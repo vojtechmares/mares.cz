@@ -10,7 +10,7 @@ specifiers:
   '@testing-library/react': ^14.0.0
   '@types/node': ^18.11.17
   '@types/react': 18.2.7
-  '@vercel/analytics': 0.1.7-beta.1
+  '@vercel/analytics': 1.0.1
   '@vitejs/plugin-react': ^3.0.0
   '@vitest/coverage-c8': ^0.31.0
   autoprefixer: ^10.4.13
@@ -36,7 +36,7 @@ dependencies:
   '@mdx-js/react': 2.2.1_react@18.2.0
   '@next/mdx': 13.1.1_vvg67iglxhejglpl7nsv3pjzui
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
-  '@vercel/analytics': 0.1.7-beta.1_react@18.2.0
+  '@vercel/analytics': 1.0.1
   clsx: 1.2.1
   next: 13.4.4_mqvh5p7ejg4taogoj6tpk3gd5a
   react: 18.2.0
@@ -1075,12 +1075,8 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: true
 
-  /@vercel/analytics/0.1.7-beta.1_react@18.2.0:
-    resolution: {integrity: sha512-7QRVBLhXboj8LK3qJ8rJRI20E6NyV4P31zW4yrWvyZLOP08Wzqb7n2CLPhq421HqZG9ztPi9rpEq5VfrrkQArQ==}
-    peerDependencies:
-      react: ^16.8||^17||^18
-    dependencies:
-      react: 18.2.0
+  /@vercel/analytics/1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
     dev: false
 
   /@vitejs/plugin-react/3.0.0_vite@4.0.2:
