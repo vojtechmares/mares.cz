@@ -25,7 +25,7 @@ const steps = [
   },
 ];
 
-export function PrimaryFeatures() {
+export function WhatIDo() {
   return (
     <section
       id="features"

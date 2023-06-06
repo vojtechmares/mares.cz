@@ -22,7 +22,7 @@ function SwirlyDoodle({ className }: SwirlyDoodleProps) {
   );
 }
 
-type PlanProps = {
+type ServiceProps = {
   name: string;
   price: string;
   description: string;
@@ -31,14 +31,14 @@ type PlanProps = {
   buttonText?: string;
 };
 
-function Plan({
+function Service({
   name,
   price,
   description,
   href,
   featured = false,
   buttonText = "Napište mi",
-}: PlanProps) {
+}: ServiceProps) {
   return (
     <section
       className={clsx(
@@ -73,11 +73,11 @@ function Plan({
   );
 }
 
-export function Pricing() {
+export function Services() {
   return (
     <section
-      id="pricing"
-      aria-label="Pricing"
+      id="services"
+      aria-label="Services"
       className="bg-black py-20 sm:py-32"
     >
       <Container>
@@ -94,13 +94,13 @@ export function Pricing() {
           </p>
         </div>
         <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
-          <Plan
+          <Service
             name="Konzultace"
             price="2 000 CZK za hodinu"
             description="Chcete se poradit nebo si nevíte rady? Projdeme Váš současný stav a najdeme kde je problém a navrhneme řešení."
             href="mailto:iam@vojtechmares.com"
           />
-          <Plan
+          <Service
             featured
             name="Firemní školení"
             price="24 000 CZK za jednodenní školení"
@@ -108,7 +108,7 @@ export function Pricing() {
             href="/#skoleni"
             buttonText="Seznam školení"
           />
-          <Plan
+          <Service
             name="Implementace"
             price="Cena dohodou"
             description="Analyzujeme Vaši situaci, projdeme možnosti, vybereme nejlepší řešení a společně jej nasadíme."
