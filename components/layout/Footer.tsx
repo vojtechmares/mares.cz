@@ -98,10 +98,10 @@ export function Footer() {
                 Nebojte se zeptat a společně vymyslíme, jak vám mohu pomoci.
               </p>
               <Button
-                href="https://calendly.com/vojtechmares/30min"
+                href="mailto:iam@vojtechmares.com"
                 className="mt-5"
               >
-                Domluvme si schůzku
+                Napište mi
               </Button>
             </div>
           </div>

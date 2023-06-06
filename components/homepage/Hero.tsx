@@ -45,15 +45,11 @@ export function Hero() {
               dluhu a připravíme Vaší IT infrastrukturu na rapidní škálování.
             </p>
             <div className="mt-10 flex flex-col gap-y-6 md:gap-y-0 sm:flex-row sm:justify-start sm:gap-x-6">
-              <Button href="https://calendly.com/vojtechmares/30min" size="large">
-                Domluvme si schůzku
-              </Button>
               <Button
                 href="mailto:iam@vojtechmares.com"
-                variant="outline"
                 size="large"
               >
-                Napište mi email
+                Napište mi
               </Button>
             </div>
             <div className="mt-10 "> {/* mt-36 lg:mt-44 */}

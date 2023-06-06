@@ -112,8 +112,8 @@ export function Pricing() {
             name="Implementace"
             price="Cena dohodou"
             description="Analyzujeme Vaši situaci, projdeme možnosti, vybereme nejlepší řešení a společně jej nasadíme."
-            href="https://calendly.com/vojtechmares/30min"
-            buttonText="Domluvme si schůzku"
+            href="mailto:iam@vojtechmares.com"
+            buttonText="Napište mi"
           />
         </div>
       </Container>

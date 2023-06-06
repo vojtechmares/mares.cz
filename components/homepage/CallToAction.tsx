@@ -16,12 +16,12 @@ export function CallToAction() {
             Je na čase pozvednout Vaši infrastrukturu na dnešní standardy. Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
           </p>
           <Button
-            href="https://calendly.com/vojtechmares/30min"
+            href="mailto:iam@vojtechmares.com"
             color="white"
             size="large"
             className="mt-10"
           >
-            Domluvme si schůzku
+            Napište mi
           </Button>
         </div>
       </Container>
