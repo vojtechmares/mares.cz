@@ -1,9 +1,14 @@
 {
-  "name": "websites",
+  "name": "vojtechmares.com",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",
