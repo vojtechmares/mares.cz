@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@headlessui/react':
-        specifier: ^1.7.4
-        version: 1.7.4(react-dom@18.2.0)(react@18.2.0)
       '@mdx-js/loader':
         specifier: ^2.2.1
         version: 2.2.1(webpack@5.85.0)
@@ -96,9 +93,6 @@ importers:
 
   apps/vojtechmares.com:
     dependencies:
-      '@headlessui/react':
-        specifier: ^1.7.4
-        version: 1.7.4(react-dom@18.2.0)(react@18.2.0)
       '@mdx-js/loader':
         specifier: ^2.2.1
         version: 2.2.1(webpack@5.85.0)
@@ -763,18 +757,6 @@ packages:
     resolution: {integrity: sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
-
-  /@headlessui/react@1.7.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-D8n5yGCF3WIkPsjEYeM8knn9jQ70bigGGb5aUvN6y4BGxcT3OcOQOKcM3zRGllRCZCFxCZyQvYJF6ZE7bQUOyQ==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
-    dependencies:
-      client-only: 0.0.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /@humanwhocodes/config-array@0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
