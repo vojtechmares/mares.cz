@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from "next/app";
 
-import "@/css/tailwind.css";
+import "@/styles/tailwind.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (
