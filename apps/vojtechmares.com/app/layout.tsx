@@ -25,14 +25,22 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/site.webmanifest',
+  metadataBase: new URL('https://vojtechmares.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    url: 'https://vojtechmares.com',
+    type: 'website',
+    title: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
+    description:
+      'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
+  },
   twitter: {
     card: 'summary_large_image',
     site: '@vojtechmares',
     creator: '@vojtechmares',
     title: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
-    images: [
-      { url: '/og.png' },
-    ]
   },
 }
 
