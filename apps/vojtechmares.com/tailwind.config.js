@@ -1,12 +1,11 @@
 module.exports = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
+    "./app/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ]
-}
+  plugins: [require("@tailwindcss/typography")],
+};
