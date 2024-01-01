@@ -2,6 +2,22 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
+import { link } from "fs";
+
+const links = [
+  {
+    name: "Školení",
+    href: "/#skoleni",
+  },
+  {
+    name: "Blog",
+    href: "https://vojtechmares.blog/",
+  },
+  // {
+  //   name: "Případové studie",
+  //   href: "/pripadove-studie",
+  // },
+];
 
 export function Navigation() {
   return (
@@ -14,19 +30,17 @@ export function Navigation() {
                 <Link href="/" className="py-2 px-4 rounded-full focus-visible:outline-black">Vojtěch Mareš</Link>
               </span>
               <div className="hidden md:flex md:gap-x-6">
-                <Link
-                  href="/#skoleni"
-                  className="inline-block rounded-full py-2 px-4 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black"
-                >
-                  Školení
-                </Link>
-                {/* <Link href="/pripadove-studie" className="inline-block rounded-full py-2 px-4 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black">Případové studie</Link> */}
-                <Link
-                  href="https://vojtechmares.blog/"
-                  className="inline-block rounded-full py-2 px-4 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black"
-                >
-                  Blog
-                </Link>
+                {links.map((link) =>
+                  (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="inline-block rounded-full py-2 px-4 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black"
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
             <div className="flex items-center gap-x-5 md:gap-x-8">
