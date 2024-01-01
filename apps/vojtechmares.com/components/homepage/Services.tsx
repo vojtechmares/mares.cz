@@ -49,9 +49,9 @@ function Service({
       )}
     >
       <h3 className="font-display text-4xl text-white">{name}</h3>
-      <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
+      {/* <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
         {price}
-      </p>
+      </p> */}
       <p
         className={clsx(
           "mt-2 text-base",
