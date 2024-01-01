@@ -1,9 +1,9 @@
 import { expect, test } from "vitest";
 import { render, screen, within } from "@testing-library/react";
-import Home from "../pages";
+import Page from "../app/page";
 
-test("home", () => {
-  render(<Home />);
+test("homepage", () => {
+  render(<Page />);
   const main = within(screen.getByRole("main"));
   expect(
     main.getByRole("heading", {
@@ -19,18 +19,18 @@ test("home", () => {
     if (element instanceof HTMLSpanElement) {
       const parent = element.closest("a");
       expect(parent?.getAttribute("href")).toBe(
-        "mailto:iam@vojtechmares.com"
+        "mailto:jsem@vojtechmares.com"
       )
       return;
     }
 
     expect(element.getAttribute("href")).toBe(
-      "mailto:iam@vojtechmares.com"
+      "mailto:jsem@vojtechmares.com"
     )
   });
 
 
-  expect(writeMe).toHaveLength(6);
+  expect(writeMe).toHaveLength(4);
 
   // const footer = within(screen.getByRole('contentinfo'))
   // const link = within(footer.getByRole('link'))

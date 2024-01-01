@@ -20,7 +20,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="mailto:iam@vojtechmares.com"
+                    href="mailto:jsem@vojtechmares.com"
                     className="underline"
                   >
                     iam@vojtechmares.com
@@ -98,7 +98,7 @@ export function Footer() {
                 Nebojte se zeptat a společně vymyslíme, jak vám mohu pomoci.
               </p>
               <Button
-                href="mailto:iam@vojtechmares.com"
+                href="mailto:jsem@vojtechmares.com"
                 className="mt-5"
               >
                 Napište mi

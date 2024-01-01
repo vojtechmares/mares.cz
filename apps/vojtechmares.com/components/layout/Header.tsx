@@ -30,7 +30,7 @@ export function Header() {
               </div>
             </div>
             <div className="flex items-center gap-x-5 md:gap-x-8">
-              <Button href="mailto:iam@vojtechmares.com" color="amber">
+              <Button href="mailto:jsem@vojtechmares.com" color="amber">
                 <span className="text-lg">
                   Napište mi{" "}
                   <span className="hidden lg:inline">ještě dnes</span>

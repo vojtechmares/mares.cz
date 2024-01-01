@@ -44,7 +44,7 @@ export function Hero() {
             </p>
             <div className="mt-10 flex flex-col gap-y-6 md:gap-y-0 sm:flex-row sm:justify-start sm:gap-x-6">
               <Button
-                href="mailto:iam@vojtechmares.com"
+                href="mailto:jsem@vojtechmares.com"
                 size="large"
               >
                 Napište mi

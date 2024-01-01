@@ -124,7 +124,7 @@ export default function TrainingLayout({ content, meta }: Props) {
                     variant="solid"
                     color="amber"
                     className="w-full text-lg font-medium"
-                    href="mailto:iam@vojtechmares.com"
+                    href="mailto:jsem@vojtechmares.com"
                   >
                     Nezávazně poptat
                   </Button>

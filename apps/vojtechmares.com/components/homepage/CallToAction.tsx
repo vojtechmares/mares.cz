@@ -16,7 +16,7 @@ export function CallToAction() {
             Je na čase pozvednout Vaši infrastrukturu na dnešní standardy. Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
           </p>
           <Button
-            href="mailto:iam@vojtechmares.com"
+            href="mailto:jsem@vojtechmares.com"
             color="white"
             size="large"
             className="mt-10"
