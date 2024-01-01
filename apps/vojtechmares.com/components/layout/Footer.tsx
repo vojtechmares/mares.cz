@@ -59,10 +59,10 @@ export function Footer() {
                 </li> */}
               </ul>
             </div>
-            <div>
+            {/* <div>
               <h3 className="text-lg font-medium">Důležité odkazy</h3>
               <ul className="mt-4 list-disc pl-4">
-                {/* <li>
+                <li>
                   <Link
                     href="https://devops-skoelni.cz/?utm_source=vojtechmares&utm_medium=vojtechmares-com-website&utm_content=link"
                     className="underline"
@@ -70,7 +70,7 @@ export function Footer() {
                   >
                     DevOps-Skoleni.cz
                   </Link>
-                </li> */}
+                </li>
                 <li>
                   <Link
                     href="https://skoleni.io/?utm_source=vojtechmares&utm_medium=vojtechmares-com-website&utm_content=link"
@@ -90,7 +90,7 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h3 className="text-lg font-medium">Zaujal jsem vás?</h3>
               <p className="mt-4">
