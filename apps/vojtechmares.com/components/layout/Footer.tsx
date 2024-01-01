@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="bg-slate-50">
       <Container className="py-8">
         <div className="py-4">
-          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
+          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-3 lg:gap-4">
             <div>
               <h4 className="text-lg font-medium">Vojtěch Mareš</h4>
               <ul className="mt-4 list-none">
@@ -23,18 +23,21 @@ export function Footer() {
                     href="mailto:jsem@vojtechmares.com"
                     className="underline"
                   >
-                    iam@vojtechmares.com
+                    jsem@vojtechmares.com
                   </Link>
                 </li>
                 <li className="mt-4">
-                  Company ID
+                  IČO
                   <br />
                   <code id="company-id">06999280</code>
                 </li>
                 <li className="mt-2">
-                  VAT ID
+                  DIČ
                   <br />
                   <code id="vat-id">CZ9709180063</code>
+                </li>
+                <li className="mt-2">
+                  Jsem plátce DPH
                 </li>
               </ul>
             </div>
