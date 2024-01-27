@@ -1,7 +1,6 @@
-.turbo
-**/node_modules
-**/coverage
-**/build
-**/dist
-**/.next
+node_modules
+coverage
+build
+dist
+.next
 .vercel
