@@ -5,7 +5,13 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        test: "#f59e0b",
+        tulip: "#ffac00",
+        lava: "#f56e0f",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

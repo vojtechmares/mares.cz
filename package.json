@@ -1,25 +1,51 @@
 {
-  "name": "websites",
+  "name": "vojtechmares.com",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "clean": "turbo clean",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo test"
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "14.1.0",
+    "@tailwindcss/typography": "^0.5.10",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.8",
+    "clsx": "^2.1.0",
+    "next": "14.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
+    "@babel/core": "^7.23.9",
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^20.11.7",
+    "@types/react": "^18.2.48",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.2.2",
+    "autoprefixer": "^10.4.17",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.1.1",
-    "prettier-plugin-tailwindcss": "^0.5.10",
-    "tsconfig": "workspace:*",
-    "turbo": "^1.11.2"
+    "jsdom": "^24.0.0",
+    "postcss": "^8.4.33",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "vitest": "^1.2.2"
   },
   "engines": {
     "node": "20.x"
   },
-  "packageManager": "pnpm@8.10.0"
+  "packageManager": "pnpm@8.14.3"
 }

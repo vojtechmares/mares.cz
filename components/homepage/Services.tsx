@@ -43,8 +43,8 @@ function Service({
     <section
       className={clsx(
         "flex flex-col rounded-3xl px-6 sm:px-8 py-8",
-        featured ? "order-first bg-amber-500 lg:order-none" : "",
-        featured ? "hover:bg-amber-600" : "md:ring-1 md:hover:ring-slate-700 md:ring-transparent",
+        featured ? "order-first bg-test lg:order-none" : "",
+        featured ? "hover:bg-test" : "md:ring-1 md:hover:ring-slate-700 md:ring-transparent",
         "transition ease-in-out duration-300 md:hover:-translate-y-1 md:hover:scale-110"
       )}
     >
@@ -84,7 +84,7 @@ export function Services() {
         <div className="md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
             <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute top-1/2 left-0 h-[1em] w-full fill-amber-400" />
+              <SwirlyDoodle className="absolute top-1/2 left-0 h-[1em] w-full fill-test" />
               <span className="relative">Co pro Vás,</span>
             </span>{" "}
             můžu udělat
