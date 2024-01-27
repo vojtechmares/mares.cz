@@ -42,10 +42,12 @@ function Service({
   return (
     <section
       className={clsx(
-        "flex flex-col rounded-3xl px-6 sm:px-8 py-8",
+        "flex flex-col rounded-3xl px-6 py-8 sm:px-8",
         featured ? "order-first bg-test lg:order-none" : "",
-        featured ? "hover:bg-test" : "md:ring-1 md:hover:ring-slate-700 md:ring-transparent",
-        "transition ease-in-out duration-300 md:hover:-translate-y-1 md:hover:scale-110"
+        featured
+          ? "hover:bg-test"
+          : "md:ring-1 md:ring-transparent md:hover:ring-slate-700",
+        "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
       <h3 className="font-display text-4xl text-white">{name}</h3>
@@ -55,7 +57,7 @@ function Service({
       <p
         className={clsx(
           "mt-2 text-base",
-          featured ? "text-slate-100" : "text-slate-400"
+          featured ? "text-slate-100" : "text-slate-400",
         )}
       >
         {description}
@@ -84,13 +86,14 @@ export function Services() {
         <div className="md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
             <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute top-1/2 left-0 h-[1em] w-full fill-test" />
+              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-test" />
               <span className="relative">Co pro Vás,</span>
             </span>{" "}
             můžu udělat
           </h2>
           <p className="mt-4 text-lg text-slate-400">
-            Nezáleží na velikosti Vaší firmy, ať jste startup, nebo korporát, dokážu pomoci každému.
+            Nezáleží na velikosti Vaší firmy, ať jste startup, nebo korporát,
+            dokážu pomoci každému.
           </p>
         </div>
         <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">

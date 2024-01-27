@@ -1,49 +1,48 @@
-import type { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { Footer } from '@/components/layout/Footer'
-import { Navigation } from '@/components/layout/Navigation'
+import { Footer } from "@/components/layout/Footer";
+import { Navigation } from "@/components/layout/Navigation";
 
-import '@/styles/tailwind.css'
+import "@/styles/tailwind.css";
 
 export const metadata: Metadata = {
-  title: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
-  description: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
-  themeColor: '#ffffff',
-  viewport: 'width=device-width, initial-scale=1.0',
+  title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+  description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+  themeColor: "#ffffff",
+  viewport: "width=device-width, initial-scale=1.0",
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: '/shortcut-icon.png',
-    apple: '/apple-touch-icon.png',
+    shortcut: "/shortcut-icon.png",
+    apple: "/apple-touch-icon.png",
     other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
+      rel: "apple-touch-icon-precomposed",
+      url: "/apple-touch-icon-precomposed.png",
     },
   },
-  manifest: '/site.webmanifest',
-  metadataBase: new URL('https://vojtechmares.com'),
+  manifest: "/site.webmanifest",
+  metadataBase: new URL("https://vojtechmares.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    url: 'https://vojtechmares.com',
-    type: 'website',
-    title: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
-    description:
-      'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
+    url: "https://vojtechmares.com",
+    type: "website",
+    title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+    description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
   },
   twitter: {
-    card: 'summary_large_image',
-    site: '@vojtechmares',
-    creator: '@vojtechmares',
-    title: 'Vojtěch Mareš - DevOps konzultant, lektor, engineer',
+    card: "summary_large_image",
+    site: "@vojtechmares",
+    creator: "@vojtechmares",
+    title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
   },
-}
+};
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -66,7 +65,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <SpeedInsights />
       </body>
     </html>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;

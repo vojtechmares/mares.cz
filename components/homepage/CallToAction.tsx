@@ -13,7 +13,8 @@ export function CallToAction() {
             Pojďme do toho společně
           </h2>
           <p className="mt-4 text-lg tracking-tight text-white">
-            Je na čase pozvednout Vaši infrastrukturu na dnešní standardy. Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
+            Je na čase pozvednout Vaši infrastrukturu na dnešní standardy.
+            Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
           </p>
           <Button
             href="mailto:jsem@vojtechmares.com"

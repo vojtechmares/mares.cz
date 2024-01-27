@@ -9,7 +9,7 @@ test("homepage", () => {
     main.getByRole("heading", {
       level: 1,
       name: /Jsem Vojtěch Mareš a pomohu Vám s Vaší IT infrastrukturou./i,
-    })
+    }),
   ).toBeDefined();
 
   const writeMe = screen.getAllByText(/Napište mi/i);
@@ -18,17 +18,12 @@ test("homepage", () => {
     // First button (in navbar) is <a><span>...</span></a>, therefore we look for parent (closest) anchor element
     if (element instanceof HTMLSpanElement) {
       const parent = element.closest("a");
-      expect(parent?.getAttribute("href")).toBe(
-        "mailto:jsem@vojtechmares.com"
-      )
+      expect(parent?.getAttribute("href")).toBe("mailto:jsem@vojtechmares.com");
       return;
     }
 
-    expect(element.getAttribute("href")).toBe(
-      "mailto:jsem@vojtechmares.com"
-    )
+    expect(element.getAttribute("href")).toBe("mailto:jsem@vojtechmares.com");
   });
-
 
   expect(writeMe).toHaveLength(4);
 

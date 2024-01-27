@@ -34,6 +34,7 @@ I decided not to look any further, since AWS's pay-as-you-go pricing model fits 
 I went directly to AWS docs for guidance on how to setup SES. At the time I was learning Terraform so I thought that it would be really nice thing to write in Terraform to teach myself a little more.
 
 To get domain ready for sending out emails via SES, you need to do a couple things first:
+
 - validate the domain (proof of ownership) via DNS
 - setup DNS DKIM records
 - setup DNS SPF (TXT) records

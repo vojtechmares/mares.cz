@@ -15,10 +15,10 @@ type TrainingType = {
 };
 
 const trainingList: TrainingType[] = [
-  { name: 'Kubernetes', href: '/skoleni/kubernetes', logo: logoKubernetes },
-  { name: 'Terraform', href: '/skoleni/terraform', logo: logoTerraform },
-  { name: 'ArgoCD', href: '/skoleni/argocd', logo: logoArgo },
-  { name: 'Git', href: '/skoleni/git', logo: logoGit },
+  { name: "Kubernetes", href: "/skoleni/kubernetes", logo: logoKubernetes },
+  { name: "Terraform", href: "/skoleni/terraform", logo: logoTerraform },
+  { name: "ArgoCD", href: "/skoleni/argocd", logo: logoArgo },
+  { name: "Git", href: "/skoleni/git", logo: logoGit },
 ];
 
 type TrainingProps = {
@@ -31,12 +31,14 @@ const Training = ({ training, className }: TrainingProps) => {
     <Link href={training.href} className={className}>
       <Image
         src={training.logo}
-        className="rounded-lg p-2 invert mx-auto"
+        className="mx-auto rounded-lg p-2 invert"
         width="128"
         height="128"
         alt={training.name}
       />
-      <h3 className="mt-4 text-3xl font-medium text-test text-center">{training.name}</h3>
+      <h3 className="mt-4 text-center text-3xl font-medium text-test">
+        {training.name}
+      </h3>
     </Link>
   );
 };
@@ -45,7 +47,7 @@ const TrainingGridMobile = () => {
   return (
     <div className="-mx-4 mt-20 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {trainingList.map((training) => (
-        <div key={training.name} >
+        <div key={training.name}>
           <Training training={training} />
         </div>
       ))}
@@ -58,7 +60,10 @@ const TrainingGridDesktop = () => {
     <div className="hidden lg:mt-20 lg:block">
       <div className="grid grid-cols-4 gap-x-8 gap-y-4">
         {trainingList.map((training) => (
-          <div key={training.name} className="relative py-4 cursor-pointer rounded-3xl transition ease-in-out duration-300 md:hover:-translate-y-1 md:hover:scale-110 md:ring-1 md:hover:ring-slate-700 md:ring-transparent">
+          <div
+            key={training.name}
+            className="relative cursor-pointer rounded-3xl py-4 transition duration-300 ease-in-out md:ring-1 md:ring-transparent md:hover:-translate-y-1 md:hover:scale-110 md:hover:ring-slate-700"
+          >
             <Training training={training} />
           </div>
         ))}
@@ -72,7 +77,7 @@ const TrainingList = () => {
     <section
       id="skoleni"
       aria-label="Training"
-      className="pt-20 pb-14 sm:pb-20 sm:pt-32 lg:pb-32 bg-black"
+      className="bg-black pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">

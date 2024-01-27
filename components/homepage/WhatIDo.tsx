@@ -30,7 +30,7 @@ export function WhatIDo() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-gradient-to-br to-test via-test from-test pt-20 pb-28 sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-br from-test via-test to-test pb-28 pt-20 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
@@ -51,12 +51,12 @@ export function WhatIDo() {
                 key={step.name}
                 className={clsx(
                   stepIdx !== steps.length - 1 ? "pb-10" : "",
-                  "relative"
+                  "relative",
                 )}
               >
                 {stepIdx !== steps.length - 1 ? (
                   <div
-                    className="absolute top-4 left-6 -ml-px mt-0.5 h-full w-0.5 bg-white"
+                    className="absolute left-6 top-4 -ml-px mt-0.5 h-full w-0.5 bg-white"
                     aria-hidden="true"
                   />
                 ) : null}

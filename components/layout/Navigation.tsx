@@ -27,20 +27,23 @@ export function Navigation() {
           <nav className="relative z-50 flex justify-between">
             <div className="flex items-center md:gap-x-12">
               <span className="text-2xl font-bold">
-                <Link href="/" className="py-2 px-4 rounded-full focus-visible:outline-black">Vojtěch Mareš</Link>
+                <Link
+                  href="/"
+                  className="rounded-full px-4 py-2 focus-visible:outline-black"
+                >
+                  Vojtěch Mareš
+                </Link>
               </span>
               <div className="hidden md:flex md:gap-x-6">
-                {links.map((link) =>
-                  (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="inline-block rounded-full py-2 px-4 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black"
-                    >
-                      {link.name}
-                    </Link>
-                  )
-                )}
+                {links.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="inline-block rounded-full px-4 py-2 text-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-black focus-visible:outline-black"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="flex items-center gap-x-5 md:gap-x-8">

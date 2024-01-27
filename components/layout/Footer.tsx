@@ -36,9 +36,7 @@ export function Footer() {
                   <br />
                   <code id="vat-id">CZ9709180063</code>
                 </li>
-                <li className="mt-2">
-                  Jsem plátce DPH
-                </li>
+                <li className="mt-2">Jsem plátce DPH</li>
               </ul>
             </div>
             <div>
@@ -100,10 +98,7 @@ export function Footer() {
                 Zaujal jsem vás avšak nevíte, jak přesně bych vám mohl pomoci?
                 Nebojte se zeptat a společně vymyslíme, jak vám mohu pomoci.
               </p>
-              <Button
-                href="mailto:jsem@vojtechmares.com"
-                className="mt-5"
-              >
+              <Button href="mailto:jsem@vojtechmares.com" className="mt-5">
                 Napište mi
               </Button>
             </div>

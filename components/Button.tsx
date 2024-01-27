@@ -60,7 +60,7 @@ export function Button({
     variantStyles[variant][color],
     sizeStyles[size],
     transitionStyle,
-    className
+    className,
   );
 
   if (href !== undefined) {

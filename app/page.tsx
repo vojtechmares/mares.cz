@@ -10,16 +10,16 @@ import { TrainingList } from "@/components/homepage/Training";
 const Page = () => {
   return (
     <main>
-        <Hero />
-        <WhatIDo />
-        <TrainingList />
-        <KubernetesEverywhere />
-        <CallToAction />
-        <Testimonials />
-        <Services />
-        {/* <Faqs /> */}
+      <Hero />
+      <WhatIDo />
+      <TrainingList />
+      <KubernetesEverywhere />
+      <CallToAction />
+      <Testimonials />
+      <Services />
+      {/* <Faqs /> */}
     </main>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
