@@ -14,13 +14,13 @@ const variantStyles = {
     black:
       "bg-black text-white hover:bg-slate-700 active:bg-slate-800 focus-visible:outline-slate-900",
     amber:
-      "bg-test text-white hover:bg-test active:bg-test focus-visible:outline-test",
+      "bg-amber-500 text-white hover:bg-amber-500 active:bg-amber-500 focus-visible:outline-amber-500",
     white:
-      "bg-white text-black hover:bg-amber-50 active:bg-test focus-visible:outline-white",
+      "bg-white text-black hover:bg-amber-50 active:bg-amber-500 focus-visible:outline-white",
   },
   outline: {
     black:
-      "ring-slate-200 text-black hover:ring-slate-300 active:bg-slate-100 focus-visible:outline-test focus-visible:ring-slate-300",
+      "ring-slate-200 text-black hover:ring-slate-300 active:bg-slate-100 focus-visible:outline-amber-500 focus-visible:ring-slate-300",
     white:
       "ring-slate-700 text-white hover:ring-slate-500 active:ring-slate-700 focus-visible:outline-white",
     amber: "", // Outline buttons cannot be amber

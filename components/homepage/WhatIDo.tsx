@@ -30,7 +30,7 @@ export function WhatIDo() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-gradient-to-br from-test via-test to-test pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-br bg-amber-500 pb-28 pt-20 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
@@ -62,8 +62,8 @@ export function WhatIDo() {
                 ) : null}
                 <div className="group relative flex items-start">
                   <span className="flex h-9 items-center" aria-hidden="true">
-                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-test bg-white">
-                      <span className="h-3 w-3 rounded-full bg-test" />
+                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-amber-500 bg-white">
+                      <span className="h-3 w-3 rounded-full bg-amber-500" />
                     </span>
                   </span>
                   <span className="ml-4 flex min-w-0 flex-col">

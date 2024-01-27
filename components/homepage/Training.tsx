@@ -36,7 +36,7 @@ const Training = ({ training, className }: TrainingProps) => {
         height="128"
         alt={training.name}
       />
-      <h3 className="mt-4 text-center text-3xl font-medium text-test">
+      <h3 className="mt-4 text-center text-3xl font-medium text-amber-500">
         {training.name}
       </h3>
     </Link>

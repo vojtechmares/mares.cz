@@ -5,7 +5,7 @@ export function CallToAction() {
   return (
     <section
       id="get-started-today"
-      className="relative overflow-hidden bg-test py-32"
+      className="relative overflow-hidden bg-amber-500 py-32"
     >
       <Container className="relative">
         <div className="mx-auto max-w-xl text-center">
