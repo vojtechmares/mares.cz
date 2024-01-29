@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -7,11 +7,16 @@ import { Navigation } from "@/components/layout/Navigation";
 
 import "@/styles/tailwind.css";
 
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1.0,
+};
+
+
 export const metadata: Metadata = {
   title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
   description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
-  themeColor: "#ffffff",
-  viewport: "width=device-width, initial-scale=1.0",
   icons: {
     icon: [
       { url: "/favicon.ico" },
