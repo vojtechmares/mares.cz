@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import avatarVojtechMares from "@/images/avatars/vojtech-mares.png";
 import logoGLAMI from "@/images/logos/glami.svg";
 import logoFakturoid from "@/images/logos/fakturoid.svg";
+import logoCybroslabs from "@/images/logos/cybroslabs-black.jpeg";
 
 type Company = {
   name: string;
@@ -15,6 +16,7 @@ type Company = {
 const companies: Company[] = [
   { name: "GLAMI", logo: logoGLAMI },
   { name: "Fakturoid", logo: logoFakturoid },
+  { name: "Cybros Labs", logo: logoCybroslabs },
 ];
 
 export function Hero() {
