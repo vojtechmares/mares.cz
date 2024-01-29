@@ -13,7 +13,6 @@ export const viewport: Viewport = {
   initialScale: 1.0,
 };
 
-
 export const metadata: Metadata = {
   title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
   description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
