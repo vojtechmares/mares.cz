@@ -23,6 +23,11 @@ const steps = [
     description:
       "Naučím váš tým používat moderní technologie, tak abyste mohli rozvíjet Vaší aplikaci a byznys a technologie byly nástrojem k rozvoji, ne břemenem, které s sebou táhnete.",
   },
+  {
+    name: "Dlouhodobá spolupráce a support",
+    description:
+      "Společně budeme rozvíjet infrastrukturu dle potřeb Vaší aplikace. Zároveň Vám mohhu nabídnout i podporu v případě problémů a SLA.",
+  },
 ];
 
 export function WhatIDo() {
