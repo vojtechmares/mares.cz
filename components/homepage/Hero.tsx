@@ -46,7 +46,10 @@ export function Hero() {
               škálování.
             </p>
             <div className="mt-10 flex flex-col gap-y-6 sm:flex-row sm:justify-start sm:gap-x-6 md:gap-y-0">
-              <Button href="mailto:jsem@vojtechmares.com" size="large">
+              <Button href="https://cal.com/vojtechmares/30min" size="large">
+                Domluvme si schůzku
+              </Button>
+              <Button href="mailto:jsem@vojtechmares.com" size="large" variant="outline">
                 Napište mi
               </Button>
             </div>

@@ -98,9 +98,14 @@ export function Footer() {
                 Zaujal jsem vás avšak nevíte, jak přesně bych vám mohl pomoci?
                 Nebojte se zeptat a společně vymyslíme, jak vám mohu pomoci.
               </p>
-              <Button href="mailto:jsem@vojtechmares.com" className="mt-5">
-                Napište mi
-              </Button>
+              <div className="mt-5 flex flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0">
+                <Button href="https://cal.com/vojtechmares/30min">
+                  Domluvme si schůzku
+                </Button>
+                <Button href="mailto:jsem@vojtechmares.com">
+                  Napište mi
+                </Button>
+              </div>
             </div>
           </div>
         </div>

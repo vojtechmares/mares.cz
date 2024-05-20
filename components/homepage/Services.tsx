@@ -115,8 +115,8 @@ export function Services() {
             name="Implementace"
             price="Cena dohodou"
             description="Analyzujeme Vaši situaci, projdeme možnosti, vybereme nejlepší řešení a společně jej nasadíme."
-            href="mailto:jsem@vojtechmares.com"
-            buttonText="Napište mi"
+            href="https://cal.com/vojtechmares/30min"
+            buttonText="Domluvme si schůzku"
           />
         </div>
       </Container>

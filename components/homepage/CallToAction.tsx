@@ -22,7 +22,7 @@ export function CallToAction() {
             size="large"
             className="mt-10"
           >
-            Napište mi
+            Domluvme si schůzku
           </Button>
         </div>
       </Container>
