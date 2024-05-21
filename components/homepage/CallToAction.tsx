@@ -17,7 +17,7 @@ export function CallToAction() {
             Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
           </p>
           <Button
-            href="mailto:jsem@vojtechmares.com"
+            href="https://cal.com/vojtechmares/30min"
             color="white"
             size="large"
             className="mt-10"
