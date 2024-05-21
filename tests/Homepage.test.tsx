@@ -30,7 +30,9 @@ test("homepage", () => {
   const meetMe = screen.getAllByText(/Domluvme si schůzku/i);
 
   meetMe.map((element) => {
-    expect(element.getAttribute("href")).toBe("https://cal.com/vojtechmares/30min");
+    expect(element.getAttribute("href")).toBe(
+      "https://cal.com/vojtechmares/30min",
+    );
   });
 
   // const footer = within(screen.getByRole('contentinfo'))
