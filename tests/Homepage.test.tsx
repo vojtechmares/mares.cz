@@ -25,7 +25,7 @@ test("homepage", () => {
     expect(element.getAttribute("href")).toBe("mailto:jsem@vojtechmares.com");
   });
 
-  expect(writeMe).toHaveLength(4);
+  expect(writeMe).toHaveLength(2);
 
   // const footer = within(screen.getByRole('contentinfo'))
   // const link = within(footer.getByRole('link'))
