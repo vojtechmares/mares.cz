@@ -27,6 +27,12 @@ test("homepage", () => {
 
   expect(writeMe).toHaveLength(2);
 
+  const meetMe = screen.getAllByText(/Domluvme si schůzku/i);
+
+  meetMe.map((element) => {
+    expect(element.getAttribute("href")).toBe("https://cal.com/vojtechmares/30min");
+  });
+
   // const footer = within(screen.getByRole('contentinfo'))
   // const link = within(footer.getByRole('link'))
   // expect(link.getByRole('img', { name: /vercel logo/i })).toBeDefined()
