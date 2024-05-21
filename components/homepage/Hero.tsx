@@ -49,7 +49,11 @@ export function Hero() {
               <Button href="https://cal.com/vojtechmares/30min" size="large">
                 Domluvme si schůzku
               </Button>
-              <Button href="mailto:jsem@vojtechmares.com" size="large" variant="outline">
+              <Button
+                href="mailto:jsem@vojtechmares.com"
+                size="large"
+                variant="outline"
+              >
                 Napište mi
               </Button>
             </div>

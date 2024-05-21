@@ -102,9 +102,7 @@ export function Footer() {
                 <Button href="https://cal.com/vojtechmares/30min">
                   Domluvme si schůzku
                 </Button>
-                <Button href="mailto:jsem@vojtechmares.com">
-                  Napište mi
-                </Button>
+                <Button href="mailto:jsem@vojtechmares.com">Napište mi</Button>
               </div>
             </div>
           </div>
