@@ -18,17 +18,19 @@
     "@tailwindcss/typography": "^0.5.13",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
+    "babel-plugin-react-compiler": "0.0.0-experimental-592953e-20240517",
     "clsx": "^2.1.1",
-    "next": "^14.2.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "15.0.0-rc.0",
+    "react": "19.0.0-rc-935180c7e0-20240524",
+    "react-dom": "19.0.0-rc-935180c7e0-20240524",
     "sharp": "^0.33.4"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
     "@testing-library/react": "^14.3.1",
     "@types/node": "^20.12.12",
-    "@types/react": "^18.3.2",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.6.0",
     "autoprefixer": "^10.4.19",
@@ -43,6 +45,10 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vitest": "^1.6.0"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "engines": {
     "node": "20.x"

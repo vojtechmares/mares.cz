@@ -17,6 +17,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     scrollRestoration: true,
+    reactCompiler: true,
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {
