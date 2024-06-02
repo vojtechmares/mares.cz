@@ -40,7 +40,7 @@ export function Hero() {
               </span>{" "}
               a pomohu Vám s Vaší IT infrastrukturou.
             </h1>
-            <p className="mt-6 max-w-xl text-lg tracking-tight text-slate-700">
+            <p className="mt-6 max-w-2xl text-lg text-slate-700">
               Společně snížíme Vaše náklady na infrasturkuturu, zbavíme se
               technického dluhu a připravíme Vaší IT infrastrukturu na rapidní
               škálování.
