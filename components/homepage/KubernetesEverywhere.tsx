@@ -74,7 +74,9 @@ const SectionDesktop = ({
 }) => (
   <div className="grid grid-cols-2 gap-x-24 gap-y-32">
     <div>
-      <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
+      <h3 className="font-display text-2xl font-bold tracking-tight">
+        {title}
+      </h3>
       <p className="mt-4 text-slate-700">{description}</p>
     </div>
     <div className={clsx(reverse ? "order-first" : "")}>

@@ -50,7 +50,9 @@ function Service({
         "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
-      <h3 className="font-display text-4xl font-medium tracking-tight text-white">{name}</h3>
+      <h3 className="font-display text-4xl font-medium tracking-tight text-white">
+        {name}
+      </h3>
       {/* <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
         {price}
       </p> */}
