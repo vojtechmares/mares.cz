@@ -83,7 +83,7 @@ export function Hero() {
             </div>
           </div>
           <Image
-            className="mx-auto pt-10 md:mx-0 md:pt-0"
+            className="mx-auto hidden pt-10 md:mx-0 md:block md:pt-0"
             priority
             width={400}
             height={800}
