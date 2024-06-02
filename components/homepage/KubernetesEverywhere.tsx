@@ -74,7 +74,7 @@ const SectionDesktop = ({
 }) => (
   <div className="grid grid-cols-2 gap-x-24 gap-y-32">
     <div>
-      <h3 className="font-display text-xl font-medium">{title}</h3>
+      <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
       <p className="mt-4 text-slate-700">{description}</p>
     </div>
     <div className={clsx(reverse ? "order-first" : "")}>
@@ -116,7 +116,7 @@ const SectionMobile = ({
         />
       ))}
     </div>
-    <h3 className="font-display text-xl font-medium">{title}</h3>
+    <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
     <p className="mt-4 text-slate-700">{description}</p>
   </>
 );
@@ -156,7 +156,7 @@ export function KubernetesEverywhere() {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-black sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-black sm:text-4xl">
             Kubernetes, jedna platforma, kdekoliv
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">

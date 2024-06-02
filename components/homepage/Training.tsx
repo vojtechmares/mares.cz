@@ -36,7 +36,7 @@ const Training = ({ training, className }: TrainingProps) => {
         height="128"
         alt={training.name}
       />
-      <h3 className="mt-4 text-center text-3xl font-medium text-amber-500">
+      <h3 className="mt-4 text-center font-display text-4xl font-medium tracking-tight text-amber-500">
         {training.name}
       </h3>
     </Link>
@@ -81,7 +81,7 @@ const TrainingList = () => {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Moje školení
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-400">

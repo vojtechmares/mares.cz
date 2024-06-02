@@ -48,7 +48,7 @@ export default function TrainingLayout({ content, meta }: Props) {
                   meta.logo.src.endsWith(".svg") ? "invert" : "",
                 )}
               />
-              <h2 className="font-display ml-4 self-center text-center text-4xl tracking-tight text-white sm:text-6xl">
+              <h2 className="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
                 Školení {meta.name}
               </h2>
             </Container>
@@ -56,7 +56,7 @@ export default function TrainingLayout({ content, meta }: Props) {
           <Container>
             <div className="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
               <div className="md:col-span-3">
-                <div className="prose:text-black prose prose-h1:text-2xl prose-h1:font-medium prose-h2:text-xl prose-h2:font-medium prose-h3:text-lg prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0">
+                <div className="prose:text-black prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0">
                   {content}
                 </div>
               </div>
@@ -92,9 +92,9 @@ export default function TrainingLayout({ content, meta }: Props) {
                 )}
                 <div className="mt-8 overflow-hidden rounded-lg bg-slate-50 shadow md:mt-0">
                   <div className="px-4 pt-5 sm:px-6">
-                    <h3 className="text-lg font-medium leading-6 text-black">
+                    <h2 className="text-2xl font-medium tracking-tight text-black">
                       Cena za školení
-                    </h3>
+                    </h2>
                   </div>
                   <div className=" px-4 pb-5 pt-2">
                     <dl className="sm:divide-y sm:divide-slate-400">

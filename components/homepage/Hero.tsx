@@ -25,7 +25,7 @@ export function Hero() {
       <Container className="pt-5 lg:pt-8">
         <div className="flex flex-col justify-center md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="font-display text-5xl font-medium leading-10 tracking-tight text-black sm:text-7xl">
+            <h1 className="font-display text-5xl font-black tracking-tight text-black sm:text-7xl">
               Jsem{" "}
               <span className="relative whitespace-nowrap text-amber-500">
                 <svg

@@ -39,7 +39,7 @@ export function WhatIDo() {
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
             Z nuly do cloudu
           </h2>
           <p className="mt-6 text-lg tracking-tight text-slate-100">

@@ -45,7 +45,7 @@ export function Testimonials() {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-black sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-black sm:text-4xl">
             Napsali o mně
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">

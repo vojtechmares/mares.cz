@@ -50,7 +50,7 @@ function Service({
         "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
-      <h3 className="font-display text-4xl text-white">{name}</h3>
+      <h3 className="font-display text-4xl font-medium tracking-tight text-white">{name}</h3>
       {/* <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
         {price}
       </p> */}
@@ -84,7 +84,7 @@ export function Services() {
     >
       <Container>
         <div className="md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             <span className="relative whitespace-nowrap">
               <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-amber-500" />
               <span className="relative">Co pro Vás,</span>
