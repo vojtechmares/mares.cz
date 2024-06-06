@@ -1,0 +1,73 @@
+import TrainingLayout from "@/components/trainingpage/TrainingLayout";
+import logoCNPG from "@/images/logos/tools/cnpg.png";
+
+export const meta = {
+  name: "Postgres na Kubernetes",
+  price: {
+    open: 5900,
+    company: 24000,
+  },
+  logo: logoCNPG,
+  description:
+    "Git je moderní verzovaci nástroj, který se stal de facto standardem mezi vývojáři. Používají jej na denní bázy jednotlivci, startupy i korporace. Git vám nabízí jednoduchou kolaboraci na projektu s více lidmi a práci na více částech současně aniž byste si zasahovali do rozdělaných věcí nebo je jinak narušovali. Spolupráci na vývoji projektu ještě zlepšuje Gitlab, což je kolaborativni platforma na návrh, vývoj a provozování software (více o Gitlabu v samostatném kurzu).",
+  days: 1,
+  weight: 20,
+};
+
+# Co je to CloudNativePG?
+
+CloudNativePG (zkráceně CNPG) je tzv. Kubernetes Operator pro PostgreSQL.
+
+CNPG operátor se stará o PostgreSQL clusterů běžících na Kubernetes. A to o celý životní cyklus clusteru (pro pokročilé: operator level 5: autopilot).
+CNPG zároveň přináší spoustu dalších funkcní, jako například:
+
+- Automatické zálohování
+- Automatické replikaci (primary, synchronní i asynchronní replika)
+- Automatický failover
+- Obnovení ze zálohy
+- Point In Time Recovery (PITR)
+- pgBouncer integraci (connection pooling)
+- Prometheus integraci (monitoring)
+- Read-only repliky
+- Replika cluster (v jiném Kubernetes clusteru)
+- `kubectl` plugin
+
+# Jak školení probíhá
+
+Školení je formou workshopu, kde si na názorných příkladech ukážeme, jak pracovat s CNPG a jak spravovat PostgreSQL clustery. Začneme od jednodušších úkolů a budeme plynule pokračovat až po složitější konfigurace a operace.
+
+# Co Vás naučím
+
+- Vytvoření a konfiguraci CNPG PostgreSQL clusteru
+- Správu a monitoring PostgreSQL clusteru
+- Aktualizace clusteru
+- Na co si dát pozor
+- Jak se řeší migrace
+- Best practices
+- Předám vám své zkušenosti se správou PostgreSQL clusterů na Kubernetes
+
+## Co si odnesete
+
+- Spoustu znalostí
+- Příklady z praxe
+- Všechny materiály ze školení
+
+# Pro koho je školení určeno
+
+Školení je určeno pro kohokoliv, kdo se zajímá o PostgreSQL a Kubernetes a chce se naučit, jak se dá provozovat databázový cluster na Kubernetes s klidným spaním. Ať už jste vývojář, správce databází nebo DevOps, toto školení je pro vás.
+
+## Předchozí znalosti
+
+- Základy práce v terminálu výhodou
+- Základní znalost PostgreSQL výhodou
+- Základní znalost Kubernetes výhodou
+
+## Technické požadavky
+
+- Nainstalovaný Git
+- Přístup na internet - ideálně bez korporátní proxy, případně nastavenou proxy v prohlížeči
+- Nebát se Kubernetes 😉
+
+export default ({ children }) => (
+  <TrainingLayout content={children} meta={meta} />
+);

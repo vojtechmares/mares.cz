@@ -7,6 +7,7 @@ import logoKubernetes from "@/images/logos/tools/kubernetes.svg";
 import logoTerraform from "@/images/logos/tools/terraform.svg";
 import logoArgo from "@/images/logos/tools/argo.svg";
 import logoGit from "@/images/logos/tools/git.svg";
+import logoPostgres from "@/images/logos/tools/postgresql.svg";
 
 type TrainingType = {
   name: string;
@@ -19,6 +20,7 @@ const trainingList: TrainingType[] = [
   { name: "Terraform", href: "/skoleni/terraform", logo: logoTerraform },
   { name: "ArgoCD", href: "/skoleni/argocd", logo: logoArgo },
   { name: "Git", href: "/skoleni/git", logo: logoGit },
+  { name: "Postgres na Kubernetes", href: "/skoleni/postgres-on-k8s", logo: logoPostgres },
 ];
 
 type TrainingProps = {
@@ -58,7 +60,7 @@ const TrainingGridMobile = () => {
 const TrainingGridDesktop = () => {
   return (
     <div className="hidden lg:mt-20 lg:block">
-      <div className="grid grid-cols-4 gap-x-8 gap-y-4">
+      <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainingList.map((training) => (
           <div
             key={training.name}
