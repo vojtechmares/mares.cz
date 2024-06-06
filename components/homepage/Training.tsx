@@ -20,7 +20,11 @@ const trainingList: TrainingType[] = [
   { name: "Terraform", href: "/skoleni/terraform", logo: logoTerraform },
   { name: "ArgoCD", href: "/skoleni/argocd", logo: logoArgo },
   { name: "Git", href: "/skoleni/git", logo: logoGit },
-  { name: "Postgres na Kubernetes", href: "/skoleni/postgres-on-k8s", logo: logoPostgres },
+  {
+    name: "Postgres na Kubernetes",
+    href: "/skoleni/postgres-on-k8s",
+    logo: logoPostgres,
+  },
 ];
 
 type TrainingProps = {
