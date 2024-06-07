@@ -57,7 +57,7 @@ export function Hero() {
                 Napište mi
               </Button>
             </div>
-            <div className="mt-10 ">
+            <div className="mt-10">
               {" "}
               {/* mt-36 lg:mt-44 */}
               <p className="font-display text-lg tracking-tight text-slate-700">

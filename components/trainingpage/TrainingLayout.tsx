@@ -62,7 +62,7 @@ export default function TrainingLayout({ content, meta }: Props) {
               </div>
               <div className="mt-8 md:col-span-2 md:mt-0">
                 {meta.days === 2 ? (
-                  <div className=" mb-8 rounded-lg bg-blue-50 p-4 shadow">
+                  <div className="mb-8 rounded-lg bg-blue-50 p-4 shadow">
                     <div className="flex">
                       <div className="flex-shrink-0">
                         {/* <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" /> */}
@@ -96,7 +96,7 @@ export default function TrainingLayout({ content, meta }: Props) {
                       Cena za školení
                     </h2>
                   </div>
-                  <div className=" px-4 pb-5 pt-2">
+                  <div className="px-4 pb-5 pt-2">
                     <dl className="sm:divide-y sm:divide-slate-400">
                       <div className="py-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 sm:py-5">
                         <dt className="font-medium text-slate-700">
