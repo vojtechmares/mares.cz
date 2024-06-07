@@ -10,8 +10,8 @@ const links = [
     href: "/#skoleni",
   },
   {
-    name: "Blog",
-    href: "https://vojtechmares.blog/",
+    name: "Články",
+    href: "/clanky",
   },
   // {
   //   name: "Případové studie",
