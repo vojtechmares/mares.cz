@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { readdir } from "fs/promises";
 import Link from "next/link";
@@ -29,28 +30,28 @@ export default async function Articles() {
 
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
-      <h2 className="font-display mb-8 text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+      <h2 className="font-display mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
         Články
       </h2>
-      <div className="grid max-w-prose grid-cols-1 space-y-4 divide-dashed">
+      <div className="max-w-prose">
         {articles.map((article) => (
-          <Link
-            key={article.slug}
-            href={"/clanky/" + article.slug}
-            className="rounded-2xl bg-slate-50 px-8 py-6"
-          >
-            <h3 className="font-display text-3xl font-bold tracking-tight">
+          <div key={article.slug}>
+            <h3 className="font-display mb-8 mt-16 text-3xl font-bold tracking-tight">
               {article.title}
             </h3>
-            <p className="text-md">
+            <p className="my-4 text-xl text-slate-700">
               {new Date(article.publishDate).toLocaleDateString("cs-CZ", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
             </p>
-            <p className="mt-4 text-xl">{article.description}</p>
-          </Link>
+            <p className="my-4 text-xl text-slate-700">{article.description}</p>
+            {/* <Link className="my-4 text-xl text-slate-700 underline" href={"/clanky/" + article.slug}>Přečíst si článek</Link> */}
+            <Button href={"/clanky/" + article.slug} color="black">
+              Přečíst si článek
+            </Button>
+          </div>
         ))}
       </div>
     </Container>
