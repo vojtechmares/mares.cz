@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
-import { link } from "fs";
 
 const links = [
   {
@@ -12,6 +11,10 @@ const links = [
   {
     name: "Články",
     href: "/clanky",
+  },
+  {
+    name: "Přednášky",
+    href: "/prednasky",
   },
   // {
   //   name: "Případové studie",
