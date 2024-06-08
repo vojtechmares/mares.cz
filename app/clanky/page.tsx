@@ -38,15 +38,14 @@ export default async function Articles() {
             <h3 className="font-display mb-8 mt-16 text-3xl font-bold tracking-tight">
               {article.title}
             </h3>
-            <p className="my-4 text-xl text-slate-700">
+            <p className="my-4 text-slate-700">
               {new Date(article.publishDate).toLocaleDateString("cs-CZ", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
             </p>
-            <p className="my-4 text-xl text-slate-700">{article.description}</p>
-            {/* <Link className="my-4 text-xl text-slate-700 underline" href={"/clanky/" + article.slug}>Přečíst si článek</Link> */}
+            <p className="my-4 text-slate-700">{article.description}</p>
             <Button href={"/clanky/" + article.slug} color="black">
               Přečíst si článek
             </Button>
