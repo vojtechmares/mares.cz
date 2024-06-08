@@ -23,7 +23,11 @@ async function getArticle(params: { slug: string }) {
   return { content, meta };
 }
 
-export default async function Article({ params }: { params: { slug: string } }) {
+export default async function Article({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { content: Content, meta } = await getArticle(params);
 
   return <Content />;
