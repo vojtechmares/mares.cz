@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Gallery } from "@/components/articles/Gallery";
+import { Image } from "@/components/articles/Image";
 
 import k8sHBD10 from "@/images/events/kcd-prague-2024/hbd-k8s-10.png";
 import vmTalkCNPG from "@/images/events/kcd-prague-2024/kcd-vm-talk-cnpg.jpg";
@@ -26,11 +26,7 @@ Díky všem, kdo se na přípravě konference podíleli a všem kdo přišli. By
 
 Letos se pořadatelům povedl moc pěkný termín, protože 6. června slaví Kubernetes svoje narozeniny 🎂. A letos to byly dokonce jubilejní 10. narozeniny 🥳.
 
-<Image
-  src={k8sHBD10}
-  alt="Kubernetes happy 10th birthday cake"
-  className="rounded-2xl"
-/>
+<Image src={k8sHBD10} alt="Kubernetes happy 10th birthday cake" />
 
 ## Co je KCD?
 
@@ -76,7 +72,6 @@ Pokud vás zajímá jak provozovat PostgreSQL cluster na Kubernetes, přijďte n
 <Image
   src={vmTalkCNPG}
   alt="Vojtěch Mareš s mikrofonem, přednášející o CloudNativePG"
-  className="rounded-2xl"
 />
 
 _Z přednášky záznam je, odkaz doplním, jakmile bude k dispozici. Celá prezentace [tady](https://docs.google.com/presentation/d/1LtF5K7xuTqlAOUQaW2XcFqQbO6HRTuld/edit?usp=sharing&ouid=115084391547465813704&rtpof=true&sd=true)._
@@ -87,8 +82,4 @@ Ve dvou nabitých dnech jsem byl na spoustě skvělých přednášek, přednáš
 
 Díky za super akci v Praze a těším se na příští rok v Bratislavě! ✌️
 
-<Image
-  src={kcdGroupPhoto}
-  alt="Společná fotka účastníků KCD Prague 2024"
-  className="rounded-2xl"
-/>
+<Image src={kcdGroupPhoto} alt="Společná fotka účastníků KCD Prague 2024" />
