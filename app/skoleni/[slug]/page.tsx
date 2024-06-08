@@ -28,11 +28,11 @@ async function getTraining(params: { slug: string }) {
 
 type Props = {
   params: { slug: string };
-}
+};
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { meta } = await getTraining(params);
 
@@ -40,12 +40,10 @@ export async function generateMetadata(
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
-  }
+  };
 }
 
-export default async function Training({
-  params,
-}: Props) {
+export default async function Training({ params }: Props) {
   const formatter = new Intl.NumberFormat("cs", {
     style: "currency",
     currency: "CZK",
