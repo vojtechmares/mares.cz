@@ -6,12 +6,9 @@ export async function generateStaticParams() {
     await readdir("./content/articles", { withFileTypes: true })
   ).filter((dirent) => !dirent.isDirectory());
 
-  // cleanup the slugs from file extension
-  files.forEach((dirent) => dirent.name.replace(/\.mdx$/, ""));
-
   let slugs: { slug: string }[] = [];
   for (let i = 0; i < files.length; i++) {
-    slugs.push({ slug: files[i].name });
+    slugs.push({ slug: files[i].name.replace(/\.mdx$/, "") });
   }
 
   return slugs;
