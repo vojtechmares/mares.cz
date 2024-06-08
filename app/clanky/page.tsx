@@ -4,13 +4,13 @@ import { readdir } from "fs/promises";
 
 async function getArticles() {
   const slugs = (
-    await readdir("./app/clanky/(clanky)", { withFileTypes: true })
-  ).filter((dirent) => dirent.isDirectory());
+    await readdir("./content/articles", { withFileTypes: true })
+  ).filter((dirent) => !dirent.isDirectory());
 
   let articles = await Promise.all(
     slugs.map(async (dirent) => {
-      const { metadata } = await import(`./(clanky)/${dirent.name}/page.mdx`);
-      return { slug: dirent.name, ...metadata };
+      const { meta } = await import(`@/content/articles/${dirent.name}`);
+      return { slug: dirent.name.replace(/\.mdx$/, ""), ...meta };
     }),
   );
 
