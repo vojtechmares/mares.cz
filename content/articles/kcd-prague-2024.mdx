@@ -41,6 +41,9 @@ Ve čtvrtek 6. června jsme společně se [cybroslabs](https://www.cybroslabs.co
 Na workshopu jsme měli skvělou účast, demo deployment jsme ukazovali na našem [Turing Pi](https://turingpi.com/) clusteru, který jsme měli s sebou.
 Ukázali jsme, jak řešíme deployment pro naše zákazníky, jak řešíme výzvy kolem Kubernetes, deploymentu Kubernetes clusteru, správy, až po deployment aplikace jako takové, včetně krátké ukázky, na čem pracujeme.
 
+Ještě bych chtěl zmínit náš open-source ingress controller [Cloudflare Tunnel Ingress Controller](https://github.com/clbs-io/cloudflare-tunnel-ingress-controller), na GitHubu jej najdete pod organizací [clbs-io](https://github.com/clbs-io). Pro IoT, edge, dema nebo domácí lab, je to super nástroj jak dostat své aplikace na internet bez nutnosti statické IP adresy nebo port forwardingu.
+Pomocí standardního Kubernetes Ingressu a [Cloudflare Tunnelu](https://www.cloudflare.com/en-gb/products/tunnel/).
+
 _Workshop bohužel nebyl nahrán, alespoň máme pár fotek._
 
 <Gallery
@@ -74,7 +77,48 @@ Pokud vás zajímá jak provozovat PostgreSQL cluster na Kubernetes, přijďte n
   alt="Vojtěch Mareš s mikrofonem, přednášející o CloudNativePG"
 />
 
+Myslím, že se mi přednáška povedla, ale ještě to má rezervy. Dal bych si tak 7/10 😄.
+
 _Z přednášky záznam je, odkaz doplním, jakmile bude k dispozici. Celá prezentace [tady](https://docs.google.com/presentation/d/1LtF5K7xuTqlAOUQaW2XcFqQbO6HRTuld/edit?usp=sharing&ouid=115084391547465813704&rtpof=true&sd=true)._
+
+## Moje střípky z KCD
+
+Tohle jsou jen moje postřehy samozřejmě, pokud vás zajímají ostatní přednášky, na YouTube [playlist](https://www.youtube.com/watch?v=6u2SxjHeKHo&list=PLzO-esMdGBjf7JDrkw9jYTvxg9X5iYmD7) přednášek.
+
+### KEDA podporuje Gateway API!
+
+[KEDA (Kubernetes Event-Driven Autoscaler)](https://keda.sh/) dnes podporuje a stále pracuje na rozšíření podpory pro Kubernetes [Gateway API](https://gateway-api.sigs.k8s.io/) (budoucnost Kubernetes Ingressu).
+
+A nejen to, KEDA umožňuje škálování až na nulu. A to bez nástrojů jako je Knative. Ovšem za cenu, že před vaším workloadem bude KEDA Interceptor (proxy), na základě kterého bude škálovat. Bylo i demo a fungovalo to moc pěkně 👍.
+Rychlost, s jakou KEDA dokázala škálovat pody byla opravdu působivá. Narozdíl od obyčjného HPA (Horizontal Pod Autoscaler), který škáluje na základě využití CPU/RAM, bylo škálování dle počtu requestů mnohem rychlejší. A to jak scale up tak down.
+
+Na můj dotaz, jaký performance overhead to má, byla odpověď, že dle benchmarků je response time cca o 10ms delší a množství odbavených requestů za sekundu kleslo z 2000 na 1600, což je pokles o 20%.
+To sice není zanedbatelné, ale pokud vaše aplikace nemusí být vyloženě real-time. Dá se s tím žít a těžit z efektivnějšího škálování. WebSockety zatím podporované nejsou, ale na GitHubu je otevřený pull request.
+
+### Event mesh
+
+Máme v Kubernetes světe meshů málo, tak si přidáme k Service meshi i event mesh 😆!
+
+Event mesh je integrovaný do [Knative](https://knative.dev/docs/). Ale přitom na krátké demo ani nebylo třeba Kafky 👀.
+
+Event mesh staví na rozdělení čtení dat (synchronní operace) a zápisu (asynchronní operace). To jde ruku v ruce s principem CQRS ([Command Query Responsibility Segregation](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)).
+
+Do tohohle bodu se event mesh vlastně neliší od event sourcingu. Za mě ten zlomový bod, proč event mesh může být přínosem,
+bylo jak snadno se dal integrovat do legacy aplikace (v tomto případě byla ukázka na Java aplikaci) a zároveň vedle mít nové (mikro)služby, například v Rustu.
+
+Nevýhodou event meshe je, že data nejsou vždy konzistentní ([eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency)), ale to je cena za asynchronní zpracování.
+
+### Srovnání Kubernetes PostgreSQL operátorů
+
+Shodou náhod před mojí přednáškou byla přednáška o různých Kubernetes PostgreSQL operátorech. Já jsem si tohle srovnání dělal sám pár měsíců zpátky,
+než jsme se cybroslabs došli k CNPG.
+
+Byly zmíněny operároty jako Zalando, CrunchyData PGO, CloudNativePG, StackGres a okrajově bitnami/postgresql Helm Chart.
+
+David Pech, nejen že povídal o rozdílech mezi jednotlivým operátory, ale zároveň ukázal i výsledky benchmarků jednotlivých operátorů.
+
+Závěřem: **CloudNativePG je skvělý!** 💪 Z čehož jsem měl pochopitelně radost, když jsem na takovou přednášku mohl rovnou navázat.
+Ale pokud nejste PostgreSQL profíci a máte možnost použít managed databázi, je to lepší volba.
 
 ## Díky a za rok zas!
 
