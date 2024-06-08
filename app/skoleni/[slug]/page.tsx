@@ -1,10 +1,11 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { readdir } from "fs/promises";
+import { Metadata, ResolvingMetadata } from "next";
+import { type MDXContent } from "mdx/types";
 
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
-import { type MDXContent } from "mdx/types";
 
 export async function generateStaticParams() {
   let files = (
@@ -25,11 +26,26 @@ async function getTraining(params: { slug: string }) {
   return { content, meta };
 }
 
+type Props = {
+  params: { slug: string };
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { meta } = await getTraining(params);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: meta.keywords,
+  }
+}
+
 export default async function Training({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: Props) {
   const formatter = new Intl.NumberFormat("cs", {
     style: "currency",
     currency: "CZK",
