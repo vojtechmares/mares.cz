@@ -1,7 +1,6 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { readdir } from "fs/promises";
-import Link from "next/link";
 
 async function getArticles() {
   const slugs = (
