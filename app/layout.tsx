@@ -60,6 +60,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           data-domain="vojtechmares.com"
           src="https://plausible.io/js/script.js"
         ></script>
+        <link
+          rel="sitemap"
+          type="application/xml"
+          title="Sitemap"
+          href="/sitemap.xml"
+        />
       </head>
       <body className="flex h-full flex-col">
         <Navigation />
