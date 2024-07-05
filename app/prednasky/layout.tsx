@@ -1,4 +1,14 @@
 import { Container } from "@/components/Container";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Přednášky | Vojtěch Mareš - DevOps konzultant, lektor",
+  description:
+    "Kde jsem přednášel o DevOps, automatizaci, vývoji softwaru a infrastruktuře",
+  alternates: {
+    canonical: "/prednasky",
+  },
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

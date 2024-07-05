@@ -37,14 +37,14 @@ export const metadata: Metadata = {
   openGraph: {
     url: "https://vojtechmares.com",
     type: "website",
-    title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
-    description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+    title: "Vojtěch Mareš - DevOps konzultant, lektor",
+    description: "Vojtěch Mareš - DevOps konzultant, lektor",
   },
   twitter: {
     card: "summary_large_image",
     site: "@vojtechmares",
     creator: "@vojtechmares",
-    title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+    title: "Vojtěch Mareš - DevOps konzultant, lektor",
   },
 };
 

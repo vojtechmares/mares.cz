@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { readdir } from "fs/promises";
+import { Metadata } from "next";
 
 async function getArticles() {
   const slugs = (
@@ -23,6 +24,14 @@ async function getArticles() {
 
   return articles;
 }
+
+export const metadata: Metadata = {
+  title: "Články | Vojtěch Mareš - DevOps konzultant, lektor",
+  description: "Články nejen o DevOps, automatizaci a vývoji softwaru",
+  alternates: {
+    canonical: "/clanky",
+  },
+};
 
 export default async function Articles() {
   const articles = await getArticles();
