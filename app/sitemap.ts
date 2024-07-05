@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await getTrainingSlugs();
 
   const trainingURLs = slugs.map((slug) => ({
-    url: `https://vojtechmares.com/skoleni/${slug}`,
+    url: `https://www.vojtechmares.com/skoleni/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const baseURLs = [
     {
-      url: "https://vojtechmares.com",
+      url: "https://www.vojtechmares.com",
       lastModified: new Date(),
       changeFrequency: "yearly" as const,
       priority: 1,
@@ -38,13 +38,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: "https://vojtechmares.com/clanky",
+      url: "https://www.vojtechmares.com/clanky",
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.5,
     },
     {
-      url: "https://vojtechmares.com/prednasky",
+      url: "https://www.vojtechmares.com/prednasky",
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.5,
