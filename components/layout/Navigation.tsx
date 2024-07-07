@@ -57,7 +57,7 @@ function MobileNavigation() {
           </span>
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
-          <Button href="mailto:jsem@vojtechmares.com" color="amber">
+          <Button href="mailto:vojtech@mares.cz" color="amber">
             <span className="text-lg font-bold tracking-tight">
               Napište mi <span className="hidden lg:inline">ještě dnes</span>
             </span>
@@ -89,7 +89,7 @@ function MobileNavigation() {
 //           </span>
 //         </div>
 //         <div className="flex items-center gap-x-8">
-//           <Button href="mailto:jsem@vojtechmares.com" color="amber">
+//           <Button href="mailto:vojtech@mares.cz" color="amber">
 //             <span className="text-lg font-bold tracking-tight">
 //               Napište mi <span className="hidden lg:inline">ještě dnes</span>
 //             </span>
@@ -129,7 +129,7 @@ function DesktopNavigation() {
           </div>
         </div>
         <div className="flex items-center gap-x-8">
-          <Button href="mailto:jsem@vojtechmares.com" color="amber">
+          <Button href="mailto:vojtech@mares.cz" color="amber">
             <span className="text-lg font-bold tracking-tight">
               Napište mi <span className="hidden lg:inline">ještě dnes</span>
             </span>

@@ -18,11 +18,11 @@ test("homepage", () => {
     // First button (in navbar) is <a><span>...</span></a>, therefore we look for parent (closest) anchor element
     if (element instanceof HTMLSpanElement) {
       const parent = element.closest("a");
-      expect(parent?.getAttribute("href")).toBe("mailto:jsem@vojtechmares.com");
+      expect(parent?.getAttribute("href")).toBe("mailto:vojtech@mares.cz");
       return;
     }
 
-    expect(element.getAttribute("href")).toBe("mailto:jsem@vojtechmares.com");
+    expect(element.getAttribute("href")).toBe("mailto:vojtech@mares.cz");
   });
 
   expect(writeMe).toHaveLength(2);

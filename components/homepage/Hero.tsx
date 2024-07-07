@@ -50,7 +50,7 @@ export function Hero() {
                 Domluvme si schůzku
               </Button>
               <Button
-                href="mailto:jsem@vojtechmares.com"
+                href="mailto:vojtech@mares.cz"
                 size="large"
                 variant="outline"
               >

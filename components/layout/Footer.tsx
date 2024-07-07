@@ -19,11 +19,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="mailto:jsem@vojtechmares.com"
-                    className="underline"
-                  >
-                    jsem@vojtechmares.com
+                  <Link href="mailto:vojtech@mares.cz" className="underline">
+                    vojtech@mares.cz
                   </Link>
                 </li>
                 <li className="mt-4">
@@ -102,7 +99,7 @@ export function Footer() {
                 <Button href="https://cal.com/vojtechmares/30min">
                   Domluvme si schůzku
                 </Button>
-                <Button href="mailto:jsem@vojtechmares.com">Napište mi</Button>
+                <Button href="mailto:vojtech@mares.cz">Napište mi</Button>
               </div>
             </div>
           </div>

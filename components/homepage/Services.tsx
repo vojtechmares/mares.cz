@@ -103,7 +103,7 @@ export function Services() {
             name="Konzultace"
             price="2 000 CZK za hodinu"
             description="Chcete se poradit nebo si nevíte rady? Projdeme Váš současný stav a najdeme kde je problém a navrhneme řešení."
-            href="mailto:jsem@vojtechmares.com"
+            href="mailto:vojtech@mares.cz"
           />
           <Service
             featured
