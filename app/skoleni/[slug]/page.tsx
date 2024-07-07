@@ -145,7 +145,7 @@ export default async function Training({ params }: Props) {
                   variant="solid"
                   color="amber"
                   className="w-full text-lg font-medium"
-                  href="mailto:jsem@vojtechmares.com"
+                  href="mailto:vojtech@mares.cz"
                 >
                   Nezávazně poptat
                 </Button>

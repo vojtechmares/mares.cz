@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL("https://vojtechmares.com"),
+  metadataBase: new URL("https://mares.cz"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    url: "https://vojtechmares.com",
+    url: "https://mares.cz",
     type: "website",
     title: "Vojtěch Mareš - DevOps konzultant, lektor",
     description: "Vojtěch Mareš - DevOps konzultant, lektor",
@@ -56,11 +56,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       lang="cs"
     >
       <head>
-        <script
-          defer
-          data-domain="vojtechmares.com"
-          src="https://plausible.io/js/script.js"
-        ></script>
         <link
           rel="sitemap"
           type="application/xml"

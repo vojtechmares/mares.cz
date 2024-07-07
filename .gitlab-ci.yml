@@ -59,6 +59,6 @@ deploy:production:
     - vercel deploy --prod --prebuilt --token=${VERCEL_TOKEN}
   environment:
     name: production
-    url: https://vojtechmares.com
+    url: https://mares.cz
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
