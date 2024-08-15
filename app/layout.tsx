@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    url: "https://mares.cz",
+    url: "https://www.mares.cz",
     type: "website",
     title: "Vojtěch Mareš - DevOps konzultant, lektor",
     description: "Vojtěch Mareš - DevOps konzultant, lektor",
