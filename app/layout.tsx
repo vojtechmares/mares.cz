@@ -15,8 +15,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
-  description: "Vojtěch Mareš - DevOps konzultant, lektor, engineer",
+  title: "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+  description:
+    "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -38,14 +39,17 @@ export const metadata: Metadata = {
   openGraph: {
     url: "https://www.mares.cz",
     type: "website",
-    title: "Vojtěch Mareš - DevOps konzultant, lektor",
-    description: "Vojtěch Mareš - DevOps konzultant, lektor",
+    title:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    description:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   },
   twitter: {
     card: "summary_large_image",
     site: "@vojtechmares_",
     creator: "@vojtechmares_",
-    title: "Vojtěch Mareš - DevOps konzultant, lektor",
+    title:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   },
 };
 
