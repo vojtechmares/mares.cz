@@ -4,6 +4,22 @@ import { Container } from "@/components/Container";
 // import { Logo } from '@/components/Logo'
 import { Button } from "@/components/Button";
 
+type Training = {
+  name: string;
+  href: string;
+};
+
+const trainings: Training[] = [
+  { name: "Kubernetes", href: "/skoleni/kubernetes" },
+  { name: "Terraform", href: "/skoleni/terraform" },
+  { name: "ArgoCD", href: "/skoleni/argocd" },
+  { name: "Git", href: "/skoleni/git" },
+  {
+    name: "Postgres na Kubernetes",
+    href: "/skoleni/postgres-on-k8s",
+  },
+];
+
 export function Footer() {
   return (
     <footer className="bg-slate-50">
@@ -37,24 +53,15 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Nejblíbenější školení</h3>
+              <h3 className="text-lg font-medium">Školení</h3>
               <ul className="mt-4 list-disc pl-4">
-                <li>
-                  <Link href="/skoleni/kubernetes" className="underline">
-                    Kubernetes
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link href="/skoleni/gitlab-ci" className="underline">GitLab CI</Link>
-                </li> */}
-                <li>
-                  <Link href="/skoleni/terraform" className="underline">
-                    Terraform
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link href="/skoleni/rancher" className="underline">Rancher</Link>
-                </li> */}
+                {trainings.map((training) => (
+                  <li key={training.href}>
+                    <Link href={training.href} className="underline">
+                      {training.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             {/* <div>
@@ -66,7 +73,7 @@ export function Footer() {
                     className="underline"
                     target="_blank"
                   >
-                    DevOps-Skoleni.cz
+                    devops-skoleni.cz
                   </Link>
                 </li>
                 <li>
@@ -75,7 +82,7 @@ export function Footer() {
                     className="underline"
                     target="_blank"
                   >
-                    Skoleni.io
+                    skoleni.io
                   </Link>
                 </li>
                 <li>
@@ -84,7 +91,7 @@ export function Footer() {
                     className="underline"
                     target="_blank"
                   >
-                    DevOpsaci.cz
+                    devopsaci.cz
                   </Link>
                 </li>
               </ul>
