@@ -1,16 +1,19 @@
-import { expect, test } from "vitest";
+import { expect, test, describe } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import Page from "../app/page";
 
 test("homepage", () => {
   render(<Page />);
-  const main = within(screen.getByRole("main"));
-  expect(
-    main.getByRole("heading", {
-      level: 1,
-      name: /Jsem Vojtěch Mareš a pomohu Vám s Vaší IT infrastrukturou./i,
-    }),
-  ).toBeDefined();
+
+  const heading = screen.queryAllByRole("heading", {
+    level: 1,
+  });
+
+  expect(heading).toBeDefined();
+
+  const headingText = heading.map((el) => el.textContent).join("");
+
+  expect(headingText).toBe("Jsem Vojtěch Mareš, DevOps architekt.");
 
   const writeMe = screen.getAllByText(/Napište mi/i);
 
