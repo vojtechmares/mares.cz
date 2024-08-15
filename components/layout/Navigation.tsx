@@ -10,6 +10,10 @@ const links = [
     href: "/#skoleni",
   },
   {
+    name: "Služby",
+    href: "/#sluzby",
+  },
+  {
     name: "Články",
     href: "/clanky",
   },

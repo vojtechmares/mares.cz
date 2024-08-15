@@ -44,10 +44,8 @@ function Service({
       className={clsx(
         "flex flex-col rounded-3xl px-6 py-8 sm:px-8",
         featured ? "order-first bg-amber-500 lg:order-none" : "",
-        featured
-          ? "hover:bg-amber-500"
-          : "md:ring-1 md:ring-transparent md:hover:ring-slate-700",
-        "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
+        featured ? "hover:bg-amber-500" : "md:ring-1 md:ring-slate-700",
+        // "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
       <h3 className="font-display text-4xl font-medium tracking-tight text-white">
@@ -68,7 +66,7 @@ function Service({
         href={href}
         variant={featured ? "solid" : "outline"}
         color="white"
-        className="mt-16"
+        className="mt-8 md:mt-16"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         {buttonText}
@@ -80,25 +78,22 @@ function Service({
 export function Services() {
   return (
     <section
-      id="services"
-      aria-label="Services"
+      id="sluzby"
+      aria-label="Služby"
       className="bg-black py-20 sm:py-32"
     >
       <Container>
         <div className="md:text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            <span className="relative whitespace-nowrap">
+            {/* <span className="relative whitespace-nowrap">
               <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-amber-500" />
               <span className="relative">Co pro Vás,</span>
-            </span>{" "}
-            můžu udělat
+            </span>{" "} */}
+            Služby
           </h2>
-          <p className="mt-4 text-lg text-slate-400">
-            Nezáleží na velikosti Vaší firmy, ať jste startup, nebo korporát,
-            dokážu pomoci každému.
-          </p>
+          <p className="mt-4 text-lg text-slate-400">Co Vám můžu nabídnout?</p>
         </div>
-        <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
+        <div className="-mx-4 mt-16 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
             name="Konzultace"
             price="2 000 CZK za hodinu"
@@ -107,16 +102,16 @@ export function Services() {
           />
           <Service
             featured
-            name="Firemní školení"
-            price="24 000 CZK za jednodenní školení"
-            description="Jednoduše, s názornými příklady, které si každý vyzkouší. Naučím váš tým nové technologii nebo prohloubíme stávající znalosti."
+            name="Školení"
+            price="Cena dle školení"
+            description="Formou workshopu Váš tým seznámím a naučím využívat moderní cloudové technologie. Vše si společně vyzkoušíme na řadě příkladů. Veškeré materiály ze školení a přílady Vám zůstanou."
             href="/#skoleni"
             buttonText="Seznam školení"
           />
           <Service
-            name="Implementace"
+            name="DevOps spolupráce"
             price="Cena dohodou"
-            description="Analyzujeme Vaši situaci, projdeme možnosti, vybereme nejlepší řešení a společně jej nasadíme."
+            description="Postarám se o Vaší infrastrukturu, migrace, monitoring a její rozvoj. Pomohu vám s vývojem cloud-native aplikací a zároveň udržím cenu Vaší infrastruktury na uzdě."
             href="https://cal.com/vojtechmares/30min"
             buttonText="Domluvme si schůzku"
           />
