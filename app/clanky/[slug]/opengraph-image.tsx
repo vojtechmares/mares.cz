@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
@@ -66,7 +68,8 @@ export default async function Image({ params }: Props) {
         <img
           style={{ position: "absolute", bottom: 0, right: 60 }}
           height="600"
-          src={avatarSrc}
+          alt=""
+          src={avatarSrc as unknown as string}
         />
       </div>
     ),

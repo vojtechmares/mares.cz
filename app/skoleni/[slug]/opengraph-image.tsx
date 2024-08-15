@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
@@ -67,7 +69,8 @@ function withImage(
             style={{ position: "absolute", right: 60 }}
             width="400"
             height="400"
-            src={logoSrc}
+            alt=""
+            src={logoSrc as unknown as string}
           />
         )}
       </div>
