@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
-
-export const runtime = "edge";
 
 // Image metadata
 export const alt =
@@ -17,9 +17,10 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Image() {
-  const avatarSrc = await fetch(
-    new URL("../images/avatars/vojtech-mares.png", import.meta.url),
-  ).then((res) => res.arrayBuffer());
+  const avatarData = await readFile(
+    join(process.cwd(), "./images/avatars/vojtech-mares.png"),
+  );
+  const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   return new ImageResponse(
     (

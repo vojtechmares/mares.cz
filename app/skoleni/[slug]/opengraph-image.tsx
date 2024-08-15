@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
-
-export const runtime = "edge";
 
 // Image metadata
 export const alt = "Školení";
@@ -110,36 +110,29 @@ function withoutImage(slug: string, meta: any): ImageResponse {
   );
 }
 
-const imageMap = new Map<string, URL>([
-  [
-    "kubernetes",
-    new URL("../../../images/logos/tools/kubernetes.png", import.meta.url),
-  ],
-  ["argocd", new URL("../../../images/logos/tools/argo.png", import.meta.url)],
-  ["git", new URL("../../../images/logos/tools/git.png", import.meta.url)],
-  [
-    "terraform",
-    new URL("../../../images/logos/tools/terraform.png", import.meta.url),
-  ],
+const imageMap = new Map<string, string>([
+  ["kubernetes", "./images/logos/tools/kubernetes.png"],
+  ["argocd", "./images/logos/tools/argo.png"],
+  ["git", "./images/logos/tools/git.png"],
+  ["terraform", "./images/logos/tools/terraform.png"],
 ]);
 
 // Image generation
 export default async function Image({ params }: Props) {
   const trainingMetadata = await getTrainingMetadata(params.slug);
 
-  const imageURL = imageMap.get(params.slug);
+  const imagePath = imageMap.get(params.slug);
 
-  if (!imageURL) {
+  if (!imagePath) {
     return withoutImage(params.slug, trainingMetadata);
   }
 
-  const logoSrc = await fetch(imageURL)
-    .then((res) => res.arrayBuffer())
-    .catch(() => null);
+  const imageData = await readFile(join(process.cwd(), imagePath));
+  const imageSrc = Uint8Array.from(imageData).buffer;
 
-  if (!logoSrc) {
+  if (!imageSrc) {
     return withoutImage(params.slug, trainingMetadata);
   }
 
-  return withImage(params.slug, logoSrc, trainingMetadata);
+  return withImage(params.slug, imageSrc, trainingMetadata);
 }
