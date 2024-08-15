@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL("https://mares.cz"),
+  metadataBase: new URL("https://www.mares.cz"),
   alternates: {
     canonical: "/",
   },
