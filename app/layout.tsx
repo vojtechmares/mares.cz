@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@vojtechmares",
-    creator: "@vojtechmares",
+    site: "@vojtechmares_",
+    creator: "@vojtechmares_",
     title: "Vojtěch Mareš - DevOps konzultant, lektor",
   },
 };
