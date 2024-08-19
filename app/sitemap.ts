@@ -14,14 +14,35 @@ async function getTrainingSlugs() {
   return slugs;
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const slugs = await getTrainingSlugs();
+async function getBlogArticleSlugs() {
+  let files = (
+    await readdir("./content/articles", { withFileTypes: true })
+  ).filter((dirent) => !dirent.isDirectory());
 
-  const trainingURLs = slugs.map((slug) => ({
+  let slugs: string[] = [];
+  for (let i = 0; i < files.length; i++) {
+    slugs.push(files[i].name.replace(/\.mdx$/, "") as string);
+  }
+
+  return slugs;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const trainingSlugs = await getTrainingSlugs();
+  const blogArticleSlugs = await getBlogArticleSlugs();
+
+  const trainingURLs = trainingSlugs.map((slug) => ({
     url: `https://www.mares.cz/skoleni/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
+  }));
+
+  const blogArticleURLs = blogArticleSlugs.map((slug) => ({
+    url: `https://www.mares.cz/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
   }));
 
   const baseURLs = [
@@ -45,5 +66,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...baseURLs, ...trainingURLs];
+  return [...baseURLs, ...trainingURLs, ...blogArticleURLs];
 }
