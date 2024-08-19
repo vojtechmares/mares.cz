@@ -32,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: "https://www.mares.cz/clanky",
+      url: "https://www.mares.cz/blog",
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.5,

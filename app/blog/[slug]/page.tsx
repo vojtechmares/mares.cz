@@ -36,7 +36,7 @@ export async function generateMetadata(
     description: meta.description,
     keywords: meta.keywords,
     alternates: {
-      canonical: "/clanky/" + params.slug,
+      canonical: "/blog/" + params.slug,
     },
   };
 }

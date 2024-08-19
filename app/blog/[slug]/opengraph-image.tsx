@@ -63,7 +63,7 @@ export default async function Image({ params }: Props) {
             Vojtěch Mareš
           </p>
           <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
-            mares.cz/clanky/{params.slug}
+            mares.cz/blog/{params.slug}
           </p>
         </div>
         <img

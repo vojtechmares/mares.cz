@@ -14,8 +14,8 @@ const links = [
     href: "/#sluzby",
   },
   {
-    name: "Články",
-    href: "/clanky",
+    name: "Blog",
+    href: "/blog",
   },
   {
     name: "Přednášky",

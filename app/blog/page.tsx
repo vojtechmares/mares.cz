@@ -26,12 +26,23 @@ async function getArticles() {
 }
 
 export const metadata: Metadata = {
-  title: "Články | Vojtěch Mareš - DevOps konzultant, lektor",
+  title: "Blog | Vojtěch Mareš - DevOps architekt, konzultant, lektor",
   description: "Články nejen o DevOps, automatizaci a vývoji softwaru",
   alternates: {
-    canonical: "/clanky",
+    canonical: "/blog",
   },
 };
+
+function localeName(locale: string): null | string {
+  switch (locale) {
+    case "cs":
+      return "Česky";
+    case "en":
+      return "English";
+    default:
+      return null;
+  }
+}
 
 export default async function Articles() {
   const articles = await getArticles();
@@ -39,7 +50,7 @@ export default async function Articles() {
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
       <h2 className="font-display mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-        Články
+        Blog
       </h2>
       <div className="max-w-prose">
         {articles.map((article) => (
@@ -53,9 +64,12 @@ export default async function Articles() {
                 month: "long",
                 year: "numeric",
               })}
+              {localeName(article.lang) !== null
+                ? " | " + localeName(article.lang)
+                : ""}
             </p>
             <p className="my-4 text-slate-700">{article.description}</p>
-            <Button href={"/clanky/" + article.slug} color="black">
+            <Button href={"/blog/" + article.slug} color="black">
               Přečíst si článek
             </Button>
           </div>
