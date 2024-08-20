@@ -1,0 +1,6 @@
+ingress:
+  host: www.mares.cz
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns-production
+
+replicas: 2

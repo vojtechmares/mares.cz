@@ -1,0 +1,27 @@
+replicas: 1
+
+image:
+  pullPolicy: IfNotPresent
+  repository: registry.mareshq.com/hq/website
+  tag: latest
+  pullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 80
+  portName: http
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  host: www.example.com
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 300m
+    memory: 512Mi

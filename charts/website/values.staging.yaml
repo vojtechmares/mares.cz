@@ -1,0 +1,10 @@
+image:
+  pullSecrets:
+    - name: mareshq-gitlab-registry
+
+replicas: 2
+
+ingress:
+  host: staging.website.vmdevel.cz
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns-production
