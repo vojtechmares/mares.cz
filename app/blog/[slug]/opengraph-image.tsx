@@ -53,7 +53,7 @@ export default async function Image({ params }: Props) {
             style={{ fontWeight: 500, fontSize: "2.5rem" }}
             tw="text-amber-500"
           >
-            Z mého blogu
+            Na blogu
           </p>
           <p style={{ fontWeight: 700, fontSize: "4rem", marginTop: 0 }}>
             {meta.title}
