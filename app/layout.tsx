@@ -53,6 +53,8 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <html
       className="h-full scroll-smooth bg-white antialiased [font-feature-settings:'ss01']"
@@ -70,7 +72,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Navigation />
         {children}
         <Footer />
-        <GoogleAnalytics gaId="G-9N0T70XBV8" />
+        {isProduction ? <GoogleAnalytics gaId="G-9N0T70XBV8" /> : <></>}
         <SpeedInsights />
       </body>
     </html>
