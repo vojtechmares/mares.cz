@@ -55,7 +55,7 @@ build:docker:
   image: docker:git
   variables:
     IMAGE: $CI_REGISTRY_IMAGE
-    TAG: $CI_COMMIT_REF-$CI_COMMIT_SHA
+    TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker info
