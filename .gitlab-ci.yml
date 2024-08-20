@@ -76,11 +76,12 @@ deploy:staging:
   variables:
     # shallow clone
     GIT_DEPTH: 1
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   script: >
     helm upgrade --install --namespace website-staging \
       website ./charts/website \
       --values ./charts/website/values.staging.yaml \
-      --set image.tag=$TAG
+      --set image.tag=$IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
   environment:
