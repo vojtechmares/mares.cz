@@ -62,6 +62,8 @@ build:docker:
     - docker buildx create --name website --use
     - docker buildx build --provenance=false --platform linux/amd64,linux/arm64 -t $IMAGE:$TAG --push .
     - docker manifest inspect $IMAGE:$TAG
+  # no cache is needed here
+  # this makes job faster, since it does not have to pull the cache
   cache: []
 #
 # deploy:preview:
