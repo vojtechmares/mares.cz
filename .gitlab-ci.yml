@@ -38,6 +38,18 @@ test:
     - source ~/.bashrc
     - pnpm add -g vercel
 
+lint:
+  stage: test
+  script:
+    - pnpm run lint
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest-9 --activate
+    - pnpm config set store-dir .pnpm-store
+    - SHELL="$(which bash)" pnpm setup
+    - source ~/.bashrc
+    - pnpm add -g vercel
+
 build:docker:
   stage: build
   variables:
