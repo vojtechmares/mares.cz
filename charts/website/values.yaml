@@ -17,6 +17,8 @@ ingress:
   className: nginx
   annotations: {}
   host: www.example.com
+  path: /
+  pathType: Prefix
 
 resources:
   limits:
