@@ -69,6 +69,23 @@ build:docker:
   # no cache is needed here
   # this makes job faster, since it does not have to pull the cache
   cache: []
+
+deploy:staging:
+  stage: deploy
+  image: ghcr.io/vojtechmares/toolkit:latest
+  variables:
+    # shallow clone
+    GIT_DEPTH: 1
+  script: >
+    helm upgrade --install --namespace website-staging \
+      website ./charts/website \
+      --values ./charts/website/values.staging.yaml \
+      --set image.tag=$TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
+  environment:
+    name: staging
+    url: https://staging.website.vmdevel.cz
 #
 # deploy:preview:
 #   stage: deploy
