@@ -52,7 +52,7 @@ lint:
 
 build:docker:
   stage: build
-  image: docker:stable
+  image: docker:git
   variables:
     IMAGE: $CI_REGISTRY_IMAGE
     TAG: $CI_COMMIT_REF-$CI_COMMIT_SHA
