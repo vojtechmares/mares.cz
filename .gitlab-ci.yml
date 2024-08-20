@@ -34,6 +34,12 @@ test:
     - pnpm run test
   <<: *pnpm_before_script
 
+format:
+  stage: test
+  script:
+    - pnpm run format:check
+  <<: *pnpm_before_script
+
 lint:
   stage: test
   script:
