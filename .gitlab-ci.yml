@@ -14,41 +14,31 @@ stages:
   - build
   - deploy
 
-install:
-  stage: install
-  script:
-    - pnpm install --frozen-lockfile
+.before_script: &pnpm_before_script
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest-9 --activate
     - pnpm config set store-dir .pnpm-store
     - SHELL="$(which bash)" pnpm setup
     - source ~/.bashrc
-    - pnpm add -g vercel
+
+install:
+  stage: install
+  script:
+    - pnpm install --frozen-lockfile
+  <<: *pnpm_before_script
 
 test:
   stage: test
   script:
     - pnpm run test
-  before_script:
-    - corepack enable
-    - corepack prepare pnpm@latest-9 --activate
-    - pnpm config set store-dir .pnpm-store
-    - SHELL="$(which bash)" pnpm setup
-    - source ~/.bashrc
-    - pnpm add -g vercel
+  <<: *pnpm_before_script
 
 lint:
   stage: test
   script:
     - pnpm run lint
-  before_script:
-    - corepack enable
-    - corepack prepare pnpm@latest-9 --activate
-    - pnpm config set store-dir .pnpm-store
-    - SHELL="$(which bash)" pnpm setup
-    - source ~/.bashrc
-    - pnpm add -g vercel
+  <<: *pnpm_before_script
 
 build:docker:
   stage: build
