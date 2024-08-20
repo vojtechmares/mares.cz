@@ -12,6 +12,7 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   experimental: {
     scrollRestoration: true,
