@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Navigation } from "@/components/layout/Navigation";
@@ -73,7 +72,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
         <Footer />
         {isProduction ? <GoogleAnalytics gaId="G-9N0T70XBV8" /> : <></>}
-        <SpeedInsights />
       </body>
     </html>
   );
