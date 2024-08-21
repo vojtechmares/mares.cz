@@ -8,6 +8,7 @@ ingress:
   host: staging.website.vmdevel.cz
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns-production
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     # Caching on the Ingress Controller
     nginx.ingress.kubernetes.io/proxy-buffering: "on" # Important!
     nginx.ingress.kubernetes.io/service-upstream: "true"
