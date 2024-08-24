@@ -1,5 +1,5 @@
 import remarkGfm from "remark-gfm";
-import remarkSlug from "remark-slug";
+import rehypeSlug from "rehype-slug";
 import createMDX from "@next/mdx";
 import rehypeHighlight from "rehype-highlight";
 
@@ -48,8 +48,9 @@ import yaml from "highlight.js/lib/languages/yaml";
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm, remarkSlug],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
+      rehypeSlug,
       [
         rehypeHighlight,
         {
