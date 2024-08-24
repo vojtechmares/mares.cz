@@ -55,7 +55,7 @@ export default async function Image({ params }: Props) {
           >
             Na blogu
           </p>
-          <p style={{ fontWeight: 700, fontSize: "4rem", marginTop: 0 }}>
+          <p tw="max-w-2xl" style={{ fontWeight: 700, fontSize: "4rem", marginTop: 0 }}>
             {meta.title}
           </p>
           <p tw="mt-6 max-w-xl text-lg">{meta.description}</p>
