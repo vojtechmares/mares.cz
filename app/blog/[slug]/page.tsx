@@ -1,6 +1,9 @@
 import { readdir } from "fs/promises";
 import { type MDXContent } from "mdx/types";
 import { Metadata, ResolvingMetadata } from "next";
+import "@/styles/highlight-js/github-dark.css";
+// import "@/styles/highlight-js/googlecode.css";
+// import "@/styles/highlight-js/tokyo-night-dark.css";
 
 export async function generateStaticParams() {
   let files = (
