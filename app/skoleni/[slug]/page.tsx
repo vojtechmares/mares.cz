@@ -37,7 +37,9 @@ export async function generateMetadata(
   const { meta } = await getTraining(params);
 
   return {
-    title: meta.title,
+    title:
+      meta.title +
+      " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
     description: meta.description,
     keywords: meta.keywords,
     alternates: {
@@ -48,14 +50,18 @@ export async function generateMetadata(
       type: "article",
       siteName:
         "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
-      title: meta.title,
+      title:
+        meta.title +
+        " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: meta.description,
     },
     twitter: {
       card: "summary_large_image",
       site: "@vojtechmares_",
       creator: "@vojtechmares_",
-      title: meta.title,
+      title:
+        meta.title +
+        " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: meta.description,
     },
   };
