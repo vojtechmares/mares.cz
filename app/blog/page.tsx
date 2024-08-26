@@ -5,7 +5,15 @@ import { Metadata } from "next";
 
 export const revalidate = 14400; // 4 hours (4 * 3600)
 
-async function getArticles() {
+type Article = {
+  slug: string;
+  title: string;
+  description: string;
+  publishDate: string;
+  lang: string;
+};
+
+async function getArticles(): Promise<Article[]> {
   const slugs = (
     await readdir("./content/articles", { withFileTypes: true })
   ).filter((dirent) => !dirent.isDirectory());
@@ -46,34 +54,75 @@ function localeName(locale: string): null | string {
   }
 }
 
+function groupArticlesByYear(articles: Article[]): [string, Article[]][] {
+  const grouped = articles.reduce(
+    (acc, article) => {
+      const year = new Date(article.publishDate).getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(article);
+      return acc;
+    },
+    {} as { [year: number]: Article[] },
+  );
+
+  const iterable = Object.entries(grouped);
+  return iterable.sort(
+    ([yearA, articlesA], [yearB, articlesB]) => +yearB - +yearA,
+  );
+}
+
 export default async function Articles() {
   const articles = await getArticles();
+  const groupedArticles = groupArticlesByYear(articles);
 
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
-      <h2 className="font-display mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+      <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
         Blog
       </h2>
       <div className="max-w-prose">
-        {articles.map((article) => (
-          <div key={article.slug}>
-            <h3 className="font-display mb-8 mt-16 text-3xl font-bold tracking-tight">
-              {article.title}
-            </h3>
-            <p className="my-4 text-slate-700">
-              {new Date(article.publishDate).toLocaleDateString("cs-CZ", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-              {localeName(article.lang) !== null
-                ? " | " + localeName(article.lang)
-                : ""}
-            </p>
-            <p className="my-4 text-slate-700">{article.description}</p>
-            <Button href={"/blog/" + article.slug} color="black">
-              Přečíst si článek
-            </Button>
+        {groupedArticles.map(([year, articles]) => (
+          <div key={year}>
+            <div className="relative mt-8">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center"
+              >
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-start">
+                <span
+                  role="heading"
+                  aria-level={2}
+                  className="bg-white pr-3 text-base font-semibold leading-6 text-black"
+                >
+                  {year}
+                </span>
+              </div>
+            </div>
+            {articles.map((article) => (
+              <div key={article.slug}>
+                <h3 className="font-display mb-8 mt-8 text-3xl font-bold tracking-tight">
+                  {article.title}
+                </h3>
+                <p className="my-4 text-slate-700">
+                  {new Date(article.publishDate).toLocaleDateString("cs-CZ", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                  {localeName(article.lang) !== null
+                    ? " | " + localeName(article.lang)
+                    : ""}
+                </p>
+                <p className="my-4 text-slate-700">{article.description}</p>
+                <Button href={"/blog/" + article.slug} color="black">
+                  Přečíst si článek
+                </Button>
+              </div>
+            ))}
           </div>
         ))}
       </div>
