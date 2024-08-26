@@ -91,7 +91,9 @@ export function Services() {
             </span>{" "} */}
             Služby
           </h2>
-          <p className="mt-4 text-lg text-slate-400">Co Vám můžu nabídnout?</p>
+          <p className="mt-4 text-lg text-slate-400">
+            Co dělám a jak Vám můžu pomoci rozvinout Vaší IT infrastrukturu?
+          </p>
         </div>
         <div className="-mx-4 mt-16 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service

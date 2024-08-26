@@ -88,11 +88,11 @@ const TrainingList = () => {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Moje školení
+            Školení
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-400">
-            Od veřejného cloudu přes on-premise až po serverless, se vším vám
-            poradím.
+            Sdílím svoje zkušenosti a znalosti z praxe formou školení. Školím
+            open-source DevOps nástroje a technologie.
           </p>
         </div>
         <TrainingGridMobile />
