@@ -87,24 +87,21 @@ deploy:staging:
   environment:
     name: staging
     url: https://staging.website.vmdevel.cz
-#
-# deploy:preview:
-#   stage: deploy
-#   script:
-#     - vercel pull --yes --environment=preview --token=${VERCEL_TOKEN}
-#     - vercel build --token=${VERCEL_TOKEN}
-#     - vercel deploy --prebuilt --token=${VERCEL_TOKEN}
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-#
-# deploy:production:
-#   stage: deploy
-#   script:
-#     - vercel pull --yes --environment=production --token=${VERCEL_TOKEN}
-#     - vercel build --prod --token=${VERCEL_TOKEN}
-#     - vercel deploy --prod --prebuilt --token=${VERCEL_TOKEN}
-#   environment:
-#     name: production
-#     url: https://www.mares.cz
-#   rules:
-#     - if: $CI_COMMIT_BRANCH == 'main'
+
+deploy:production:
+  stage: deploy
+  image: ghcr.io/vojtechmares/toolkit:latest
+  variables:
+    # shallow clone
+    GIT_DEPTH: 1
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+  script: >
+    helm upgrade --install --namespace website-production \
+      website ./charts/website \
+      --values ./charts/website/values.production.yaml \
+      --set image.tag=$IMAGE_TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'production'
+  environment:
+    name: production
+    url: https://wwww.mares.cz
