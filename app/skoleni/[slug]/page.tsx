@@ -43,6 +43,21 @@ export async function generateMetadata(
     alternates: {
       canonical: "/skoleni/" + params.slug,
     },
+    openGraph: {
+      url: "https://www.mares.cz/skoleni/" + params.slug,
+      type: "article",
+      siteName:
+        "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+      title: meta.title,
+      description: meta.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@vojtechmares_",
+      creator: "@vojtechmares_",
+      title: meta.title,
+      description: meta.description,
+    },
   };
 }
 

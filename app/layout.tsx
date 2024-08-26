@@ -37,6 +37,8 @@ export const metadata: Metadata = {
   openGraph: {
     url: "https://www.mares.cz",
     type: "website",
+    siteName:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
     title:
       "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
     description:
@@ -47,6 +49,8 @@ export const metadata: Metadata = {
     site: "@vojtechmares_",
     creator: "@vojtechmares_",
     title:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    description:
       "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   },
 };
