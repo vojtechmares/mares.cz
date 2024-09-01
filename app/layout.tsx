@@ -57,6 +57,7 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === "production";
+  const suppressGoogleAnalytics = process.env.SUPPRESS_GOOGLE_ANALYTICS === "true";
 
   return (
     <html
@@ -75,7 +76,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Navigation />
         {children}
         <Footer />
-        {isProduction ? <GoogleAnalytics gaId="G-9N0T70XBV8" /> : <></>}
+        {isProduction || suppressGoogleAnalytics ? <GoogleAnalytics gaId="G-9N0T70XBV8" /> : <></>}
       </body>
     </html>
   );
