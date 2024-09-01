@@ -2,6 +2,8 @@ import { readdir } from "fs/promises";
 import { type MDXContent } from "mdx/types";
 import { Metadata, ResolvingMetadata } from "next";
 import "@/styles/highlight-js/github-dark.css";
+import { Container } from "@/components/Container";
+import { TrainingAd } from "@/components/blog/TrainingAd";
 // import "@/styles/highlight-js/googlecode.css";
 // import "@/styles/highlight-js/tokyo-night-dark.css";
 
@@ -71,5 +73,16 @@ export async function generateMetadata(
 export default async function Article({ params }: Props) {
   const { content: Content, meta } = await getArticle(params);
 
-  return <Content />;
+  return (
+    <>
+      <Container>
+        <div className="pb-14 sm:pb-20 lg:pb-32">
+          <div className="prose:text-black prose-h1:font-display prose-h2:font-display prose-h3:font-display prose prose-h1:text-3xl prose-h1:font-extrabold prose-h1:tracking-tight prose-h2:text-2xl prose-h2:font-bold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0 prose-h1:sm:text-4xl prose-h2:sm:text-3xl prose-h1:md:text-5xl">
+            <Content />
+          </div>
+        </div>
+      </Container>
+      <TrainingAd trainingSlug={meta.trainingAd} />
+    </>
+  );
 }
