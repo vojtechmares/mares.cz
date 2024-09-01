@@ -88,6 +88,7 @@ deploy:staging:
     name: staging
     url: https://staging.website.vmdevel.cz
   interruptible: true
+  cache: []
 
 deploy:production:
   stage: deploy
@@ -107,3 +108,4 @@ deploy:production:
     name: production
     url: https://wwww.mares.cz
   interruptible: true
+  cache: []
