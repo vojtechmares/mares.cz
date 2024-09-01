@@ -5,10 +5,13 @@ import hashicorp from "@/images/logos/hashicorp-horizontal.png";
 
 export const meta = {
   title: "Terraform: Infrastruktura jako kód",
-  description: "Terraform je nástroj, kterým můžeme spravovat infrastrukturu jako kód. Co to znamená a proč je to důležité? Aneb konec klikání v konzoli a hledání, jak jsme vlastně ten server před rokem nastavili.",
-  keywords: "infrastruktura, terraform, infrastructure-as-code, devops, cloud, hashicorp",
+  description:
+    "Terraform je nástroj, kterým můžeme spravovat infrastrukturu jako kód. Co to znamená a proč je to důležité? Aneb konec klikání v konzoli a hledání, jak jsme vlastně ten server před rokem nastavili.",
+  keywords:
+    "infrastruktura, terraform, infrastructure-as-code, devops, cloud, hashicorp",
   lang: "cs",
   publishDate: "2024-09-02",
+  trainingAd: "terraform",
 };
 
 # Terraform: Infrastruktura jako kód
@@ -27,10 +30,7 @@ Puppetu a Chefu se věnovat nebudu, jednak z mé zkušenosti v Česku nejsou ani
 
 ## Terraform
 
-<Image
-  src={hashicorpTerraform}
-  alt="HashiCorp Terraform logo"
-/>
+<Image src={hashicorpTerraform} alt="HashiCorp Terraform logo" />
 
 Myšlenka Terraformu se zrodila už v roce 2011, kdy [Mitchell Hashimoto](https://mitchellh.com/) psal na svém blogu o [AWS CloudFormation](https://aws.amazon.com/cloudformation/),
 a že na trhu chybí open-source alternativa, nezávislá na AWS.
@@ -47,11 +47,10 @@ Díky Terraformu můžeme popsat infrastrukturu jako kód (Infrastructure as Cod
 
 ### Jiný pohled
 
-Terraform staví na deklarativním modelu tvorby a správy zdrojů (*resources*) napříč různými poskytovateli (*providers*), jako je AWS, Azure, GCP a další.
+Terraform staví na deklarativním modelu tvorby a správy zdrojů (_resources_) napříč různými poskytovateli (_providers_), jako je AWS, Azure, GCP a další.
 
 Co znamená deklarativní? To znamená, že v Terraformu popisujete co chcete a jak má vypadat výsledný stav.
 Opakem je imperativní model, kde popisujete jednotlivé kroky, jak se dostat z bodu A do bodu B. Pro přestavu imperativní jsou například skripty v Bashi, Pythonu nebo třeba Ansible.
-
 
 ### Základní koncepty
 
@@ -231,57 +230,57 @@ Ukážeme si, jak jednoduše spojit Terraform a GitLab CI. Takže Terraform nemu
 
 2. Do souboru přidáme následující obsah:
 
-    ```yaml
-    include:
-    - template: Terraform/Base.gitlab-ci.yml
-    - template: Jobs/SAST-IaC.gitlab-ci.yml
+   ```yaml
+   include:
+   - template: Terraform/Base.gitlab-ci.yml
+   - template: Jobs/SAST-IaC.gitlab-ci.yml
 
-    stages:
-    - validate
-    - test
-    - build
-    - deploy
-    - cleanup
+   stages:
+   - validate
+   - test
+   - build
+   - deploy
+   - cleanup
 
-    fmt:
-    extends: .terraform:fmt
-    needs: []
+   fmt:
+   extends: .terraform:fmt
+   needs: []
 
-    validate:
-    extends: .terraform:validate
-    needs: []
+   validate:
+   extends: .terraform:validate
+   needs: []
 
-    build:
-    extends: .terraform:build
+   build:
+   extends: .terraform:build
 
-    deploy:
-    extends: .terraform:deploy
-    dependencies:
-      - build
-    environment:
-      name: $TF_STATE_NAME
-    ```
+   deploy:
+   extends: .terraform:deploy
+   dependencies:
+     - build
+   environment:
+     name: $TF_STATE_NAME
+   ```
 
-    Všiměte si, že většinu konfigurace CI pipeline prakticky vůbec nepíšeme, ale používáme šablony od GitLabu.
-    Pokud Vás zajímá, co šablona přesně dělá, můžete se podívat: https://gitlab.com/gitlab-org/gitlab-foss/tree/master/lib/gitlab/ci/templates
+   Všiměte si, že většinu konfigurace CI pipeline prakticky vůbec nepíšeme, ale používáme šablony od GitLabu.
+   Pokud Vás zajímá, co šablona přesně dělá, můžete se podívat: https://gitlab.com/gitlab-org/gitlab-foss/tree/master/lib/gitlab/ci/templates
 
 3. Nakonfigurujeme Terraform, aby použil GitLab jako backend.
 
-    ```hcl
-    terraform {
-      backend "http" {
-        address = "https://gitlab.com/api/v4/projects/1234/terraform/state"
-        lock_address = "https://gitlab.com/api/v4/projects/1234/terraform/lock"
-        unlock_address = "https://gitlab.com/api/v4/projects/1234/terraform/lock"
-        username = "gitlab-ci-token"
-        password = "CI_JOB_TOKEN"
-      }
-    }
-    ```
+   ```hcl
+   terraform {
+     backend "http" {
+       address = "https://gitlab.com/api/v4/projects/1234/terraform/state"
+       lock_address = "https://gitlab.com/api/v4/projects/1234/terraform/lock"
+       unlock_address = "https://gitlab.com/api/v4/projects/1234/terraform/lock"
+       username = "gitlab-ci-token"
+       password = "CI_JOB_TOKEN"
+     }
+   }
+   ```
 
 4. Přidáme `.tf` soubory do repozitářeme a provedem push, GitLab se postará o zbytek
-    (samozřejmě je třeba nastavit GitLab CI environment proměnné, pokud jsou třeba.
-    Například token pro přístup do Cloudflare apod.).
+   (samozřejmě je třeba nastavit GitLab CI environment proměnné, pokud jsou třeba.
+   Například token pro přístup do Cloudflare apod.).
 
 Pro lokální práci s Terraformem, pokud je backend nastavený na GitLab, je třeba jej lokálně nakonfigurovat:
 
@@ -301,39 +300,39 @@ Pokud bychom chtěli i automatickou destroy operaci, například pro demo prost�
 
 ```yaml
 deploy:
- extends: .terraform:deploy
- rules:
-   - if: $CI_COMMIT_TITLE != "destroy"
-     when: on_success
- dependencies:
-   - build
- environment:
-   name: $TF_STATE_NAME
+  extends: .terraform:deploy
+  rules:
+    - if: $CI_COMMIT_TITLE != "destroy"
+      when: on_success
+  dependencies:
+    - build
+  environment:
+    name: $TF_STATE_NAME
 
 cleanup:
- extends: .terraform:destroy
- environment:
-   name: $TF_STATE_NAME
- rules:
-   - if: $CI_COMMIT_TITLE == "destroy"
-     when: on_success
+  extends: .terraform:destroy
+  environment:
+    name: $TF_STATE_NAME
+  rules:
+    - if: $CI_COMMIT_TITLE == "destroy"
+      when: on_success
 ```
 
 ## Terraform vs Ansible
 
-|                    | Terraform                               | Ansible                       |
-| ------------------ | --------------------------------------- | ----------------------------- |
-| **Model**          | Deklarativní                            | Imperativní                   |
-| **Vyvíjí**         | HashiCorp                               | RedHat                        |
-| **Licence**        | BUSL (bussiness, pouze public-source)*  | GPL-3 (open-source, copyleft) |
-| **Formát**         | HCL (HashiCorp Configuration Language)  | YAML                          |
-| **Rozšiřitelnost** | Ano, moduly a Golang                    | Ano, role a Python            |
-| **Dokumentace****   | 9/10                                   | 7/10                          |
+|                     | Terraform                               | Ansible                       |
+| ------------------- | --------------------------------------- | ----------------------------- |
+| **Model**           | Deklarativní                            | Imperativní                   |
+| **Vyvíjí**          | HashiCorp                               | RedHat                        |
+| **Licence**         | BUSL (bussiness, pouze public-source)\* | GPL-3 (open-source, copyleft) |
+| **Formát**          | HCL (HashiCorp Configuration Language)  | YAML                          |
+| **Rozšiřitelnost**  | Ano, moduly a Golang                    | Ano, role a Python            |
+| **Dokumentace\*\*** | 9/10                                    | 7/10                          |
 
-***BUSL licence**: je podobná běžným open-source licencím a nezakazuje použití Terraformu ve firmách. Ale zakazuje komerční distribuci nebo přímou integraci Terraformu do produktu,
+**\*BUSL licence**: je podobná běžným open-source licencím a nezakazuje použití Terraformu ve firmách. Ale zakazuje komerční distribuci nebo přímou integraci Terraformu do produktu,
 v tom případě je třeba kontaktovat HashiCorp a uzavřít smlouvu. Pokud je pro vás licence problém, podívejte se na open-source projekt [OpenTofu](https://opentofu.org/), který je kompatibilní s Terraformem jedná se totiž o fork.
 
-****Dokumentace**: beru v potaz oficiální dokumentaci, ne dokumentaci pro komunitní projekty nebo třetí strany. A je to samozřejmě moje subjektivní hodnocení.
+\***\*Dokumentace**: beru v potaz oficiální dokumentaci, ne dokumentaci pro komunitní projekty nebo třetí strany. A je to samozřejmě moje subjektivní hodnocení.
 
 Jak jsem již psal, největší rozdíl je v tom, jaký model jednotlivé nástroje využívají. Terraform je deklarativní, tj. popisujeme výsledný stav který chceme.
 Zatímco Ansible je imperativní a popisujeme jak se dostat ze stavu A do stavu B.
@@ -362,10 +361,7 @@ Zároveň se Terraform těší velké oblibě v DevOps komunitě, i když nedáv
 
 ## HashiCorp
 
-<Image
-  src={hashicorp}
-  alt="HashiCorp logo"
-/>
+<Image src={hashicorp} alt="HashiCorp logo" />
 
 Jak jsem psal v úvodu, Terraform vytvořil Mitchell Hashimoto, který je spoluzakladatelem firmy [HashiCorp](https://www.hashicorp.com/). Dnes už však firmu definitivně opustil a věnuje se dalším projektům.
 
