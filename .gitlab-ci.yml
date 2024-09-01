@@ -87,6 +87,7 @@ deploy:staging:
   environment:
     name: staging
     url: https://staging.website.vmdevel.cz
+  interruptible: true
 
 deploy:production:
   stage: deploy
@@ -105,3 +106,4 @@ deploy:production:
   environment:
     name: production
     url: https://wwww.mares.cz
+  interruptible: true
