@@ -38,7 +38,7 @@ export async function generateMetadata(
 
   return {
     title:
-      meta.title +
+      meta.name +
       " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
     description: meta.description,
     keywords: meta.keywords,
@@ -51,7 +51,7 @@ export async function generateMetadata(
       siteName:
         "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       title:
-        meta.title +
+        meta.name +
         " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: meta.description,
     },
@@ -60,7 +60,7 @@ export async function generateMetadata(
       site: "@vojtechmares_",
       creator: "@vojtechmares_",
       title:
-        meta.title +
+        meta.name +
         " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: meta.description,
     },
