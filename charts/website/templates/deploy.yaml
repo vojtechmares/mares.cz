@@ -53,3 +53,5 @@ spec:
               value: production
             - name: PORT
               value: {{ .Values.service.targetPort | quote }}
+            - name: SUPPRESS_GOOGLE_ANALYTICS
+              value: {{ .Values.config.suppressGoogleAnalytics | quote }}
