@@ -22,3 +22,7 @@ ingress:
 config:
   suppressGoogleAnalytics: false
   apiKey: "0abc3573b122b2d4fcc0ea6ad91bc426d860b842f0fcb9ada83dfa5bec83042f"
+
+cron:
+  refreshBlog:
+    enabled: true

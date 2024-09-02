@@ -31,3 +31,9 @@ resources:
 config:
   suppressGoogleAnalytics: true
   apiKey: "xxx"
+
+cron:
+  refreshBlog:
+    enabled: false
+    schedule: "0 5 * * *"
+    image: "curlimages/curl:7.76.1"
