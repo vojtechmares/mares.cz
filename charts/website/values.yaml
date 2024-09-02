@@ -30,3 +30,4 @@ resources:
 
 config:
   suppressGoogleAnalytics: true
+  apiKey: "xxx"
