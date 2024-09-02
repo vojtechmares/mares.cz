@@ -3,8 +3,6 @@ import { Container } from "@/components/Container";
 import { readdir } from "fs/promises";
 import { Metadata } from "next";
 
-export const revalidate = 14400; // 4 hours (4 * 3600)
-
 type Article = {
   slug: string;
   title: string;
