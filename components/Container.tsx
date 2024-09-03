@@ -8,7 +8,12 @@ type Props = {
 
 export function Container({ className, children }: Props) {
   return (
-    <div className={clsx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", className)}>
+    <div
+      className={clsx(
+        "md:max-5xl mx-auto max-w-sm sm:max-w-3xl sm:px-4 md:px-6 lg:max-w-7xl lg:px-8",
+        className,
+      )}
+    >
       {children}
     </div>
   );
