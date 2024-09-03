@@ -80,7 +80,7 @@ export default async function Articles() {
       <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
         Blog
       </h2>
-      <div className="max-w-prose">
+      <div className="max-w-prose text-base lg:text-xl">
         {groupedArticles.map(([year, articles]) => (
           <div key={year}>
             <div className="relative mt-8">
