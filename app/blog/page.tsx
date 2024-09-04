@@ -106,7 +106,7 @@ export default async function Articles() {
       <div className="max-w-prose text-base md:text-lg lg:text-xl">
         {groupedArticles.map(([year, articles]) => (
           <div key={year}>
-            <div className="relative mt-8">
+            <div className="relative mt-10">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 flex items-center"
@@ -125,7 +125,7 @@ export default async function Articles() {
             </div>
             {articles.map((article) => (
               <div key={article.slug}>
-                <h3 className="font-display mb-8 mt-8 text-3xl font-bold tracking-tight">
+                <h3 className="font-display mt-10 text-3xl font-bold tracking-tight">
                   {article.title}
                 </h3>
                 <p className="my-4 text-slate-700">
