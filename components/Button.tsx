@@ -41,12 +41,14 @@ type Props = {
   className?: string;
   href?: string;
   children?: ReactNode;
+  type?: "text/html" | "application/rss+xml" | "application/atom+xml";
 };
 
 export function Button({
   variant = "solid",
   color = "black",
   size = "medium",
+  type = "text/html",
   className,
   href,
   children,
@@ -65,7 +67,7 @@ export function Button({
 
   if (href !== undefined) {
     return (
-      <Link href={href} className={className}>
+      <Link type={type} href={href} className={className}>
         {children}
       </Link>
     );
