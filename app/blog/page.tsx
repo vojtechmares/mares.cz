@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { readdir } from "fs/promises";
 import { Metadata } from "next";
+import Link from "next/link";
 
 type Article = {
   slug: string;
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     canonical: "/blog",
     types: {
       "application/rss+xml": "https://www.mares.cz/api/blog/feed/rss.xml",
+      "application/atom+xml": "https://www.mares.cz/api/blog/feed/atom.xml",
     },
   },
 };
@@ -80,21 +82,28 @@ export default async function Articles() {
 
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
-      <div className="flex flex-row justify-between">
-        <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-          Blog
-        </h2>
-        <div>
-          <Button
-            type="application/rss+xml"
-            href="/api/blog/feed/rss.xml"
-            color="black"
-          >
-            RSS
-          </Button>
-        </div>
-      </div>
-      <div className="max-w-prose text-base lg:text-xl">
+      <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+        Blog
+      </h2>
+      <p className="mt-4 text-base lg:text-xl">
+        Odebírejte:{" "}
+        <Link
+          className="underline"
+          type="application/rss+xml"
+          href="/api/blog/feed/rss.xml"
+        >
+          RSS
+        </Link>
+        ,{" "}
+        <Link
+          className="underline"
+          type="application/atom+xml"
+          href="/api/blog/feed/atom.xml"
+        >
+          Atom
+        </Link>
+      </p>
+      <div className="max-w-prose text-base md:text-lg lg:text-xl">
         {groupedArticles.map(([year, articles]) => (
           <div key={year}>
             <div className="relative mt-8">
