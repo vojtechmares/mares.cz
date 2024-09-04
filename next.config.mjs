@@ -105,7 +105,6 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     scrollRestoration: true,
-    reactCompiler: true,
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {
