@@ -5,6 +5,7 @@ import logoTerraform from "@/images/logos/tools/terraform.svg";
 import logoArgo from "@/images/logos/tools/argo.svg";
 import logoGit from "@/images/logos/tools/git.svg";
 import logoPostgres from "@/images/logos/tools/postgresql.svg";
+import logoDocker from "@/images/logos/tools/docker.svg";
 
 export type TrainingType = {
   name: string;
@@ -79,5 +80,18 @@ export const trainingList: TrainingType[] = [
       alt: "PostgreSQL logo",
     },
     price: { public: 5900, corporate: 24000 },
+  },
+  {
+    name: "Docker",
+    href: "/skoleni/docker",
+    slug: "docker",
+    logo: {
+      src: logoDocker,
+      alt: "Docker logo",
+    },
+    price: { public: 9900, corporate: 44000 },
+    days: 2,
+    adText:
+      "Chcete provozovat Vaše aplikace v kontejnerech a přestat řešit, že na serveru je třeba aktualizovat knohovnu XY nebo verzi runtimu? Začněte používat Docker. Přijďte na školení o Dockeru a nakopněte Váš vývoj kupředu. Přihlaste se buď na veřejný termín nebo mě kontaktujte ohledně firemního školení.",
   },
 ];
