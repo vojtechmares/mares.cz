@@ -83,12 +83,12 @@ export default async function Training({ params }: Props) {
           <Container className="flex justify-around">
             <Image
               src={meta.logo}
-              width="1500"
-              height="1500"
+              width={meta.logo.width}
+              height={meta.logo.height}
               alt=""
               priority
               className={clsx(
-                "h-32 w-32 rounded-full",
+                "h-32 w-auto",
                 meta.logo.src.endsWith(".svg") ? "invert" : "",
               )}
             />
