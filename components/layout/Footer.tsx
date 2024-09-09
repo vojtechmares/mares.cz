@@ -3,22 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 // import { Logo } from '@/components/Logo'
 import { Button } from "@/components/Button";
-
-type Training = {
-  name: string;
-  href: string;
-};
-
-const trainings: Training[] = [
-  { name: "Kubernetes", href: "/skoleni/kubernetes" },
-  { name: "Terraform", href: "/skoleni/terraform" },
-  { name: "ArgoCD", href: "/skoleni/argocd" },
-  { name: "Git", href: "/skoleni/git" },
-  {
-    name: "Postgres na Kubernetes",
-    href: "/skoleni/postgres-on-k8s",
-  },
-];
+import { trainingList } from "@/content/traininig-list";
 
 export function Footer() {
   return (
@@ -55,7 +40,7 @@ export function Footer() {
             <div>
               <h3 className="text-lg font-medium">Školení</h3>
               <ul className="mt-4 list-disc pl-4">
-                {trainings.map((training) => (
+                {trainingList.map((training) => (
                   <li key={training.href}>
                     <Link href={training.href} className="underline">
                       {training.name}
