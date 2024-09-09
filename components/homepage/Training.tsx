@@ -3,29 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 
-import logoKubernetes from "@/images/logos/tools/kubernetes.svg";
-import logoTerraform from "@/images/logos/tools/terraform.svg";
-import logoArgo from "@/images/logos/tools/argo.svg";
-import logoGit from "@/images/logos/tools/git.svg";
-import logoPostgres from "@/images/logos/tools/postgresql.svg";
-
-type TrainingType = {
-  name: string;
-  logo: StaticImageData;
-  href: string;
-};
-
-const trainingList: TrainingType[] = [
-  { name: "Kubernetes", href: "/skoleni/kubernetes", logo: logoKubernetes },
-  { name: "Terraform", href: "/skoleni/terraform", logo: logoTerraform },
-  { name: "ArgoCD", href: "/skoleni/argocd", logo: logoArgo },
-  { name: "Git", href: "/skoleni/git", logo: logoGit },
-  {
-    name: "Postgres na Kubernetes",
-    href: "/skoleni/postgres-on-k8s",
-    logo: logoPostgres,
-  },
-];
+import { trainingList, type TrainingType } from "@/content/traininig-list";
 
 type TrainingProps = {
   training: TrainingType;
@@ -36,7 +14,7 @@ const Training = ({ training, className }: TrainingProps) => {
   return (
     <Link href={training.href} className={className}>
       <Image
-        src={training.logo}
+        src={training.logo.src}
         className="mx-auto rounded-lg p-2 invert"
         width="128"
         height="128"
