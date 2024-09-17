@@ -97,7 +97,7 @@ export default async function Training({ params }: Props) {
             </h2>
           </Container>
         </div>
-        <Container>
+        <Container className={meta.draft ? "hidden" : ""}>
           <div className="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
             <div className="md:col-span-3">
               <div className="prose:text-black prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0">
@@ -173,6 +173,13 @@ export default async function Training({ params }: Props) {
               </div>
             </div>
           </div>
+        </Container>
+        <Container
+          className={!meta.draft ? "hidden" : "my-32 flex justify-center"}
+        >
+          <h1 className="text-4xl font-bold">
+            Toto školení teprve připravuji.
+          </h1>
         </Container>
       </div>
     </main>
