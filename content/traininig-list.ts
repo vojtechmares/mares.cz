@@ -60,6 +60,8 @@ export const trainingList: TrainingType[] = [
       alt: "ArgoCD logo",
     },
     price: { public: 5900, corporate: 24000 },
+    adText:
+      "Už vás nebaví do nekonečna psát CI/CD pipeliny a nasazovat každou aplikaci do Kubernetes skrz pipeline? Vyzkoušejte GitOps přístup s ArgoCD: všechny informace o nasazených aplikacích jsou přehledně verzované v Git repozitáři. A zároveň to slouží i jako záloha, kdyby vám Kubernetes cluster spadnul... Přijďte na veřejný termín školení nebo se domluvme na firemním školení.",
   },
   {
     name: "Git",
