@@ -5,10 +5,18 @@ type ImageProps = {
   src: string;
   alt: string;
   className?: string;
+  width?: number;
+  height?: number;
 };
 
-export function Image({ src, alt, className }: ImageProps) {
+export function Image({ src, alt, width, height, className }: ImageProps) {
   return (
-    <NextImage src={src} alt={alt} className={clsx("rounded-2xl", className)} />
+    <NextImage
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={clsx("rounded-2xl", className)}
+    />
   );
 }
