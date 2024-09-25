@@ -110,6 +110,20 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/clanky",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/clanky/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withMDX(nextConfig);
