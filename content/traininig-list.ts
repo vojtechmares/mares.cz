@@ -82,6 +82,8 @@ export const trainingList: TrainingType[] = [
       alt: "PostgreSQL logo",
     },
     price: { public: 5900, corporate: 24000 },
+    adText:
+      "Nechcete platit za managed databázi obrovské peníze? Nasaďte PostgreSQL do Kubernetes! S pomocí CloudNativePG operátoru se společně na školení naučíme, jak postavit a provozovat PostgreSQL cluster v Kubernetes. Přijďte na veřejný termín školení nebo se domluvme na firemním školení.",
   },
   {
     name: "Docker",
