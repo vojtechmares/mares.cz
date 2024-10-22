@@ -20,9 +20,9 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-async function getTraining(params: { slug: string }) {
+async function getTraining(slug: string) {
   const { default: content, meta }: { default: MDXContent; meta: any } =
-    await import(`@/content/trainings/${params.slug}.mdx`);
+    await import(`@/content/trainings/${slug}.mdx`);
   return { content, meta };
 }
 
@@ -34,7 +34,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { meta } = await getTraining(params);
+  const { slug } = await params;
+  const { meta } = await getTraining(slug);
 
   return {
     title:
@@ -43,10 +44,10 @@ export async function generateMetadata(
     description: meta.description,
     keywords: meta.keywords,
     alternates: {
-      canonical: "/skoleni/" + params.slug,
+      canonical: "/skoleni/" + slug,
     },
     openGraph: {
-      url: "https://www.mares.cz/skoleni/" + params.slug,
+      url: "https://www.mares.cz/skoleni/" + slug,
       type: "article",
       siteName:
         "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
@@ -74,7 +75,8 @@ export default async function Training({ params }: Props) {
     maximumFractionDigits: 0,
   });
 
-  const { content: Content, meta } = await getTraining(params);
+  const { slug } = await params;
+  const { content: Content, meta } = await getTraining(slug);
 
   return (
     <main>

@@ -20,9 +20,9 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-async function getArticle(params: { slug: string }) {
+async function getArticle(slug: string) {
   const { default: content, meta }: { default: MDXContent; meta: any } =
-    await import(`@/content/articles/${params.slug}.mdx`);
+    await import(`@/content/articles/${slug}.mdx`);
   return { content, meta };
 }
 
@@ -34,7 +34,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { meta } = await getArticle(params);
+  const { slug } = await params;
+  const { meta } = await getArticle(slug);
 
   return {
     title:
@@ -44,10 +45,10 @@ export async function generateMetadata(
     description: meta.description,
     keywords: meta.keywords,
     alternates: {
-      canonical: "/blog/" + params.slug,
+      canonical: "/blog/" + slug,
     },
     openGraph: {
-      url: "https://www.mares.cz/blog/" + params.slug,
+      url: "https://www.mares.cz/blog/" + slug,
       type: "article",
       siteName:
         "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
@@ -71,7 +72,8 @@ export async function generateMetadata(
 }
 
 export default async function Article({ params }: Props) {
-  const { content: Content, meta } = await getArticle(params);
+  const { slug } = await params;
+  const { content: Content, meta } = await getArticle(slug);
 
   return (
     <>
