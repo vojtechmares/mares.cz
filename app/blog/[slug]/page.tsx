@@ -26,15 +26,10 @@ async function getArticle(slug: string) {
   return { content, meta };
 }
 
-type Props = {
-  params: { slug: string };
-};
+type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata(props: {params: Params}): Promise<Metadata> {
+  const { slug } = await props.params;
   const { meta } = await getArticle(slug);
 
   return {
@@ -71,8 +66,8 @@ export async function generateMetadata(
   };
 }
 
-export default async function Article({ params }: Props) {
-  const { slug } = await params;
+export default async function Article(props: {params: Params}) {
+  const { slug } = await props.params;
   const { content: Content, meta } = await getArticle(slug);
 
   return (
