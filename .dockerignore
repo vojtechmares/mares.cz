@@ -1,0 +1,12 @@
+node_modules
+.next
+.vercel
+charts
+.vscode
+.env
+.git-hooks
+tests
+.gitlab-ci.yml
+.gitignore
+.editorconfig
+Makefile
