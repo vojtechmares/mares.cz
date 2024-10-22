@@ -52,6 +52,7 @@ test:helm:
   script:
     - helm lint ./charts/website
     - helm template website ./charts/website
+  cache: []
 
 build:docker:
   stage: build
