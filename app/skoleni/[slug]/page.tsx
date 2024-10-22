@@ -28,7 +28,9 @@ async function getTraining(slug: string) {
 
 type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata(props: {params: Params}): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Params;
+}): Promise<Metadata> {
   const { slug } = await props.params;
   const { meta } = await getTraining(slug);
 
@@ -63,7 +65,7 @@ export async function generateMetadata(props: {params: Params}): Promise<Metadat
   };
 }
 
-export default async function Training(props: {params: Params}) {
+export default async function Training(props: { params: Params }) {
   const formatter = new Intl.NumberFormat("cs", {
     style: "currency",
     currency: "CZK",
