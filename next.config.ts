@@ -45,6 +45,8 @@ import wasm from "highlight.js/lib/languages/wasm";
 import xml from "highlight.js/lib/languages/xml";
 import yaml from "highlight.js/lib/languages/yaml";
 
+import type { NextConfig } from "next";
+
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
@@ -99,8 +101,7 @@ const withMDX = createMDX({
   },
 });
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: "standalone",
   reactStrictMode: true,
   experimental: {
