@@ -72,6 +72,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           title="Sitemap"
           href="/sitemap.xml"
         />
+        <link rel="me" href="https://mastodon.social/@vojtechmares" />
+        <meta
+          name="fediverse:creator"
+          content="@vojtechmares@mastodon.social"
+        />
       </head>
       <body className="flex h-full flex-col">
         <Navigation />
