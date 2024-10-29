@@ -48,6 +48,9 @@ spec:
               port: {{ .Values.service.targetPort }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: ephemeral-cache
+              mountPath: "/app/.next/cache"
           env:
             - name: NODE_ENV
               value: production
@@ -57,3 +60,7 @@ spec:
               value: {{ .Values.config.suppressGoogleAnalytics | quote }}
             - name: API_KEY
               value: {{ .Values.config.apiKey | quote }}
+      volumes:
+        - name: ephemeral-cache
+          emptyDir:
+            sizeLimit: {{ .Values.config.cache.size }}

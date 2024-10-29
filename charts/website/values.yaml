@@ -24,13 +24,18 @@ resources:
   limits:
     cpu: "1"
     memory: 1Gi
+    ephemeral-storage: 256Mi
   requests:
     cpu: 500m
     memory: 1Gi
+    ephemeral-storage: 256Mi
 
 config:
   suppressGoogleAnalytics: true
   apiKey: "xxx"
+
+  cache:
+    size: 256Mi # must be less than or equal to the ephemeral-storage limit
 
 cron:
   refreshBlog:
