@@ -6,6 +6,11 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // disallow: "/private/",
+      disallow: [
+        "/api/blog/feed/rss.xml",
+        "/api/blog/feed/atom.xml",
+        "/cdn-cgi/l/email-protection",
+      ],
     },
     sitemap: "https://www.mares.cz/sitemap.xml",
   };
