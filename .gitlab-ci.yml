@@ -50,8 +50,8 @@ test:helm:
   stage: test
   image: ghcr.io/vojtechmares/toolkit:latest
   script:
-    - helm lint ./charts/website
-    - helm template website ./charts/website
+    - helm lint ./deploy/k8s
+    - helm template website ./deploy/k8s
   cache: []
 
 build:docker:
@@ -80,8 +80,8 @@ deploy:staging:
     IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   script: >
     helm upgrade --install --namespace website-staging \
-      website ./charts/website \
-      --values ./charts/website/values.staging.yaml \
+      website ./deploy/k8s \
+      --values ./deploy/k8s/values.staging.yaml \
       --set image.tag=$IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
@@ -100,8 +100,8 @@ deploy:production:
     IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   script: >
     helm upgrade --install --namespace website-production \
-      website ./charts/website \
-      --values ./charts/website/values.production.yaml \
+      website ./deploy/k8s \
+      --values ./deploy/k8s/values.production.yaml \
       --set image.tag=$IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == 'production'
