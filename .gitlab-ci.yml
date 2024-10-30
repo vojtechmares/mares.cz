@@ -65,11 +65,12 @@ build:docker:
     - docker info
   script:
     - docker buildx create --name website --use
-    - docker buildx build --push \
-      --provenance=false \
-      --platform linux/arm64 \
-      --build-arg CMS_API_TOKEN=$CMS_API_TOKEN \
-      -t $IMAGE:$TAG .
+    - >
+      docker buildx build --push \
+        --provenance=false \
+        --platform linux/arm64 \
+        --build-arg CMS_API_TOKEN=$CMS_API_TOKEN \
+        -t $IMAGE:$TAG .
     - docker manifest inspect $IMAGE:$TAG
   # no cache is needed here
   # this makes job faster, since it does not have to pull the cache
