@@ -28,8 +28,7 @@ ARG CMS_API_TOKEN
 # COPY .env.production.sample .env.production
 RUN pnpm run build
 
-# --platform=$TARGETPLATFORM is not required since it's default behavior
-FROM base AS runtime
+FROM --platform=$TARGETPLATFORM base AS runtime
 
 WORKDIR /app
 
