@@ -116,7 +116,7 @@ const nextConfig: NextConfig = {
         hostname: "mareshq-strapi-uploads-live.s3.eu-central-1.amazonaws.com",
         port: "",
         pathname: "/**",
-      }
+      },
     ],
   },
   redirects: async () => {
