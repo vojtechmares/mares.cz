@@ -4,6 +4,8 @@ import { Container } from "@/components/Container";
 import { Metadata } from "next";
 import Link from "next/link";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Blog | Vojtěch Mareš - DevOps architekt, konzultant, lektor",
   description: "Články nejen o DevOps, automatizaci a vývoji softwaru",
