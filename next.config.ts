@@ -110,6 +110,14 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "s3.amazonaws.com",
+        port: "",
+        pathname: "/mareshq-strapi-uploads-local/**",
+      },
+    ],
   },
   redirects: async () => {
     return [
