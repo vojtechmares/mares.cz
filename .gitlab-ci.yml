@@ -99,6 +99,8 @@ build:docker:manifest:
 deploy:staging:
   stage: deploy
   image: ghcr.io/vojtechmares/toolkit:latest
+  tags:
+    - amd64 # temp fix before I create multi-platform image
   variables:
     GIT_DEPTH: 1 # shallow clone
   script: >
@@ -119,6 +121,8 @@ deploy:staging:
 deploy:production:
   stage: deploy
   image: ghcr.io/vojtechmares/toolkit:latest
+  tags:
+    - amd64 # temp fix before I create multi-platform image
   variables:
     GIT_DEPTH: 1 # shallow clone
   script: >
