@@ -91,6 +91,8 @@ build:docker:manifest:
   # no cache is needed here
   # this makes job faster, since it does not have to pull the cache
   cache: []
+  needs:
+    - job: build:docker:arm64
 
 deploy:staging:
   stage: deploy
