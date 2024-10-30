@@ -22,6 +22,9 @@ RUN corepack enable pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ARG CMS_API_URL="https://cms.mareshq.com/api"
+ARG CMS_API_TOKEN
+
 # COPY .env.production.sample .env.production
 RUN pnpm run build
 
