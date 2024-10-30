@@ -1,3 +1,4 @@
+import { strapi } from "@/lib/strapi/strapi";
 import { readdir } from "fs/promises";
 import { MetadataRoute } from "next";
 
@@ -14,22 +15,9 @@ async function getTrainingSlugs() {
   return slugs;
 }
 
-async function getBlogArticleSlugs() {
-  let files = (
-    await readdir("./content/articles", { withFileTypes: true })
-  ).filter((dirent) => !dirent.isDirectory());
-
-  let slugs: string[] = [];
-  for (let i = 0; i < files.length; i++) {
-    slugs.push(files[i].name.replace(/\.mdx$/, "") as string);
-  }
-
-  return slugs;
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const trainingSlugs = await getTrainingSlugs();
-  const blogArticleSlugs = await getBlogArticleSlugs();
+  const articles = await strapi.fetchArticles({ limit: 100 });
 
   const trainingURLs = trainingSlugs.map((slug) => ({
     url: `https://www.mares.cz/skoleni/${slug}`,
@@ -38,8 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const blogArticleURLs = blogArticleSlugs.map((slug) => ({
-    url: `https://www.mares.cz/blog/${slug}`,
+  const blogArticleURLs = articles.map((article) => ({
+    url: `https://www.mares.cz/blog/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6,
