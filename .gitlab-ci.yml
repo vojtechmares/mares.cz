@@ -82,7 +82,8 @@ deploy:staging:
     helm upgrade --install --namespace website-staging \
       website ./deploy/k8s \
       --values ./deploy/k8s/values.staging.yaml \
-      --set image.tag=$IMAGE_TAG
+      --set image.tag=$IMAGE_TAG \
+      --set config.cms.apiToken=$CMS_API_TOKEN
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
   environment:
@@ -102,7 +103,8 @@ deploy:production:
     helm upgrade --install --namespace website-production \
       website ./deploy/k8s \
       --values ./deploy/k8s/values.production.yaml \
-      --set image.tag=$IMAGE_TAG
+      --set image.tag=$IMAGE_TAG \
+      --set config.cms.apiToken=$CMS_API_TOKEN
   rules:
     - if: $CI_COMMIT_BRANCH == 'production'
   environment:

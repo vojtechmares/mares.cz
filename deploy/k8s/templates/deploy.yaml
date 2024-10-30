@@ -51,15 +51,11 @@ spec:
           volumeMounts:
             - name: ephemeral-cache
               mountPath: "/app/.next/cache"
-          env:
-            - name: NODE_ENV
-              value: production
-            - name: PORT
-              value: {{ .Values.service.targetPort | quote }}
-            - name: SUPPRESS_GOOGLE_ANALYTICS
-              value: {{ .Values.config.suppressGoogleAnalytics | quote }}
-            - name: API_KEY
-              value: {{ .Values.config.apiKey | quote }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}
+            - secretRef:
+                name: {{ .Release.Name }}
       volumes:
         - name: ephemeral-cache
           emptyDir:

@@ -13,6 +13,9 @@ ingress:
 config:
   apiKey: "3b1effbcbab4c76c2601ab908294700e5af22ca08082459d64a06cc080ac7641"
 
+  cms:
+    apiURL: "https://cms.mareshq.com/api"
+
 cron:
   refreshBlog:
     enabled: true

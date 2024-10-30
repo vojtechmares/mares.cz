@@ -34,6 +34,10 @@ config:
   suppressGoogleAnalytics: true
   apiKey: "xxx"
 
+  cms:
+    apiURL: "https://strapi.example.com/api"
+    apiToken: "xxx"
+
   cache:
     size: 256Mi # must be less than or equal to the ephemeral-storage limit
 

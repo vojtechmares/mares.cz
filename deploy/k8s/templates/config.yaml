@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+data:
+  NODE_ENV: "production"
+  PORT: {{ .Values.service.targetPort | quote }}
+  SUPPRESS_GOOGLE_ANALYTICS: {{ .Values.config.suppressGoogleAnalytics | quote }}
+  CMS_API_URL: {{ .Values.config.cms.apiURL | quote }}
