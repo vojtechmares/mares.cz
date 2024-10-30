@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { strapi } from "@/lib/strapi/strapi";
 import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
@@ -18,21 +19,15 @@ type Props = {
   params: { slug: string };
 };
 
-async function getArticleMetadata(slug: string) {
-  const { meta }: { meta: any } = await import(
-    `@/content/articles/${slug}.mdx`
-  );
-  return meta;
-}
-
 // Image generation
-export default async function Image({ params }: Props) {
+export default async function Image(props: Props) {
   const avatarData = await readFile(
     join(process.cwd(), "./images/avatars/vojtech-mares.png"),
   );
   const avatarSrc = Uint8Array.from(avatarData).buffer;
 
-  const meta = await getArticleMetadata(params.slug);
+  const { slug } = await props.params;
+  const article = await strapi.getArticle(slug);
 
   return new ImageResponse(
     (
@@ -59,14 +54,14 @@ export default async function Image({ params }: Props) {
             tw="max-w-2xl"
             style={{ fontWeight: 700, fontSize: "4rem", marginTop: 0 }}
           >
-            {meta.title}
+            {article.title}
           </p>
-          <p tw="mt-6 max-w-xl text-lg">{meta.description}</p>
+          <p tw="mt-6 max-w-xl text-lg">{article.description}</p>
           <p style={{ fontSize: "2rem", fontWeight: 500, marginBottom: 0 }}>
             Vojtěch Mareš
           </p>
           <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
-            mares.cz/blog/{params.slug}
+            mares.cz/blog/{article.slug}
           </p>
         </div>
         <img
