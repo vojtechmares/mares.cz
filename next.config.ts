@@ -113,10 +113,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "s3.amazonaws.com",
+        hostname: "mareshq-strapi-uploads-live.s3.eu-central-1.amazonaws.com",
         port: "",
-        pathname: "/mareshq-strapi-uploads-local/**",
-      },
+        pathname: "/**",
+      }
     ],
   },
   redirects: async () => {
