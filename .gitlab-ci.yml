@@ -1,5 +1,5 @@
 default:
-  image: node:22
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:22
   cache:
     key:
       files:
