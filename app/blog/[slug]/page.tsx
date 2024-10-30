@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { strapi } from "@/lib/strapi/strapi";
-import { markdownToHtml } from "@/lib/markdown-to-html";
 import "@/styles/highlight-js/github-dark.css";
-import { Container } from "@/components/Container";
 import { TrainingAd } from "@/components/blog/TrainingAd";
+import { ArticleHeader } from "@/components/blog/article-header";
+import { Article } from "@/components/blog/article";
+import { notFound } from "next/navigation";
 
 // Next.js will invalidate the cache when a
 // request comes in, at most once every hour.
@@ -64,31 +65,24 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function Article(props: { params: Params }) {
+export default async function ArticlePage(props: { params: Params }) {
   const { slug } = await props.params;
-  const article = await strapi.getArticle(slug);
 
-  const content = await markdownToHtml(article.text);
+  try {
+    const article = await strapi.getArticle(slug);
 
-  return (
-    <>
-      <Container>
-        <article className="prose:text-black prose-h1:font-display prose-h2:font-display prose-h3:font-display prose pb-14 md:prose-lg lg:prose-xl prose-h1:text-3xl prose-h1:font-extrabold prose-h1:tracking-tight prose-h2:text-2xl prose-h2:font-bold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-pre:text-xl prose-pre:leading-none prose-ol:ps-5 prose-ul:ps-5 prose-li:my-0 sm:pb-20 prose-h1:sm:text-4xl prose-h2:sm:text-3xl prose-h1:md:text-5xl prose-ol:md:ps-6 prose-ul:md:ps-6 lg:pb-32">
-          <p>
-            {new Date(article.publishedAt).toLocaleDateString("cs-CZ", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-        </article>
-      </Container>
-      {article.trainingAd !== undefined ? (
-        <TrainingAd trainingSlug={article.trainingAd} />
-      ) : (
-        <></>
-      )}
-    </>
-  );
+    return (
+      <>
+        <ArticleHeader article={article} />
+        <Article article={article} />
+        {article.trainingAd !== undefined ? (
+          <TrainingAd trainingSlug={article.trainingAd} />
+        ) : (
+          <></>
+        )}
+      </>
+    );
+  } catch (error) {
+    notFound();
+  }
 }
