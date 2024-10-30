@@ -53,6 +53,8 @@ lint:
 test:helm:
   stage: test
   image: ghcr.io/vojtechmares/toolkit:latest
+  tags:
+    - amd64 # temp fix before I create multi-platform image
   script:
     - helm lint ./deploy/k8s
     - helm template website ./deploy/k8s
