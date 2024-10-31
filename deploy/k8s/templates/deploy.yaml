@@ -37,6 +37,8 @@ spec:
         - name: frontend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1001
           ports:
             - name: {{ .Values.service.portName }}
               containerPort: {{ .Values.service.targetPort }}
