@@ -5,10 +5,12 @@ image:
 replicas: 2
 
 ingress:
-  host: staging.website.vmdevel.cz
+  host: stage-web.vmdevel.cz
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns-production
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    external-dns.alpha.kubernetes.io/hostname: stage-web.vmdevel.cz
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 
 config:
   apiKey: "3b1effbcbab4c76c2601ab908294700e5af22ca08082459d64a06cc080ac7641"
