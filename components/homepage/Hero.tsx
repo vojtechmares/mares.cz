@@ -83,10 +83,8 @@ export function Hero() {
             </div>
           </div>
           <Image
-            className="mx-auto hidden pt-10 md:mx-0 md:block md:pt-0"
+            className="mx-auto hidden max-w-[400px] pt-10 md:mx-0 md:block md:pt-0"
             priority
-            width={400}
-            height={800}
             src={avatarVojtechMares}
             alt="Vojtěch Mareš"
           />
