@@ -73,6 +73,7 @@ class Strapi {
         Authorization: `Bearer ${this.strapiToken}`,
         ContentType: "application/json",
       },
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!response.ok) {
