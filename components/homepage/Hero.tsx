@@ -3,7 +3,7 @@ import Image, { type StaticImageData } from "next/image";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 
-import avatarVojtechMares from "@/images/avatars/vojtech-mares.png";
+import avatarVojtechMares from "@/public/images/people/vojtech-mares.png";
 import logoGLAMI from "@/images/logos/glami.svg";
 import logoFakturoid from "@/images/logos/fakturoid.svg";
 import logoCybroslabs from "@/images/logos/cybroslabs-black.jpeg";

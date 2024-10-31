@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Container } from "@/components/Container";
-import avatarAntoninHoskovec from "@/images/avatars/antonin-hoskovec.jpg";
+import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg";
 
 const testimonials = [
   [
