@@ -4,9 +4,9 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 
 import avatarVojtechMares from "@/public/images/people/vojtech-mares.png";
-import logoGLAMI from "@/images/logos/glami.svg";
-import logoFakturoid from "@/images/logos/fakturoid.svg";
-import logoCybroslabs from "@/images/logos/cybroslabs-black.jpeg";
+import logoGLAMI from "@/public/images/logos/glami.svg";
+import logoFakturoid from "@/public/images/logos/fakturoid.svg";
+import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg";
 
 type Company = {
   name: string;

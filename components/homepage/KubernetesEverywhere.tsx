@@ -4,18 +4,18 @@ import clsx from "clsx";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 
-import logoKubernetes from "@/images/logos/tools/kubernetes.svg";
-import logoRancher from "@/images/logos/tools/rancher.svg";
+import logoKubernetes from "@/public/images/logos/kubernetes.svg";
+import logoRancher from "@/public/images/logos/rancher.svg";
 
-import logoAWS from "@/images/logos/tools/amazonaws.svg";
-import logoDigitalOcean from "@/images/logos/tools/digitalocean.svg";
-import logoGCP from "@/images/logos/tools/googlecloud.svg";
-import logoAzure from "@/images/logos/tools/microsoftazure.svg";
-import logoLinode from "@/images/logos/tools/linode.svg";
+import logoAWS from "@/public/images/logos/amazonaws.svg";
+import logoDigitalOcean from "@/public/images/logos/digitalocean.svg";
+import logoGCP from "@/public/images/logos/googlecloud.svg";
+import logoAzure from "@/public/images/logos/microsoftazure.svg";
+import logoLinode from "@/public/images/logos/linode.svg";
 
-import logoOpenStack from "@/images/logos/tools/openstack.svg";
-import logoProxmox from "@/images/logos/tools/proxmox.svg";
-import logovmware from "@/images/logos/tools/vmware.svg";
+import logoOpenStack from "@/public/images/logos/openstack.svg";
+import logoProxmox from "@/public/images/logos/proxmox.svg";
+import logovmware from "@/public/images/logos/vmware.svg";
 
 const sections = [
   {

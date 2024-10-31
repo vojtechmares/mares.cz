@@ -1,11 +1,11 @@
 import { StaticImageData } from "next/image";
 
-import logoKubernetes from "@/images/logos/tools/kubernetes.svg";
-import logoTerraform from "@/images/logos/tools/terraform.svg";
-import logoArgo from "@/images/logos/tools/argo.svg";
-import logoGit from "@/images/logos/tools/git.svg";
-import logoPostgres from "@/images/logos/tools/postgresql.svg";
-import logoDocker from "@/images/logos/tools/docker.svg";
+import logoKubernetes from "@/public/images/logos/kubernetes.svg";
+import logoTerraform from "@/public/images/logos/terraform.svg";
+import logoArgo from "@/public/images/logos/argo.svg";
+import logoGit from "@/public/images/logos/git.svg";
+import logoPostgres from "@/public/images/logos/postgresql.svg";
+import logoDocker from "@/public/images/logos/docker.svg";
 
 export type TrainingType = {
   name: string;
