@@ -1,4 +1,7 @@
-import { expect, test } from "vitest";
+/**
+ * @jest-environment jsdom
+ */
+import "@testing-library/jest-dom";
 import { render, screen, cleanup } from "@testing-library/react";
 import { Button } from "@/components/Button";
 

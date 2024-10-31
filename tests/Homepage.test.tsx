@@ -1,4 +1,6 @@
-import { expect, test, describe } from "vitest";
+/**
+ * @jest-environment jsdom
+ */
 import { render, screen, within } from "@testing-library/react";
 import Page from "../app/page";
 
