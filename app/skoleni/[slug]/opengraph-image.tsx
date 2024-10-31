@@ -111,10 +111,10 @@ function withoutImage(slug: string, meta: any): ImageResponse {
 }
 
 const imageMap = new Map<string, string>([
-  ["kubernetes", "./images/logos/tools/kubernetes.png"],
-  ["argocd", "./images/logos/tools/argo.png"],
-  ["git", "./images/logos/tools/git.png"],
-  ["terraform", "./images/logos/tools/terraform.png"],
+  ["kubernetes", "./public/images/logos/kubernetes.png"],
+  ["argocd", "./public/images/logos/argo.png"],
+  ["git", "./public/images/logos/git.png"],
+  ["terraform", "./public/images/logos/terraform.png"],
 ]);
 
 // Image generation
