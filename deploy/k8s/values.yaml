@@ -40,9 +40,3 @@ config:
 
   cache:
     size: 256Mi # must be less than or equal to the ephemeral-storage limit
-
-cron:
-  refreshBlog:
-    enabled: false
-    schedule: "0 5 * * *"
-    image: "curlimages/curl:7.76.1"

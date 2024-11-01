@@ -16,7 +16,3 @@ config:
 
   cms:
     apiURL: "https://cms.mareshq.com/api"
-
-cron:
-  refreshBlog:
-    enabled: true
