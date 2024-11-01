@@ -68,7 +68,7 @@ export default async function Articles() {
                 year: "numeric",
               })}
               {localeName(article.locale) !== null
-                ? " | " + localeName(article.locale)
+                ? " · " + localeName(article.locale)
                 : ""}
             </p>
             <p className="my-4 text-slate-700">{article.description}</p>
