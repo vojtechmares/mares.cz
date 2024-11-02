@@ -114,7 +114,7 @@ deploy:staging:
     - if: $CI_COMMIT_BRANCH == 'main'
   environment:
     name: staging
-    url: https://staging.website.vmdevel.cz
+    url: https://stage-web.vmdevel.cz
   interruptible: true
   cache: []
 
