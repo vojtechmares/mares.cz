@@ -3,8 +3,14 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import clsx from "clsx";
+import { strapi } from "@/lib/strapi/strapi";
 
-const links = [
+type NavLink = {
+  name: string;
+  href: string;
+};
+
+const staticLinks: NavLink[] = [
   {
     name: "Školení",
     href: "/#skoleni",
@@ -17,14 +23,6 @@ const links = [
     name: "Blog",
     href: "/blog",
   },
-  {
-    name: "Přednášky",
-    href: "/prednasky",
-  },
-  // {
-  //   name: "Případové studie",
-  //   href: "/pripadove-studie",
-  // },
 ];
 
 function LinkItem({
@@ -46,7 +44,7 @@ function LinkItem({
   );
 }
 
-function MobileNavigation() {
+function MobileNavigation({ links }: { links: NavLink[] }) {
   return (
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
@@ -111,7 +109,7 @@ function MobileNavigation() {
 //   );
 // }
 
-function DesktopNavigation() {
+function DesktopNavigation({ links }: { links: NavLink[] }) {
   return (
     <nav className="relative z-50 hidden lg:block">
       <div className="flex justify-between">
@@ -151,13 +149,26 @@ function DesktopNavigation() {
   );
 }
 
-export function Navigation() {
+export async function Navigation() {
+  // "use cache";
+
+  const pages = await strapi.fetchPages();
+
+  const pageLinks: NavLink[] = pages
+    .filter((page) => page.featured)
+    .map((page) => ({
+      name: page.title,
+      href: `/${page.slug}`,
+    }));
+
+  const links = [...staticLinks, ...pageLinks];
+
   return (
     <>
       <header className="mb-12 pt-5 lg:pt-10">
         <Container>
-          <MobileNavigation />
-          <DesktopNavigation />
+          <MobileNavigation links={links} />
+          <DesktopNavigation links={links} />
         </Container>
       </header>
     </>

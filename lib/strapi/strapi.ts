@@ -1,4 +1,5 @@
 import type { Article } from "@/lib/strapi/types/article";
+import type { Page } from "@/lib/strapi/types/page";
 
 interface StrapiData {
   id: string;
@@ -59,6 +60,24 @@ class Strapi {
     return this.transformToArticle(article.data);
   }
 
+  public async fetchPages(): Promise<Page[]> {
+    const data = await this.sendRequest(
+      "/pages?pagination[pageSize]=100&filters[publishedAt][$notNull]=true&sort=title:asc",
+    );
+
+    const pages = data.data.map((page: any) => {
+      return this.transformToPage(page);
+    });
+
+    return pages;
+  }
+
+  public async getPage(slug: string): Promise<Page> {
+    const page = await this.sendRequest(`/pages/${slug}`);
+
+    return this.transformToPage(page.data);
+  }
+
   /**
    *
    * @param {string} path
@@ -94,6 +113,17 @@ class Strapi {
       updatedAt: new Date(data.updatedAt),
       locale: data.locale,
       trainingAd: data.trainingAd !== "" ? data.trainingAd : null,
+    };
+  }
+
+  private transformToPage(data: any): Page {
+    return {
+      slug: data.slug,
+      title: data.title,
+      keywords: data.keywords,
+      description: data.description,
+      content: data.content,
+      featured: data.featured,
     };
   }
 }

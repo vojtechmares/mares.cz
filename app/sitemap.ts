@@ -18,6 +18,7 @@ async function getTrainingSlugs() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const trainingSlugs = await getTrainingSlugs();
   const articles = await strapi.fetchArticles({ limit: 100 });
+  const pages = await strapi.fetchPages();
 
   const trainingURLs = trainingSlugs.map((slug) => ({
     url: `https://www.mares.cz/skoleni/${slug}`,
@@ -33,6 +34,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const pageURLs = pages.map((page) => ({
+    url: `https://www.mares.cz/${page.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
   const baseURLs = [
     {
       url: "https://www.mares.cz",
@@ -46,13 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.5,
     },
-    {
-      url: "https://www.mares.cz/prednasky",
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    },
   ];
 
-  return [...baseURLs, ...trainingURLs, ...blogArticleURLs];
+  return [...baseURLs, ...trainingURLs, ...pageURLs, ...blogArticleURLs];
 }

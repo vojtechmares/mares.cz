@@ -106,6 +106,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     scrollRestoration: true,
+    // dynamicIO: true, // "use cache" directive -- only next.js canary 2024-11-02
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {

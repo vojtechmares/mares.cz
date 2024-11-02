@@ -4,13 +4,31 @@ import { Container } from "@/components/Container";
 // import { Logo } from '@/components/Logo'
 import { Button } from "@/components/Button";
 import { trainingList } from "@/content/traininig-list";
+import { strapi } from "@/lib/strapi/strapi";
 
-export function Footer() {
+const staticLinks = [
+  {
+    title: "Blog",
+    href: "/blog",
+  },
+];
+
+export async function Footer() {
+  // "use cache";
+
+  const pages = await strapi.fetchPages();
+  const pageLinks = pages.map((page) => ({
+    title: page.title,
+    href: `/${page.slug}`,
+  }));
+
+  const links = [...staticLinks, ...pageLinks];
+
   return (
     <footer className="bg-slate-50">
       <Container className="py-8">
         <div className="py-4">
-          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-3 lg:gap-4">
+          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
             <div>
               <h4 className="text-lg font-medium">Vojtěch Mareš</h4>
               <ul className="mt-4 list-none">
@@ -49,10 +67,17 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-            {/* <div>
+            <div>
               <h3 className="text-lg font-medium">Důležité odkazy</h3>
               <ul className="mt-4 list-disc pl-4">
-                <li>
+                {links.map((link) => (
+                  <li key={link.title}>
+                    <Link href={link.href} className="underline">
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+                {/* <li>
                   <Link
                     href="https://devops-skoelni.cz/?utm_source=vojtechmares&utm_medium=vojtechmares-com-website&utm_content=link"
                     className="underline"
@@ -78,9 +103,9 @@ export function Footer() {
                   >
                     devopsaci.cz
                   </Link>
-                </li>
+                </li> */}
               </ul>
-            </div> */}
+            </div>
             <div>
               <h3 className="text-lg font-medium">Zaujal jsem vás?</h3>
               <p className="mt-4">
