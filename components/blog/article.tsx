@@ -1,5 +1,5 @@
 import { markdownToHtml } from "@/lib/markdown-to-html";
-import type { Article } from "@/lib/strapi/types/blog/article";
+import type { Article } from "@/lib/strapi/types/article";
 
 export async function Article({ article }: { article: Article }) {
   const content = await markdownToHtml(article.text);

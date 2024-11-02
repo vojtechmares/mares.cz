@@ -1,4 +1,4 @@
-import type { Article } from "@/lib/strapi/types/blog/article";
+import type { Article } from "@/lib/strapi/types/article";
 
 interface StrapiData {
   id: string;

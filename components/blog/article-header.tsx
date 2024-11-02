@@ -1,4 +1,4 @@
-import type { Article } from "@/lib/strapi/types/blog/article";
+import type { Article } from "@/lib/strapi/types/article";
 
 export function ArticleHeader({ article }: { article: Article }) {
   return (
