@@ -34,6 +34,8 @@ install:
 
 test:
   stage: test
+  variables:
+    CMS_API_URL: https://cms.mareshq.com/api
   script:
     - pnpm run test
   <<: *pnpm_before_script
