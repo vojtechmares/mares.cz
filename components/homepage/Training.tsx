@@ -20,7 +20,7 @@ const Training = ({ training, className }: TrainingProps) => {
         height="128"
         alt={training.title}
       />
-      <h3 className="font-display mt-4 text-center text-4xl font-medium tracking-tight text-amber-500">
+      <h3 className="font-display mt-4 text-center text-3xl font-medium tracking-tight text-amber-500">
         {training.title}
       </h3>
     </Link>
@@ -48,10 +48,7 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
     <div className="hidden lg:mt-20 lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainings.map((training) => (
-          <div
-            key={training.slug}
-            className="relative cursor-pointer rounded-3xl py-4 transition duration-300 ease-in-out md:ring-1 md:ring-transparent md:hover:-translate-y-1 md:hover:scale-110 md:hover:ring-slate-700"
-          >
+          <div key={training.slug} className="rounded-3xl py-4">
             <Training training={training} />
           </div>
         ))}
@@ -60,9 +57,7 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   );
 };
 
-const TrainingList = async () => {
-  const trainings = await strapi.fetchTrainings();
-
+export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
   return (
     <section
       id="skoleni"
@@ -84,6 +79,4 @@ const TrainingList = async () => {
       </Container>
     </section>
   );
-};
-
-export { TrainingList };
+}

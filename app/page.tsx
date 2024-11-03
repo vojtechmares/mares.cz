@@ -7,12 +7,16 @@ import { Testimonials } from "@/components/homepage/Testimonials";
 import { KubernetesEverywhere } from "@/components/homepage/KubernetesEverywhere";
 import { TrainingList } from "@/components/homepage/Training";
 
-const Page = () => {
+import { strapi } from "@/lib/strapi/strapi";
+
+export default async function Home() {
+  const trainings = await strapi.fetchTrainings();
+
   return (
     <main>
       <Hero />
       <WhatIDo />
-      <TrainingList />
+      <TrainingList trainings={trainings} />
       <KubernetesEverywhere />
       <CallToAction />
       <Testimonials />
@@ -20,6 +24,4 @@ const Page = () => {
       {/* <Faqs /> */}
     </main>
   );
-};
-
-export default Page;
+}
