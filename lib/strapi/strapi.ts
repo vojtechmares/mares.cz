@@ -1,6 +1,7 @@
 import type { Article } from "@/lib/strapi/types/article";
 import type { Page } from "@/lib/strapi/types/page";
 import type { Training } from "@/lib/strapi/types/training";
+import axios from "axios";
 
 interface StrapiData {
   id: string;
@@ -101,24 +102,21 @@ class Strapi {
    *
    * @param {string} path
    * @throws {Error}
-   * @returns {Promise<Article>}
+   * @returns {Promise<StrapiResponse>}
    */
   private async sendRequest(path: string): Promise<StrapiResponse> {
-    const response = await fetch(`${this.strapiURL}${path}`, {
-      next: { revalidate: 60 }, // cache for 60 seconds
-      method: "GET",
+    const response = await axios.get(`${this.strapiURL}${path}`, {
       headers: {
         Authorization: `Bearer ${this.strapiToken}`,
-        ContentType: "application/json",
       },
-      signal: AbortSignal.timeout(5000),
+      timeout: 5000,
     });
 
-    if (!response.ok) {
+    if (response.status < 100 || response.status >= 400) {
       throw new Error(`Strapi request failed with status ${response.status}`);
     }
 
-    return (await response.json()) as StrapiResponse;
+    return response.data as StrapiResponse;
   }
 
   private transformToArticle(data: any): Article {
