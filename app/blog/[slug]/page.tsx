@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { strapi } from "@/lib/strapi/strapi";
 import "@/styles/highlight-js/github-dark.css";
-import { TrainingAd } from "@/components/blog/TrainingAd";
+import { TrainingAd } from "@/components/blog/training-ad";
 import { ArticleHeader } from "@/components/blog/article-header";
 import { Article } from "@/components/blog/article";
 import { notFound } from "next/navigation";
@@ -60,11 +60,7 @@ export default async function ArticlePage(props: { params: Params }) {
       <>
         <ArticleHeader article={article} />
         <Article article={article} />
-        {article.trainingAd !== undefined ? (
-          <TrainingAd trainingSlug={article.trainingAd} />
-        ) : (
-          <></>
-        )}
+        <TrainingAd trainingSlug={article.trainingAd} />
       </>
     );
   } catch (error) {

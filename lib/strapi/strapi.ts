@@ -1,5 +1,6 @@
 import type { Article } from "@/lib/strapi/types/article";
 import type { Page } from "@/lib/strapi/types/page";
+import type { Training } from "@/lib/strapi/types/training";
 
 interface StrapiData {
   id: string;
@@ -60,9 +61,27 @@ class Strapi {
     return this.transformToArticle(article.data);
   }
 
+  public async fetchTrainings(): Promise<Training[]> {
+    const data = await this.sendRequest(
+      "/trainings?populate=*&pagination[pageSize]=100&filters[publishedAt][$notNull]=true",
+    );
+
+    const trainings = data.data.map((training: any) => {
+      return this.transformToTraining(training);
+    });
+
+    return trainings;
+  }
+
+  public async getTraining(slug: string): Promise<Training> {
+    const training = await this.sendRequest(`/trainings/${slug}?populate=*`);
+
+    return this.transformToTraining(training.data);
+  }
+
   public async fetchPages(): Promise<Page[]> {
     const data = await this.sendRequest(
-      "/pages?pagination[pageSize]=100&filters[publishedAt][$notNull]=true&sort=title:asc",
+      "/pages?populate=*&pagination[pageSize]=100&filters[publishedAt][$notNull]=true&sort=title:asc",
     );
 
     const pages = data.data.map((page: any) => {
@@ -113,6 +132,43 @@ class Strapi {
       updatedAt: new Date(data.updatedAt),
       locale: data.locale,
       trainingAd: data.trainingAd !== "" ? data.trainingAd : null,
+    };
+  }
+
+  private transformToTraining(data: any): Training {
+    return {
+      slug: data.slug,
+      title: data.title,
+      description: data.description,
+      keywords: data.keywords,
+      days: data.days,
+      content: data.content,
+      adText: data.adText,
+      priceOpen: Number(data.priceOpen),
+      priceCorporate: Number(data.priceCorporate),
+      publishedAt:
+        data.publishedAt !== null ? new Date(data.publishedAt) : null,
+      icon: {
+        url: data.icon?.url,
+        alt: data.icon?.alternativeText,
+      },
+      logo: {
+        alt: data.logo?.alternativeText,
+        formats: {
+          thumbnail: {
+            url: data.logo?.formats.thumbnail?.url,
+          },
+          small: {
+            url: data.logo?.formats.small?.url,
+          },
+          medium: {
+            url: data.logo?.formats.medium?.url,
+          },
+          large: {
+            url: data.logo?.formats.large?.url,
+          },
+        },
+      },
     };
   }
 

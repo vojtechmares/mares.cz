@@ -2,8 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-
-import { trainingList, type TrainingType } from "@/content/traininig-list";
+import { strapi } from "@/lib/strapi/strapi";
+import type { Training as TrainingType } from "@/lib/strapi/types/training";
 
 type TrainingProps = {
   training: TrainingType;
@@ -12,26 +12,30 @@ type TrainingProps = {
 
 const Training = ({ training, className }: TrainingProps) => {
   return (
-    <Link href={training.href} className={className}>
+    <Link href={"/skoleni/" + training.slug} className={className}>
       <Image
-        src={training.logo.src}
+        src={training.icon?.url as string}
         className="mx-auto rounded-lg p-2 invert"
         width="128"
         height="128"
-        alt={training.name}
+        alt={training.title}
       />
       <h3 className="font-display mt-4 text-center text-4xl font-medium tracking-tight text-amber-500">
-        {training.name}
+        {training.title}
       </h3>
     </Link>
   );
 };
 
-const TrainingGridMobile = () => {
+type TrainingGridProps = {
+  trainings: TrainingType[];
+};
+
+const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   return (
     <div className="-mx-4 mt-20 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
-      {trainingList.map((training) => (
-        <div key={training.name}>
+      {trainings.map((training) => (
+        <div key={training.slug}>
           <Training training={training} />
         </div>
       ))}
@@ -39,13 +43,13 @@ const TrainingGridMobile = () => {
   );
 };
 
-const TrainingGridDesktop = () => {
+const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   return (
     <div className="hidden lg:mt-20 lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
-        {trainingList.map((training) => (
+        {trainings.map((training) => (
           <div
-            key={training.name}
+            key={training.slug}
             className="relative cursor-pointer rounded-3xl py-4 transition duration-300 ease-in-out md:ring-1 md:ring-transparent md:hover:-translate-y-1 md:hover:scale-110 md:hover:ring-slate-700"
           >
             <Training training={training} />
@@ -56,7 +60,9 @@ const TrainingGridDesktop = () => {
   );
 };
 
-const TrainingList = () => {
+const TrainingList = async () => {
+  const trainings = await strapi.fetchTrainings();
+
   return (
     <section
       id="skoleni"
@@ -73,8 +79,8 @@ const TrainingList = () => {
             open-source DevOps nástroje a technologie.
           </p>
         </div>
-        <TrainingGridMobile />
-        <TrainingGridDesktop />
+        <TrainingGridMobile trainings={trainings} />
+        <TrainingGridDesktop trainings={trainings} />
       </Container>
     </section>
   );

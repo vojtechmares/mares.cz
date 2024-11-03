@@ -1,9 +1,7 @@
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-// import { Logo } from '@/components/Logo'
 import { Button } from "@/components/Button";
-import { trainingList } from "@/content/traininig-list";
 import { strapi } from "@/lib/strapi/strapi";
 
 const staticLinks = [
@@ -15,6 +13,8 @@ const staticLinks = [
 
 export async function Footer() {
   // "use cache";
+
+  const trainings = await strapi.fetchTrainings();
 
   const pages = await strapi.fetchPages();
   const pageLinks = pages.map((page) => ({
@@ -58,10 +58,13 @@ export async function Footer() {
             <div>
               <h3 className="text-lg font-medium">Školení</h3>
               <ul className="mt-4 list-disc pl-4">
-                {trainingList.map((training) => (
-                  <li key={training.href}>
-                    <Link href={training.href} className="underline">
-                      {training.name}
+                {trainings.map((training) => (
+                  <li key={training.slug}>
+                    <Link
+                      href={"/skoleni/" + training.slug}
+                      className="underline"
+                    >
+                      {training.title}
                     </Link>
                   </li>
                 ))}

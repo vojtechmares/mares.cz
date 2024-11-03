@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { join } from "node:path";
-import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
+import { strapi } from "@/lib/strapi/strapi";
+import { Training } from "@/lib/strapi/types/training";
 
 // Image metadata
 export const alt = "Školení";
@@ -18,18 +18,13 @@ type Props = {
   params: { slug: string };
 };
 
-async function getTrainingMetadata(slug: string) {
-  const { meta }: { meta: any } = await import(
-    `@/content/trainings/${slug}.mdx`
-  );
-  return meta;
+async function getTraining(slug: string): Promise<Training> {
+  const training = await strapi.getTraining(slug);
+
+  return training;
 }
 
-function withImage(
-  slug: string,
-  logoSrc: ArrayBuffer,
-  meta: any,
-): ImageResponse {
+function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
   return new ImageResponse(
     (
       <div
@@ -54,14 +49,14 @@ function withImage(
             }}
             tw="text-amber-500"
           >
-            Školení {meta.name}
+            Školení {training.title}
           </p>
-          <p tw="mt-6 max-w-2xl text-lg">{meta.description}</p>
+          <p tw="mt-6 max-w-2xl text-lg">{training.description}</p>
           <p style={{ fontSize: "2rem", fontWeight: 500, marginBottom: 0 }}>
             Vojtěch Mareš
           </p>
           <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
-            mares.cz/skoleni/{slug}
+            mares.cz/skoleni/{training.slug}
           </p>
         </div>
         {logoSrc && (
@@ -78,7 +73,7 @@ function withImage(
   );
 }
 
-function withoutImage(slug: string, meta: any): ImageResponse {
+function withoutImage(training: Training): ImageResponse {
   return new ImageResponse(
     (
       <div
@@ -95,14 +90,14 @@ function withoutImage(slug: string, meta: any): ImageResponse {
       >
         <div tw="ml-16 flex flex-col justify-center h-full">
           <p style={{ fontWeight: 700, fontSize: "4rem" }} tw="text-amber-500">
-            Školení {meta.name}
+            Školení {training.title}
           </p>
-          <p tw="mt-6 max-w-5xl text-lg">{meta.description}</p>
+          <p tw="mt-6 max-w-5xl text-lg">{training.description}</p>
           <p style={{ fontSize: "2rem", fontWeight: 500, marginBottom: 0 }}>
             Vojtěch Mareš
           </p>
           <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
-            mares.cz/skoleni/{slug}
+            mares.cz/skoleni/{training.slug}
           </p>
         </div>
       </div>
@@ -110,29 +105,23 @@ function withoutImage(slug: string, meta: any): ImageResponse {
   );
 }
 
-const imageMap = new Map<string, string>([
-  ["kubernetes", "./public/images/logos/kubernetes.png"],
-  ["argocd", "./public/images/logos/argo.png"],
-  ["git", "./public/images/logos/git.png"],
-  ["terraform", "./public/images/logos/terraform.png"],
-]);
-
 // Image generation
 export default async function Image({ params }: Props) {
-  const trainingMetadata = await getTrainingMetadata(params.slug);
+  const training = await getTraining(params.slug);
 
-  const imagePath = imageMap.get(params.slug);
+  let imageURL = training.logo?.formats.small?.url;
 
-  if (!imagePath) {
-    return withoutImage(params.slug, trainingMetadata);
+  if (imageURL === undefined) {
+    return withoutImage(training);
   }
 
-  const imageData = await readFile(join(process.cwd(), imagePath));
-  const imageSrc = Uint8Array.from(imageData).buffer;
+  const imageSrc = await fetch(new URL(imageURL)).then((res) =>
+    res.arrayBuffer(),
+  );
 
   if (!imageSrc) {
-    return withoutImage(params.slug, trainingMetadata);
+    return withoutImage(training);
   }
 
-  return withImage(params.slug, imageSrc, trainingMetadata);
+  return withImage(training, imageSrc);
 }
