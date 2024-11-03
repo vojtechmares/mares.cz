@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Navigation } from "@/components/layout/Navigation";
 
 import "@/styles/tailwind.css";
+import { strapi } from "@/lib/strapi/strapi";
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -55,10 +56,13 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === "production";
   const suppressGoogleAnalytics =
     process.env.SUPPRESS_GOOGLE_ANALYTICS === "true";
+
+  const pages = await strapi.fetchPages();
+  const trainings = await strapi.fetchTrainings();
 
   return (
     <html
@@ -79,9 +83,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body className="flex h-full flex-col">
-        <Navigation />
+        <Navigation pages={pages} />
         {children}
-        <Footer />
+        <Footer pages={pages} trainings={trainings} />
         {isProduction || suppressGoogleAnalytics ? (
           <GoogleAnalytics gaId="G-9N0T70XBV8" />
         ) : (

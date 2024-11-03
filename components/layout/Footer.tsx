@@ -2,7 +2,8 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
-import { strapi } from "@/lib/strapi/strapi";
+import { Page } from "@/lib/strapi/types/page";
+import { Training } from "@/lib/strapi/types/training";
 
 const staticLinks = [
   {
@@ -11,12 +12,13 @@ const staticLinks = [
   },
 ];
 
-export async function Footer() {
-  // "use cache";
-
-  const trainings = await strapi.fetchTrainings();
-
-  const pages = await strapi.fetchPages();
+export async function Footer({
+  pages,
+  trainings,
+}: {
+  pages: Page[];
+  trainings: Training[];
+}) {
   const pageLinks = pages.map((page) => ({
     title: page.title,
     href: `/${page.slug}`,

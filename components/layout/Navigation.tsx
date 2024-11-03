@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import clsx from "clsx";
-import { strapi } from "@/lib/strapi/strapi";
+import { Page } from "@/lib/strapi/types/page";
 
 type NavLink = {
   name: string;
@@ -149,11 +149,7 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
   );
 }
 
-export async function Navigation() {
-  // "use cache";
-
-  const pages = await strapi.fetchPages();
-
+export async function Navigation({ pages }: { pages: Page[] }) {
   const pageLinks: NavLink[] = pages
     .filter((page) => page.featured)
     .map((page) => ({
