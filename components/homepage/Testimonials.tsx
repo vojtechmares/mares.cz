@@ -5,37 +5,24 @@ import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg";
 import avatarLadislavCapka from "@/public/images/people/ladislav-capka.jpg";
 
 const testimonials = [
-  [
-    {
-      content:
-        "Když jsme Vojtu poznali, byli jsme zrovna v procesu migrace existujících Kubernetes clusterů na nové, vylepšené (vlastní) infrastrukturní balíčky. Krásně jsme si sedli v automatizaci jak vytváření/strhávání infrastruktury, tak v automatizaci nasazování a použitých technologiích (AWS, Kubernetes, Terraform, Python, GitLab. Docker). Vojta pro nás navrhnul a vytvořil nové Terraform repozitáře, pomohl nám i se školením týmu a mladších kolegů a byl dlouhodobě k dispozici pro řešení ad-hoc problémů.",
-      author: {
-        name: "Antonín Hoškovec",
-        role: "AI team lead, GLAMI",
-        image: avatarAntoninHoskovec,
-      },
+  {
+    content:
+      "Když jsme Vojtu poznali, byli jsme zrovna v procesu migrace existujících Kubernetes clusterů na nové, vylepšené (vlastní) infrastrukturní balíčky. Krásně jsme si sedli v automatizaci jak vytváření/strhávání infrastruktury, tak v automatizaci nasazování a použitých technologiích (AWS, Kubernetes, Terraform, Python, GitLab. Docker). Vojta pro nás navrhnul a vytvořil nové Terraform repozitáře, pomohl nám i se školením týmu a mladších kolegů a byl dlouhodobě k dispozici pro řešení ad-hoc problémů.",
+    author: {
+      name: "Antonín Hoškovec",
+      role: "AI team lead, GLAMI",
+      image: avatarAntoninHoskovec,
     },
-    {
-      content:
-        "S Vojtou Marešem jsme za poslední roky úspěšně zvládli mnoho technických výzev, převážně ve světě Kubernetes, kde se Vojta skvěle orientuje z pohledu operations i vývoje. Společně jsme automatizovali procesy skripty jako GitHub Workflows či GitLab pipelines a řešili komplexní infrastruktury pro veřejné cloudy (AWS, GCP) i vlastní RKE2 clustery s high-availability pokrytím. Vojtovy znalosti sahají i do vývoje – jeho přesah nám umožnil vytvořit základní koncept Kubernetes operátoru v Go, který je klíčovou součástí našeho produktu. Díky své zkušenosti a schopnosti dobře se učit nové věci je pro něj svět Kubernetes otevřenou knihou, a máloco ho zde dokáže překvapit.",
-      author: {
-        name: "Ladislav Čapka",
-        role: "CTO, cybros labs",
-        image: avatarLadislavCapka,
-      },
+  },
+  {
+    content:
+      "S Vojtou Marešem jsme za poslední roky úspěšně zvládli mnoho technických výzev, převážně ve světě Kubernetes, kde se Vojta skvěle orientuje z pohledu operations i vývoje. Společně jsme automatizovali procesy skripty jako GitHub Workflows či GitLab pipelines a řešili komplexní infrastruktury pro veřejné cloudy (AWS, GCP) i vlastní RKE2 clustery s high-availability pokrytím. Vojtovy znalosti sahají i do vývoje – jeho přesah nám umožnil vytvořit základní koncept Kubernetes operátoru v Go, který je klíčovou součástí našeho produktu. Díky své zkušenosti a schopnosti dobře se učit nové věci je pro něj svět Kubernetes otevřenou knihou, a máloco ho zde dokáže překvapit.",
+    author: {
+      name: "Ladislav Čapka",
+      role: "CTO, cybros labs",
+      image: avatarLadislavCapka,
     },
-  ],
-  // [
-  //   {
-  //     content:
-  //       "The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.",
-  //     author: {
-  //       name: "Leland Kiehn",
-  //       role: "Founder of Kiehn and Sons",
-  //       image: avatarImage5,
-  //     },
-  //   },
-  // ],
+  },
 ];
 
 function QuoteIcon(props: any) {
@@ -64,43 +51,37 @@ export function Testimonials() {
         </div>
         <ul
           role="list"
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-4xl" // lg:grid-cols-2
+          className="mx-auto mt-16 flex max-w-2xl flex-col gap-y-6 sm:gap-y-8 lg:mt-20 lg:max-w-4xl"
         >
-          {testimonials.map((column, columnIndex) => (
-            <li key={columnIndex}>
-              <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
-                {column.map((testimonial, testimonialIndex) => (
-                  <li key={testimonialIndex}>
-                    <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                      <QuoteIcon className="absolute left-6 top-6 fill-slate-100" />
-                      <blockquote className="relative">
-                        <p className="text-lg tracking-tight text-black">
-                          {testimonial.content}
-                        </p>
-                      </blockquote>
-                      <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
-                        <div>
-                          <div className="font-display text-base text-black">
-                            {testimonial.author.name}
-                          </div>
-                          <div className="mt-1 text-sm text-slate-700">
-                            {testimonial.author.role}
-                          </div>
-                        </div>
-                        <div className="overflow-hidden rounded-full bg-slate-50">
-                          <Image
-                            className="h-14 w-14 object-cover"
-                            src={testimonial.author.image}
-                            alt={testimonial.author.name}
-                            width={56}
-                            height={56}
-                          />
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </li>
-                ))}
-              </ul>
+          {testimonials.map((testimonial, idx) => (
+            <li key={idx}>
+              <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                <QuoteIcon className="absolute left-6 top-6 fill-slate-100" />
+                <blockquote className="relative">
+                  <p className="text-lg tracking-tight text-black">
+                    {testimonial.content}
+                  </p>
+                </blockquote>
+                <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
+                  <div>
+                    <div className="font-display text-base text-black">
+                      {testimonial.author.name}
+                    </div>
+                    <div className="mt-1 text-sm text-slate-700">
+                      {testimonial.author.role}
+                    </div>
+                  </div>
+                  <div className="overflow-hidden rounded-full bg-slate-50">
+                    <Image
+                      className="h-14 w-14 object-cover"
+                      src={testimonial.author.image}
+                      alt={testimonial.author.name}
+                      width={56}
+                      height={56}
+                    />
+                  </div>
+                </figcaption>
+              </figure>
             </li>
           ))}
         </ul>
