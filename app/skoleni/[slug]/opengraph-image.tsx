@@ -5,15 +5,6 @@ import { strapi } from "@/lib/strapi/strapi";
 import { Training } from "@/lib/strapi/types/training";
 
 // Image metadata
-export const alt = "Školení";
-
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
-export const contentType = "image/png";
-
 type Props = {
   params: { slug: string };
 };
@@ -22,6 +13,20 @@ async function getTraining(slug: string): Promise<Training> {
   const training = await strapi.getTraining(slug);
 
   return training;
+}
+
+export async function generateImageMetadata({ params }: Props) {
+  const { slug } = params;
+  const training = await getTraining(slug);
+
+  return {
+    alt: "Školení " + training.title,
+    size: {
+      width: 1200,
+      height: 630,
+    },
+    contentType: "image/png",
+  };
 }
 
 function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
@@ -107,7 +112,8 @@ function withoutImage(training: Training): ImageResponse {
 
 // Image generation
 export default async function Image({ params }: Props) {
-  const training = await getTraining(params.slug);
+  const { slug } = params;
+  const training = await getTraining(slug);
 
   let imageURL = training.logo?.formats.small?.url;
 

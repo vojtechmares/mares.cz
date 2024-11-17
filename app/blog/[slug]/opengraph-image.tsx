@@ -5,19 +5,31 @@ import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
 
-// Image metadata
-export const alt = "Z blogu";
-
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
-export const contentType = "image/png";
-
 type Props = {
   params: { slug: string };
 };
+
+async function getArticle(slug: string) {
+  const article = await strapi.getArticle(slug);
+
+  return article;
+}
+
+export async function generateImageMetadata({ params }: Props) {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+
+  return {
+    alt:
+      article.title +
+      " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    size: {
+      width: 1200,
+      height: 630,
+    },
+    contentType: "image/png",
+  };
+}
 
 // Image generation
 export default async function Image(props: Props) {
@@ -27,7 +39,7 @@ export default async function Image(props: Props) {
   const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   const { slug } = await props.params;
-  const article = await strapi.getArticle(slug);
+  const article = getArticle(slug);
 
   return new ImageResponse(
     (
