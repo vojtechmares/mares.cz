@@ -39,7 +39,7 @@ export default async function Image(props: Props) {
   const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   const { slug } = await props.params;
-  const article = getArticle(slug);
+  const article = await getArticle(slug);
 
   return new ImageResponse(
     (
