@@ -116,6 +116,7 @@ build:docker:manifest:
   cache: []
   needs:
     - job: build:docker:arm64
+    - job: build:docker:amd64
 
 deploy:staging:
   stage: deploy
