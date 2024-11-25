@@ -19,14 +19,16 @@ export async function generateImageMetadata({ params }: Props) {
   const { slug } = params;
   const training = await getTraining(slug);
 
-  return {
-    alt: "Školení " + training.title,
-    size: {
-      width: 1200,
-      height: 630,
+  return [
+    {
+      alt: "Školení " + training.title,
+      size: {
+        width: 1200,
+        height: 630,
+      },
+      contentType: "image/png",
     },
-    contentType: "image/png",
-  };
+  ];
 }
 
 function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {

@@ -19,16 +19,18 @@ export async function generateImageMetadata({ params }: Props) {
   const { slug } = await params;
   const article = await getArticle(slug);
 
-  return {
-    alt:
-      article.title +
-      " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
-    size: {
-      width: 1200,
-      height: 630,
+  return [
+    {
+      alt:
+        article.title +
+        " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+      size: {
+        width: 1200,
+        height: 630,
+      },
+      contentType: "image/png",
     },
-    contentType: "image/png",
-  };
+  ];
 }
 
 // Image generation
