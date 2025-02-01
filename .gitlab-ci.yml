@@ -79,3 +79,59 @@ build:docker:
   # no cache is needed here
   # this makes job faster, since it does not have to pull the cache
   cache: []
+
+deploy:staging:
+  stage: deploy
+  image: docker:git
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+  environment:
+    name: staging
+    url: https://beta.mares.cz
+
+  variables:
+    GIT_DEPTH: 1 # shallow clone
+
+  before_script:
+    - "command -v ssh-agent >/dev/null || ( apk add --no-cache openssh-client )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H valhalla.vxm.cz >> ~/.ssh/known_hosts
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+
+  script:
+    - apk update && apk add docker-cli-compose
+    - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
+    - docker --context remote-valhalla compose --file ./deploy/docker-compose.beta.yml up --detach --force-recreate
+
+deploy:production:
+  stage: deploy
+  image: docker:git
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'production'
+
+  environment:
+    name: production
+    url: https://www.mares.cz
+
+  variables:
+    GIT_DEPTH: 1 # shallow clone
+
+  before_script:
+    - "command -v ssh-agent >/dev/null || ( apk add --no-cache openssh-client )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H valhalla.vxm.cz >> ~/.ssh/known_hosts
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+
+  script:
+    - apk update && apk add docker-cli-compose
+    - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
+    - docker --context remote-valhalla compose --file ./deploy/docker-compose.prod.yml up --detach --force-recreate
