@@ -15,7 +15,7 @@ services:
       CMS_API_TOKEN: ${CMS_API_TOKEN}
       API_KEY: 3b1effbcbab4c76c2601ab908294700e5af22ca08082459d64a06cc080ac7641
     volumes:
-      - /srv/mares-cz-website/cache:/app/.next/cache
+      - /srv/mares-cz-website-beta/cache:/app/.next/cache
     networks:
       - mares-cz-net-beta
 
