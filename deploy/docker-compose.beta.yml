@@ -20,6 +20,6 @@ services:
       - mares-cz-net-beta
 
 networks:
-  mares-cz-net:
+  mares-cz-net-beta:
     name: mares-cz-net-beta
     driver: bridge
