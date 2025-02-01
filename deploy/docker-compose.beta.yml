@@ -4,13 +4,13 @@ services:
     # using env variable $TAG to specify the image tag
     image: registry.mareshq.com/hq/website:${TAG}
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3001:3001"
     restart: unless-stopped
     environment:
       NODE_ENV: "production"
       HOSTNAME: "0.0.0.0"
       SUPPRESS_GOOGLE_ANALYTICS: "false"
-      PORT: 3000
+      PORT: 3001
       CMS_API_URL: https://cms.mareshq.com/api
       CMS_API_TOKEN: ${CMS_API_TOKEN}
       API_KEY: 3b1effbcbab4c76c2601ab908294700e5af22ca08082459d64a06cc080ac7641
