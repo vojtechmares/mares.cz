@@ -62,7 +62,7 @@ test:helm:
     - helm template website ./deploy/k8s
   cache: []
 
-build:docker:amd64:
+build:docker:
   stage: build
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:git
   tags:
@@ -75,25 +75,7 @@ build:docker:amd64:
       docker build --push \
         --provenance=false \
         --build-arg CMS_API_TOKEN=$CMS_API_TOKEN \
-        -t $IMAGE:$TAG-amd64 .
+        -t $IMAGE:$TAG .
   # no cache is needed here
   # this makes job faster, since it does not have to pull the cache
   cache: []
-
-build:docker:manifest:
-  stage: build
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:git
-  before_script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker info
-  script:
-    - >
-      docker manifest create $IMAGE:$TAG \
-        $IMAGE:$TAG-amd64
-    - docker manifest push $IMAGE:$TAG
-    - docker manifest inspect $IMAGE:$TAG
-  # no cache is needed here
-  # this makes job faster, since it does not have to pull the cache
-  cache: []
-  needs:
-    - job: build:docker:amd64
