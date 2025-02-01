@@ -62,24 +62,6 @@ test:helm:
     - helm template website ./deploy/k8s
   cache: []
 
-build:docker:arm64:
-  stage: build
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:git
-  tags:
-    - arm64
-  before_script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker info
-  script:
-    - >
-      docker build --push \
-        --provenance=false \
-        --build-arg CMS_API_TOKEN=$CMS_API_TOKEN \
-        -t $IMAGE:$TAG-arm64 .
-  # no cache is needed here
-  # this makes job faster, since it does not have to pull the cache
-  cache: []
-
 build:docker:amd64:
   stage: build
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:git
@@ -107,7 +89,6 @@ build:docker:manifest:
   script:
     - >
       docker manifest create $IMAGE:$TAG \
-        $IMAGE:$TAG-arm64 \
         $IMAGE:$TAG-amd64
     - docker manifest push $IMAGE:$TAG
     - docker manifest inspect $IMAGE:$TAG
@@ -115,49 +96,4 @@ build:docker:manifest:
   # this makes job faster, since it does not have to pull the cache
   cache: []
   needs:
-    - job: build:docker:arm64
     - job: build:docker:amd64
-
-deploy:staging:
-  stage: deploy
-  image: ghcr.io/vojtechmares/toolkit:latest
-  tags:
-    - amd64 # temp fix before I create multi-platform image
-  variables:
-    GIT_DEPTH: 1 # shallow clone
-  script: >
-    helm upgrade --install --namespace website-staging \
-      website ./deploy/k8s \
-      --wait \
-      --values ./deploy/k8s/values.staging.yaml \
-      --set image.tag=$TAG \
-      --set config.cms.apiToken=$CMS_API_TOKEN
-  rules:
-    - if: $CI_COMMIT_BRANCH == 'main'
-  environment:
-    name: staging
-    url: https://stage-web.vmdevel.cz
-  interruptible: true
-  cache: []
-
-deploy:production:
-  stage: deploy
-  image: ghcr.io/vojtechmares/toolkit:latest
-  tags:
-    - amd64 # temp fix before I create multi-platform image
-  variables:
-    GIT_DEPTH: 1 # shallow clone
-  script: >
-    helm upgrade --install --namespace website-production \
-      website ./deploy/k8s \
-      --wait \
-      --values ./deploy/k8s/values.production.yaml \
-      --set image.tag=$TAG \
-      --set config.cms.apiToken=$CMS_API_TOKEN
-  rules:
-    - if: $CI_COMMIT_BRANCH == 'production'
-  environment:
-    name: production
-    url: https://wwww.mares.cz
-  interruptible: true
-  cache: []
