@@ -96,7 +96,7 @@ deploy:staging:
   script:
     - apk update && apk add docker-cli-compose
     - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
-    - docker --context remote-valhalla compose --file ./deploy/docker-compose.beta.yml up --detach --force-recreate
+    - docker --context remote-valhalla compose --project-name web-beta --file ./deploy/docker-compose.beta.yml up --detach --force-recreate
 
 deploy:production:
   stage: deploy
@@ -124,4 +124,4 @@ deploy:production:
   script:
     - apk update && apk add docker-cli-compose
     - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
-    - docker --context remote-valhalla compose --file ./deploy/docker-compose.prod.yml up --detach --force-recreate
+    - docker --context remote-valhalla compose --project-name web-prod --file ./deploy/docker-compose.prod.yml up --detach --force-recreate
