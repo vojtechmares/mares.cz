@@ -182,6 +182,9 @@ class Strapi {
   }
 }
 
-const strapi = new Strapi(process.env.STRAPI_API_TOKEN!, process.env.STRAPI_API_URL!);
+const strapi = new Strapi(
+  process.env.STRAPI_API_TOKEN!,
+  process.env.STRAPI_API_URL!,
+);
 
 export { strapi };
