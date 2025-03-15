@@ -8,120 +8,51 @@ default:
       - .pnpm-store
       - node_modules
 
-variables:
-  IMAGE: $CI_REGISTRY_IMAGE
-  TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE != 'merge_request_event'
 
-stages:
-  - install
-  - test
-  - build
-  - deploy
-
-.before_script: &pnpm_before_script
-  before_script:
-    - corepack enable
-    - corepack prepare pnpm@latest-9 --activate
-    - pnpm config set store-dir .pnpm-store
-    - SHELL="$(which bash)" pnpm setup
-    - source ~/.bashrc
+before_script:
+  - corepack enable
+  - corepack prepare pnpm@latest-8 --activate
+  - pnpm config set store-dir .pnpm-store
+  - SHELL="$(which bash)" pnpm setup
+  - source ~/.bashrc
+  - pnpm add -g vercel
 
 install:
-  stage: install
   script:
     - pnpm install --frozen-lockfile
-  <<: *pnpm_before_script
 
 test:
-  stage: test
-  variables:
-    CMS_API_URL: https://cms.mareshq.com/api
+  needs: [install]
   script:
     - pnpm run test
-  <<: *pnpm_before_script
 
 format:
-  stage: test
+  needs: [install]
   script:
     - pnpm run format:check
-  <<: *pnpm_before_script
 
-lint:
-  stage: test
+deploy:preview:
+  needs: [test, format]
   script:
-    - pnpm run lint
-  <<: *pnpm_before_script
-
-build:docker:
-  stage: build
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:git
-  tags:
-    - amd64
-  before_script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker info
-  script:
-    - >
-      docker build --push \
-        --provenance=false \
-        --build-arg CMS_API_TOKEN=$CMS_API_TOKEN \
-        -t $IMAGE:$TAG .
-  # no cache is needed here
-  # this makes job faster, since it does not have to pull the cache
-  cache: []
-
-deploy:staging:
-  stage: deploy
-  image: docker:git
-
+    - vercel pull --yes --environment=preview --token=${VERCEL_TOKEN}
+    - vercel build --token=${VERCEL_TOKEN}
+    - vercel deploy --prebuilt --token=${VERCEL_TOKEN}
   rules:
-    - if: $CI_COMMIT_BRANCH == 'main'
-
-  environment:
-    name: staging
-    url: https://beta.mares.cz
-
-  variables:
-    GIT_DEPTH: 1 # shallow clone
-
-  before_script:
-    - "command -v ssh-agent >/dev/null || ( apk add --no-cache openssh-client )"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan -H valhalla.vxm.cz >> ~/.ssh/known_hosts
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-
-  script:
-    - apk update && apk add docker-cli-compose
-    - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
-    - docker --context remote-valhalla compose --project-name web-beta --file ./deploy/docker-compose.beta.yml up --detach --force-recreate
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
 deploy:production:
-  stage: deploy
-  image: docker:git
-
-  rules:
-    - if: $CI_COMMIT_BRANCH == 'production'
-
+  needs: [test, format]
+  script:
+    - vercel pull --yes --environment=production --token=${VERCEL_TOKEN}
+    - vercel build --prod --token=${VERCEL_TOKEN}
+    - vercel deploy --prod --prebuilt --token=${VERCEL_TOKEN}
   environment:
     name: production
     url: https://www.mares.cz
-
-  variables:
-    GIT_DEPTH: 1 # shallow clone
-
-  before_script:
-    - "command -v ssh-agent >/dev/null || ( apk add --no-cache openssh-client )"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan -H valhalla.vxm.cz >> ~/.ssh/known_hosts
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-
-  script:
-    - apk update && apk add docker-cli-compose
-    - docker context create remote-valhalla --docker "host=ssh://root@valhalla.vxm.cz"
-    - docker --context remote-valhalla compose --project-name web-prod --file ./deploy/docker-compose.prod.yml up --detach --force-recreate
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
