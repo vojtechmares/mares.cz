@@ -14,6 +14,11 @@ workflow:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE != 'merge_request_event'
 
+stages:
+  - install
+  - test
+  - deploy
+
 before_script:
   - corepack enable
   - corepack prepare pnpm@latest-8 --activate
@@ -23,21 +28,22 @@ before_script:
   - pnpm add -g vercel
 
 install:
+  stage: install
   script:
     - pnpm install --frozen-lockfile
 
 test:
-  needs: [install]
+  stage: test
   script:
     - pnpm run test
 
 format:
-  needs: [install]
+  stage: test
   script:
     - pnpm run format:check
 
 deploy:preview:
-  needs: [test, format]
+  stage: deploy
   script:
     - vercel pull --yes --environment=preview --token=${VERCEL_TOKEN}
     - vercel build --token=${VERCEL_TOKEN}
@@ -46,7 +52,7 @@ deploy:preview:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
 deploy:production:
-  needs: [test, format]
+  stage: deploy
   script:
     - vercel pull --yes --environment=production --token=${VERCEL_TOKEN}
     - vercel build --prod --token=${VERCEL_TOKEN}
