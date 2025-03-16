@@ -2,9 +2,8 @@ import type { Article } from "@/lib/strapi/types/article";
 
 export function ArticleHeader({ article }: { article: Article }) {
   return (
-    <header className="mx-auto mb-4 w-[65ch] md:text-lg lg:text-xl">
-      <div>
-        <p className="mb-4 text-slate-700">
+    <header className="mx-auto mb-8 md:text-lg lg:text-xl">
+        <p className="text-slate-700">
           {article.publishedAt.toLocaleDateString("cs-CZ", {
             day: "numeric",
             month: "long",
@@ -24,7 +23,6 @@ export function ArticleHeader({ article }: { article: Article }) {
             <></>
           )}
         </p>
-      </div>
     </header>
   );
 }
