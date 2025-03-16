@@ -34,7 +34,7 @@ export default async function Articles() {
 
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
-      <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+      <h2 className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">
         Blog
       </h2>
       <p className="mt-4 text-base lg:text-xl">
