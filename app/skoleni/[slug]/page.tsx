@@ -118,9 +118,9 @@ export default async function Training(props: { params: Params }) {
               </div>
               <div className="mt-8 md:col-span-2 md:mt-0">
                 {training.days === 2 ? (
-                  <div className="mb-8 rounded-lg bg-blue-50 p-4 shadow">
+                  <div className="mb-8 rounded-lg bg-blue-50 p-4 shadow-sm">
                     <div className="flex">
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         {/* <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" /> */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ export default async function Training(props: { params: Params }) {
                 ) : (
                   <></>
                 )}
-                <div className="mt-8 overflow-hidden rounded-lg bg-slate-50 shadow md:mt-0">
+                <div className="mt-8 overflow-hidden rounded-lg bg-slate-50 shadow-sm md:mt-0">
                   <div className="px-4 pt-5 sm:px-6">
                     <h2 className="text-2xl font-medium tracking-tight text-black">
                       Cena za školení

@@ -4,9 +4,9 @@ import { ReactNode } from "react";
 
 const baseStyles = {
   solid:
-    "group inline-flex items-center justify-center rounded-full font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2",
+    "group inline-flex items-center justify-center rounded-full font-semibold focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2",
   outline:
-    "group inline-flex ring-1 items-center justify-center rounded-full focus:outline-none",
+    "group inline-flex ring-1 items-center justify-center rounded-full focus:outline-hidden",
 };
 
 const variantStyles = {

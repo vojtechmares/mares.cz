@@ -35,7 +35,7 @@ export function WhatIDo() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-amber-500 bg-gradient-to-br pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-amber-500 bg-linear-to-br pb-28 pt-20 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
