@@ -101,7 +101,7 @@ export default async function Training(props: { params: Params }) {
     return (
       <main>
         <div className="pb-14 sm:pb-20 lg:pb-32">
-          <div className="bg-black pb-16 pt-16">
+          <div className="bg-black pt-16 pb-16">
             <Container className="flex justify-around">
               <Logo training={training} />
               <h2 className="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
@@ -152,7 +152,7 @@ export default async function Training(props: { params: Params }) {
                       Cena za školení
                     </h2>
                   </div>
-                  <div className="px-4 pb-5 pt-2">
+                  <div className="px-4 pt-2 pb-5">
                     <dl className="sm:divide-y sm:divide-slate-400">
                       <div className="py-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 sm:py-5">
                         <dt className="font-medium text-slate-700">

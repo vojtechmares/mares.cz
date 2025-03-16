@@ -4,7 +4,7 @@ import { Container } from "@/components/Container";
 
 export default function NotFound() {
   return (
-    <Container className="mb-8 mt-16">
+    <Container className="mt-16 mb-8">
       <h2 className="mb-8 text-5xl font-medium">Jejda.</h2>
       <p>Je mi líto, ale tady nic není.</p>
       <div className="my-8">

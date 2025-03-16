@@ -62,7 +62,7 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
     <section
       id="skoleni"
       aria-label="Training"
-      className="bg-black pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
+      className="bg-black pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">

@@ -35,7 +35,7 @@ export function WhatIDo() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-amber-500 bg-linear-to-br pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-amber-500 bg-linear-to-br pt-20 pb-28 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
@@ -61,7 +61,7 @@ export function WhatIDo() {
               >
                 {stepIdx !== steps.length - 1 ? (
                   <div
-                    className="absolute left-6 top-4 -ml-px mt-0.5 h-full w-0.5 bg-white"
+                    className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-white"
                     aria-hidden="true"
                   />
                 ) : null}

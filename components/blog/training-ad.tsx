@@ -13,7 +13,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
     const training = await strapi.getTraining(trainingSlug);
 
     return (
-      <section className="bg-amber-500 pb-28 pt-20 sm:py-32">
+      <section className="bg-amber-500 pt-20 pb-28 sm:py-32">
         <Container>
           <div className="flex flex-col justify-between md:flex-row">
             <div className="max-w-3xl">
