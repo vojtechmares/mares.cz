@@ -4,7 +4,7 @@ import { Container } from "@/components/Container";
 import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg";
 import avatarLadislavCapka from "@/public/images/people/ladislav-capka.jpg";
 
-const testimonials = [
+const references = [
   {
     content:
       "Když jsme Vojtu poznali, byli jsme zrovna v procesu migrace existujících Kubernetes clusterů na nové, vylepšené (vlastní) infrastrukturní balíčky. Krásně jsme si sedli v automatizaci jak vytváření/strhávání infrastruktury, tak v automatizaci nasazování a použitých technologiích (AWS, Kubernetes, Terraform, Python, GitLab. Docker). Vojta pro nás navrhnul a vytvořil nové Terraform repozitáře, pomohl nám i se školením týmu a mladších kolegů a byl dlouhodobě k dispozici pro řešení ad-hoc problémů.",
@@ -33,27 +33,27 @@ function QuoteIcon(props: any) {
   );
 }
 
-export function Testimonials() {
+export function References() {
   return (
     <section
-      id="testimonials"
+      id="references"
       aria-label="What our customers are saying"
       className="bg-slate-50 py-20 sm:py-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-black sm:text-4xl">
-            Napsali o mně
+            Reference
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Zde jsou některé z mých referencí.
+            Co o mně napsali moji klienti.
           </p>
         </div>
         <ul
           role="list"
           className="mx-auto mt-16 flex max-w-2xl flex-col gap-y-6 sm:gap-y-8 lg:mt-20 lg:max-w-4xl"
         >
-          {testimonials.map((testimonial, idx) => (
+          {references.map((testimonial, idx) => (
             <li key={idx}>
               <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                 <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
