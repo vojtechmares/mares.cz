@@ -3,6 +3,9 @@ import Image, { StaticImageData } from "next/image";
 import logoGLAMI from "@/public/images/logos/glami.svg";
 import logoFakturoid from "@/public/images/logos/fakturoid.svg";
 import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg";
+import { Section } from "@/components/ui/section";
+import { Heading } from "@/components/ui/heading";
+import { Container } from "@/components/Container";
 
 type Client = {
   name: string;
@@ -17,14 +20,12 @@ const clients: Client[] = [
 
 function Clients() {
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 className="font-display text-3xl font-bold tracking-tight text-black sm:text-4xl md:text-center">
-          {" "}
-          {/* text-center text-lg/8 font-semibold text-gray-900 */}
+    <Section id="clients" ariaLabel="Moji klienti">
+      <Container>
+        <Heading level="h2" className="md:text-center">
           Moji klienti
-        </h2>
-        <p className="mt-4 text-lg tracking-tight text-slate-400 md:text-center">
+        </Heading>
+        <p className="mt-4 text-lg tracking-tight text-slate-700 md:text-center">
           Společnosti, které mi důvěřují a se kterými jsem měl tu čest
           spolupracovat.
         </p>
@@ -40,8 +41,8 @@ function Clients() {
             />
           ))}
         </div>
-      </div>
-    </div>
+      </Container>
+    </Section>
   );
 }
 

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { strapi } from "@/lib/strapi/strapi";
 import type { Training as TrainingType } from "@/lib/strapi/types/training";
+import { Section } from "@/components/ui/section";
+import { Heading } from "@/components/ui/heading";
 
 type TrainingProps = {
   training: TrainingType;
@@ -20,9 +22,9 @@ const Training = ({ training, className }: TrainingProps) => {
         height="128"
         alt={training.title}
       />
-      <h3 className="font-display mt-4 text-center text-3xl font-medium tracking-tight text-amber-500">
+      <Heading level="h3" className="mt-4 text-center underline" text="amber">
         {training.title}
-      </h3>
+      </Heading>
     </Link>
   );
 };
@@ -59,17 +61,17 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
 
 export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
   return (
-    <section
+    <Section
       id="skoleni"
       aria-label="Training"
-      className="bg-black pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32"
+      background="black"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <Heading level="h2" text="white">
             DevOps školení
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-400">
+          </Heading>
+          <p className="mt-4 text-lg tracking-tight text-slate-300">
             Sdílím svoje zkušenosti a znalosti z praxe formou školení. Školím
             open-source DevOps nástroje a technologie.
           </p>
@@ -77,6 +79,6 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
         <TrainingGridMobile trainings={trainings} />
         <TrainingGridDesktop trainings={trainings} />
       </Container>
-    </section>
+    </Section>
   );
 }

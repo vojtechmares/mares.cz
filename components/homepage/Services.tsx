@@ -2,6 +2,8 @@ import clsx from "clsx";
 
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
+import { Section } from "@/components/ui/section";
+import { Heading } from "@/components/ui/heading";
 
 type SwirlyDoodleProps = { className: string };
 
@@ -77,21 +79,17 @@ function Service({
 
 export function Services() {
   return (
-    <section
+    <Section
       id="sluzby"
       aria-label="Služby"
-      className="bg-black py-20 sm:py-32"
+      background="black"
     >
       <Container>
         <div className="md:text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {/* <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-amber-500" />
-              <span className="relative">Co pro Vás,</span>
-            </span>{" "} */}
+          <Heading level="h2" text="white">
             Služby
-          </h2>
-          <p className="mt-4 text-lg text-slate-400">
+          </Heading>
+          <p className="mt-4 text-lg text-slate-300">
             Co dělám a jak Vám můžu pomoci rozvinout Vaší IT infrastrukturu?
           </p>
         </div>
@@ -119,6 +117,6 @@ export function Services() {
           />
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

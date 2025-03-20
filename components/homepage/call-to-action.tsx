@@ -1,18 +1,20 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
+import Head from "next/head";
+import { Heading } from "@/components/ui/heading";
+import { Section } from "@/components/ui/section";
+import { CallToAction as CTA } from "@/components/landing/call-to-action";
 
 export function CallToAction() {
   return (
-    <section
-      id="get-started-today"
-      className="relative overflow-hidden bg-black py-32"
+    <CTA
+      id="pojdme-do-toho"
     >
-      <Container className="relative">
         <div className="mx-auto max-w-xl text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <Heading level="h2" text="white">
             Pojďme do toho společně
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-400">
+          </Heading>
+          <p className="mt-4 text-lg tracking-tight text-white">
             Je na čase pozvednout Vaši infrastrukturu na dnešní standardy.
             Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
           </p>
@@ -25,7 +27,6 @@ export function CallToAction() {
             Domluvme si schůzku
           </Button>
         </div>
-      </Container>
-    </section>
+    </CTA>
   );
 }

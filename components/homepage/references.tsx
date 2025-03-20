@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Container } from "@/components/Container";
 import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg";
 import avatarLadislavCapka from "@/public/images/people/ladislav-capka.jpg";
+import { Section } from "@/components/ui/section";
+import { Heading } from "@/components/ui/heading";
 
 const references = [
   {
@@ -35,16 +37,15 @@ function QuoteIcon(props: any) {
 
 export function References() {
   return (
-    <section
+    <Section
       id="references"
-      aria-label="What our customers are saying"
-      className="bg-slate-50 py-20 sm:py-32"
+      aria-label="Co o mně napsali moji klienti."
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-black sm:text-4xl">
+          <Heading level="h2">
             Reference
-          </h2>
+          </Heading>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
             Co o mně napsali moji klienti.
           </p>
@@ -86,6 +87,6 @@ export function References() {
           ))}
         </ul>
       </Container>
-    </section>
+    </Section>
   );
 }
