@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-import { Footer } from "@/components/layout/Footer";
+import { Footer } from "@/components/layout/footer";
 import { Navigation } from "@/components/layout/Navigation";
 
 import "@/styles/tailwind.css";
