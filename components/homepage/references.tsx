@@ -37,15 +37,10 @@ function QuoteIcon(props: any) {
 
 export function References() {
   return (
-    <Section
-      id="references"
-      aria-label="Co o mně napsali moji klienti."
-    >
+    <Section id="references" aria-label="Co o mně napsali moji klienti.">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <Heading level="h2">
-            Reference
-          </Heading>
+          <Heading level="h2">Reference</Heading>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
             Co o mně napsali moji klienti.
           </p>

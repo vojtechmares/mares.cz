@@ -23,9 +23,13 @@ const textStyles = {
   amber: "text-amber-500",
 };
 
-export function Heading(
-  { children, className, level = "h1", text = "black", ariaLabel }: HeadingProps,
-) {
+export function Heading({
+  children,
+  className,
+  level = "h1",
+  text = "black",
+  ariaLabel,
+}: HeadingProps) {
   if (level === "h4" || level === "h5" || level === "h6") {
     throw new Error("Headings must be level 1, 2, or 3");
   }
@@ -33,7 +37,15 @@ export function Heading(
   const Tag = level;
 
   return (
-    <Tag className={clsx(className, levelStyles[level], textStyles[text], baseStyles)} aria-label={ariaLabel}>
+    <Tag
+      className={clsx(
+        className,
+        levelStyles[level],
+        textStyles[text],
+        baseStyles,
+      )}
+      aria-label={ariaLabel}
+    >
       {children}
     </Tag>
   );

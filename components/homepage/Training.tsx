@@ -61,11 +61,7 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
 
 export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
   return (
-    <Section
-      id="skoleni"
-      aria-label="Training"
-      background="black"
-    >
+    <Section id="skoleni" aria-label="Training" background="black">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2" text="white">

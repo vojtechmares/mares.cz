@@ -79,11 +79,7 @@ function Service({
 
 export function Services() {
   return (
-    <Section
-      id="sluzby"
-      aria-label="Služby"
-      background="black"
-    >
+    <Section id="sluzby" aria-label="Služby" background="black">
       <Container>
         <div className="md:text-center">
           <Heading level="h2" text="white">
