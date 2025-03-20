@@ -2,7 +2,7 @@ import { Hero } from "@/components/homepage/Hero";
 import { CallToAction } from "@/components/homepage/call-to-action";
 import { Faqs } from "@/components/homepage/Faqs";
 import { Services } from "@/components/homepage/services";
-import { WhatIDo } from "@/components/homepage/cooperation";
+import { Cooperation } from "@/components/homepage/cooperation";
 import { References } from "@/components/homepage/references";
 import { KubernetesEverywhere } from "@/components/homepage/KubernetesEverywhere";
 import { TrainingList } from "@/components/homepage/training";
@@ -20,7 +20,7 @@ export default async function Home() {
       <Clients />
       <TrainingList trainings={trainings} />
       <References />
-      <WhatIDo />
+      <Cooperation />
       <CallToAction />
       {/* <KubernetesEverywhere /> */}
       {/* <Faqs /> */}

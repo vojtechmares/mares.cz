@@ -32,7 +32,7 @@ const steps = [
   },
 ];
 
-export function WhatIDo() {
+export function Cooperation() {
   return (
     <Section
       id="z-nuly-do-cloudu"
