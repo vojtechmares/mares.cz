@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { strapi } from "@/lib/strapi/strapi";
+import { CallToAction } from "@/components/landing/call-to-action";
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   if (!trainingSlug) {
@@ -13,8 +14,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
     const training = await strapi.getTraining(trainingSlug);
 
     return (
-      <section className="bg-amber-500 pt-20 pb-28 sm:py-32">
-        <Container>
+      <CallToAction id="skoleni">
           <div className="flex flex-col justify-between md:flex-row">
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -50,8 +50,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
               height="196"
             />
           </div>
-        </Container>
-      </section>
+      </CallToAction>
     );
   } catch (error) {
     return <></>;
