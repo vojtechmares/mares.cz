@@ -113,7 +113,7 @@ export function Services() {
           <Service
             name="DevOps spolupráce"
             price="Cena dohodou"
-            description="Postarám se o Vaší infrastrukturu, migrace, monitoring a její rozvoj. Pomohu vám s vývojem cloud-native aplikací a zároveň udržím cenu Vaší infrastruktury na uzdě."
+            description="Dlouhodobá spolupráce, kde se starám o Vaší infrastrukturu, aktualizace, potřeby Vaší aplikace a společně rozvíjíme Vaší platform dle Vašich potřeb. Zároveň se starám, abychom udrželi cenu na uzdě, optimalizovali cenu a výkon, bez kompromisů na kvalitě a bezpečnosti."
             href="https://cal.com/vojtechmares/30min"
             buttonText="Domluvme si schůzku"
           />

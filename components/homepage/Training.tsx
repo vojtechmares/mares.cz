@@ -67,7 +67,7 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Školení
+            DevOps školení
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-400">
             Sdílím svoje zkušenosti a znalosti z praxe formou školení. Školím

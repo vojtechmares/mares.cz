@@ -19,7 +19,7 @@ const steps = [
       "Přesunu Vaši aplikaci do Kubernetes, ať na Vašem vlastním hardware nebo v public cloudu. Celá infrastruktura bude jasně deklarovaná jako kód pomocí Terraformu.",
   },
   {
-    name: "Proškolení Vašeho týmu",
+    name: "Školení Vašeho týmu",
     description:
       "Naučím váš tým používat moderní technologie, tak abyste mohli rozvíjet Vaší aplikaci a byznys a technologie byly nástrojem k rozvoji, ne břemenem, které s sebou táhnete.",
   },
@@ -43,7 +43,7 @@ export function WhatIDo() {
             Z nuly do cloudu
           </h2>
           <p className="mt-6 text-lg tracking-tight text-slate-100">
-            Vše co budete potřebovat, od začátku až do cíle.
+            Jak může vypadat naše spolupráce.
           </p>
         </div>
         <nav aria-label="Progress">

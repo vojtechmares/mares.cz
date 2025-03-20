@@ -6,6 +6,7 @@ import { WhatIDo } from "@/components/homepage/WhatIDo";
 import { References } from "@/components/homepage/references";
 import { KubernetesEverywhere } from "@/components/homepage/KubernetesEverywhere";
 import { TrainingList } from "@/components/homepage/Training";
+import { Clients } from "@/components/homepage/clients";
 
 import { strapi } from "@/lib/strapi/strapi";
 
@@ -15,12 +16,13 @@ export default async function Home() {
   return (
     <main>
       <Hero />
-      <WhatIDo />
-      <TrainingList trainings={trainings} />
-      <KubernetesEverywhere />
-      <CallToAction />
-      <References />
       <Services />
+      <Clients />
+      <TrainingList trainings={trainings} />
+      <References />
+      <WhatIDo />
+      <CallToAction />
+      {/* <KubernetesEverywhere /> */}
       {/* <Faqs /> */}
     </main>
   );

@@ -22,9 +22,9 @@ const companies: Company[] = [
 export function Hero() {
   return (
     <>
-      <Container className="pt-5 lg:pt-8">
+      <Container className="pt-5 pb-8 md:py-0 lg:pt-8">
         <div className="flex flex-col justify-center md:flex-row md:items-end md:justify-between">
-          <div>
+          <div className="md:my-auto">
             <h1 className="font-display text-4xl font-black tracking-tight text-black sm:text-7xl">
               Jsem{" "}
               <span className="relative whitespace-nowrap text-amber-500">
@@ -57,30 +57,6 @@ export function Hero() {
                 Napište mi
               </Button>
             </div>
-            <div className="mt-10">
-              {" "}
-              {/* mt-36 lg:mt-44 */}
-              <p className="font-display text-lg tracking-tight text-slate-700">
-                Moji spokojení klienti, přidejte se k nim i Vy.
-              </p>
-              <ul
-                role="list"
-                className="mt-4 flex flex-wrap items-center justify-center gap-x-6 sm:justify-start"
-              >
-                {companies.map((company) => (
-                  <li key={company.name} className="flex">
-                    <Image
-                      className="h-16 object-scale-down"
-                      src={company.logo}
-                      alt={company.name}
-                      width={128}
-                      height={64}
-                      priority
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
           <Image
             className="mx-auto hidden max-w-[400px] pt-10 md:mx-0 md:block md:pt-0"
@@ -93,3 +69,28 @@ export function Hero() {
     </>
   );
 }
+
+// <div className="mt-10">
+//               {" "}
+//               {/* mt-36 lg:mt-44 */}
+//               <p className="font-display text-lg tracking-tight text-slate-700">
+//                 Moji spokojení klienti, přidejte se k nim i Vy.
+//               </p>
+//               <ul
+//                 role="list"
+//                 className="mt-4 flex flex-wrap items-center justify-center gap-x-6 sm:justify-start"
+//               >
+//                 {companies.map((company) => (
+//                   <li key={company.name} className="flex">
+//                     <Image
+//                       className="h-16 object-scale-down"
+//                       src={company.logo}
+//                       alt={company.name}
+//                       width={128}
+//                       height={64}
+//                       priority
+//                     />
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
