@@ -44,14 +44,14 @@ export function Cooperation() {
           <Heading level="h2" text="white">
             Z nuly do cloudu
           </Heading>
-          <p className="mt-6 text-lg tracking-tight text-slate-300">
+          <p className="mt-4 text-lg tracking-tight text-slate-300">
             Jak může vypadat naše spolupráce.
           </p>
         </div>
         <nav aria-label="Progress">
           <ol
             role="list"
-            className="mx-auto mt-20 max-w-3xl overflow-hidden pt-2"
+            className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2"
           >
             {steps.map((step, stepIdx) => (
               <li

@@ -35,7 +35,7 @@ type TrainingGridProps = {
 
 const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   return (
-    <div className="-mx-4 mt-20 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
+    <div className="-mx-4 mt-10 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {trainings.map((training) => (
         <div key={training.slug}>
           <Training training={training} />
@@ -47,7 +47,7 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
 
 const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   return (
-    <div className="hidden lg:mt-20 lg:block">
+    <div className="hidden mt-10 lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainings.map((training) => (
           <div key={training.slug} className="rounded-3xl py-4">

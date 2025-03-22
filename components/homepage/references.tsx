@@ -47,7 +47,7 @@ export function References() {
         </div>
         <ul
           role="list"
-          className="mx-auto mt-16 flex max-w-2xl flex-col gap-y-6 sm:gap-y-8 lg:mt-20 lg:max-w-4xl"
+          className="mx-auto mt-10 flex max-w-2xl flex-col gap-y-6 sm:gap-y-8 lg:max-w-4xl"
         >
           {references.map((testimonial, idx) => (
             <li key={idx}>
