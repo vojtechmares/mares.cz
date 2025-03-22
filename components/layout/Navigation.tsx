@@ -60,7 +60,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
           <Button href="mailto:vojtech@mares.cz" color="amber">
-            <span className="text-lg font-bold tracking-tight">
+            <span className="text-lg font-bold tracking-tight text-black">
               Napište mi <span className="hidden lg:inline">ještě dnes</span>
             </span>
           </Button>
@@ -132,7 +132,7 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
         </div>
         <div className="flex items-center gap-x-8">
           <Button href="mailto:vojtech@mares.cz" color="amber">
-            <span className="text-lg font-bold tracking-tight">
+            <span className="text-lg font-bold tracking-tight text-black">
               Napište mi <span className="hidden lg:inline">ještě dnes</span>
             </span>
           </Button>

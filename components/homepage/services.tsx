@@ -50,16 +50,16 @@ function Service({
         // "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
-      <h3 className="font-display text-4xl font-medium tracking-tight text-white">
+      <Heading level="h3" className={featured ? "text-black" : "text-white"}>
         {name}
-      </h3>
+      </Heading>
       {/* <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
         {price}
       </p> */}
       <p
         className={clsx(
-          "mt-2 text-base",
-          featured ? "text-slate-100" : "text-slate-400",
+          "mt-4 text-base",
+          featured ? "text-black" : "text-slate-400",
         )}
       >
         {description}
@@ -67,8 +67,8 @@ function Service({
       <Button
         href={href}
         variant={featured ? "solid" : "outline"}
-        color="white"
-        className="mt-8 md:mt-16"
+        color={featured ? "black" : "white"}
+        className="mt-4"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         {buttonText}

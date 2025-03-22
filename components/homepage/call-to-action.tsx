@@ -9,16 +9,16 @@ export function CallToAction() {
   return (
     <CTA id="pojdme-do-toho">
       <div className="mx-auto max-w-xl text-center">
-        <Heading level="h2" text="white">
+        <Heading level="h2" text="black">
           Pojďme do toho společně
         </Heading>
-        <p className="mt-4 text-lg tracking-tight text-white">
+        <p className="mt-4 text-lg tracking-tight text-black">
           Je na čase pozvednout Vaši infrastrukturu na dnešní standardy.
           Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
         </p>
         <Button
           href="https://cal.com/vojtechmares/30min"
-          color="white"
+          color="black"
           size="large"
           className="mt-10"
         >
