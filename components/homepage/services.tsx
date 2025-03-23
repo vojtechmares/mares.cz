@@ -59,7 +59,7 @@ function Service({
       <p
         className={clsx(
           "mt-4 text-base",
-          featured ? "text-black" : "text-slate-400",
+          featured ? "text-black" : "text-slate-300",
         )}
       >
         {description}
