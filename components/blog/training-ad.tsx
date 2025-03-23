@@ -18,9 +18,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
       <CallToAction id="skoleni">
         <div className="flex flex-col justify-between md:flex-row">
           <div className="max-w-3xl">
-            <Heading level="h2" >
-              {training.title} školení
-            </Heading>
+            <Heading level="h2">{training.title} školení</Heading>
             <p className="mt-4 text-lg tracking-tight text-black">
               {training.adText}
             </p>

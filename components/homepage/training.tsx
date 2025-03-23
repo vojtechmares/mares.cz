@@ -47,7 +47,7 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
 
 const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   return (
-    <div className="hidden mt-10 lg:block">
+    <div className="mt-10 hidden lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainings.map((training) => (
           <div key={training.slug} className="rounded-3xl py-4">
