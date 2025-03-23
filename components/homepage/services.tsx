@@ -68,7 +68,7 @@ function Service({
         href={href}
         variant={featured ? "solid" : "outline"}
         color={featured ? "black" : "white"}
-        className="mt-4"
+        className="mt-6"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         {buttonText}
