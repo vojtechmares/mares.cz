@@ -29,15 +29,15 @@ function Clients() {
           Společnosti, které mi důvěřují a se kterými jsem měl tu čest
           spolupracovat.
         </p>
-        <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+        <div className="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {clients.map((client) => (
             <Image
               key={client.name}
               alt={client.name}
               src={client.logo.src}
-              width={client.logo.width} // 158
-              height={client.logo.height} // 48
-              className="w-full object-contain" // w-full object-contain // col-span-2 max-h-12 w-full object-contain lg:col-span-1
+              width={client.logo.width}
+              height={client.logo.height}
+              className="h-24 w-full object-contain" // w-full object-contain // col-span-2 max-h-12 w-full object-contain lg:col-span-1
             />
           ))}
         </div>
