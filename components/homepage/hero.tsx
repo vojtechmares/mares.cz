@@ -4,20 +4,6 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 
 import avatarVojtechMares from "@/public/images/people/vojtech-mares.png";
-import logoGLAMI from "@/public/images/logos/glami.svg";
-import logoFakturoid from "@/public/images/logos/fakturoid.svg";
-import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg";
-
-type Company = {
-  name: string;
-  logo: StaticImageData;
-};
-
-const companies: Company[] = [
-  { name: "GLAMI", logo: logoGLAMI },
-  { name: "Fakturoid", logo: logoFakturoid },
-  { name: "Cybros Labs", logo: logoCybroslabs },
-];
 
 export function Hero() {
   return (
@@ -41,9 +27,7 @@ export function Hero() {
               , DevOps architekt.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-slate-700">
-              Společně snížíme Vaše náklady na infrasturkuturu, zbavíme se
-              technického dluhu a připravíme Vaší IT infrastrukturu na rapidní
-              škálování.
+              Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a připravíme vaši IT infrastrukturu na rapidní škálování.
             </p>
             <div className="mt-10 flex flex-col gap-y-6 sm:flex-row sm:justify-start sm:gap-x-6 md:gap-y-0">
               <Button href="https://cal.com/vojtechmares/30min" size="large">
@@ -69,28 +53,3 @@ export function Hero() {
     </>
   );
 }
-
-// <div className="mt-10">
-//               {" "}
-//               {/* mt-36 lg:mt-44 */}
-//               <p className="font-display text-lg tracking-tight text-slate-700">
-//                 Moji spokojení klienti, přidejte se k nim i Vy.
-//               </p>
-//               <ul
-//                 role="list"
-//                 className="mt-4 flex flex-wrap items-center justify-center gap-x-6 sm:justify-start"
-//               >
-//                 {companies.map((company) => (
-//                   <li key={company.name} className="flex">
-//                     <Image
-//                       className="h-16 object-scale-down"
-//                       src={company.logo}
-//                       alt={company.name}
-//                       width={128}
-//                       height={64}
-//                       priority
-//                     />
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>

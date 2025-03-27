@@ -1,4 +1,4 @@
-import { Hero } from "@/components/homepage/Hero";
+import { Hero } from "@/components/homepage/hero";
 import { CallToAction } from "@/components/homepage/call-to-action";
 import { Faqs } from "@/components/homepage/Faqs";
 import { Services } from "@/components/homepage/services";
