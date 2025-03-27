@@ -27,7 +27,6 @@ function SwirlyDoodle({ className }: SwirlyDoodleProps) {
 
 type ServiceProps = {
   name: string;
-  price: string;
   description: string;
   href: string;
   featured?: boolean;
@@ -36,7 +35,6 @@ type ServiceProps = {
 
 function Service({
   name,
-  price,
   description,
   href,
   featured = false,
@@ -54,9 +52,6 @@ function Service({
       <Heading level="h3" className={featured ? "text-black" : "text-white"}>
         {name}
       </Heading>
-      {/* <p className="font-display mt-4 text-lg font-light tracking-tight text-white">
-        {price}
-      </p> */}
       <p
         className={clsx(
           "mt-4 text-base",
@@ -93,21 +88,18 @@ export function Services() {
         <div className="-mx-4 mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
             name="Konzultace"
-            price="2 000 CZK za hodinu"
             description="Chcete se poradit nebo si nevíte rady? Projdeme Váš současný stav a najdeme kde je problém a navrhneme řešení."
             href="mailto:vojtech@mares.cz"
           />
           <Service
             featured
             name="Školení"
-            price="Cena dle školení"
             description="Formou workshopu Váš tým seznámím a naučím využívat moderní cloudové technologie. Vše si společně vyzkoušíme na řadě příkladů. Veškeré materiály ze školení a přílady Vám zůstanou."
             href="/#skoleni"
             buttonText="Seznam školení"
           />
           <Service
             name="DevOps spolupráce"
-            price="Cena dohodou"
             description="Dlouhodobá spolupráce, kde se starám o Vaší infrastrukturu, aktualizace, potřeby Vaší aplikace a společně rozvíjíme Vaší platform dle Vašich potřeb."
             href="https://cal.com/vojtechmares/30min"
             buttonText="Domluvme si schůzku"
