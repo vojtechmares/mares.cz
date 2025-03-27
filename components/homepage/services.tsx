@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/ui/section";
 import { Heading } from "@/components/ui/heading";
+import { Card } from "@/components/ui/card";
 
 type SwirlyDoodleProps = { className: string };
 
@@ -42,11 +43,11 @@ function Service({
   buttonText = "Napište mi",
 }: ServiceProps) {
   return (
-    <section
+    <Card
+      background={featured ? "amber" : "black"}
       className={clsx(
-        "flex flex-col rounded-3xl px-6 py-8 sm:px-8",
-        featured ? "order-first bg-amber-500 lg:order-none" : "",
-        featured ? "hover:bg-amber-500" : "md:ring-1 md:ring-slate-700",
+        "flex flex-col",
+        featured ? "order-first lg:order-none" : "md:ring-1 md:ring-slate-700",
         // "transition duration-300 ease-in-out md:hover:-translate-y-1 md:hover:scale-110",
       )}
     >
@@ -68,12 +69,12 @@ function Service({
         href={href}
         variant={featured ? "solid" : "outline"}
         color={featured ? "black" : "white"}
-        className="mt-6"
+        className="mt-6 w-full"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         {buttonText}
       </Button>
-    </section>
+    </Card>
   );
 }
 
