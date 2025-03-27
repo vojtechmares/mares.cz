@@ -27,7 +27,7 @@ export async function Footer({
   const links = [...staticLinks, ...pageLinks];
 
   return (
-    <footer className="bg-white">
+    <footer className="bg-slate-50">
       <Container className="py-8">
         <div className="py-4">
           <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
