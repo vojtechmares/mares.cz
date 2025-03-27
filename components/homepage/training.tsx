@@ -68,8 +68,9 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
             DevOps školení
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-slate-300">
-            Sdílím svoje zkušenosti a znalosti z praxe formou školení. Školím
-            open-source DevOps nástroje a technologie.
+            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a
+            workshopů. Zaměřuji se především na open-source DevOps nástroje a
+            technologie.
           </p>
         </div>
         <TrainingGridMobile trainings={trainings} />

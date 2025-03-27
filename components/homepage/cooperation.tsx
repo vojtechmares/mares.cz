@@ -8,27 +8,27 @@ const steps = [
   {
     name: "Analýza současného stavu",
     description:
-      "Zjistíme kde jsou slabá místa Vaší infrastruktury nebo aplikace, a nebo obojího.",
+      "Identifikujeme slabá místa ve vaší infrastruktuře, aplikaci nebo obojím. ",
   },
   {
     name: "Návrh řešení",
     description:
-      "Navrhnu, jak tato slabá místa odstranit, na co si dát pozor a naplánujeme případné další kroky. ",
+      "Navrhnu efektivní řešení, jak tato slabá místa odstranit, upozorním na rizika a společně naplánujeme případné další kroky.",
   },
   {
     name: "Implementace",
     description:
-      "Přesunu Vaši aplikaci do Kubernetes, ať na Vašem vlastním hardware nebo v public cloudu. Celá infrastruktura bude jasně deklarovaná jako kód pomocí Terraformu.",
+      "Přesunu vaši aplikaci do Kubernetes, ať už na vašem vlastním hardware, nebo v public cloudu. Veškerá infrastruktura bude jasně definovaná jako kód pomocí Terraformu.",
   },
   {
-    name: "Školení Vašeho týmu",
+    name: "Školení vašeho týmu",
     description:
-      "Naučím váš tým používat moderní technologie, tak abyste mohli rozvíjet Vaší aplikaci a byznys a technologie byly nástrojem k rozvoji, ne břemenem, které s sebou táhnete.",
+      "Naučím vás používat moderní technologie tak, aby byly efektivním nástrojem pro rozvoj vašich aplikací a byznysu a ne břemenem.",
   },
   {
-    name: "Dlouhodobá spolupráce a support",
+    name: "Dlouhodobá spolupráce a podpora",
     description:
-      "Společně budeme rozvíjet infrastrukturu dle potřeb Vaší aplikace. Zároveň Vám mohhu nabídnout i podporu v případě problémů a SLA.",
+      "Budeme průběžně rozvíjet infrastrukturu podle aktuálních potřeb vašich aplikací. Nabízím také možnost podpory a SLA, díky čemuž získáte jistotu a rychlé řešení v případě jakýchkoli problémů.",
   },
 ];
 

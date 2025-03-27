@@ -42,7 +42,7 @@ export function References() {
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2">Reference</Heading>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Co o mně napsali moji klienti.
+            Co o mně říkají moji klienti.
           </p>
         </div>
         <ul

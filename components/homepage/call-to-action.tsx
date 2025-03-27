@@ -13,8 +13,9 @@ export function CallToAction() {
           Pojďme do toho společně
         </Heading>
         <p className="mt-4 text-lg tracking-tight text-black">
-          Je na čase pozvednout Vaši infrastrukturu na dnešní standardy.
-          Infrastruktura má ukázat Vaši aplikaci světu, ne ji držet při zemi.
+          Nastal čas posunout vaši infrastrukturu na úroveň současných
+          standardů. Infrastruktura má vaši aplikaci představit světu, nikoli ji
+          držet zpátky.
         </p>
         <Button
           href="https://cal.com/vojtechmares/30min"

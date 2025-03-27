@@ -27,7 +27,9 @@ export function Hero() {
               , DevOps architekt.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-slate-700">
-              Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a připravíme vaši IT infrastrukturu na rapidní škálování.
+              Společně snížíme vaše náklady na infrastrukturu, zbavíme se
+              technického dluhu a připravíme vaši IT infrastrukturu na rapidní
+              škálování.
             </p>
             <div className="mt-10 flex flex-col gap-y-6 sm:flex-row sm:justify-start sm:gap-x-6 md:gap-y-0">
               <Button href="https://cal.com/vojtechmares/30min" size="large">

@@ -26,7 +26,7 @@ function Clients() {
           Moji klienti
         </Heading>
         <p className="mt-4 text-lg tracking-tight text-slate-700 md:text-center">
-          Společnosti, které mi důvěřují a se kterými jsem měl tu čest
+          Společnosti, které mi důvěřují a se kterými mám tu čest dlouhodobě
           spolupracovat.
         </p>
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">

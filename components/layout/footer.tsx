@@ -114,8 +114,9 @@ export async function Footer({
             <div>
               <h3 className="text-lg font-medium">Zaujal jsem vás?</h3>
               <p className="mt-4">
-                Zaujal jsem vás avšak nevíte, jak přesně bych vám mohl pomoci?
-                Nebojte se zeptat a společně vymyslíme, jak vám mohu pomoci.
+                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl
+                pomoci? Ozvěte se mi &ndash; společně probereme vaše potřeby a
+                najdeme řešení na míru.
               </p>
               <div className="mt-5 flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-2">
                 <Button href="https://cal.com/vojtechmares/30min">

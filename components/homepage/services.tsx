@@ -30,7 +30,8 @@ type ServiceProps = {
   description: string;
   href: string;
   featured?: boolean;
-  buttonText?: string;
+  buttonText: string;
+  buttonAriaLabel?: string;
 };
 
 function Service({
@@ -38,7 +39,8 @@ function Service({
   description,
   href,
   featured = false,
-  buttonText = "Napište mi",
+  buttonText,
+  buttonAriaLabel,
 }: ServiceProps) {
   return (
     <Card
@@ -65,7 +67,7 @@ function Service({
         variant={featured ? "solid" : "outline"}
         color={featured ? "black" : "white"}
         className="mt-6 w-full"
-        aria-label={`Get started with the ${name} plan for ${price}`}
+        aria-label={buttonAriaLabel}
       >
         {buttonText}
       </Button>
@@ -82,27 +84,31 @@ export function Services() {
             Služby
           </Heading>
           <p className="mt-4 text-lg text-slate-300">
-            Co dělám a jak Vám můžu pomoci rozvinout Vaší IT infrastrukturu?
+            Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?
           </p>
         </div>
         <div className="-mx-4 mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
             name="Konzultace"
-            description="Chcete se poradit nebo si nevíte rady? Projdeme Váš současný stav a najdeme kde je problém a navrhneme řešení."
+            description="Potřebujete poradit nebo si nevíte rady? Společně projdeme váš současný stav, identifikujeme problémy a navrhneme vhodná řešení."
+            buttonText="Napište mi"
+            buttonAriaLabel="Napište mi email a domluvme si konzultaci"
             href="mailto:vojtech@mares.cz"
           />
           <Service
             featured
             name="Školení"
-            description="Formou workshopu Váš tým seznámím a naučím využívat moderní cloudové technologie. Vše si společně vyzkoušíme na řadě příkladů. Veškeré materiály ze školení a přílady Vám zůstanou."
+            description="Formou workshopu seznámím váš tým s moderními cloudovými technologiemi a naučím vás je efektivně využívat. Vše si společně vyzkoušíme na praktických příkladech. Veškeré materiály ze školení a ukázkové příklady vám zůstanou."
             href="/#skoleni"
             buttonText="Seznam školení"
+            buttonAriaLabel="Odkaz na seznam školení"
           />
           <Service
             name="DevOps spolupráce"
-            description="Dlouhodobá spolupráce, kde se starám o Vaší infrastrukturu, aktualizace, potřeby Vaší aplikace a společně rozvíjíme Vaší platform dle Vašich potřeb."
+            description="Nabízím dlouhodobou spolupráci, při které se kompletně postarám o vaši infrastrukturu, pravidelné aktualizace a požadavky vašich aplikací. Společně budeme rozvíjet vaši platformu tak, aby odpovídala vašim aktuálním potřebám."
             href="https://cal.com/vojtechmares/30min"
             buttonText="Domluvme si schůzku"
+            buttonAriaLabel="Domluvte si online schůzku"
           />
         </div>
       </Container>
