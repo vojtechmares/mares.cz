@@ -20,7 +20,7 @@ const clients: Client[] = [
 
 function Clients() {
   return (
-    <Section id="clients" ariaLabel="Moji klienti">
+    <Section id="clients" ariaLabel="Moji klienti" background="white">
       <Container>
         <Heading level="h2" className="md:text-center">
           Moji klienti
