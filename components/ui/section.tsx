@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 type SectionProps = {
   children?: ReactNode;
   className?: string;
-  background?: "white" | "black" | "amber";
+  background?: "white" | "black" | "amber" | "slate";
   id?: string;
   ariaLabel?: string;
 };
@@ -15,6 +15,7 @@ const backgroundStyles = {
   white: "bg-white",
   black: "bg-black",
   amber: "bg-amber-500",
+  slate: "bg-slate-50",
 };
 
 export function Section({
@@ -22,7 +23,7 @@ export function Section({
   className,
   id,
   ariaLabel,
-  background = "white",
+  background = "slate",
 }: SectionProps) {
   return (
     <section
