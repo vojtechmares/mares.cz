@@ -21,6 +21,7 @@ export async function generateImageMetadata({ params }: Props) {
 
   return [
     {
+      id: params.slug,
       alt:
         article.title +
         " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",

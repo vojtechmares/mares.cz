@@ -21,6 +21,7 @@ export async function generateImageMetadata({ params }: Props) {
 
   return [
     {
+      id: params.slug,
       alt: "Školení " + training.title,
       size: {
         width: 1200,

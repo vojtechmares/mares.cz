@@ -6,22 +6,38 @@ import { ImageResponse } from "next/og";
 import { strapi } from "@/lib/strapi/strapi";
 
 // Image metadata
-export const alt =
-  "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze";
+async function getPage(slug: string) {
+  const page = await strapi.getPage(slug);
+  if (!page) {
+    throw new Error("Page not found");
+  }
 
-export const size = {
-  width: 1200,
-  height: 630,
-};
+  return page;
+}
 
-export const contentType = "image/png";
+export async function generateImageMetadata(props: { params: Params }) {
+  const { slug } = await props.params;
+  const page = await getPage(slug);
+
+  return [
+    {
+      id: slug,
+      alt: page.title,
+      size: {
+        width: 1200,
+        height: 630,
+      },
+      contentType: "image/png",
+    },
+  ];
+}
 
 type Params = Promise<{ slug: string }>;
 
 // Image generation
 export default async function Image(props: { params: Params }) {
   const { slug } = await props.params;
-  const page = await strapi.getPage(slug);
+  const page = await getPage(slug);
 
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
