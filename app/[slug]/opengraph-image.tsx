@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
 import { strapi } from "@/lib/strapi/strapi";
@@ -38,7 +39,9 @@ export default async function Image(props: { params: Params }) {
   const { slug } = await props.params;
   const page = await getPage(slug);
 
-  const avatarData = await readFile("/public/images/people/vojtech-mares.png");
+  const avatarData = await readFile(
+    join(process.cwd(), "./images/avatars/vojtech-mares.png"),
+  );
   const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   return new ImageResponse(
