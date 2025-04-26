@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/Container";
 import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg";
 import avatarLadislavCapka from "@/public/images/people/ladislav-capka.jpg";
+import avatarBalintCsoka from "@/public/images/people/balint-csoka.jpg";
 import { Section } from "@/components/ui/section";
 import { Heading } from "@/components/ui/heading";
 
@@ -23,6 +24,34 @@ const references = [
       name: "Ladislav Čapka",
       role: "CTO, cybros labs",
       image: avatarLadislavCapka,
+    },
+  },
+  {
+    // content: "Pán Mareš nám poskytol skvele školenia na tematiku pipelines, CI/CD a hands-on ukážky s príkladmi z realného života na základe jeho bohatých skúsenosti v oblasti DevOps. Máme v tíme seniorných ľudí v oblasti DevOps, aj začiatočníkov, obsah a forma jeho školenia bola vhodná pre obe skupiny, palec hore.",
+    content: (
+      <>
+        <strong>Školení GitHub Actions</strong>
+        <br />
+        Pán Mareš nám poskytol skvele školenia na tematiku pipelines, CI/CD a
+        hands-on ukážky s príkladmi z realného života na základe jeho bohatých
+        skúsenosti v oblasti DevOps. Máme v tíme seniorných ľudí v oblasti
+        DevOps, aj začiatočníkov, obsah a forma jeho školenia bola vhodná pre
+        obe skupiny, palec hore.
+        <br />
+        <br />
+        <strong>Školení Git & GitHub</strong>
+        <br />
+        Dozvedeli sme sa skutočne veľa o fungovaní Git-u ako takého, s reálnymi
+        ukážkami operácii (aj nie úplne každodenných) ako aj CMD, tak aj v
+        pomocných nástrojoch ako GitHub Desktop. Bolo užitočné vidieť, ako sa dá
+        najefektívnejšie pracovať s Git-om, a ako to celé zapadá do každodennej
+        práce tímu cez GitHub Enteprise, ktorý vo firme používame.
+      </>
+    ),
+    author: {
+      name: "Ing. Bálint Csóka",
+      role: "IT architekt, Stredoslovenská distribučná",
+      image: avatarBalintCsoka,
     },
   },
 ];
