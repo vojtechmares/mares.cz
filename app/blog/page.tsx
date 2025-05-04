@@ -1,7 +1,7 @@
-import { strapi } from "@/lib/strapi/strapi"
-import { Button } from "@/components/Button"
-import { Container } from "@/components/Container"
-import { Metadata } from "next"
+import {strapi} from "@/lib/strapi/strapi"
+import {Button} from "@/components/Button"
+import {Container} from "@/components/Container"
+import {Metadata} from "next"
 import Link from "next/link"
 
 export const dynamic = "force-dynamic"

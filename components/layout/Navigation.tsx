@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-import { Container } from "@/components/Container"
-import { Button } from "@/components/Button"
+import {Container} from "@/components/Container"
+import {Button} from "@/components/Button"
 import clsx from "clsx"
-import { Page } from "@/lib/strapi/types/page"
+import {Page} from "@/lib/strapi/types/page"
 
 type NavLink = {
   name: string
@@ -44,7 +44,7 @@ function LinkItem({
   )
 }
 
-function MobileNavigation({ links }: { links: NavLink[] }) {
+function MobileNavigation({links}: {links: NavLink[]}) {
   return (
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
@@ -109,7 +109,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
 //   );
 // }
 
-function DesktopNavigation({ links }: { links: NavLink[] }) {
+function DesktopNavigation({links}: {links: NavLink[]}) {
   return (
     <nav className="relative z-50 hidden lg:block">
       <div className="flex justify-between">
@@ -149,7 +149,7 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
   )
 }
 
-export async function Navigation({ pages }: { pages: Page[] }) {
+export async function Navigation({pages}: {pages: Page[]}) {
   const pageLinks: NavLink[] = pages
     .filter((page) => page.featured)
     .map((page) => ({

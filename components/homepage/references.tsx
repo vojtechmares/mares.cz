@@ -1,11 +1,11 @@
 import Image from "next/image"
 
-import { Container } from "@/components/Container"
+import {Container} from "@/components/Container"
 import avatarAntoninHoskovec from "@/public/images/people/antonin-hoskovec.jpg"
 import avatarLadislavCapka from "@/public/images/people/ladislav-capka.jpg"
 import avatarBalintCsoka from "@/public/images/people/balint-csoka.jpg"
-import { Section } from "@/components/ui/section"
-import { Heading } from "@/components/ui/heading"
+import {Section} from "@/components/ui/section"
+import {Heading} from "@/components/ui/heading"
 
 const references = [
   {

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import clsx from "clsx"
-import { ReactNode } from "react"
+import {ReactNode} from "react"
 
 const baseStyles = {
   solid:

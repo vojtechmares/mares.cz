@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { ReactNode } from "react"
+import {ReactNode} from "react"
 
 type TextProps = {
   children?: ReactNode
@@ -13,6 +13,6 @@ const textStyles = {
   slate: "text-slate-300",
 }
 
-export function Text({ children, className, text = "black" }: TextProps) {
+export function Text({children, className, text = "black"}: TextProps) {
   return <p className={clsx(className, textStyles[text])}>{children}</p>
 }

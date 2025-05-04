@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug"
 import rehypeRaw from "rehype-raw"
 import rehypeHighlight from "rehype-highlight"
 import rehypeStringify from "rehype-stringify"
-import { unified } from "unified"
+import {unified} from "unified"
 
 import http from "highlight.js/lib/languages/http"
 import nginx from "highlight.js/lib/languages/nginx"
@@ -49,7 +49,7 @@ export async function markdownToHtml(md: string) {
   const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype, {allowDangerousHtml: true})
     .use(rehypeRaw)
     .use(rehypeSlug)
     .use(rehypeHighlight, {

@@ -1,8 +1,8 @@
 import clsx from "clsx"
 
-import { Container } from "@/components/Container"
-import { Heading } from "@/components/ui/heading"
-import { Section } from "@/components/ui/section"
+import {Container} from "@/components/Container"
+import {Heading} from "@/components/ui/heading"
+import {Section} from "@/components/ui/section"
 
 const steps = [
   {

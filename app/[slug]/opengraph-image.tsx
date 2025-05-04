@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { join } from "node:path"
-import { readFile } from "node:fs/promises"
-import { ImageResponse } from "next/og"
-import { strapi } from "@/lib/strapi/strapi"
+import {join} from "node:path"
+import {readFile} from "node:fs/promises"
+import {ImageResponse} from "next/og"
+import {strapi} from "@/lib/strapi/strapi"
 
 // Image metadata
 async function getPage(slug: string) {
@@ -15,8 +15,8 @@ async function getPage(slug: string) {
   return page
 }
 
-export async function generateImageMetadata(props: { params: Params }) {
-  const { slug } = await props.params
+export async function generateImageMetadata(props: {params: Params}) {
+  const {slug} = await props.params
   const page = await getPage(slug)
 
   return [
@@ -32,11 +32,11 @@ export async function generateImageMetadata(props: { params: Params }) {
   ]
 }
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{slug: string}>
 
 // Image generation
-export default async function Image(props: { params: Params }) {
-  const { slug } = await props.params
+export default async function Image(props: {params: Params}) {
+  const {slug} = await props.params
   const page = await getPage(slug)
 
   const avatarData = await readFile(
@@ -71,12 +71,12 @@ export default async function Image(props: { params: Params }) {
             {page.title}
           </p>
           <p tw="mt-6 max-w-lg text-lg">{page.description}</p>
-          <p style={{ fontSize: "2rem", fontWeight: 500 }}>
+          <p style={{fontSize: "2rem", fontWeight: 500}}>
             mares.cz/{page.slug}
           </p>
         </div>
         <img
-          style={{ position: "absolute", bottom: 0, right: 60 }}
+          style={{position: "absolute", bottom: 0, right: 60}}
           alt=""
           height="600"
           src={avatarSrc as unknown as string}

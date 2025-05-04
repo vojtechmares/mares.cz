@@ -1,12 +1,12 @@
 import Image from "next/image"
 
-import { Button } from "@/components/Button"
-import { Container } from "@/components/Container"
-import { strapi } from "@/lib/strapi/strapi"
-import { CallToAction } from "@/components/landing/call-to-action"
-import { Heading } from "@/components/ui/heading"
+import {Button} from "@/components/Button"
+import {Container} from "@/components/Container"
+import {strapi} from "@/lib/strapi/strapi"
+import {CallToAction} from "@/components/landing/call-to-action"
+import {Heading} from "@/components/ui/heading"
 
-export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
+export async function TrainingAd({trainingSlug}: {trainingSlug?: string}) {
   if (!trainingSlug) {
     return <></>
   }

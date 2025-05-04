@@ -38,4 +38,4 @@ type TrainingLogo = {
   }
 }
 
-export type { Training, TrainingIcon, TrainingLogo }
+export type {Training, TrainingIcon, TrainingLogo}

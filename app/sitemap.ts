@@ -1,8 +1,8 @@
-import { strapi } from "@/lib/strapi/strapi"
-import { MetadataRoute } from "next"
+import {strapi} from "@/lib/strapi/strapi"
+import {MetadataRoute} from "next"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles = await strapi.fetchArticles({ limit: 100 })
+  const articles = await strapi.fetchArticles({limit: 100})
   const pages = await strapi.fetchPages()
   const trainings = await strapi.fetchTrainings()
 

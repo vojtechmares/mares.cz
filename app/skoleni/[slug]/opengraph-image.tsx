@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { ImageResponse } from "next/og"
-import { strapi } from "@/lib/strapi/strapi"
-import { Training } from "@/lib/strapi/types/training"
+import {ImageResponse} from "next/og"
+import {strapi} from "@/lib/strapi/strapi"
+import {Training} from "@/lib/strapi/types/training"
 
 // Image metadata
 type Props = {
-  params: { slug: string }
+  params: {slug: string}
 }
 
 async function getTraining(slug: string): Promise<Training> {
@@ -15,8 +15,8 @@ async function getTraining(slug: string): Promise<Training> {
   return training
 }
 
-export async function generateImageMetadata({ params }: Props) {
-  const { slug } = params
+export async function generateImageMetadata({params}: Props) {
+  const {slug} = params
   const training = await getTraining(slug)
 
   return [
@@ -60,16 +60,16 @@ function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
             Školení {training.title}
           </p>
           <p tw="mt-6 max-w-2xl text-lg">{training.description}</p>
-          <p style={{ fontSize: "2rem", fontWeight: 500, marginBottom: 0 }}>
+          <p style={{fontSize: "2rem", fontWeight: 500, marginBottom: 0}}>
             Vojtěch Mareš
           </p>
-          <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
+          <p style={{fontSize: "1.5rem", fontWeight: 300, marginTop: 0}}>
             mares.cz/skoleni/{training.slug}
           </p>
         </div>
         {logoSrc && (
           <img
-            style={{ position: "absolute", right: 60 }}
+            style={{position: "absolute", right: 60}}
             width="400"
             height="400"
             alt=""
@@ -97,14 +97,14 @@ function withoutImage(training: Training): ImageResponse {
         }}
       >
         <div tw="ml-16 flex flex-col justify-center h-full">
-          <p style={{ fontWeight: 700, fontSize: "4rem" }} tw="text-amber-500">
+          <p style={{fontWeight: 700, fontSize: "4rem"}} tw="text-amber-500">
             Školení {training.title}
           </p>
           <p tw="mt-6 max-w-5xl text-lg">{training.description}</p>
-          <p style={{ fontSize: "2rem", fontWeight: 500, marginBottom: 0 }}>
+          <p style={{fontSize: "2rem", fontWeight: 500, marginBottom: 0}}>
             Vojtěch Mareš
           </p>
-          <p style={{ fontSize: "1.5rem", fontWeight: 300, marginTop: 0 }}>
+          <p style={{fontSize: "1.5rem", fontWeight: 300, marginTop: 0}}>
             mares.cz/skoleni/{training.slug}
           </p>
         </div>
@@ -114,8 +114,8 @@ function withoutImage(training: Training): ImageResponse {
 }
 
 // Image generation
-export default async function Image({ params }: Props) {
-  const { slug } = params
+export default async function Image({params}: Props) {
+  const {slug} = params
   const training = await getTraining(slug)
 
   let imageURL = training.logo?.formats.small?.url

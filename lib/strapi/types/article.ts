@@ -10,4 +10,4 @@ type Article = {
   trainingAd?: string
 }
 
-export type { Article }
+export type {Article}

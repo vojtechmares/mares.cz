@@ -1,28 +1,33 @@
 import Image from "next/image"
 import clsx from "clsx"
-import { Metadata } from "next"
-import { notFound } from "next/navigation"
+import {Metadata} from "next"
+import {notFound} from "next/navigation"
 
-import type { Training } from "@/lib/strapi/types/training"
-import { Container } from "@/components/Container"
-import { Button } from "@/components/Button"
-import { strapi } from "@/lib/strapi/strapi"
-import { markdownToHtml } from "@/lib/markdown-to-html"
+import type {Training} from "@/lib/strapi/types/training"
+import {Container} from "@/components/Container"
+import {Button} from "@/components/Button"
+import {strapi} from "@/lib/strapi/strapi"
+import {markdownToHtml} from "@/lib/markdown-to-html"
 
-export const dynamic = "force-dynamic"
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 4 hours.
+export const revalidate = 14_400
+
+// We'll prerender only the params from `generateStaticParams` at build time.
+// If a request comes in for a path that hasn't been generated,
+// Next.js will server-render the page on-demand.
+export const dynamicParams = true
 
 async function getTraining(slug: string): Promise<Training> {
-  const training = await strapi.getTraining(slug)
-
-  return training
+  return await strapi.getTraining(slug)
 }
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{slug: string}>
 
 export async function generateMetadata(props: {
   params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params
+  const {slug} = await props.params
   const training = await getTraining(slug)
 
   return {
@@ -56,7 +61,7 @@ export async function generateMetadata(props: {
   }
 }
 
-function Logo({ training }: { training: Training }) {
+function Logo({training}: {training: Training}) {
   let imageURL = training.logo?.formats.small?.url
 
   if (imageURL === undefined) {
@@ -84,14 +89,14 @@ function Logo({ training }: { training: Training }) {
   )
 }
 
-export default async function Training(props: { params: Params }) {
+export default async function Training(props: {params: Params}) {
   const formatter = new Intl.NumberFormat("cs", {
     style: "currency",
     currency: "CZK",
     maximumFractionDigits: 0,
   })
 
-  const { slug } = await props.params
+  const {slug} = await props.params
 
   try {
     const training = await getTraining(slug)
@@ -113,7 +118,7 @@ export default async function Training(props: { params: Params }) {
             <div className="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
               <div className="md:col-span-3">
                 <div className="prose:text-black prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0">
-                  <div dangerouslySetInnerHTML={{ __html: html }} />
+                  <div dangerouslySetInnerHTML={{__html: html}} />
                 </div>
               </div>
               <div className="mt-8 md:col-span-2 md:mt-0">

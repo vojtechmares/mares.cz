@@ -1,14 +1,14 @@
 import clsx from "clsx"
 
-import { Button } from "@/components/Button"
-import { Container } from "@/components/Container"
-import { Section } from "@/components/ui/section"
-import { Heading } from "@/components/ui/heading"
-import { Card } from "@/components/ui/card"
+import {Button} from "@/components/Button"
+import {Container} from "@/components/Container"
+import {Section} from "@/components/ui/section"
+import {Heading} from "@/components/ui/heading"
+import {Card} from "@/components/ui/card"
 
-type SwirlyDoodleProps = { className: string }
+type SwirlyDoodleProps = {className: string}
 
-function SwirlyDoodle({ className }: SwirlyDoodleProps) {
+function SwirlyDoodle({className}: SwirlyDoodleProps) {
   return (
     <svg
       aria-hidden="true"

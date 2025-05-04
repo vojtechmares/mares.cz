@@ -1,18 +1,18 @@
-import Image, { StaticImageData } from "next/image"
+import Image, {StaticImageData} from "next/image"
 import Link from "next/link"
 
-import { Container } from "@/components/Container"
-import { strapi } from "@/lib/strapi/strapi"
-import type { Training as TrainingType } from "@/lib/strapi/types/training"
-import { Section } from "@/components/ui/section"
-import { Heading } from "@/components/ui/heading"
+import {Container} from "@/components/Container"
+import {strapi} from "@/lib/strapi/strapi"
+import type {Training as TrainingType} from "@/lib/strapi/types/training"
+import {Section} from "@/components/ui/section"
+import {Heading} from "@/components/ui/heading"
 
 type TrainingProps = {
   training: TrainingType
   className?: string
 }
 
-const Training = ({ training, className }: TrainingProps) => {
+const Training = ({training, className}: TrainingProps) => {
   return (
     <Link href={"/skoleni/" + training.slug} className={className}>
       <Image
@@ -33,7 +33,7 @@ type TrainingGridProps = {
   trainings: TrainingType[]
 }
 
-const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
+const TrainingGridMobile = ({trainings}: TrainingGridProps) => {
   return (
     <div className="-mx-4 mt-10 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {trainings.map((training) => (
@@ -45,7 +45,7 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   )
 }
 
-const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
+const TrainingGridDesktop = ({trainings}: TrainingGridProps) => {
   return (
     <div className="mt-10 hidden lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
@@ -59,7 +59,7 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   )
 }
 
-export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
+export function TrainingList({trainings}: {trainings: TrainingType[]}) {
   return (
     <Section id="skoleni" aria-label="Training" background="black">
       <Container>

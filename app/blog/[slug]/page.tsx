@@ -1,19 +1,26 @@
-import { Metadata } from "next"
-import { strapi } from "@/lib/strapi/strapi"
+import {Metadata} from "next"
+import {strapi} from "@/lib/strapi/strapi"
 import "@/styles/highlight-js/github-dark.css"
-import { TrainingAd } from "@/components/blog/training-ad"
-import { ArticleHeader } from "@/components/blog/article-header"
-import { Article } from "@/components/blog/article"
-import { notFound } from "next/navigation"
+import {TrainingAd} from "@/components/blog/training-ad"
+import {ArticleHeader} from "@/components/blog/article-header"
+import {Article} from "@/components/blog/article"
+import {notFound} from "next/navigation"
 
-export const dynamic = "force-dynamic"
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 24 hours.
+export const revalidate = 86_400
 
-type Params = Promise<{ slug: string }>
+// We'll prerender only the params from `generateStaticParams` at build time.
+// If a request comes in for a path that hasn't been generated,
+// Next.js will server-render the page on-demand.
+export const dynamicParams = true
+
+type Params = Promise<{slug: string}>
 
 export async function generateMetadata(props: {
   params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params
+  const {slug} = await props.params
   const article = await strapi.getArticle(slug)
 
   return {
@@ -50,8 +57,8 @@ export async function generateMetadata(props: {
   }
 }
 
-export default async function ArticlePage(props: { params: Params }) {
-  const { slug } = await props.params
+export default async function ArticlePage(props: {params: Params}) {
+  const {slug} = await props.params
 
   try {
     const article = await strapi.getArticle(slug)

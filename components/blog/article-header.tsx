@@ -1,6 +1,6 @@
-import type { Article } from "@/lib/strapi/types/article"
+import type {Article} from "@/lib/strapi/types/article"
 
-export function ArticleHeader({ article }: { article: Article }) {
+export function ArticleHeader({article}: {article: Article}) {
   return (
     <header className="mx-auto mb-8 md:text-lg lg:text-xl">
       <p className="text-slate-700">

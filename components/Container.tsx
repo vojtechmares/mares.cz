@@ -1,12 +1,12 @@
 import clsx from "clsx"
-import { ReactNode } from "react"
+import {ReactNode} from "react"
 
 type Props = {
   className?: string
   children?: ReactNode
 }
 
-export function Container({ className, children }: Props) {
+export function Container({className, children}: Props) {
   return (
     <div
       className={clsx(

@@ -1,10 +1,10 @@
-import { strapi } from "@/lib/strapi/strapi"
+import {strapi} from "@/lib/strapi/strapi"
 
 // cache for 1 hour
 export const revalidate = 3600
 
 export async function GET() {
-  const articles = await strapi.fetchArticles({ limit: 100 })
+  const articles = await strapi.fetchArticles({limit: 100})
 
   const feed = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">

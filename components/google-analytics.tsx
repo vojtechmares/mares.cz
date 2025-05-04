@@ -1,8 +1,8 @@
 "use client"
 
 import Script from "next/script"
-import { usePathname, useSearchParams } from "next/navigation"
-import { useEffect } from "react"
+import {usePathname, useSearchParams} from "next/navigation"
+import {useEffect} from "react"
 
 declare global {
   interface Window {
@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-export function GoogleAnalytics({ gaID }: { gaID: string }) {
+export function GoogleAnalytics({gaID}: {gaID: string}) {
   const pathname = usePathname()
   // SearchParams is a client side function.
   const searchParams = useSearchParams()

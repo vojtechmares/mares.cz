@@ -7,4 +7,4 @@ type Page = {
   featured: boolean // show in navigation
 }
 
-export type { Page }
+export type {Page}

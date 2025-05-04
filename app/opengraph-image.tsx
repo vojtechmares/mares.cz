@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { join } from "node:path"
-import { readFile } from "node:fs/promises"
-import { ImageResponse } from "next/og"
+import {join} from "node:path"
+import {readFile} from "node:fs/promises"
+import {ImageResponse} from "next/og"
 
 // Image metadata
 export const alt =
@@ -45,7 +45,7 @@ export default async function Image() {
               paddingBottom: 0,
             }}
           >
-            <span tw="relative text-amber-500" style={{ whiteSpace: "nowrap" }}>
+            <span tw="relative text-amber-500" style={{whiteSpace: "nowrap"}}>
               <span tw="relative">Vojtěch Mareš</span>
             </span>
             <br />,
@@ -64,10 +64,10 @@ export default async function Image() {
             Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu.
             Naučím Váš tým, jak používat moderní cloud-native technologie.
           </p>
-          <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz</p>
+          <p style={{fontSize: "2rem", fontWeight: 500}}>mares.cz</p>
         </div>
         <img
-          style={{ position: "absolute", bottom: 0, right: 60 }}
+          style={{position: "absolute", bottom: 0, right: 60}}
           alt=""
           height="600"
           src={avatarSrc as unknown as string}

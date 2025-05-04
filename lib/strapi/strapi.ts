@@ -1,6 +1,6 @@
-import type { Article } from "@/lib/strapi/types/article"
-import type { Page } from "@/lib/strapi/types/page"
-import type { Training } from "@/lib/strapi/types/training"
+import type {Article} from "@/lib/strapi/types/article"
+import type {Page} from "@/lib/strapi/types/page"
+import type {Training} from "@/lib/strapi/types/training"
 import axios from "axios"
 
 interface StrapiData {
@@ -187,4 +187,4 @@ const strapi = new Strapi(
   process.env.STRAPI_API_URL!,
 )
 
-export { strapi }
+export {strapi}

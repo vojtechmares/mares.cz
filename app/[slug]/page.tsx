@@ -1,11 +1,11 @@
-import { strapi } from "@/lib/strapi/strapi"
-import { Metadata } from "next"
+import {strapi} from "@/lib/strapi/strapi"
+import {Metadata} from "next"
 
-import type { Page as PageType } from "@/lib/strapi/types/page"
-import { MarkdownContent } from "@/components/markdown-content"
-import { notFound } from "next/navigation"
+import type {Page as PageType} from "@/lib/strapi/types/page"
+import {MarkdownContent} from "@/components/markdown-content"
+import {notFound} from "next/navigation"
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{slug: string}>
 
 async function getPage(slug: string): Promise<PageType> {
   return await strapi.getPage(slug)
@@ -14,7 +14,7 @@ async function getPage(slug: string): Promise<PageType> {
 export async function generateMetadata(props: {
   params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params
+  const {slug} = await props.params
   const page = await getPage(slug)
 
   return {
@@ -36,8 +36,8 @@ export const revalidate = 14_400
 // Next.js will server-render the page on-demand.
 export const dynamicParams = true
 
-export default async function Page(props: { params: Params }) {
-  const { slug } = await props.params
+export default async function Page(props: {params: Params}) {
+  const {slug} = await props.params
 
   try {
     const page = await getPage(slug)

@@ -5,7 +5,8 @@
 const config = {
   semi: false,
   trailingComma: "all",
-  bracketSpacing: true,
+  bracketSpacing: false,
+
   plugins: ["prettier-plugin-tailwindcss"],
 }
 

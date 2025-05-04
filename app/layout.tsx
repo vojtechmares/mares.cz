@@ -1,11 +1,11 @@
-import type { Metadata, Viewport } from "next"
-import { GoogleAnalytics } from "@next/third-parties/google"
+import type {Metadata, Viewport} from "next"
+import {GoogleAnalytics} from "@next/third-parties/google"
 
-import { Footer } from "@/components/layout/footer"
-import { Navigation } from "@/components/layout/Navigation"
+import {Footer} from "@/components/layout/footer"
+import {Navigation} from "@/components/layout/Navigation"
 
 import "@/styles/tailwind.css"
-import { strapi } from "@/lib/strapi/strapi"
+import {strapi} from "@/lib/strapi/strapi"
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      {url: "/favicon.ico"},
+      {url: "/favicon-16x16.png", sizes: "16x16", type: "image/png"},
+      {url: "/favicon-32x32.png", sizes: "32x32", type: "image/png"},
     ],
     shortcut: "/shortcut-icon.png",
     apple: "/apple-touch-icon.png",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
 }
 
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({children}: {children: React.ReactNode}) => {
   const isProduction = process.env.NODE_ENV === "production"
   const suppressGoogleAnalytics =
     process.env.SUPPRESS_GOOGLE_ANALYTICS === "true"

@@ -1,5 +1,5 @@
-import { Container } from "@/components/Container"
-import { Section } from "@/components/ui/section"
+import {Container} from "@/components/Container"
+import {Section} from "@/components/ui/section"
 
 export function CallToAction({
   id,

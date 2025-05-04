@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, cleanup } from "@testing-library/react"
-import { Button } from "@/components/Button"
+import {render, screen, cleanup} from "@testing-library/react"
+import {Button} from "@/components/Button"
 
 test("button", () => {
   render(<Button>Hello</Button>)

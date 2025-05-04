@@ -1,7 +1,7 @@
-import Image, { type StaticImageData } from "next/image"
+import Image, {type StaticImageData} from "next/image"
 
-import { Button } from "@/components/Button"
-import { Container } from "@/components/Container"
+import {Button} from "@/components/Button"
+import {Container} from "@/components/Container"
 
 import avatarVojtechMares from "@/public/images/people/vojtech-mares.png"
 

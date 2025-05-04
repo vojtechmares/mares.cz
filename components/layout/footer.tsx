@@ -1,9 +1,9 @@
 import Link from "next/link"
 
-import { Container } from "@/components/Container"
-import { Button } from "@/components/Button"
-import { Page } from "@/lib/strapi/types/page"
-import { Training } from "@/lib/strapi/types/training"
+import {Container} from "@/components/Container"
+import {Button} from "@/components/Button"
+import {Page} from "@/lib/strapi/types/page"
+import {Training} from "@/lib/strapi/types/training"
 
 const staticLinks = [
   {
