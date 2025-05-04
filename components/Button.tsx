@@ -1,13 +1,13 @@
-import Link from "next/link";
-import clsx from "clsx";
-import { ReactNode } from "react";
+import Link from "next/link"
+import clsx from "clsx"
+import { ReactNode } from "react"
 
 const baseStyles = {
   solid:
     "group inline-flex items-center justify-center rounded-full font-semibold focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2",
   outline:
     "group inline-flex ring-1 items-center justify-center rounded-full focus:outline-hidden",
-};
+}
 
 const variantStyles = {
   solid: {
@@ -25,24 +25,24 @@ const variantStyles = {
       "ring-slate-700 text-white hover:ring-slate-500 active:ring-slate-700 focus-visible:outline-white",
     amber: "", // Outline buttons cannot be amber
   },
-};
+}
 
-const transitionStyle = "transition duration-150 ease-in-out";
+const transitionStyle = "transition duration-150 ease-in-out"
 
 const sizeStyles = {
   medium: "px-4 py-2 text-sm",
   large: "px-8 py-4 text-base",
-};
+}
 
 type Props = {
-  variant?: "solid" | "outline";
-  color?: "black" | "white" | "amber";
-  size?: "medium" | "large";
-  className?: string;
-  href?: string;
-  children?: ReactNode;
-  type?: "text/html" | "application/rss+xml" | "application/atom+xml";
-};
+  variant?: "solid" | "outline"
+  color?: "black" | "white" | "amber"
+  size?: "medium" | "large"
+  className?: string
+  href?: string
+  children?: ReactNode
+  type?: "text/html" | "application/rss+xml" | "application/atom+xml"
+}
 
 export function Button({
   variant = "solid",
@@ -54,7 +54,7 @@ export function Button({
   children,
 }: Props) {
   if (variant === "outline" && color === "amber") {
-    throw new Error("Outline buttons cannot be amber");
+    throw new Error("Outline buttons cannot be amber")
   }
 
   className = clsx(
@@ -63,15 +63,15 @@ export function Button({
     sizeStyles[size],
     transitionStyle,
     className,
-  );
+  )
 
   if (href !== undefined) {
     return (
       <Link type={type} href={href} className={className}>
         {children}
       </Link>
-    );
+    )
   } else {
-    return <button className={className}>{children}</button>;
+    return <button className={className}>{children}</button>
   }
 }

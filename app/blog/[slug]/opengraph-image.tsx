@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { strapi } from "@/lib/strapi/strapi";
-import { join } from "node:path";
-import { readFile } from "node:fs/promises";
-import { ImageResponse } from "next/og";
+import { strapi } from "@/lib/strapi/strapi"
+import { join } from "node:path"
+import { readFile } from "node:fs/promises"
+import { ImageResponse } from "next/og"
 
 type Props = {
-  params: { slug: string };
-};
+  params: { slug: string }
+}
 
 async function getArticle(slug: string) {
-  const article = await strapi.getArticle(slug);
+  const article = await strapi.getArticle(slug)
 
-  return article;
+  return article
 }
 
 export async function generateImageMetadata({ params }: Props) {
-  const { slug } = await params;
-  const article = await getArticle(slug);
+  const { slug } = await params
+  const article = await getArticle(slug)
 
   return [
     {
@@ -31,18 +31,18 @@ export async function generateImageMetadata({ params }: Props) {
       },
       contentType: "image/png",
     },
-  ];
+  ]
 }
 
 // Image generation
 export default async function Image(props: Props) {
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
-  );
-  const avatarSrc = Uint8Array.from(avatarData).buffer;
+  )
+  const avatarSrc = Uint8Array.from(avatarData).buffer
 
-  const { slug } = await props.params;
-  const article = await getArticle(slug);
+  const { slug } = await props.params
+  const article = await getArticle(slug)
 
   return new ImageResponse(
     (
@@ -87,5 +87,5 @@ export default async function Image(props: Props) {
         />
       </div>
     ),
-  );
+  )
 }

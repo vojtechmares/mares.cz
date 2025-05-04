@@ -1,16 +1,16 @@
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
+import Image, { StaticImageData } from "next/image"
+import Link from "next/link"
 
-import { Container } from "@/components/Container";
-import { strapi } from "@/lib/strapi/strapi";
-import type { Training as TrainingType } from "@/lib/strapi/types/training";
-import { Section } from "@/components/ui/section";
-import { Heading } from "@/components/ui/heading";
+import { Container } from "@/components/Container"
+import { strapi } from "@/lib/strapi/strapi"
+import type { Training as TrainingType } from "@/lib/strapi/types/training"
+import { Section } from "@/components/ui/section"
+import { Heading } from "@/components/ui/heading"
 
 type TrainingProps = {
-  training: TrainingType;
-  className?: string;
-};
+  training: TrainingType
+  className?: string
+}
 
 const Training = ({ training, className }: TrainingProps) => {
   return (
@@ -26,12 +26,12 @@ const Training = ({ training, className }: TrainingProps) => {
         {training.title}
       </Heading>
     </Link>
-  );
-};
+  )
+}
 
 type TrainingGridProps = {
-  trainings: TrainingType[];
-};
+  trainings: TrainingType[]
+}
 
 const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   return (
@@ -42,8 +42,8 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
 const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   return (
@@ -56,8 +56,8 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
   return (
@@ -77,5 +77,5 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
         <TrainingGridDesktop trainings={trainings} />
       </Container>
     </Section>
-  );
+  )
 }

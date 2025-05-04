@@ -1,21 +1,21 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, cleanup } from "@testing-library/react";
-import { Button } from "@/components/Button";
+import { render, screen, cleanup } from "@testing-library/react"
+import { Button } from "@/components/Button"
 
 test("button", () => {
-  render(<Button>Hello</Button>);
+  render(<Button>Hello</Button>)
 
-  expect(screen.getByText("Hello")).toBeDefined();
+  expect(screen.getByText("Hello")).toBeDefined()
 
-  cleanup();
-});
+  cleanup()
+})
 
 test("button-with-link", () => {
-  render(<Button href="/country-road">Hello</Button>);
+  render(<Button href="/country-road">Hello</Button>)
 
-  expect(screen.getByText("Hello").getAttribute("href")).toBe("/country-road");
+  expect(screen.getByText("Hello").getAttribute("href")).toBe("/country-road")
 
-  cleanup();
-});
+  cleanup()
+})

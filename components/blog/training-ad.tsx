@@ -1,18 +1,18 @@
-import Image from "next/image";
+import Image from "next/image"
 
-import { Button } from "@/components/Button";
-import { Container } from "@/components/Container";
-import { strapi } from "@/lib/strapi/strapi";
-import { CallToAction } from "@/components/landing/call-to-action";
-import { Heading } from "@/components/ui/heading";
+import { Button } from "@/components/Button"
+import { Container } from "@/components/Container"
+import { strapi } from "@/lib/strapi/strapi"
+import { CallToAction } from "@/components/landing/call-to-action"
+import { Heading } from "@/components/ui/heading"
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   if (!trainingSlug) {
-    return <></>;
+    return <></>
   }
 
   try {
-    const training = await strapi.getTraining(trainingSlug);
+    const training = await strapi.getTraining(trainingSlug)
 
     return (
       <CallToAction id="skoleni">
@@ -50,8 +50,8 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
           />
         </div>
       </CallToAction>
-    );
+    )
   } catch (error) {
-    return <></>;
+    return <></>
   }
 }

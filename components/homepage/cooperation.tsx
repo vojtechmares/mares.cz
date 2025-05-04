@@ -1,8 +1,8 @@
-import clsx from "clsx";
+import clsx from "clsx"
 
-import { Container } from "@/components/Container";
-import { Heading } from "@/components/ui/heading";
-import { Section } from "@/components/ui/section";
+import { Container } from "@/components/Container"
+import { Heading } from "@/components/ui/heading"
+import { Section } from "@/components/ui/section"
 
 const steps = [
   {
@@ -30,7 +30,7 @@ const steps = [
     description:
       "Budeme průběžně rozvíjet infrastrukturu podle aktuálních potřeb vašich aplikací. Nabízím také možnost podpory a SLA, díky čemuž získáte jistotu a rychlé řešení v případě jakýchkoli problémů.",
   },
-];
+]
 
 export function Cooperation() {
   return (
@@ -88,5 +88,5 @@ export function Cooperation() {
         </nav>
       </Container>
     </Section>
-  );
+  )
 }

@@ -1,29 +1,29 @@
-import Image from "next/image";
-import clsx from "clsx";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import Image from "next/image"
+import clsx from "clsx"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
-import type { Training } from "@/lib/strapi/types/training";
-import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
-import { strapi } from "@/lib/strapi/strapi";
-import { markdownToHtml } from "@/lib/markdown-to-html";
+import type { Training } from "@/lib/strapi/types/training"
+import { Container } from "@/components/Container"
+import { Button } from "@/components/Button"
+import { strapi } from "@/lib/strapi/strapi"
+import { markdownToHtml } from "@/lib/markdown-to-html"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
 async function getTraining(slug: string): Promise<Training> {
-  const training = await strapi.getTraining(slug);
+  const training = await strapi.getTraining(slug)
 
-  return training;
+  return training
 }
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string }>
 
 export async function generateMetadata(props: {
-  params: Params;
+  params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params;
-  const training = await getTraining(slug);
+  const { slug } = await props.params
+  const training = await getTraining(slug)
 
   return {
     title:
@@ -53,23 +53,23 @@ export async function generateMetadata(props: {
         " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: training.description,
     },
-  };
+  }
 }
 
 function Logo({ training }: { training: Training }) {
-  let imageURL = training.logo?.formats.small?.url;
+  let imageURL = training.logo?.formats.small?.url
 
   if (imageURL === undefined) {
-    imageURL = training.logo?.formats.thumbnail?.url;
+    imageURL = training.logo?.formats.thumbnail?.url
   }
 
   if (imageURL === undefined) {
     // using SVG icon as fallback
-    imageURL = training.icon?.url;
+    imageURL = training.icon?.url
   }
 
   if (imageURL === undefined) {
-    return <></>;
+    return <></>
   }
 
   return (
@@ -81,7 +81,7 @@ function Logo({ training }: { training: Training }) {
       priority
       className={clsx("h-32 w-auto", imageURL.endsWith(".svg") ? "invert" : "")}
     />
-  );
+  )
 }
 
 export default async function Training(props: { params: Params }) {
@@ -89,14 +89,14 @@ export default async function Training(props: { params: Params }) {
     style: "currency",
     currency: "CZK",
     maximumFractionDigits: 0,
-  });
+  })
 
-  const { slug } = await props.params;
+  const { slug } = await props.params
 
   try {
-    const training = await getTraining(slug);
+    const training = await getTraining(slug)
 
-    const html = await markdownToHtml(training.content);
+    const html = await markdownToHtml(training.content)
 
     return (
       <main>
@@ -199,8 +199,8 @@ export default async function Training(props: { params: Params }) {
           </Container>
         </div>
       </main>
-    );
+    )
   } catch (error) {
-    notFound();
+    notFound()
   }
 }

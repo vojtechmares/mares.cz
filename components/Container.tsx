@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import { ReactNode } from "react";
+import clsx from "clsx"
+import { ReactNode } from "react"
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-};
+  className?: string
+  children?: ReactNode
+}
 
 export function Container({ className, children }: Props) {
   return (
@@ -16,5 +16,5 @@ export function Container({ className, children }: Props) {
     >
       {children}
     </div>
-  );
+  )
 }

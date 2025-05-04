@@ -1,30 +1,30 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
-import { Page } from "@/lib/strapi/types/page";
-import { Training } from "@/lib/strapi/types/training";
+import { Container } from "@/components/Container"
+import { Button } from "@/components/Button"
+import { Page } from "@/lib/strapi/types/page"
+import { Training } from "@/lib/strapi/types/training"
 
 const staticLinks = [
   {
     title: "Blog",
     href: "/blog",
   },
-];
+]
 
 export async function Footer({
   pages,
   trainings,
 }: {
-  pages: Page[];
-  trainings: Training[];
+  pages: Page[]
+  trainings: Training[]
 }) {
   const pageLinks = pages.map((page) => ({
     title: page.title,
     href: `/${page.slug}`,
-  }));
+  }))
 
-  const links = [...staticLinks, ...pageLinks];
+  const links = [...staticLinks, ...pageLinks]
 
   return (
     <footer className="bg-slate-50">
@@ -186,5 +186,5 @@ export async function Footer({
         </div>
       </Container>
     </footer>
-  );
+  )
 }

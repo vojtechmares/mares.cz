@@ -1,17 +1,17 @@
-import type { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import type { Metadata, Viewport } from "next"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
-import { Footer } from "@/components/layout/footer";
-import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/footer"
+import { Navigation } from "@/components/layout/Navigation"
 
-import "@/styles/tailwind.css";
-import { strapi } from "@/lib/strapi/strapi";
+import "@/styles/tailwind.css"
+import { strapi } from "@/lib/strapi/strapi"
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1.0,
-};
+}
 
 export const metadata: Metadata = {
   title: "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
@@ -54,15 +54,15 @@ export const metadata: Metadata = {
     description:
       "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
   },
-};
+}
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === "production"
   const suppressGoogleAnalytics =
-    process.env.SUPPRESS_GOOGLE_ANALYTICS === "true";
+    process.env.SUPPRESS_GOOGLE_ANALYTICS === "true"
 
-  const pages = await strapi.fetchPages();
-  const trainings = await strapi.fetchTrainings();
+  const pages = await strapi.fetchPages()
+  const trainings = await strapi.fetchTrainings()
 
   return (
     <html
@@ -93,7 +93,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         )}
       </body>
     </html>
-  );
-};
+  )
+}
 
-export default RootLayout;
+export default RootLayout

@@ -1,21 +1,21 @@
-import Image, { StaticImageData } from "next/image";
-import clsx from "clsx";
+import Image, { StaticImageData } from "next/image"
+import clsx from "clsx"
 
-import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
+import { Container } from "@/components/Container"
+import { Button } from "@/components/Button"
 
-import logoKubernetes from "@/public/images/logos/kubernetes.svg";
-import logoRancher from "@/public/images/logos/rancher.svg";
+import logoKubernetes from "@/public/images/logos/kubernetes.svg"
+import logoRancher from "@/public/images/logos/rancher.svg"
 
-import logoAWS from "@/public/images/logos/amazonaws.svg";
-import logoDigitalOcean from "@/public/images/logos/digitalocean.svg";
-import logoGCP from "@/public/images/logos/googlecloud.svg";
-import logoAzure from "@/public/images/logos/microsoftazure.svg";
-import logoLinode from "@/public/images/logos/linode.svg";
+import logoAWS from "@/public/images/logos/amazonaws.svg"
+import logoDigitalOcean from "@/public/images/logos/digitalocean.svg"
+import logoGCP from "@/public/images/logos/googlecloud.svg"
+import logoAzure from "@/public/images/logos/microsoftazure.svg"
+import logoLinode from "@/public/images/logos/linode.svg"
 
-import logoOpenStack from "@/public/images/logos/openstack.svg";
-import logoProxmox from "@/public/images/logos/proxmox.svg";
-import logovmware from "@/public/images/logos/vmware.svg";
+import logoOpenStack from "@/public/images/logos/openstack.svg"
+import logoProxmox from "@/public/images/logos/proxmox.svg"
+import logovmware from "@/public/images/logos/vmware.svg"
 
 const sections = [
   {
@@ -59,7 +59,7 @@ const sections = [
       "Pokud máte vlastní infrastrukturu, ale chcete využít i veřejný cloud, můžete využít například Rancher, který vám umožní propojit Vaši vlastní infrastrukturu s veřejným cloudem. Využijte výhody obou světů a vytvořte si hybridní řešení. Díky Rancheru získáte jednotnou ucelenou platformu pro všechny prostředí.",
     images: [{ src: logoRancher, alt: "Rancher" }],
   },
-];
+]
 
 const SectionDesktop = ({
   title,
@@ -67,10 +67,10 @@ const SectionDesktop = ({
   images,
   reverse,
 }: {
-  title: string;
-  description: string;
-  images: { src: StaticImageData; alt: string }[];
-  reverse: boolean;
+  title: string
+  description: string
+  images: { src: StaticImageData; alt: string }[]
+  reverse: boolean
 }) => (
   <div className="grid grid-cols-2 gap-x-24 gap-y-32">
     <div>
@@ -94,16 +94,16 @@ const SectionDesktop = ({
       </div>
     </div>
   </div>
-);
+)
 
 const SectionMobile = ({
   title,
   description,
   images,
 }: {
-  title: string;
-  description: string;
-  images: { src: StaticImageData; alt: string }[];
+  title: string
+  description: string
+  images: { src: StaticImageData; alt: string }[]
 }) => (
   <>
     <div className="mb-4 flex flex-wrap justify-around gap-x-8 overflow-hidden">
@@ -121,7 +121,7 @@ const SectionMobile = ({
     <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
     <p className="mt-4 text-slate-700">{description}</p>
   </>
-);
+)
 
 const Mobile = () => (
   <div className="mt-10 lg:hidden">
@@ -134,7 +134,7 @@ const Mobile = () => (
       </div>
     ))}
   </div>
-);
+)
 
 const Desktop = () => (
   <div className="mt-10 hidden lg:mt-20 lg:block">
@@ -147,7 +147,7 @@ const Desktop = () => (
       </div>
     ))}
   </div>
-);
+)
 
 export function KubernetesEverywhere() {
   return (
@@ -170,5 +170,5 @@ export function KubernetesEverywhere() {
         <Desktop />
       </Container>
     </section>
-  );
+  )
 }

@@ -1,20 +1,20 @@
-import { Metadata } from "next";
-import { strapi } from "@/lib/strapi/strapi";
-import "@/styles/highlight-js/github-dark.css";
-import { TrainingAd } from "@/components/blog/training-ad";
-import { ArticleHeader } from "@/components/blog/article-header";
-import { Article } from "@/components/blog/article";
-import { notFound } from "next/navigation";
+import { Metadata } from "next"
+import { strapi } from "@/lib/strapi/strapi"
+import "@/styles/highlight-js/github-dark.css"
+import { TrainingAd } from "@/components/blog/training-ad"
+import { ArticleHeader } from "@/components/blog/article-header"
+import { Article } from "@/components/blog/article"
+import { notFound } from "next/navigation"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string }>
 
 export async function generateMetadata(props: {
-  params: Params;
+  params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params;
-  const article = await strapi.getArticle(slug);
+  const { slug } = await props.params
+  const article = await strapi.getArticle(slug)
 
   return {
     title:
@@ -47,14 +47,14 @@ export async function generateMetadata(props: {
         " | Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
       description: article.description,
     },
-  };
+  }
 }
 
 export default async function ArticlePage(props: { params: Params }) {
-  const { slug } = await props.params;
+  const { slug } = await props.params
 
   try {
-    const article = await strapi.getArticle(slug);
+    const article = await strapi.getArticle(slug)
 
     return (
       <>
@@ -62,8 +62,8 @@ export default async function ArticlePage(props: { params: Params }) {
         <Article article={article} />
         <TrainingAd trainingSlug={article.trainingAd} />
       </>
-    );
+    )
   } catch (error) {
-    notFound();
+    notFound()
   }
 }

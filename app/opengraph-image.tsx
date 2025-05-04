@@ -1,26 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { join } from "node:path";
-import { readFile } from "node:fs/promises";
-import { ImageResponse } from "next/og";
+import { join } from "node:path"
+import { readFile } from "node:fs/promises"
+import { ImageResponse } from "next/og"
 
 // Image metadata
 export const alt =
-  "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze";
+  "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze"
 
 export const size = {
   width: 1200,
   height: 630,
-};
+}
 
-export const contentType = "image/png";
+export const contentType = "image/png"
 
 // Image generation
 export default async function Image() {
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
-  );
-  const avatarSrc = Uint8Array.from(avatarData).buffer;
+  )
+  const avatarSrc = Uint8Array.from(avatarData).buffer
 
   return new ImageResponse(
     (
@@ -74,5 +74,5 @@ export default async function Image() {
         />
       </div>
     ),
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { Container } from "@/components/Container";
+import { Container } from "@/components/Container"
 
 export default function NotFound() {
   return (
@@ -15,5 +15,5 @@ export default function NotFound() {
         Vrátit se na hlavní stránku
       </Link>
     </Container>
-  );
+  )
 }

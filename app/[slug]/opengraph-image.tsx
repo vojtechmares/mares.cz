@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { join } from "node:path";
-import { readFile } from "node:fs/promises";
-import { ImageResponse } from "next/og";
-import { strapi } from "@/lib/strapi/strapi";
+import { join } from "node:path"
+import { readFile } from "node:fs/promises"
+import { ImageResponse } from "next/og"
+import { strapi } from "@/lib/strapi/strapi"
 
 // Image metadata
 async function getPage(slug: string) {
-  const page = await strapi.getPage(slug);
+  const page = await strapi.getPage(slug)
   if (!page) {
-    throw new Error("Page not found");
+    throw new Error("Page not found")
   }
 
-  return page;
+  return page
 }
 
 export async function generateImageMetadata(props: { params: Params }) {
-  const { slug } = await props.params;
-  const page = await getPage(slug);
+  const { slug } = await props.params
+  const page = await getPage(slug)
 
   return [
     {
@@ -29,20 +29,20 @@ export async function generateImageMetadata(props: { params: Params }) {
       },
       contentType: "image/png",
     },
-  ];
+  ]
 }
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string }>
 
 // Image generation
 export default async function Image(props: { params: Params }) {
-  const { slug } = await props.params;
-  const page = await getPage(slug);
+  const { slug } = await props.params
+  const page = await getPage(slug)
 
   const avatarData = await readFile(
     join(process.cwd(), "./images/avatars/vojtech-mares.png"),
-  );
-  const avatarSrc = Uint8Array.from(avatarData).buffer;
+  )
+  const avatarSrc = Uint8Array.from(avatarData).buffer
 
   return new ImageResponse(
     (
@@ -83,5 +83,5 @@ export default async function Image(props: { params: Params }) {
         />
       </div>
     ),
-  );
+  )
 }

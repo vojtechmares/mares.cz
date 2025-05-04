@@ -1,14 +1,14 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
-import clsx from "clsx";
-import { Page } from "@/lib/strapi/types/page";
+import { Container } from "@/components/Container"
+import { Button } from "@/components/Button"
+import clsx from "clsx"
+import { Page } from "@/lib/strapi/types/page"
 
 type NavLink = {
-  name: string;
-  href: string;
-};
+  name: string
+  href: string
+}
 
 const staticLinks: NavLink[] = [
   {
@@ -23,25 +23,25 @@ const staticLinks: NavLink[] = [
     name: "Blog",
     href: "/blog",
   },
-];
+]
 
 function LinkItem({
   href,
   name,
   className = "",
 }: {
-  href: string;
-  name: string;
-  className?: string;
+  href: string
+  name: string
+  className?: string
 }) {
   const classes =
-    "inline-block rounded-full bg-slate-100 px-4 py-2 text-lg font-bold text-black focus-visible:outline-black";
+    "inline-block rounded-full bg-slate-100 px-4 py-2 text-lg font-bold text-black focus-visible:outline-black"
 
   return (
     <Link href={href} className={clsx(className, classes)}>
       {name}
     </Link>
-  );
+  )
 }
 
 function MobileNavigation({ links }: { links: NavLink[] }) {
@@ -72,7 +72,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
         ))}
       </div>
     </nav>
-  );
+  )
 }
 
 // desktop navigation v2, needs more links to be added, to make it look good
@@ -146,7 +146,7 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
         </div>
       </div> */}
     </nav>
-  );
+  )
 }
 
 export async function Navigation({ pages }: { pages: Page[] }) {
@@ -155,9 +155,9 @@ export async function Navigation({ pages }: { pages: Page[] }) {
     .map((page) => ({
       name: page.title,
       href: `/${page.slug}`,
-    }));
+    }))
 
-  const links = [...staticLinks, ...pageLinks];
+  const links = [...staticLinks, ...pageLinks]
 
   return (
     <>
@@ -168,5 +168,5 @@ export async function Navigation({ pages }: { pages: Page[] }) {
         </Container>
       </header>
     </>
-  );
+  )
 }

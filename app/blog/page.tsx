@@ -1,10 +1,10 @@
-import { strapi } from "@/lib/strapi/strapi";
-import { Button } from "@/components/Button";
-import { Container } from "@/components/Container";
-import { Metadata } from "next";
-import Link from "next/link";
+import { strapi } from "@/lib/strapi/strapi"
+import { Button } from "@/components/Button"
+import { Container } from "@/components/Container"
+import { Metadata } from "next"
+import Link from "next/link"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Blog | Vojtěch Mareš - DevOps architekt, konzultant, lektor",
@@ -16,21 +16,21 @@ export const metadata: Metadata = {
       "application/atom+xml": "https://www.mares.cz/api/blog/feed/atom.xml",
     },
   },
-};
+}
 
 function localeName(locale: string): null | string {
   switch (locale) {
     case "cs":
-      return "Česky";
+      return "Česky"
     case "en":
-      return "English";
+      return "English"
     default:
-      return null;
+      return null
   }
 }
 
 export default async function Articles() {
-  const articles = await strapi.fetchArticles();
+  const articles = await strapi.fetchArticles()
 
   return (
     <Container className="pb-14 sm:pb-20 lg:pb-32">
@@ -79,5 +79,5 @@ export default async function Articles() {
         ))}
       </div>
     </Container>
-  );
+  )
 }

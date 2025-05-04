@@ -1,24 +1,24 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image"
 
-import logoGLAMI from "@/public/images/logos/glami.svg";
-import logoFakturoid from "@/public/images/logos/fakturoid.svg";
-import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg";
-import logoNUMOTEQ from "@/public/images/logos/numoteq.png";
-import { Section } from "@/components/ui/section";
-import { Heading } from "@/components/ui/heading";
-import { Container } from "@/components/Container";
+import logoGLAMI from "@/public/images/logos/glami.svg"
+import logoFakturoid from "@/public/images/logos/fakturoid.svg"
+import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg"
+import logoNUMOTEQ from "@/public/images/logos/numoteq.png"
+import { Section } from "@/components/ui/section"
+import { Heading } from "@/components/ui/heading"
+import { Container } from "@/components/Container"
 
 type Client = {
-  name: string;
-  logo: StaticImageData;
-};
+  name: string
+  logo: StaticImageData
+}
 
 const clients: Client[] = [
   { name: "GLAMI", logo: logoGLAMI },
   { name: "Fakturoid", logo: logoFakturoid },
   { name: "Cybros Labs", logo: logoCybroslabs },
   { name: "NUMOTEQ", logo: logoNUMOTEQ },
-];
+]
 
 function Clients() {
   return (
@@ -45,7 +45,7 @@ function Clients() {
         </div>
       </Container>
     </Section>
-  );
+  )
 }
 
-export { Clients };
+export { Clients }

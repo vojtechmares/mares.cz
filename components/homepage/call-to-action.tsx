@@ -1,9 +1,9 @@
-import { Button } from "@/components/Button";
-import { Container } from "@/components/Container";
-import Head from "next/head";
-import { Heading } from "@/components/ui/heading";
-import { Section } from "@/components/ui/section";
-import { CallToAction as CTA } from "@/components/landing/call-to-action";
+import { Button } from "@/components/Button"
+import { Container } from "@/components/Container"
+import Head from "next/head"
+import { Heading } from "@/components/ui/heading"
+import { Section } from "@/components/ui/section"
+import { CallToAction as CTA } from "@/components/landing/call-to-action"
 
 export function CallToAction() {
   return (
@@ -27,5 +27,5 @@ export function CallToAction() {
         </Button>
       </div>
     </CTA>
-  );
+  )
 }

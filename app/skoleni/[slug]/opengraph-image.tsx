@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { ImageResponse } from "next/og";
-import { strapi } from "@/lib/strapi/strapi";
-import { Training } from "@/lib/strapi/types/training";
+import { ImageResponse } from "next/og"
+import { strapi } from "@/lib/strapi/strapi"
+import { Training } from "@/lib/strapi/types/training"
 
 // Image metadata
 type Props = {
-  params: { slug: string };
-};
+  params: { slug: string }
+}
 
 async function getTraining(slug: string): Promise<Training> {
-  const training = await strapi.getTraining(slug);
+  const training = await strapi.getTraining(slug)
 
-  return training;
+  return training
 }
 
 export async function generateImageMetadata({ params }: Props) {
-  const { slug } = params;
-  const training = await getTraining(slug);
+  const { slug } = params
+  const training = await getTraining(slug)
 
   return [
     {
@@ -29,7 +29,7 @@ export async function generateImageMetadata({ params }: Props) {
       },
       contentType: "image/png",
     },
-  ];
+  ]
 }
 
 function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
@@ -78,7 +78,7 @@ function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
         )}
       </div>
     ),
-  );
+  )
 }
 
 function withoutImage(training: Training): ImageResponse {
@@ -110,27 +110,27 @@ function withoutImage(training: Training): ImageResponse {
         </div>
       </div>
     ),
-  );
+  )
 }
 
 // Image generation
 export default async function Image({ params }: Props) {
-  const { slug } = params;
-  const training = await getTraining(slug);
+  const { slug } = params
+  const training = await getTraining(slug)
 
-  let imageURL = training.logo?.formats.small?.url;
+  let imageURL = training.logo?.formats.small?.url
 
   if (imageURL === undefined) {
-    return withoutImage(training);
+    return withoutImage(training)
   }
 
   const imageSrc = await fetch(new URL(imageURL)).then((res) =>
     res.arrayBuffer(),
-  );
+  )
 
   if (!imageSrc) {
-    return withoutImage(training);
+    return withoutImage(training)
   }
 
-  return withImage(training, imageSrc);
+  return withImage(training, imageSrc)
 }

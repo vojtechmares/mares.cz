@@ -1,4 +1,4 @@
-import type { Article } from "@/lib/strapi/types/article";
+import type { Article } from "@/lib/strapi/types/article"
 
 export function ArticleHeader({ article }: { article: Article }) {
   return (
@@ -24,5 +24,5 @@ export function ArticleHeader({ article }: { article: Article }) {
         )}
       </p>
     </header>
-  );
+  )
 }
