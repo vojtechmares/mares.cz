@@ -8,9 +8,7 @@ import { notFound } from "next/navigation";
 type Params = Promise<{ slug: string }>;
 
 async function getPage(slug: string): Promise<PageType> {
-  const page = await strapi.getPage(slug);
-
-  return page;
+  return await strapi.getPage(slug);
 }
 
 export async function generateMetadata(props: {
