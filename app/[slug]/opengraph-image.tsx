@@ -50,7 +50,7 @@ export default async function Image({
   const page = await getPage(slug)
 
   const avatarData = await readFile(
-    join(process.cwd(), "./images/avatars/vojtech-mares.png"),
+    join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
   const avatarSrc = Uint8Array.from(avatarData).buffer
 
