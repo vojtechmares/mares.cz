@@ -36,7 +36,7 @@ export async function generateImageMetadata({params}: Props) {
 }
 
 // Image generation
-export default async function Image(props: Props) {
+export default async function Image({id}: {id: string}) {
   console.log(
     "static-image-path:",
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
@@ -54,8 +54,7 @@ export default async function Image(props: Props) {
 
   const avatarSrc = Uint8Array.from(avatarData).buffer
 
-  const {slug} = await props.params
-  const article = await getArticle(slug)
+  const article = await getArticle(id) // id is the slug
 
   return new ImageResponse(
     (
