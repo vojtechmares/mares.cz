@@ -8,10 +8,17 @@ import {Container} from "@/components/Container"
 import {Button} from "@/components/Button"
 import {strapi} from "@/lib/strapi/strapi"
 import {markdownToHtml} from "@/lib/markdown-to-html"
+import {Heading} from "@/components/ui/heading"
+import {
+  FormatTrainingDate,
+  FormatTrainingPrice,
+  TrainingSession,
+} from "@/lib/training"
+import {notion} from "@/lib/notion"
 
 // Next.js will invalidate the cache when a
-// request comes in, at most once every 4 hours.
-export const revalidate = 14_400
+// request comes in, at most once every 24 hours.
+export const revalidate = 86_400
 
 // We'll prerender only the params from `generateStaticParams` at build time.
 // If a request comes in for a path that hasn't been generated,
@@ -89,6 +96,139 @@ function Logo({training}: {training: Training}) {
   )
 }
 
+type TrainingSessionsTableProps = {
+  sessions: TrainingSession[]
+}
+
+function TrainingSessionsTable({sessions}: TrainingSessionsTableProps) {
+  return (
+    <table className="min-w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            className="hidden px-3 py-3.5 text-left font-semibold text-black md:table-cell"
+          >
+            Datum
+          </th>
+          <th
+            scope="col"
+            className="hidden px-3 py-3.5 text-left font-semibold text-black md:table-cell"
+          >
+            Místo
+          </th>
+          <th
+            scope="col"
+            className="hidden px-3 py-3.5 text-left font-semibold text-black md:table-cell"
+          >
+            Cena
+          </th>
+          <th
+            scope="col"
+            className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell"
+          >
+            <span className="sr-only">Přihlásit se</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-300">
+        {sessions.map((training) => (
+          <tr key={`${training.slug}-${training.dates?.start}`}>
+            <td className="py-4 pr-3 pl-4 font-medium whitespace-nowrap text-slate-900 sm:pl-0">
+              <TrainingDate dates={training.dates} />
+              <dl className="py-4 md:hidden">
+                <dt className="sr-only">Místo</dt>
+                <dd className="font-normal text-slate-700">
+                  {training.location}
+                </dd>
+                <dt className="sr-only">Cena</dt>
+                <dd className="font-normal text-slate-700">
+                  <TrainingPrice price={training.price} />
+                </dd>
+                <dt className="sr-only">Přihlásit se</dt>
+                <dd className="mt-4 font-normal text-slate-700">
+                  {typeof training.signUpFormURL === "string" ? (
+                    <PublicSessionSignUpButton
+                      name={training.name}
+                      signUpFormURL={training.signUpFormURL}
+                    />
+                  ) : (
+                    <SigningUpNotOpenYet />
+                  )}
+                </dd>
+              </dl>
+            </td>
+            <td className="hidden px-3 py-4 whitespace-nowrap text-slate-700 md:table-cell">
+              {training.location}
+            </td>
+            <td className="hidden px-3 py-4 whitespace-nowrap text-slate-700 md:table-cell">
+              <TrainingPrice price={training.price} />
+            </td>
+            <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
+              {typeof training.signUpFormURL === "string" ? (
+                <PublicSessionSignUpButton
+                  name={training.name}
+                  signUpFormURL={training.signUpFormURL}
+                />
+              ) : (
+                <SigningUpNotOpenYet />
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+type TrainingDateProps = {
+  dates: {
+    start: string
+    end?: string
+  }
+}
+
+function TrainingDate({dates}: TrainingDateProps) {
+  const start = FormatTrainingDate(dates.start)
+
+  if (typeof dates.end !== "undefined" && dates.end !== null) {
+    const end = FormatTrainingDate(dates.end)
+
+    return (
+      <>
+        {start} - {end}
+      </>
+    )
+  }
+
+  return <>{start}</>
+}
+
+function TrainingPrice({price}: {price: number}) {
+  const formattedPrice = FormatTrainingPrice(price)
+
+  return <>{formattedPrice}</>
+}
+
+function PublicSessionSignUpButton({
+  name,
+  signUpFormURL,
+}: {
+  name: string
+  signUpFormURL: URL
+}) {
+  return (
+    <Button href={signUpFormURL.toString()}>
+      Přihlásit se
+      <span className="sr-only">na školení {name}</span>
+    </Button>
+  )
+}
+
+function SigningUpNotOpenYet() {
+  return <p>Přihlašování se zatím není možné</p>
+}
+
 export default async function Training(props: {params: Params}) {
   const formatter = new Intl.NumberFormat("cs", {
     style: "currency",
@@ -100,8 +240,12 @@ export default async function Training(props: {params: Params}) {
 
   try {
     const training = await getTraining(slug)
-
     const html = await markdownToHtml(training.content)
+
+    const allSessions = await notion.GetFutureTrainingSessionsForSlug(slug)
+    const sessions = allSessions.filter(
+      (session) => session.signUpFormURL !== null,
+    )
 
     return (
       <main>
@@ -109,9 +253,9 @@ export default async function Training(props: {params: Params}) {
           <div className="bg-black pt-16 pb-16">
             <Container className="flex justify-around">
               <Logo training={training} />
-              <h2 className="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
+              <h1 className="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
                 Školení {training.title}
-              </h2>
+              </h1>
             </Container>
           </div>
           <Container className={training.publishedAt === null ? "hidden" : ""}>
@@ -122,6 +266,14 @@ export default async function Training(props: {params: Params}) {
                 </div>
               </div>
               <div className="mt-8 md:col-span-2 md:mt-0">
+                {sessions.length > 0 ? (
+                  <div className="mb-4">
+                    <Heading level="h2">Veřejné termíny školení</Heading>
+                    <TrainingSessionsTable sessions={sessions} />
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {training.days === 2 ? (
                   <div className="mb-8 rounded-lg bg-blue-50 p-4 shadow-sm">
                     <div className="flex">
@@ -151,7 +303,7 @@ export default async function Training(props: {params: Params}) {
                 ) : (
                   <></>
                 )}
-                <div className="mt-8 overflow-hidden rounded-lg bg-slate-50 shadow-sm md:mt-0">
+                <div className="overflow-hidden rounded-lg bg-slate-50 shadow-sm">
                   <div className="px-4 pt-5 sm:px-6">
                     <h2 className="text-2xl font-medium tracking-tight text-black">
                       Cena za školení
