@@ -48,7 +48,6 @@ export default async function Page(props: {params: Params}) {
       </article>
     )
   } catch (error) {
-    console.error("page not found", slug, error)
     notFound()
   }
 }
