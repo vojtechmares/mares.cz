@@ -5,12 +5,7 @@ import {Button} from "@/components/Button"
 import {Page} from "@/lib/strapi/types/page"
 import {Training} from "@/lib/strapi/types/training"
 
-const staticLinks = [
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-]
+import {StaticNavigationLinks} from "@/lib/site"
 
 export async function Footer({
   pages,
@@ -20,11 +15,11 @@ export async function Footer({
   trainings: Training[]
 }) {
   const pageLinks = pages.map((page) => ({
-    title: page.title,
+    name: page.title,
     href: `/${page.slug}`,
   }))
 
-  const links = [...staticLinks, ...pageLinks]
+  const links = [...StaticNavigationLinks, ...pageLinks]
 
   return (
     <footer className="bg-slate-50">
@@ -76,9 +71,9 @@ export async function Footer({
               <h3 className="text-lg font-medium">Důležité odkazy</h3>
               <ul className="mt-4 list-disc pl-4">
                 {links.map((link) => (
-                  <li key={link.title}>
+                  <li key={link.name}>
                     <Link href={link.href} className="underline">
-                      {link.title}
+                      {link.name}
                     </Link>
                   </li>
                 ))}

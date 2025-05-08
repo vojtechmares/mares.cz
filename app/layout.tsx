@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from "next"
 import {GoogleAnalytics} from "@next/third-parties/google"
 
 import {Footer} from "@/components/layout/footer"
-import {Navigation} from "@/components/layout/Navigation"
+import {Navigation} from "@/components/layout/navigation"
 
 import "@/styles/tailwind.css"
 import {strapi} from "@/lib/strapi/strapi"

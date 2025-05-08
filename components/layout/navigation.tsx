@@ -5,25 +5,12 @@ import {Button} from "@/components/Button"
 import clsx from "clsx"
 import {Page} from "@/lib/strapi/types/page"
 
+import {StaticNavigationLinks} from "@/lib/site"
+
 type NavLink = {
   name: string
   href: string
 }
-
-const staticLinks: NavLink[] = [
-  {
-    name: "Školení",
-    href: "/#skoleni",
-  },
-  {
-    name: "Služby",
-    href: "/#sluzby",
-  },
-  {
-    name: "Blog",
-    href: "/blog",
-  },
-]
 
 function LinkItem({
   href,
@@ -157,7 +144,7 @@ export async function Navigation({pages}: {pages: Page[]}) {
       href: `/${page.slug}`,
     }))
 
-  const links = [...staticLinks, ...pageLinks]
+  const links = [...StaticNavigationLinks, ...pageLinks]
 
   return (
     <>
