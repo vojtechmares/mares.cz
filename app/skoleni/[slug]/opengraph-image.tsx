@@ -4,29 +4,30 @@ import {ImageResponse} from "next/og"
 import {strapi} from "@/lib/strapi/strapi"
 import {Training} from "@/lib/strapi/types/training"
 
-// Image metadata
-type Props = {
-  params: {slug: string}
-}
-
 async function getTraining(slug: string): Promise<Training> {
   const training = await strapi.getTraining(slug)
 
   return training
 }
 
-export async function generateImageMetadata({params}: Props) {
-  const {slug} = params
+const size = {
+  width: 1200,
+  height: 630,
+}
+
+export async function generateImageMetadata({
+  params,
+}: {
+  params: {slug: string}
+}) {
+  const {slug} = await params
   const training = await getTraining(slug)
 
   return [
     {
       id: params.slug,
       alt: "Školení " + training.title,
-      size: {
-        width: 1200,
-        height: 630,
-      },
+      size,
       contentType: "image/png",
     },
   ]
@@ -78,6 +79,9 @@ function withImage(training: Training, logoSrc: ArrayBuffer): ImageResponse {
         )}
       </div>
     ),
+    {
+      ...size,
+    },
   )
 }
 
@@ -110,12 +114,21 @@ function withoutImage(training: Training): ImageResponse {
         </div>
       </div>
     ),
+    {
+      ...size,
+    },
   )
 }
 
 // Image generation
-export default async function Image({params}: Props) {
-  const {slug} = params
+export default async function Image({
+  params,
+  id,
+}: {
+  params: {slug: string}
+  id: string
+}) {
+  const {slug} = await params
   const training = await getTraining(slug)
 
   let imageURL = training.logo?.formats.small?.url
