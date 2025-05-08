@@ -4,6 +4,7 @@ import {strapi} from "@/lib/strapi/strapi"
 import {join} from "node:path"
 import {readFile} from "node:fs/promises"
 import {ImageResponse} from "next/og"
+import {readdir} from "node:fs"
 
 type Props = {
   params: {slug: string}
@@ -40,6 +41,12 @@ export default async function Image(props: Props) {
     "static-image-path:",
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
+
+  const dir = await readdir(process.cwd(), (err, files) => {
+    for (const file of files) {
+      console.log("file:", file)
+    }
+  })
 
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
