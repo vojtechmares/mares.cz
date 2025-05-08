@@ -4,11 +4,6 @@ import {strapi} from "@/lib/strapi/strapi"
 import {join} from "node:path"
 import {readFile} from "node:fs/promises"
 import {ImageResponse} from "next/og"
-import {readdir} from "node:fs"
-
-type Props = {
-  params: {slug: string}
-}
 
 async function getArticle(slug: string) {
   const article = await strapi.getArticle(slug)
@@ -21,7 +16,11 @@ const size = {
   height: 630,
 }
 
-export async function generateImageMetadata({params}: Props) {
+export async function generateImageMetadata({
+  params,
+}: {
+  params: {slug: string}
+}) {
   const {slug} = await params
   const article = await getArticle(slug)
 
@@ -38,25 +37,20 @@ export async function generateImageMetadata({params}: Props) {
 }
 
 // Image generation
-export default async function Image({id}: {id: string}) {
-  console.log(
-    "static-image-path:",
-    join(process.cwd(), "./public/images/people/vojtech-mares.png"),
-  )
-
-  const dir = await readdir(process.cwd(), (err, files) => {
-    for (const file of files) {
-      console.log("file:", file)
-    }
-  })
-
+export default async function Image({
+  params,
+  id,
+}: {
+  params: {slug: string}
+  id: string
+}) {
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
-
   const avatarSrc = Uint8Array.from(avatarData).buffer
 
-  const article = await getArticle(id) // id is the slug
+  const {slug} = await params
+  const article = await getArticle(slug)
 
   return new ImageResponse(
     (

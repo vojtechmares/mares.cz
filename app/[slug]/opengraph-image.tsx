@@ -15,39 +15,43 @@ async function getPage(slug: string) {
   return page
 }
 
-export async function generateImageMetadata(props: {params: Params}) {
-  const {slug} = await props.params
+const size = {
+  width: 1200,
+  height: 630,
+}
+
+export async function generateImageMetadata({
+  params,
+}: {
+  params: {slug: string}
+}) {
+  const {slug} = await params
   const page = await getPage(slug)
 
   return [
     {
       id: slug,
       alt: page.title,
-      size: {
-        width: 1200,
-        height: 630,
-      },
+      size,
       contentType: "image/png",
     },
   ]
 }
 
-type Params = Promise<{slug: string}>
-
 // Image generation
-export default async function Image(props: {params: Params}) {
-  const {slug} = await props.params
+export default async function Image({
+  params,
+  id,
+}: {
+  params: {slug: string}
+  id: string
+}) {
+  const {slug} = await params
   const page = await getPage(slug)
-
-  console.log(
-    "static-image-path:",
-    join(process.cwd(), "./public/images/people/vojtech-mares.png"),
-  )
 
   const avatarData = await readFile(
     join(process.cwd(), "./images/avatars/vojtech-mares.png"),
   )
-
   const avatarSrc = Uint8Array.from(avatarData).buffer
 
   return new ImageResponse(
@@ -89,5 +93,8 @@ export default async function Image(props: {params: Params}) {
         />
       </div>
     ),
+    {
+      ...size,
+    },
   )
 }

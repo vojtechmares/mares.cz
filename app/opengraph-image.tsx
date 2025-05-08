@@ -20,12 +20,6 @@ export default async function Image() {
   const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
-
-  console.log(
-    "static-image-path:",
-    join(process.cwd(), "./public/images/people/vojtech-mares.png"),
-  )
-
   const avatarSrc = Uint8Array.from(avatarData).buffer
 
   return new ImageResponse(
@@ -80,5 +74,8 @@ export default async function Image() {
         />
       </div>
     ),
+    {
+      ...size,
+    },
   )
 }
