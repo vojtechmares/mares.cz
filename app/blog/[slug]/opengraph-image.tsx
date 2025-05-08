@@ -36,12 +36,12 @@ export async function generateImageMetadata({params}: Props) {
 
 // Image generation
 export default async function Image(props: Props) {
-  const avatarData = await readFile(
+  console.log(
+    "static-image-path:",
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
 
-  console.log(
-    "static-image-path:",
+  const avatarData = await readFile(
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
   )
 

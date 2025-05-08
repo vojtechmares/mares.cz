@@ -39,13 +39,13 @@ export default async function Image(props: {params: Params}) {
   const {slug} = await props.params
   const page = await getPage(slug)
 
-  const avatarData = await readFile(
-    join(process.cwd(), "./images/avatars/vojtech-mares.png"),
-  )
-
   console.log(
     "static-image-path:",
     join(process.cwd(), "./public/images/people/vojtech-mares.png"),
+  )
+
+  const avatarData = await readFile(
+    join(process.cwd(), "./images/avatars/vojtech-mares.png"),
   )
 
   const avatarSrc = Uint8Array.from(avatarData).buffer
