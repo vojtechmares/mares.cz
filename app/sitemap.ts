@@ -40,6 +40,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.5,
     },
+    {
+      url: "https://www.mares.cz/skoleni/verejne-terminy",
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    },
   ]
 
   return [...baseURLs, ...trainingURLs, ...pageURLs, ...blogArticleURLs]
