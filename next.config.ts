@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
     scrollRestoration: true,
     // dynamicIO: true, // "use cache" directive -- only next.js canary 2024-11-02
   },
+  outputFileTracingIncludes: {
+    "/blog/\\[slug\\]/opengraph-image": [
+      "./public/images/people/vojtech-mares.png",
+    ],
+    "/\\[slug\\]/opengraph-image": ["./public/images/people/vojtech-mares.png"],
+    "/opengraph-image": ["./public/images/people/vojtech-mares.png"],
+  },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   images: {
     formats: ["image/avif", "image/webp"],
