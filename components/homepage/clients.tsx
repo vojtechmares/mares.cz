@@ -4,6 +4,7 @@ import logoGLAMI from "@/public/images/logos/glami.svg"
 import logoFakturoid from "@/public/images/logos/fakturoid.svg"
 import logoCybroslabs from "@/public/images/logos/cybroslabs-black.jpeg"
 import logoNUMOTEQ from "@/public/images/logos/numoteq.png"
+import logoNOTINO from "@/public/images/logos/notino.svg"
 import {Section} from "@/components/ui/section"
 import {Heading} from "@/components/ui/heading"
 import {Container} from "@/components/Container"
@@ -18,6 +19,7 @@ const clients: Client[] = [
   {name: "Fakturoid", logo: logoFakturoid},
   {name: "Cybros Labs", logo: logoCybroslabs},
   {name: "NUMOTEQ", logo: logoNUMOTEQ},
+  {name: "NOTINO", logo: logoNOTINO},
 ]
 
 function Clients() {
