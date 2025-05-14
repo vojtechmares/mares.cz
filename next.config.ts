@@ -7,9 +7,11 @@ const nextConfig: NextConfig = {
     // dynamicIO: true, // "use cache" directive -- only next.js canary 2024-11-02
   },
   outputFileTracingIncludes: {
+    // /blog/kubecon-2025-prvni-den/opengraph-image/kubecon-2025-prvni-den
     "/blog/\\[slug\\]/opengraph-image": [
       "./public/images/people/vojtech-mares.png",
     ],
+    // /prednasky/opengraph-image/prednasky
     "/\\[slug\\]/opengraph-image": ["./public/images/people/vojtech-mares.png"],
     "/opengraph-image": ["./public/images/people/vojtech-mares.png"],
   },
