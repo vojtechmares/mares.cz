@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "mareshq-strapi-uploads-live.s3.eu-central-1.amazonaws.com",
+        hostname: "cdn.mares.cz",
         port: "",
         pathname: "/**",
       },
