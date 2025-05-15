@@ -125,7 +125,7 @@ export async function Footer({
         <div className="flex flex-col items-center border-t border-slate-400/10 py-10 md:flex-row-reverse md:justify-between">
           <div className="flex gap-x-6">
             <Link
-              href="https://bsky.app/profile/vojtechmares.bsky.social"
+              href="https://bsky.app/profile/mares.cz"
               target="_blank"
               className="group"
               aria-label="Vojtěch Mareš na Bluesky"
