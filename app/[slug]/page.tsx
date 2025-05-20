@@ -22,7 +22,10 @@ export async function generateMetadata(props: {
     description: page.description,
     keywords: page.keywords,
     alternates: {
-      canonical: `/${page.slug}`,
+      canonical: "/" + slug,
+    },
+    openGraph: {
+      url: "https://www.mares.cz/" + slug,
     },
   }
 }
