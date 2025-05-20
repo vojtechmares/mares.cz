@@ -81,6 +81,7 @@ const RootLayout = async ({children}: {children: React.ReactNode}) => {
           name="fediverse:creator"
           content="@vojtechmares@mastodon.social"
         />
+        <link rel="preconnect" href="https://cdn.mares.cz" />
       </head>
       <body className="flex h-full flex-col">
         <Navigation pages={pages} />
