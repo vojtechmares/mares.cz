@@ -39,7 +39,7 @@ function Clients() {
               key={client.name}
               alt={client.name}
               src={client.logo.src}
-              width={client.logo.width}
+              width={165}
               height={96}
               className="h-24 w-full object-contain" // w-full object-contain // col-span-2 max-h-12 w-full object-contain lg:col-span-1
               loading="lazy"
