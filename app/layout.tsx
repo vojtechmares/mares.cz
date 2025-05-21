@@ -1,6 +1,6 @@
 import type {Metadata, Viewport} from "next"
 import {GoogleAnalytics, GoogleTagManager} from "@next/third-parties/google"
-import Script from "next/scriptt"
+import Script from "next/script"
 
 import {Footer} from "@/components/layout/footer"
 import {Navigation} from "@/components/layout/navigation"
