@@ -27,7 +27,7 @@ export async function Footer({
         <div className="py-4">
           <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
             <div>
-              <h4 className="text-lg font-medium">Vojtěch Mareš</h4>
+              <h3 className="text-lg font-medium">Vojtěch Mareš</h3>
               <ul className="mt-4 list-none">
                 <li>
                   <Link href="tel:+420732490651" className="underline">
