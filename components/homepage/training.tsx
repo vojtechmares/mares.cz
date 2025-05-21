@@ -20,7 +20,7 @@ const Training = ({training, className}: TrainingProps) => {
         className="mx-auto rounded-lg p-2 invert"
         width="128"
         height="128"
-        alt={training.title}
+        alt={`Ikona školení ${training.title}`}
       />
       <Heading level="h3" className="mt-4 text-center underline" text="amber">
         {training.title}
