@@ -21,6 +21,7 @@ const Training = ({training, className}: TrainingProps) => {
         width="128"
         height="128"
         alt={`Ikona školení ${training.title}`}
+        loading="lazy"
       />
       <Heading level="h3" className="mt-4 text-center underline" text="amber">
         {training.title}
