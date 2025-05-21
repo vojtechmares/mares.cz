@@ -1,5 +1,5 @@
 import type {Metadata, Viewport} from "next"
-import {GoogleAnalytics} from "@next/third-parties/google"
+import {GoogleAnalytics, GoogleTagManager} from "@next/third-parties/google"
 
 import {Footer} from "@/components/layout/footer"
 import {Navigation} from "@/components/layout/navigation"
@@ -82,6 +82,11 @@ const RootLayout = async ({children}: {children: React.ReactNode}) => {
           content="@vojtechmares@mastodon.social"
         />
         <link rel="preconnect" href="https://cdn.mares.cz" />
+        {isProduction || suppressGoogleAnalytics ? (
+          <GoogleTagManager gtmId="	GTM-5W5Q3LTV" />
+        ) : (
+          <></>
+        )}
       </head>
       <body className="flex h-full flex-col">
         <Navigation pages={pages} />
