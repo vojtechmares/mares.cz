@@ -84,13 +84,10 @@ const RootLayout = async ({children}: {children: React.ReactNode}) => {
         />
         <link rel="preconnect" href="https://cdn.mares.cz" />
         {isProduction || suppressGoogleAnalytics ? (
-          <GoogleTagManager gtmId="	GTM-5W5Q3LTV" />
-          {/* Twitter conversion tracking base code */}
-          <Script
-            src="/twpx.js"
-            strategy="lazyOnload"
-          />
-          {/* End Twitter conversion tracking base code */}
+          <>
+            <GoogleTagManager gtmId="	GTM-5W5Q3LTV" />
+            <Script src="/twpx.js" strategy="lazyOnload" />
+          </>
         ) : (
           <></>
         )}
