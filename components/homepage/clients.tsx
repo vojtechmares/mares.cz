@@ -42,6 +42,7 @@ function Clients() {
               width={client.logo.width}
               height={96}
               className="h-24 w-full object-contain" // w-full object-contain // col-span-2 max-h-12 w-full object-contain lg:col-span-1
+              loading="lazy"
             />
           ))}
         </div>
