@@ -5,7 +5,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --write \"**/*.{mjs,ts,tsx}\"",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
+    "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.11",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
