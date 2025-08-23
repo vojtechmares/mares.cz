@@ -64,7 +64,7 @@
   "engines": {
     "node": "22.x"
   },
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.15.0",
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.11",
