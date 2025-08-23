@@ -2,6 +2,7 @@ import type {NextConfig} from "next"
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  typedRoutes: true,
   experimental: {
     scrollRestoration: true,
     // dynamicIO: true, // "use cache" directive -- only next.js canary 2024-11-02
