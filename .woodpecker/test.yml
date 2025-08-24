@@ -13,6 +13,8 @@ steps:
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - corepack enable
       - corepack prepare pnpm@latest-10 --activate
       - pnpm config set store-dir $PNPM_STORE_DIR
@@ -24,16 +26,22 @@ steps:
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - pnpm install --frozen-lockfile
 
   - name: format_check
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - pnpm run format:check
 
   - name: test
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - pnpm run test

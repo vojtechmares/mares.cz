@@ -20,6 +20,8 @@ steps:
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - corepack enable
       - corepack prepare pnpm@latest-10 --activate
       - pnpm config set store-dir $PNPM_STORE_DIR
@@ -31,6 +33,8 @@ steps:
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - vercel pull --yes --environment=production --token=$${VERCEL_TOKEN}
       - vercel build --prod --token=$${VERCEL_TOKEN}
       - vercel deploy --prod --prebuilt --token=$${VERCEL_TOKEN}
@@ -52,6 +56,8 @@ steps:
     image: *node_image
     commands:
       - export PNPM_STORE_DIR=$${CI_WORKSPACE}/.pnpm-store
+      - export PNPM_HOME=$${CI_WORKSPACE}/pnpm
+      - export PATH="$PNPM_HOME:$PATH"
       - vercel pull --yes --environment=preview --token=$${VERCEL_TOKEN}
       - vercel build --token=$${VERCEL_TOKEN}
       - DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=$${VERCEL_TOKEN})
