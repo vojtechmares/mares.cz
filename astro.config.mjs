@@ -4,35 +4,41 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
-    output: "server",
-    site: "https://www.mares.cz",
+  output: "server",
+  site: "https://www.mares.cz",
 
-    i18n: {
-        locales: ["cs", "en"],
-        defaultLocale: "cs",
-        routing: {
-            prefixDefaultLocale: false,
-        },
-    },
+  i18n: {
+      locales: ["cs", "en"],
+      defaultLocale: "cs",
+      routing: {
+          prefixDefaultLocale: false,
+      },
+  },
 
-    trailingSlash: "never",
+  trailingSlash: "never",
 
-    vite: {
-        plugins: [tailwindcss()],
-    },
+  vite: {
+      plugins: [tailwindcss()],
+  },
 
-    integrations: [
-        react(),
-        sitemap({
-            i18n: {
-                defaultLocale: "cs",
-                locales: {
-                    cs: "cs-CZ",
-                    en: "en-US",
-                },
-            },
-        }),
-    ],
+  integrations: [
+      react(),
+      sitemap({
+          i18n: {
+              defaultLocale: "cs",
+              locales: {
+                  cs: "cs-CZ",
+                  en: "en-US",
+              },
+          },
+      }),
+  ],
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });
