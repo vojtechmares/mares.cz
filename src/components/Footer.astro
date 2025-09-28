@@ -1,20 +1,34 @@
 ---
-import Container from "./ui/Container.astro";
-import Button from "./ui/Button.astro";
+import {Container} from "./ui/container";
+import {Button} from "./ui/button";
+import type {Page} from "../interfaces/page";
+import type {Training} from "../interfaces/training";
+import {LocalizedStaticNavigationLinks} from "../lib/site";
 
-// import {Page} from "@/lib/strapi/types/page";
-// import {Training} from "@/lib/strapi/types/training";
+interface Props {
+    pages: Page[];
+    trainings: Training[];
+}
 
-// import {StaticNavigationLinks} from "@/lib/site";
+let locale = Astro.currentLocale;
+if (locale === undefined) {
+    locale = "cs";
+}
+
+const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
+    return links.locale === locale;
+})[0].links;
+
+const {pages, trainings} = Astro.props;
+
+const pageLinks = pages.map((page) => ({
+    name: page.title,
+    href: `/${page.slug}`,
+}));
 
 const links = [
-    {name: "Blog", href: "/blog"},
-    {name: "Something", href: "#"},
-];
-
-const trainings = [
-    {title: "Kubernetes", slug: "kubernetes"},
-    {title: "Terraform", slug: "terraform"},
+    ...(staticLinks as {name: string; href: string}[]),
+    ...pageLinks,
 ];
 ---
 

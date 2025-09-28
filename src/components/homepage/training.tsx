@@ -1,10 +1,5 @@
-// import Image, {StaticImageData} from "next/image"
-
-import { Image } from "astro:assets";
-
 import { Container } from "../ui/container";
-// import { strapi } from "@/lib/strapi/strapi";
-// import type { Training as TrainingType } from "@/lib/strapi/types/training";
+import type { Training as TrainingType } from "../../interfaces/training";
 import { Section } from "../ui/section";
 import { Heading } from "../ui/heading";
 
@@ -16,9 +11,9 @@ type TrainingProps = {
 const Training = ({ training, className }: TrainingProps) => {
     return (
         <a href={"/skoleni/" + training.slug} className={className}>
-            <Image
+            <img
                 src={training.icon?.url as string}
-                class="mx-auto rounded-lg p-2 invert"
+                className="mx-auto rounded-lg p-2 invert"
                 width="128"
                 height="128"
                 alt={`Ikona školení ${training.title}`}

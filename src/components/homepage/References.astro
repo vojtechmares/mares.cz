@@ -87,7 +87,13 @@ const references = [
                             </svg>
                             <blockquote class="relative">
                                 <p class="text-lg tracking-tight text-black">
-                                    {testimonial.content}
+                                    {testimonial.content.includes("<") ? (
+                                        <Fragment
+                                            set:html={testimonial.content}
+                                        />
+                                    ) : (
+                                        testimonial.content
+                                    )}
                                 </p>
                             </blockquote>
                             <figcaption class="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
