@@ -3,22 +3,35 @@ import "../styles/global.css";
 
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+
+import {strapi} from "../lib/strapi";
+
+const pages = await strapi.fetchPages();
+const trainings = await strapi.fetchTrainings();
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+    lang="en"
+    class="h-full scroll-smooth bg-white antialiased [font-feature-settings:'ss01']"
+>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="sitemap" href="/sitemap-index.xml" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro Basics</title>
+        <meta
+            name="fediverse:creator"
+            content="@vojtechmares@mastodon.social"
+        />
+        <link rel="preconnect" href="https://cdn.mares.cz" />
+        <title>Vojtěch Mareš | DevOps architekt</title>
     </head>
-    <body>
-        <Navigation />
+    <body class="flex h-full flex-col">
+        <Navigation pages={pages} />
         <slot />
-        <Footer />
+        <Footer pages={pages} trainings={trainings} />
     </body>
 </html>
 

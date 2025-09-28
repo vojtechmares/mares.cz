@@ -1,0 +1,29 @@
+---
+import {MarkdownContent} from "../components/markdown-content";
+import Layout from "../layouts/Layout.astro";
+import {dateToLastModified} from "../lib/caching";
+import {strapi} from "../lib/strapi";
+
+const {slug} = Astro.params;
+
+if (slug === undefined) {
+    return new Response(null, {status: 404});
+}
+
+const page = await strapi.getPage(slug);
+
+Astro.response.headers.set("Cache-Control", "s-maxage=60, must-revalidate");
+
+if (page.updatedAt !== null) {
+    Astro.response.headers.set(
+        "Last-Modified",
+        dateToLastModified(page.updatedAt)
+    );
+}
+---
+
+<Layout>
+    <article>
+        <MarkdownContent content={page.content} />
+    </article>
+</Layout>

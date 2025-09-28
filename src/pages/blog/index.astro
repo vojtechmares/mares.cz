@@ -1,0 +1,66 @@
+---
+import {Button} from "../../components/ui/button";
+import {Container} from "../../components/ui/container";
+import {Heading} from "../../components/ui/heading";
+import Layout from "../../layouts/Layout.astro";
+import {strapi} from "../../lib/strapi";
+
+function localeName(locale: string): null | string {
+    switch (locale) {
+        case "cs":
+            return "Česky";
+        case "en":
+            return "English";
+        default:
+            return null;
+    }
+}
+
+const articles = await strapi.fetchArticles();
+---
+
+<Layout>
+    <Container className="pb-14 sm:pb-20 lg:pb-32">
+        <Heading>Blog</Heading>
+        <p class="mt-4 text-base lg:text-xl">
+            Odebírejte:{" "}
+            <a
+                class="underline"
+                type="application/rss+xml"
+                href="/blog/rss.xml"
+            >
+                RSS
+            </a>
+        </p>
+        <div class="max-w-prose text-base md:text-lg lg:text-xl">
+            {
+                articles.map((article) => (
+                    <div>
+                        <Heading
+                            level="h2"
+                            className="font-display mt-10 text-3xl font-bold tracking-tight"
+                        >
+                            {article.title}
+                        </Heading>
+                        <p class="my-4 text-slate-700">
+                            {new Date(
+                                article.publishedAt as Date
+                            ).toLocaleDateString("cs-CZ", {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                            {localeName(article.locale) !== null
+                                ? " · " + localeName(article.locale)
+                                : ""}
+                        </p>
+                        <p class="my-4 text-slate-700">{article.description}</p>
+                        <Button href={"/blog/" + article.slug} color="black">
+                            Přečíst si článek
+                        </Button>
+                    </div>
+                ))
+            }
+        </div>
+    </Container>
+</Layout>
