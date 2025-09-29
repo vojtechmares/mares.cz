@@ -17,9 +17,15 @@ function localeName(locale: string): null | string {
 }
 
 const articles = await strapi.fetchArticles();
+
+const meta = {
+    title: "Vojtěch Mareš | Blog",
+    description: "Články na méme blogu nejen o DevOps.",
+    keywords: "blog, devops blog, články",
+};
 ---
 
-<Layout>
+<Layout meta={meta}>
     <Container className="pb-14 sm:pb-20 lg:pb-32">
         <Heading>Blog</Heading>
         <p class="mt-4 text-base lg:text-xl">

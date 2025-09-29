@@ -20,9 +20,15 @@ if (page.updatedAt !== null) {
         dateToLastModified(page.updatedAt)
     );
 }
+
+const meta = {
+    title: "Vojtěch Mareš | " + page.title,
+    description: page.description,
+    keywords: page.keywords,
+};
 ---
 
-<Layout>
+<Layout meta={meta}>
     <article>
         <MarkdownContent content={page.content} />
     </article>

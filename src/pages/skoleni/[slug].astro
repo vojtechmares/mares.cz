@@ -34,9 +34,15 @@ if (training.updatedAt !== null) {
         dateToLastModified(training.updatedAt)
     );
 }
+
+const meta = {
+    title: "Vojtěch Mareš | Školení " + training.title,
+    description: training.description,
+    keywords: training.keywords,
+};
 ---
 
-<Layout>
+<Layout meta={meta}>
     <main>
         <div class="pb-14 sm:pb-20 lg:pb-32">
           <div class="bg-black pt-16 pb-16">

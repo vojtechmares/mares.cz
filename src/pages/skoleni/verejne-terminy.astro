@@ -8,9 +8,16 @@ import Layout from "../../layouts/Layout.astro";
 import {notion} from "../../lib/notion";
 
 const sessions = await notion.GetFutureTrainingSessions();
+
+const meta = {
+    title: "Vojtěch Mareš | Veřejné termíny školení",
+    description:
+        "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
+    keywords: "školení, termíny, devops školení, termín školení",
+};
 ---
 
-<Layout>
+<Layout meta={meta}>
     <main>
         <Container className="mb-10">
             <Heading level="h1">Veřejné termíny školení</Heading>

@@ -14,9 +14,15 @@ if (slug === undefined) {
 }
 
 const article = await strapi.getArticle(slug);
+
+const meta = {
+    title: "Vojtěch Mareš | Blog: " + article.title,
+    description: article.description,
+    keywords: article.keywords,
+};
 ---
 
-<Layout>
+<Layout meta={meta}>
     <ArticleHeader article={article} />
     <Article article={article} />
     <TrainingAd trainingSlug={article.trainingAd} />

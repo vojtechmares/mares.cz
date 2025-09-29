@@ -1,0 +1,53 @@
+---
+import {LocalizedMetadata} from "../../lib/site";
+
+interface Props {
+    title: string;
+    description: string;
+
+    image?: {
+        url: URL;
+        width: number; // 1200
+        height: number; // 630
+    };
+}
+
+let {title, description, image = undefined} = Astro.props;
+
+let locale = Astro.currentLocale;
+if (locale === undefined) {
+    locale = "cs";
+}
+
+const metadata = LocalizedMetadata.filter((m) => m.locale === locale)[0];
+
+if (title === undefined) {
+    title = metadata.title;
+}
+
+if (description === undefined) {
+    description = metadata.description;
+}
+
+const creator = "@vojtechmares_";
+const site = "@vojtechmares_";
+---
+
+<meta name="twitter:site" content={site} />
+<meta name="twitter:creator" content={creator} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+{
+    image === undefined ? (
+        <meta name="twitter:card" content="summary" />
+    ) : (
+        <meta name="twitter:card" content="summary_large_image" />
+        // TODO
+        // <meta name="twitter:image:alt" content="Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze">
+        // <meta name="twitter:image:type" content="image/png">
+        // <meta name="twitter:image" content="https://www.mares.cz/opengraph-image?487d11d88abd158c">
+        // <meta name="twitter:image:width" content="1200">
+        // <meta name="twitter:image:height" content="630">
+    )
+}

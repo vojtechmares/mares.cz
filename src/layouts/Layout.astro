@@ -5,6 +5,21 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
 import {strapi} from "../lib/strapi";
+import Fediverse from "../components/seo/Fediverse.astro";
+import Meta from "../components/seo/Meta.astro";
+import Favicon from "../components/seo/Favicon.astro";
+import Twitter from "../components/seo/Twitter.astro";
+
+interface Props {
+    meta?: {
+        title?: string;
+        description?: string;
+        keywords?: string;
+        canonical?: string;
+    };
+}
+
+const {meta} = Astro.props;
 
 const pages = await strapi.fetchPages();
 const trainings = await strapi.fetchTrainings();
@@ -12,21 +27,22 @@ const trainings = await strapi.fetchTrainings();
 
 <!doctype html>
 <html
-    lang="en"
+    lang="cs"
     class="h-full scroll-smooth bg-white antialiased [font-feature-settings:'ss01']"
 >
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="sitemap" href="/sitemap-index.xml" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <meta
-            name="fediverse:creator"
-            content="@vojtechmares@mastodon.social"
+        <Favicon />
+        <Meta
+            title={meta?.title}
+            description={meta?.description}
+            keywords={meta?.keywords}
         />
+        <Twitter title={meta?.title} description={meta?.description} />
+        <Fediverse />
         <link rel="preconnect" href="https://cdn.mares.cz" />
-        <title>Vojtěch Mareš | DevOps architekt</title>
     </head>
     <body class="flex h-full flex-col">
         <Navigation pages={pages} />
