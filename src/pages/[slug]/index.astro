@@ -1,8 +1,8 @@
 ---
-import {MarkdownContent} from "../components/markdown-content";
-import Layout from "../layouts/Layout.astro";
-import {dateToLastModified} from "../lib/caching";
-import {strapi} from "../lib/strapi";
+import {MarkdownContent} from "../../components/markdown-content";
+import Layout from "../../layouts/Layout.astro";
+import {dateToLastModified} from "../../lib/caching";
+import {strapi} from "../../lib/strapi";
 
 const {slug} = Astro.params;
 
@@ -26,9 +26,19 @@ const meta = {
     description: page.description,
     keywords: page.keywords,
 };
+
+const openGraph = {
+    type: "website" as "website",
+    image: {
+        url: "/" + page.slug + "/card.png",
+        width: 1200,
+        height: 630,
+        alt: page.title + ": " + page.description,
+    },
+},
 ---
 
-<Layout meta={meta}>
+<Layout meta={meta} openGraph={openGraph}>
     <article>
         <MarkdownContent content={page.content} />
     </article>
