@@ -36,6 +36,10 @@ function localeToOGLocale(locale?: string) {
             throw new Error("Unsupported OpenGraph locale");
     }
 }
+
+if (image?.url !== undefined && image.url.startsWith("/")) {
+    image.url = Astro.site + image.url;
+}
 ---
 
 <meta property="og:type" content={type} />

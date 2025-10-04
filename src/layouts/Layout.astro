@@ -21,7 +21,7 @@ interface Props {
 
     openGraph?: {
         type: "website" | "article";
-        image?: {
+        image: {
             url: string;
             width: number;
             height: number;
@@ -73,7 +73,7 @@ const trainings = await strapi.fetchTrainings();
                     description={
                         meta?.description ?? metadataDefaults.description
                     }
-                    image={openGraph?.image}
+                    image={openGraph.image}
                 />
             )
         }
@@ -85,12 +85,3 @@ const trainings = await strapi.fetchTrainings();
         <Footer pages={pages} trainings={trainings} />
     </body>
 </html>
-
-<style>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
