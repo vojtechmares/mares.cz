@@ -27,6 +27,12 @@ export async function GET({ params }: { params: { slug: string } }) {
     const interFontRegular = await readFile(
         join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf")
     );
+    const interFontLight = await readFile(
+        join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf")
+    );
+    const interFontBold = await readFile(
+        join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf")
+    );
 
     const svg = await satori(component, {
         width: 1200,
@@ -35,7 +41,17 @@ export async function GET({ params }: { params: { slug: string } }) {
             {
                 name: "Inter",
                 data: interFontRegular,
-                weight: 400,
+                weight: 500,
+            },
+            {
+                name: "Inter",
+                data: interFontLight,
+                weight: 300,
+            },
+            {
+                name: "Inter",
+                data: interFontBold,
+                weight: 700,
             },
         ],
     });

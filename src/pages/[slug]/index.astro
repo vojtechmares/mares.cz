@@ -30,12 +30,12 @@ const meta = {
 const openGraph = {
     type: "website" as "website",
     image: {
-        url: "/" + page.slug + "/card.png",
+        url: Astro.site + "/" + page.slug + "/card.png",
         width: 1200,
         height: 630,
         alt: page.title + ": " + page.description,
     },
-},
+};
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
