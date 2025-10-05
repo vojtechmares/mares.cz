@@ -1,4 +1,5 @@
 ---
+import { Article } from "../../../components/blog/article";
 import { Logo } from "../../../components/training/logo";
 import { CompactTrainingSessionsTable } from "../../../components/training/training-sessions-table";
 import { Button } from "../../../components/ui/button";
@@ -36,13 +37,24 @@ if (training.updatedAt !== null) {
 }
 
 const meta = {
-    title: "Vojtěch Mareš | Školení " + training.title,
+    title: "Vojtěch Mareš | " + training.title + " školení",
     description: training.description,
     keywords: training.keywords,
 };
+
+const openGraph = {
+    type: "article" as "article",
+    image: {
+        url: Astro.site + "skoleni/" + training.slug + "/card.png",
+        width: 1200,
+        height: 630,
+        alt: training.title + ": " + training.description,
+    }
+
+}
 ---
 
-<Layout meta={meta}>
+<Layout meta={meta} openGraph={openGraph}>
     <main>
         <div class="pb-14 sm:pb-20 lg:pb-32">
           <div class="bg-black pt-16 pb-16">
