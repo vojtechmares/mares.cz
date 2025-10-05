@@ -10,6 +10,7 @@ import Twitter from "../components/seo/Twitter.astro";
 import OpenGraph from "../components/seo/OpenGraph.astro";
 import {LocalizedMetadata} from "../lib/site";
 import {strapi} from "../lib/strapi";
+import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
 
 interface Props {
     meta?: {
@@ -78,6 +79,7 @@ const trainings = await strapi.fetchTrainings();
             )
         }
         <link rel="preconnect" href="https://cdn.mares.cz" />
+        <GoogleAnalytics />
     </head>
     <body class="flex h-full flex-col">
         <Navigation pages={pages} />
