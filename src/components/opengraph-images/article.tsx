@@ -37,7 +37,7 @@ function ArticleImage({
                     style={{
                         fontWeight: 500,
                         fontSize: "2.5rem",
-                        color: "#fbbf24",
+                        color: "#f59e0b",
                     }}
                 >
                     Na blogu
