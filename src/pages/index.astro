@@ -11,6 +11,8 @@ import {CallToAction} from "../components/homepage/call-to-action";
 
 import {strapi} from "../lib/strapi";
 import {dateToLastModified} from "../lib/caching";
+import {LocalizedMetadata} from "../lib/site";
+
 const trainings = await strapi.fetchTrainings();
 
 let latest = null;
@@ -35,9 +37,27 @@ Astro.response.headers.set("Cache-Control", "s-maxage=60, must-revalidate");
 if (latest !== null) {
     Astro.response.headers.set("Last-Modified", dateToLastModified(latest));
 }
+
+const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === "cs")[0];
+
+const meta = {
+    title: defaultMetadata.title,
+    description: defaultMetadata.description,
+    keywords: defaultMetadata.keywords,
+};
+
+const openGraph = {
+    type: "website" as "website",
+    image: {
+        url: Astro.site + "card.png",
+        width: 1200,
+        height: 630,
+        alt: defaultMetadata.title + ": " + defaultMetadata.description,
+    },
+};
 ---
 
-<Layout>
+<Layout meta={meta} openGraph={openGraph}>
     <Hero />
     <Services />
     <Clients />

@@ -1,0 +1,77 @@
+function HomepageImage({ imageData }: { imageData: ArrayBuffer }) {
+    return (
+        <div
+            style={{
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center", // flex-end
+                justifyContent: "space-between", // space-between
+                backgroundColor: "white",
+                color: "black",
+            }}
+        >
+            <div
+                style={{
+                    marginLeft: "4rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    height: "100%",
+                }}
+            >
+                <p
+                    style={{
+                        fontWeight: 700,
+                        fontSize: "4rem",
+                        marginBottom: 0,
+                        paddingBottom: 0,
+                    }}
+                >
+                    <span style={{ whiteSpace: "nowrap", color: "#f59e0b" }}>
+                        Vojtěch Mareš
+                    </span>
+                    <br />,
+                </p>
+                <p
+                    style={{
+                        fontWeight: 700,
+                        fontSize: "4rem",
+                        marginTop: 0,
+                        paddingTop: 0,
+                    }}
+                >
+                    DevOps architekt.
+                </p>
+                <p
+                    style={{
+                        marginTop: "1.5rem",
+                        maxWidth: "32rem",
+                        fontSize: "18px",
+                        lineHeight: "1.5556",
+                    }}
+                >
+                    Snížím Vaše náklady na infrastrukturu, zbavím Vás
+                    technického dluhu. Naučím Váš tým, jak používat moderní
+                    cloud-native technologie.
+                </p>
+                <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz</p>
+            </div>
+            <img
+                style={{ position: "absolute", bottom: 0, right: 60 }}
+                alt=""
+                height={600}
+                src={imageData as unknown as string}
+            />
+        </div>
+    );
+}
+
+export function CreateHomepageImageComponent({
+    imageData,
+}: {
+    imageData: ArrayBuffer;
+}) {
+    return <HomepageImage imageData={imageData} />;
+}
