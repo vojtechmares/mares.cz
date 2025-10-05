@@ -64,6 +64,7 @@ const trainings = await strapi.fetchTrainings();
         <Twitter
             title={meta?.title ?? metadataDefaults.title}
             description={meta?.description ?? metadataDefaults.description}
+            image={openGraph?.image}
         />
         <Fediverse />
         {

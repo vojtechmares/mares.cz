@@ -4,16 +4,21 @@ interface Props {
     description: string;
 
     image?: {
-        url: URL;
+        url: string;
         width: number; // 1200
         height: number; // 630
+        alt: string;
     };
 }
 
-let {title, description, image = undefined} = Astro.props;
-
 const creator = "@vojtechmares_";
 const site = "@vojtechmares_";
+
+let {title, description, image = undefined} = Astro.props;
+
+if (image?.url.startsWith("/")) {
+    image.url = Astro.site + image.url.replace("/", "");
+}
 ---
 
 <meta name="twitter:site" content={site} />
@@ -26,11 +31,9 @@ const site = "@vojtechmares_";
         <meta name="twitter:card" content="summary" />
     ) : (
         <meta name="twitter:card" content="summary_large_image" />
-        // TODO
-        // <meta name="twitter:image:alt" content="Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze">
-        // <meta name="twitter:image:type" content="image/png">
-        // <meta name="twitter:image" content="https://www.mares.cz/opengraph-image?487d11d88abd158c">
-        // <meta name="twitter:image:width" content="1200">
-        // <meta name="twitter:image:height" content="630">
+        <meta name="twitter:image" content={image.url}>
+        <meta name="twitter:image:alt" content={title}>
+        <meta name="twitter:image:width" content={image.width.toString()}>
+        <meta name="twitter:image:height" content={image.height.toString()}>
     )
 }
