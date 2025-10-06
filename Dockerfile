@@ -1,10 +1,17 @@
-FROM node:22-bookworm-slim AS base
+# FROM node:22-bookworm-slim AS base
+FROM node:22.19-alpine3.22 AS base
 
 WORKDIR /app
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get install -y ca-certificates
+# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     apt-get update && apt-get install --no-install-recommends -y ca-certificates
+
+RUN apk add --no-cache \
+    ca-certificates \
+    vips-dev \
+    build-base \
+    python3
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
