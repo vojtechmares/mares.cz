@@ -10,33 +10,9 @@ import {Cooperation} from "../components/homepage/cooperation";
 import {CallToAction} from "../components/homepage/call-to-action";
 
 import {strapi} from "../lib/strapi";
-import {dateToLastModified} from "../lib/caching";
 import {LocalizedMetadata} from "../lib/site";
 
 const trainings = await strapi.fetchTrainings();
-
-let latest = null;
-for (const training of trainings) {
-    if (training.updatedAt === null) {
-        continue;
-    }
-
-    if (latest === null) {
-        latest = training.updatedAt;
-        continue;
-    }
-
-    if (latest > training.updatedAt) {
-        continue;
-    }
-
-    latest = training.updatedAt;
-}
-
-Astro.response.headers.set("Cache-Control", "s-maxage=60, must-revalidate");
-if (latest !== null) {
-    Astro.response.headers.set("Last-Modified", dateToLastModified(latest));
-}
 
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === "cs")[0];
 

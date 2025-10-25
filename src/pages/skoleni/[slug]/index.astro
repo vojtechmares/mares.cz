@@ -6,7 +6,6 @@ import { Button } from "../../../components/ui/button";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
-import {dateToLastModified} from "../../../lib/caching";
 import { markdownToHtml } from "../../../lib/markdown-to-html";
 import { notion } from "../../../lib/notion";
 import {strapi} from "../../../lib/strapi";
@@ -27,14 +26,6 @@ const formatter = new Intl.NumberFormat("cs", {
     currency: "CZK",
     maximumFractionDigits: 0,
   })
-
-Astro.response.headers.set("Cache-Control", "s-maxage=60, must-revalidate");
-if (training.updatedAt !== null) {
-    Astro.response.headers.set(
-        "Last-Modified",
-        dateToLastModified(training.updatedAt)
-    );
-}
 
 const meta = {
     title: "Vojtěch Mareš | " + training.title + " školení",
