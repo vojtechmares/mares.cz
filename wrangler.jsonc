@@ -15,10 +15,5 @@
   },
   "vars": {
     "STRAPI_API_URL": "https://cms.mareshq.com/api"
-  },
-  "env": {
-    "staging": {
-        "route": "beta.mares.cz"
-    }
   }
 }
