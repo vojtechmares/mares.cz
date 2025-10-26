@@ -7,6 +7,9 @@ import { readFile } from "node:fs/promises";
 import { CreatePageImageComponent } from "../../components/opengraph-images/page";
 import { strapi } from "../../lib/strapi";
 
+// server-side rendered route
+export const prerender = false;
+
 export async function GET({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
