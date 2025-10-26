@@ -33,6 +33,7 @@ class Notion {
     constructor(notionAPIKey: string) {
         this.client = new Client({
             auth: notionAPIKey,
+            fetch: fetch.bind(globalThis),
         });
 
         this.trainingSessionsDatabaseID = NOTION_TRAINING_SESSIONS_DATABASE_ID;
