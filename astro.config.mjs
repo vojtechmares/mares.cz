@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -49,9 +49,35 @@ export default defineConfig({
     },
 
     adapter: cloudflare({
-        imageService: "cloudflare",
+        imageService: "compile",
         platformProxy: {
             enabled: true,
         },
     }),
+
+    env: {
+        schema: {
+            STRAPI_API_URL: envField.string({
+                context: "server",
+                access: "public",
+            }),
+            STRAPI_API_TOKEN: envField.string({
+                context: "server",
+                access: "secret",
+            }),
+            NOTION_API_KEY: envField.string({
+                context: "server",
+                access: "secret",
+            }),
+            NOTION_TRAINING_SESSIONS_DATABASE_ID: envField.string({
+                context: "server",
+                access: "secret",
+            }),
+            DISABLE_ANALYTICS: envField.boolean({
+                context: "server",
+                access: "public",
+                default: false,
+            }),
+        },
+    },
 });

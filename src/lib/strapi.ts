@@ -1,3 +1,5 @@
+import { STRAPI_API_URL, STRAPI_API_TOKEN } from "astro:env/server";
+
 import type { Article } from "../interfaces/article";
 import type { Page } from "../interfaces/page";
 import type { Training } from "../interfaces/training";
@@ -192,9 +194,6 @@ class Strapi {
     }
 }
 
-const strapi = new Strapi(
-    import.meta.env.STRAPI_API_TOKEN,
-    import.meta.env.STRAPI_API_URL
-);
+const strapi = new Strapi(STRAPI_API_TOKEN, STRAPI_API_URL);
 
 export { strapi };

@@ -10,6 +10,10 @@ import type {
     PartialBlockObjectResponse,
 } from "@notionhq/client";
 import { type TrainingSession } from "../interfaces/training";
+import {
+    NOTION_API_KEY,
+    NOTION_TRAINING_SESSIONS_DATABASE_ID,
+} from "astro:env/server";
 
 type ObjectResponse =
     | PageObjectResponse
@@ -31,8 +35,7 @@ class Notion {
             auth: notionAPIKey,
         });
 
-        this.trainingSessionsDatabaseID =
-            import.meta.env.NOTION_TRAINING_SESSIONS_DATABASE_ID;
+        this.trainingSessionsDatabaseID = NOTION_TRAINING_SESSIONS_DATABASE_ID;
     }
 
     public async GetFutureTrainingSessions(): Promise<TrainingSession[]> {
@@ -240,6 +243,6 @@ class Notion {
     }
 }
 
-const notion = new Notion(import.meta.env.NOTION_API_KEY);
+const notion = new Notion(NOTION_API_KEY);
 
 export { notion };
