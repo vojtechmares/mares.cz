@@ -1,6 +1,9 @@
 import rss from "@astrojs/rss";
 import { strapi } from "../../lib/strapi";
 
+// server-side rendered route
+export const prerender = false;
+
 export async function GET(context: any) {
     const articles = await strapi.fetchArticles();
 
