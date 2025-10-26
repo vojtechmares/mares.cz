@@ -7,9 +7,6 @@ import { readFile } from "node:fs/promises";
 import { CreateTrainingImageComponent } from "../../../components/opengraph-images/training";
 import { strapi } from "../../../lib/strapi";
 
-// server-side rendered route
-export const prerender = false;
-
 export async function GET({ params }: { params: { slug: string } }) {
     const { slug } = params;
 

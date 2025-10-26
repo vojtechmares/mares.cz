@@ -6,9 +6,6 @@ import { readFile } from "node:fs/promises";
 
 import { CreateHomepageImageComponent } from "../components/opengraph-images/homepage";
 
-// server-side rendered route
-export const prerender = false;
-
 export async function GET() {
     const avatarData = await readFile(
         join(process.cwd(), "./src/images/people/vojtech-mares.png")
