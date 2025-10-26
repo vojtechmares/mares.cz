@@ -15,5 +15,6 @@
   },
   "vars": {
     "STRAPI_API_URL": "https://cms.mareshq.com/api"
-  }
+  },
+  "logpush": true
 }
