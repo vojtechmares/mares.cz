@@ -49,6 +49,8 @@ jobs:
                   push: true
                   platforms: linux/amd64
                   tags: ${{ steps.meta.outputs.tags }}
+                  provenance: mode=max
+                  sbom: true
                   cache-from: type=registry,ref=${{ github.repository }}/app:buildcache
                   cache-to: type=registry,ref=${{ github.repository }}/app:buildcache,mode=max
                   secrets: |
