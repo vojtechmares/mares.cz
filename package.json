@@ -12,7 +12,7 @@
         "cf-typegen": "wrangler types"
     },
     "dependencies": {
-        "@astrojs/cloudflare": "^12.6.10",
+        "@astrojs/node": "^9.5.0",
         "@astrojs/react": "^4.4.0",
         "@astrojs/rss": "^4.0.13",
         "@astrojs/sitemap": "^3.6.0",
@@ -40,8 +40,7 @@
         "unified": "^11.0.5"
     },
     "devDependencies": {
-        "@tailwindcss/typography": "^0.5.19",
-        "wrangler": "^4.45.0"
+        "@tailwindcss/typography": "^0.5.19"
     },
     "packageManager": "pnpm@10.19.0"
 }
