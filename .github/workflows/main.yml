@@ -25,7 +25,7 @@ jobs:
               uses: docker/metadata-action@v5
               with:
                   images: |
-                      ${{ github.repository }}/app
+                      ghcr.io/${{ github.repository }}/app
                   tags: |
                       type=ref,event=branch
                       type=ref,event=pr
@@ -53,8 +53,8 @@ jobs:
                   tags: ${{ steps.meta.outputs.tags }}
                   provenance: mode=max
                   sbom: true
-                  cache-from: type=registry,ref=${{ github.repository }}/app:buildcache
-                  cache-to: type=registry,ref=${{ github.repository }}/app:buildcache,mode=max
+                  cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache
+                  cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache,mode=max
                   secrets: |
                       STRAPI_API_URL=${{ secrets.STRAPI_API_URL }}
                       STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }}
