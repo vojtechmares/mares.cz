@@ -8,7 +8,7 @@
 #     - example.com
 
 image:
-  registry: ghcr.io/vojtechmares/website-mares-cz/app
+  repository: ghcr.io/vojtechmares/website-mares-cz/app
   tag: latest
 
 resources:
