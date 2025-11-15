@@ -55,11 +55,11 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
             - secretRef:
-              name: {{ .Release.Name }}-strapi-credentials
+                name: {{ .Release.Name }}-strapi-credentials
             - secretRef:
-              name: {{ .Release.Name }}-notion-credentials
+                name: {{ .Release.Name }}-notion-credentials
             - configMapRef:
-              name: {{ .Release.Name }}-config
+                name: {{ .Release.Name }}-config
           securityContext:
             runAsNonRoot: true
             runAsUser: 1001
