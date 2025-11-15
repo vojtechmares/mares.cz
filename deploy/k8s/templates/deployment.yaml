@@ -41,14 +41,14 @@ spec:
         #   livenessProbe:
         #     httpGet:
         #       path: /healthz
-        #       port: {{ .Values.service.port.name }}
+        #       port: 8080
         #     failureThreshold: 1
         #     periodSeconds: 5
         #   # app does not start straight away, so a startup probe helps to reduce 503 errors (or 502, because of ingress controller)
         #   startupProbe:
         #     httpGet:
         #       path: /startupz
-        #       port: {{ .Values.service.port.name }}
+        #       port: 8080
         #     failureThreshold: 12 # 1 minute (5 seconds * 12 = 60 seconds)
         #     periodSeconds: 5
           resources:
