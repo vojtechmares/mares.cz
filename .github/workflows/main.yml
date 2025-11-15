@@ -1,62 +1,139 @@
 name: build and deploy main
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    build:
-        name: build container image
-        runs-on: ubuntu-24.04
+  build:
+    name: build container image
+    runs-on: ubuntu-24.04
 
-        permissions:
-            contents: read
-            packages: write
-            attestations: write
-            id-token: write
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
 
-        steps:
-            - name: checkout
-              uses: actions/checkout@v5
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
 
-            - name: docker meta
-              id: meta
-              uses: docker/metadata-action@v5
-              with:
-                  images: |
-                      ghcr.io/${{ github.repository }}/app
-                  tags: |
-                      type=ref,event=branch
-                      type=ref,event=pr
-                      type=sha,prefix={{branch}}-
-                      type=raw,value=latest,enable={{is_default_branch}}
+      - name: docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/app
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
 
-            - name: login to github container registry
-              uses: docker/login-action@v3
-              with:
-                  username: ${{ github.repository_owner }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-                  registry: ghcr.io
+      - name: login to github container registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
 
-            - name: set up qemu
-              uses: docker/setup-qemu-action@v3
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v3
 
-            - name: set up docker buildx
-              uses: docker/setup-buildx-action@v3
+      - name: set up docker buildx
+        uses: docker/setup-buildx-action@v3
 
-            - name: build and push
-              uses: docker/build-push-action@v6
-              with:
-                  push: true
-                  platforms: linux/amd64
-                  tags: ${{ steps.meta.outputs.tags }}
-                  provenance: mode=max
-                  sbom: true
-                  cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache
-                  cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache,mode=max
-                  secrets: |
-                      STRAPI_API_URL=${{ secrets.STRAPI_API_URL }}
-                      STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }}
-                      NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
-                      NOTION_TRAINING_SESSIONS_DATABASE_ID=${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
+      - name: build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          platforms: linux/amd64
+          tags: ${{ steps.meta.outputs.tags }}
+          provenance: mode=max
+          sbom: true
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/app:buildcache,mode=max
+          secrets: |
+            STRAPI_API_URL=${{ secrets.STRAPI_API_URL }}
+            STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }}
+            NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
+            NOTION_TRAINING_SESSIONS_DATABASE_ID=${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
+
+  deploy-to-staging:
+    name: deploy to staging
+    runs-on: ubuntu-24.04
+    needs: [build]
+
+    concurrency:
+      group: deploy-staging
+      cancel-in-progress: false
+
+    environment:
+      name: staging
+      url: https://beta.mares.cz
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+
+      - name: set up helm
+        uses: azure/setup-helm@v4
+
+      - name: set up kubectl context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+          kubeconfig-encoding: base64
+
+      - name: deploy to staging
+        id: helm_deploy
+        continue-on-error: true
+        shell: bash
+        run: >
+          helm upgrade --install mares-cz ./deploy/k8s
+          --namespace mareshq-websites-staging
+          --wait
+          --wait-for-jobs
+          --values ./deploy/k8s/values.staging.yaml
+          --set image.tag=sha-${{ github.sha }}
+
+      - name: collect diagnostics on failure
+        if: steps.helm_deploy.outcome == 'failure'
+        run: |
+          echo "::group::Helm Release Status"
+          helm status mares-cz --namespace mareshq-websites-staging --show-resources || true
+          echo "::endgroup::"
+
+          echo "::group::Helm Release History"
+          helm history mares-cz --namespace mareshq-websites-staging || true
+          echo "::endgroup::"
+
+          echo "::group::Current Values"
+          helm get values mares-cz --namespace mareshq-websites-staging || true
+          echo "::endgroup::"
+
+          echo "::group::Pod Status"
+          kubectl get pods -l app.kubernetes.io/name=website-mares-cz --namespace mareshq-websites-staging -o wide || true
+          echo "::endgroup::"
+
+          echo "::group::Pod Events"
+          kubectl get events --field-selector involvedObject.kind=Pod --sort-by='.lastTimestamp' --namespace mareshq-websites-staging | tail -30 || true
+          echo "::endgroup::"
+
+          echo "::group::Pod Logs (last 50 lines)"
+          for pod in $(kubectl get pods -l app.kubernetes.io/name=website-mares-cz --namespace mareshq-websites-staging -o name 2>/dev/null); do
+            echo "--- Logs for $pod ---"
+            kubectl logs $pod --tail=50 --all-containers=true --namespace mareshq-websites-staging || true
+          done
+          echo "::endgroup::"
+
+          echo "::group::Deployment/Job Status"
+          kubectl describe deployment,job -l app.kubernetes.io/name=website-mares-cz --namespace mareshq-websites-staging || true
+          echo "::endgroup::"
+
+      - name: Fail the job if Helm deploy failed
+        if: steps.helm_deploy.outcome == 'failure'
+        run: exit 1
