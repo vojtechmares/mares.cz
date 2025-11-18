@@ -20,6 +20,8 @@ resources:
     memory: 1Gi
 
 config:
+  host: beta.mares.cz
+
   port: 8080
 
   env:
