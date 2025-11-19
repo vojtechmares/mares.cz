@@ -35,13 +35,12 @@ RUN adduser -D nodejs
 
 COPY --chown=nodejs:nodejs --from=build /app/src/fonts ./src/fonts
 COPY --chown=nodejs:nodejs --from=build /app/src/images ./src/images
+COPY --chown=nodejs:nodejs --from=build /app/server.mjs ./
 COPY --chown=nodejs:nodejs --from=prod-deps /app/node_modules ./node_modules
 COPY --chown=nodejs:nodejs --from=build /app/dist ./dist
 
-ENV HOST=0.0.0.0
-ENV PORT=4321
-EXPOSE 4321
+EXPOSE 8080
 
 USER nodejs
 
-CMD ["node", "./dist/server/entry.mjs"]
+CMD ["node", "./server.mjs"]
