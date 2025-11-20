@@ -11,6 +11,13 @@ export default defineConfig({
   output: "server",
   site: "https://www.mares.cz",
 
+  redirects: {
+    "/meeting/30min": "https://cal.com/vojtechmares/30min",
+    "/meeting/1h": "https://cal.com/vojtechmares/1h",
+    "/meeting/lunch": "https://cal.com/vojtechmares/lunch",
+    "/meeting/beer": "https://cal.com/vojtechmares/beer",
+  },
+
   i18n: {
     locales: ["cs", "en"],
     defaultLocale: "cs",
