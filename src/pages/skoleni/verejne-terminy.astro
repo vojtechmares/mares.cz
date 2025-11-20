@@ -10,61 +10,56 @@ import {notion} from "../../lib/notion";
 const sessions = await notion.GetFutureTrainingSessions();
 
 const meta = {
-    title: "Vojtěch Mareš | Veřejné termíny školení",
-    description:
-        "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
-    keywords: "školení, termíny, devops školení, termín školení",
+  title: "Vojtěch Mareš | Veřejné termíny školení",
+  description:
+    "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
+  keywords: "školení, termíny, devops školení, termín školení",
 };
 ---
 
 <Layout meta={meta}>
-    <main>
-        <Container className="mb-10">
-            <Heading level="h1">Veřejné termíny školení</Heading>
-        </Container>
-        <Container className="mb-14 sm:mb-20 lg:mb-32">
-            <TrainingSessionsTable sessions={sessions} />
-            <hr class="text-slate-300 my-4" />
-            <div class="max-w-xl mx-auto">
-                <Heading level="h3" className="mt-10" id="podminky">
-                    Podmínky veřejných termínů školení
-                </Heading>
-                <ul class="mt-10 list-disc pl-4">
-                    <li>
-                        Přihlášení na veřejný termín školení je závazné a
-                        zavazujete se k platbě.
-                    </li>
-                    <li>
-                        Minimální počet účastníků pro uskuteční školení je <strong
-                            >5</strong
-                        >.
-                    </li>
-                    <li>
-                        Maximální počet účastníků na termínu je <strong
-                            >12</strong
-                        >.
-                    </li>
-                    <li>
-                        Školení je potvrzeno <strong>týden</strong> předem, nebo
-                        zrušeno z důvodu nízké účasti.
-                    </li>
-                    <li>
-                        Při odhlášení <strong>min. týden předem</strong> vracím <strong
-                            >plnou částku</strong
-                        >.
-                    </li>
-                    <li>
-                        Při odhlášení <strong>méně jak týden předem</strong> vracím
-                        pouze
-                        <strong>50% z ceny školení</strong>.
-                    </li>
-                    <li>
-                        Nabízím slevu <strong
-                            >50% pro studenty denního studia</strong
-                        > při doložení platného dokladu (potvrzení o studiu).
-                    </li>
-                </ul>
-            </div>
-        </Container>
-    </main>
+  <main>
+    <Container className="mb-10">
+      <Heading level="h1">Veřejné termíny školení</Heading>
+    </Container>
+    <Container className="mb-14 sm:mb-20 lg:mb-32">
+      <TrainingSessionsTable sessions={sessions} />
+      <hr class="text-zinc-300 my-4" />
+      <div class="max-w-xl mx-auto">
+        <Heading level="h3" className="mt-10" id="podminky">
+          Podmínky veřejných termínů školení
+        </Heading>
+        <ul class="mt-10 list-disc pl-4">
+          <li>
+            Přihlášení na veřejný termín školení je závazné a zavazujete se k
+            platbě.
+          </li>
+          <li>
+            Minimální počet účastníků pro uskuteční školení je <strong>5</strong
+            >.
+          </li>
+          <li>
+            Maximální počet účastníků na termínu je <strong>12</strong>.
+          </li>
+          <li>
+            Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu
+            nízké účasti.
+          </li>
+          <li>
+            Při odhlášení <strong>min. týden předem</strong> vracím <strong
+              >plnou částku</strong
+            >.
+          </li>
+          <li>
+            Při odhlášení <strong>méně jak týden předem</strong> vracím pouze
+            <strong>50% z ceny školení</strong>.
+          </li>
+          <li>
+            Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení
+            platného dokladu (potvrzení o studiu).
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </main>
 </Layout>

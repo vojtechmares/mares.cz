@@ -2,40 +2,36 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 
 type SectionProps = {
-    children?: ReactNode;
-    className?: string;
-    background?: "white" | "black" | "amber" | "slate";
-    id?: string;
-    ariaLabel?: string;
+  children?: ReactNode;
+  className?: string;
+  background?: "white" | "black" | "amber" | "zinc";
+  id?: string;
+  ariaLabel?: string;
 };
 
 const baseStyles = "py-20 sm:py-32";
 
 const backgroundStyles = {
-    white: "bg-white",
-    black: "bg-black",
-    amber: "bg-amber-500",
-    slate: "bg-slate-50",
+  white: "bg-white",
+  black: "bg-zinc-900",
+  amber: "bg-amber-500",
+  zinc: "bg-zinc-50",
 };
 
 export function Section({
-    children,
-    className,
-    id,
-    ariaLabel,
-    background = "slate",
+  children,
+  className,
+  id,
+  ariaLabel,
+  background = "zinc",
 }: SectionProps) {
-    return (
-        <section
-            id={id}
-            aria-label={ariaLabel}
-            className={clsx(
-                className,
-                backgroundStyles[background],
-                baseStyles
-            )}
-        >
-            {children}
-        </section>
-    );
+  return (
+    <section
+      id={id}
+      aria-label={ariaLabel}
+      className={clsx(className, backgroundStyles[background], baseStyles)}
+    >
+      {children}
+    </section>
+  );
 }

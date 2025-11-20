@@ -1,117 +1,117 @@
 import type { ReactNode } from "react";
 
 function TrainingImage({
-    slug,
-    title,
-    description,
-    imageData,
+  slug,
+  title,
+  description,
+  imageData,
 }: {
-    slug: string;
-    title: string;
-    description: string;
-    imageData?: ArrayBuffer | string;
+  slug: string;
+  title: string;
+  description: string;
+  imageData?: ArrayBuffer | string;
 }) {
-    return (
-        <div
-            style={{
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center", // flex-end
-                justifyContent: "space-between", // space-between
-                color: "black",
-                backgroundColor: "#f59e0b",
-            }}
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center", // flex-end
+        justifyContent: "space-between", // space-between
+        color: "#ffffff",
+        backgroundColor: "#18181b",
+      }}
+    >
+      <div
+        style={{
+          marginLeft: "4rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: 700,
+            fontSize: "4rem",
+            marginBottom: 0,
+            paddingBottom: 0,
+          }}
         >
-            <div
-                style={{
-                    marginLeft: "4rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    height: "100%",
-                }}
-            >
-                <p
-                    style={{
-                        fontWeight: 700,
-                        fontSize: "4rem",
-                        marginBottom: 0,
-                        paddingBottom: 0,
-                    }}
-                >
-                    {title} školení
-                </p>
-                <p
-                    style={{
-                        marginTop: "1.5rem",
-                        maxWidth: "32rem",
-                        fontSize: "18px",
-                        lineHeight: "1.5556",
-                        fontWeight: 300,
-                    }}
-                >
-                    {description}
-                </p>
-                <p
-                    style={{
-                        fontSize: "2rem",
-                        fontWeight: 500,
-                        marginBottom: 0,
-                    }}
-                >
-                    Vojtěch Mareš
-                </p>
-                <p
-                    style={{
-                        fontSize: "1.5rem",
-                        fontWeight: 300,
-                        marginTop: 0,
-                    }}
-                >
-                    DevOps achitekt, lektor, konzultant
-                </p>
-                <p
-                    style={{
-                        fontSize: "1.5rem",
-                        fontWeight: 500,
-                        marginTop: 0,
-                    }}
-                >
-                    mares.cz/skoleni/{slug}
-                </p>
-            </div>
-            {imageData !== undefined && (
-                <img
-                    style={{ position: "absolute", right: 60 }}
-                    width={400}
-                    height={400}
-                    alt=""
-                    src={imageData as unknown as string}
-                />
-            )}
-        </div>
-    );
+          {title} školení
+        </p>
+        <p
+          style={{
+            marginTop: "1.5rem",
+            maxWidth: "32rem",
+            fontSize: "18px",
+            lineHeight: "1.5556",
+            fontWeight: 300,
+          }}
+        >
+          {description}
+        </p>
+        <p
+          style={{
+            fontSize: "2rem",
+            fontWeight: 500,
+            marginBottom: 0,
+          }}
+        >
+          Vojtěch Mareš
+        </p>
+        <p
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: 300,
+            marginTop: 0,
+          }}
+        >
+          DevOps achitekt & lektor
+        </p>
+        <p
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: 500,
+            marginTop: 0,
+          }}
+        >
+          mares.cz/skoleni/{slug}
+        </p>
+      </div>
+      {imageData !== undefined && (
+        <img
+          style={{ position: "absolute", right: 60, filter: `invert(100%)` }}
+          width={400}
+          height={400}
+          alt=""
+          src={imageData as unknown as string}
+        />
+      )}
+    </div>
+  );
 }
 
 export function CreateTrainingImageComponent({
-    slug,
-    title,
-    description,
-    image = undefined,
+  slug,
+  title,
+  description,
+  image = undefined,
 }: {
-    slug: string;
-    title: string;
-    description: string;
-    image?: ArrayBuffer | string;
+  slug: string;
+  title: string;
+  description: string;
+  image?: ArrayBuffer | string;
 }): ReactNode {
-    return (
-        <TrainingImage
-            slug={slug}
-            title={title}
-            description={description}
-            imageData={image}
-        />
-    );
+  return (
+    <TrainingImage
+      slug={slug}
+      title={title}
+      description={description}
+      imageData={image}
+    />
+  );
 }

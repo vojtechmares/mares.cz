@@ -48,7 +48,7 @@ const openGraph = {
 <Layout meta={meta} openGraph={openGraph}>
     <main>
         <div class="pb-14 sm:pb-20 lg:pb-32">
-          <div class="bg-black pt-16 pb-16">
+          <div class="bg-zinc-900 pt-16 pb-16">
             <Container className="flex justify-around">
               <Logo training={training} />
               <h1 class="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
@@ -59,7 +59,7 @@ const openGraph = {
           <Container className={training.publishedAt === null ? "hidden" : ""}>
             <div class="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
               <div class="md:col-span-3">
-                <div class="prose:text-black prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-slate-700 prose-li:my-0">
+                <div class="prose:text-zinc-900 prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-zinc-700 prose-li:my-0">
                   <Fragment set:html={trainingHTML} />
                 </div>
               </div>
@@ -105,9 +105,9 @@ const openGraph = {
                     <Heading level="h2" className="mb-4">
                       Cena za školení
                     </Heading>
-                    <dl class="sm:divide-y sm:divide-slate-400">
+                    <dl class="sm:divide-y sm:divide-zinc-400">
                         <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                            <dt class="font-medium text-slate-700">
+                            <dt class="font-medium text-zinc-700">
                             Veřejný termín
                             </dt>
                             <dd class="">
@@ -115,7 +115,7 @@ const openGraph = {
                             </dd>
                         </div>
                         <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                            <dt class="font-medium text-slate-700">
+                            <dt class="font-medium text-zinc-700">
                             Firemní školení
                             </dt>
                             <dd class="">
