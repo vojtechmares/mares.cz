@@ -8,73 +8,73 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-    output: "server",
-    site: "https://www.mares.cz",
+  output: "server",
+  site: "https://www.mares.cz",
 
-    i18n: {
-        locales: ["cs", "en"],
+  i18n: {
+    locales: ["cs", "en"],
+    defaultLocale: "cs",
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+
+  trailingSlash: "never",
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  integrations: [
+    react(),
+    sitemap({
+      i18n: {
         defaultLocale: "cs",
-        routing: {
-            prefixDefaultLocale: false,
+        locales: {
+          cs: "cs-CZ",
+          en: "en-US",
         },
-    },
-
-    trailingSlash: "never",
-
-    vite: {
-        plugins: [tailwindcss()],
-    },
-
-    integrations: [
-        react(),
-        sitemap({
-            i18n: {
-                defaultLocale: "cs",
-                locales: {
-                    cs: "cs-CZ",
-                    en: "en-US",
-                },
-            },
-        }),
-    ],
-
-    image: {
-        domains: ["cdn.mares.cz"],
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "cdn.mares.cz",
-            },
-        ],
-    },
-
-    adapter: node({
-        mode: "middleware",
+      },
     }),
+  ],
 
-    env: {
-        schema: {
-            STRAPI_API_URL: envField.string({
-                context: "server",
-                access: "public",
-            }),
-            STRAPI_API_TOKEN: envField.string({
-                context: "server",
-                access: "secret",
-            }),
-            NOTION_API_KEY: envField.string({
-                context: "server",
-                access: "secret",
-            }),
-            NOTION_TRAINING_SESSIONS_DATABASE_ID: envField.string({
-                context: "server",
-                access: "secret",
-            }),
-            DISABLE_ANALYTICS: envField.boolean({
-                context: "server",
-                access: "public",
-                default: false,
-            }),
-        },
+  image: {
+    domains: ["cdn.mares.cz"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.mares.cz",
+      },
+    ],
+  },
+
+  adapter: node({
+    mode: "middleware",
+  }),
+
+  env: {
+    schema: {
+      STRAPI_API_URL: envField.string({
+        context: "server",
+        access: "public",
+      }),
+      STRAPI_API_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      NOTION_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      NOTION_TRAINING_SESSIONS_DATABASE_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      DISABLE_ANALYTICS: envField.boolean({
+        context: "server",
+        access: "public",
+        default: false,
+      }),
     },
+  },
 });
