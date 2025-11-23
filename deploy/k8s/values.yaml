@@ -8,7 +8,7 @@
 #     - example.com
 
 image:
-  repository: ghcr.io/vojtechmares/website-mares-cz/app
+  repository: ghcr.io/vojtechmares/mares.cz/app
   tag: latest
 
 resources:
