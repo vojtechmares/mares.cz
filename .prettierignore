@@ -5,5 +5,9 @@ deploy
 pnpm-lock.yaml
 pnpm-workspace.yaml
 
+# claude
+.claude/settings.local.json
+
+# general
 node_modules
 dist
