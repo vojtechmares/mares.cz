@@ -14,7 +14,7 @@ await app
   .register(fastifyMiddie);
 app.use(ssrHandler);
 
-app.get("/_/livez", { config: { otel: false } }, async (request, reply) => {
+app.get("/_/livez", { config: { otel: false } }, async (_request, _reply) => {
   return { message: "OK" };
 });
 

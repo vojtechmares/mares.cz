@@ -23,7 +23,7 @@ const meta = {
 };
 
 const openGraph = {
-  type: "article" as "article",
+  type: "article" as const,
   image: {
     url: "/blog/" + article.slug + "/card.png",
     width: 1200,

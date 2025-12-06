@@ -34,7 +34,7 @@ const meta = {
 };
 
 const openGraph = {
-  type: "article" as "article",
+  type: "article" as const,
   image: {
     url: Astro.site + "skoleni/" + training.slug + "/card.png",
     width: 1200,

@@ -23,7 +23,7 @@ const meta = {
 };
 
 const openGraph = {
-  type: "website" as "website",
+  type: "website" as const,
   image: {
     url: Astro.site + "card.png",
     width: 1200,

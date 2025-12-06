@@ -64,10 +64,3 @@ export async function GET({ params }: { params: { slug: string } }) {
     },
   });
 }
-
-function toArrayBuffer(buffer: Buffer): ArrayBuffer | SharedArrayBuffer {
-  return buffer.buffer.slice(
-    buffer.byteOffset,
-    buffer.byteOffset + buffer.byteLength,
-  );
-}

@@ -1,5 +1,4 @@
 import { Button } from "../ui/button";
-import { Container } from "../ui/container";
 import { CallToAction } from "../landing/call-to-action";
 import { Heading } from "../ui/heading";
 import { strapi } from "../../lib/strapi";
@@ -50,6 +49,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
       </CallToAction>
     );
   } catch (error) {
+    console.error("Failed to load training ad:", error);
     return <></>;
   }
 }
