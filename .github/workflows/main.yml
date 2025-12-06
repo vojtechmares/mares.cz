@@ -1,4 +1,4 @@
-name: build and deploy main
+name: publish container and deploy to staging
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    name: build container image
+  publish-container:
+    name: build and publish container image
     runs-on: ubuntu-24.04
 
     permissions:
@@ -65,7 +65,7 @@ jobs:
   deploy-to-staging:
     name: deploy to staging
     runs-on: ubuntu-24.04
-    needs: [build]
+    needs: [publish-container]
 
     concurrency:
       group: deploy-staging
