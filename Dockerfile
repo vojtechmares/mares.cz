@@ -22,6 +22,9 @@ FROM pkg AS build-deps
 RUN pnpm install --frozen-lockfile
 
 FROM build-deps AS build
+
+ENV NODE_ENV="production"
+
 COPY . .
 RUN \
     --mount=type=secret,id=STRAPI_API_URL,env=STRAPI_API_URL \
