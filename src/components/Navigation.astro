@@ -24,7 +24,7 @@ const pageLinks = pages
             return;
         }
 
-        return {name: page.title, href: page.slug};
+        return {name: page.title, href: `/${page.slug}`};
     })
     .filter((link) => {
         return link !== undefined;
