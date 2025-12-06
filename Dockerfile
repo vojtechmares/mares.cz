@@ -16,7 +16,7 @@ RUN npm install --global pnpm
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 FROM pkg AS prod-deps
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 FROM pkg AS build-deps
 RUN pnpm install --frozen-lockfile
