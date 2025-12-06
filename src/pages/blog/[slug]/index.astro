@@ -1,40 +1,40 @@
 ---
-import {Debug} from "astro:components";
-import {Article} from "../../../components/blog/article";
-import {ArticleHeader} from "../../../components/blog/article-header";
-import {TrainingAd} from "../../../components/blog/training-ad";
+import { Debug } from "astro:components";
+import { Article } from "../../../components/blog/article";
+import { ArticleHeader } from "../../../components/blog/article-header";
+import { TrainingAd } from "../../../components/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
-import {strapi} from "../../../lib/strapi";
+import { strapi } from "../../../lib/strapi";
 
 import "../../../styles/highlight-js/github-dark.css";
 
-const {slug} = Astro.params;
+const { slug } = Astro.params;
 
 if (slug === undefined) {
-    return new Response(null, {status: 404});
+  return new Response(null, { status: 404 });
 }
 
 const article = await strapi.getArticle(slug);
 
 const meta = {
-    title: "Vojtěch Mareš | Blog: " + article.title,
-    description: article.description,
-    keywords: article.keywords,
+  title: "Vojtěch Mareš | Blog: " + article.title,
+  description: article.description,
+  keywords: article.keywords,
 };
 
 const openGraph = {
-    type: "article" as "article",
-    image: {
-        url: "/blog/" + article.slug + "/card.png",
-        width: 1200,
-        height: 630,
-        alt: article.title + ": " + article.description,
-    },
+  type: "article" as "article",
+  image: {
+    url: "/blog/" + article.slug + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: article.title + ": " + article.description,
+  },
 };
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
-    <ArticleHeader article={article} />
-    <Article article={article} />
-    <TrainingAd trainingSlug={article.trainingAd} />
+  <ArticleHeader article={article} />
+  <Article article={article} />
+  <TrainingAd trainingSlug={article.trainingAd} />
 </Layout>

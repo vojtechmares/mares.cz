@@ -1,11 +1,11 @@
 ---
-import {Container} from "../../components/ui/container";
-import {Heading} from "../../components/ui/heading";
-import {TrainingSessionsTable} from "../../components/training/training-sessions-table";
-import {Text} from "../../components/ui/text";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { TrainingSessionsTable } from "../../components/training/training-sessions-table";
+import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 
-import {notion} from "../../lib/notion";
+import { notion } from "../../lib/notion";
 
 const sessions = await notion.GetFutureTrainingSessions();
 
@@ -24,8 +24,8 @@ const meta = {
     </Container>
     <Container className="mb-14 sm:mb-20 lg:mb-32">
       <TrainingSessionsTable sessions={sessions} />
-      <hr class="text-zinc-300 my-4" />
-      <div class="max-w-xl mx-auto">
+      <hr class="my-4 text-zinc-300" />
+      <div class="mx-auto max-w-xl">
         <Heading level="h3" className="mt-10" id="podminky">
           Podmínky veřejných termínů školení
         </Heading>

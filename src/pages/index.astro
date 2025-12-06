@@ -4,32 +4,32 @@ import Hero from "../components/homepage/Hero.astro";
 import Clients from "../components/homepage/Clients.astro";
 import References from "../components/homepage/References.astro";
 
-import {Services} from "../components/homepage/services";
-import {TrainingList} from "../components/homepage/training";
-import {Cooperation} from "../components/homepage/cooperation";
-import {CallToAction} from "../components/homepage/call-to-action";
+import { Services } from "../components/homepage/services";
+import { TrainingList } from "../components/homepage/training";
+import { Cooperation } from "../components/homepage/cooperation";
+import { CallToAction } from "../components/homepage/call-to-action";
 
-import {strapi} from "../lib/strapi";
-import {LocalizedMetadata} from "../lib/site";
+import { strapi } from "../lib/strapi";
+import { LocalizedMetadata } from "../lib/site";
 
 const trainings = await strapi.fetchTrainings();
 
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === "cs")[0];
 
 const meta = {
-    title: defaultMetadata.title,
-    description: defaultMetadata.description,
-    keywords: defaultMetadata.keywords,
+  title: defaultMetadata.title,
+  description: defaultMetadata.description,
+  keywords: defaultMetadata.keywords,
 };
 
 const openGraph = {
-    type: "website" as "website",
-    image: {
-        url: Astro.site + "card.png",
-        width: 1200,
-        height: 630,
-        alt: defaultMetadata.title + ": " + defaultMetadata.description,
-    },
+  type: "website" as "website",
+  image: {
+    url: Astro.site + "card.png",
+    width: 1200,
+    height: 630,
+    alt: defaultMetadata.title + ": " + defaultMetadata.description,
+  },
 };
 ---
 

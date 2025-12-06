@@ -1,18 +1,18 @@
 ---
 interface Props {
-    title?: string;
-    prefixedTitle?: string;
-    description?: string;
-    keywords?: string;
-    canonical?: string;
+  title?: string;
+  prefixedTitle?: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
 }
 
 let {
-    title = undefined,
-    prefixedTitle = undefined,
-    description = undefined,
-    keywords = undefined,
-    canonical = undefined,
+  title = undefined,
+  prefixedTitle = undefined,
+  description = undefined,
+  keywords = undefined,
+  canonical = undefined,
 } = Astro.props;
 ---
 
@@ -22,6 +22,6 @@ let {
 <meta name="author" content="Vojtěch Mareš" />
 <meta name="theme-color" content="#ffffff" />
 <meta
-    name="canonical"
-    content={canonical !== undefined ? canonical : Astro.url.toString()}
+  name="canonical"
+  content={canonical !== undefined ? canonical : Astro.url.toString()}
 />

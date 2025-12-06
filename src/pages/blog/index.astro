@@ -1,9 +1,9 @@
 ---
-import {Button} from "../../components/ui/button";
-import {Container} from "../../components/ui/container";
-import {Heading} from "../../components/ui/heading";
+import { Button } from "../../components/ui/button";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
 import Layout from "../../layouts/Layout.astro";
-import {strapi} from "../../lib/strapi";
+import { strapi } from "../../lib/strapi";
 
 function localeName(locale: string): null | string {
   switch (locale) {
@@ -51,7 +51,7 @@ const meta = {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
-                }
+                },
               )}
               {localeName(article.locale) !== null
                 ? " · " + localeName(article.locale)

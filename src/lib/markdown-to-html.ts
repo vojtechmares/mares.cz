@@ -46,55 +46,55 @@ import xml from "highlight.js/lib/languages/xml";
 import yaml from "highlight.js/lib/languages/yaml";
 
 export async function markdownToHtml(md: string) {
-    const result = await unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkRehype, { allowDangerousHtml: true })
-        .use(rehypeRaw)
-        .use(rehypeSlug)
-        .use(rehypeHighlight, {
-            languages: {
-                http,
-                nginx,
-                dns,
-                awk,
-                nix,
-                protobuf,
-                bash,
-                c,
-                cpp,
-                csharp,
-                css,
-                diff,
-                dockerfile,
-                go,
-                graphql,
-                ini,
-                java,
-                javascript,
-                json,
-                kotlin,
-                lua,
-                makefile,
-                markdown,
-                php,
-                phpTemplate,
-                plaintext,
-                python,
-                pythonRepl,
-                ruby,
-                rust,
-                shell,
-                sql,
-                swift,
-                typescript,
-                wasm,
-                xml,
-                yaml,
-            },
-        })
-        .use(rehypeStringify)
-        .process(md);
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSlug)
+    .use(rehypeHighlight, {
+      languages: {
+        http,
+        nginx,
+        dns,
+        awk,
+        nix,
+        protobuf,
+        bash,
+        c,
+        cpp,
+        csharp,
+        css,
+        diff,
+        dockerfile,
+        go,
+        graphql,
+        ini,
+        java,
+        javascript,
+        json,
+        kotlin,
+        lua,
+        makefile,
+        markdown,
+        php,
+        phpTemplate,
+        plaintext,
+        python,
+        pythonRepl,
+        ruby,
+        rust,
+        shell,
+        sql,
+        swift,
+        typescript,
+        wasm,
+        xml,
+        yaml,
+      },
+    })
+    .use(rehypeStringify)
+    .process(md);
 
-    return result.toString();
+  return result.toString();
 }

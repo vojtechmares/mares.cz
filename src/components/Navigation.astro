@@ -1,38 +1,38 @@
 ---
-import type {Page} from "../interfaces/page";
-import {Navigation as Navbar} from "./navigation";
-import {LocalizedStaticNavigationLinks} from "../lib/site";
+import type { Page } from "../interfaces/page";
+import { Navigation as Navbar } from "./navigation";
+import { LocalizedStaticNavigationLinks } from "../lib/site";
 
 interface Props {
-    pages: Page[];
+  pages: Page[];
 }
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
-    locale = "cs";
+  locale = "cs";
 }
 
 const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
-    return links.locale === locale;
+  return links.locale === locale;
 })[0].links;
 
-const {pages} = Astro.props;
+const { pages } = Astro.props;
 
 const pageLinks = pages
-    .map((page) => {
-        if (!page.featured) {
-            return;
-        }
+  .map((page) => {
+    if (!page.featured) {
+      return;
+    }
 
-        return {name: page.title, href: `/${page.slug}`};
-    })
-    .filter((link) => {
-        return link !== undefined;
-    });
+    return { name: page.title, href: `/${page.slug}` };
+  })
+  .filter((link) => {
+    return link !== undefined;
+  });
 
 const links = [
-    ...(staticLinks as {name: string; href: string}[]),
-    ...pageLinks,
+  ...(staticLinks as { name: string; href: string }[]),
+  ...pageLinks,
 ];
 
 // const links = [

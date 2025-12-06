@@ -1,35 +1,35 @@
 ---
-import {MarkdownContent} from "../../components/markdown-content";
+import { MarkdownContent } from "../../components/markdown-content";
 import Layout from "../../layouts/Layout.astro";
-import {strapi} from "../../lib/strapi";
+import { strapi } from "../../lib/strapi";
 
-const {slug} = Astro.params;
+const { slug } = Astro.params;
 
 if (slug === undefined) {
-    return new Response(null, {status: 404});
+  return new Response(null, { status: 404 });
 }
 
 const page = await strapi.getPage(slug);
 
 const meta = {
-    title: "Vojtěch Mareš | " + page.title,
-    description: page.description,
-    keywords: page.keywords,
+  title: "Vojtěch Mareš | " + page.title,
+  description: page.description,
+  keywords: page.keywords,
 };
 
 const openGraph = {
-    type: "website" as "website",
-    image: {
-        url: Astro.site + page.slug + "/card.png",
-        width: 1200,
-        height: 630,
-        alt: page.title + ": " + page.description,
-    },
+  type: "website" as "website",
+  image: {
+    url: Astro.site + page.slug + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: page.title + ": " + page.description,
+  },
 };
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
-    <article>
-        <MarkdownContent content={page.content} />
-    </article>
+  <article>
+    <MarkdownContent content={page.content} />
+  </article>
 </Layout>

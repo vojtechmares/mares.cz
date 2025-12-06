@@ -9,7 +9,8 @@
   Current colors taken from GitHub's CSS
 */
 
-pre:has(.hljs), .hljs {
+pre:has(.hljs),
+.hljs {
   color: #c9d1d9;
   background: #0d1117;
 }
