@@ -1,44 +1,44 @@
 ---
 interface Props {
-    title: string;
-    type: "website" | "article";
-    description: string;
-    url?: string;
+  title: string;
+  type: "website" | "article";
+  description: string;
+  url?: string;
 
-    locale?: "cs" | "en";
-    localeAlternate?: "cs" | "en";
+  locale?: "cs" | "en";
+  localeAlternate?: "cs" | "en";
 
-    image?: {
-        url: string;
-        width: number;
-        height: number;
-        alt: string;
-    };
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
 }
 
 const {
-    title,
-    description,
-    type = "website",
-    url = undefined,
-    locale = "cs",
-    localeAlternate = undefined,
-    image = undefined,
+  title,
+  description,
+  type = "website",
+  url = undefined,
+  locale = "cs",
+  localeAlternate = undefined,
+  image = undefined,
 } = Astro.props;
 
 function localeToOGLocale(locale?: string) {
-    switch (locale) {
-        case "cs":
-            return "cs_CZ";
-        case "en":
-            return "en_US";
-        default:
-            throw new Error("Unsupported OpenGraph locale");
-    }
+  switch (locale) {
+    case "cs":
+      return "cs_CZ";
+    case "en":
+      return "en_US";
+    default:
+      throw new Error("Unsupported OpenGraph locale");
+  }
 }
 
 if (image?.url !== undefined && image.url.startsWith("/")) {
-    image.url = Astro.site + image.url.replace("/", "");
+  image.url = Astro.site + image.url.replace("/", "");
 }
 ---
 
@@ -46,26 +46,28 @@ if (image?.url !== undefined && image.url.startsWith("/")) {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta
-    property="og:url"
-    content={url !== undefined ? url.toString() : Astro.url.href}
+  property="og:url"
+  content={url !== undefined ? url.toString() : Astro.url.href}
 />
 <meta property="og:site_name" content="Vojtěch Mareš - DevOps architekt" />
 <meta property="og:locale" content={localeToOGLocale(locale)} />
 {
-    localeAlternate !== undefined && (
-        <meta
-            property="og:locale:alternate"
-            content={localeToOGLocale(localeAlternate)}
-        />
-    )
+  localeAlternate !== undefined && (
+    <meta
+      property="og:locale:alternate"
+      content={localeToOGLocale(localeAlternate)}
+    />
+  )
 }
 {
-    image !== undefined && (
-        <meta property="og:image" content={image.url} />
-        <meta property="og:image:secure_url" content={image.url} />
-        <meta property="og:image:width" content={image.width.toString()} />
-        <meta property="og:image:height" content={image.height.toString()} />
-        <meta property="og:image:alt" content={image.alt} />
-        <meta property="og:image:type" content="image/png" />
-    )
+  image !== undefined && (
+    <>
+      <meta property="og:image" content={image.url} />
+      <meta property="og:image:secure_url" content={image.url} />
+      <meta property="og:image:width" content={image.width.toString()} />
+      <meta property="og:image:height" content={image.height.toString()} />
+      <meta property="og:image:alt" content={image.alt} />
+      <meta property="og:image:type" content="image/png" />
+    </>
+  )
 }

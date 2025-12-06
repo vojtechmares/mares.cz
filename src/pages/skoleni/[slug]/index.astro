@@ -8,12 +8,12 @@ import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
 import { markdownToHtml } from "../../../lib/markdown-to-html";
 import { notion } from "../../../lib/notion";
-import {strapi} from "../../../lib/strapi";
+import { strapi } from "../../../lib/strapi";
 
-const {slug} = Astro.params;
+const { slug } = Astro.params;
 
 if (slug === undefined) {
-    return new Response(null, {status: 404});
+  return new Response(null, { status: 404 });
 }
 
 const training = await strapi.getTraining(slug);
@@ -22,132 +22,127 @@ const sessions = await notion.GetFutureTrainingSessionsForSlug(slug);
 const trainingHTML = markdownToHtml(training.content);
 
 const formatter = new Intl.NumberFormat("cs", {
-    style: "currency",
-    currency: "CZK",
-    maximumFractionDigits: 0,
-  })
+  style: "currency",
+  currency: "CZK",
+  maximumFractionDigits: 0,
+});
 
 const meta = {
-    title: "Vojtěch Mareš | " + training.title + " školení",
-    description: training.description,
-    keywords: training.keywords,
+  title: "Vojtěch Mareš | " + training.title + " školení",
+  description: training.description,
+  keywords: training.keywords,
 };
 
 const openGraph = {
-    type: "article" as "article",
-    image: {
-        url: Astro.site + "skoleni/" + training.slug + "/card.png",
-        width: 1200,
-        height: 630,
-        alt: training.title + ": " + training.description,
-    }
-
-}
+  type: "article" as "article",
+  image: {
+    url: Astro.site + "skoleni/" + training.slug + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: training.title + ": " + training.description,
+  },
+};
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
-    <main>
-        <div class="pb-14 sm:pb-20 lg:pb-32">
-          <div class="bg-zinc-900 pt-16 pb-16">
-            <Container className="flex justify-around">
-              <Logo training={training} />
-              <h1 class="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl">
-                {training.title} školení
-              </h1>
-            </Container>
+  <main>
+    <div class="pb-14 sm:pb-20 lg:pb-32">
+      <div class="bg-zinc-900 pt-16 pb-16">
+        <Container className="flex justify-around">
+          <Logo training={training} />
+          <h1
+            class="font-display ml-4 self-center text-center text-4xl font-black tracking-tight text-white sm:text-6xl"
+          >
+            {training.title} školení
+          </h1>
+        </Container>
+      </div>
+      <Container className={training.publishedAt === null ? "hidden" : ""}>
+        <div class="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
+          <div class="md:col-span-3">
+            <div
+              class="prose:text-zinc-900 prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-zinc-700 prose-li:my-0"
+            >
+              <Fragment set:html={trainingHTML} />
+            </div>
           </div>
-          <Container className={training.publishedAt === null ? "hidden" : ""}>
-            <div class="mt-12 md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
-              <div class="md:col-span-3">
-                <div class="prose:text-zinc-900 prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-zinc-700 prose-li:my-0">
-                  <Fragment set:html={trainingHTML} />
+          <div class="mt-8 md:col-span-2 md:mt-0">
+            {
+              sessions.length > 0 ? (
+                <div class="mb-4">
+                  <Heading level="h2" className="mb-4">
+                    Veřejné termíny školení
+                  </Heading>
+                  <CompactTrainingSessionsTable sessions={sessions} />
                 </div>
-              </div>
-              <div class="mt-8 md:col-span-2 md:mt-0">
-                {sessions.length > 0 ? (
-                  <div class="mb-4">
-                    <Heading level="h2" className="mb-4" >Veřejné termíny školení</Heading>
-                    <CompactTrainingSessionsTable sessions={sessions} />
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {training.days === 2 ? (
-                  <div class="mb-4">
-                    <div class="flex">
-                      <div class="shrink-0">
-                        {/* <ExclamationTriangleIcon class="h-5 w-5 text-yellow-400" aria-hidden="true" /> */}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          class="h-6 w-6 text-blue-400"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <div class="ml-3">
-                        <p class="text-blue-600 text-xl">
-                          Toto školení je{" "}
-                          <span class="font-medium">dvoudenní.</span>
-                        </p>
-                      </div>
+              ) : null
+            }
+            {
+              training.days === 2 ? (
+                <div class="mb-4">
+                  <div class="flex">
+                    <div class="shrink-0">
+                      {/* <ExclamationTriangleIcon class="h-5 w-5 text-yellow-400" aria-hidden="true" /> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="h-6 w-6 text-blue-400"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-xl text-blue-600">
+                        Toto školení je{" "}
+                        <span class="font-medium">dvoudenní.</span>
+                      </p>
                     </div>
                   </div>
-                ) : (
-                  <></>
-                )}
-                <div>
-                    <Heading level="h2" className="mb-4">
-                      Cena za školení
-                    </Heading>
-                    <dl class="sm:divide-y sm:divide-zinc-400">
-                        <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                            <dt class="font-medium text-zinc-700">
-                            Veřejný termín
-                            </dt>
-                            <dd class="">
-                            {formatter.format(training.priceOpen)} bez DPH
-                            </dd>
-                        </div>
-                        <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                            <dt class="font-medium text-zinc-700">
-                            Firemní školení
-                            </dt>
-                            <dd class="">
-                            {formatter.format(training.priceCorporate)} bez DPH
-                            </dd>
-                        </div>
-                    </dl>
                 </div>
-                <div class="mt-4">
-                  <Button
-                    variant="solid"
-                    color="amber"
-                    className="w-full text-lg font-medium"
-                    href="mailto:vojtech@mares.cz"
-                  >
-                    Nezávazně poptat
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Container>
-          <Container
-            className={
-              training.publishedAt !== null
-                ? "hidden"
-                : "my-32 flex justify-center"
+              ) : null
             }
-          >
-            <h1 class="text-4xl font-bold">
-              Toto školení teprve připravuji.
-            </h1>
-          </Container>
+            <div>
+              <Heading level="h2" className="mb-4"> Cena za školení </Heading>
+              <dl class="sm:divide-y sm:divide-zinc-400">
+                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
+                  <dt class="font-medium text-zinc-700">Veřejný termín</dt>
+                  <dd class="">
+                    {formatter.format(training.priceOpen)} bez DPH
+                  </dd>
+                </div>
+                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
+                  <dt class="font-medium text-zinc-700">Firemní školení</dt>
+                  <dd class="">
+                    {formatter.format(training.priceCorporate)} bez DPH
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div class="mt-4">
+              <Button
+                variant="solid"
+                color="amber"
+                className="w-full text-lg font-medium"
+                href="mailto:vojtech@mares.cz"
+              >
+                Nezávazně poptat
+              </Button>
+            </div>
+          </div>
         </div>
-      </main>
+      </Container>
+      <Container
+        className={training.publishedAt !== null
+          ? "hidden"
+          : "my-32 flex justify-center"}
+      >
+        <h1 class="text-4xl font-bold">Toto školení teprve připravuji.</h1>
+      </Container>
+    </div>
+  </main>
 </Layout>

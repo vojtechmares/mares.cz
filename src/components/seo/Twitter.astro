@@ -1,23 +1,23 @@
 ---
 interface Props {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 
-    image?: {
-        url: string;
-        width: number; // 1200
-        height: number; // 630
-        alt: string;
-    };
+  image?: {
+    url: string;
+    width: number; // 1200
+    height: number; // 630
+    alt: string;
+  };
 }
 
 const creator = "@vojtechmares_";
 const site = "@vojtechmares_";
 
-let {title, description, image = undefined} = Astro.props;
+let { title, description, image = undefined } = Astro.props;
 
 if (image?.url.startsWith("/")) {
-    image.url = Astro.site + image.url.replace("/", "");
+  image.url = Astro.site + image.url.replace("/", "");
 }
 ---
 
@@ -27,13 +27,15 @@ if (image?.url.startsWith("/")) {
 <meta name="twitter:description" content={description} />
 
 {
-    image === undefined ? (
-        <meta name="twitter:card" content="summary" />
-    ) : (
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={image.url}>
-        <meta name="twitter:image:alt" content={title}>
-        <meta name="twitter:image:width" content={image.width.toString()}>
-        <meta name="twitter:image:height" content={image.height.toString()}>
-    )
+  image === undefined ? (
+    <meta name="twitter:card" content="summary" />
+  ) : (
+    <>
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={image.url} />
+      <meta name="twitter:image:alt" content={title} />
+      <meta name="twitter:image:width" content={image.width.toString()} />
+      <meta name="twitter:image:height" content={image.height.toString()} />
+    </>
+  )
 }
