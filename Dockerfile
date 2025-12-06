@@ -8,6 +8,7 @@ RUN apk add --no-cache libc6-compat
 
 FROM base AS pkg
 
+ENV HUSKY=0
 RUN npm install --global pnpm
 
 # By copying only the package.json and package-lock.json here, we ensure that the following `-deps` steps are independent of the source code.
