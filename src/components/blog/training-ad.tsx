@@ -41,7 +41,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
           <img
             src={training.icon?.url as string}
             alt=""
-            className="mx-auto hidden rounded-lg p-2 md:block"
+            className="mx-auto hidden p-2 md:block"
             width="196"
             height="196"
           />

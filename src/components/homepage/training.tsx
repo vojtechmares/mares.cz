@@ -13,7 +13,7 @@ const Training = ({ training, className }: TrainingProps) => {
     <a href={"/skoleni/" + training.slug} className={className}>
       <img
         src={training.icon?.url as string}
-        className="mx-auto rounded-lg p-2 invert"
+        className="mx-auto p-2 invert"
         width="128"
         height="128"
         alt={`Ikona školení ${training.title}`}
