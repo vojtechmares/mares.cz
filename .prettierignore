@@ -11,3 +11,6 @@ pnpm-workspace.yaml
 # general
 node_modules
 dist
+
+# github
+.github
