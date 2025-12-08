@@ -26,6 +26,8 @@ app.addHook("onRequest", async (_request, reply) => {
     "Content-Security-Policy",
     "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://cdn.mares.cz data:; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests",
   );
+  reply.removeHeader("Server");
+  reply.removeHeader("X-Powered-By");
 });
 
 app.use(ssrHandler);
