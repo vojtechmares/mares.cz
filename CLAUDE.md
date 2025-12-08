@@ -35,6 +35,13 @@ This is a personal website (mares.cz) built with Astro 5, deployed as a containe
 - Use `pnpm` exclusively (version 10.23.0 specified in packageManager field)
 - Use `task` for Docker operations (configured in Taskfile.yml)
 
+**Git Commits:**
+
+- Use [Conventional Commits](https://www.conventionalcommits.org/) format for commit messages
+- Always sign off commits with the `--signoff` flag (adds `Signed-off-by:` line)
+- Common types: `feat:`, `fix:`, `refactor:`, `chore:`, `docs:`, `test:`
+- Example: `git commit --signoff -m "feat: add new feature"`
+
 ## Architecture
 
 ### Content Sources
