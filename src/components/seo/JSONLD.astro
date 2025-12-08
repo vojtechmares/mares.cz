@@ -1,0 +1,124 @@
+---
+interface BlogPostSchema {
+  type: "BlogPosting";
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+  author: {
+    name: string;
+    url: string;
+  };
+  keywords: string;
+  image?: string;
+  url: string;
+}
+
+interface WebsiteSchema {
+  type: "WebSite" | "Organization" | "Person";
+}
+
+interface Props {
+  schema: BlogPostSchema | WebsiteSchema;
+}
+
+const { schema } = Astro.props;
+
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+
+let jsonLd: any;
+
+if (schema.type === "BlogPosting") {
+  const blogPost = schema as BlogPostSchema;
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blogPost.headline,
+    description: blogPost.description,
+    datePublished: blogPost.datePublished,
+    dateModified: blogPost.dateModified,
+    author: {
+      "@type": "Person",
+      name: blogPost.author.name,
+      url: blogPost.author.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Vojtěch Mareš",
+      url: baseUrl,
+    },
+    keywords: blogPost.keywords,
+    ...(blogPost.image && {
+      image: {
+        "@type": "ImageObject",
+        url: blogPost.image,
+      },
+    }),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": blogPost.url,
+    },
+  };
+} else if (schema.type === "WebSite") {
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Vojtěch Mareš - DevOps architekt",
+    url: baseUrl,
+    description:
+      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    author: {
+      "@type": "Person",
+      name: "Vojtěch Mareš",
+      url: baseUrl,
+      jobTitle: "DevOps architekt",
+      sameAs: [
+        "https://github.com/vojtechmares",
+        "https://linkedin.com/in/vojtech-mares",
+        "https://twitter.com/vojtechmares_",
+      ],
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+} else if (schema.type === "Organization") {
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vojtěch Mareš",
+    url: baseUrl,
+    logo: `${baseUrl}/logo.png`,
+    sameAs: [
+      "https://github.com/vojtechmares",
+      "https://linkedin.com/in/vojtech-mares",
+      "https://twitter.com/vojtechmares_",
+    ],
+  };
+} else if (schema.type === "Person") {
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Vojtěch Mareš",
+    url: baseUrl,
+    jobTitle: "DevOps architekt",
+    description:
+      "DevOps architekt, konzultant a lektor na volné noze se zaměřením na Kubernetes, CI/CD a cloud native technologie",
+    sameAs: [
+      "https://github.com/vojtechmares",
+      "https://linkedin.com/in/vojtech-mares",
+      "https://twitter.com/vojtechmares_",
+    ],
+  };
+}
+
+const jsonLdString = JSON.stringify(jsonLd);
+---
+
+<script type="application/ld+json" set:html={jsonLdString} />

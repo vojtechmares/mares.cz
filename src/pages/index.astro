@@ -31,9 +31,13 @@ const openGraph = {
     alt: defaultMetadata.title + ": " + defaultMetadata.description,
   },
 };
+
+const jsonLd = {
+  type: "WebSite" as const,
+};
 ---
 
-<Layout meta={meta} openGraph={openGraph}>
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
   <main>
     <Hero />
     <Services />

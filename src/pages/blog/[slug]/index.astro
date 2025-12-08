@@ -31,9 +31,30 @@ const openGraph = {
     alt: article.title + ": " + article.description,
   },
 };
+
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+
+const jsonLd = {
+  type: "BlogPosting" as const,
+  headline: article.title,
+  description: article.description,
+  datePublished: article.publishedAt?.toISOString() || new Date().toISOString(),
+  dateModified:
+    article.updatedAt?.toISOString() ||
+    article.publishedAt?.toISOString() ||
+    new Date().toISOString(),
+  author: {
+    name: "Vojtěch Mareš",
+    url: baseUrl,
+  },
+  keywords: article.keywords,
+  image: baseUrl + "/blog/" + article.slug + "/card.png",
+  url: baseUrl + "/blog/" + article.slug,
+};
 ---
 
-<Layout meta={meta} openGraph={openGraph}>
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
   <ArticleHeader article={article} />
   <Article article={article} />
   <TrainingAd trainingSlug={article.trainingAd} />

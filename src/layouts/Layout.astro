@@ -8,6 +8,7 @@ import Favicon from "../components/seo/Favicon.astro";
 import Fediverse from "../components/seo/Fediverse.astro";
 import Twitter from "../components/seo/Twitter.astro";
 import OpenGraph from "../components/seo/OpenGraph.astro";
+import JSONLD from "../components/seo/JSONLD.astro";
 import { LocalizedMetadata } from "../lib/site";
 import { strapi } from "../lib/strapi";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
@@ -30,9 +31,28 @@ interface Props {
       alt: string;
     };
   };
+
+  jsonLd?:
+    | {
+        type: "BlogPosting";
+        headline: string;
+        description: string;
+        datePublished: string;
+        dateModified: string;
+        author: {
+          name: string;
+          url: string;
+        };
+        keywords: string;
+        image?: string;
+        url: string;
+      }
+    | {
+        type: "WebSite" | "Organization" | "Person";
+      };
 }
 
-const { meta, openGraph = undefined } = Astro.props;
+const { meta, openGraph = undefined, jsonLd = undefined } = Astro.props;
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
@@ -78,6 +98,7 @@ const trainings = await strapi.fetchTrainings();
         />
       )
     }
+    {jsonLd !== undefined && <JSONLD schema={jsonLd} />}
     <link rel="preconnect" href="https://cdn.mares.cz" />
     <GoogleAnalytics />
   </head>
