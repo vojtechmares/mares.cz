@@ -11,6 +11,7 @@ import OpenGraph from "../components/seo/OpenGraph.astro";
 import { LocalizedMetadata } from "../lib/site";
 import { strapi } from "../lib/strapi";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
+import CookieConsent from "../components/layout/CookieConsent.astro";
 
 interface Props {
   meta?: {
@@ -84,5 +85,6 @@ const trainings = await strapi.fetchTrainings();
     <Navigation pages={pages} />
     <slot />
     <Footer pages={pages} trainings={trainings} />
+    <CookieConsent />
   </body>
 </html>

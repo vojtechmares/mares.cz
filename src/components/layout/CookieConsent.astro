@@ -1,0 +1,15 @@
+---
+import { CookieConsentBar } from "./cookie-consent-bar";
+import UpdateConsentScript from "./UpdateConsentScript.astro";
+
+// Check if user has already made a cookie consent decision
+const cookieConsent = Astro.cookies.get("cookie-consent");
+const shouldShowConsent = !cookieConsent;
+
+// If user accepted cookies, pass that information to the client
+const hasAcceptedCookies = cookieConsent?.value === "accept";
+---
+
+{shouldShowConsent && <CookieConsentBar client:load />}
+
+{hasAcceptedCookies && <UpdateConsentScript />}
