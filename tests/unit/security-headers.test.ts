@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import Fastify, { type FastifyInstance } from "fastify";
 import fastifyMiddie from "@fastify/middie";
+import { applySecurityHeaders } from "../../src/middleware/security-headers.js";
 
 describe("Security Headers", () => {
   let app: FastifyInstance;
@@ -12,23 +13,8 @@ describe("Security Headers", () => {
 
     await app.register(fastifyMiddie);
 
-    // Middleware to add security headers (same as in server.mjs)
-    app.use((req, res, next) => {
-      res.setHeader("X-Frame-Options", "SAMEORIGIN");
-      res.setHeader("X-Content-Type-Options", "nosniff");
-      res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-      res.setHeader(
-        "Permissions-Policy",
-        "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
-      );
-      res.setHeader(
-        "Content-Security-Policy",
-        "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://cdn.mares.cz data:; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests",
-      );
-      res.removeHeader("Server");
-      res.removeHeader("X-Powered-By");
-      next();
-    });
+    // Apply security headers middleware
+    app.use(applySecurityHeaders);
 
     // Add a simple test route
     app.get("/test", async () => {
