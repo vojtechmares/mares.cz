@@ -27,11 +27,11 @@ ENV NODE_ENV="production"
 
 COPY . .
 RUN \
-    --mount=type=secret,id=STRAPI_API_URL,env=STRAPI_API_URL \
-    --mount=type=secret,id=STRAPI_API_TOKEN,env=STRAPI_API_TOKEN \
-    --mount=type=secret,id=NOTION_API_KEY,env=NOTION_API_KEY \
-    --mount=type=secret,id=NOTION_TRAINING_SESSIONS_DATABASE_ID,env=NOTION_TRAINING_SESSIONS_DATABASE_ID \
-    pnpm run build
+  --mount=type=secret,id=STRAPI_API_URL,env=STRAPI_API_URL \
+  --mount=type=secret,id=STRAPI_API_TOKEN,env=STRAPI_API_TOKEN \
+  --mount=type=secret,id=NOTION_API_KEY,env=NOTION_API_KEY \
+  --mount=type=secret,id=NOTION_TRAINING_SESSIONS_DATABASE_ID,env=NOTION_TRAINING_SESSIONS_DATABASE_ID \
+  pnpm run build
 
 FROM base AS runtime
 
