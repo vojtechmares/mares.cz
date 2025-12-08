@@ -1,46 +1,62 @@
-# Astro Starter Kit: Basics
+# mares.cz
 
-```sh
-pnpm create astro@latest -- --template basics
+Personal website built with Astro 5, deployed as a containerized application to Kubernetes.
+
+## Overview
+
+Bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS and training session data from Notion API.
+
+## Tech Stack
+
+- **Framework**: Astro 5 with SSR
+- **Runtime**: Node.js 24 (Alpine)
+- **Server**: Fastify
+- **Styling**: Tailwind CSS v4
+- **Content**: Strapi CMS + Notion API
+- **Deployment**: Kubernetes with Helm
+
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start dev server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run production build locally
+pnpm run-like-prod
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Docker
 
-## 🚀 Project Structure
+```bash
+# Build container image
+task docker:build
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+# Run container locally
+task docker:run
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Environment Variables
 
-## 🧞 Commands
+Required variables (store in `.prod.env` for local development):
 
-All commands are run from the root of the project, from a terminal:
+- `STRAPI_API_URL` - Strapi CMS endpoint
+- `STRAPI_API_TOKEN` - Strapi authentication token
+- `NOTION_API_KEY` - Notion API key
+- `NOTION_TRAINING_SESSIONS_DATABASE_ID` - Notion database ID
+- `DISABLE_ANALYTICS` - Disable Google Analytics (optional)
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## Contributing
 
-## 👀 Want to learn more?
+- Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages
+- Sign off all commits with `--signoff` flag
+- Run `pnpm format:fix` before committing
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+
+Private project - All rights reserved
