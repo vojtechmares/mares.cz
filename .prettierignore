@@ -7,10 +7,12 @@ pnpm-workspace.yaml
 
 # claude
 .claude/settings.local.json
+.mcp.json
 
 # general
 node_modules
 dist
+.astro/
 
 # github
 .github
