@@ -41,6 +41,7 @@ type Props = {
   href?: string;
   children?: ReactNode;
   type?: "text/html" | "application/rss+xml" | "application/atom+xml";
+  onClick?: () => void;
 };
 
 export function Button({
@@ -51,6 +52,7 @@ export function Button({
   className,
   href,
   children,
+  onClick,
 }: Props) {
   if (variant === "outline" && color === "amber") {
     throw new Error("Outline buttons cannot be amber");
@@ -71,6 +73,10 @@ export function Button({
       </a>
     );
   } else {
-    return <button className={className}>{children}</button>;
+    return (
+      <button className={className} onClick={onClick}>
+        {children}
+      </button>
+    );
   }
 }
