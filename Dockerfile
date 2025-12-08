@@ -39,7 +39,6 @@ RUN adduser -D nodejs
 
 COPY --chown=nodejs:nodejs --from=build /app/src/fonts ./src/fonts
 COPY --chown=nodejs:nodejs --from=build /app/src/images ./src/images
-COPY --chown=nodejs:nodejs --from=build /app/server.mjs ./
 COPY --chown=nodejs:nodejs --from=prod-deps /app/node_modules ./node_modules
 COPY --chown=nodejs:nodejs --from=build /app/dist ./dist
 
@@ -47,4 +46,4 @@ EXPOSE 8080
 
 USER nodejs
 
-CMD ["node", "./server.mjs"]
+CMD ["node", "./dist/server-build/server.js"]

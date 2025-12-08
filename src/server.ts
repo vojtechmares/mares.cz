@@ -2,19 +2,21 @@ import Fastify from "fastify";
 import fastifyMiddie from "@fastify/middie";
 import fastifyStatic from "@fastify/static";
 import { fileURLToPath } from "node:url";
-import { handler as ssrHandler } from "./dist/server/entry.mjs";
+import type { IncomingMessage, ServerResponse } from "node:http";
 
 const app = Fastify({ logger: true });
 
 await app
   .register(fastifyStatic, {
-    root: fileURLToPath(new URL("./dist/client", import.meta.url)),
-    cacheControl: "public, max-age=31536000, immutable",
+    root: fileURLToPath(new URL("../client", import.meta.url)),
+    setHeaders: (res) => {
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    },
   })
   .register(fastifyMiddie);
 
 // Middleware to add security headers
-app.use((req, res, next) => {
+app.use((req: IncomingMessage, res: ServerResponse, next: () => void) => {
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -31,7 +33,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(ssrHandler);
+// Import SSR handler dynamically after build
+const { handler } = await import("../server/entry.mjs");
+
+app.use(handler);
 
 app.get("/_/livez", { config: { otel: false } }, async (_request, _reply) => {
   return { message: "OK" };
