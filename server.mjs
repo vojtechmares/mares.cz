@@ -12,6 +12,18 @@ await app
     cacheControl: "public, max-age=31536000, immutable",
   })
   .register(fastifyMiddie);
+
+// Add security headers to all responses
+app.addHook("onRequest", async (_request, reply) => {
+  reply.header("X-Frame-Options", "SAMEORIGIN");
+  reply.header("X-Content-Type-Options", "nosniff");
+  reply.header("Referrer-Policy", "strict-origin-when-cross-origin");
+  reply.header(
+    "Permissions-Policy",
+    "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+  );
+});
+
 app.use(ssrHandler);
 
 app.get("/_/livez", { config: { otel: false } }, async (_request, _reply) => {
