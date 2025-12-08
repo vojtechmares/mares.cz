@@ -6,13 +6,6 @@ import { handler as ssrHandler } from "./dist/server/entry.mjs";
 
 const app = Fastify({ logger: true });
 
-await app
-  .register(fastifyStatic, {
-    root: fileURLToPath(new URL("./dist/client", import.meta.url)),
-    cacheControl: "public, max-age=31536000, immutable",
-  })
-  .register(fastifyMiddie);
-
 // Add security headers to all responses
 app.addHook("onRequest", async (_request, reply) => {
   reply.header("X-Frame-Options", "SAMEORIGIN");
@@ -29,6 +22,13 @@ app.addHook("onRequest", async (_request, reply) => {
   reply.removeHeader("Server");
   reply.removeHeader("X-Powered-By");
 });
+
+await app
+  .register(fastifyStatic, {
+    root: fileURLToPath(new URL("./dist/client", import.meta.url)),
+    cacheControl: "public, max-age=31536000, immutable",
+  })
+  .register(fastifyMiddie);
 
 app.use(ssrHandler);
 
