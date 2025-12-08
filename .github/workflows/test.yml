@@ -44,3 +44,7 @@ jobs:
       - name: format check
         shell: bash
         run: pnpm format
+
+      - name: test
+        shell: bash
+        run: pnpm test
