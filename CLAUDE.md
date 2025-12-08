@@ -20,6 +20,11 @@ This is a personal website (mares.cz) built with Astro 5, deployed as a containe
 - `pnpm format:fix` - Auto-fix formatting issues with Prettier
 - `pnpm format:check` - Check formatting (runs on pre-commit via Husky)
 
+**Docker:**
+
+- `task docker:build` - Build Docker image with production secrets from .prod.env
+- `task docker:run` - Run Docker container locally with production environment variables
+
 **Deployment:**
 
 - `pnpm deploy` - Build and deploy to Cloudflare Workers
@@ -28,6 +33,7 @@ This is a personal website (mares.cz) built with Astro 5, deployed as a containe
 **Package Manager:**
 
 - Use `pnpm` exclusively (version 10.23.0 specified in packageManager field)
+- Use `task` for Docker operations (configured in Taskfile.yml)
 
 ## Architecture
 
