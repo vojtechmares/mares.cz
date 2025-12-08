@@ -15,6 +15,9 @@
     "format": "prettier . --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "prepare": "husky"
   },
   "dependencies": {
@@ -52,11 +55,13 @@
     "@playwright/test": "^1.57.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^24.10.1",
+    "@vitest/ui": "^4.0.15",
     "husky": "^9.1.7",
     "oxlint": "^1.31.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.2"
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "vitest": "^4.0.15"
   },
   "packageManager": "pnpm@10.23.0"
 }
