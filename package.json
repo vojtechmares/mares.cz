@@ -6,11 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && wrangler dev",
     "run-like-prod": "astro build && node server.mjs",
     "astro": "astro",
-    "deploy": "astro build && wrangler deploy",
-    "cf-typegen": "wrangler types",
     "format:fix": "prettier . --write",
     "format": "prettier . --check",
     "lint": "oxlint",
