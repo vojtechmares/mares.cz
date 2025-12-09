@@ -8,6 +8,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "lbh.knowing-koala.k8s.vxm.cz"
     # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     haproxy.org/ssl-redirect: "true"
+    haproxy.org/ssl-redirect-port: "443"
 spec:
   ingressClassName: haproxy
   tls:
