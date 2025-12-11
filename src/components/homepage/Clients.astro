@@ -10,6 +10,8 @@ import logoFakturoid from "../../images/logos/fakturoid.svg";
 import logoCybroslabs from "../../images/logos/cybroslabs-black.jpeg";
 import logoNUMOTEQ from "../../images/logos/numoteq.png";
 import logoNOTINO from "../../images/logos/notino.svg";
+import logoPartners from "../../images/logos/partners.png";
+import clsx from "clsx";
 
 type Client = {
   name: string;
@@ -22,6 +24,7 @@ const clients: Client[] = [
   { name: "Cybros Labs", logo: logoCybroslabs },
   { name: "NUMOTEQ", logo: logoNUMOTEQ },
   { name: "NOTINO", logo: logoNOTINO },
+  { name: "Partners", logo: logoPartners },
 ];
 ---
 
@@ -33,7 +36,7 @@ const clients: Client[] = [
       spolupracovat.
     </p>
     <div
-      class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5"
+      class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-3"
     >
       {
         clients.map((client) => (
