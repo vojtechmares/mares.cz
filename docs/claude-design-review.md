@@ -180,7 +180,7 @@ Color usage lacks standardization and semantic meaning:
 - `text-zinc-700` (body text)
 - `text-zinc-300` (muted text)
 - `text-amber-500` (accent)
-- `bg-zinc-50` (light background)
+- `bg-zinc-100` (light background)
 - `bg-zinc-100` (card background)
 
 **Problems**:
@@ -403,7 +403,7 @@ export const colors = {
   background: {
     primary: "bg-amber-500",
     secondary: "bg-zinc-900",
-    muted: "bg-zinc-50",
+    muted: "bg-zinc-100",
     surface: "bg-white",
   },
   // Text
@@ -876,7 +876,7 @@ export const colorTokens = {
   // Backgrounds
   "bg-primary": "bg-amber-500",
   "bg-secondary": "bg-zinc-900",
-  "bg-muted": "bg-zinc-50",
+  "bg-muted": "bg-zinc-100",
   "bg-surface": "bg-white",
 
   // Text
@@ -901,7 +901,7 @@ variant="inverse"   → text-white
 variant="accent"    → text-amber-500
 
 // Section component variants
-variant="default"   → bg-zinc-50
+variant="default"   → bg-zinc-100
 variant="surface"   → bg-white
 variant="dark"      → bg-zinc-900
 variant="accent"    → bg-amber-500

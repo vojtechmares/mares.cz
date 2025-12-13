@@ -15,7 +15,7 @@ const backgroundStyles = {
   white: "bg-white",
   black: "bg-zinc-900",
   amber: "bg-amber-500",
-  zinc: "bg-zinc-50",
+  zinc: "bg-zinc-100",
 };
 
 export function Section({
