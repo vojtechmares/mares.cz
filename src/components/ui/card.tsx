@@ -10,10 +10,10 @@ type CardProps = {
 };
 
 const backgroundStyles = {
-  white: "bg-white",
+  white: "bg-white shadow-xl shadow-zinc-900/10",
   black: "bg-zinc-900",
   amber: "bg-amber-500",
-  zinc: "bg-zinc-50",
+  zinc: "bg-zinc-100 shadow-xl shadow-zinc-900/10",
   "amber-light": "bg-amber-100",
 };
 
