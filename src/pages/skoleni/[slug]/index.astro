@@ -3,6 +3,7 @@ import { Article } from "../../../components/blog/article";
 import { Logo } from "../../../components/training/logo";
 import { CompactTrainingSessionsTable } from "../../../components/training/training-sessions-table";
 import { Button } from "../../../components/ui/button";
+import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
@@ -69,17 +70,42 @@ const openGraph = {
           <div class="mt-8 md:col-span-2 md:mt-0">
             {
               sessions.length > 0 ? (
-                <div class="mb-4">
+                <Card className="mb-10">
                   <Heading level="h2" className="mb-4">
                     Veřejné termíny školení
                   </Heading>
                   <CompactTrainingSessionsTable sessions={sessions} />
-                </div>
+                </Card>
               ) : null
             }
+            <Card className="mb-10">
+              <Heading level="h2" className="mb-4">Cena za školení</Heading>
+              <dl class="sm:divide-y sm:divide-zinc-300">
+                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
+                  <dt class="font-medium text-zinc-700">Veřejný termín</dt>
+                  <dd class="text-zinc-900">
+                    {formatter.format(training.priceOpen)} bez DPH
+                  </dd>
+                </div>
+                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
+                  <dt class="font-medium text-zinc-700">Firemní školení</dt>
+                  <dd class="text-zinc-900">
+                    {formatter.format(training.priceCorporate)} bez DPH
+                  </dd>
+                </div>
+              </dl>
+              <Button
+                variant="solid"
+                color="amber"
+                className="w-full text-lg font-medium"
+                href="mailto:vojtech@mares.cz"
+              >
+                Nezávazně poptat
+              </Button>
+            </Card>
             {
               training.days === 2 ? (
-                <div class="mb-4">
+                <Card className="mb-10">
                   <div class="flex">
                     <div class="shrink-0">
                       {/* <ExclamationTriangleIcon class="h-5 w-5 text-yellow-400" aria-hidden="true" /> */}
@@ -103,36 +129,9 @@ const openGraph = {
                       </p>
                     </div>
                   </div>
-                </div>
+                </Card>
               ) : null
             }
-            <div>
-              <Heading level="h2" className="mb-4"> Cena za školení </Heading>
-              <dl class="sm:divide-y sm:divide-zinc-400">
-                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                  <dt class="font-medium text-zinc-700">Veřejný termín</dt>
-                  <dd class="">
-                    {formatter.format(training.priceOpen)} bez DPH
-                  </dd>
-                </div>
-                <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                  <dt class="font-medium text-zinc-700">Firemní školení</dt>
-                  <dd class="">
-                    {formatter.format(training.priceCorporate)} bez DPH
-                  </dd>
-                </div>
-              </dl>
-            </div>
-            <div class="mt-4">
-              <Button
-                variant="solid"
-                color="amber"
-                className="w-full text-lg font-medium"
-                href="mailto:vojtech@mares.cz"
-              >
-                Nezávazně poptat
-              </Button>
-            </div>
           </div>
         </div>
       </Container>
