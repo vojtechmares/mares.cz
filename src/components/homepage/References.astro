@@ -7,6 +7,7 @@ import avatarLadislavCapka from "../../images/people/ladislav-capka.jpg";
 import avatarBalintCsoka from "../../images/people/balint-csoka.png";
 import { Section } from "../ui/section";
 import { Heading } from "../ui/heading";
+import { Card } from "../ui/card";
 
 const references = [
   {
@@ -69,13 +70,10 @@ const references = [
         Co o mně říkají moji klienti.
       </p>
     </div>
-    <ul
-      role="list"
-      class="mx-auto mt-10 flex max-w-2xl flex-col gap-y-6 sm:gap-y-8 lg:max-w-4xl"
-    >
+    <div role="list" class="mx-auto mt-10 flex max-w-2xl flex-col lg:max-w-4xl">
       {
         references.map((testimonial, idx) => (
-          <li>
+          <Card>
             <figure class="relative rounded-3xl bg-white p-6 shadow-xl shadow-zinc-900/10">
               <svg
                 aria-hidden="true"
@@ -114,9 +112,9 @@ const references = [
                 </div>
               </figcaption>
             </figure>
-          </li>
+          </Card>
         ))
       }
-    </ul>
+    </div>
   </Container>
 </Section>
