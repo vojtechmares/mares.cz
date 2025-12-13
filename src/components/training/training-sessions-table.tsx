@@ -106,7 +106,7 @@ export function CompactTrainingSessionsTable({
   sessions,
 }: TrainingSessionTableProps) {
   return (
-    <table className="min-w-full divide-y divide-gray-300">
+    <table className="min-w-full divide-y divide-zinc-300">
       <thead>
         <tr>
           <th
