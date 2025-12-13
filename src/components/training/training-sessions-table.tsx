@@ -8,7 +8,7 @@ export type TrainingSessionTableProps = {
 
 export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
-    <table className="min-w-full divide-y divide-gray-300">
+    <table className="w-full divide-y divide-gray-300">
       <thead>
         <tr>
           <th
@@ -106,7 +106,7 @@ export function CompactTrainingSessionsTable({
   sessions,
 }: TrainingSessionTableProps) {
   return (
-    <table className="min-w-full divide-y divide-zinc-300">
+    <table className="min-w-full md:divide-y md:divide-zinc-300">
       <thead>
         <tr>
           <th
@@ -138,7 +138,7 @@ export function CompactTrainingSessionsTable({
       <tbody className="divide-y divide-zinc-300">
         {sessions.map((training) => (
           <tr key={`${training.slug}-${training.dates?.start}`}>
-            <td className="py-4 pr-3 pl-4 font-medium whitespace-nowrap text-zinc-900 sm:pl-0">
+            <td className="py-4 font-medium whitespace-nowrap text-zinc-900">
               <TrainingDate dates={training.dates} />
               <dl className="py-4 md:hidden">
                 <dt className="sr-only">Místo</dt>
