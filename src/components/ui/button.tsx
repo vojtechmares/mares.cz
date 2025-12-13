@@ -13,7 +13,7 @@ const variantStyles = {
     black:
       "bg-zinc-900 text-white hover:bg-zinc-700 active:bg-zinc-800 focus-visible:outline-zinc-900",
     amber:
-      "bg-amber-500 text-white hover:bg-amber-500 active:bg-amber-500 focus-visible:outline-amber-500",
+      "bg-amber-500 hover:bg-amber-500 active:bg-amber-500 focus-visible:outline-amber-500",
     white:
       "bg-white text-zinc-900 hover:bg-amber-50 active:bg-amber-500 focus-visible:outline-white",
   },
