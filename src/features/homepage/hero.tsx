@@ -41,11 +41,7 @@ export function Hero({ children }: HeroProps) {
             <Button href="https://cal.com/vojtechmares/30min" size="large">
               Domluvme si schůzku
             </Button>
-            <Button
-              href="mailto:vojtech@mares.cz"
-              size="large"
-              variant="outline"
-            >
+            <Button href="mailto:vojtech@mares.cz" size="large" style="outline">
               Napište mi
             </Button>
           </div>
