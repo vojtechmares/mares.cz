@@ -1,28 +1,29 @@
 import { Button } from "../../components/ui/button";
 import { Heading } from "../../components/ui/heading";
-import { CallToAction as CTA } from "../../components/landing/call-to-action";
+import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 
 export function CallToAction() {
   return (
-    <CTA id="pojdme-do-toho">
+    <Section id="pojdme-do-toho" variant="inverse">
       <div className="mx-auto max-w-xl text-center">
-        <Heading level="h2" variant="primary">
+        <Heading level="h2" variant="inverse">
           Pojďme do toho společně
         </Heading>
-        <p className="mt-4 text-lg tracking-tight text-zinc-900">
+        <Text variant="inverse" className="mt-4">
           Nastal čas posunout vaši infrastrukturu na úroveň současných
           standardů. Infrastruktura má vaši aplikaci představit světu, nikoli ji
           držet zpátky.
-        </p>
+        </Text>
         <Button
           href="https://cal.com/vojtechmares/30min"
-          variant="primary"
+          variant="accent"
           size="large"
           className="mt-10"
         >
           Domluvme si schůzku
         </Button>
       </div>
-    </CTA>
+    </Section>
   );
 }

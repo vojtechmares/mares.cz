@@ -1,7 +1,9 @@
 import { Button } from "../../components/ui/button";
-import { CallToAction } from "../../components/landing/call-to-action";
 import { Heading } from "../../components/ui/heading";
 import { strapi } from "../../lib/strapi";
+import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
+import { Container } from "../../components/ui/container";
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   if (!trainingSlug) {
@@ -12,41 +14,45 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
     const training = await strapi.getTraining(trainingSlug);
 
     return (
-      <CallToAction id="skoleni">
-        <div className="flex flex-col justify-between md:flex-row">
-          <div className="max-w-3xl">
-            <Heading level="h2">{training.title} školení</Heading>
-            <p className="mt-4 text-lg tracking-tight text-zinc-900">
-              {training.adText}
-            </p>
-            <div className="flex flex-col md:flex-row md:gap-x-6">
-              <Button
-                href="mailto:vojtech@mares.cz"
-                variant="primary"
-                size="large"
-                className="mt-10"
-              >
-                Nezávazně poptat firemní školení
-              </Button>
-              <Button
-                href={"/skoleni/" + training.slug}
-                variant="secondary"
-                size="large"
-                className="mt-10"
-              >
-                Více informací o školení
-              </Button>
+      <Section id="skoleni" variant="inverse">
+        <Container>
+          <div className="flex flex-col justify-between md:flex-row">
+            <div className="max-w-3xl">
+              <Heading level="h2" variant="inverse">
+                {training.title} školení
+              </Heading>
+              <Text variant="inverse" className="mt-4">
+                {training.adText}
+              </Text>
+              <div className="flex flex-col md:flex-row md:gap-x-6">
+                <Button
+                  href="mailto:vojtech@mares.cz"
+                  variant="accent"
+                  size="large"
+                  className="mt-10"
+                >
+                  Nezávazně poptat firemní školení
+                </Button>
+                <Button
+                  href={"/skoleni/" + training.slug}
+                  variant="secondary"
+                  size="large"
+                  className="mt-10"
+                >
+                  Více informací o školení
+                </Button>
+              </div>
             </div>
+            <img
+              src={training.icon?.url as string}
+              alt=""
+              className="mx-auto hidden p-2 invert md:block"
+              width="196"
+              height="196"
+            />
           </div>
-          <img
-            src={training.icon?.url as string}
-            alt=""
-            className="mx-auto hidden p-2 md:block"
-            width="196"
-            height="196"
-          />
-        </div>
-      </CallToAction>
+        </Container>
+      </Section>
     );
   } catch (error) {
     console.error("Failed to load training ad:", error);
