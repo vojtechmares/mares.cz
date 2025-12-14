@@ -1,13 +1,10 @@
 ---
 import { Image } from "astro:assets";
+import { ReferencesContainer, ReferenceCard } from "./references";
 
-import { Container } from "../ui/container";
 import avatarAntoninHoskovec from "../../images/people/antonin-hoskovec.jpg";
 import avatarLadislavCapka from "../../images/people/ladislav-capka.jpg";
 import avatarBalintCsoka from "../../images/people/balint-csoka.png";
-import { Section } from "../ui/section";
-import { Heading } from "../ui/heading";
-import { Card } from "../ui/card";
 
 const references = [
   {
@@ -35,7 +32,6 @@ const references = [
     },
   },
   {
-    // content: "Pán Mareš nám poskytol skvele školenia na tematiku pipelines, CI/CD a hands-on ukážky s príkladmi z realného života na základe jeho bohatých skúsenosti v oblasti DevOps. Máme v tíme seniorných ľudí v oblasti DevOps, aj začiatočníkov, obsah a forma jeho školenia bola vhodná pre obe skupiny, palec hore.",
     content: `\
                 <strong>Školení GitHub Actions</strong>
                 <br />
@@ -64,55 +60,22 @@ const references = [
 ];
 ---
 
-<Section
-  id="references"
-  variant="default"
-  aria-label="Co o mně napsali moji klienti."
->
-  <Container>
-    <div class="mx-auto max-w-2xl md:text-center">
-      <Heading level="h2">Reference</Heading>
-      <p class="mt-4 text-lg tracking-tight text-zinc-700">
-        Co o mně říkají moji klienti.
-      </p>
-    </div>
-    <div role="list" class="mx-auto mt-10 flex max-w-2xl flex-col lg:max-w-4xl">
-      {
-        references.map((testimonial, idx) => (
-          <Card variant="surface" className="mb-10">
-            <figure>
-              <blockquote class="relative">
-                <p class="text-lg tracking-tight text-zinc-900">
-                  {testimonial.content.includes("<") ? (
-                    <Fragment set:html={testimonial.content} />
-                  ) : (
-                    testimonial.content
-                  )}
-                </p>
-              </blockquote>
-              <figcaption class="relative mt-6 flex items-center justify-between border-t border-zinc-300 pt-6">
-                <div>
-                  <div class="font-display text-base text-zinc-900">
-                    {testimonial.author.name}
-                  </div>
-                  <div class="mt-1 text-sm text-zinc-700">
-                    {testimonial.author.role}
-                  </div>
-                </div>
-                <div class="overflow-hidden rounded-full bg-zinc-100">
-                  <Image
-                    class="h-14 w-14 object-cover"
-                    src={testimonial.author.image}
-                    alt={testimonial.author.name}
-                    width={56}
-                    height={56}
-                  />
-                </div>
-              </figcaption>
-            </figure>
-          </Card>
-        ))
-      }
-    </div>
-  </Container>
-</Section>
+<ReferencesContainer>
+  {
+    references.map((ref) => (
+      <ReferenceCard
+        content={ref.content}
+        authorName={ref.author.name}
+        authorRole={ref.author.role}
+      >
+        <Image
+          class="h-14 w-14 object-cover"
+          src={ref.author.image}
+          alt={ref.author.name}
+          width={56}
+          height={56}
+        />
+      </ReferenceCard>
+    ))
+  }
+</ReferencesContainer>
