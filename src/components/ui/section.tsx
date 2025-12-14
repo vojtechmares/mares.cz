@@ -1,21 +1,23 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+import { colors, spacing, type SectionSize } from "../../lib/design-tokens";
+
+type SectionVariant = "surface" | "inverse" | "accent" | "default";
 
 type SectionProps = {
   children?: ReactNode;
   className?: string;
-  background?: "white" | "black" | "amber" | "zinc";
+  variant?: SectionVariant;
+  size?: SectionSize;
   id?: string;
   ariaLabel?: string;
 };
 
-const baseStyles = "py-20 sm:py-32";
-
-const backgroundStyles = {
-  white: "bg-white",
-  black: "bg-zinc-900",
-  amber: "bg-amber-500",
-  zinc: "bg-zinc-100",
+const variantStyles: Record<SectionVariant, string> = {
+  surface: colors.background.surface,
+  inverse: colors.background.inverse,
+  accent: colors.accent.default,
+  default: colors.background.default,
 };
 
 export function Section({
@@ -23,13 +25,14 @@ export function Section({
   className,
   id,
   ariaLabel,
-  background = "zinc",
+  variant = "default",
+  size = "md",
 }: SectionProps) {
   return (
     <section
       id={id}
       aria-label={ariaLabel}
-      className={clsx(className, backgroundStyles[background], baseStyles)}
+      className={clsx(className, variantStyles[variant], spacing.section[size])}
     >
       {children}
     </section>

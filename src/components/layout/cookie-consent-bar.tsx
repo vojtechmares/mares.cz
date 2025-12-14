@@ -51,16 +51,16 @@ export function CookieConsentBar() {
       </p>
       <div className="flex flex-none items-center gap-x-5">
         <Button
-          variant="solid"
-          color="black"
+          style="solid"
+          variant="primary"
           className="cursor-pointer"
           onClick={() => handleConsent("accept")}
         >
           Přijmout vše
         </Button>
         <Button
-          variant="outline"
-          color="black"
+          style="outline"
+          variant="primary"
           className="cursor-pointer"
           onClick={() => handleConsent("deny")}
         >

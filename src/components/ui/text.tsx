@@ -1,18 +1,22 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+import { colors } from "../../lib/design-tokens";
+
+type TextVariant = "primary" | "secondary" | "muted" | "inverse";
 
 type TextProps = {
   children?: ReactNode;
   className?: string;
-  text?: "black" | "white" | "zinc";
+  variant?: TextVariant;
 };
 
-const textStyles = {
-  black: "text-zinc-900",
-  white: "text-white",
-  zinc: "text-zinc-300",
+const variantStyles: Record<TextVariant, string> = {
+  primary: colors.text.primary,
+  secondary: colors.text.secondary,
+  muted: colors.text.muted,
+  inverse: colors.text.inverse,
 };
 
-export function Text({ children, className, text = "black" }: TextProps) {
-  return <p className={clsx(className, textStyles[text])}>{children}</p>;
+export function Text({ children, className, variant = "primary" }: TextProps) {
+  return <p className={clsx(className, variantStyles[variant])}>{children}</p>;
 }

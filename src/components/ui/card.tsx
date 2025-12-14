@@ -1,42 +1,51 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+import { colors, spacing, radius, shadows } from "../../lib/design-tokens";
+
+type CardVariant =
+  | "surface"
+  | "inverse"
+  | "accent"
+  | "default"
+  | "accent-light";
+type CardBorder = "none";
 
 type CardProps = {
   children?: ReactNode;
-  background?: "white" | "black" | "amber" | "zinc" | "amber-light";
+  variant?: CardVariant;
   className?: string;
-  border?: "none"; // TODO: Add more border options
+  border?: CardBorder;
   shadow?: boolean;
 };
 
-const backgroundStyles = {
-  white: "bg-white shadow-xl shadow-zinc-900/10",
-  black: "bg-zinc-900",
-  amber: "bg-amber-500",
-  zinc: "bg-zinc-100 shadow-xl shadow-zinc-900/10",
-  "amber-light": "bg-amber-100",
+const variantStyles: Record<CardVariant, string> = {
+  surface: `${colors.background.surface} shadow-xl shadow-zinc-900/10`,
+  inverse: colors.background.inverse,
+  accent: colors.accent.default,
+  default: `${colors.background.default} shadow-xl shadow-zinc-900/10`,
+  "accent-light": colors.accent.light,
 };
 
-const borderStyles = {
+const borderStyles: Record<CardBorder, string> = {
   none: "border-none",
 };
 
-const baseStyles = "overflow-hidden rounded-3xl px-4 py-8 sm:px-8";
+const baseStyles = `overflow-hidden ${radius.lg} ${spacing.card}`;
 
 export function Card({
   children,
   className,
-  background = "zinc",
+  variant = "default",
   border = "none",
-  shadow = false,
+  shadow: showShadow = false,
 }: CardProps) {
   return (
     <section
       className={clsx(
-        backgroundStyles[background],
+        variantStyles[variant],
         borderStyles[border],
         baseStyles,
-        shadow ? "shadow" : "",
+        showShadow ? shadows.md : "",
         className,
       )}
     >

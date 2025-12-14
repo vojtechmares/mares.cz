@@ -11,7 +11,7 @@ export function CallToAction({
   children: ReactNode;
 }) {
   return (
-    <Section id={id} background="amber">
+    <Section id={id} variant="accent">
       <Container>{children}</Container>
     </Section>
   );

@@ -37,11 +37,11 @@ export function Cooperation() {
     <Section
       id="z-nuly-do-cloudu"
       aria-label="Z nuly do cloudu"
-      background="black"
+      variant="inverse"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <Heading level="h2" text="white">
+          <Heading level="h2" variant="inverse">
             Z nuly do cloudu
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-zinc-300">

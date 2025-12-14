@@ -1,50 +1,41 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+import { typography, colors, type HeadingLevel } from "../../lib/design-tokens";
+
+type HeadingVariant = "primary" | "inverse" | "accent";
 
 type HeadingProps = {
   children?: ReactNode;
   className?: string;
-  level?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  level?: HeadingLevel;
   ariaLabel?: string;
-  text?: "black" | "white" | "amber";
+  variant?: HeadingVariant;
   id?: string;
 };
 
-const baseStyles = "font-display tracking-tight";
-
-const levelStyles = {
-  h1: "text-4xl sm:text-5xl font-bold",
-  h2: "text-3xl sm:text-4xl font-bold",
-  h3: "text-2xl sm:text-3xl font-medium",
-};
-
-const textStyles = {
-  black: "text-zinc-900",
-  white: "text-white",
-  amber: "text-amber-500",
+const variantStyles: Record<HeadingVariant, string> = {
+  primary: colors.text.primary,
+  inverse: colors.text.inverse,
+  accent: colors.accent.text,
 };
 
 export function Heading({
   children,
   className,
   level = "h1",
-  text = "black",
+  variant = "primary",
   id = undefined,
   ariaLabel,
 }: HeadingProps) {
-  if (level === "h4" || level === "h5" || level === "h6") {
-    throw new Error("Headings must be level 1, 2, or 3");
-  }
-
   const Tag = level;
 
   return (
     <Tag
       className={clsx(
         className,
-        levelStyles[level],
-        textStyles[text],
-        baseStyles,
+        typography.heading[level],
+        variantStyles[variant],
+        typography.display,
       )}
       aria-label={ariaLabel}
       id={id}

@@ -22,7 +22,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
             <div className="flex flex-col md:flex-row md:gap-x-6">
               <Button
                 href="mailto:vojtech@mares.cz"
-                color="black"
+                variant="primary"
                 size="large"
                 className="mt-10"
               >
@@ -30,7 +30,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
               </Button>
               <Button
                 href={"/skoleni/" + training.slug}
-                color="white"
+                variant="secondary"
                 size="large"
                 className="mt-10"
               >

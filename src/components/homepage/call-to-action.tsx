@@ -6,7 +6,7 @@ export function CallToAction() {
   return (
     <CTA id="pojdme-do-toho">
       <div className="mx-auto max-w-xl text-center">
-        <Heading level="h2" text="black">
+        <Heading level="h2" variant="primary">
           Pojďme do toho společně
         </Heading>
         <p className="mt-4 text-lg tracking-tight text-zinc-900">
@@ -16,7 +16,7 @@ export function CallToAction() {
         </p>
         <Button
           href="https://cal.com/vojtechmares/30min"
-          color="black"
+          variant="primary"
           size="large"
           className="mt-10"
         >

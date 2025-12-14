@@ -19,7 +19,11 @@ const Training = ({ training, className }: TrainingProps) => {
         alt={`Ikona školení ${training.title}`}
         loading="lazy"
       />
-      <Heading level="h3" className="mt-4 text-center underline" text="amber">
+      <Heading
+        level="h3"
+        className="mt-4 text-center underline"
+        variant="accent"
+      >
         {training.title}
       </Heading>
     </a>
@@ -58,10 +62,10 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
 
 export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
   return (
-    <Section id="skoleni" aria-label="Training" background="black">
+    <Section id="skoleni" aria-label="Training" variant="inverse">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <Heading level="h2" text="white">
+          <Heading level="h2" variant="inverse">
             DevOps školení
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-zinc-300">

@@ -25,14 +25,14 @@ function Service({
 }: ServiceProps) {
   return (
     <Card
-      background={featured ? "amber" : "black"}
+      variant={featured ? "accent" : "inverse"}
       className={clsx(
         "flex flex-col",
         featured ? "order-first lg:order-none" : "md:ring-1 md:ring-zinc-700",
         // "transition duration-300 ease-in-out md:hover:-tranzinc-y-1 md:hover:scale-110",
       )}
     >
-      <Heading level="h3" text={featured ? "black" : "white"}>
+      <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
       <p
@@ -45,8 +45,8 @@ function Service({
       </p>
       <Button
         href={href}
-        variant={featured ? "solid" : "outline"}
-        color={featured ? "black" : "white"}
+        style={featured ? "solid" : "outline"}
+        variant={featured ? "primary" : "secondary"}
         className="mt-6 w-full"
         aria-label={buttonAriaLabel}
       >
@@ -58,10 +58,10 @@ function Service({
 
 export function Services() {
   return (
-    <Section id="sluzby" aria-label="Služby" background="black">
+    <Section id="sluzby" aria-label="Služby" variant="inverse">
       <Container>
         <div className="md:text-center">
-          <Heading level="h2" text="white">
+          <Heading level="h2" variant="inverse">
             Služby
           </Heading>
           <p className="mt-4 text-lg text-zinc-300">
