@@ -448,10 +448,8 @@ export const spacing = {
 
 // Border Radius
 export const radius = {
-  sm: "rounded-lg",
-  md: "rounded-xl",
-  lg: "rounded-2xl",
-  xl: "rounded-3xl",
+  none: "rounded-none",
+  normal: "rounded-3xl",
   full: "rounded-full",
 };
 ```
