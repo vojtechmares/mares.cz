@@ -1,7 +1,7 @@
-import { Container } from "../ui/container";
+import { Container } from "../../components/ui/container";
 import type { Training as TrainingType } from "../../interfaces/training";
-import { Section } from "../ui/section";
-import { Heading } from "../ui/heading";
+import { Section } from "../../components/ui/section";
+import { Heading } from "../../components/ui/heading";
 
 type TrainingProps = {
   training: TrainingType;

@@ -1,8 +1,8 @@
 import clsx from "clsx";
 
-import { Container } from "../ui/container";
-import { Heading } from "../ui/heading";
-import { Section } from "../ui/section";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 const steps = [
   {

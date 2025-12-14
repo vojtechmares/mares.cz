@@ -1,7 +1,7 @@
-import type { Page } from "../interfaces/page";
-import type { Training } from "../interfaces/training";
-import { Container } from "./ui/container";
-import { Button } from "./ui/button";
+import type { Page } from "../../interfaces/page";
+import type { Training } from "../../interfaces/training";
+import { Container } from "../../components/ui/container";
+import { Button } from "../../components/ui/button";
 
 // Social Icons
 function BlueskyIcon() {

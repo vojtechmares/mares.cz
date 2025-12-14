@@ -1,18 +1,18 @@
 ---
 import "../styles/global.css";
 
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import Meta from "../components/seo/Meta.astro";
-import Favicon from "../components/seo/Favicon.astro";
-import Fediverse from "../components/seo/Fediverse.astro";
-import Twitter from "../components/seo/Twitter.astro";
-import OpenGraph from "../components/seo/OpenGraph.astro";
-import JSONLD from "../components/seo/JSONLD.astro";
+import Navigation from "../features/layout/Navigation.astro";
+import Footer from "../features/layout/Footer.astro";
+import Meta from "../features/layout/seo/Meta.astro";
+import Favicon from "../features/layout/seo/Favicon.astro";
+import Fediverse from "../features/layout/seo/Fediverse.astro";
+import Twitter from "../features/layout/seo/Twitter.astro";
+import OpenGraph from "../features/layout/seo/OpenGraph.astro";
+import JSONLD from "../features/layout/seo/JSONLD.astro";
 import { LocalizedMetadata } from "../lib/site";
 import { strapi } from "../lib/strapi";
-import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
-import CookieConsent from "../components/layout/CookieConsent.astro";
+import GoogleAnalytics from "../features/analytics/GoogleAnalytics.astro";
+import CookieConsent from "../features/layout/CookieConsent.astro";
 
 interface Props {
   meta?: {

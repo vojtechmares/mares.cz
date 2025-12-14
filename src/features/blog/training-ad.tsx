@@ -1,6 +1,6 @@
-import { Button } from "../ui/button";
-import { CallToAction } from "../landing/call-to-action";
-import { Heading } from "../ui/heading";
+import { Button } from "../../components/ui/button";
+import { CallToAction } from "../../components/landing/call-to-action";
+import { Heading } from "../../components/ui/heading";
 import { strapi } from "../../lib/strapi";
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Container } from "../ui/container";
-import { Section } from "../ui/section";
-import { Heading } from "../ui/heading";
-import { Card } from "../ui/card";
+import { Container } from "../../components/ui/container";
+import { Section } from "../../components/ui/section";
+import { Heading } from "../../components/ui/heading";
+import { Card } from "../../components/ui/card";
 
 interface ReferencesContainerProps {
   children?: ReactNode;

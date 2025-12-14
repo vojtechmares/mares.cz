@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { Container } from "./ui/container";
-import { Button } from "./ui/button";
+import { Container } from "../../components/ui/container";
+import { Button } from "../../components/ui/button";
 // import {Page} from "@/lib/strapi/types/page"
 
 // import {StaticNavigationLinks} from "@/lib/site"

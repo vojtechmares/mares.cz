@@ -1,6 +1,6 @@
 import type { TrainingSession } from "../../interfaces/training";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 
 export type TrainingSessionTableProps = {
   sessions: TrainingSession[];

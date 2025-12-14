@@ -4,7 +4,7 @@ import sharp from "sharp";
 import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 
-import { CreateTrainingImageComponent } from "../../../components/opengraph-images/training";
+import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
 import { strapi } from "../../../lib/strapi";
 
 export async function GET({ params }: { params: { slug: string } }) {

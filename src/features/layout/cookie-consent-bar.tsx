@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { actions } from "astro:actions";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 
 export function CookieConsentBar() {
   const [isVisible, setIsVisible] = useState(true);

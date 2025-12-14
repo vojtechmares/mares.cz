@@ -1,6 +1,6 @@
-import { Button } from "../ui/button";
-import { Heading } from "../ui/heading";
-import { CallToAction as CTA } from "../landing/call-to-action";
+import { Button } from "../../components/ui/button";
+import { Heading } from "../../components/ui/heading";
+import { CallToAction as CTA } from "../../components/landing/call-to-action";
 
 export function CallToAction() {
   return (

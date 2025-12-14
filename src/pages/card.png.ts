@@ -4,7 +4,7 @@ import sharp from "sharp";
 import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 
-import { CreateHomepageImageComponent } from "../components/opengraph-images/homepage";
+import { CreateHomepageImageComponent } from "../features/opengraph-images/homepage";
 
 export async function GET() {
   const avatarData = await readFile(

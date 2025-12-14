@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { Container } from "../ui/container";
-import { Button } from "../ui/button";
+import { Container } from "../../components/ui/container";
+import { Button } from "../../components/ui/button";
 
 function UnderlineSvg() {
   return (
