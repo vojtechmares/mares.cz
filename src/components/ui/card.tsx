@@ -22,7 +22,7 @@ const variantStyles: Record<CardVariant, string> = {
   surface: `${colors.background.surface} shadow-xl shadow-zinc-900/10`,
   inverse: colors.background.inverse,
   accent: colors.accent.default,
-  default: `${colors.background.default} shadow-xl shadow-zinc-900/10`,
+  default: `${colors.background.default} inset-shadow-sm inset-shadow-zinc-900/10`,
   "accent-light": colors.accent.light,
 };
 
