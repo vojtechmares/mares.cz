@@ -23,7 +23,7 @@ export const colors = {
   text: {
     primary: "text-zinc-900",
     secondary: "text-zinc-700",
-    muted: "text-zinc-500",
+    muted: "text-zinc-300",
     inverse: "text-white",
   },
 
