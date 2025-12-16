@@ -5,6 +5,7 @@ import { Container } from "../../components/ui/container";
 import { Section } from "../../components/ui/section";
 import { Heading } from "../../components/ui/heading";
 import { Card } from "../../components/ui/card";
+import { Text } from "../../components/ui/text";
 
 type ServiceProps = {
   name: string;
@@ -28,26 +29,23 @@ function Service({
       variant={featured ? "accent" : "inverse"}
       className={clsx(
         "flex flex-col",
-        featured ? "order-first lg:order-none" : "md:ring-1 md:ring-zinc-700",
-        // "transition duration-300 ease-in-out md:hover:-tranzinc-y-1 md:hover:scale-110",
+        featured ? "order-first lg:order-0" : "",
       )}
     >
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
-      <p
-        className={clsx(
-          "mt-4 text-base",
-          featured ? "text-zinc-900" : "text-zinc-300",
-        )}
+      <Text
+        variant={featured ? "primary" : "muted"}
+        className={clsx("mt-4 text-base")}
       >
         {description}
-      </p>
+      </Text>
       <Button
         href={href}
         style={featured ? "solid" : "outline"}
         variant={featured ? "primary" : "secondary"}
-        className="mt-6 w-full"
+        className="mt-6"
         aria-label={buttonAriaLabel}
       >
         {buttonText}
