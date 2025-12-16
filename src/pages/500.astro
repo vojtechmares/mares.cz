@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+import { Error as ErrorComponent } from "../features/error/error";
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+---
+
+<!doctype html>
+<html lang="cs" class="min-h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="min-h-full bg-zinc-900">
+    <ErrorComponent
+      status={500}
+      error={error instanceof Error ? error.message : "Unknown error"}
+    />
+  </body>
+</html>
