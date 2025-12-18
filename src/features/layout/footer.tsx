@@ -2,6 +2,8 @@ import type { Page } from "../../interfaces/page";
 import type { Training } from "../../interfaces/training";
 import { Container } from "../../components/ui/container";
 import { Button } from "../../components/ui/button";
+import { Section } from "../../components/ui/section";
+import { Heading } from "../../components/ui/heading";
 
 // Social Icons
 function BlueskyIcon() {
@@ -82,12 +84,12 @@ export function Footer({
   const links = [...staticLinks, ...pageLinks];
 
   return (
-    <footer className="bg-zinc-100">
-      <Container className="py-8">
-        <div className="py-4">
+    <Section className="border-t border-zinc-300">
+      <footer>
+        <Container>
           <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
             <div>
-              <h3 className="text-lg font-medium">Vojtěch Mareš</h3>
+              <Heading level="h3">Vojtěch Mareš</Heading>
               <ul className="mt-4 list-none">
                 <li>
                   <a href="tel:+420732490651" className="underline">
@@ -113,7 +115,7 @@ export function Footer({
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Školení</h3>
+              <Heading level="h3">Školení</Heading>
               <ul className="mt-4 list-disc pl-4">
                 {trainings.map((training) => (
                   <li key={training.slug}>
@@ -125,7 +127,7 @@ export function Footer({
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Důležité odkazy</h3>
+              <Heading level="h3">Důležité odkazy</Heading>
               <ul className="mt-4 list-disc pl-4">
                 {links.map((link) => (
                   <li key={link.href}>
@@ -137,7 +139,7 @@ export function Footer({
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Zaujal jsem vás?</h3>
+              <Heading level="h3">Zaujal jsem vás?</Heading>
               <p className="mt-4">
                 Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl
                 pomoci? Ozvěte se mi &ndash; společně probereme vaše potřeby a
@@ -153,52 +155,52 @@ export function Footer({
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center border-t border-zinc-400/10 py-10 md:flex-row-reverse md:justify-between">
-          <div className="flex gap-x-6">
-            <a
-              href="https://bsky.app/profile/mares.cz"
-              target="_blank"
-              rel="noreferrer"
-              className="group"
-              aria-label="Vojtěch Mareš na Bluesky"
-            >
-              <BlueskyIcon />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/vojtech-mares/"
-              target="_blank"
-              rel="noreferrer"
-              className="group"
-              aria-label="Vojtěch Mareš na LinkedIn"
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href="https://x.com/vojtechmares_"
-              target="_blank"
-              rel="noreferrer"
-              className="group"
-              aria-label="Vojtěch Mareš na X"
-            >
-              <XIcon />
-            </a>
-            <a
-              href="https://github.com/vojtechmares"
-              target="_blank"
-              rel="noreferrer"
-              className="group"
-              aria-label="Vojtěch Mareš na GitHub"
-            >
-              <GitHubIcon />
-            </a>
+          <div className="flex flex-col items-center border-t border-zinc-400/10 py-10 md:flex-row-reverse md:justify-between">
+            <div className="flex gap-x-6">
+              <a
+                href="https://bsky.app/profile/mares.cz"
+                target="_blank"
+                rel="noreferrer"
+                className="group"
+                aria-label="Vojtěch Mareš na Bluesky"
+              >
+                <BlueskyIcon />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/vojtech-mares/"
+                target="_blank"
+                rel="noreferrer"
+                className="group"
+                aria-label="Vojtěch Mareš na LinkedIn"
+              >
+                <LinkedInIcon />
+              </a>
+              <a
+                href="https://x.com/vojtechmares_"
+                target="_blank"
+                rel="noreferrer"
+                className="group"
+                aria-label="Vojtěch Mareš na X"
+              >
+                <XIcon />
+              </a>
+              <a
+                href="https://github.com/vojtechmares"
+                target="_blank"
+                rel="noreferrer"
+                className="group"
+                aria-label="Vojtěch Mareš na GitHub"
+              >
+                <GitHubIcon />
+              </a>
+            </div>
+            <p className="mt-6 text-zinc-700 md:mt-0">
+              Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva
+              vyhrazena.
+            </p>
           </div>
-          <p className="mt-6 text-zinc-700 md:mt-0">
-            Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva
-            vyhrazena.
-          </p>
-        </div>
-      </Container>
-    </footer>
+        </Container>
+      </footer>
+    </Section>
   );
 }
