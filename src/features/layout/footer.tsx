@@ -144,10 +144,12 @@ export function Footer({
                 najdeme řešení na míru.
               </p>
               <div className="mt-5 flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-2">
-                <Button href="https://cal.com/vojtechmares/30min">
+                <Button href="https://cal.com/vojtechmares/30min" size="medium">
                   Domluvme si schůzku
                 </Button>
-                <Button href="mailto:vojtech@mares.cz">Napište mi</Button>
+                <Button href="mailto:vojtech@mares.cz" size="medium">
+                  Napište mi
+                </Button>
               </div>
             </div>
           </div>

@@ -28,7 +28,6 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
                 <Button
                   href="mailto:vojtech@mares.cz"
                   variant="accent"
-                  size="large"
                   className="mt-10"
                 >
                   Nezávazně poptat firemní školení
@@ -36,7 +35,6 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
                 <Button
                   href={"/skoleni/" + training.slug}
                   variant="secondary"
-                  size="large"
                   className="mt-10"
                 >
                   Více informací o školení

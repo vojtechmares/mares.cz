@@ -18,7 +18,6 @@ export function CallToAction() {
         <Button
           href="https://cal.com/vojtechmares/30min"
           variant="accent"
-          size="large"
           className="mt-10"
         >
           Domluvme si schůzku

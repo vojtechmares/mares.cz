@@ -45,7 +45,7 @@ type ButtonProps = {
 export function Button({
   style = "solid",
   variant = "primary",
-  size = "medium",
+  size = "large",
   type = "text/html",
   className,
   href,
