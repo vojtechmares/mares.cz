@@ -111,13 +111,13 @@ export function CompactTrainingSessionsTable({
         <tr>
           <th
             scope="col"
-            className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
+            className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
           >
             Datum
           </th>
           <th
             scope="col"
-            className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
+            className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
           >
             Místo
           </th>
@@ -162,7 +162,7 @@ export function CompactTrainingSessionsTable({
                 </dd>
               </dl>
             </td>
-            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
+            <td className="hidden py-4 whitespace-nowrap text-zinc-700 md:table-cell">
               {training.location}
             </td>
             {/* <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
@@ -229,7 +229,7 @@ function PublicSessionSignUpButton({
   signUpFormURL: URL;
 }) {
   return (
-    <Button href={signUpFormURL.toString()}>
+    <Button href={signUpFormURL.toString()} variant="accent">
       Přihlásit se
       <span className="sr-only">na školení {name}</span>
     </Button>
