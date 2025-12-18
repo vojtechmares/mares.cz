@@ -49,19 +49,26 @@ export const colors = {
 export const typography = {
   // Heading sizes (responsive)
   heading: {
-    h1: "text-4xl sm:text-5xl font-bold",
-    h2: "text-3xl sm:text-4xl font-bold",
-    h3: "text-2xl sm:text-3xl font-medium",
-    h4: "text-xl sm:text-2xl font-medium",
-    h5: "text-lg sm:text-xl font-medium",
-    h6: "text-base sm:text-lg font-medium",
+    // Original
+    // h1: "text-5xl sm:text-7xl font-bold",
+    // h2: "text-3xl sm:text-4xl font-bold",
+    // h3: "text-2xl sm:text-3xl font-medium",
+    // h4: "text-xl sm:text-2xl font-medium",
+    // h5: "text-lg sm:text-xl font-medium",
+    // h6: "text-base sm:text-lg font-medium",
+    h1: "text-5xl font-sans font-bold leading-[1.1]",
+    h2: "text-4xl font-sans font-semibold leading-[1.2]",
+    h3: "text-3xl font-sans font-semibold leading-[1.3]",
+    h4: "text-xl font-mono font-medium leading-[1.4]",
+    h5: "text-lg  font-mono font-semibold leading-[1.5]",
+    h6: "text-base font-mono font-semibold leading-[1.5]",
   },
 
   // Body text sizes
   body: {
-    large: "text-lg",
-    base: "text-base",
-    small: "text-sm",
+    large: "text-lg font-mono",
+    base: "text-base font-mono",
+    small: "text-sm font-mono",
   },
 
   // Display font settings
@@ -76,12 +83,13 @@ export const spacing = {
   // Section vertical padding
   section: {
     sm: "py-12 sm:py-16",
-    md: "py-20 sm:py-32",
+    md: "py-16 sm:py-24",
     lg: "py-32 sm:py-40",
   },
+  // section: "py-16 sm:py-24",
 
   // Card padding
-  card: "px-4 py-8 sm:px-8",
+  card: "px-8 py-8",
 
   // Container horizontal padding
   container: "px-4 lg:px-8",
@@ -101,11 +109,16 @@ export const spacing = {
 // =============================================================================
 
 export const radius = {
+  // none: "rounded-none",
+  // sm: "rounded-lg",
+  // md: "rounded-2xl",
+  // lg: "rounded-3xl",
+  // full: "rounded-full",
   none: "rounded-none",
-  sm: "rounded-lg",
-  md: "rounded-2xl",
-  lg: "rounded-3xl",
-  full: "rounded-full",
+  sm: "rounded-none",
+  md: "rounded-none",
+  lg: "rounded-none",
+  full: "rounded-none",
 } as const;
 
 // =============================================================================
