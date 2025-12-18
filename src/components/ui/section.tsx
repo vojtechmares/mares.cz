@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
-import { colors, spacing, type SectionSize } from "../../lib/design-tokens";
+import { colors, spacing } from "../../lib/design-tokens";
 
 type SectionVariant = "surface" | "inverse" | "accent" | "default";
 
@@ -8,7 +8,6 @@ type SectionProps = {
   children?: ReactNode;
   className?: string;
   variant?: SectionVariant;
-  size?: SectionSize;
   id?: string;
   ariaLabel?: string;
 };
@@ -26,13 +25,12 @@ export function Section({
   id,
   ariaLabel,
   variant = "default",
-  size = "md",
 }: SectionProps) {
   return (
     <section
       id={id}
       aria-label={ariaLabel}
-      className={clsx(className, variantStyles[variant], spacing.section[size])}
+      className={clsx(className, variantStyles[variant], spacing.section)}
     >
       {children}
     </section>

@@ -81,12 +81,7 @@ export const typography = {
 
 export const spacing = {
   // Section vertical padding
-  section: {
-    sm: "py-12 sm:py-16",
-    md: "py-16 sm:py-24",
-    lg: "py-32 sm:py-40",
-  },
-  // section: "py-16 sm:py-24",
+  section: "py-16 sm:py-24",
 
   // Card padding
   card: "px-8 py-8",
@@ -142,7 +137,6 @@ export type AccentColor = keyof typeof colors.accent;
 export type BorderColor = keyof typeof colors.border;
 export type HeadingLevel = keyof typeof typography.heading;
 export type BodySize = keyof typeof typography.body;
-export type SectionSize = keyof typeof spacing.section;
 export type GapSize = keyof typeof spacing.gap;
 export type RadiusSize = keyof typeof radius;
 export type ShadowSize = keyof typeof shadows;
