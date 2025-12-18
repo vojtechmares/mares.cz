@@ -2,31 +2,46 @@ import { Container } from "../../components/ui/container";
 import type { Training as TrainingType } from "../../interfaces/training";
 import { Section } from "../../components/ui/section";
 import { Heading } from "../../components/ui/heading";
+import { Card } from "../../components/ui/card";
+import { clsx } from "clsx";
+import { Button } from "../../components/ui/button";
 
 type TrainingProps = {
   training: TrainingType;
   className?: string;
+  featured: boolean;
 };
 
-const Training = ({ training, className }: TrainingProps) => {
+const Training = ({ training, className, featured = false }: TrainingProps) => {
   return (
-    <a href={"/skoleni/" + training.slug} className={className}>
+    <div
+      className={clsx(className, "flex flex-row items-center justify-between")}
+    >
       <img
         src={training.icon?.url as string}
-        className="mx-auto p-2 invert"
-        width="128"
-        height="128"
+        className={clsx("", featured ? "" : "invert")}
+        width="80"
+        height="80"
         alt={`Ikona školení ${training.title}`}
         loading="lazy"
       />
-      <Heading
-        level="h3"
-        className="mt-4 text-center underline"
-        variant="accent"
-      >
-        {training.title}
-      </Heading>
-    </a>
+      <div className="flex flex-col items-end">
+        <Heading
+          level="h3"
+          variant={featured ? "primary" : "inverse"}
+          className="text-right"
+        >
+          {training.title}
+        </Heading>
+        <Button
+          className="mt-4"
+          href={"/skoleni/" + training.slug}
+          variant={featured ? "primary" : "accent"}
+        >
+          O školení
+        </Button>
+      </div>
+    </div>
   );
 };
 
@@ -36,11 +51,17 @@ type TrainingGridProps = {
 
 const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   return (
-    <div className="-mx-4 mt-10 grid grid-cols-2 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
+    <div className="-mx-4 mt-10 grid grid-cols-1 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {trainings.map((training) => (
-        <div key={training.slug}>
-          <Training training={training} />
-        </div>
+        <Card
+          variant={training.slug === "kubernetes" ? "accent" : "inverse"}
+          key={training.slug}
+        >
+          <Training
+            training={training}
+            featured={training.slug === "kubernetes"}
+          />
+        </Card>
       ))}
     </div>
   );
@@ -49,11 +70,17 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
 const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
   return (
     <div className="mt-10 hidden lg:block">
-      <div className="grid grid-cols-4 gap-x-8 gap-y-4">
+      <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainings.map((training) => (
-          <div key={training.slug} className="rounded-3xl py-4">
-            <Training training={training} />
-          </div>
+          <Card
+            variant={training.slug === "kubernetes" ? "accent" : "inverse"}
+            key={training.slug}
+          >
+            <Training
+              training={training}
+              featured={training.slug === "kubernetes"}
+            />
+          </Card>
         ))}
       </div>
     </div>
