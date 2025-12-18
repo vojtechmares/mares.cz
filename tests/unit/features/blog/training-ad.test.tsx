@@ -36,7 +36,6 @@ function TestTrainingAd({
               <Button
                 href="mailto:vojtech@mares.cz"
                 variant="accent"
-                size="large"
                 className="mt-10"
               >
                 Nezávazně poptat firemní školení
@@ -44,7 +43,6 @@ function TestTrainingAd({
               <Button
                 href={"/skoleni/" + training.slug}
                 variant="secondary"
-                size="large"
                 className="mt-10"
               >
                 Více informací o školení
