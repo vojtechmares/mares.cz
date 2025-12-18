@@ -27,10 +27,7 @@ function Service({
   return (
     <Card
       variant={featured ? "accent" : "inverse"}
-      className={clsx(
-        "flex flex-col",
-        featured ? "order-first lg:order-0" : "",
-      )}
+      className={featured ? "order-first lg:order-0" : ""}
     >
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
@@ -43,7 +40,7 @@ function Service({
       </Text>
       <Button
         href={href}
-        style={featured ? "solid" : "outline"}
+        style="solid"
         variant={featured ? "primary" : "secondary"}
         className="mt-6"
         aria-label={buttonAriaLabel}
@@ -66,7 +63,7 @@ export function Services() {
             Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?
           </p>
         </div>
-        <div className="-mx-4 mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
+        <div className="mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
             name="Konzultace"
             description="Potřebujete poradit nebo si nevíte rady? Společně projdeme váš současný stav, identifikujeme problémy a navrhneme vhodná řešení."
@@ -85,9 +82,9 @@ export function Services() {
           <Service
             name="DevOps spolupráce"
             description="Nabízím dlouhodobou spolupráci, při které se kompletně postarám o vaši infrastrukturu, pravidelné aktualizace a požadavky vašich aplikací. Společně budeme rozvíjet vaši platformu tak, aby odpovídala vašim aktuálním potřebám."
-            href="https://cal.com/vojtechmares/30min"
-            buttonText="Domluvme si schůzku"
-            buttonAriaLabel="Domluvte si online schůzku"
+            href="/sluzby"
+            buttonText="Všechny služby"
+            buttonAriaLabel="Co pro můžu udělat"
           />
         </div>
       </Container>
