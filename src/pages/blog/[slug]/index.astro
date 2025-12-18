@@ -7,6 +7,10 @@ import Layout from "../../../layouts/Layout.astro";
 import { strapi } from "../../../lib/strapi";
 
 import "../../../styles/highlight-js/github-dark.css";
+import { Section } from "../../../components/ui/section";
+import { Container } from "../../../components/ui/container";
+import { Heading } from "../../../components/ui/heading";
+import { TrainingList } from "../../../features/homepage/training";
 
 const { slug } = Astro.params;
 
@@ -15,6 +19,7 @@ if (slug === undefined) {
 }
 
 const article = await strapi.getArticle(slug);
+const trainings = await strapi.fetchTrainings();
 
 const meta = {
   title: "Vojtěch Mareš | Blog: " + article.title,
@@ -52,10 +57,50 @@ const jsonLd = {
   image: baseUrl + "/blog/" + article.slug + "/card.png",
   url: baseUrl + "/blog/" + article.slug,
 };
+
+function localeName(locale: string): null | string {
+  switch (locale) {
+    case "cs":
+      return "Česky";
+    case "en":
+      return "English";
+    default:
+      return null;
+  }
+}
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <ArticleHeader article={article} />
-  <Article article={article} />
-  <TrainingAd trainingSlug={article.trainingAd} />
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse" level="h1">{article.title}</Heading>
+      <div class="flex flex-row justify-between">
+        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+          <a href="#" class="underline">#kubernetes</a>
+          <a href="#" class="underline">#docker</a>
+          <a href="#" class="underline">#gitops</a>
+          <a href="#" class="underline">#security</a>
+        </p>
+        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+          {
+            new Date(article.publishedAt as Date).toLocaleDateString("cs-CZ", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })
+          }
+        </p>
+      </div>
+    </Container>
+  </Section>
+  <!-- <ArticleHeader article={article} /> -->
+  <Section>
+    <Article article={article} />
+  </Section>
+  {
+    article.trainingAd !== undefined && (
+      <TrainingAd trainingSlug={article.trainingAd} />
+    )
+  }
+  {article.trainingAd === undefined && <TrainingList trainings={trainings} />}
 </Layout>
