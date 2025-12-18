@@ -20,8 +20,7 @@ function LinkItem({
   name: string;
   className?: string;
 }) {
-  const classes =
-    "inline-block rounded-full bg-zinc-100 px-4 py-2 text-lg font-bold text-zinc-900 focus-visible:outline-black";
+  const classes = "text-xl font-bold text-zinc-100 underline";
 
   return (
     <a href={href} className={clsx(className, classes)}>
@@ -35,7 +34,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
         <div className="flex items-center md:gap-x-12">
-          <span className="text-2xl font-extrabold tracking-tight">
+          <span className="text-2xl font-extrabold tracking-tight text-amber-500">
             <a
               href="/"
               className="rounded-full py-2 focus-visible:outline-black"
@@ -52,7 +51,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
           </Button>
         </div>
       </div>
-      <div className="mt-4 flex flex-row flex-wrap justify-between gap-y-2">
+      <div className="align-center mt-4 flex flex-row flex-wrap justify-between gap-y-2">
         {links.map((link) => (
           <LinkItem key={link.name} href={link.href} name={link.name} />
         ))}
@@ -104,13 +103,13 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
             <span className="text-2xl font-extrabold tracking-tight">
               <a
                 href="/"
-                className="rounded-full py-2 focus-visible:outline-black"
+                className="rounded-full py-2 text-amber-500 focus-visible:outline-black"
               >
                 Vojtěch Mareš
               </a>
             </span>
           </div>
-          <div className="flex flex-row flex-wrap gap-x-6">
+          <div className="flex flex-row flex-wrap items-center gap-x-6">
             {links.map((link) => (
               <LinkItem key={link.name} href={link.href} name={link.name} />
             ))}
@@ -147,7 +146,7 @@ export function Navigation({ links }: { links: NavLink[] }) {
 
   return (
     <>
-      <header className="mb-12 pt-5 lg:pt-10">
+      <header className="bg-zinc-900 py-5 lg:py-10">
         <Container>
           <MobileNavigation links={links} />
           <DesktopNavigation links={links} />
