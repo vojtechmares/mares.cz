@@ -42,7 +42,7 @@ describe("Button", () => {
     it("should render with solid style by default", () => {
       render(<Button>Solid</Button>);
       const button = screen.getByRole("button");
-      expect(button).toHaveClass("rounded-full");
+      expect(button).toHaveClass("rounded-none");
     });
 
     it("should render with outline style", () => {
@@ -88,16 +88,16 @@ describe("Button", () => {
   });
 
   describe("sizes", () => {
-    it("should render with medium size by default", () => {
-      render(<Button>Medium</Button>);
-      const button = screen.getByRole("button");
-      expect(button).toHaveClass("px-4", "py-2", "text-sm");
-    });
-
-    it("should render with large size", () => {
-      render(<Button size="large">Large</Button>);
+    it("should render with large size by default", () => {
+      render(<Button>Large</Button>);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("px-8", "py-4", "text-base");
+    });
+
+    it("should render with medium size", () => {
+      render(<Button size="medium">Medium</Button>);
+      const button = screen.getByRole("button");
+      expect(button).toHaveClass("px-4", "py-2", "text-sm");
     });
   });
 

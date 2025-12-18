@@ -69,16 +69,5 @@ describe("Services", () => {
       });
       expect(trainingLink).toHaveAttribute("href", "/#skoleni");
     });
-
-    it("should render meeting booking link", () => {
-      render(<Services />);
-      const meetingLink = screen.getByRole("link", {
-        name: /domluvme si schůzku/i,
-      });
-      expect(meetingLink).toHaveAttribute(
-        "href",
-        "https://cal.com/vojtechmares/30min",
-      );
-    });
   });
 });

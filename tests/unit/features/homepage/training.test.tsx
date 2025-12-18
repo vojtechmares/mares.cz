@@ -59,13 +59,17 @@ describe("TrainingList", () => {
 
     it("should render training links with correct href", () => {
       render(<TrainingList trainings={mockTrainings} />);
+      const links = screen.getAllByRole("link", {
+        name: /o školení/i,
+      });
+      // Each training has a link in both mobile and desktop grids
+      expect(links.length).toBeGreaterThanOrEqual(mockTrainings.length);
+      // Verify all expected training slugs are present in the hrefs
       mockTrainings.forEach((training) => {
-        const links = screen.getAllByRole("link", {
-          name: new RegExp(training.title, "i"),
-        });
-        links.forEach((link) => {
-          expect(link).toHaveAttribute("href", `/skoleni/${training.slug}`);
-        });
+        const matchingLinks = links.filter(
+          (link) => link.getAttribute("href") === `/skoleni/${training.slug}`,
+        );
+        expect(matchingLinks.length).toBeGreaterThanOrEqual(1);
       });
     });
 

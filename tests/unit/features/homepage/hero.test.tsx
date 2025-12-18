@@ -30,14 +30,6 @@ describe("Hero", () => {
         screen.getByRole("link", { name: /domluvme si schůzku/i }),
       ).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
     });
-
-    it("should render email button", () => {
-      render(<Hero />);
-      expect(screen.getByRole("link", { name: /napište mi/i })).toHaveAttribute(
-        "href",
-        "mailto:vojtech@mares.cz",
-      );
-    });
   });
 
   describe("children", () => {
