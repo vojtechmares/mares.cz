@@ -6,8 +6,13 @@ import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 
 import { notion } from "../../lib/notion";
+import { Section } from "../../components/ui/section";
+import { Card } from "../../components/ui/card";
+import { TrainingList } from "../../features/homepage/training";
+import { strapi } from "../../lib/strapi";
 
 const sessions = await notion.GetFutureTrainingSessions();
+const trainings = await strapi.fetchTrainings();
 
 const meta = {
   title: "Vojtěch Mareš | Veřejné termíny školení",
@@ -19,47 +24,52 @@ const meta = {
 
 <Layout meta={meta}>
   <main>
-    <Container className="mb-10">
-      <Heading level="h1">Veřejné termíny školení</Heading>
-    </Container>
-    <Container className="mb-14 sm:mb-20 lg:mb-32">
-      <TrainingSessionsTable sessions={sessions} />
-      <hr class="my-4 text-zinc-300" />
-      <div class="mx-auto max-w-xl">
-        <Heading level="h3" className="mt-10" id="podminky">
-          Podmínky veřejných termínů školení
-        </Heading>
-        <ul class="mt-10 list-disc pl-4">
-          <li>
-            Přihlášení na veřejný termín školení je závazné a zavazujete se k
-            platbě.
-          </li>
-          <li>
-            Minimální počet účastníků pro uskuteční školení je <strong>5</strong
-            >.
-          </li>
-          <li>
-            Maximální počet účastníků na termínu je <strong>12</strong>.
-          </li>
-          <li>
-            Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu
-            nízké účasti.
-          </li>
-          <li>
-            Při odhlášení <strong>min. týden předem</strong> vracím <strong
-              >plnou částku</strong
-            >.
-          </li>
-          <li>
-            Při odhlášení <strong>méně jak týden předem</strong> vracím pouze
-            <strong>50% z ceny školení</strong>.
-          </li>
-          <li>
-            Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení
-            platného dokladu (potvrzení o studiu).
-          </li>
-        </ul>
-      </div>
-    </Container>
+    <Section variant="inverse">
+      <Container>
+        <Heading variant="inverse" level="h1">Veřejné termíny školení</Heading>
+      </Container>
+    </Section>
+    <Section>
+      <Container>
+        <TrainingSessionsTable sessions={sessions} />
+        <Card variant="surface" className="mt-12 sm:mt-18">
+          <Heading level="h3" id="podminky">
+            Podmínky veřejných termínů školení
+          </Heading>
+          <ul class="mt-6 list-disc pl-4">
+            <li>
+              Přihlášení na veřejný termín školení je závazné a zavazujete se k
+              platbě.
+            </li>
+            <li>
+              Minimální počet účastníků pro uskuteční školení je <strong
+                >5</strong
+              >.
+            </li>
+            <li>
+              Maximální počet účastníků na termínu je <strong>12</strong>.
+            </li>
+            <li>
+              Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu
+              nízké účasti.
+            </li>
+            <li>
+              Při odhlášení <strong>min. týden předem</strong> vracím <strong
+                >plnou částku</strong
+              >.
+            </li>
+            <li>
+              Při odhlášení <strong>méně jak týden předem</strong> vracím pouze
+              <strong>50% z ceny školení</strong>.
+            </li>
+            <li>
+              Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení
+              platného dokladu (potvrzení o studiu).
+            </li>
+          </ul>
+        </Card>
+      </Container>
+    </Section>
+    <TrainingList trainings={trainings} />
   </main>
 </Layout>
