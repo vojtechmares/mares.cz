@@ -15,7 +15,7 @@ const styleVariants: Record<ButtonStyle, Record<ButtonVariant, string>> = {
   solid: {
     primary: `${colors.background.inverse} ${colors.text.inverse} hover:bg-zinc-700 active:bg-zinc-800 focus-visible:outline-zinc-900`,
     accent: `${colors.accent.default} ${colors.accent.hover} active:bg-amber-500 focus-visible:outline-amber-500`,
-    secondary: `${colors.background.surface} ${colors.text.primary} hover:bg-amber-50 active:bg-amber-500 focus-visible:outline-white`,
+    secondary: `${colors.background.default} ${colors.text.primary} hover:bg-amber-50 active:bg-amber-500 focus-visible:outline-white`,
   },
   outline: {
     primary: `${colors.border.default} ${colors.text.primary} hover:ring-zinc-300 active:bg-zinc-100 focus-visible:outline-amber-500 focus-visible:ring-zinc-300`,
