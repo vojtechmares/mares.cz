@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import { Hero } from "./hero";
+import { Hero as HeroComponent } from "./hero";
 import avatarVojtechMares from "../../images/people/vojtech-mares.png";
 ---
 
-<Hero>
+<HeroComponent>
   <Image
-    class="mx-auto hidden max-w-[400px] pt-10 md:mx-0 md:block md:pt-0"
+    class="mx-auto max-w-100 md:mx-0 md:block md:pt-0"
     priority
     loading="eager"
     layout={"full-width"}
@@ -15,4 +15,4 @@ import avatarVojtechMares from "../../images/people/vojtech-mares.png";
     widths={[400, 600, 800]}
     sizes={`(max-width: 768px) 400px, (max-width: 1024px) 600px, 800px`}
   />
-</Hero>
+</HeroComponent>

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Container } from "../../components/ui/container";
 import { Button } from "../../components/ui/button";
+import { Heading } from "../../components/ui/heading";
 
 function UnderlineSvg() {
   return (
@@ -21,32 +22,33 @@ interface HeroProps {
 
 export function Hero({ children }: HeroProps) {
   return (
-    <Container className="pt-5 pb-8 md:py-0 lg:pt-8">
-      <div className="flex flex-col justify-center md:flex-row md:items-end md:justify-between">
-        <div className="md:my-auto">
-          <h1 className="font-display text-4xl font-black tracking-tight text-zinc-900 sm:text-7xl">
+    <Container className="pt-16 pr-0! sm:pt-24 md:pr-4">
+      <div className="flex flex-row justify-center md:flex-row md:items-end md:justify-between">
+        <div className="max-w-64 md:my-auto md:max-w-200">
+          <Heading level="h1">
             Jsem{" "}
             <span className="relative whitespace-nowrap text-amber-500">
               <UnderlineSvg />
               <span className="relative">Vojtěch Mareš</span>
             </span>
-            , DevOps architekt.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-zinc-700">
+            ,<br />
+            DevOps architekt.
+          </Heading>
+          <p className="mt-6 text-lg text-zinc-700 md:max-w-2xl">
             Společně snížíme vaše náklady na infrastrukturu, zbavíme se
             technického dluhu a připravíme vaši IT infrastrukturu na rapidní
             škálování.
           </p>
-          <div className="mt-10 flex flex-col gap-y-6 sm:flex-row sm:justify-start sm:gap-x-6 md:gap-y-0">
-            <Button href="https://cal.com/vojtechmares/30min" size="large">
+          <div className="mt-10 flex flex-row gap-x-6 gap-y-6 sm:justify-start md:gap-y-0">
+            <Button href="https://cal.com/vojtechmares/30min">
               Domluvme si schůzku
             </Button>
-            <Button href="mailto:vojtech@mares.cz" size="large" style="outline">
+            {/* <Button href="mailto:vojtech@mares.cz" style="outline">
               Napište mi
-            </Button>
+            </Button> */}
           </div>
         </div>
-        {children}
+        <div className="overflow-x-hidden">{children}</div>
       </div>
     </Container>
   );
