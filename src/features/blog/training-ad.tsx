@@ -1,9 +1,9 @@
 import { Button } from "../../components/ui/button";
 import { Heading } from "../../components/ui/heading";
-import { strapi } from "../../lib/strapi";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 import { Container } from "../../components/ui/container";
+import { getEntry } from "astro:content";
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   if (!trainingSlug) {
@@ -11,7 +11,11 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   }
 
   try {
-    const training = await strapi.getTraining(trainingSlug);
+    const training = await getEntry("training", trainingSlug);
+
+    if (training === undefined) {
+      throw new Error("Training is undefined for slug: " + trainingSlug);
+    }
 
     return (
       <Section id="skoleni" variant="inverse">
@@ -19,10 +23,10 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
           <div className="flex flex-col justify-between md:flex-row">
             <div className="max-w-3xl">
               <Heading level="h2" variant="inverse">
-                {training.title} školení
+                {training.data.title} školení
               </Heading>
               <Text variant="inverse" className="mt-4">
-                {training.adText}
+                {training.data.ad}
               </Text>
               <div className="flex flex-col md:flex-row md:gap-x-6">
                 <Button
@@ -33,7 +37,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
                   Nezávazně poptat firemní školení
                 </Button>
                 <Button
-                  href={"/skoleni/" + training.slug}
+                  href={"/skoleni/" + training.id}
                   variant="secondary"
                   className="mt-10"
                 >
@@ -42,7 +46,7 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
               </div>
             </div>
             <img
-              src={training.icon?.url as string}
+              src={training.data.icon?.src as string}
               alt=""
               className="mx-auto hidden p-2 invert md:block"
               width="196"
