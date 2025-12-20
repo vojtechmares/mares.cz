@@ -1,24 +1,39 @@
 ---
+import { getCollection } from "astro:content";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
-import { strapi } from "../../lib/strapi";
 
-function localeName(locale: string): null | string {
-  switch (locale) {
-    case "cs":
-      return "Česky";
-    case "en":
-      return "English";
-    default:
-      return null;
-  }
+// switch to static page rendering during build time
+export const prerender = true;
+
+// function localeName(locale: string): null | string {
+//   switch (locale) {
+//     case "cs":
+//       return "Česky";
+//     case "en":
+//       return "English";
+//     default:
+//       return null;
+//   }
+// }
+
+const articles = (
+  await getCollection("blog", ({ data }) => {
+    return !data.draft;
+  })
+).sort((a, b) => {
+  return b.data.publish_time.valueOf() - a.data.publish_time.valueOf();
+});
+
+let tags: string[] = [];
+for (const article of articles) {
+  tags.push(...article.data.tags);
 }
-
-const articles = await strapi.fetchArticles();
+tags = [...new Set(tags)];
 
 const meta = {
   title: "Vojtěch Mareš | Blog",
@@ -32,10 +47,15 @@ const meta = {
     <Container>
       <Heading variant="inverse">Blog</Heading>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        <a href="#" class="underline">#kubernetes</a>
-        <a href="#" class="underline">#docker</a>
-        <a href="#" class="underline">#gitops</a>
-        <a href="#" class="underline">#security</a>
+        {
+          tags.map((tag) => (
+            <>
+              <a href="#" class="underline">
+                #{tag}
+              </a>{" "}
+            </>
+          ))
+        }
       </p>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
         <a class="underline" type="application/rss+xml" href="/blog/rss.xml"
@@ -57,39 +77,33 @@ const meta = {
                 level="h2"
                 className="font-display text-3xl font-bold tracking-tight"
               >
-                {article.title}
+                {article.data.title}
               </Heading>
               <p class="mt-2 mb-4">
-                <a href="#" class="underline">
-                  #kubernetes
-                </a>
-                <a href="#" class="underline">
-                  #docker
-                </a>
-                <a href="#" class="underline">
-                  #gitops
-                </a>
-                <a href="#" class="underline">
-                  #security
-                </a>
+                {article.data.tags.map((tag) => (
+                  <>
+                    <a href="#" class="underline">
+                      #{tag}
+                    </a>{" "}
+                  </>
+                ))}
               </p>
 
-              <p class="my-4 text-zinc-700">{article.description}</p>
+              <p class="my-4 text-zinc-700">{article.data.description}</p>
               <div class="flex flex-row justify-end gap-x-6">
                 <p class="my-4 text-zinc-700">
-                  {new Date(article.publishedAt as Date).toLocaleDateString(
-                    "cs-CZ",
-                    {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    },
-                  )}
-                  {localeName(article.locale) !== null
+                  {new Date(
+                    article.data.publish_time as Date,
+                  ).toLocaleDateString("cs-CZ", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                  {/* {localeName(article.locale) !== null
                     ? " · " + localeName(article.locale)
-                    : ""}
+                    : ""} */}
                 </p>
-                <Button href={"/blog/" + article.slug} variant="primary">
+                <Button href={"/blog/" + article.id} variant="primary">
                   Přečíst si článek
                 </Button>
               </div>

@@ -1,39 +1,56 @@
 ---
-import { Debug } from "astro:components";
-import { Article } from "../../../features/blog/article";
-import { ArticleHeader } from "../../../features/blog/article-header";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
-import { strapi } from "../../../lib/strapi";
 
 import "../../../styles/highlight-js/github-dark.css";
 import { Section } from "../../../components/ui/section";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
-import { TrainingList } from "../../../features/homepage/training";
+import { StyleContent } from "../../../components/style-content";
+import { TrainingGrid } from "../../../features/training/training-grid";
 
-const { slug } = Astro.params;
-
-if (slug === undefined) {
-  return new Response(null, { status: 404 });
+interface Props {
+  article: CollectionEntry<"blog">;
 }
 
-const article = await strapi.getArticle(slug);
-const trainings = await strapi.fetchTrainings();
+export async function getStaticPaths() {
+  // Get all `src/content/blog/` entries
+  const articles = await getCollection("blog", ({ data }) => {
+    return !data.draft;
+  });
+
+  // const paths = pages.map(page => {
+  //   const [lang, ...slug] = page.id.split('/');
+  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
+  // });
+
+  return articles.map((article) => {
+    return {
+      params: { slug: article.id },
+      props: { article: article },
+    };
+  });
+
+  // return paths;
+}
+
+const { slug: _slug } = Astro.params;
+const { article } = Astro.props;
 
 const meta = {
-  title: "Vojtěch Mareš | Blog: " + article.title,
-  description: article.description,
-  keywords: article.keywords,
+  title: "Vojtěch Mareš | Blog: " + article.data.title,
+  description: article.data.description,
+  keywords: article.data.keywords.join(","),
 };
 
 const openGraph = {
   type: "article" as const,
   image: {
-    url: "/blog/" + article.slug + "/card.png",
+    url: "/blog/" + article.id + "/card.png",
     width: 1200,
     height: 630,
-    alt: article.title + ": " + article.description,
+    alt: article.data.title + ": " + article.data.description,
   },
 };
 
@@ -42,52 +59,61 @@ const baseUrl =
 
 const jsonLd = {
   type: "BlogPosting" as const,
-  headline: article.title,
-  description: article.description,
-  datePublished: article.publishedAt?.toISOString() || new Date().toISOString(),
+  headline: article.data.title,
+  description: article.data.description,
+  datePublished:
+    article.data.publish_time?.toISOString() || new Date().toISOString(),
   dateModified:
-    article.updatedAt?.toISOString() ||
-    article.publishedAt?.toISOString() ||
-    new Date().toISOString(),
+    article.data.publish_time?.toISOString() || new Date().toISOString(),
   author: {
     name: "Vojtěch Mareš",
     url: baseUrl,
   },
-  keywords: article.keywords,
-  image: baseUrl + "/blog/" + article.slug + "/card.png",
-  url: baseUrl + "/blog/" + article.slug,
+  keywords: article.data.keywords.join(","),
+  image: baseUrl + "/blog/" + article.id + "/card.png",
+  url: baseUrl + "/blog/" + article.id,
 };
 
-function localeName(locale: string): null | string {
-  switch (locale) {
-    case "cs":
-      return "Česky";
-    case "en":
-      return "English";
-    default:
-      return null;
-  }
-}
+// function localeName(locale: string): null | string {
+//   switch (locale) {
+//     case "cs":
+//       return "Česky";
+//     case "en":
+//       return "English";
+//     default:
+//       return null;
+//   }
+// }
+
+const { Content } = await render(article);
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
   <Section variant="inverse">
     <Container>
-      <Heading variant="inverse" level="h1">{article.title}</Heading>
+      <Heading variant="inverse" level="h1">{article.data.title}</Heading>
       <div class="flex flex-row justify-between">
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-          <a href="#" class="underline">#kubernetes</a>
-          <a href="#" class="underline">#docker</a>
-          <a href="#" class="underline">#gitops</a>
-          <a href="#" class="underline">#security</a>
+          {
+            article.data.tags.map((tag) => (
+              <>
+                <a href="#" class="underline">
+                  #{tag}
+                </a>{" "}
+              </>
+            ))
+          }
         </p>
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
           {
-            new Date(article.publishedAt as Date).toLocaleDateString("cs-CZ", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })
+            new Date(article.data.publish_time as Date).toLocaleDateString(
+              "cs-CZ",
+              {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              },
+            )
           }
         </p>
       </div>
@@ -95,12 +121,16 @@ function localeName(locale: string): null | string {
   </Section>
   <!-- <ArticleHeader article={article} /> -->
   <Section>
-    <Article article={article} />
+    <StyleContent>
+      <article>
+        <Content />
+      </article>
+    </StyleContent>
   </Section>
   {
-    article.trainingAd !== undefined && (
-      <TrainingAd trainingSlug={article.trainingAd} />
+    article.data.trainingAd !== undefined && (
+      <TrainingAd trainingSlug={article.data.trainingAd as string} />
     )
   }
-  {article.trainingAd === undefined && <TrainingList trainings={trainings} />}
+  {article.data.trainingAd === undefined && <TrainingGrid />}
 </Layout>
