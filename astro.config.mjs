@@ -61,14 +61,6 @@ export default defineConfig({
 
   env: {
     schema: {
-      STRAPI_API_URL: envField.string({
-        context: "server",
-        access: "public",
-      }),
-      STRAPI_API_TOKEN: envField.string({
-        context: "server",
-        access: "secret",
-      }),
       NOTION_API_KEY: envField.string({
         context: "server",
         access: "secret",
