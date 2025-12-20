@@ -1,16 +1,12 @@
 import clsx from "clsx";
-import type { Training } from "../../interfaces/training";
+import type { CollectionEntry } from "astro:content";
 
-export function Logo({ training }: { training: Training }) {
-  let imageURL = training.logo?.formats.small?.url;
-
-  if (imageURL === undefined) {
-    imageURL = training.logo?.formats.thumbnail?.url;
-  }
+export function Logo({ training }: { training: CollectionEntry<"training"> }) {
+  let imageURL = training.data.logo?.src;
 
   if (imageURL === undefined) {
     // using SVG icon as fallback
-    imageURL = training.icon?.url;
+    imageURL = training.data.icon?.src;
   }
 
   if (imageURL === undefined) {
