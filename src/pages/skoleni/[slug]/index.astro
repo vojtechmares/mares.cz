@@ -1,4 +1,5 @@
 ---
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import { Logo } from "../../../features/training/logo";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
 import { Button } from "../../../components/ui/button";
@@ -6,21 +7,48 @@ import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
-import { markdownToHtml } from "../../../lib/markdown-to-html";
 import { notion } from "../../../lib/notion";
-import { strapi } from "../../../lib/strapi";
 import { Section } from "../../../components/ui/section";
+import { StyleContent } from "../../../components/style-content";
+import { getEntry } from "astro:content";
+
+// out-out of static pre-rendering
+export const prerender = false;
+// pre-rendering is disabled because of training-session fetching
+
+interface Props {
+  training: CollectionEntry<"training">;
+}
+
+export async function getStaticPaths() {
+  const trainings = await getCollection("training", ({ data }) => {
+    return !data.draft;
+  });
+
+  // const paths = pages.map(page => {
+  //   const [lang, ...slug] = page.id.split('/');
+  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
+  // });
+
+  return trainings.map((training) => {
+    return {
+      params: { slug: training.id },
+      props: { training: training },
+    };
+  });
+
+  // return paths;
+}
 
 const { slug } = Astro.params;
+// const { training } = Astro.props;
 
-if (slug === undefined) {
+const training = await getEntry("training", slug);
+if (!training || training.data.draft) {
   return new Response(null, { status: 404 });
 }
 
-const training = await strapi.getTraining(slug);
 const sessions = await notion.GetFutureTrainingSessionsForSlug(slug);
-
-const trainingHTML = markdownToHtml(training.content);
 
 const formatter = new Intl.NumberFormat("cs", {
   style: "currency",
@@ -29,19 +57,30 @@ const formatter = new Intl.NumberFormat("cs", {
 });
 
 const meta = {
-  title: "Vojtěch Mareš | " + training.title + " školení",
-  description: training.description,
-  keywords: training.keywords,
+  title: "Vojtěch Mareš | " + training.data.title + " školení",
+  description: training.data.description,
+  keywords: training.data.keywords.join(","),
 };
 
 const openGraph = {
   type: "article" as const,
   image: {
-    url: Astro.site + "skoleni/" + training.slug + "/card.png",
+    url: Astro.site + "skoleni/" + training.id + "/card.png",
     width: 1200,
     height: 630,
-    alt: training.title + ": " + training.description,
+    alt: training.data.title + ": " + training.data.description,
   },
+};
+
+const { Content } = await render(training);
+
+const pricing = {
+  open: training.data.price.open.filter(
+    (variant) => variant.currency === "CZK",
+  )[0].amount,
+  corporate: training.data.price.corporate.filter(
+    (variant) => variant.currency === "CZK",
+  )[0].amount,
 };
 ---
 
@@ -50,7 +89,7 @@ const openGraph = {
     <Section variant="inverse">
       <Container className="flex items-center justify-between">
         <Heading level="h1" variant="inverse">
-          {training.title} školení
+          {training.data.title} školení
         </Heading>
         <!-- <h1
             class="font-display self-center text-center text-5xl font-black tracking-tight text-white sm:text-6xl"
@@ -61,14 +100,12 @@ const openGraph = {
       </Container>
     </Section>
     <Section>
-      <Container className={training.publishedAt === null ? "hidden" : ""}>
+      <Container className={training.data.draft ? "hidden" : ""}>
         <div class="md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
           <div class="md:col-span-3">
-            <div
-              class="prose:text-zinc-900 prose prose-h1:text-4xl prose-h1:font-bold prose-h2:text-2xl prose-h2:font-medium prose-h3:text-xl prose-h3:font-medium prose-p:text-zinc-700 prose-li:my-0"
-            >
-              <Fragment set:html={trainingHTML} />
-            </div>
+            <StyleContent>
+              <Content />
+            </StyleContent>
           </div>
           <div class="mt-8 md:col-span-2 md:mt-0">
             {
@@ -87,13 +124,13 @@ const openGraph = {
                 <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
                   <dt class="font-medium text-zinc-700">Veřejný termín</dt>
                   <dd class="text-zinc-900">
-                    {formatter.format(training.priceOpen)} bez DPH
+                    {formatter.format(pricing.open)} bez DPH
                   </dd>
                 </div>
                 <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
                   <dt class="font-medium text-zinc-700">Firemní školení</dt>
                   <dd class="text-zinc-900">
-                    {formatter.format(training.priceCorporate)} bez DPH
+                    {formatter.format(pricing.corporate)} bez DPH
                   </dd>
                 </div>
               </dl>
@@ -106,7 +143,7 @@ const openGraph = {
               </Button>
             </Card>
             {
-              training.days === 2 ? (
+              training.data.length === 2 ? (
                 <Card className="mb-10" variant="surface">
                   <div class="flex">
                     <div class="shrink-0">
