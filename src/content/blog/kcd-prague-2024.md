@@ -1,0 +1,101 @@
+---
+title: KCD Prague 2024
+description: Jaké byly letošní Kubernetes Community Days Prague 2024 od CNCF CZ/SK komunity? Přečtěte si zážitky a koukněte fotky z konference.
+keywords: []
+tags: ["konference"]
+trainingAd:
+draft: false
+publish_time: 2024-06-08
+---
+
+Ve dnech 6. a 7. června 2024 se v Praze v budově FIT ČVUT konala konferece [Kubernetes Community Days Prague 2024](https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/), kterou pořádala [Česko-Slovenská CNCF komunita](https://community.cncf.io/kcd-czech-slovak/).
+
+Díky všem, kdo se na přípravě konference podíleli a všem kdo přišli. Byli jste skvělí!
+
+Letos se pořadatelům povedl moc pěkný termín, protože 6. června slaví Kubernetes svoje narozeniny 🎂. A letos to byly dokonce jubilejní 10. narozeniny 🥳.
+
+![Happy 10th birthday Kubernetes](https://cdn.mares.cz/hbd_k8s_10_d716d0b4be.png)
+
+## Co je KCD?
+
+KCD neboli Kubernetes Community Days. Je lokální akce zaměřená na Kubernetes (s podporou [CNCF](https://www.cncf.io/)) a související technologie. Akce je určena pro vývojáře, DevOps, SRE, administrátory a všechny, kteří se zajímají o Kubernetes. Na KCD se můžete těšit na zajímavé přednášky, workshopy a networking.
+
+## Workshop se cybroslabs
+
+Ve čtvrtek 6. června jsme společně se [cybroslabs](https://www.cybroslabs.com/) (které je hrdým sponzorem letošních KCD v Praze) pořádali workshop na téma **Deployment cloud-native aplikace do regulovaného prostředí energetiky**.
+
+> Ukážeme, jak v cybroslabs řešíme deployment cloud-native aplikace do silně regulovaného prostředí energetiky (čtěte: ne cloud-native prostředí). Pěkně od podlahy s Kubernetes, konfigurace prostředí, high-availability Kubernetes cluster díky RKE2, ukázka deploymentu komponent aplikace a testování vysoké dostupnosti, disaster recovery, failover databáze a obnovení ze zálohy.
+
+Na workshopu jsme měli skvělou účast, demo deployment jsme ukazovali na našem [Turing Pi](https://turingpi.com/) clusteru, který jsme měli s sebou.
+Ukázali jsme, jak řešíme deployment pro naše zákazníky, jak řešíme výzvy kolem Kubernetes, deploymentu Kubernetes clusteru, správy, až po deployment aplikace jako takové, včetně krátké ukázky, na čem pracujeme.
+
+Ještě bych chtěl zmínit náš open-source ingress controller [Cloudflare Tunnel Ingress Controller](https://github.com/clbs-io/cloudflare-tunnel-ingress-controller), na GitHubu jej najdete pod organizací [clbs-io](https://github.com/clbs-io). Pro IoT, edge, dema nebo domácí lab, je to super nástroj jak dostat své aplikace na internet bez nutnosti statické IP adresy nebo port forwardingu.
+Pomocí standardního Kubernetes Ingressu a [Cloudflare Tunnelu](https://www.cloudflare.com/en-gb/products/tunnel/).
+
+_Workshop bohužel nebyl nahrán, alespoň máme pár fotek._
+
+![Vojtěch Mareš přednáší workshop a ukazuje na promítací plátno](https://cdn.mares.cz/kcd_cybroslabs_workshop_1_cd6db5163d.jpg)
+![Otevřená počítačová skříň se samolepkami na otevřeném víku a vedle Gopher plyšák (maskot Golang)"](https://cdn.mares.cz/kcd_cybroslabs_workshop_2_f057e1980f.jpg)
+![Vojtěch Mareš a Ladislav Čapka přednášející workshop](https://cdn.mares.cz/kcd_cybroslabs_workshop_3_247d9467be.jpg)
+
+## Přednáška o CloudNativePG
+
+V pátek 7. června jsem měl přednášku na téma **CloudNativePG - PostgreSQL on Kubernetes the right way**.
+
+Na přednášce jsem představil open-source Kubernetes Operator pro PostgreSQL [CloudNativePG](https://cloudnative-pg.io/), jeho možnosti a podělil jsem se o moje/naše (se cybroslabs) zkušenosti s provozem PostgreSQL na Kubernetes v produkčním prostředí.
+Mezi nejdůležitější funkce CNPG patří správa HA Postgres clusteru, zálohy a jejich obnova, streaming replikace, integrace monitoringu s Prometheem nebo možnost replikace na úrovni clusteru.
+
+Pokud vás zajímá jak provozovat PostgreSQL cluster na Kubernetes, přijďte na moje školení [Postgres na Kubernetes](/skoleni/postgres-on-k8s).
+
+![Vojtěch Mareš s mikrofonem, přednášející o CloudNativePG](https://cdn.mares.cz/kcd_vm_talk_cnpg_1f9af4db2a.jpg)
+
+Myslím, že se mi přednáška povedla, ale ještě to má rezervy. Dal bych si tak 7/10 😄.
+
+_Celá prezentace [tady](https://docs.google.com/presentation/d/1LtF5K7xuTqlAOUQaW2XcFqQbO6HRTuld/edit?usp=sharing&ouid=115084391547465813704&rtpof=true&sd=true). Popř. na YouTube je [záznam](https://www.youtube.com/watch?v=g6sPL-DXHvg)._
+
+## Moje střípky z KCD
+
+Tohle jsou jen moje postřehy samozřejmě, pokud vás zajímají ostatní přednášky, na YouTube [playlist](https://www.youtube.com/watch?v=6u2SxjHeKHo&list=PLzO-esMdGBjf7JDrkw9jYTvxg9X5iYmD7) přednášek.
+
+### KEDA podporuje Gateway API!
+
+[KEDA (Kubernetes Event-Driven Autoscaler)](https://keda.sh/) dnes podporuje a stále pracuje na rozšíření podpory pro Kubernetes [Gateway API](https://gateway-api.sigs.k8s.io/) (budoucnost Kubernetes Ingressu).
+
+A nejen to, KEDA umožňuje škálování až na nulu. A to bez nástrojů jako je Knative. Ovšem za cenu, že před vaším workloadem bude KEDA Interceptor (proxy), na základě kterého bude škálovat. Bylo i demo a fungovalo to moc pěkně 👍.
+Rychlost, s jakou KEDA dokázala škálovat pody byla opravdu působivá. Narozdíl od obyčjného HPA (Horizontal Pod Autoscaler), který škáluje na základě využití CPU/RAM, bylo škálování dle počtu requestů mnohem rychlejší. A to jak scale up tak down.
+
+Na můj dotaz, jaký performance overhead to má, byla odpověď, že dle benchmarků je response time cca o 10ms delší a množství odbavených requestů za sekundu kleslo z 2000 na 1600, což je pokles o 20%.
+To sice není zanedbatelné, ale pokud vaše aplikace nemusí být vyloženě real-time. Dá se s tím žít a těžit z efektivnějšího škálování. WebSockety zatím podporované nejsou, ale na GitHubu je otevřený pull request.
+
+### Event mesh
+
+Máme v Kubernetes světe meshů málo, tak si přidáme k Service meshi i event mesh 😆!
+
+Event mesh je integrovaný do [Knative](https://knative.dev/docs/). Ale přitom na krátké demo ani nebylo třeba Kafky 👀.
+
+Event mesh staví na rozdělení čtení dat (synchronní operace) a zápisu (asynchronní operace). To jde ruku v ruce s principem CQRS ([Command Query Responsibility Segregation](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)).
+
+Do tohohle bodu se event mesh vlastně neliší od event sourcingu. Za mě ten zlomový bod, proč event mesh může být přínosem,
+bylo jak snadno se dal integrovat do legacy aplikace (v tomto případě byla ukázka na Java aplikaci) a zároveň vedle mít nové (mikro)služby, například v Rustu.
+
+Nevýhodou event meshe je, že data nejsou vždy konzistentní ([eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency)), ale to je cena za asynchronní zpracování.
+
+### Srovnání Kubernetes PostgreSQL operátorů
+
+Shodou náhod před mojí přednáškou byla přednáška o různých Kubernetes PostgreSQL operátorech. Já jsem si tohle srovnání dělal sám pár měsíců zpátky,
+než jsme se cybroslabs došli k CNPG.
+
+Byly zmíněny operároty jako Zalando, CrunchyData PGO, CloudNativePG, StackGres a okrajově bitnami/postgresql Helm Chart.
+
+David Pech, nejen že povídal o rozdílech mezi jednotlivým operátory, ale zároveň ukázal i výsledky benchmarků jednotlivých operátorů.
+
+Závěřem: **CloudNativePG je skvělý!** 💪 Z čehož jsem měl pochopitelně radost, když jsem na takovou přednášku mohl rovnou navázat.
+Ale pokud nejste PostgreSQL profíci a máte možnost použít managed databázi, je to lepší volba.
+
+## Díky a za rok zas!
+
+Ve dvou nabitých dnech jsem byl na spoustě skvělých přednášek, přednášel a vedl workshop, potkal jsem se starámi známými, ale i poznal nové tváře...
+
+Díky za super akci v Praze a těším se na příští rok v Bratislavě! ✌️
+
+![Společná fotka účastníků KCD Prague 2024](https://cdn.mares.cz/kcd_group_photo_86f48b7899.jpg)
