@@ -1,11 +1,7 @@
 ---
-import type { Page } from "../../interfaces/page";
+import { getCollection } from "astro:content";
 import { Navigation as Navbar } from "./navigation";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
-
-interface Props {
-  pages: Page[];
-}
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
@@ -16,15 +12,13 @@ const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
   return links.locale === locale;
 })[0].links;
 
-const { pages } = Astro.props;
+const pages = await getCollection("page", ({ data }) => {
+  return !data.draft && data.featured;
+});
 
 const pageLinks = pages
   .map((page) => {
-    if (!page.featured) {
-      return;
-    }
-
-    return { name: page.title, href: `/${page.slug}` };
+    return { name: page.data.title, href: `/${page.id}` };
   })
   .filter((link) => {
     return link !== undefined;
@@ -34,14 +28,6 @@ const links = [
   ...(staticLinks as { name: string; href: string }[]),
   ...pageLinks,
 ];
-
-// const links = [
-//     {name: "Školení", href: "/skoleni"},
-//     {name: "Termíny školení", href: "/terminy-skoleni"},
-//     {name: "Služby", href: "#services"},
-//     {name: "Blog", href: "/blog"},
-//     {name: "Přednášky", href: "/prednasky"},
-// ];
 ---
 
 <Navbar links={links} />
