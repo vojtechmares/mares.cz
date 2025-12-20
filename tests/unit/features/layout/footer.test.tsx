@@ -43,8 +43,8 @@ describe("Footer", () => {
     it("should render phone number", () => {
       render(<Footer {...defaultProps} />);
       expect(
-        screen.getByRole("link", { name: /\+420 732 490 651/i }),
-      ).toHaveAttribute("href", "tel:+420732490651");
+        screen.getByRole("link", { name: /\+420 732 220 651/i }),
+      ).toHaveAttribute("href", "tel:+420732220651");
     });
 
     it("should render email", () => {
