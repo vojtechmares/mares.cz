@@ -1,0 +1,75 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
+import Layout from "../../layouts/Layout.astro";
+import { StyleContent } from "../../components/style-content";
+
+interface Props {
+  page: CollectionEntry<"page">;
+}
+
+export async function getStaticPaths() {
+  // Get all `src/content/page/` entries
+  const pages = await getCollection("page", ({ data }) => {
+    return !data.draft;
+  });
+
+  // const paths = pages.map(page => {
+  //   const [lang, ...slug] = page.id.split('/');
+  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
+  // });
+
+  return pages.map((page) => {
+    return {
+      params: { slug: page.id },
+      props: { page: page },
+    };
+  });
+
+  // return paths;
+}
+
+// const { lang, slug } = Astro.params;
+const { slug: _slug } = Astro.params;
+const { page } = Astro.props;
+// const page = await getEntry('page', slug);
+if (!page) {
+  return new Response(null, { status: 404 });
+}
+
+const meta = {
+  title: "Vojtěch Mareš | " + page.data.title,
+  description: page.data.description,
+  keywords: page.data.keywords.join(","),
+};
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: Astro.site + page.id + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: page.data.title + ": " + page.data.description,
+  },
+};
+
+const { Content } = await render(page);
+---
+
+<Layout meta={meta} openGraph={openGraph}>
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse" level="h1">{page.data.title}</Heading>
+    </Container>
+  </Section>
+  <Section>
+    <article>
+      <StyleContent>
+        <Content />
+      </StyleContent>
+    </article>
+  </Section>
+</Layout>
