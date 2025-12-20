@@ -5,14 +5,10 @@ import Clients from "../features/homepage/Clients.astro";
 import References from "../features/homepage/References.astro";
 
 import { Services } from "../features/homepage/services";
-import { TrainingList } from "../features/homepage/training";
-import { Cooperation } from "../features/homepage/cooperation";
 import { CallToAction } from "../features/homepage/call-to-action";
 
-import { strapi } from "../lib/strapi";
 import { LocalizedMetadata } from "../lib/site";
-
-const trainings = await strapi.fetchTrainings();
+import { TrainingGrid } from "../features/training/training-grid";
 
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === "cs")[0];
 
@@ -42,7 +38,7 @@ const jsonLd = {
     <Hero />
     <Services />
     <Clients />
-    <TrainingList trainings={trainings} />
+    <TrainingGrid />
     <References />
     <CallToAction />
   </main>
