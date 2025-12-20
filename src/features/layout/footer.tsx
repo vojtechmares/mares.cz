@@ -1,5 +1,4 @@
-import type { Page } from "../../interfaces/page";
-import type { Training } from "../../interfaces/training";
+import type { CollectionEntry } from "astro:content";
 import { Container } from "../../components/ui/container";
 import { Button } from "../../components/ui/button";
 import { Section } from "../../components/ui/section";
@@ -64,25 +63,12 @@ function GitHubIcon() {
 }
 
 interface FooterProps {
-  pages: Page[];
-  trainings: Training[];
-  staticLinks: { name: string; href: string }[];
+  trainings: CollectionEntry<"training">[];
+  links: { name: string; href: string }[];
   currentYear: number;
 }
 
-export function Footer({
-  pages,
-  trainings,
-  staticLinks,
-  currentYear,
-}: FooterProps) {
-  const pageLinks = pages.map((page) => ({
-    name: page.title,
-    href: `/${page.slug}`,
-  }));
-
-  const links = [...staticLinks, ...pageLinks];
-
+export function Footer({ links, trainings, currentYear }: FooterProps) {
   return (
     <Section className="border-t border-zinc-300">
       <footer>
@@ -92,8 +78,8 @@ export function Footer({
               <Heading level="h3">Vojtěch Mareš</Heading>
               <ul className="mt-4 list-none">
                 <li>
-                  <a href="tel:+420732490651" className="underline">
-                    +420 732 490 651
+                  <a href="tel:+420732220651" className="underline">
+                    +420 732 220 651
                   </a>
                 </li>
                 <li>
@@ -118,9 +104,9 @@ export function Footer({
               <Heading level="h3">Školení</Heading>
               <ul className="mt-4 list-disc pl-4">
                 {trainings.map((training) => (
-                  <li key={training.slug}>
-                    <a href={"/skoleni/" + training.slug} className="underline">
-                      {training.title}
+                  <li key={training.id}>
+                    <a href={"/skoleni/" + training.id} className="underline">
+                      {training.data.title}
                     </a>
                   </li>
                 ))}

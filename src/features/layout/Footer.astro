@@ -1,13 +1,7 @@
 ---
-import { Footer } from "./footer";
-import type { Page } from "../../interfaces/page";
-import type { Training } from "../../interfaces/training";
+import { getCollection } from "astro:content";
+import { Footer as FooterComponent } from "./footer";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
-
-interface Props {
-  pages: Page[];
-  trainings: Training[];
-}
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
@@ -18,12 +12,30 @@ const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
   return links.locale === locale;
 })[0].links as { name: string; href: string }[];
 
-const { pages, trainings } = Astro.props;
+const pages = await getCollection("page", ({ data }) => {
+  return !data.draft;
+});
+
+const trainings = await getCollection("training", ({ data }) => {
+  return !data.draft;
+});
+
+const pageLinks = pages
+  .map((page) => {
+    return { name: page.data.title, href: `/${page.id}` };
+  })
+  .filter((link) => {
+    return link !== undefined;
+  });
+
+const links = [
+  ...(staticLinks as { name: string; href: string }[]),
+  ...pageLinks,
+];
 ---
 
-<Footer
-  pages={pages}
+<FooterComponent
+  links={links}
   trainings={trainings}
-  staticLinks={staticLinks}
   currentYear={new Date().getFullYear()}
 />
