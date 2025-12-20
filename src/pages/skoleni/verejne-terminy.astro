@@ -2,17 +2,17 @@
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { TrainingSessionsTable } from "../../features/training/training-sessions-table";
-import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 
 import { notion } from "../../lib/notion";
 import { Section } from "../../components/ui/section";
 import { Card } from "../../components/ui/card";
-import { TrainingList } from "../../features/homepage/training";
-import { strapi } from "../../lib/strapi";
+import { TrainingGrid } from "../../features/training/training-grid";
+
+// out-out of static pre-rendering
+export const prerender = false;
 
 const sessions = await notion.GetFutureTrainingSessions();
-const trainings = await strapi.fetchTrainings();
 
 const meta = {
   title: "Vojtěch Mareš | Veřejné termíny školení",
@@ -70,6 +70,6 @@ const meta = {
         </Card>
       </Container>
     </Section>
-    <TrainingList trainings={trainings} />
+    <TrainingGrid />
   </main>
 </Layout>
