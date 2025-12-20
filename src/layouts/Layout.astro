@@ -15,6 +15,7 @@ import GoogleAnalytics from "../features/analytics/GoogleAnalytics.astro";
 import CookieConsent from "../features/layout/CookieConsent.astro";
 
 interface Props {
+  lang?: string;
   meta?: {
     title: string;
     description: string;
@@ -52,7 +53,12 @@ interface Props {
       };
 }
 
-const { meta, openGraph = undefined, jsonLd = undefined } = Astro.props;
+const {
+  meta,
+  openGraph = undefined,
+  jsonLd = undefined,
+  lang = "cs",
+} = Astro.props;
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
@@ -62,14 +68,11 @@ if (locale === undefined) {
 const metadataDefaults = LocalizedMetadata.filter(
   (m) => m.locale === locale,
 )[0];
-
-const pages = await strapi.fetchPages();
-const trainings = await strapi.fetchTrainings();
 ---
 
 <!doctype html>
 <html
-  lang="cs"
+  lang={lang}
   class="h-full scroll-smooth bg-zinc-100 font-mono antialiased [font-feature-settings:'ss01']"
 >
   <head>
