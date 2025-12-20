@@ -10,7 +10,6 @@ import Twitter from "../features/layout/seo/Twitter.astro";
 import OpenGraph from "../features/layout/seo/OpenGraph.astro";
 import JSONLD from "../features/layout/seo/JSONLD.astro";
 import { LocalizedMetadata } from "../lib/site";
-import { strapi } from "../lib/strapi";
 import GoogleAnalytics from "../features/analytics/GoogleAnalytics.astro";
 import CookieConsent from "../features/layout/CookieConsent.astro";
 
@@ -106,9 +105,9 @@ const metadataDefaults = LocalizedMetadata.filter(
     <GoogleAnalytics />
   </head>
   <body class="flex h-full flex-col">
-    <Navigation pages={pages} />
+    <Navigation />
     <slot />
-    <Footer pages={pages} trainings={trainings} />
+    <Footer />
     <CookieConsent />
   </body>
 </html>
