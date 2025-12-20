@@ -1,3 +1,5 @@
+import { type CollectionEntry, getCollection } from "astro:content";
+
 import satori from "satori";
 import sharp from "sharp";
 
@@ -5,12 +7,45 @@ import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
-import { strapi } from "../../../lib/strapi";
 
-export async function GET({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+// switch to static page rendering during build time
+export const prerender = true;
 
-  const training = await strapi.getTraining(slug);
+interface Props {
+  training: CollectionEntry<"training">;
+}
+
+export async function getStaticPaths() {
+  const trainings = await getCollection("training", ({ data }) => {
+    return !data.draft;
+  });
+
+  // const paths = pages.map(page => {
+  //   const [lang, ...slug] = page.id.split('/');
+  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
+  // });
+
+  return trainings.map((training) => {
+    return {
+      params: { slug: training.id },
+      props: { training: training },
+    };
+  });
+
+  // return paths;
+}
+
+export async function GET({
+  params,
+  props,
+}: {
+  params: { slug: string };
+  props: Props;
+}) {
+  const { slug: _slug } = params;
+  const { training } = props;
+
+  // const training = await strapi.getTraining(slug);
 
   // const avatarData = await readFile(
   //     join(process.cwd(), "./src/images/people/vojtech-mares.png")
@@ -18,17 +53,17 @@ export async function GET({ params }: { params: { slug: string } }) {
   // const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   let iconData: ArrayBuffer | string | undefined = undefined;
-  if (training.icon?.url !== undefined) {
-    console.log(training.icon.url);
+  if (training.data.icon?.src !== undefined) {
+    console.log(training.data.icon.src);
     // const res = await fetch(training.icon.url);
     // iconData = await res.arrayBuffer();
-    iconData = training.icon.url;
+    iconData = training.data.icon.src;
   }
 
   const component = CreateTrainingImageComponent({
-    slug: training.slug,
-    title: training.title,
-    description: training.description,
+    slug: training.id,
+    title: training.data.title,
+    description: training.data.description,
     image: iconData,
   });
 

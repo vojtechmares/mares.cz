@@ -1,3 +1,5 @@
+import { type CollectionEntry, getCollection } from "astro:content";
+
 import satori from "satori";
 import sharp from "sharp";
 
@@ -5,12 +7,42 @@ import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 
 import { CreatePageImageComponent } from "../../features/opengraph-images/page";
-import { strapi } from "../../lib/strapi";
 
-export async function GET({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+interface Props {
+  page: CollectionEntry<"page">;
+}
 
-  const page = await strapi.getPage(slug);
+export async function getStaticPaths() {
+  // Get all `src/content/page/` entries
+  const pages = await getCollection("page", ({ data }) => {
+    return !data.draft;
+  });
+
+  // const paths = pages.map(page => {
+  //   const [lang, ...slug] = page.id.split('/');
+  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
+  // });
+
+  return pages.map((page) => {
+    return {
+      params: { slug: page.id },
+      props: { page: page },
+    };
+  });
+
+  // return paths;
+}
+
+export async function GET({
+  params,
+  props,
+}: {
+  params: { slug: string };
+  props: Props;
+}) {
+  // const { lang, slug } = Astro.params;
+  const { slug: _slug } = params;
+  const { page } = props;
 
   const avatarData = await readFile(
     join(process.cwd(), "./src/images/people/vojtech-mares.png"),
@@ -18,9 +50,9 @@ export async function GET({ params }: { params: { slug: string } }) {
   const avatarSrc = Uint8Array.from(avatarData).buffer;
 
   const component = CreatePageImageComponent({
-    slug: page.slug,
-    title: page.title,
-    description: page.description,
+    slug: page.id,
+    title: page.data.title,
+    description: page.data.description,
     imageData: avatarSrc,
   });
 
