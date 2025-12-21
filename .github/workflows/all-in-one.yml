@@ -1,0 +1,80 @@
+name: build, test, deploy
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+env:
+  HUSKY: 0
+
+jobs:
+  build-test:
+    name: build and test app
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: lint check
+        shell: bash
+        run: pnpm lint
+
+      - name: format check
+        shell: bash
+        run: pnpm format
+
+      - name: test
+        shell: bash
+        run: pnpm test
+
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    needs: [build-test]
+
+    concurrency:
+      group: deploy-${{ github.ref_name }}
+      cancel-in-progress: false
+
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
+          secrets: |
+            NOTION_API_KEY
+            NOTION_TRAINING_SESSIONS_DATABASE_ID
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
