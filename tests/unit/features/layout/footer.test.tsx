@@ -3,25 +3,19 @@ import { render, screen } from "@testing-library/react";
 import { Footer } from "../../../../src/features/layout/footer";
 
 describe("Footer", () => {
-  const mockPages = [
-    { title: "O mně", slug: "o-mne" },
-    { title: "Reference", slug: "reference" },
-  ] as Array<{ title: string; slug: string }>;
-
   const mockTrainings = [
-    { title: "Kubernetes", slug: "kubernetes" },
-    { title: "Docker", slug: "docker" },
-  ] as Array<{ title: string; slug: string }>;
+    { id: "kubernetes", data: { title: "Kubernetes" } },
+    { id: "docker", data: { title: "Docker" } },
+  ] as Parameters<typeof Footer>[0]["trainings"];
 
-  const mockStaticLinks = [
+  const mockLinks = [
     { name: "Blog", href: "/blog" },
     { name: "RSS", href: "/rss.xml" },
   ];
 
   const defaultProps = {
-    pages: mockPages,
     trainings: mockTrainings,
-    staticLinks: mockStaticLinks,
+    links: mockLinks,
     currentYear: 2024,
   };
 
@@ -78,7 +72,7 @@ describe("Footer", () => {
       render(<Footer {...defaultProps} />);
       mockTrainings.forEach((training) => {
         expect(
-          screen.getByRole("link", { name: training.title }),
+          screen.getByRole("link", { name: training.data.title }),
         ).toBeInTheDocument();
       });
     });
@@ -87,8 +81,8 @@ describe("Footer", () => {
       render(<Footer {...defaultProps} />);
       mockTrainings.forEach((training) => {
         expect(
-          screen.getByRole("link", { name: training.title }),
-        ).toHaveAttribute("href", `/skoleni/${training.slug}`);
+          screen.getByRole("link", { name: training.data.title }),
+        ).toHaveAttribute("href", `/skoleni/${training.id}`);
       });
     });
   });
@@ -101,22 +95,12 @@ describe("Footer", () => {
       ).toBeInTheDocument();
     });
 
-    it("should render static links", () => {
+    it("should render links", () => {
       render(<Footer {...defaultProps} />);
-      mockStaticLinks.forEach((link) => {
+      mockLinks.forEach((link) => {
         expect(screen.getByRole("link", { name: link.name })).toHaveAttribute(
           "href",
           link.href,
-        );
-      });
-    });
-
-    it("should render page links", () => {
-      render(<Footer {...defaultProps} />);
-      mockPages.forEach((page) => {
-        expect(screen.getByRole("link", { name: page.title })).toHaveAttribute(
-          "href",
-          `/${page.slug}`,
         );
       });
     });

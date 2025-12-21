@@ -4,57 +4,28 @@ import { Logo } from "../../../../src/features/training/logo";
 
 describe("Logo", () => {
   describe("image source priority", () => {
-    it("should use small format when available", () => {
+    it("should use logo when available", () => {
       const training = {
-        logo: {
-          formats: {
-            small: { url: "/images/small.png" },
-            thumbnail: { url: "/images/thumbnail.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: { src: "/images/logo.png" },
+          icon: { src: "/icons/icon.svg" },
         },
-        icon: { url: "/icons/icon.svg" },
       } as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
 
-      expect(img).toHaveAttribute("src", "/images/small.png");
+      expect(img).toHaveAttribute("src", "/images/logo.png");
     });
 
-    it("should use thumbnail format when small is not available", () => {
+    it("should use icon as fallback when logo is not available", () => {
       const training = {
-        logo: {
-          formats: {
-            thumbnail: { url: "/images/thumbnail.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: undefined,
+          icon: { src: "/icons/icon.svg" },
         },
-        icon: { url: "/icons/icon.svg" },
-      } as Parameters<typeof Logo>[0]["training"];
-
-      const { container } = render(<Logo training={training} />);
-      const img = container.querySelector("img");
-
-      expect(img).toHaveAttribute("src", "/images/thumbnail.png");
-    });
-
-    it("should use icon as fallback when logo formats are not available", () => {
-      const training = {
-        logo: {
-          formats: {},
-        },
-        icon: { url: "/icons/icon.svg" },
-      } as Parameters<typeof Logo>[0]["training"];
-
-      const { container } = render(<Logo training={training} />);
-      const img = container.querySelector("img");
-
-      expect(img).toHaveAttribute("src", "/icons/icon.svg");
-    });
-
-    it("should use icon when logo is undefined", () => {
-      const training = {
-        logo: undefined,
-        icon: { url: "/icons/icon.svg" },
       } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
@@ -67,21 +38,11 @@ describe("Logo", () => {
   describe("when no image available", () => {
     it("should render empty fragment when all image sources are undefined", () => {
       const training = {
-        logo: undefined,
-        icon: undefined,
-      } as unknown as Parameters<typeof Logo>[0]["training"];
-
-      const { container } = render(<Logo training={training} />);
-
-      expect(container.firstChild).toBeNull();
-    });
-
-    it("should render empty fragment when logo formats are empty and no icon", () => {
-      const training = {
-        logo: {
-          formats: {},
+        id: "test-training",
+        data: {
+          logo: undefined,
+          icon: undefined,
         },
-        icon: undefined,
       } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
@@ -93,11 +54,12 @@ describe("Logo", () => {
   describe("styling", () => {
     it("should apply invert class for SVG icons", () => {
       const training = {
-        logo: {
-          formats: {},
+        id: "test-training",
+        data: {
+          logo: undefined,
+          icon: { src: "/icons/icon.svg" },
         },
-        icon: { url: "/icons/icon.svg" },
-      } as Parameters<typeof Logo>[0]["training"];
+      } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
@@ -107,12 +69,11 @@ describe("Logo", () => {
 
     it("should not apply invert class for non-SVG images", () => {
       const training = {
-        logo: {
-          formats: {
-            small: { url: "/images/logo.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: { src: "/images/logo.png" },
         },
-      } as Parameters<typeof Logo>[0]["training"];
+      } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
@@ -122,12 +83,11 @@ describe("Logo", () => {
 
     it("should apply base size class", () => {
       const training = {
-        logo: {
-          formats: {
-            small: { url: "/images/logo.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: { src: "/images/logo.png" },
         },
-      } as Parameters<typeof Logo>[0]["training"];
+      } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
@@ -139,12 +99,11 @@ describe("Logo", () => {
   describe("image attributes", () => {
     it("should have empty alt text", () => {
       const training = {
-        logo: {
-          formats: {
-            small: { url: "/images/logo.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: { src: "/images/logo.png" },
         },
-      } as Parameters<typeof Logo>[0]["training"];
+      } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
@@ -154,12 +113,11 @@ describe("Logo", () => {
 
     it("should have width and height attributes", () => {
       const training = {
-        logo: {
-          formats: {
-            small: { url: "/images/logo.png" },
-          },
+        id: "test-training",
+        data: {
+          logo: { src: "/images/logo.png" },
         },
-      } as Parameters<typeof Logo>[0]["training"];
+      } as unknown as Parameters<typeof Logo>[0]["training"];
 
       const { container } = render(<Logo training={training} />);
       const img = container.querySelector("img");
