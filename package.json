@@ -5,9 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pnpm build:server",
-    "build:server": "tsc --project tsconfig.server.json",
-    "run-like-prod": "pnpm build && node dist/server-build/server.js",
+    "build": "astro build",
     "astro": "astro",
     "format:fix": "prettier . --write",
     "format": "prettier . --check",
