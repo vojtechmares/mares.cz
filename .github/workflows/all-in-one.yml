@@ -86,12 +86,14 @@ jobs:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
 
-      - name: deploy
+      - name: deploy to staging
+        if: "github.ref == 'refs/heads/main'"
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
+          command: deploy --env staging
           secrets: |
             NOTION_API_KEY
             NOTION_TRAINING_SESSIONS_DATABASE_ID

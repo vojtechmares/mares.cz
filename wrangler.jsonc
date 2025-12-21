@@ -10,4 +10,10 @@
   "observability": {
     "enabled": true,
   },
+  "env": {
+    "staging": {
+      "name": "website-mares-cz-v3-staging",
+      "routes": [{ "pattern": "beta.mares.cz", "custom_domain": true }],
+    },
+  },
 }
