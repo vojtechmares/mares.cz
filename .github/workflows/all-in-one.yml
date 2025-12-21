@@ -69,6 +69,16 @@ jobs:
       - name: setup pnpm
         uses: pnpm/action-setup@v4
 
+      - name: setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
       - name: deploy
         uses: cloudflare/wrangler-action@v3
         with:
@@ -78,7 +88,6 @@ jobs:
           secrets: |
             NOTION_API_KEY
             NOTION_TRAINING_SESSIONS_DATABASE_ID
-          wranglerVersion: "latest"
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
