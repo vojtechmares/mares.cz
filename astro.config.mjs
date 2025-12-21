@@ -3,9 +3,6 @@ import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-
-import node from "@astrojs/node";
-
 import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
