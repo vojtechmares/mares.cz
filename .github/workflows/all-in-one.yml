@@ -52,7 +52,9 @@ jobs:
   deploy-preview:
     if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/production'"
     needs: [build-test]
-
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/deploy.yml
     with:
       environment: preview
@@ -61,7 +63,9 @@ jobs:
   deploy-staging:
     if: "github.ref == 'refs/heads/main'"
     needs: [build-test]
-
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/deploy.yml
     with:
       environment: staging
