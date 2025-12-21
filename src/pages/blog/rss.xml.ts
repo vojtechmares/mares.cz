@@ -1,15 +1,21 @@
+import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
-import { strapi } from "../../lib/strapi";
 
 export async function GET(context: any) {
-  const articles = await strapi.fetchArticles();
+  const articles = (
+    await getCollection("blog", ({ data }) => {
+      return !data.draft;
+    })
+  ).sort((a, b) => {
+    return b.data.publish_time.valueOf() - a.data.publish_time.valueOf();
+  });
 
   const articlesToItems = articles.map((article) => {
     return {
-      title: article.title,
-      description: article.description,
-      link: context.site + "/blog/" + article.slug,
-      pubDate: new Date(article.publishedAt as Date),
+      title: article.data.title,
+      description: article.data.description,
+      link: context.site + "/blog/" + article.id,
+      pubDate: new Date(article.data.publish_time as Date),
       author: "vojtech@mares.cz",
     };
   });
