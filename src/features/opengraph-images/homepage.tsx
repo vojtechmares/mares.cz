@@ -1,4 +1,8 @@
-function HomepageImage({ imageData }: { imageData: ArrayBuffer }) {
+import { join } from "node:path";
+
+import { imageToDataUrl } from "../../lib/opengraph";
+
+function HomepageImage({ imageData }: { imageData: string }) {
   return (
     <div
       style={{
@@ -61,16 +65,16 @@ function HomepageImage({ imageData }: { imageData: ArrayBuffer }) {
         style={{ position: "absolute", bottom: 0, right: 60 }}
         alt=""
         height={600}
-        src={imageData as unknown as string}
+        src={imageData}
       />
     </div>
   );
 }
 
-export function CreateHomepageImageComponent({
-  imageData,
-}: {
-  imageData: ArrayBuffer;
-}) {
-  return <HomepageImage imageData={imageData} />;
+export async function CreateHomepageImageComponent() {
+  const avatarSrc = await imageToDataUrl(
+    join(process.cwd(), "./src/images/people/vojtech-mares.png"),
+  );
+
+  return <HomepageImage imageData={avatarSrc} />;
 }

@@ -9,7 +9,7 @@ function TrainingImage({
   slug: string;
   title: string;
   description: string;
-  imageData?: ArrayBuffer | string;
+  imageData?: string;
 }) {
   return (
     <div
@@ -88,7 +88,7 @@ function TrainingImage({
           width={400}
           height={400}
           alt=""
-          src={imageData as unknown as string}
+          src={imageData}
         />
       )}
     </div>
@@ -104,7 +104,7 @@ export function CreateTrainingImageComponent({
   slug: string;
   title: string;
   description: string;
-  image?: ArrayBuffer | string;
+  image?: string;
 }): ReactNode {
   return (
     <TrainingImage

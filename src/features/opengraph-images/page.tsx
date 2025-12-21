@@ -1,4 +1,7 @@
+import { join } from "node:path";
 import type { ReactNode } from "react";
+
+import { imageToDataUrl } from "../../lib/opengraph";
 
 function Page({
   slug,
@@ -9,7 +12,7 @@ function Page({
   slug: string;
   title: string;
   description: string;
-  imageData: ArrayBuffer;
+  imageData: string;
 }) {
   return (
     <div
@@ -60,29 +63,31 @@ function Page({
         style={{ position: "absolute", bottom: 0, right: 60 }}
         alt=""
         height={600}
-        src={imageData as unknown as string}
+        src={imageData}
       />
     </div>
   );
 }
 
-export function CreatePageImageComponent({
+export async function CreatePageImageComponent({
   slug,
   title,
   description,
-  imageData,
 }: {
   slug: string;
   title: string;
   description: string;
-  imageData: ArrayBuffer;
-}): ReactNode {
+}): Promise<ReactNode> {
+  const avatarSrc = await imageToDataUrl(
+    join(process.cwd(), "./src/images/people/vojtech-mares.png"),
+  );
+
   return (
     <Page
       slug={slug}
       title={title}
       description={description}
-      imageData={imageData}
+      imageData={avatarSrc}
     />
   );
 }
