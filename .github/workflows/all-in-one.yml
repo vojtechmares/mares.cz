@@ -50,14 +50,14 @@ jobs:
         run: pnpm test
 
   deploy-preview:
-    if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/production'"
+    if: "github.ref != 'refs/heads/main' && github.ref != 'refs/heads/production'"
     needs: [build-test]
     permissions:
       contents: read
       deployments: write
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: preview
+      environment: preview-${{ github.ref_name }}
       environment-url: https://preview.mares.cz
     secrets: inherit
 
