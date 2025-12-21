@@ -78,6 +78,7 @@ jobs:
           secrets: |
             NOTION_API_KEY
             NOTION_TRAINING_SESSIONS_DATABASE_ID
+          wranglerVersion: "latest"
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
