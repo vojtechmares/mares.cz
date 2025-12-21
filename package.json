@@ -16,7 +16,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preview": "wrangler dev",
+    "wrangler": "wrangler"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
