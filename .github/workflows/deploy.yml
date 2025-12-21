@@ -1,0 +1,70 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: "Environment name to deploy to (preview, staging, production)"
+      environment-url:
+        type: string
+        required: true
+
+env:
+  HUSKY: 0
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    concurrency:
+      group: deploy-${{ github.ref_name }}
+      cancel-in-progress: false
+
+    permissions:
+      contents: read
+      deployments: write
+
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ inputs.environment-url }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: build
+        shell: bash
+        run: pnpm build
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
+
+      - name: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
+          command: deploy --env ${{ inputs.environment }}
+          secrets: |
+            NOTION_API_KEY
+            NOTION_TRAINING_SESSIONS_DATABASE_ID
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}

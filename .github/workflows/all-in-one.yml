@@ -49,54 +49,20 @@ jobs:
         shell: bash
         run: pnpm test
 
-  deploy:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
+  deploy-preview:
+    if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/production'"
     needs: [build-test]
 
-    concurrency:
-      group: deploy-${{ github.ref_name }}
-      cancel-in-progress: false
+    uses: ./.github/workflows/deploy.yml@main
+    with:
+      environment: preview
+      environment-url: https://preview.mares.cz
 
-    permissions:
-      contents: read
-      deployments: write
+  deploy-staging:
+    if: "github.ref == 'refs/heads/main'"
+    needs: [build-test]
 
-    steps:
-      - name: checkout
-        uses: actions/checkout@v6
-
-      - name: setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: setup node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - name: install dependencies
-        shell: bash
-        run: pnpm install --frozen-lockfile
-
-      - name: build
-        shell: bash
-        run: pnpm build
-        env:
-          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
-
-      - name: deploy to staging
-        if: "github.ref == 'refs/heads/main'"
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
-          command: deploy --env staging
-          secrets: |
-            NOTION_API_KEY
-            NOTION_TRAINING_SESSIONS_DATABASE_ID
-        env:
-          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
+    uses: ./.github/workflows/deploy.yml@main
+    with:
+      environment: staging
+      environment-url: https://beta.mares.cz
