@@ -97,7 +97,7 @@ const { Content } = await render(article);
           {
             article.data.tags.map((tag) => (
               <>
-                <a href="#" class="underline">
+                <a href={`/blog/tag/${tag}`} class="underline">
                   #{tag}
                 </a>{" "}
               </>
@@ -117,6 +117,9 @@ const { Content } = await render(article);
           }
         </p>
       </div>
+      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        <a class="underline" href="/blog">← Zpět na blog</a>
+      </p>
     </Container>
   </Section>
   <!-- <ArticleHeader article={article} /> -->

@@ -1,0 +1,130 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Button } from "../../../../components/ui/button";
+import { Card } from "../../../../components/ui/card";
+import { Container } from "../../../../components/ui/container";
+import { Heading } from "../../../../components/ui/heading";
+import { Section } from "../../../../components/ui/section";
+import Layout from "../../../../layouts/Layout.astro";
+import Breadcrumbs from "../../../../components/seo/Breadcrumbs.astro";
+
+export const prerender = true;
+
+interface Props {
+  tag: string;
+  articles: CollectionEntry<"blog">[];
+}
+
+export async function getStaticPaths() {
+  const articles = await getCollection("blog", ({ data }) => !data.draft);
+
+  // Extract unique tags
+  const tags = [...new Set(articles.flatMap((article) => article.data.tags))];
+
+  return tags
+    .filter((tag) => tag !== "")
+    .map((tag) => ({
+      params: { tag },
+      props: {
+        tag,
+        articles: articles
+          .filter((a) => a.data.tags.includes(tag))
+          .sort(
+            (a, b) =>
+              b.data.publish_time.valueOf() - a.data.publish_time.valueOf(),
+          ),
+      },
+    }));
+}
+
+const { tag, articles } = Astro.props;
+
+const meta = {
+  title: `Vojtěch Mareš | Blog: #${tag}`,
+  description: `Články na téma ${tag} na blogu Vojtěcha Mareše. ${articles.length} článků o ${tag}.`,
+  keywords: `${tag}, blog, devops, ${tag} články`,
+};
+
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: `/blog/tag/${tag}/card.png`,
+    width: 1200,
+    height: 630,
+    alt: `Blog: #${tag}`,
+  },
+};
+
+const jsonLd = {
+  type: "CollectionPage" as const,
+  name: `Články s tagem #${tag}`,
+  description: meta.description,
+  url: `${baseUrl}/blog/tag/${tag}`,
+  numberOfItems: articles.length,
+};
+---
+
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse">Blog: #{tag}</Heading>
+      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        {articles.length} článků s tímto tagem
+      </p>
+      <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+        <a class="underline" href="/blog">← Zpět na blog</a>
+      </p>
+    </Container>
+  </Section>
+  <Section>
+    <Container>
+      <div
+        role="list"
+        class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl"
+      >
+        {
+          articles.map((article) => (
+            <Card variant="surface">
+              <Heading
+                level="h2"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                {article.data.title}
+              </Heading>
+              <p class="mt-2 mb-4">
+                {article.data.tags.map((t) => (
+                  <>
+                    <a
+                      href={`/blog/tag/${t}`}
+                      class:list={["underline", { "font-bold": t === tag }]}
+                    >
+                      #{t}
+                    </a>{" "}
+                  </>
+                ))}
+              </p>
+              <p class="my-4 text-zinc-700">{article.data.description}</p>
+              <div class="flex flex-row justify-end gap-x-6">
+                <p class="my-4 text-zinc-700">
+                  {new Date(
+                    article.data.publish_time as Date,
+                  ).toLocaleDateString("cs-CZ", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+                <Button href={"/blog/" + article.id} variant="primary">
+                  Přečíst si článek
+                </Button>
+              </div>
+            </Card>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+</Layout>

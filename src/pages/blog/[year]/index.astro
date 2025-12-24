@@ -1,0 +1,182 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Button } from "../../../components/ui/button";
+import { Card } from "../../../components/ui/card";
+import { Container } from "../../../components/ui/container";
+import { Heading } from "../../../components/ui/heading";
+import { Section } from "../../../components/ui/section";
+import Layout from "../../../layouts/Layout.astro";
+import Breadcrumbs from "../../../components/seo/Breadcrumbs.astro";
+
+export const prerender = true;
+
+interface Props {
+  year: number;
+  articles: CollectionEntry<"blog">[];
+  months: { month: number; count: number }[];
+}
+
+const CZECH_MONTHS = [
+  "Leden",
+  "Únor",
+  "Březen",
+  "Duben",
+  "Květen",
+  "Červen",
+  "Červenec",
+  "Srpen",
+  "Září",
+  "Říjen",
+  "Listopad",
+  "Prosinec",
+];
+
+export async function getStaticPaths() {
+  const articles = await getCollection("blog", ({ data }) => !data.draft);
+  const currentYear = new Date().getFullYear();
+
+  // Extract valid years (filter out placeholder dates like 2030)
+  const yearMap = new Map<number, CollectionEntry<"blog">[]>();
+
+  for (const article of articles) {
+    const year = article.data.publish_time.getFullYear();
+    // Only include years up to next year (allow planned posts)
+    if (year <= currentYear + 1 && year >= 2020) {
+      if (!yearMap.has(year)) {
+        yearMap.set(year, []);
+      }
+      yearMap.get(year)!.push(article);
+    }
+  }
+
+  return Array.from(yearMap.entries()).map(([year, yearArticles]) => {
+    // Group by month for navigation
+    const monthCounts = new Map<number, number>();
+    for (const article of yearArticles) {
+      const month = article.data.publish_time.getMonth() + 1;
+      monthCounts.set(month, (monthCounts.get(month) || 0) + 1);
+    }
+
+    return {
+      params: { year: year.toString() },
+      props: {
+        year,
+        articles: yearArticles.sort(
+          (a, b) =>
+            b.data.publish_time.valueOf() - a.data.publish_time.valueOf(),
+        ),
+        months: Array.from(monthCounts.entries())
+          .map(([month, count]) => ({ month, count }))
+          .sort((a, b) => b.month - a.month),
+      },
+    };
+  });
+}
+
+const { year, articles, months } = Astro.props;
+
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+
+const meta = {
+  title: `Vojtěch Mareš | Blog: ${year}`,
+  description: `Články z roku ${year} na blogu Vojtěcha Mareše. ${articles.length} článků.`,
+  keywords: `blog, devops, ${year}, články`,
+};
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: `/blog/${year}/card.png`,
+    width: 1200,
+    height: 630,
+    alt: `Blog: ${year}`,
+  },
+};
+
+const jsonLd = {
+  type: "CollectionPage" as const,
+  name: `Blog: ${year}`,
+  description: meta.description,
+  url: `${baseUrl}/blog/${year}`,
+  numberOfItems: articles.length,
+};
+---
+
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse">Blog: {year}</Heading>
+      <div class="flex flex-row justify-between">
+        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+          {articles.length} článků v tomto roce
+        </p>
+        {
+          months.length > 1 && (
+            <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+              {months.map((m, i) => (
+                <>
+                  <a
+                    href={`/blog/${year}/${String(m.month).padStart(2, "0")}`}
+                    class="underline"
+                  >
+                    {CZECH_MONTHS[m.month - 1]}
+                  </a>
+                  {i < months.length - 1 ? " · " : ""}
+                </>
+              ))}
+            </p>
+          )
+        }
+      </div>
+      <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+        <a class="underline" href="/blog">← Zpět na blog</a>
+      </p>
+    </Container>
+  </Section>
+  <Section>
+    <Container>
+      <div
+        role="list"
+        class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl"
+      >
+        {
+          articles.map((article) => (
+            <Card variant="surface">
+              <Heading
+                level="h2"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                {article.data.title}
+              </Heading>
+              <p class="mt-2 mb-4">
+                {article.data.tags.map((tag) => (
+                  <>
+                    <a href={`/blog/tag/${tag}`} class="underline">
+                      #{tag}
+                    </a>{" "}
+                  </>
+                ))}
+              </p>
+              <p class="my-4 text-zinc-700">{article.data.description}</p>
+              <div class="flex flex-row justify-end gap-x-6">
+                <p class="my-4 text-zinc-700">
+                  {new Date(
+                    article.data.publish_time as Date,
+                  ).toLocaleDateString("cs-CZ", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+                <Button href={"/blog/" + article.id} variant="primary">
+                  Přečíst si článek
+                </Button>
+              </div>
+            </Card>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+</Layout>

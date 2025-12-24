@@ -35,6 +35,16 @@ for (const article of articles) {
 }
 tags = [...new Set(tags)];
 
+// Extract years for archive navigation
+const currentYear = new Date().getFullYear();
+const years = [
+  ...new Set(
+    articles
+      .map((a) => a.data.publish_time.getFullYear())
+      .filter((y) => y <= currentYear + 1 && y >= 2020),
+  ),
+].sort((a, b) => b - a);
+
 const meta = {
   title: "Vojtěch Mareš | Blog",
   description: "Články na méme blogu nejen o DevOps.",
@@ -50,18 +60,34 @@ const meta = {
         {
           tags.map((tag) => (
             <>
-              <a href="#" class="underline">
+              <a href={`/blog/tag/${tag}`} class="underline">
                 #{tag}
               </a>{" "}
             </>
           ))
         }
       </p>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" type="application/rss+xml" href="/blog/rss.xml"
-          >RSS feed</a
-        >
-      </p>
+      <div class="mt-4 flex flex-row justify-between">
+        <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+          Archiv:{" "}
+          {
+            years.map((year, i) => (
+              <>
+                <a href={`/blog/${year}`} class="underline">
+                  {year}
+                </a>
+                {i < years.length - 1 ? " · " : ""}
+              </>
+            ))
+          }
+        </p>
+        <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+          Feed:{" "}
+          <a class="underline" type="application/rss+xml" href="/blog/rss.xml"
+            >RSS</a
+          >
+        </p>
+      </div>
     </Container>
   </Section>
   <Section>
@@ -82,7 +108,7 @@ const meta = {
               <p class="mt-2 mb-4">
                 {article.data.tags.map((tag) => (
                   <>
-                    <a href="#" class="underline">
+                    <a href={`/blog/tag/${tag}`} class="underline">
                       #{tag}
                     </a>{" "}
                   </>
