@@ -49,6 +49,46 @@ interface Props {
       }
     | {
         type: "WebSite" | "Organization" | "Person";
+      }
+    | {
+        type: "CollectionPage";
+        name: string;
+        description: string;
+        url: string;
+        numberOfItems: number;
+      }
+    | {
+        type: "Course";
+        name: string;
+        description: string;
+        provider: {
+          name: string;
+          url: string;
+        };
+        offers?: {
+          price: number;
+          priceCurrency: string;
+        };
+        hasCourseInstance?: {
+          startDate: string;
+          endDate?: string;
+          courseMode: string;
+          location: string;
+        }[];
+      }
+    | {
+        type: "ItemList";
+        items: {
+          name: string;
+          startDate: string;
+          endDate?: string;
+          location: string;
+          organizerName: string;
+          organizerUrl: string;
+          price: number;
+          priceCurrency: string;
+          offerUrl?: string;
+        }[];
       };
 }
 
@@ -103,6 +143,7 @@ const metadataDefaults = LocalizedMetadata.filter(
     {jsonLd !== undefined && <JSONLD schema={jsonLd} />}
     <link rel="preconnect" href="https://cdn.mares.cz" />
     <GoogleAnalytics />
+    <slot name="head" />
   </head>
   <body class="flex h-full flex-col">
     <Navigation />

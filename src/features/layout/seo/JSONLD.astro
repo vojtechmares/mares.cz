@@ -18,8 +18,58 @@ interface WebsiteSchema {
   type: "WebSite" | "Organization" | "Person";
 }
 
+interface CollectionPageSchema {
+  type: "CollectionPage";
+  name: string;
+  description: string;
+  url: string;
+  numberOfItems: number;
+}
+
+interface CourseSchema {
+  type: "Course";
+  name: string;
+  description: string;
+  provider: {
+    name: string;
+    url: string;
+  };
+  offers?: {
+    price: number;
+    priceCurrency: string;
+  };
+  hasCourseInstance?: {
+    startDate: string;
+    endDate?: string;
+    courseMode: string;
+    location: string;
+  }[];
+}
+
+interface EventSchema {
+  name: string;
+  startDate: string;
+  endDate?: string;
+  location: string;
+  organizerName: string;
+  organizerUrl: string;
+  price: number;
+  priceCurrency: string;
+  offerUrl?: string;
+}
+
+interface ItemListSchema {
+  type: "ItemList";
+  items: EventSchema[];
+}
+
 interface Props {
-  schema: BlogPostSchema | WebsiteSchema;
+  schema:
+    | BlogPostSchema
+    | WebsiteSchema
+    | CollectionPageSchema
+    | CourseSchema
+    | ItemListSchema;
 }
 
 const { schema } = Astro.props;
@@ -115,6 +165,86 @@ if (schema.type === "BlogPosting") {
       "https://linkedin.com/in/vojtech-mares",
       "https://twitter.com/vojtechmares_",
     ],
+  };
+} else if (schema.type === "CollectionPage") {
+  const collectionPage = schema as CollectionPageSchema;
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: collectionPage.name,
+    description: collectionPage.description,
+    url: collectionPage.url,
+    numberOfItems: collectionPage.numberOfItems,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Vojtěch Mareš - DevOps architekt",
+      url: baseUrl,
+    },
+  };
+} else if (schema.type === "Course") {
+  const course = schema as CourseSchema;
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.name,
+    description: course.description,
+    provider: {
+      "@type": "Person",
+      name: course.provider.name,
+      url: course.provider.url,
+    },
+    ...(course.offers && {
+      offers: {
+        "@type": "Offer",
+        price: course.offers.price,
+        priceCurrency: course.offers.priceCurrency,
+      },
+    }),
+    ...(course.hasCourseInstance && {
+      hasCourseInstance: course.hasCourseInstance.map((instance) => ({
+        "@type": "CourseInstance",
+        courseMode: instance.courseMode,
+        startDate: instance.startDate,
+        ...(instance.endDate && { endDate: instance.endDate }),
+        location: {
+          "@type": "Place",
+          name: instance.location,
+        },
+      })),
+    }),
+  };
+} else if (schema.type === "ItemList") {
+  const itemList = schema as ItemListSchema;
+  jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: itemList.items.map((event, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Event",
+        name: event.name,
+        startDate: event.startDate,
+        ...(event.endDate && { endDate: event.endDate }),
+        location: {
+          "@type": "Place",
+          name: event.location,
+        },
+        organizer: {
+          "@type": "Person",
+          name: event.organizerName,
+          url: event.organizerUrl,
+        },
+        offers: {
+          "@type": "Offer",
+          price: event.price,
+          priceCurrency: event.priceCurrency,
+          ...(event.offerUrl && { url: event.offerUrl }),
+          availability: "https://schema.org/InStock",
+        },
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      },
+    })),
   };
 }
 
