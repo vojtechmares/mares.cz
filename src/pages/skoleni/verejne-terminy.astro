@@ -20,9 +20,32 @@ const meta = {
     "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
   keywords: "školení, termíny, devops školení, termín školení",
 };
+
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+
+// Generate Event schema for each training session
+const jsonLd = {
+  type: "ItemList" as const,
+  items: sessions.map((session) => ({
+    name: session.name,
+    startDate: new Date(session.dates.start).toISOString(),
+    ...(session.dates.end && {
+      endDate: new Date(session.dates.end).toISOString(),
+    }),
+    location: session.location,
+    organizerName: "Vojtěch Mareš",
+    organizerUrl: baseUrl,
+    price: session.price,
+    priceCurrency: "CZK",
+    ...(session.signUpFormURL && {
+      offerUrl: session.signUpFormURL.toString(),
+    }),
+  })),
+};
 ---
 
-<Layout meta={meta}>
+<Layout meta={meta} jsonLd={jsonLd}>
   <main>
     <Section variant="inverse">
       <Container>

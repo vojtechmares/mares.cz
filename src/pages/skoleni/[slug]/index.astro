@@ -11,6 +11,7 @@ import { notion } from "../../../lib/notion";
 import { Section } from "../../../components/ui/section";
 import { StyleContent } from "../../../components/style-content";
 import { getEntry } from "astro:content";
+import { n } from "../../../../playwright-report/trace/assets/defaultSettingsView-BEpdCv1S";
 
 // out-out of static pre-rendering
 export const prerender = false;
@@ -72,7 +73,8 @@ const openGraph = {
   },
 };
 
-const { Content } = await render(training);
+const baseUrl =
+  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const pricing = {
   open: training.data.price.open.filter(
@@ -82,21 +84,49 @@ const pricing = {
     (variant) => variant.currency === "CZK",
   )[0].amount,
 };
+
+const jsonLd = {
+  type: "Course" as const,
+  name: training.data.title + " školení",
+  description: training.data.description,
+  provider: {
+    name: "Vojtěch Mareš",
+    url: baseUrl,
+  },
+  offers: {
+    price: pricing.open,
+    priceCurrency: "CZK",
+  },
+  ...(sessions.length > 0 && {
+    hasCourseInstance: sessions.map((session) => ({
+      startDate: new Date(session.dates.start).toISOString(),
+      ...(session.dates.end && {
+        endDate: new Date(session.dates.end).toISOString(),
+      }),
+      courseMode: "Offline",
+      location: session.location,
+    })),
+  }),
+};
+
+const { Content } = await render(training);
 ---
 
-<Layout meta={meta} openGraph={openGraph}>
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
   <main>
     <Section variant="inverse">
-      <Container className="flex items-center justify-between">
-        <Heading level="h1" variant="inverse">
-          {training.data.title} školení
-        </Heading>
-        <!-- <h1
+      <Container className="flex flex-col">
+        <div class="flex items-center justify-between">
+          <Heading level="h1" variant="inverse">
+            {training.data.title} školení
+          </Heading>
+          <!-- <h1
             class="font-display self-center text-center text-5xl font-black tracking-tight text-white sm:text-6xl"
           >
             {training.title} školení
           </h1> -->
-        <Logo training={training} />
+          <Logo training={training} />
+        </div>
       </Container>
     </Section>
     <Section>
