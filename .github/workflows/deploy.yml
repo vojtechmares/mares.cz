@@ -61,10 +61,10 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
-          command: deploy --env ${{ inputs.environment }}
           secrets: |
             NOTION_API_KEY
             NOTION_TRAINING_SESSIONS_DATABASE_ID
+          environment: ${{ inputs.environment }}
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
