@@ -4,7 +4,7 @@ Personal website built with Astro 5, deployed as a containerized application to 
 
 ## Overview
 
-Bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS and training session data from Notion API.
+Bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ Bilingual (Czech/English) server-side rendered website that fetches content from
 - **Runtime**: Node.js 24 (Alpine)
 - **Server**: Fastify
 - **Styling**: Tailwind CSS v4
-- **Content**: Strapi CMS + Notion API
+- **Content**: Strapi CMS
 - **Deployment**: Kubernetes with Helm
 
 ## Development
@@ -47,8 +47,6 @@ Required variables (store in `.prod.env` for local development):
 
 - `STRAPI_API_URL` - Strapi CMS endpoint
 - `STRAPI_API_TOKEN` - Strapi authentication token
-- `NOTION_API_KEY` - Notion API key
-- `NOTION_TRAINING_SESSIONS_DATABASE_ID` - Notion database ID
 - `DISABLE_ANALYTICS` - Disable Google Analytics (optional)
 
 ## Contributing

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website (mares.cz) built with Astro 5, deployed as a containerized application to Kubernetes. The site is a bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS and training session data from Notion.
+This is a personal website (mares.cz) built with Astro 5, deployed as a containerized application to Kubernetes. The site is a bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
 
 ## Key Commands
 
@@ -46,7 +46,7 @@ This is a personal website (mares.cz) built with Astro 5, deployed as a containe
 
 ### Content Sources
 
-The application pulls content from two external sources:
+The application pulls content from:
 
 1. **Strapi CMS** (src/lib/strapi.ts)
    - Articles (blog posts)
@@ -55,10 +55,10 @@ The application pulls content from two external sources:
    - Requires `STRAPI_API_URL` and `STRAPI_API_TOKEN` environment variables
    - All fetch methods return transformed TypeScript interfaces (Article, Page, Training)
 
-2. **Notion** (src/lib/notion.ts)
+2. **Sessions Content Collection** (src/content/session/)
    - Training sessions (scheduled public training dates)
-   - Requires `NOTION_API_KEY` and `NOTION_TRAINING_SESSIONS_DATABASE_ID` environment variables
-   - Queries future sessions by filtering out "Done" and "Cancelled" statuses
+   - Stored as JSON files in the content collection
+   - Accessed via src/lib/sessions.ts helper functions
 
 ### Server Configuration
 
@@ -91,7 +91,7 @@ The site uses Astro's file-based routing with dynamic segments:
 - `/[slug]` - Generic pages from Strapi
 - `/blog/[slug]` - Blog posts from Strapi
 - `/skoleni/[slug]` - Training course pages from Strapi
-- `/skoleni/verejne-terminy` - Public training sessions from Notion
+- `/skoleni/verejne-terminy` - Public training sessions from content collection
 
 Each dynamic route includes a `card.png.ts` file that generates Open Graph preview images using Satori.
 
@@ -117,8 +117,6 @@ Required environment variables (defined in astro.config.mjs env schema):
 
 - `STRAPI_API_URL` - Strapi CMS endpoint
 - `STRAPI_API_TOKEN` - Strapi authentication token
-- `NOTION_API_KEY` - Notion API key
-- `NOTION_TRAINING_SESSIONS_DATABASE_ID` - Notion database ID for training sessions
 - `DISABLE_ANALYTICS` - Boolean to disable Google Analytics (default: false)
 
 ### SEO Components

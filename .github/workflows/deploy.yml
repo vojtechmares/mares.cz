@@ -51,9 +51,6 @@ jobs:
       - name: build
         shell: bash
         run: pnpm build
-        env:
-          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
 
       - name: deploy
         uses: cloudflare/wrangler-action@v3
@@ -61,10 +58,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }} # for github deployments
-          secrets: |
-            NOTION_API_KEY
-            NOTION_TRAINING_SESSIONS_DATABASE_ID
           environment: ${{ inputs.environment }}
-        env:
-          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_TRAINING_SESSIONS_DATABASE_ID: ${{ secrets.NOTION_TRAINING_SESSIONS_DATABASE_ID }}
