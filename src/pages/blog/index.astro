@@ -60,9 +60,7 @@ const meta = {
         {
           tags.map((tag) => (
             <>
-              <a href={`/blog/tag/${tag}`} class="underline">
-                #{tag}
-              </a>{" "}
+              <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
             </>
           ))
         }
@@ -73,10 +71,7 @@ const meta = {
           {
             years.map((year, i) => (
               <>
-                <a href={`/blog/${year}`} class="underline">
-                  {year}
-                </a>
-                {i < years.length - 1 ? " · " : ""}
+                <a href={`/blog/${year}`} class="underline">{year}</a>{i < years.length - 1 ? " · " : ""}
               </>
             ))
           }
@@ -108,9 +103,7 @@ const meta = {
               <p class="mt-2 mb-4">
                 {article.data.tags.map((tag) => (
                   <>
-                    <a href={`/blog/tag/${tag}`} class="underline">
-                      #{tag}
-                    </a>{" "}
+                    <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
                   </>
                 ))}
               </p>

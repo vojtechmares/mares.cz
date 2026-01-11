@@ -97,9 +97,7 @@ const { Content } = await render(article);
           {
             article.data.tags.map((tag) => (
               <>
-                <a href={`/blog/tag/${tag}`} class="underline">
-                  #{tag}
-                </a>{" "}
+                <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
               </>
             ))
           }
