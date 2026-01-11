@@ -13,8 +13,7 @@ export function Error({ status, error = undefined }: ErrorProps) {
     },
     "500": {
       headline: "Internal Server Error",
-      description:
-        "Hups, něco se rozbilo. Na serveru došlo k neočekávané chybě.",
+      description: "Hups, něco se rozbilo. Na serveru došlo k neočekávané chybě.",
     },
   };
 

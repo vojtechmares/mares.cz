@@ -19,13 +19,7 @@ const variantStyles: Record<BadgeVariant, string> = {
 
 const baseStyles = `inline-block ${radius.full} px-4 py-2 text-base font-bold`;
 
-export function Badge({
-  children,
-  variant = "default",
-  className,
-  as = "span",
-  href,
-}: BadgeProps) {
+export function Badge({ children, variant = "default", className, as = "span", href }: BadgeProps) {
   const combinedClassName = clsx(baseStyles, variantStyles[variant], className);
 
   if (as === "a" && href) {

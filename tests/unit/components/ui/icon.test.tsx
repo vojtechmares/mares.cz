@@ -30,11 +30,7 @@ describe("Icon", () => {
         </Icon>,
       );
       const container = screen.getByTestId("icon-svg").parentElement;
-      expect(container).toHaveClass(
-        "inline-flex",
-        "items-center",
-        "justify-center",
-      );
+      expect(container).toHaveClass("inline-flex", "items-center", "justify-center");
     });
   });
 
@@ -77,9 +73,7 @@ describe("Icon", () => {
           <svg data-testid="icon-svg" />
         </Icon>,
       );
-      expect(
-        screen.getByRole("img", { name: /settings icon/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: /settings icon/i })).toBeInTheDocument();
     });
 
     it("should not have role when label is not provided", () => {

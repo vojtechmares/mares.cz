@@ -32,21 +32,13 @@ export async function getStaticPaths() {
   // return paths;
 }
 
-export async function GET({
-  params,
-  props,
-}: {
-  params: { slug: string };
-  props: Props;
-}) {
+export async function GET({ params, props }: { params: { slug: string }; props: Props }) {
   const { slug: _slug } = params;
   const { training } = props;
 
   let iconDataUrl: string | undefined = undefined;
   if (training.data.icon?.src !== undefined) {
-    iconDataUrl = await imageToDataUrl(
-      join(process.cwd(), "./public", training.data.icon.src),
-    );
+    iconDataUrl = await imageToDataUrl(join(process.cwd(), "./public", training.data.icon.src));
   }
 
   const component = CreateTrainingImageComponent({

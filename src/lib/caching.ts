@@ -16,9 +16,7 @@ const monthShort = [
 
 export function dateToLastModified(date: Date): string {
   // Transform date timezone from any to GMT (Greenwich Mean Time)
-  date = new Date(
-    Intl.DateTimeFormat("en-US", { timeZone: "Europe/London" }).format(date),
-  );
+  date = new Date(Intl.DateTimeFormat("en-US", { timeZone: "Europe/London" }).format(date));
 
   // Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
   // Example: Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
@@ -39,21 +37,15 @@ export function dateToLastModified(date: Date): string {
   lastModified += year + " ";
 
   const hours =
-    date.getHours() < 10
-      ? "0" + date.getHours().toString()
-      : date.getHours().toString();
+    date.getHours() < 10 ? "0" + date.getHours().toString() : date.getHours().toString();
   lastModified += hours + ":";
 
   const minutes =
-    date.getMinutes() < 10
-      ? "0" + date.getMinutes().toString()
-      : date.getMinutes().toString();
+    date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
   lastModified += minutes + ":";
 
   const seconds =
-    date.getSeconds() < 10
-      ? "0" + date.getSeconds().toString()
-      : date.getSeconds().toString();
+    date.getSeconds() < 10 ? "0" + date.getSeconds().toString() : date.getSeconds().toString();
   lastModified += seconds + " ";
   lastModified += "GMT";
 

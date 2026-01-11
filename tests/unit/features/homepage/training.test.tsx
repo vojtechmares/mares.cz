@@ -40,9 +40,7 @@ describe("TrainingList", () => {
 
     it("should render description", () => {
       render(<TrainingList trainings={mockTrainings} />);
-      expect(
-        screen.getByText(/sdílím své zkušenosti a znalosti/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/sdílím své zkušenosti a znalosti/i)).toBeInTheDocument();
     });
   });
 
@@ -51,9 +49,7 @@ describe("TrainingList", () => {
       render(<TrainingList trainings={mockTrainings} />);
       mockTrainings.forEach((training) => {
         // Each training appears twice (mobile + desktop grid)
-        expect(
-          screen.getAllByText(training.title).length,
-        ).toBeGreaterThanOrEqual(1);
+        expect(screen.getAllByText(training.title).length).toBeGreaterThanOrEqual(1);
       });
     });
 
@@ -76,9 +72,7 @@ describe("TrainingList", () => {
     it("should render training icons", () => {
       render(<TrainingList trainings={mockTrainings} />);
       mockTrainings.forEach((training) => {
-        const images = screen.getAllByAltText(
-          `Ikona školení ${training.title}`,
-        );
+        const images = screen.getAllByAltText(`Ikona školení ${training.title}`);
         expect(images.length).toBeGreaterThanOrEqual(1);
       });
     });
@@ -101,9 +95,7 @@ describe("TrainingList", () => {
   describe("empty trainings", () => {
     it("should render with empty trainings array", () => {
       render(<TrainingList trainings={[]} />);
-      expect(
-        screen.getByRole("heading", { name: /devops školení/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /devops školení/i })).toBeInTheDocument();
     });
   });
 

@@ -35,18 +35,10 @@ describe("TrainingSessionsTable", () => {
 
     it("should render table headers", () => {
       render(<TrainingSessionsTable sessions={mockSessions} />);
-      expect(
-        screen.getByRole("columnheader", { name: /školení/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", { name: /datum/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", { name: /místo/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", { name: /cena/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /školení/i })).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /datum/i })).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /místo/i })).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /cena/i })).toBeInTheDocument();
     });
 
     it("should render all sessions", () => {
@@ -84,9 +76,7 @@ describe("TrainingSessionsTable", () => {
         signUpURL: undefined,
       });
       render(<TrainingSessionsTable sessions={[sessionWithoutSignUp]} />);
-      expect(
-        screen.getAllByText(/přihlašování zatím není možné/i).length,
-      ).toBeGreaterThan(0);
+      expect(screen.getAllByText(/přihlašování zatím není možné/i).length).toBeGreaterThan(0);
     });
   });
 
@@ -101,9 +91,7 @@ describe("TrainingSessionsTable", () => {
   describe("accessibility", () => {
     it("should have screen reader text for sign up button", () => {
       render(<TrainingSessionsTable sessions={[createMockSession()]} />);
-      expect(
-        screen.getAllByText(/na školení kubernetes workshop/i).length,
-      ).toBeGreaterThan(0);
+      expect(screen.getAllByText(/na školení kubernetes workshop/i).length).toBeGreaterThan(0);
     });
   });
 });
@@ -129,19 +117,11 @@ describe("CompactTrainingSessionsTable", () => {
 
     it("should render compact headers (no training name, no price)", () => {
       render(<CompactTrainingSessionsTable sessions={mockSessions} />);
-      expect(
-        screen.getByRole("columnheader", { name: /datum/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", { name: /místo/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /datum/i })).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: /místo/i })).toBeInTheDocument();
       // Should NOT have "Školení" and "Cena" headers in compact version
-      expect(
-        screen.queryByRole("columnheader", { name: /^školení$/i }),
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByRole("columnheader", { name: /^cena$/i }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole("columnheader", { name: /^školení$/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole("columnheader", { name: /^cena$/i })).not.toBeInTheDocument();
     });
 
     it("should render sessions", () => {
@@ -161,12 +141,8 @@ describe("CompactTrainingSessionsTable", () => {
       const sessionWithoutSignUp = createMockSession({
         signUpURL: undefined,
       });
-      render(
-        <CompactTrainingSessionsTable sessions={[sessionWithoutSignUp]} />,
-      );
-      expect(
-        screen.getAllByText(/přihlašování zatím není možné/i).length,
-      ).toBeGreaterThan(0);
+      render(<CompactTrainingSessionsTable sessions={[sessionWithoutSignUp]} />);
+      expect(screen.getAllByText(/přihlašování zatím není možné/i).length).toBeGreaterThan(0);
     });
   });
 

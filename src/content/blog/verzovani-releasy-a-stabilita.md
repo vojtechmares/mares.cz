@@ -1,8 +1,7 @@
 ---
 title: Verzování, releasy a stabilita
 description: Verzování. Časté téma, a další problém k "naming things, cache invalidation, off by one errors", tak čtvrtý IT problém je verzování. Jaké verzovací schémata existují, jak je používám a proč a jaké jsou naopak nevhodné. Verzování zároveň není jen o jedné věci, dnes verzujeme zdrojový kód služby, máme verzi produktu/aplikace jako celku a pak do toho verzujeme ještě třeba machine learning modely. No prostě, s verzováním je sranda.
-keywords:
-  ["verzování", "aplikace", "api", "produkt", "breaking changes", "stabilita"]
+keywords: ["verzování", "aplikace", "api", "produkt", "breaking changes", "stabilita"]
 tags: [""]
 draft: true
 publish_time: 2020-01-01

@@ -35,10 +35,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
           >
             Cena
           </th>
-          <th
-            scope="col"
-            className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell"
-          >
+          <th scope="col" className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell">
             <span className="sr-only">Přihlásit se</span>
           </th>
         </tr>
@@ -54,9 +51,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
                   <TrainingDate dates={training.dates} />
                 </dd>
                 <dt className="sr-only">Místo</dt>
-                <dd className="font-normal text-zinc-700">
-                  {training.location}
-                </dd>
+                <dd className="font-normal text-zinc-700">{training.location}</dd>
                 <dt className="sr-only">Cena</dt>
                 <dd className="font-normal text-zinc-700">
                   <TrainingPrice price={training.price} />
@@ -85,10 +80,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
             </td>
             <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
               {training.signUpURL ? (
-                <PublicSessionSignUpButton
-                  name={training.name}
-                  signUpURL={training.signUpURL}
-                />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
               ) : (
                 <SigningUpNotOpenYet />
               )}
@@ -100,9 +92,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   );
 }
 
-export function CompactTrainingSessionsTable({
-  sessions,
-}: TrainingSessionTableProps) {
+export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
     <table className="min-w-full md:divide-y md:divide-zinc-300">
       <thead>
@@ -125,10 +115,7 @@ export function CompactTrainingSessionsTable({
                     >
                         Cena
                     </th> */}
-          <th
-            scope="col"
-            className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell"
-          >
+          <th scope="col" className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell">
             <span className="sr-only">Přihlásit se</span>
           </th>
         </tr>
@@ -140,9 +127,7 @@ export function CompactTrainingSessionsTable({
               <TrainingDate dates={training.dates} />
               <dl className="py-4 md:hidden">
                 <dt className="sr-only">Místo</dt>
-                <dd className="font-normal text-zinc-700">
-                  {training.location}
-                </dd>
+                <dd className="font-normal text-zinc-700">{training.location}</dd>
                 {/* <dt className="sr-only">Cena</dt>
                                 <dd className="font-normal text-zinc-700">
                                     <TrainingPrice price={training.price} />
@@ -168,10 +153,7 @@ export function CompactTrainingSessionsTable({
                         </td> */}
             <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
               {training.signUpURL ? (
-                <PublicSessionSignUpButton
-                  name={training.name}
-                  signUpURL={training.signUpURL}
-                />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
               ) : (
                 <SigningUpNotOpenYet />
               )}
@@ -219,13 +201,7 @@ function TrainingPrice({ price }: { price: number }) {
   );
 }
 
-function PublicSessionSignUpButton({
-  name,
-  signUpURL,
-}: {
-  name: string;
-  signUpURL: string;
-}) {
+function PublicSessionSignUpButton({ name, signUpURL }: { name: string; signUpURL: string }) {
   return (
     <Button href={signUpURL} variant="accent">
       Přihlásit se

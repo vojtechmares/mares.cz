@@ -107,12 +107,5 @@ export async function CreateArticleImageComponent({
     join(process.cwd(), "./src/images/people/vojtech-mares.png"),
   );
 
-  return (
-    <ArticleImage
-      slug={slug}
-      title={title}
-      description={description}
-      imageData={avatarSrc}
-    />
-  );
+  return <ArticleImage slug={slug} title={title} description={description} imageData={avatarSrc} />;
 }

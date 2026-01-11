@@ -6,9 +6,7 @@ describe("Heading", () => {
   describe("rendering", () => {
     it("should render with children", () => {
       render(<Heading>Heading text</Heading>);
-      expect(
-        screen.getByRole("heading", { name: /heading text/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /heading text/i })).toBeInTheDocument();
     });
 
     it("should render as h1 element by default", () => {

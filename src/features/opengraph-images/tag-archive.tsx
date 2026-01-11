@@ -61,12 +61,7 @@ function TagArchiveImage({
             lineHeight: "1.5556",
           }}
         >
-          {articleCount}{" "}
-          {articleCount === 1
-            ? "článek"
-            : articleCount < 5
-              ? "články"
-              : "článků"}
+          {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
         </p>
         <p
           style={{
@@ -108,11 +103,5 @@ export async function CreateTagArchiveImageComponent({
     join(process.cwd(), "./src/images/people/vojtech-mares.png"),
   );
 
-  return (
-    <TagArchiveImage
-      tag={tag}
-      articleCount={articleCount}
-      imageData={avatarSrc}
-    />
-  );
+  return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} />;
 }

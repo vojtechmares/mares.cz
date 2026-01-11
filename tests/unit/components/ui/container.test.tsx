@@ -43,9 +43,7 @@ describe("Container", () => {
           <p>Paragraph</p>
         </Container>,
       );
-      expect(
-        screen.getByRole("heading", { name: /title/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /title/i })).toBeInTheDocument();
       expect(screen.getByText("Paragraph")).toBeInTheDocument();
     });
   });

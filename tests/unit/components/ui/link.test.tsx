@@ -6,9 +6,7 @@ describe("Link", () => {
   describe("rendering", () => {
     it("should render with children", () => {
       render(<Link href="/test">Link text</Link>);
-      expect(
-        screen.getByRole("link", { name: /link text/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: /link text/i })).toBeInTheDocument();
     });
 
     it("should render as anchor element", () => {
@@ -72,10 +70,7 @@ describe("Link", () => {
           External
         </Link>,
       );
-      expect(screen.getByRole("link")).toHaveAttribute(
-        "rel",
-        "noopener noreferrer",
-      );
+      expect(screen.getByRole("link")).toHaveAttribute("rel", "noopener noreferrer");
     });
   });
 

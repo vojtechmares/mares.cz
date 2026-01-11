@@ -13,22 +13,16 @@ export async function getFutureSessions(): Promise<Session[]> {
   return sessions
     .filter((session) => session.data.dates.start >= today)
     .sort(
-      (a, b) =>
-        new Date(a.data.dates.start).getTime() -
-        new Date(b.data.dates.start).getTime(),
+      (a, b) => new Date(a.data.dates.start).getTime() - new Date(b.data.dates.start).getTime(),
     );
 }
 
 /**
  * Get future sessions filtered by name
  */
-export async function getFutureSessionsByName(
-  name: string,
-): Promise<Session[]> {
+export async function getFutureSessionsByName(name: string): Promise<Session[]> {
   const sessions = await getFutureSessions();
-  return sessions.filter(
-    (s) => s.data.name.toLowerCase() === name.toLowerCase(),
-  );
+  return sessions.filter((s) => s.data.name.toLowerCase() === name.toLowerCase());
 }
 
 /**

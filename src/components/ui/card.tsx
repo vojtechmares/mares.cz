@@ -2,12 +2,7 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 import { colors, spacing, radius, shadows } from "../../lib/design-tokens";
 
-type CardVariant =
-  | "surface"
-  | "inverse"
-  | "accent"
-  | "default"
-  | "accent-light";
+type CardVariant = "surface" | "inverse" | "accent" | "default" | "accent-light";
 type CardBorder = "none";
 
 type CardProps = {

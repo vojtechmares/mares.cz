@@ -11,15 +11,10 @@ export function CallToAction() {
           Pojďme do toho společně
         </Heading>
         <Text variant="inverse" className="mt-4">
-          Nastal čas posunout vaši infrastrukturu na úroveň současných
-          standardů. Infrastruktura má vaši aplikaci představit světu, nikoli ji
-          držet zpátky.
+          Nastal čas posunout vaši infrastrukturu na úroveň současných standardů. Infrastruktura má
+          vaši aplikaci představit světu, nikoli ji držet zpátky.
         </Text>
-        <Button
-          href="https://cal.com/vojtechmares/30min"
-          variant="accent"
-          className="mt-10"
-        >
+        <Button href="https://cal.com/vojtechmares/30min" variant="accent" className="mt-10">
           Domluvme si schůzku
         </Button>
       </div>

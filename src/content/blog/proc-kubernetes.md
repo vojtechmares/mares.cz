@@ -1,8 +1,7 @@
 ---
 title: Proč Kubernetes?
 description: V tomhle článku píšu o tom, proč je Kubernetes tak rozšířené, a proč tu s námi bude ještě dlouho.
-keywords:
-  ["kubernetes", "infrastructure", "containers", "docker", "devops", "cloud"]
+keywords: ["kubernetes", "infrastructure", "containers", "docker", "devops", "cloud"]
 tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false

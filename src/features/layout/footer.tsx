@@ -127,9 +127,8 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
             <div>
               <Heading level="h3">Zaujal jsem vás?</Heading>
               <p className="mt-4">
-                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl
-                pomoci? Ozvěte se mi &ndash; společně probereme vaše potřeby a
-                najdeme řešení na míru.
+                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi
+                &ndash; společně probereme vaše potřeby a najdeme řešení na míru.
               </p>
               <div className="mt-5 flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-2">
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">
@@ -181,8 +180,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               </a>
             </div>
             <p className="mt-6 text-zinc-700 md:mt-0">
-              Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva
-              vyhrazena.
+              Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva vyhrazena.
             </p>
           </div>
         </Container>

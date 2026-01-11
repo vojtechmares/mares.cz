@@ -19,13 +19,7 @@ const variantStyles: Record<SectionVariant, string> = {
   default: colors.background.default,
 };
 
-export function Section({
-  children,
-  className,
-  id,
-  ariaLabel,
-  variant = "default",
-}: SectionProps) {
+export function Section({ children, className, id, ariaLabel, variant = "default" }: SectionProps) {
   return (
     <section
       id={id}

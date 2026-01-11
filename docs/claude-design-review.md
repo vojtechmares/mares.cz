@@ -109,9 +109,7 @@ Instead of using standardized UI components, many places use inline Tailwind cla
 **Hero Component** (`src/components/homepage/Hero.astro:16-32`):
 
 ```html
-<h1
-  class="font-display text-4xl font-black tracking-tight text-zinc-900 sm:text-7xl"
->
+<h1 class="font-display text-4xl font-black tracking-tight text-zinc-900 sm:text-7xl">
   <!-- Should use <Heading> component instead -->
 </h1>
 ```
@@ -1026,12 +1024,7 @@ export function Section({
 
 ```typescript
 // Color variants
-export type ColorVariant =
-  | "primary"
-  | "secondary"
-  | "accent"
-  | "muted"
-  | "inverse";
+export type ColorVariant = "primary" | "secondary" | "accent" | "muted" | "inverse";
 
 // Size variants
 export type SizeVariant = "sm" | "md" | "lg";

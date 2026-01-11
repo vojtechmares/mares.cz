@@ -7,9 +7,7 @@ describe("Button", () => {
   describe("rendering", () => {
     it("should render with children", () => {
       render(<Button>Click me</Button>);
-      expect(
-        screen.getByRole("button", { name: /click me/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /click me/i })).toBeInTheDocument();
     });
 
     it("should render as button element by default", () => {
@@ -19,10 +17,7 @@ describe("Button", () => {
 
     it("should render as link when href is provided", () => {
       render(<Button href="/test">Link</Button>);
-      expect(screen.getByRole("link", { name: /link/i })).toHaveAttribute(
-        "href",
-        "/test",
-      );
+      expect(screen.getByRole("link", { name: /link/i })).toHaveAttribute("href", "/test");
     });
 
     it("should apply type attribute to link", () => {
@@ -31,10 +26,7 @@ describe("Button", () => {
           RSS
         </Button>,
       );
-      expect(screen.getByRole("link")).toHaveAttribute(
-        "type",
-        "application/rss+xml",
-      );
+      expect(screen.getByRole("link")).toHaveAttribute("type", "application/rss+xml");
     });
   });
 

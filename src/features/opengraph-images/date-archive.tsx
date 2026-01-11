@@ -63,12 +63,7 @@ function DateArchiveImage({
             lineHeight: "1.5556",
           }}
         >
-          {articleCount}{" "}
-          {articleCount === 1
-            ? "článek"
-            : articleCount < 5
-              ? "články"
-              : "článků"}
+          {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
         </p>
         <p
           style={{
@@ -113,11 +108,6 @@ export async function CreateDateArchiveImageComponent({
   );
 
   return (
-    <DateArchiveImage
-      title={title}
-      articleCount={articleCount}
-      url={url}
-      imageData={avatarSrc}
-    />
+    <DateArchiveImage title={title} articleCount={articleCount} url={url} imageData={avatarSrc} />
   );
 }

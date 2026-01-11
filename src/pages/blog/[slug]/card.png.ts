@@ -28,13 +28,7 @@ export async function getStaticPaths() {
   // return paths;
 }
 
-export async function GET({
-  params,
-  props,
-}: {
-  params: { slug: string };
-  props: Props;
-}) {
+export async function GET({ params, props }: { params: { slug: string }; props: Props }) {
   const { slug: _slug } = params;
   const { article } = props;
 

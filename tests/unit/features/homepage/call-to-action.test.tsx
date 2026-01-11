@@ -21,9 +21,7 @@ describe("CallToAction", () => {
 
     it("should render description text", () => {
       render(<CallToAction />);
-      expect(
-        screen.getByText(/nastal čas posunout vaši infrastrukturu/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/nastal čas posunout vaši infrastrukturu/i)).toBeInTheDocument();
     });
 
     it("should render motivational text", () => {
@@ -37,9 +35,10 @@ describe("CallToAction", () => {
   describe("CTA button", () => {
     it("should render meeting booking button", () => {
       render(<CallToAction />);
-      expect(
-        screen.getByRole("link", { name: /domluvme si schůzku/i }),
-      ).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
+      expect(screen.getByRole("link", { name: /domluvme si schůzku/i })).toHaveAttribute(
+        "href",
+        "https://cal.com/vojtechmares/30min",
+      );
     });
 
     it("should have accent variant button", () => {

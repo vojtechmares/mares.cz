@@ -106,12 +106,5 @@ export function CreateTrainingImageComponent({
   description: string;
   image?: string;
 }): ReactNode {
-  return (
-    <TrainingImage
-      slug={slug}
-      title={title}
-      description={description}
-      imageData={image}
-    />
-  );
+  return <TrainingImage slug={slug} title={title} description={description} imageData={image} />;
 }

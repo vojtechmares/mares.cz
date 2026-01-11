@@ -25,16 +25,10 @@ export function Link({
   external = false,
   className,
 }: LinkProps) {
-  const externalProps = external
-    ? { target: "_blank", rel: "noopener noreferrer" }
-    : {};
+  const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
-    <a
-      href={href}
-      className={clsx(variantStyles[variant], className)}
-      {...externalProps}
-    >
+    <a href={href} className={clsx(variantStyles[variant], className)} {...externalProps}>
       {children}
     </a>
   );

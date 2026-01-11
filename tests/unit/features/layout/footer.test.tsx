@@ -27,18 +27,17 @@ describe("Footer", () => {
 
     it("should render brand name", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("heading", { name: /vojtěch mareš/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /vojtěch mareš/i })).toBeInTheDocument();
     });
   });
 
   describe("contact information", () => {
     it("should render phone number", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("link", { name: /\+420 732 220 651/i }),
-      ).toHaveAttribute("href", "tel:+420732220651");
+      expect(screen.getByRole("link", { name: /\+420 732 220 651/i })).toHaveAttribute(
+        "href",
+        "tel:+420732220651",
+      );
     });
 
     it("should render email", () => {
@@ -63,26 +62,23 @@ describe("Footer", () => {
   describe("trainings section", () => {
     it("should render trainings heading", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("heading", { name: /školení/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /školení/i })).toBeInTheDocument();
     });
 
     it("should render all trainings", () => {
       render(<Footer {...defaultProps} />);
       mockTrainings.forEach((training) => {
-        expect(
-          screen.getByRole("link", { name: training.data.title }),
-        ).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: training.data.title })).toBeInTheDocument();
       });
     });
 
     it("should render training links with correct href", () => {
       render(<Footer {...defaultProps} />);
       mockTrainings.forEach((training) => {
-        expect(
-          screen.getByRole("link", { name: training.data.title }),
-        ).toHaveAttribute("href", `/skoleni/${training.id}`);
+        expect(screen.getByRole("link", { name: training.data.title })).toHaveAttribute(
+          "href",
+          `/skoleni/${training.id}`,
+        );
       });
     });
   });
@@ -90,18 +86,13 @@ describe("Footer", () => {
   describe("links section", () => {
     it("should render links heading", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("heading", { name: /důležité odkazy/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /důležité odkazy/i })).toBeInTheDocument();
     });
 
     it("should render links", () => {
       render(<Footer {...defaultProps} />);
       mockLinks.forEach((link) => {
-        expect(screen.getByRole("link", { name: link.name })).toHaveAttribute(
-          "href",
-          link.href,
-        );
+        expect(screen.getByRole("link", { name: link.name })).toHaveAttribute("href", link.href);
       });
     });
   });
@@ -109,16 +100,15 @@ describe("Footer", () => {
   describe("CTA section", () => {
     it("should render CTA heading", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("heading", { name: /zaujal jsem vás/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /zaujal jsem vás/i })).toBeInTheDocument();
     });
 
     it("should render meeting booking button", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByRole("link", { name: /domluvme si schůzku/i }),
-      ).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
+      expect(screen.getByRole("link", { name: /domluvme si schůzku/i })).toHaveAttribute(
+        "href",
+        "https://cal.com/vojtechmares/30min",
+      );
     });
   });
 
@@ -141,10 +131,7 @@ describe("Footer", () => {
 
     it("should render X link", () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.getByLabelText(/na X/i)).toHaveAttribute(
-        "href",
-        "https://x.com/vojtechmares_",
-      );
+      expect(screen.getByLabelText(/na X/i)).toHaveAttribute("href", "https://x.com/vojtechmares_");
     });
 
     it("should render GitHub link", () => {
@@ -172,16 +159,12 @@ describe("Footer", () => {
   describe("copyright", () => {
     it("should render copyright text with current year", () => {
       render(<Footer {...defaultProps} />);
-      expect(
-        screen.getByText(/copyright.*2024.*vojtěch mareš/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/copyright.*2024.*vojtěch mareš/i)).toBeInTheDocument();
     });
 
     it("should update copyright year dynamically", () => {
       render(<Footer {...defaultProps} currentYear={2025} />);
-      expect(
-        screen.getByText(/copyright.*2025.*vojtěch mareš/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/copyright.*2025.*vojtěch mareš/i)).toBeInTheDocument();
     });
   });
 });

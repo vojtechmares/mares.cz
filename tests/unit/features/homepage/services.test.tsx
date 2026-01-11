@@ -11,41 +11,31 @@ describe("Services", () => {
 
     it("should render main heading", () => {
       render(<Services />);
-      expect(
-        screen.getByRole("heading", { name: /služby/i, level: 2 }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /služby/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
       render(<Services />);
-      expect(
-        screen.getByText(/co dělám a jak vám mohu pomoci/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/co dělám a jak vám mohu pomoci/i)).toBeInTheDocument();
     });
   });
 
   describe("service cards", () => {
     it("should render consultation service", () => {
       render(<Services />);
-      expect(
-        screen.getByRole("heading", { name: /konzultace/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /konzultace/i })).toBeInTheDocument();
       expect(screen.getByText(/potřebujete poradit/i)).toBeInTheDocument();
     });
 
     it("should render training service (featured)", () => {
       render(<Services />);
-      expect(
-        screen.getByRole("heading", { name: /^školení$/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /^školení$/i })).toBeInTheDocument();
       expect(screen.getByText(/formou workshopu/i)).toBeInTheDocument();
     });
 
     it("should render DevOps cooperation service", () => {
       render(<Services />);
-      expect(
-        screen.getByRole("heading", { name: /devops spolupráce/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /devops spolupráce/i })).toBeInTheDocument();
       expect(screen.getByText(/dlouhodobou spolupráci/i)).toBeInTheDocument();
     });
   });
@@ -56,9 +46,7 @@ describe("Services", () => {
       const emailLinks = screen.getAllByRole("link", {
         name: /napište mi/i,
       });
-      const emailLink = emailLinks.find((link) =>
-        link.getAttribute("href")?.includes("mailto:"),
-      );
+      const emailLink = emailLinks.find((link) => link.getAttribute("href")?.includes("mailto:"));
       expect(emailLink).toHaveAttribute("href", "mailto:vojtech@mares.cz");
     });
 

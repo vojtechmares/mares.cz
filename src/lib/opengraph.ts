@@ -34,12 +34,8 @@ async function renderImage(component: ReactNode) {
   const interFontRegular = await readFile(
     join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf"),
   );
-  const interFontLight = await readFile(
-    join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf"),
-  );
-  const interFontBold = await readFile(
-    join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf"),
-  );
+  const interFontLight = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf"));
+  const interFontBold = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf"));
 
   const svg = await satori(component, {
     width: 1200,

@@ -33,9 +33,7 @@ function HomepageImage({ imageData }: { imageData: string }) {
             paddingBottom: 0,
           }}
         >
-          <span style={{ whiteSpace: "nowrap", color: "#f59e0b" }}>
-            Vojtěch Mareš
-          </span>
+          <span style={{ whiteSpace: "nowrap", color: "#f59e0b" }}>Vojtěch Mareš</span>
           <br />,
         </p>
         <p
@@ -56,8 +54,8 @@ function HomepageImage({ imageData }: { imageData: string }) {
             lineHeight: "1.5556",
           }}
         >
-          Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu.
-          Naučím Váš tým, jak používat moderní cloud-native technologie.
+          Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak
+          používat moderní cloud-native technologie.
         </p>
         <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz</p>
       </div>

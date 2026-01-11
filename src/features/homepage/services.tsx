@@ -32,10 +32,7 @@ function Service({
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
-      <Text
-        variant={featured ? "primary" : "muted"}
-        className={clsx("mt-4 text-base")}
-      >
+      <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4 text-base")}>
         {description}
       </Text>
       <Button

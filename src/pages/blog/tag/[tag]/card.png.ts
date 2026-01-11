@@ -25,13 +25,7 @@ export async function getStaticPaths() {
     }));
 }
 
-export async function GET({
-  params,
-  props,
-}: {
-  params: { tag: string };
-  props: Props;
-}) {
+export async function GET({ params, props }: { params: { tag: string }; props: Props }) {
   const { tag } = params;
   const { articles } = props;
 

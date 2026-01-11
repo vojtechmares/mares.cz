@@ -1,8 +1,7 @@
 ---
 title: GitLab CI vs GitHub Actions
 description: V tomhle článku se rozepíšu o velice populárních CI/CD nástrojích GitLab CI a GitHub Actions. A to nejen z hlediska pipeliny, ale i runnerů a dalších funkcí.
-keywords:
-  ["git", "ci", "runner", "gitlab ci", "github actions", "gitlab", "github"]
+keywords: ["git", "ci", "runner", "gitlab ci", "github actions", "gitlab", "github"]
 tags: ["continuous-integration"]
 trainingAd: github-actions
 draft: false

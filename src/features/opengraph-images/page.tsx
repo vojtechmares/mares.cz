@@ -82,12 +82,5 @@ export async function CreatePageImageComponent({
     join(process.cwd(), "./src/images/people/vojtech-mares.png"),
   );
 
-  return (
-    <Page
-      slug={slug}
-      title={title}
-      description={description}
-      imageData={avatarSrc}
-    />
-  );
+  return <Page slug={slug} title={title} description={description} imageData={avatarSrc} />;
 }

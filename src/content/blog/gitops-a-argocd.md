@@ -1,8 +1,7 @@
 ---
 title: GitOps a ArgoCD
 description: V tomto článku se podíváme na GitOps a nástroj ArgoCD, který je jedním z nástrojů pro GitOps.
-keywords:
-  ["git", "gitlab", "github", "argocd", "gitops", "kargo", "argocd autopilot"]
+keywords: ["git", "gitlab", "github", "argocd", "gitops", "kargo", "argocd autopilot"]
 tags: ["kubernetes", "gitops"]
 trainingAd: argocd
 draft: false

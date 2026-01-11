@@ -9,8 +9,7 @@ export function ArticleHeader({ article }: { article: Article }) {
           month: "long",
           year: "numeric",
         })}
-        {article.publishedAt?.toDateString() !==
-        article.updatedAt?.toDateString() ? (
+        {article.publishedAt?.toDateString() !== article.updatedAt?.toDateString() ? (
           <>
             , upraveno:{" "}
             {article.updatedAt?.toLocaleDateString("cs-CZ", {

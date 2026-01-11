@@ -15,15 +15,9 @@ describe("CookieConsentBar", () => {
   it("should render the cookie consent bar", () => {
     render(<CookieConsentBar />);
 
-    expect(
-      screen.getByText(/Tento web používá soubory cookies/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Přijmout vše/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Odmítnout vše/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Tento web používá soubory cookies/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Přijmout vše/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Odmítnout vše/i })).toBeInTheDocument();
   });
 
   it("should render link to cookie policy", () => {
@@ -75,9 +69,7 @@ describe("CookieConsentBar", () => {
     await user.click(acceptButton);
 
     await waitFor(() => {
-      expect(
-        screen.queryByText(/Tento web používá soubory cookies/i),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/Tento web používá soubory cookies/i)).not.toBeInTheDocument();
     });
   });
 
@@ -92,9 +84,7 @@ describe("CookieConsentBar", () => {
     await user.click(denyButton);
 
     await waitFor(() => {
-      expect(
-        screen.queryByText(/Tento web používá soubory cookies/i),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/Tento web používá soubory cookies/i)).not.toBeInTheDocument();
     });
   });
 
@@ -138,9 +128,7 @@ describe("CookieConsentBar", () => {
   it("should log error if setCookieConsent action fails", async () => {
     const user = userEvent.setup();
     const mockAction = vi.mocked(actions.setCookieConsent);
-    const consoleErrorSpy = vi
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     mockAction.mockResolvedValue({
       data: undefined,
@@ -160,9 +148,7 @@ describe("CookieConsentBar", () => {
     });
 
     // Should not hide the bar on error
-    expect(
-      screen.getByText(/Tento web používá soubory cookies/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Tento web používá soubory cookies/i)).toBeInTheDocument();
 
     consoleErrorSpy.mockRestore();
   });
@@ -170,9 +156,7 @@ describe("CookieConsentBar", () => {
   it("should log error if setCookieConsent action throws", async () => {
     const user = userEvent.setup();
     const mockAction = vi.mocked(actions.setCookieConsent);
-    const consoleErrorSpy = vi
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     mockAction.mockRejectedValue(new Error("Network error"));
 
@@ -189,9 +173,7 @@ describe("CookieConsentBar", () => {
     });
 
     // Should not hide the bar on error
-    expect(
-      screen.getByText(/Tento web používá soubory cookies/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Tento web používá soubory cookies/i)).toBeInTheDocument();
 
     consoleErrorSpy.mockRestore();
   });

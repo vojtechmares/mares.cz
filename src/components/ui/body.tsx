@@ -28,10 +28,6 @@ export function Body({
   as: Tag = "p",
 }: BodyProps) {
   return (
-    <Tag
-      className={clsx(typography.body[variant], colorStyles[color], className)}
-    >
-      {children}
-    </Tag>
+    <Tag className={clsx(typography.body[variant], colorStyles[color], className)}>{children}</Tag>
   );
 }

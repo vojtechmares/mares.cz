@@ -33,18 +33,10 @@ function TestTrainingAd({
               {training.adText}
             </Text>
             <div className="flex flex-col md:flex-row md:gap-x-6">
-              <Button
-                href="mailto:vojtech@mares.cz"
-                variant="accent"
-                className="mt-10"
-              >
+              <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
                 Nezávazně poptat firemní školení
               </Button>
-              <Button
-                href={"/skoleni/" + training.slug}
-                variant="secondary"
-                className="mt-10"
-              >
+              <Button href={"/skoleni/" + training.slug} variant="secondary" className="mt-10">
                 Více informací o školení
               </Button>
             </div>
@@ -87,9 +79,7 @@ describe("TrainingAd", () => {
 
     it("should render training title", () => {
       render(<TestTrainingAd training={mockTraining} />);
-      expect(
-        screen.getByRole("heading", { name: /kubernetes školení/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /kubernetes školení/i })).toBeInTheDocument();
     });
 
     it("should render training ad text", () => {
@@ -108,9 +98,10 @@ describe("TrainingAd", () => {
 
     it("should render more info button", () => {
       render(<TestTrainingAd training={mockTraining} />);
-      expect(
-        screen.getByRole("link", { name: /více informací o školení/i }),
-      ).toHaveAttribute("href", "/skoleni/kubernetes");
+      expect(screen.getByRole("link", { name: /více informací o školení/i })).toHaveAttribute(
+        "href",
+        "/skoleni/kubernetes",
+      );
     });
   });
 

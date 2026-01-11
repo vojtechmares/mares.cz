@@ -14,9 +14,7 @@ type TrainingProps = {
 
 const Training = ({ training, className, featured = false }: TrainingProps) => {
   return (
-    <div
-      className={clsx(className, "flex flex-row items-center justify-between")}
-    >
+    <div className={clsx(className, "flex flex-row items-center justify-between")}>
       <img
         src={training.icon?.url as string}
         className={clsx("", featured ? "" : "invert")}
@@ -26,11 +24,7 @@ const Training = ({ training, className, featured = false }: TrainingProps) => {
         loading="lazy"
       />
       <div className="flex flex-col items-end">
-        <Heading
-          level="h3"
-          variant={featured ? "primary" : "inverse"}
-          className="text-right"
-        >
+        <Heading level="h3" variant={featured ? "primary" : "inverse"} className="text-right">
           {training.title}
         </Heading>
         <Button
@@ -53,14 +47,8 @@ const TrainingGridMobile = ({ trainings }: TrainingGridProps) => {
   return (
     <div className="-mx-4 mt-10 grid grid-cols-1 gap-x-8 gap-y-4 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {trainings.map((training) => (
-        <Card
-          variant={training.slug === "kubernetes" ? "accent" : "inverse"}
-          key={training.slug}
-        >
-          <Training
-            training={training}
-            featured={training.slug === "kubernetes"}
-          />
+        <Card variant={training.slug === "kubernetes" ? "accent" : "inverse"} key={training.slug}>
+          <Training training={training} featured={training.slug === "kubernetes"} />
         </Card>
       ))}
     </div>
@@ -72,14 +60,8 @@ const TrainingGridDesktop = ({ trainings }: TrainingGridProps) => {
     <div className="mt-10 hidden lg:block">
       <div className="grid grid-cols-3 gap-x-8 gap-y-4">
         {trainings.map((training) => (
-          <Card
-            variant={training.slug === "kubernetes" ? "accent" : "inverse"}
-            key={training.slug}
-          >
-            <Training
-              training={training}
-              featured={training.slug === "kubernetes"}
-            />
+          <Card variant={training.slug === "kubernetes" ? "accent" : "inverse"} key={training.slug}>
+            <Training training={training} featured={training.slug === "kubernetes"} />
           </Card>
         ))}
       </div>
@@ -96,9 +78,8 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
             DevOps školení
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-zinc-300">
-            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a
-            workshopů. Zaměřuji se především na open-source DevOps nástroje a
-            technologie.
+            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji
+            se především na open-source DevOps nástroje a technologie.
           </p>
         </div>
         <TrainingGridMobile trainings={trainings} />

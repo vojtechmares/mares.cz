@@ -1,9 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import {
-  ReferencesContainer,
-  ReferenceCard,
-} from "../../../../src/features/homepage/references";
+import { ReferencesContainer, ReferenceCard } from "../../../../src/features/homepage/references";
 
 describe("ReferencesContainer", () => {
   describe("rendering", () => {
@@ -14,16 +11,12 @@ describe("ReferencesContainer", () => {
 
     it("should render main heading", () => {
       render(<ReferencesContainer />);
-      expect(
-        screen.getByRole("heading", { name: /reference/i, level: 2 }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /reference/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
       render(<ReferencesContainer />);
-      expect(
-        screen.getByText(/co o mně říkají moji klienti/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/co o mně říkají moji klienti/i)).toBeInTheDocument();
     });
   });
 
@@ -39,9 +32,7 @@ describe("ReferencesContainer", () => {
 
     it("should render without children", () => {
       render(<ReferencesContainer />);
-      expect(
-        screen.getByRole("heading", { name: /reference/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /reference/i })).toBeInTheDocument();
     });
   });
 

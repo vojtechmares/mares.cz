@@ -35,14 +35,11 @@ export function Hero({ children }: HeroProps) {
             DevOps architekt.
           </Heading>
           <p className="mt-6 text-lg text-zinc-700 md:max-w-2xl">
-            Společně snížíme vaše náklady na infrastrukturu, zbavíme se
-            technického dluhu a připravíme vaši IT infrastrukturu na rapidní
-            škálování.
+            Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a
+            připravíme vaši IT infrastrukturu na rapidní škálování.
           </p>
           <div className="mt-10 flex flex-row gap-x-6 gap-y-6 sm:justify-start md:gap-y-0">
-            <Button href="https://cal.com/vojtechmares/30min">
-              Domluvme si schůzku
-            </Button>
+            <Button href="https://cal.com/vojtechmares/30min">Domluvme si schůzku</Button>
             {/* <Button href="mailto:vojtech@mares.cz" style="outline">
               Napište mi
             </Button> */}

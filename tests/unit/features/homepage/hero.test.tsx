@@ -17,18 +17,17 @@ describe("Hero", () => {
 
     it("should render description paragraph", () => {
       render(<Hero />);
-      expect(
-        screen.getByText(/snížíme vaše náklady na infrastrukturu/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/snížíme vaše náklady na infrastrukturu/i)).toBeInTheDocument();
     });
   });
 
   describe("CTA buttons", () => {
     it("should render meeting booking button", () => {
       render(<Hero />);
-      expect(
-        screen.getByRole("link", { name: /domluvme si schůzku/i }),
-      ).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
+      expect(screen.getByRole("link", { name: /domluvme si schůzku/i })).toHaveAttribute(
+        "href",
+        "https://cal.com/vojtechmares/30min",
+      );
     });
   });
 

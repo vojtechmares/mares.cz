@@ -29,18 +29,10 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
                 {training.data.ad}
               </Text>
               <div className="flex flex-col md:flex-row md:gap-x-6">
-                <Button
-                  href="mailto:vojtech@mares.cz"
-                  variant="accent"
-                  className="mt-10"
-                >
+                <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
                   Nezávazně poptat firemní školení
                 </Button>
-                <Button
-                  href={"/skoleni/" + training.id}
-                  variant="secondary"
-                  className="mt-10"
-                >
+                <Button href={"/skoleni/" + training.id} variant="secondary" className="mt-10">
                   Více informací o školení
                 </Button>
               </div>

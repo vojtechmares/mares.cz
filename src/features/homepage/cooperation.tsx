@@ -7,8 +7,7 @@ import { Section } from "../../components/ui/section";
 const steps = [
   {
     name: "Analýza současného stavu",
-    description:
-      "Identifikujeme slabá místa ve vaší infrastruktuře, aplikaci nebo obojím. ",
+    description: "Identifikujeme slabá místa ve vaší infrastruktuře, aplikaci nebo obojím. ",
   },
   {
     name: "Návrh řešení",
@@ -34,11 +33,7 @@ const steps = [
 
 export function Cooperation() {
   return (
-    <Section
-      id="z-nuly-do-cloudu"
-      aria-label="Z nuly do cloudu"
-      variant="inverse"
-    >
+    <Section id="z-nuly-do-cloudu" aria-label="Z nuly do cloudu" variant="inverse">
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <Heading level="h2" variant="inverse">
@@ -49,17 +44,11 @@ export function Cooperation() {
           </p>
         </div>
         <nav aria-label="Progress">
-          <ol
-            role="list"
-            className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2"
-          >
+          <ol role="list" className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2">
             {steps.map((step, stepIdx) => (
               <li
                 key={step.name}
-                className={clsx(
-                  stepIdx !== steps.length - 1 ? "pb-10" : "",
-                  "relative",
-                )}
+                className={clsx(stepIdx !== steps.length - 1 ? "pb-10" : "", "relative")}
               >
                 {stepIdx !== steps.length - 1 ? (
                   <div
@@ -74,12 +63,8 @@ export function Cooperation() {
                     </span>
                   </span>
                   <span className="ml-4 flex min-w-0 flex-col">
-                    <span className="text-2xl font-normal text-white">
-                      {step.name}
-                    </span>
-                    <span className="text-lg text-zinc-300">
-                      {step.description}
-                    </span>
+                    <span className="text-2xl font-normal text-white">{step.name}</span>
+                    <span className="text-lg text-zinc-300">{step.description}</span>
                   </span>
                 </div>
               </li>

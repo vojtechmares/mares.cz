@@ -19,11 +19,7 @@ const sizeStyles: Record<IconSize, string> = {
 export function Icon({ children, size = "md", className, label }: IconProps) {
   return (
     <span
-      className={clsx(
-        "inline-flex items-center justify-center",
-        sizeStyles[size],
-        className,
-      )}
+      className={clsx("inline-flex items-center justify-center", sizeStyles[size], className)}
       role={label ? "img" : undefined}
       aria-label={label}
     >

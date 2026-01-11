@@ -11,16 +11,12 @@ describe("Clients", () => {
 
     it("should render main heading", () => {
       render(<Clients />);
-      expect(
-        screen.getByRole("heading", { name: /moji klienti/i, level: 2 }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /moji klienti/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
       render(<Clients />);
-      expect(
-        screen.getByText(/společnosti, které mi důvěřují/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/společnosti, které mi důvěřují/i)).toBeInTheDocument();
     });
   });
 
@@ -38,9 +34,7 @@ describe("Clients", () => {
 
     it("should render without children", () => {
       render(<Clients />);
-      expect(
-        screen.getByRole("heading", { name: /moji klienti/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /moji klienti/i })).toBeInTheDocument();
     });
   });
 
