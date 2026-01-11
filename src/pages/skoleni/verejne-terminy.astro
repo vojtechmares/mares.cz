@@ -4,7 +4,7 @@ import { Heading } from "../../components/ui/heading";
 import { TrainingSessionsTable } from "../../features/training/training-sessions-table";
 import Layout from "../../layouts/Layout.astro";
 
-import { notion } from "../../lib/notion";
+import { getFutureSessions, toTrainingSession } from "../../lib/sessions";
 import { Section } from "../../components/ui/section";
 import { Card } from "../../components/ui/card";
 import { TrainingGrid } from "../../features/training/training-grid";
@@ -12,7 +12,8 @@ import { TrainingGrid } from "../../features/training/training-grid";
 // out-out of static pre-rendering
 export const prerender = false;
 
-const sessions = await notion.GetFutureTrainingSessions();
+const sessionEntries = await getFutureSessions();
+const sessions = sessionEntries.map(toTrainingSession);
 
 const meta = {
   title: "Vojtěch Mareš | Veřejné termíny školení",
@@ -38,8 +39,8 @@ const jsonLd = {
     organizerUrl: baseUrl,
     price: session.price,
     priceCurrency: "CZK",
-    ...(session.signUpFormURL && {
-      offerUrl: session.signUpFormURL.toString(),
+    ...(session.signUpURL && {
+      offerUrl: session.signUpURL,
     }),
   })),
 };

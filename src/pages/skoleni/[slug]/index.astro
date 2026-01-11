@@ -7,11 +7,13 @@ import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
-import { notion } from "../../../lib/notion";
+import {
+  getFutureSessionsByName,
+  toTrainingSession,
+} from "../../../lib/sessions";
 import { Section } from "../../../components/ui/section";
 import { StyleContent } from "../../../components/style-content";
 import { getEntry } from "astro:content";
-import { n } from "../../../../playwright-report/trace/assets/defaultSettingsView-BEpdCv1S";
 
 // out-out of static pre-rendering
 export const prerender = false;
@@ -49,7 +51,8 @@ if (!training || training.data.draft) {
   return new Response(null, { status: 404 });
 }
 
-const sessions = await notion.GetFutureTrainingSessionsForSlug(slug);
+const sessionEntries = await getFutureSessionsByName(training.data.title);
+const sessions = sessionEntries.map(toTrainingSession);
 
 const formatter = new Intl.NumberFormat("cs", {
   style: "currency",

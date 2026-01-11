@@ -1,0 +1,9 @@
+{
+  "name": "Docker",
+  "dates": {
+    "start": "2025-04-10"
+  },
+  "location": "Praha",
+  "price": 5700,
+  "signUpURL": "https://forms.gle/docker-april"
+}

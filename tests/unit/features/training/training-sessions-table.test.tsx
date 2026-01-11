@@ -10,11 +10,10 @@ describe("TrainingSessionsTable", () => {
   const createMockSession = (overrides = {}): TrainingSession =>
     ({
       name: "Kubernetes Workshop",
-      slug: "kubernetes",
       dates: { start: "2024-03-15" },
       location: "Praha",
       price: 10000,
-      signUpFormURL: "https://example.com/signup",
+      signUpURL: "https://example.com/signup",
       ...overrides,
     }) as TrainingSession;
 
@@ -22,7 +21,6 @@ describe("TrainingSessionsTable", () => {
     createMockSession(),
     createMockSession({
       name: "Docker Workshop",
-      slug: "docker",
       dates: { start: "2024-03-20", end: "2024-03-21" },
       location: "Brno",
       price: 8000,
@@ -53,27 +51,8 @@ describe("TrainingSessionsTable", () => {
 
     it("should render all sessions", () => {
       render(<TrainingSessionsTable sessions={mockSessions} />);
-      // Find training links by href pattern to avoid matching signup buttons
-      const kubernetesLinks = screen
-        .getAllByRole("link")
-        .filter((link) => link.getAttribute("href") === "/skoleni/kubernetes");
-      const dockerLinks = screen
-        .getAllByRole("link")
-        .filter((link) => link.getAttribute("href") === "/skoleni/docker");
-      expect(kubernetesLinks.length).toBeGreaterThan(0);
-      expect(dockerLinks.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe("session links", () => {
-    it("should link to training detail page", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
-      // Find training links by href pattern to avoid matching signup buttons
-      const trainingLinks = screen
-        .getAllByRole("link")
-        .filter((link) => link.getAttribute("href")?.startsWith("/skoleni/"));
-      expect(trainingLinks.length).toBeGreaterThan(0);
-      expect(trainingLinks[0]).toHaveAttribute("href", "/skoleni/kubernetes");
+      expect(screen.getByText("Kubernetes Workshop")).toBeInTheDocument();
+      expect(screen.getByText("Docker Workshop")).toBeInTheDocument();
     });
   });
 
@@ -102,7 +81,7 @@ describe("TrainingSessionsTable", () => {
 
     it("should show not available message when sign up URL is undefined", () => {
       const sessionWithoutSignUp = createMockSession({
-        signUpFormURL: undefined,
+        signUpURL: undefined,
       });
       render(<TrainingSessionsTable sessions={[sessionWithoutSignUp]} />);
       expect(
@@ -133,11 +112,10 @@ describe("CompactTrainingSessionsTable", () => {
   const createMockSession = (overrides = {}): TrainingSession =>
     ({
       name: "Kubernetes Workshop",
-      slug: "kubernetes",
       dates: { start: "2024-03-15" },
       location: "Praha",
       price: 10000,
-      signUpFormURL: "https://example.com/signup",
+      signUpURL: "https://example.com/signup",
       ...overrides,
     }) as TrainingSession;
 
@@ -181,7 +159,7 @@ describe("CompactTrainingSessionsTable", () => {
 
     it("should show not available message when sign up URL is undefined", () => {
       const sessionWithoutSignUp = createMockSession({
-        signUpFormURL: undefined,
+        signUpURL: undefined,
       });
       render(
         <CompactTrainingSessionsTable sessions={[sessionWithoutSignUp]} />,

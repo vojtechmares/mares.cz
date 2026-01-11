@@ -60,14 +60,6 @@ export default defineConfig({
 
   env: {
     schema: {
-      NOTION_API_KEY: envField.string({
-        context: "server",
-        access: "secret",
-      }),
-      NOTION_TRAINING_SESSIONS_DATABASE_ID: envField.string({
-        context: "server",
-        access: "secret",
-      }),
       DISABLE_ANALYTICS: envField.boolean({
         context: "server",
         access: "public",

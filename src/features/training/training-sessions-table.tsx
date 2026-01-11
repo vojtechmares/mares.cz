@@ -45,11 +45,9 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
       </thead>
       <tbody className="divide-y divide-zinc-300">
         {sessions.map((training) => (
-          <tr key={`${training.slug}-${training.dates?.start}`}>
+          <tr key={`${training.name}-${training.dates?.start}`}>
             <td className="py-4 pr-3 pl-4 font-medium whitespace-nowrap text-zinc-900 sm:pl-0">
-              <a className="underline" href={"/skoleni/" + training.slug}>
-                {training.name}
-              </a>
+              {training.name}
               <dl className="py-4 md:hidden">
                 <dt className="sr-only">Datum</dt>
                 <dd className="font-normal text-zinc-700">
@@ -65,10 +63,10 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
                 </dd>
                 <dt className="sr-only">Přihlásit se</dt>
                 <dd className="mt-4 font-normal text-zinc-700">
-                  {typeof training.signUpFormURL === "string" ? (
+                  {training.signUpURL ? (
                     <PublicSessionSignUpButton
                       name={training.name}
-                      signUpFormURL={training.signUpFormURL}
+                      signUpURL={training.signUpURL}
                     />
                   ) : (
                     <SigningUpNotOpenYet />
@@ -86,10 +84,10 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
               <TrainingPrice price={training.price} />
             </td>
             <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
-              {typeof training.signUpFormURL === "string" ? (
+              {training.signUpURL ? (
                 <PublicSessionSignUpButton
                   name={training.name}
-                  signUpFormURL={training.signUpFormURL}
+                  signUpURL={training.signUpURL}
                 />
               ) : (
                 <SigningUpNotOpenYet />
@@ -137,7 +135,7 @@ export function CompactTrainingSessionsTable({
       </thead>
       <tbody className="divide-y divide-zinc-300">
         {sessions.map((training) => (
-          <tr key={`${training.slug}-${training.dates?.start}`}>
+          <tr key={`${training.name}-${training.dates?.start}`}>
             <td className="py-4 font-medium whitespace-nowrap text-zinc-900">
               <TrainingDate dates={training.dates} />
               <dl className="py-4 md:hidden">
@@ -151,10 +149,10 @@ export function CompactTrainingSessionsTable({
                                 </dd> */}
                 <dt className="sr-only">Přihlásit se</dt>
                 <dd className="mt-4 font-normal text-zinc-700">
-                  {typeof training.signUpFormURL === "string" ? (
+                  {training.signUpURL ? (
                     <PublicSessionSignUpButton
                       name={training.name}
-                      signUpFormURL={training.signUpFormURL}
+                      signUpURL={training.signUpURL}
                     />
                   ) : (
                     <SigningUpNotOpenYet />
@@ -169,10 +167,10 @@ export function CompactTrainingSessionsTable({
                             <TrainingPrice price={training.price} />
                         </td> */}
             <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
-              {typeof training.signUpFormURL === "string" ? (
+              {training.signUpURL ? (
                 <PublicSessionSignUpButton
                   name={training.name}
-                  signUpFormURL={training.signUpFormURL}
+                  signUpURL={training.signUpURL}
                 />
               ) : (
                 <SigningUpNotOpenYet />
@@ -223,13 +221,13 @@ function TrainingPrice({ price }: { price: number }) {
 
 function PublicSessionSignUpButton({
   name,
-  signUpFormURL,
+  signUpURL,
 }: {
   name: string;
-  signUpFormURL: URL;
+  signUpURL: string;
 }) {
   return (
-    <Button href={signUpFormURL.toString()} variant="accent">
+    <Button href={signUpURL} variant="accent">
       Přihlásit se
       <span className="sr-only">na školení {name}</span>
     </Button>

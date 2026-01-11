@@ -89,5 +89,22 @@ const page = defineCollection({
 //   /* ... */
 // });
 
-export const collections = { blog, page, training };
+const session = defineCollection({
+  loader: glob({
+    pattern: ["*.json"],
+    base: "./src/content/session",
+  }),
+  schema: z.object({
+    name: z.string(),
+    dates: z.object({
+      start: z.string(),
+      end: z.string().optional(),
+    }),
+    location: z.string(),
+    price: z.number(),
+    signUpURL: z.string().url().optional(),
+  }),
+});
+
+export const collections = { blog, page, training, session };
 // export const collections = { blog, training, page, reference };

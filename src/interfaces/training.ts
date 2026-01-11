@@ -41,14 +41,13 @@ interface TrainingLogo {
 
 interface TrainingSession {
   name: string;
-  slug: string;
   dates: {
     start: string;
     end?: string;
   };
   location: string;
   price: number;
-  signUpFormURL?: URL;
+  signUpURL?: string;
 }
 
 export type { Training, TrainingIcon, TrainingLogo, TrainingSession };
