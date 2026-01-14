@@ -7,3 +7,33 @@
     "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
 }
+
+ul li {
+  list-style-type: none;
+  position: relative;
+}
+
+ul li::before {
+  content: "→";
+  position: absolute;
+  left: -0.8rem;
+  color: var(--color-amber-500);
+  font-weight: 700;
+}
+
+ol {
+  list-style: none;
+  counter-reset: item;
+}
+
+ol li {
+  counter-increment: item;
+}
+
+ol li::before {
+  margin-right: 0.25rem;
+  margin-left: -2.5rem;
+  content: "[" counter(item) "]";
+  color: var(--color-amber-500);
+  font-weight: 700;
+}
