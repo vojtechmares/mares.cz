@@ -36,7 +36,7 @@ const training = defineCollection({
   schema: z.object({
     // backofficeID: z.number().positive(),
     title: z.string(),
-    description: z.string(),
+    description: z.string().max(240),
     keywords: z.array(z.string()),
     featured: z.boolean().default(false),
     length: z.number().default(1),
