@@ -1,7 +1,7 @@
 ---
 title: Docker
 description: |
-  Docker je dnes technologie, která proces vývoje, testování a provozování softwaru velmi zjednodušuje. Provozujte cokoliv a kdekoliv. Už nečekejte na nastavení vašeho serveru nebo na aktualizaci nějaké knihovny. Mějte prostředí jako součást vaší aplikace.
+  Docker je technologie, která proces vývoje, testování a provozování softwaru velmi zjednodušuje. Na školení projdeme vše od začátků až po pokročilé funkce.
 keywords: ["docker", "kontejner", "obraz", "build aplikace", "devops", "deployment"]
 featured: false
 length: 2

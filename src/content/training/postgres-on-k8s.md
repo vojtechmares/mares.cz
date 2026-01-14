@@ -1,7 +1,7 @@
 ---
 title: Postgres na Kubernetes
 description: |
-  CloudNativePG je moderní Kubernetes Operator pro provozování PostgreSQL clusterů na Kubernetes, se všemi funkcemi jako jsou zálohy, obnovy, vysoká dostupnost, pgBouncer a další pod jednou střchou. Na školení si ukážeme, jak s CNPG pracovat a spravovat Postgres clustery na Kubernetes.
+  Školení CloudNativePG: provozujte téměř bezstarostně PostgreSQL cluster na vašem Kubernetes clusteru. CNPG za vás řeší prakticky všechnu operativu: upgrady, failover, switchover, zálohy a mnohem víc – to vše si sami vyzkoušíte a naučíte.
 keywords: ["postgres", "kubernetes", "devops", "database", "operator"]
 featured: false
 length: 1

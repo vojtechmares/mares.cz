@@ -1,7 +1,7 @@
 ---
 title: Kubernetes
 description: |
-  Kubernetes jsou dnes nejrozšířenější platformou na hostování Docker kontejnerů a jsou podporovány velkými hráči na trhu (Google, Amazon, Microsoft) skrz Cloud Native Computing Foundation. Kubernetes pro provoz používají všechny velikosti firem, od startupu po korporace.
+  Školení Kubernetes: naučte se zkrotit Kubernetes cluster(y), provozovat je, nasazovat aplikace. Na školení projdeme od základů práci s Kubernetes, jak vyvíjet aplikace pro Kubernetes a jak je provozovat.
 keywords:
   [
     "kubernetes",

@@ -1,7 +1,7 @@
 ---
 title: Terraform
 description: |
-  Terraform je nástroj, který se používá ke správě infrastruktury v cloudu, jak veřejném (AWS, Azure, GCP), tak privátním (OpenStack, VMware vSphere). Terraform Vám umožní spravovat infrastruktutru jako kód, to znamená verzovanou v Gitu, přidávání resources pomocí merge (pull) requestů a mnoho dalších výhod. Infrastrukturu můžete dále nasadit do testovacího prostředí přesně tak, jako je v produkci bez zbytečného úsilí. O všech komponentách máte přehled a můžete predikovat ceny. Konec klikání infrastruktury, zkuste Terraform. Terraform umožnuje spravovat více cloudových providerů současne, zároveň umožnuje pracovat s hibridními cloudy (část v privátním cloudu, část ve veřejném).
+  Školení Terraform: naučte se pracovat s Terraformem, nástrojem pro spravování vaší infrastruktury jako kódu. Díky Terraformu dokážete mít lepší přehled, snáz provádět změny napříč prostředímy a migrovat mezi vendory.
 keywords:
   [
     "terraform",

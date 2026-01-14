@@ -1,7 +1,7 @@
 ---
 title: GitHub Actions
 description: |
-  Školení na téma GitHub Actions: naučte se psát a používat automatizaci na GitHubu jako profíci!
+  Školení na téma GitHub Actions: naučte se psát automatizované workflows pomocí GitHub Actions, abyste si ušetřili manuální práci s testováním a zároveň zvýšili kvalitu vaší aplikace.
 keywords:
   [
     "github",
