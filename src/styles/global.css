@@ -21,6 +21,14 @@ ul li::before {
   font-weight: 700;
 }
 
+ul.list-none li {
+  list-style-type: none;
+}
+
+ul.list-none li::before {
+  content: "";
+}
+
 ol {
   list-style: none;
   counter-reset: item;
@@ -36,4 +44,12 @@ ol li::before {
   content: "[" counter(item) "]";
   color: var(--color-amber-500);
   font-weight: 700;
+}
+
+ol.list-none li {
+  list-style-type: none;
+}
+
+ol.list-none li::before {
+  content: "";
 }
