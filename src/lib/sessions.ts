@@ -1,13 +1,13 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { TrainingSession } from "../interfaces/training";
 
-export type Session = CollectionEntry<"sessions">;
+export type Session = CollectionEntry<"session">;
 
 /**
  * Get all future sessions sorted by start date (ascending)
  */
 export async function getFutureSessions(): Promise<Session[]> {
-  const sessions = await getCollection("sessions");
+  const sessions = await getCollection("session");
   const today = new Date().toISOString().split("T")[0];
 
   return sessions
