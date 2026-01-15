@@ -28,6 +28,7 @@ function Service({
     <Card
       variant={featured ? "accent" : "inverse"}
       className={featured ? "order-first lg:order-0" : ""}
+      hover={true}
     >
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
