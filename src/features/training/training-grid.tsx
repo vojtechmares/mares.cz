@@ -29,10 +29,8 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
   return (
     <Card
       variant={featured ? "accent" : "inverse"}
-      className={clsx(
-        className,
-        "group flex h-full flex-col transition-transform duration-200 ease-out hover:-translate-y-0.5",
-      )}
+      className={clsx(className, "group flex h-full flex-col")}
+      hover={true}
     >
       {/* Header row: Icon + Title/Price */}
       <div className="flex flex-row items-start justify-between gap-6">
