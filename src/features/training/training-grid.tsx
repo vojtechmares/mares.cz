@@ -59,7 +59,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
           <span
             className={clsx(
               "mt-2 font-mono text-sm uppercase tracking-wider",
-              featured ? "text-zinc-700" : "text-zinc-400",
+              featured ? "text-black" : "text-zinc-300",
             )}
           >
             {getDurationText(training.data.length)}
@@ -69,7 +69,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
           <span
             className={clsx(
               "mt-1 font-mono text-lg font-bold",
-              featured ? "text-zinc-900" : "text-zinc-100",
+              featured ? "text-black" : "text-zinc-100",
             )}
           >
             od {formatPrice(price.amount)} {price.currency}
@@ -78,7 +78,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
       </div>
 
       {/* Description - full width */}
-      <p className={clsx("mt-4 leading-relaxed", featured ? "text-zinc-800" : "text-zinc-400")}>
+      <p className={clsx("mt-4 leading-relaxed", featured ? "text-black" : "text-zinc-300")}>
         {truncateText(training.data.description)}
       </p>
 
