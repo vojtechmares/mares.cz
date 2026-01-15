@@ -47,7 +47,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
           </Button>
         </div>
       </div>
-      <div className="align-center mt-4 flex flex-row flex-wrap justify-between gap-y-2">
+      <div className="align-center mt-4 flex flex-row whitespace-nowrap gap-y-2 gap-x-4 overflow-x-scroll">
         {links.map((link) => (
           <LinkItem key={link.name} href={link.href} name={link.name} />
         ))}
@@ -139,7 +139,7 @@ export function Navigation({ links }: { links: NavLink[] }) {
 
   return (
     <>
-      <header className="bg-zinc-900 py-5 lg:py-10">
+      <header className="bg-zinc-900 py-4 lg:py-1">
         <Container>
           <MobileNavigation links={links} />
           <DesktopNavigation links={links} />
