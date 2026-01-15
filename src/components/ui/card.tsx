@@ -11,6 +11,7 @@ type CardProps = {
   className?: string;
   border?: CardBorder;
   shadow?: boolean;
+  hover?: boolean;
 };
 
 const variantStyles: Record<CardVariant, string> = {
@@ -27,12 +28,16 @@ const borderStyles: Record<CardBorder, string> = {
 
 const baseStyles = `overflow-hidden ${radius.lg} ${spacing.card}`;
 
+const hoverStyles =
+  "transition duration-300 ease hover:-translate-y-0.5 ring-1 ring-transparent hover:ring-amber-500";
+
 export function Card({
   children,
   className,
   variant = "default",
   border = "none",
   shadow: showShadow = false,
+  hover = false,
 }: CardProps) {
   return (
     <section
@@ -41,6 +46,7 @@ export function Card({
         borderStyles[border],
         baseStyles,
         showShadow ? shadows.md : "",
+        hover ? hoverStyles : "",
         className,
       )}
     >
