@@ -46,7 +46,7 @@ export function ReferenceCard({ content, authorName, authorRole, children }: Ref
             <div className="font-display text-base text-zinc-900">{authorName}</div>
             <div className="mt-1 text-sm text-zinc-700">{authorRole}</div>
           </div>
-          <div className="overflow-hidden rounded-full bg-zinc-100">{children}</div>
+          <div className="overflow-hidden bg-zinc-100">{children}</div>
         </figcaption>
       </figure>
     </Card>

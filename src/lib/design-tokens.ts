@@ -25,6 +25,9 @@ export const colors = {
     secondary: "text-zinc-700",
     muted: "text-zinc-300",
     inverse: "text-white",
+    // Link colors - amber-800 for WCAG AA compliance
+    link: "text-amber-800",
+    linkHover: "hover:text-amber-900",
   },
 
   // 10% - Accent
@@ -35,10 +38,15 @@ export const colors = {
     light: "bg-amber-100",
   },
 
-  // Borders
+  // Borders - Design System Manual specs
   border: {
-    default: "border-zinc-200",
-    muted: "border-zinc-300",
+    // Light background borders
+    default: "border-zinc-300",
+    hover: "border-zinc-500",
+    // Dark background borders
+    dark: "border-zinc-700",
+    // Emphasis border (2px)
+    emphasis: "border-2",
   },
 } as const;
 
@@ -47,32 +55,31 @@ export const colors = {
 // =============================================================================
 
 export const typography = {
-  // Heading sizes (responsive)
+  // Heading sizes - Design System Manual specs
+  // H1: 48px/3rem, Inter Bold, -0.02em, line-height 1.1
+  // H2: 36px/2.25rem, Inter SemiBold, -0.015em, line-height 1.2
+  // H3: 28px/1.75rem, Inter SemiBold, -0.01em, line-height 1.3
+  // H4: 20px/1.25rem, Inter Medium, line-height 1.4
+  // H5: 18px/1.125rem, Inter SemiBold, line-height 1.5
+  // H6: 16px/1rem, Inter SemiBold, line-height 1.5
   heading: {
-    // Original
-    // h1: "text-5xl sm:text-7xl font-bold",
-    // h2: "text-3xl sm:text-4xl font-bold",
-    // h3: "text-2xl sm:text-3xl font-medium",
-    // h4: "text-xl sm:text-2xl font-medium",
-    // h5: "text-lg sm:text-xl font-medium",
-    // h6: "text-base sm:text-lg font-medium",
-    h1: "text-5xl font-sans font-bold leading-[1.1]",
-    h2: "text-4xl font-sans font-semibold leading-[1.2]",
-    h3: "text-3xl font-sans font-semibold leading-[1.3]",
-    h4: "text-xl font-mono font-medium leading-[1.4]",
-    h5: "text-lg  font-mono font-semibold leading-[1.5]",
-    h6: "text-base font-mono font-semibold leading-[1.5]",
+    h1: "text-5xl font-sans font-bold leading-[1.1] tracking-[-0.02em]",
+    h2: "text-4xl font-sans font-semibold leading-[1.2] tracking-[-0.015em]",
+    h3: "text-3xl font-sans font-semibold leading-[1.3] tracking-[-0.01em]",
+    h4: "text-xl font-sans font-medium leading-[1.4]",
+    h5: "text-lg font-sans font-semibold leading-[1.5]",
+    h6: "text-base font-sans font-semibold leading-[1.5]",
   },
 
-  // Body text sizes
+  // Body text sizes - Space Mono
   body: {
-    large: "text-lg font-mono",
-    base: "text-base font-mono",
-    small: "text-sm font-mono",
+    large: "text-lg font-mono leading-[1.6] tracking-[0.01em]",
+    base: "text-base font-mono leading-[1.6] tracking-[0.01em]",
+    small: "text-sm font-mono leading-[1.5] tracking-[0.01em]",
   },
 
   // Display font settings
-  display: "font-display tracking-tight",
+  display: "font-sans tracking-tight",
 } as const;
 
 // =============================================================================
@@ -80,22 +87,31 @@ export const typography = {
 // =============================================================================
 
 export const spacing = {
-  // Section vertical padding
+  // Section vertical padding - 8px grid aligned
   section: "py-16 sm:py-24",
 
-  // Card padding
+  // Card padding - 8px grid aligned
   card: "px-8 py-8",
 
-  // Container horizontal padding
-  container: "px-4 lg:px-8",
+  // Container horizontal padding - Design System Manual specs
+  // Mobile: 16px, Tablet: 24px, Desktop small: 32px, Desktop: 40px
+  container: "px-4 md:px-6 lg:px-8 xl:px-10",
 
-  // Gap utilities
+  // Max widths
+  maxWidth: {
+    standard: "max-w-[1280px]", // Standard container
+    prose: "max-w-prose", // 65ch for articles
+  },
+
+  // Gap utilities - 8px grid
   gap: {
-    xs: "gap-1",
-    sm: "gap-2",
-    md: "gap-4",
-    lg: "gap-6",
-    xl: "gap-8",
+    xs: "gap-1", // 4px
+    sm: "gap-2", // 8px
+    md: "gap-4", // 16px
+    lg: "gap-6", // 24px
+    xl: "gap-8", // 32px
+    "2xl": "gap-12", // 48px
+    "3xl": "gap-16", // 64px
   },
 } as const;
 

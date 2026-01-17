@@ -13,8 +13,8 @@ type LinkProps = {
 };
 
 const variantStyles: Record<LinkVariant, string> = {
-  default: `${colors.text.primary} hover:${colors.accent.text} transition-colors`,
-  underline: `${colors.text.primary} underline hover:${colors.accent.text} transition-colors`,
+  default: `${colors.text.link} ${colors.text.linkHover} transition-colors`,
+  underline: `${colors.text.link} underline ${colors.text.linkHover} transition-colors`,
   muted: `${colors.text.muted} hover:${colors.text.primary} transition-colors`,
 };
 

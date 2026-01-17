@@ -7,7 +7,8 @@ type ContainerProps = {
   children?: ReactNode;
 };
 
-const baseStyles = `mx-auto ${spacing.container} sm:max-w-3xl md:max-w-5xl md:px-0 lg:max-w-7xl`;
+// Standard container: 1280px max width with responsive padding
+const baseStyles = `mx-auto ${spacing.container} ${spacing.maxWidth.standard}`;
 
 export function Container({ className, children }: ContainerProps) {
   return <div className={clsx(baseStyles, className)}>{children}</div>;
