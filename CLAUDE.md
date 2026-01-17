@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website (mares.cz) built with Astro 5, deployed as a containerized application to Kubernetes. The site is a bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
+This is a personal website (mares.cz) built with Astro 5. The site is a bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
 
 ## Key Commands
 
@@ -12,28 +12,25 @@ This is a personal website (mares.cz) built with Astro 5, deployed as a containe
 
 - `pnpm dev` - Start development server at localhost:4321
 - `pnpm build` - Build production site to ./dist/
-- `pnpm run-like-prod` - Build and run with production server (Fastify)
-- `pnpm preview` - Build and preview with Wrangler dev server
+- `pnpm preview` - Preview with Wrangler dev server
 
-**Formatting:**
+**Formatting & Linting:**
 
-- `pnpm format:fix` - Auto-fix formatting issues with Prettier
-- `pnpm format:check` - Check formatting (runs on pre-commit via Husky)
+- `pnpm format` - Check formatting with oxfmt (runs on pre-commit)
+- `pnpm format:fix` - Auto-fix formatting issues
+- `pnpm lint` - Check code with oxlint (runs on pre-commit)
+- `pnpm lint:fix` - Auto-fix linting issues
 
-**Docker:**
+**Testing:**
 
-- `task docker:build` - Build Docker image with production secrets from .prod.env
-- `task docker:run` - Run Docker container locally with production environment variables
-
-**Deployment:**
-
-- `pnpm deploy` - Build and deploy to Cloudflare Workers
-- Container builds happen automatically via GitHub Actions on push to main
+- `pnpm test` - Run unit tests with Vitest
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:ui` - Run tests with Vitest UI
+- `npx playwright test` - Run E2E tests
 
 **Package Manager:**
 
 - Use `pnpm` exclusively (version 10.23.0 specified in packageManager field)
-- Use `task` for Docker operations (configured in Taskfile.yml)
 
 **Git Commits:**
 
@@ -69,12 +66,6 @@ The application pulls content from:
   - Site URL: https://www.mares.cz
   - Meeting redirects configured to Cal.com
 
-- **Production Server** (server.mjs):
-  - Fastify server running on port 8080
-  - Serves static assets from dist/client with aggressive caching (1 year)
-  - Liveness probe at `/_/livez`
-  - SSR handler integrated via @fastify/middie
-
 ### Markdown Processing
 
 Markdown content is converted to HTML using a unified processor pipeline (src/lib/markdown-to-html.ts):
@@ -95,21 +86,18 @@ The site uses Astro's file-based routing with dynamic segments:
 
 Each dynamic route includes a `card.png.ts` file that generates Open Graph preview images using Satori.
 
-### Deployment
+### Testing
 
-**Container Build:**
+**Unit Tests** (Vitest + React Testing Library):
 
-- Multi-stage Dockerfile optimized for Node.js 24 Alpine
-- Build-time secrets injected for CMS access
-- Runs as non-root user (nodejs)
-- Exposes port 8080
+- Config: `vitest.config.ts`
+- Tests: `tests/unit/**/*.test.{ts,tsx}`
+- Setup: `tests/setup.ts`
 
-**CI/CD:**
+**E2E Tests** (Playwright):
 
-- GitHub Actions workflow builds and pushes to GHCR on main branch
-- Automatic deployment to staging environment (beta.mares.cz)
-- Helm charts in deploy/k8s/ directory
-- Kubernetes secrets managed via External Secrets Operator
+- Config: `playwright.config.ts`
+- Tests: `tests/e2e/`
 
 ### Environment Variables
 
@@ -134,4 +122,3 @@ The site includes comprehensive SEO components (src/components/seo/):
 
 - Tailwind CSS v4 configured via Vite plugin
 - Typography plugin for prose content
-- Custom Prettier plugins for Astro and Tailwind class sorting
