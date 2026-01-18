@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { Container } from "../../components/ui/container";
 import { Button } from "../../components/ui/button";
+import { Container } from "../../components/ui/container";
 
 // import {StaticNavigationLinks} from "@/lib/site"
 
@@ -10,15 +10,7 @@ type NavLink = {
   href: string;
 };
 
-function LinkItem({
-  href,
-  name,
-  className = "",
-}: {
-  href: string;
-  name: string;
-  className?: string;
-}) {
+function LinkItem({ href, name, className = "" }: { href: string; name: string; className?: string }) {
   const classes = "text-xl font-bold text-zinc-100 underline";
 
   return (

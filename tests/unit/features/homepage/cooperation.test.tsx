@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { Cooperation } from "../../../../src/features/homepage/cooperation";
 
 describe("Cooperation", () => {
@@ -11,9 +12,7 @@ describe("Cooperation", () => {
 
     it("should render main heading", () => {
       render(<Cooperation />);
-      expect(
-        screen.getByRole("heading", { name: /z nuly do cloudu/i, level: 2 }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /z nuly do cloudu/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {

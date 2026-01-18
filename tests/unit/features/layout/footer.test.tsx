@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { Footer } from "../../../../src/features/layout/footer";
 
 describe("Footer", () => {
@@ -34,10 +35,7 @@ describe("Footer", () => {
   describe("contact information", () => {
     it("should render phone number", () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.getByRole("link", { name: /\+420 732 220 651/i })).toHaveAttribute(
-        "href",
-        "tel:+420732220651",
-      );
+      expect(screen.getByRole("link", { name: /\+420 732 220 651/i })).toHaveAttribute("href", "tel:+420732220651");
     });
 
     it("should render email", () => {
@@ -115,18 +113,12 @@ describe("Footer", () => {
   describe("social links", () => {
     it("should render Bluesky link", () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.getByLabelText(/bluesky/i)).toHaveAttribute(
-        "href",
-        "https://bsky.app/profile/mares.cz",
-      );
+      expect(screen.getByLabelText(/bluesky/i)).toHaveAttribute("href", "https://bsky.app/profile/mares.cz");
     });
 
     it("should render LinkedIn link", () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.getByLabelText(/linkedin/i)).toHaveAttribute(
-        "href",
-        "https://www.linkedin.com/in/vojtech-mares/",
-      );
+      expect(screen.getByLabelText(/linkedin/i)).toHaveAttribute("href", "https://www.linkedin.com/in/vojtech-mares/");
     });
 
     it("should render X link", () => {
@@ -136,10 +128,7 @@ describe("Footer", () => {
 
     it("should render GitHub link", () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.getByLabelText(/github/i)).toHaveAttribute(
-        "href",
-        "https://github.com/vojtechmares",
-      );
+      expect(screen.getByLabelText(/github/i)).toHaveAttribute("href", "https://github.com/vojtechmares");
     });
 
     it("should open social links in new tab", () => {

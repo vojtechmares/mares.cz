@@ -1,5 +1,6 @@
-import { join } from "node:path";
 import type { ReactNode } from "react";
+
+import { join } from "node:path";
 
 import { imageToDataUrl } from "../../lib/opengraph";
 
@@ -59,12 +60,7 @@ function Page({
         </p>
         <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz/{slug}</p>
       </div>
-      <img
-        style={{ position: "absolute", bottom: 0, right: 60 }}
-        alt=""
-        height={600}
-        src={imageData}
-      />
+      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>
   );
 }
@@ -78,9 +74,7 @@ export async function CreatePageImageComponent({
   title: string;
   description: string;
 }): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(
-    join(process.cwd(), "./src/images/people/vojtech-mares.png"),
-  );
+  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
 
   return <Page slug={slug} title={title} description={description} imageData={avatarSrc} />;
 }

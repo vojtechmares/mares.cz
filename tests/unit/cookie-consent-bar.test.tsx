@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { CookieConsentBar } from "../../src/features/layout/cookie-consent-bar";
 import { actions } from "astro:actions";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+
+import { CookieConsentBar } from "../../src/features/layout/cookie-consent-bar";
 
 describe("CookieConsentBar", () => {
   beforeEach(() => {
@@ -141,10 +142,7 @@ describe("CookieConsentBar", () => {
     await user.click(acceptButton);
 
     await waitFor(() => {
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "Failed to save cookie consent:",
-        expect.any(Object),
-      );
+      expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to save cookie consent:", expect.any(Object));
     });
 
     // Should not hide the bar on error
@@ -166,10 +164,7 @@ describe("CookieConsentBar", () => {
     await user.click(acceptButton);
 
     await waitFor(() => {
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "Failed to save cookie consent:",
-        expect.any(Error),
-      );
+      expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to save cookie consent:", expect.any(Error));
     });
 
     // Should not hide the bar on error

@@ -39,22 +39,14 @@ export function Cooperation() {
           <Heading level="h2" variant="inverse">
             Z nuly do cloudu
           </Heading>
-          <p className="mt-4 text-lg tracking-tight text-zinc-300">
-            Jak může vypadat naše spolupráce.
-          </p>
+          <p className="mt-4 text-lg tracking-tight text-zinc-300">Jak může vypadat naše spolupráce.</p>
         </div>
         <nav aria-label="Progress">
           <ol role="list" className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2">
             {steps.map((step, stepIdx) => (
-              <li
-                key={step.name}
-                className={clsx(stepIdx !== steps.length - 1 ? "pb-10" : "", "relative")}
-              >
+              <li key={step.name} className={clsx(stepIdx !== steps.length - 1 ? "pb-10" : "", "relative")}>
                 {stepIdx !== steps.length - 1 ? (
-                  <div
-                    className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-white"
-                    aria-hidden="true"
-                  />
+                  <div className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-white" aria-hidden="true" />
                 ) : null}
                 <div className="group relative flex items-start">
                   <span className="flex h-9 items-center" aria-hidden="true">

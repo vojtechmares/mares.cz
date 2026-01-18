@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { CallToAction } from "../../../../src/features/homepage/call-to-action";
 
 describe("CallToAction", () => {
@@ -26,9 +27,7 @@ describe("CallToAction", () => {
 
     it("should render motivational text", () => {
       render(<CallToAction />);
-      expect(
-        screen.getByText(/infrastruktura má vaši aplikaci představit světu/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/infrastruktura má vaši aplikaci představit světu/i)).toBeInTheDocument();
     });
   });
 

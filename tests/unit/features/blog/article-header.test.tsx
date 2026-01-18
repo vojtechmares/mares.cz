@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { ArticleHeader } from "../../../../src/features/blog/article-header";
 
 describe("ArticleHeader", () => {

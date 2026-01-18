@@ -1,16 +1,8 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 
 // Create a synchronous test version since React doesn't support async client components
-function TestMarkdownContent({
-  content,
-  classNames,
-  html,
-}: {
-  content: string;
-  classNames?: string;
-  html: string;
-}) {
+function TestMarkdownContent({ content, classNames, html }: { content: string; classNames?: string; html: string }) {
   // Suppress unused variable warning - content is for interface compatibility
   void content;
 

@@ -1,8 +1,9 @@
 import type { CollectionEntry } from "astro:content";
-import { Container } from "../../components/ui/container";
+
 import { Button } from "../../components/ui/button";
-import { Section } from "../../components/ui/section";
+import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 // Social Icons
 function BlueskyIcon() {
@@ -127,8 +128,8 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
             <div>
               <Heading level="h3">Zaujal jsem vás?</Heading>
               <p className="mt-4">
-                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi
-                &ndash; společně probereme vaše potřeby a najdeme řešení na míru.
+                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi &ndash; společně
+                probereme vaše potřeby a najdeme řešení na míru.
               </p>
               <div className="mt-5 flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-2">
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">

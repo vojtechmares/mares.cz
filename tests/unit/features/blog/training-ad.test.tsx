@@ -1,10 +1,11 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { Button } from "../../../../src/components/ui/button";
+import { Container } from "../../../../src/components/ui/container";
 import { Heading } from "../../../../src/components/ui/heading";
 import { Section } from "../../../../src/components/ui/section";
 import { Text } from "../../../../src/components/ui/text";
-import { Container } from "../../../../src/components/ui/container";
 
 // Create a synchronous test version since React doesn't support async client components
 function TestTrainingAd({
@@ -91,9 +92,10 @@ describe("TrainingAd", () => {
   describe("CTA buttons", () => {
     it("should render corporate training inquiry button", () => {
       render(<TestTrainingAd training={mockTraining} />);
-      expect(
-        screen.getByRole("link", { name: /nezávazně poptat firemní školení/i }),
-      ).toHaveAttribute("href", "mailto:vojtech@mares.cz");
+      expect(screen.getByRole("link", { name: /nezávazně poptat firemní školení/i })).toHaveAttribute(
+        "href",
+        "mailto:vojtech@mares.cz",
+      );
     });
 
     it("should render more info button", () => {

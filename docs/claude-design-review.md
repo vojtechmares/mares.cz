@@ -1061,14 +1061,7 @@ export type ButtonProps = BaseComponentProps & {
 // src/components/ui/heading.tsx
 import { HeadingProps } from "../../types/components";
 
-export function Heading({
-  children,
-  className,
-  level = "h1",
-  variant = "primary",
-  id,
-  ariaLabel,
-}: HeadingProps) {
+export function Heading({ children, className, level = "h1", variant = "primary", id, ariaLabel }: HeadingProps) {
   // ...
 }
 ```
@@ -1279,8 +1272,7 @@ Props:
 ### Before
 
 ```html
-<h1 class="text-4xl font-bold text-zinc-900">Heading</h1>
-<p class="text-lg text-zinc-700">Body text</p>
+<h1 class="text-4xl font-bold text-zinc-900">Heading</h1> <p class="text-lg text-zinc-700">Body text</p>
 ```
 
 ### After

@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { actions } from "astro:actions";
+import { useState } from "react";
+
 import { Button } from "../../components/ui/button";
 
 export function CookieConsentBar() {
@@ -38,29 +39,18 @@ export function CookieConsentBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-100 flex flex-col justify-between gap-x-8 gap-y-4 bg-white py-1 px-6 ring-1 ring-zinc-900/10 md:flex-row md:items-center lg:px-8">
       <p className="max-w-8xl text-sm/6 text-zinc-700">
-        Tento web používá soubory cookies k analýze návštěvnosti pomocí služby Google Analytics.
-        Díky nim můžu zlepšovat svoje stránky na základě anonymních statistik. Více informací
-        najdete v{" "}
+        Tento web používá soubory cookies k analýze návštěvnosti pomocí služby Google Analytics. Díky nim můžu zlepšovat
+        svoje stránky na základě anonymních statistik. Více informací najdete v{" "}
         <a href="/zasady-pouzivani-cookies" className="font-semibold text-zinc-900 underline">
           zásadách používání cookies
         </a>
         .
       </p>
       <div className="flex flex-none items-center gap-x-5">
-        <Button
-          style="solid"
-          variant="primary"
-          className="cursor-pointer"
-          onClick={() => handleConsent("accept")}
-        >
+        <Button style="solid" variant="primary" className="cursor-pointer" onClick={() => handleConsent("accept")}>
           Přijmout vše
         </Button>
-        <Button
-          style="outline"
-          variant="primary"
-          className="cursor-pointer"
-          onClick={() => handleConsent("deny")}
-        >
+        <Button style="outline" variant="primary" className="cursor-pointer" onClick={() => handleConsent("deny")}>
           Odmítnout vše
         </Button>
       </div>

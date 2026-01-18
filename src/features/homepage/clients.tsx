@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
-import { Section } from "../../components/ui/section";
-import { Heading } from "../../components/ui/heading";
+
 import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 interface ClientsProps {
   children?: ReactNode;

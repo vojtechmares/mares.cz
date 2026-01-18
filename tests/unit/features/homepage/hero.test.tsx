@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { Hero } from "../../../../src/features/homepage/hero";
 
 describe("Hero", () => {

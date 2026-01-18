@@ -54,25 +54,18 @@ function HomepageImage({ imageData }: { imageData: string }) {
             lineHeight: "1.5556",
           }}
         >
-          Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak
-          používat moderní cloud-native technologie.
+          Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak používat moderní
+          cloud-native technologie.
         </p>
         <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz</p>
       </div>
-      <img
-        style={{ position: "absolute", bottom: 0, right: 60 }}
-        alt=""
-        height={600}
-        src={imageData}
-      />
+      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>
   );
 }
 
 export async function CreateHomepageImageComponent() {
-  const avatarSrc = await imageToDataUrl(
-    join(process.cwd(), "./src/images/people/vojtech-mares.png"),
-  );
+  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
 
   return <HomepageImage imageData={avatarSrc} />;
 }

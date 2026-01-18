@@ -1,17 +1,10 @@
-import { join } from "node:path";
 import type { ReactNode } from "react";
+
+import { join } from "node:path";
 
 import { imageToDataUrl } from "../../lib/opengraph";
 
-function TagArchiveImage({
-  tag,
-  articleCount,
-  imageData,
-}: {
-  tag: string;
-  articleCount: number;
-  imageData: string;
-}) {
+function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articleCount: number; imageData: string }) {
   return (
     <div
       style={{
@@ -82,12 +75,7 @@ function TagArchiveImage({
           mares.cz/blog/tag/{tag}
         </p>
       </div>
-      <img
-        style={{ position: "absolute", bottom: 0, right: 60 }}
-        height={600}
-        alt=""
-        src={imageData}
-      />
+      <img style={{ position: "absolute", bottom: 0, right: 60 }} height={600} alt="" src={imageData} />
     </div>
   );
 }
@@ -99,9 +87,7 @@ export async function CreateTagArchiveImageComponent({
   tag: string;
   articleCount: number;
 }): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(
-    join(process.cwd(), "./src/images/people/vojtech-mares.png"),
-  );
+  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
 
   return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} />;
 }

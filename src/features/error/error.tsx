@@ -39,12 +39,8 @@ export function Error({ status, error = undefined }: ErrorProps) {
           <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">
             {messages.headline}
           </h1>
-          <p className="mt-6 text-lg font-medium text-pretty text-zinc-300 sm:text-xl/8">
-            {messages.description}
-          </p>
-          {error !== undefined && (
-            <p className="mt-6 text-base text-pretty text-zinc-300">{error}</p>
-          )}
+          <p className="mt-6 text-lg font-medium text-pretty text-zinc-300 sm:text-xl/8">{messages.description}</p>
+          {error !== undefined && <p className="mt-6 text-base text-pretty text-zinc-300">{error}</p>}
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button href="/" variant="accent">
               Zpět na hlavní stránku

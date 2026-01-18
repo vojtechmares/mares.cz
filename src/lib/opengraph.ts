@@ -1,9 +1,8 @@
-import { join } from "node:path";
 import { readFile } from "node:fs/promises";
-
+import { join } from "node:path";
+import { type ReactNode } from "react";
 import satori from "satori";
 import sharp from "sharp";
-import { type ReactNode } from "react";
 
 export async function imageToDataUrl(filePath: string): Promise<string> {
   const data = await readFile(filePath);
@@ -31,9 +30,7 @@ export async function OpenGraphImageResponse(component: ReactNode) {
 }
 
 async function renderImage(component: ReactNode) {
-  const interFontRegular = await readFile(
-    join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf"),
-  );
+  const interFontRegular = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf"));
   const interFontLight = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf"));
   const interFontBold = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf"));
 

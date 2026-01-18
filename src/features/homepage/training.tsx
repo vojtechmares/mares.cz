@@ -1,10 +1,12 @@
-import { Container } from "../../components/ui/container";
-import type { Training as TrainingType } from "../../interfaces/training";
-import { Section } from "../../components/ui/section";
-import { Heading } from "../../components/ui/heading";
-import { Card } from "../../components/ui/card";
 import { clsx } from "clsx";
+
+import type { Training as TrainingType } from "../../interfaces/training";
+
 import { Button } from "../../components/ui/button";
+import { Card } from "../../components/ui/card";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 type TrainingProps = {
   training: TrainingType;
@@ -27,11 +29,7 @@ const Training = ({ training, className, featured = false }: TrainingProps) => {
         <Heading level="h3" variant={featured ? "primary" : "inverse"} className="text-right">
           {training.title}
         </Heading>
-        <Button
-          className="mt-4"
-          href={"/skoleni/" + training.slug}
-          variant={featured ? "primary" : "accent"}
-        >
+        <Button className="mt-4" href={"/skoleni/" + training.slug} variant={featured ? "primary" : "accent"}>
           O školení
         </Button>
       </div>
@@ -78,8 +76,8 @@ export function TrainingList({ trainings }: { trainings: TrainingType[] }) {
             DevOps školení
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-zinc-300">
-            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji
-            se především na open-source DevOps nástroje a technologie.
+            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji se především na
+            open-source DevOps nástroje a technologie.
           </p>
         </div>
         <TrainingGridMobile trainings={trainings} />

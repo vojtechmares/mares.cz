@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+
 import { spacing, type GapSize } from "../../lib/design-tokens";
 
 type StackDirection = "vertical" | "horizontal";
@@ -35,14 +36,7 @@ const justifyStyles: Record<StackJustify, string> = {
   around: "justify-around",
 };
 
-export function Stack({
-  children,
-  direction = "vertical",
-  gap = "md",
-  align,
-  justify,
-  className,
-}: StackProps) {
+export function Stack({ children, direction = "vertical", gap = "md", align, justify, className }: StackProps) {
   return (
     <div
       className={clsx(

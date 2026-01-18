@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+
 import { typography, colors, type BodySize } from "../../lib/design-tokens";
 
 type BodyColor = "primary" | "secondary" | "muted" | "inverse";
@@ -20,14 +21,6 @@ const colorStyles: Record<BodyColor, string> = {
   inverse: colors.text.inverse,
 };
 
-export function Body({
-  children,
-  className,
-  variant = "base",
-  color = "primary",
-  as: Tag = "p",
-}: BodyProps) {
-  return (
-    <Tag className={clsx(typography.body[variant], colorStyles[color], className)}>{children}</Tag>
-  );
+export function Body({ children, className, variant = "base", color = "primary", as: Tag = "p" }: BodyProps) {
+  return <Tag className={clsx(typography.body[variant], colorStyles[color], className)}>{children}</Tag>;
 }

@@ -1,9 +1,10 @@
+import { getEntry } from "astro:content";
+
 import { Button } from "../../components/ui/button";
+import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
-import { Container } from "../../components/ui/container";
-import { getEntry } from "astro:content";
 
 export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
   if (!trainingSlug) {

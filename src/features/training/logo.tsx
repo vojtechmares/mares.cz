@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import type { CollectionEntry } from "astro:content";
+
+import clsx from "clsx";
 
 export function Logo({ training }: { training: CollectionEntry<"training"> }) {
   let imageURL = training.data.logo?.src;

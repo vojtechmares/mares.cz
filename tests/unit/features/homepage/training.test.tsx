@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
 import { TrainingList } from "../../../../src/features/homepage/training";
 
 describe("TrainingList", () => {
@@ -33,9 +34,7 @@ describe("TrainingList", () => {
 
     it("should render main heading", () => {
       render(<TrainingList trainings={mockTrainings} />);
-      expect(
-        screen.getByRole("heading", { name: /devops školení/i, level: 2 }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: /devops školení/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
@@ -62,9 +61,7 @@ describe("TrainingList", () => {
       expect(links.length).toBeGreaterThanOrEqual(mockTrainings.length);
       // Verify all expected training slugs are present in the hrefs
       mockTrainings.forEach((training) => {
-        const matchingLinks = links.filter(
-          (link) => link.getAttribute("href") === `/skoleni/${training.slug}`,
-        );
+        const matchingLinks = links.filter((link) => link.getAttribute("href") === `/skoleni/${training.slug}`);
         expect(matchingLinks.length).toBeGreaterThanOrEqual(1);
       });
     });

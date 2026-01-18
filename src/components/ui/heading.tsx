@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+
 import { typography, colors, type HeadingLevel } from "../../lib/design-tokens";
 
 type HeadingVariant = "primary" | "inverse" | "accent";
@@ -31,12 +32,7 @@ export function Heading({
 
   return (
     <Tag
-      className={clsx(
-        className,
-        typography.heading[level],
-        variantStyles[variant],
-        typography.display,
-      )}
+      className={clsx(className, typography.heading[level], variantStyles[variant], typography.display)}
       aria-label={ariaLabel}
       id={id}
     >

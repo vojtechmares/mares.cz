@@ -67,13 +67,7 @@ export async function getStaticPaths() {
   });
 }
 
-export async function GET({
-  params,
-  props,
-}: {
-  params: { year: string; month: string };
-  props: Props;
-}) {
+export async function GET({ params, props }: { params: { year: string; month: string }; props: Props }) {
   const { year, month, monthName, articles } = props;
 
   const component = await CreateDateArchiveImageComponent({

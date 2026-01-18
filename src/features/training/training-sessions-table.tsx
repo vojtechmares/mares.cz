@@ -1,6 +1,7 @@
 import type { TrainingSession } from "../../interfaces/training";
-import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
+
 import { Button } from "../../components/ui/button";
+import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
 
 export type TrainingSessionTableProps = {
   sessions: TrainingSession[];
@@ -11,28 +12,16 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
     <table className="w-full divide-y divide-gray-300">
       <thead>
         <tr>
-          <th
-            scope="col"
-            className="py-3.5 pr-3 pl-4 text-left font-semibold text-zinc-900 sm:pl-0"
-          >
+          <th scope="col" className="py-3.5 pr-3 pl-4 text-left font-semibold text-zinc-900 sm:pl-0">
             Školení
           </th>
-          <th
-            scope="col"
-            className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-          >
+          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
             Datum
           </th>
-          <th
-            scope="col"
-            className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-          >
+          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
             Místo
           </th>
-          <th
-            scope="col"
-            className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-          >
+          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
             Cena
           </th>
           <th scope="col" className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell">
@@ -59,10 +48,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
                 <dt className="sr-only">Přihlásit se</dt>
                 <dd className="mt-4 font-normal text-zinc-700">
                   {training.signUpURL ? (
-                    <PublicSessionSignUpButton
-                      name={training.name}
-                      signUpURL={training.signUpURL}
-                    />
+                    <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
                   ) : (
                     <SigningUpNotOpenYet />
                   )}
@@ -72,9 +58,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
             <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
               <TrainingDate dates={training.dates} />
             </td>
-            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
-              {training.location}
-            </td>
+            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">{training.location}</td>
             <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
               <TrainingPrice price={training.price} />
             </td>
@@ -97,16 +81,10 @@ export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableP
     <table className="min-w-full md:divide-y md:divide-zinc-300">
       <thead>
         <tr>
-          <th
-            scope="col"
-            className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-          >
+          <th scope="col" className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
             Datum
           </th>
-          <th
-            scope="col"
-            className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-          >
+          <th scope="col" className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
             Místo
           </th>
           {/* <th
@@ -135,19 +113,14 @@ export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableP
                 <dt className="sr-only">Přihlásit se</dt>
                 <dd className="mt-4 font-normal text-zinc-700">
                   {training.signUpURL ? (
-                    <PublicSessionSignUpButton
-                      name={training.name}
-                      signUpURL={training.signUpURL}
-                    />
+                    <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
                   ) : (
                     <SigningUpNotOpenYet />
                   )}
                 </dd>
               </dl>
             </td>
-            <td className="hidden py-4 whitespace-nowrap text-zinc-700 md:table-cell">
-              {training.location}
-            </td>
+            <td className="hidden py-4 whitespace-nowrap text-zinc-700 md:table-cell">{training.location}</td>
             {/* <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
                             <TrainingPrice price={training.price} />
                         </td> */}

@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
-import { Container } from "../../components/ui/container";
-import { Section } from "../../components/ui/section";
-import { Heading } from "../../components/ui/heading";
+
 import { Card } from "../../components/ui/card";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 interface ReferencesContainerProps {
   children?: ReactNode;
@@ -36,10 +37,7 @@ export function ReferenceCard({ content, authorName, authorRole, children }: Ref
     <Card variant="surface" className="mb-10">
       <figure>
         <blockquote className="relative">
-          <p
-            className="text-lg tracking-tight text-zinc-900"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <p className="text-lg tracking-tight text-zinc-900" dangerouslySetInnerHTML={{ __html: content }} />
         </blockquote>
         <figcaption className="relative mt-6 flex items-center justify-between border-t border-zinc-300 pt-6">
           <div>

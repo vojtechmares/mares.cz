@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+
 import type { TrainingSession } from "../interfaces/training";
 
 export type Session = CollectionEntry<"session">;
@@ -12,9 +13,7 @@ export async function getFutureSessions(): Promise<Session[]> {
 
   return sessions
     .filter((session) => session.data.dates.start >= today)
-    .sort(
-      (a, b) => new Date(a.data.dates.start).getTime() - new Date(b.data.dates.start).getTime(),
-    );
+    .sort((a, b) => new Date(a.data.dates.start).getTime() - new Date(b.data.dates.start).getTime());
 }
 
 /**

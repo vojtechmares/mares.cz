@@ -1,16 +1,7 @@
 ---
 title: KubeCon 2025 v Londýně – první den
 description: KubeCon v Londýně konečně oficiálně začal a já se vrhnul do víru dění a začal jsem sbírat všechny možná moudra a novinky.
-keywords:
-  [
-    "kubecon",
-    "kubecon eu",
-    "kubecon europe",
-    "kubecon 2025",
-    "konference",
-    "cloudnative",
-    "cloudnativecon",
-  ]
+keywords: ["kubecon", "kubecon eu", "kubecon europe", "kubecon 2025", "konference", "cloudnative", "cloudnativecon"]
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-03

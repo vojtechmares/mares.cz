@@ -1,5 +1,6 @@
-import { MarkdownContent } from "../../components/markdown-content";
 import type { Article } from "../../interfaces/article";
+
+import { MarkdownContent } from "../../components/markdown-content";
 
 export async function Article({ article }: { article: Article }) {
   return (

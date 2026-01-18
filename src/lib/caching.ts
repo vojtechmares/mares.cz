@@ -1,18 +1,5 @@
 const daysOfTheWeekShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const monthShort = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const monthShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export function dateToLastModified(date: Date): string {
   // Transform date timezone from any to GMT (Greenwich Mean Time)
@@ -36,16 +23,13 @@ export function dateToLastModified(date: Date): string {
   const year = date.getFullYear().toString();
   lastModified += year + " ";
 
-  const hours =
-    date.getHours() < 10 ? "0" + date.getHours().toString() : date.getHours().toString();
+  const hours = date.getHours() < 10 ? "0" + date.getHours().toString() : date.getHours().toString();
   lastModified += hours + ":";
 
-  const minutes =
-    date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
+  const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
   lastModified += minutes + ":";
 
-  const seconds =
-    date.getSeconds() < 10 ? "0" + date.getSeconds().toString() : date.getSeconds().toString();
+  const seconds = date.getSeconds() < 10 ? "0" + date.getSeconds().toString() : date.getSeconds().toString();
   lastModified += seconds + " ";
   lastModified += "GMT";
 

@@ -1,11 +1,11 @@
 import { type CollectionEntry, getCollection } from "astro:content";
-
-import { Container } from "../../components/ui/container";
-import { Section } from "../../components/ui/section";
-import { Heading } from "../../components/ui/heading";
-import { Card } from "../../components/ui/card";
 import { clsx } from "clsx";
+
 import { Button } from "../../components/ui/button";
+import { Card } from "../../components/ui/card";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Section } from "../../components/ui/section";
 
 // Price formatter (Czech locale - space as thousands separator)
 const formatPrice = (amount: number) => new Intl.NumberFormat("cs-CZ").format(amount);
@@ -38,10 +38,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
         <div className="shrink-0">
           <img
             src={training.data.icon?.src as string}
-            className={clsx(
-              "transition-transform duration-200 ease-out group-hover:scale-105",
-              !featured && "invert",
-            )}
+            className={clsx("transition-transform duration-200 ease-out group-hover:scale-105", !featured && "invert")}
             width="80"
             height="80"
             alt={`Ikona školení ${training.data.title}`}
@@ -66,12 +63,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
           </span>
 
           {/* Price */}
-          <span
-            className={clsx(
-              "mt-1 font-mono text-lg font-bold",
-              featured ? "text-black" : "text-zinc-100",
-            )}
-          >
+          <span className={clsx("mt-1 font-mono text-lg font-bold", featured ? "text-black" : "text-zinc-100")}>
             od {formatPrice(price.amount)} {price.currency}
           </span>
         </div>
@@ -112,8 +104,8 @@ export async function TrainingGrid() {
             DevOps školení
           </Heading>
           <p className="mt-4 text-lg tracking-tight text-zinc-300">
-            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji
-            se především na open-source DevOps nástroje a technologie.
+            Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji se především na
+            open-source DevOps nástroje a technologie.
           </p>
         </div>
 

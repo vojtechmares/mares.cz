@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 
 // Create a synchronous test version since React doesn't support async client components
 function TestArticle({ html }: { html: string }) {

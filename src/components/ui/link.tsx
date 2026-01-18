@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
+
 import { colors } from "../../lib/design-tokens";
 
 type LinkVariant = "default" | "underline" | "muted";
@@ -18,13 +19,7 @@ const variantStyles: Record<LinkVariant, string> = {
   muted: `${colors.text.muted} hover:${colors.text.primary} transition-colors`,
 };
 
-export function Link({
-  href,
-  children,
-  variant = "default",
-  external = false,
-  className,
-}: LinkProps) {
+export function Link({ href, children, variant = "default", external = false, className }: LinkProps) {
   const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (

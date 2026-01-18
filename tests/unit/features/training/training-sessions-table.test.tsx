@@ -1,10 +1,12 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+
+import type { TrainingSession } from "../../../../src/interfaces/training";
+
 import {
   TrainingSessionsTable,
   CompactTrainingSessionsTable,
 } from "../../../../src/features/training/training-sessions-table";
-import type { TrainingSession } from "../../../../src/interfaces/training";
 
 describe("TrainingSessionsTable", () => {
   const createMockSession = (overrides = {}): TrainingSession =>

@@ -2,16 +2,7 @@
 title: Docker a dominance kontejnerizace backendu
 description: V tomhle článku se budu věnovat historii kontejnerů, kontejnerizaci aplikací a historii orchestrace kontejnerů.
 keywords:
-  [
-    "docker",
-    "kontejner",
-    "backend",
-    "kubernetes",
-    "docker swarm",
-    "apache mesos",
-    "hashicop nomad",
-    "12factor app",
-  ]
+  ["docker", "kontejner", "backend", "kubernetes", "docker swarm", "apache mesos", "hashicop nomad", "12factor app"]
 tags: ["kontejnery", "kubernetes"]
 trainingAd: docker
 draft: false

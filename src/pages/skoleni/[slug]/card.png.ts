@@ -1,5 +1,4 @@
 import { type CollectionEntry, getCollection } from "astro:content";
-
 import { join } from "node:path";
 
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
