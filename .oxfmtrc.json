@@ -1,0 +1,13 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 120,
+    "htmlWhitespaceSensitivity": "strict",
+    "useTabs": false,
+    "tabWidth": 2,
+    "semi": true,
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "experimentalSortImports": {
+        "newlinesBetween": true
+    }
+}
