@@ -237,8 +237,8 @@ No consistent spacing scale is applied:
   const baseStyles = "py-20 sm:py-32";
 
   <!-- vs Footer.astro:36 -->
-  <Container className="py-8"></Container
-></Container>
+  <Container className="py-8"></Container>
+</Container>
 ```
 
 ---
@@ -1272,7 +1272,8 @@ Props:
 ### Before
 
 ```html
-<h1 class="text-4xl font-bold text-zinc-900">Heading</h1> <p class="text-lg text-zinc-700">Body text</p>
+<h1 class="text-4xl font-bold text-zinc-900">Heading</h1>
+<p class="text-lg text-zinc-700">Body text</p>
 ```
 
 ### After
