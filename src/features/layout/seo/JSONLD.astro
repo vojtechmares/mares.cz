@@ -64,18 +64,12 @@ interface ItemListSchema {
 }
 
 interface Props {
-  schema:
-    | BlogPostSchema
-    | WebsiteSchema
-    | CollectionPageSchema
-    | CourseSchema
-    | ItemListSchema;
+  schema: BlogPostSchema | WebsiteSchema | CollectionPageSchema | CourseSchema | ItemListSchema;
 }
 
 const { schema } = Astro.props;
 
-const baseUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 let jsonLd: any;
 
@@ -116,8 +110,7 @@ if (schema.type === "BlogPosting") {
     "@type": "WebSite",
     name: "Vojtěch Mareš - DevOps architekt",
     url: baseUrl,
-    description:
-      "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    description: "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
     author: {
       "@type": "Person",
       name: "Vojtěch Mareš",

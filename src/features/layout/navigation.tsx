@@ -39,7 +39,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
           </Button>
         </div>
       </div>
-      <div className="align-center mt-4 flex flex-row whitespace-nowrap gap-y-2 gap-x-4 overflow-x-scroll">
+      <div className="align-center mt-4 flex flex-row gap-x-4 gap-y-2 overflow-x-scroll whitespace-nowrap">
         {links.map((link) => (
           <LinkItem key={link.name} href={link.href} name={link.name} />
         ))}

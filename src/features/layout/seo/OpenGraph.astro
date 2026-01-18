@@ -45,20 +45,10 @@ if (image?.url !== undefined && image.url.startsWith("/")) {
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta
-  property="og:url"
-  content={url !== undefined ? url.toString() : Astro.url.href}
-/>
+<meta property="og:url" content={url !== undefined ? url.toString() : Astro.url.href} />
 <meta property="og:site_name" content="Vojtěch Mareš - DevOps architekt" />
 <meta property="og:locale" content={localeToOGLocale(locale)} />
-{
-  localeAlternate !== undefined && (
-    <meta
-      property="og:locale:alternate"
-      content={localeToOGLocale(localeAlternate)}
-    />
-  )
-}
+{localeAlternate !== undefined && <meta property="og:locale:alternate" content={localeToOGLocale(localeAlternate)} />}
 {
   image !== undefined && (
     <>

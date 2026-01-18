@@ -37,7 +37,7 @@ export function CookieConsentBar() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-100 flex flex-col justify-between gap-x-8 gap-y-4 bg-white py-1 px-6 ring-1 ring-zinc-900/10 md:flex-row md:items-center lg:px-8">
+    <div className="fixed inset-x-0 bottom-0 z-100 flex flex-col justify-between gap-x-8 gap-y-4 bg-white px-6 py-1 ring-1 ring-zinc-900/10 md:flex-row md:items-center lg:px-8">
       <p className="max-w-8xl text-sm/6 text-zinc-700">
         Tento web používá soubory cookies k analýze návštěvnosti pomocí služby Google Analytics. Díky nim můžu zlepšovat
         svoje stránky na základě anonymních statistik. Více informací najdete v{" "}

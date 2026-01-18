@@ -55,7 +55,7 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
           {/* Duration */}
           <span
             className={clsx(
-              "mt-2 font-mono text-sm uppercase tracking-wider",
+              "mt-2 font-mono text-sm tracking-wider uppercase",
               featured ? "text-black" : "text-zinc-300",
             )}
           >

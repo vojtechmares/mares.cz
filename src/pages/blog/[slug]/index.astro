@@ -54,17 +54,14 @@ const openGraph = {
   },
 };
 
-const baseUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const jsonLd = {
   type: "BlogPosting" as const,
   headline: article.data.title,
   description: article.data.description,
-  datePublished:
-    article.data.publish_time?.toISOString() || new Date().toISOString(),
-  dateModified:
-    article.data.publish_time?.toISOString() || new Date().toISOString(),
+  datePublished: article.data.publish_time?.toISOString() || new Date().toISOString(),
+  dateModified: article.data.publish_time?.toISOString() || new Date().toISOString(),
   author: {
     name: "Vojtěch Mareš",
     url: baseUrl,
@@ -97,21 +94,20 @@ const { Content } = await render(article);
           {
             article.data.tags.map((tag) => (
               <>
-                <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
+                <a href={`/blog/tag/${tag}`} class="underline">
+                  #{tag}
+                </a>{" "}
               </>
             ))
           }
         </p>
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
           {
-            new Date(article.data.publish_time as Date).toLocaleDateString(
-              "cs-CZ",
-              {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              },
-            )
+            new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })
           }
         </p>
       </div>
@@ -128,10 +124,6 @@ const { Content } = await render(article);
       </article>
     </StyleContent>
   </Section>
-  {
-    article.data.trainingAd !== undefined && (
-      <TrainingAd trainingSlug={article.data.trainingAd as string} />
-    )
-  }
+  {article.data.trainingAd !== undefined && <TrainingAd trainingSlug={article.data.trainingAd as string} />}
   {article.data.trainingAd === undefined && <TrainingGrid />}
 </Layout>

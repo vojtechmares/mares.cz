@@ -63,18 +63,8 @@ const references = [
 <ReferencesContainer>
   {
     references.map((ref) => (
-      <ReferenceCard
-        content={ref.content}
-        authorName={ref.author.name}
-        authorRole={ref.author.role}
-      >
-        <Image
-          class="h-14 w-14 object-cover"
-          src={ref.author.image}
-          alt={ref.author.name}
-          width={56}
-          height={56}
-        />
+      <ReferenceCard content={ref.content} authorName={ref.author.name} authorRole={ref.author.role}>
+        <Image class="h-14 w-14 object-cover" src={ref.author.image} alt={ref.author.name} width={56} height={56} />
       </ReferenceCard>
     ))
   }

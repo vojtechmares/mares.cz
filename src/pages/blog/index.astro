@@ -38,11 +38,7 @@ tags = [...new Set(tags)];
 // Extract years for archive navigation
 const currentYear = new Date().getFullYear();
 const years = [
-  ...new Set(
-    articles
-      .map((a) => a.data.publish_time.getFullYear())
-      .filter((y) => y <= currentYear + 1 && y >= 2020),
-  ),
+  ...new Set(articles.map((a) => a.data.publish_time.getFullYear()).filter((y) => y <= currentYear + 1 && y >= 2020)),
 ].sort((a, b) => b - a);
 
 const meta = {
@@ -60,7 +56,9 @@ const meta = {
         {
           tags.map((tag) => (
             <>
-              <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
+              <a href={`/blog/tag/${tag}`} class="underline">
+                #{tag}
+              </a>{" "}
             </>
           ))
         }
@@ -71,7 +69,10 @@ const meta = {
           {
             years.map((year, i) => (
               <>
-                <a href={`/blog/${year}`} class="underline">{year}</a>{i < years.length - 1 ? " · " : ""}
+                <a href={`/blog/${year}`} class="underline">
+                  {year}
+                </a>
+                {i < years.length - 1 ? " · " : ""}
               </>
             ))
           }
@@ -85,23 +86,19 @@ const meta = {
   </Section>
   <Section>
     <Container>
-      <div
-        role="list"
-        class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl"
-      >
+      <div role="list" class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl">
         {
           articles.map((article) => (
             <Card variant="surface">
-              <Heading
-                level="h2"
-                className="font-display text-3xl font-bold tracking-tight"
-              >
+              <Heading level="h2" className="font-display text-3xl font-bold tracking-tight">
                 {article.data.title}
               </Heading>
               <p class="mt-2 mb-4">
                 {article.data.tags.map((tag) => (
                   <>
-                    <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
+                    <a href={`/blog/tag/${tag}`} class="underline">
+                      #{tag}
+                    </a>{" "}
                   </>
                 ))}
               </p>
@@ -109,9 +106,7 @@ const meta = {
               <p class="my-4 text-zinc-700">{article.data.description}</p>
               <div class="flex flex-row justify-end gap-x-6">
                 <p class="my-4 text-zinc-700">
-                  {new Date(
-                    article.data.publish_time as Date,
-                  ).toLocaleDateString("cs-CZ", {
+                  {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",

@@ -761,9 +761,7 @@ function NavLink({ href, name }: { href: string; name: string }) {
 </Heading>
 
 <!-- Replace hardcoded p with Body component -->
-<Body variant="large" className="mt-6 max-w-2xl">
-  Společně snížíme vaše náklady na infrastrukturu...
-</Body>
+<Body variant="large" className="mt-6 max-w-2xl"> Společně snížíme vaše náklady na infrastrukturu... </Body>
 ```
 
 **Footer** (`src/components/footer.astro`):

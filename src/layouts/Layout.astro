@@ -92,28 +92,18 @@ interface Props {
       };
 }
 
-const {
-  meta,
-  openGraph = undefined,
-  jsonLd = undefined,
-  lang = "cs",
-} = Astro.props;
+const { meta, openGraph = undefined, jsonLd = undefined, lang = "cs" } = Astro.props;
 
 let locale = Astro.currentLocale;
 if (locale === undefined) {
   locale = "cs";
 }
 
-const metadataDefaults = LocalizedMetadata.filter(
-  (m) => m.locale === locale,
-)[0];
+const metadataDefaults = LocalizedMetadata.filter((m) => m.locale === locale)[0];
 ---
 
 <!doctype html>
-<html
-  lang={lang}
-  class="h-full scroll-smooth bg-zinc-100 font-mono antialiased [font-feature-settings:'ss01']"
->
+<html lang={lang} class="h-full scroll-smooth bg-zinc-100 font-mono antialiased [font-feature-settings:'ss01']">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

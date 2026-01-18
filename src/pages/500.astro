@@ -17,9 +17,6 @@ const { error } = Astro.props;
     <meta name="robots" content="noindex" />
   </head>
   <body class="min-h-full bg-zinc-900">
-    <ErrorComponent
-      status={500}
-      error={error instanceof Error ? error.message : "Unknown error"}
-    />
+    <ErrorComponent status={500} error={error instanceof Error ? error.message : "Unknown error"} />
   </body>
 </html>

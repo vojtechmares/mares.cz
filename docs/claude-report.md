@@ -50,8 +50,7 @@ Generated: 2025-12-06
 **Issue**: `Layout.astro:45-46` fetches ALL pages and trainings on every single page load:
 
 ```astro
-const pages = await strapi.fetchPages(); const trainings = await
-strapi.fetchTrainings();
+const pages = await strapi.fetchPages(); const trainings = await strapi.fetchTrainings();
 ```
 
 **Impact**:

@@ -24,10 +24,7 @@ const pageLinks = pages
     return link !== undefined;
   });
 
-const links = [
-  ...(staticLinks as { name: string; href: string }[]),
-  ...pageLinks,
-];
+const links = [...(staticLinks as { name: string; href: string }[]), ...pageLinks];
 ---
 
 <Navbar links={links} />

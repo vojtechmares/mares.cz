@@ -16,10 +16,16 @@ This is a personal website (mares.cz) built with Astro 5. The site is a bilingua
 
 **Formatting & Linting:**
 
-- `pnpm format` - Check formatting with oxfmt (runs on pre-commit)
+- `pnpm format` - Check formatting with Prettier (runs on pre-commit)
 - `pnpm format:fix` - Auto-fix formatting issues
 - `pnpm lint` - Check code with oxlint (runs on pre-commit)
 - `pnpm lint:fix` - Auto-fix linting issues
+
+Prettier is configured with:
+
+- `prettier-plugin-astro` for .astro file support
+- `prettier-plugin-tailwindcss` for automatic class sorting
+- `htmlWhitespaceSensitivity: "ignore"` to prevent whitespace from affecting rendering
 
 **Testing:**
 

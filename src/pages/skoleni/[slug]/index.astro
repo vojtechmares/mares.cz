@@ -7,10 +7,7 @@ import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
-import {
-  getFutureSessionsByName,
-  toTrainingSession,
-} from "../../../lib/sessions";
+import { getFutureSessionsByName, toTrainingSession } from "../../../lib/sessions";
 import { Section } from "../../../components/ui/section";
 import { StyleContent } from "../../../components/style-content";
 import { getEntry } from "astro:content";
@@ -76,16 +73,11 @@ const openGraph = {
   },
 };
 
-const baseUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const pricing = {
-  open: training.data.price.open.filter(
-    (variant) => variant.currency === "CZK",
-  )[0].amount,
-  corporate: training.data.price.corporate.filter(
-    (variant) => variant.currency === "CZK",
-  )[0].amount,
+  open: training.data.price.open.filter((variant) => variant.currency === "CZK")[0].amount,
+  corporate: training.data.price.corporate.filter((variant) => variant.currency === "CZK")[0].amount,
 };
 
 const jsonLd = {
@@ -167,11 +159,7 @@ const { Content } = await render(training);
                   </dd>
                 </div>
               </dl>
-              <Button
-                variant="accent"
-                className="text-lg font-medium"
-                href="mailto:vojtech@mares.cz"
-              >
+              <Button variant="accent" className="text-lg font-medium" href="mailto:vojtech@mares.cz">
                 Nezávazně poptat
               </Button>
             </Card>
@@ -196,8 +184,7 @@ const { Content } = await render(training);
                     </div>
                     <div class="ml-3">
                       <p class="text-xl text-blue-600">
-                        Toto školení je{" "}
-                        <span class="font-medium">dvoudenní.</span>
+                        Toto školení je <span class="font-medium">dvoudenní.</span>
                       </p>
                     </div>
                   </div>

@@ -22,8 +22,7 @@ const meta = {
   keywords: "školení, termíny, devops školení, termín školení",
 };
 
-const baseUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 // Generate Event schema for each training session
 const jsonLd = {
@@ -57,38 +56,27 @@ const jsonLd = {
       <Container>
         <TrainingSessionsTable sessions={sessions} />
         <Card variant="surface" className="mt-12 sm:mt-18">
-          <Heading level="h3" id="podminky">
-            Podmínky veřejných termínů školení
-          </Heading>
+          <Heading level="h3" id="podminky"> Podmínky veřejných termínů školení </Heading>
           <ul class="mt-6 list-disc pl-4">
+            <li>Přihlášení na veřejný termín školení je závazné a zavazujete se k platbě.</li>
             <li>
-              Přihlášení na veřejný termín školení je závazné a zavazujete se k
-              platbě.
-            </li>
-            <li>
-              Minimální počet účastníků pro uskuteční školení je <strong
-                >5</strong
-              >.
+              Minimální počet účastníků pro uskuteční školení je <strong>5</strong>.
             </li>
             <li>
               Maximální počet účastníků na termínu je <strong>12</strong>.
             </li>
             <li>
-              Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu
-              nízké účasti.
+              Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu nízké účasti.
             </li>
             <li>
-              Při odhlášení <strong>min. týden předem</strong> vracím <strong
-                >plnou částku</strong
-              >.
+              Při odhlášení <strong>min. týden předem</strong> vracím <strong>plnou částku</strong>.
             </li>
             <li>
               Při odhlášení <strong>méně jak týden předem</strong> vracím pouze
               <strong>50% z ceny školení</strong>.
             </li>
             <li>
-              Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení
-              platného dokladu (potvrzení o studiu).
+              Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení platného dokladu (potvrzení o studiu).
             </li>
           </ul>
         </Card>

@@ -61,10 +61,7 @@ export async function getStaticPaths() {
       params: { year: year.toString() },
       props: {
         year,
-        articles: yearArticles.sort(
-          (a, b) =>
-            b.data.publish_time.valueOf() - a.data.publish_time.valueOf(),
-        ),
+        articles: yearArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf()),
         months: Array.from(monthCounts.entries())
           .map(([month, count]) => ({ month, count }))
           .sort((a, b) => b.month - a.month),
@@ -75,8 +72,7 @@ export async function getStaticPaths() {
 
 const { year, articles, months } = Astro.props;
 
-const baseUrl =
-  Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
   title: `Vojtěch Mareš | Blog: ${year}`,
@@ -116,7 +112,9 @@ const jsonLd = {
             <p class="mt-2 text-base text-zinc-100 lg:text-xl">
               {months.map((m, i) => (
                 <>
-                  <a href={`/blog/${year}/${String(m.month).padStart(2, "0")}`} class="underline">{CZECH_MONTHS[m.month - 1]}</a>
+                  <a href={`/blog/${year}/${String(m.month).padStart(2, "0")}`} class="underline">
+                    {CZECH_MONTHS[m.month - 1]}
+                  </a>
                   {i < months.length - 1 ? " · " : ""}
                 </>
               ))}
@@ -131,32 +129,26 @@ const jsonLd = {
   </Section>
   <Section>
     <Container>
-      <div
-        role="list"
-        class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl"
-      >
+      <div role="list" class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl">
         {
           articles.map((article) => (
             <Card variant="surface">
-              <Heading
-                level="h2"
-                className="font-display text-3xl font-bold tracking-tight"
-              >
+              <Heading level="h2" className="font-display text-3xl font-bold tracking-tight">
                 {article.data.title}
               </Heading>
               <p class="mt-2 mb-4">
                 {article.data.tags.map((tag) => (
                   <>
-                    <a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}
+                    <a href={`/blog/tag/${tag}`} class="underline">
+                      #{tag}
+                    </a>{" "}
                   </>
                 ))}
               </p>
               <p class="my-4 text-zinc-700">{article.data.description}</p>
               <div class="flex flex-row justify-end gap-x-6">
                 <p class="my-4 text-zinc-700">
-                  {new Date(
-                    article.data.publish_time as Date,
-                  ).toLocaleDateString("cs-CZ", {
+                  {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
