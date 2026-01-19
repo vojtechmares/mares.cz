@@ -14,9 +14,10 @@ type ServiceProps = {
   featured?: boolean;
   buttonText: string;
   buttonAriaLabel?: string;
+  price: string;
 };
 
-function Service({ name, description, href, featured = false, buttonText, buttonAriaLabel }: ServiceProps) {
+function Service({ name, description, href, featured = false, buttonText, buttonAriaLabel, price }: ServiceProps) {
   return (
     <Card
       variant={featured ? "accent" : "inverse"}
@@ -26,6 +27,9 @@ function Service({ name, description, href, featured = false, buttonText, button
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
+      <span className={clsx("mt-2 font-mono text-lg font-bold", featured ? "text-black" : "text-zinc-100")}>
+        {price}
+      </span>
       <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4 text-base")}>
         {description}
       </Text>
@@ -51,6 +55,7 @@ export function Services() {
         <div className="mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
             name="Konzultace"
+            price="2 500 CZK / hod"
             description="Potřebujete poradit nebo si nevíte rady? Společně projdeme váš současný stav, identifikujeme problémy a navrhneme vhodná řešení."
             buttonText="Napište mi"
             buttonAriaLabel="Napište mi email a domluvme si konzultaci"
@@ -59,6 +64,7 @@ export function Services() {
           <Service
             featured
             name="Školení"
+            price="od 5 400 CZK"
             description="Formou workshopu seznámím váš tým s moderními cloudovými technologiemi a naučím vás je efektivně využívat. Vše si společně vyzkoušíme na praktických příkladech. Veškeré materiály ze školení a ukázkové příklady vám zůstanou."
             href="/#skoleni"
             buttonText="Seznam školení"
@@ -66,6 +72,7 @@ export function Services() {
           />
           <Service
             name="DevOps spolupráce"
+            price="cena dle domluvy"
             description="Nabízím dlouhodobou spolupráci, při které se kompletně postarám o vaši infrastrukturu, pravidelné aktualizace a požadavky vašich aplikací. Společně budeme rozvíjet vaši platformu tak, aby odpovídala vašim aktuálním potřebám."
             href="/sluzby"
             buttonText="Všechny služby"
