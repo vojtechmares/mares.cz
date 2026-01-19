@@ -5,6 +5,7 @@ import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import { Section } from "../../../components/ui/section";
+import { TagList } from "../../../components/ui/tag-list";
 import Layout from "../../../layouts/Layout.astro";
 import Breadcrumbs from "../../../components/seo/Breadcrumbs.astro";
 
@@ -14,6 +15,7 @@ interface Props {
   year: number;
   articles: CollectionEntry<"blog">[];
   months: { month: number; count: number }[];
+  tags: string[];
 }
 
 const CZECH_MONTHS = [
@@ -57,6 +59,9 @@ export async function getStaticPaths() {
       monthCounts.set(month, (monthCounts.get(month) || 0) + 1);
     }
 
+    // Extract unique tags from articles in this year
+    const tags = [...new Set(yearArticles.flatMap((a) => a.data.tags))];
+
     return {
       params: { year: year.toString() },
       props: {
@@ -65,12 +70,13 @@ export async function getStaticPaths() {
         months: Array.from(monthCounts.entries())
           .map(([month, count]) => ({ month, count }))
           .sort((a, b) => b.month - a.month),
+        tags,
       },
     };
   });
 }
 
-const { year, articles, months } = Astro.props;
+const { year, articles, months, tags } = Astro.props;
 
 const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
@@ -103,6 +109,9 @@ const jsonLd = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog: {year}</Heading>
+      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        <TagList tags={tags} variant="inverse" />
+      </p>
       <div class="flex flex-row justify-between">
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
           {articles.length} článků v tomto roce

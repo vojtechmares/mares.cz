@@ -5,6 +5,7 @@ import { Card } from "../../../../components/ui/card";
 import { Container } from "../../../../components/ui/container";
 import { Heading } from "../../../../components/ui/heading";
 import { Section } from "../../../../components/ui/section";
+import { TagList } from "../../../../components/ui/tag-list";
 import Layout from "../../../../layouts/Layout.astro";
 import Breadcrumbs from "../../../../components/seo/Breadcrumbs.astro";
 
@@ -15,6 +16,7 @@ interface Props {
   month: number;
   monthName: string;
   articles: CollectionEntry<"blog">[];
+  tags: string[];
 }
 
 export async function getStaticPaths() {
@@ -60,6 +62,9 @@ export async function getStaticPaths() {
     const year = parseInt(yearStr);
     const month = parseInt(monthStr);
 
+    // Extract unique tags from articles in this month
+    const tags = [...new Set(monthArticles.flatMap((a) => a.data.tags))];
+
     return {
       params: {
         year: yearStr,
@@ -70,12 +75,13 @@ export async function getStaticPaths() {
         month,
         monthName: CZECH_MONTHS[month - 1],
         articles: monthArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf()),
+        tags,
       },
     };
   });
 }
 
-const { year, month, monthName, articles } = Astro.props;
+const { year, month, monthName, articles, tags } = Astro.props;
 
 const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
@@ -108,6 +114,9 @@ const jsonLd = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog: {monthName}{" "}{year}</Heading>
+      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        <TagList tags={tags} variant="inverse" />
+      </p>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
         {articles.length}
         {articles.length === 1 ? "článek" : articles.length < 5 ? "články" : "článků"}
