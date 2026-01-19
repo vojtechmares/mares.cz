@@ -54,27 +54,20 @@ const meta = {
       <Heading variant="inverse">Blog</Heading>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
         {
-          tags.map((tag) => (
-            <>
-              <a href={`/blog/tag/${tag}`} class="underline">
-                #{tag}
-              </a>{" "}
-            </>
-          ))
+          tags.map((tag) =>
+            // prettier-ignore
+            <><a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}</>,
+          )
         }
       </p>
       <div class="mt-4 flex flex-row justify-between">
         <p class="mt-2 text-base text-zinc-100 lg:text-xl">
           Archiv:{" "}
           {
-            years.map((year, i) => (
-              <>
-                <a href={`/blog/${year}`} class="underline">
-                  {year}
-                </a>
-                {i < years.length - 1 ? " · " : ""}
-              </>
-            ))
+            years.map((year, i) =>
+              // prettier-ignore
+              <><a href={`/blog/${year}`} class="underline">{year}</a>{i < years.length - 1 ? " · " : ""}</>,
+            )
           }
         </p>
         <p class="mt-2 text-base text-zinc-100 lg:text-xl">
@@ -86,22 +79,15 @@ const meta = {
   </Section>
   <Section>
     <Container>
-      <div role="list" class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl">
+      <div role="list" class="grid grid-cols-1 gap-y-4 md:gap-x-4 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-8">
         {
           articles.map((article) => (
-            <Card variant="surface">
+            <Card variant="surface" className="">
               <Heading level="h2" className="font-display text-3xl font-bold tracking-tight">
                 {article.data.title}
               </Heading>
-              <p class="mt-2 mb-4">
-                {article.data.tags.map((tag) => (
-                  <>
-                    <a href={`/blog/tag/${tag}`} class="underline">
-                      #{tag}
-                    </a>{" "}
-                  </>
-                ))}
-              </p>
+              {/* prettier-ignore */}
+              <p class="mt-2 mb-4">{article.data.tags.map((tag) => <Fragment><a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}</Fragment>)}</p>
 
               <p class="my-4 text-zinc-700">{article.data.description}</p>
               <div class="flex flex-row justify-end gap-x-6">
