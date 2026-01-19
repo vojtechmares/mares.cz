@@ -18,22 +18,22 @@ type ServiceProps = {
 
 function Service({ name, description, href, featured = false, buttonText, buttonAriaLabel }: ServiceProps) {
   return (
-    <Card variant={featured ? "accent" : "inverse"} className={featured ? "order-first lg:order-0" : ""} hover={true}>
+    <Card
+      variant={featured ? "accent" : "inverse"}
+      className={clsx("flex h-full flex-col", featured && "order-first lg:order-0")}
+      hover={true}
+    >
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
       <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4 text-base")}>
         {description}
       </Text>
-      <Button
-        href={href}
-        style="solid"
-        variant={featured ? "primary" : "secondary"}
-        className="mt-6"
-        aria-label={buttonAriaLabel}
-      >
-        {buttonText}
-      </Button>
+      <div className="mt-auto flex justify-end pt-4">
+        <Button href={href} style="solid" variant={featured ? "primary" : "secondary"} aria-label={buttonAriaLabel}>
+          {buttonText}
+        </Button>
+      </div>
     </Card>
   );
 }
