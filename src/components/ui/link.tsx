@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 
 import { colors } from "../../lib/design-tokens";
 
-type LinkVariant = "default" | "underline" | "muted";
+type LinkVariant = "default" | "muted";
 
 type LinkProps = {
   href: string;
@@ -14,8 +14,7 @@ type LinkProps = {
 };
 
 const variantStyles: Record<LinkVariant, string> = {
-  default: `${colors.text.link} ${colors.text.linkHover} transition-colors`,
-  underline: `${colors.text.link} underline ${colors.text.linkHover} transition-colors`,
+  default: `${colors.text.link} underline ${colors.text.linkHover} transition-colors`,
   muted: `${colors.text.muted} hover:${colors.text.primary} transition-colors`,
 };
 
