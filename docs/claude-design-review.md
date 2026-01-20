@@ -1270,8 +1270,7 @@ Props:
 ### Before
 
 ```html
-<h1 class="text-4xl font-bold text-zinc-900">Heading</h1>
-<p class="text-lg text-zinc-700">Body text</p>
+<h1 class="text-4xl font-bold text-zinc-900">Heading</h1> <p class="text-lg text-zinc-700">Body text</p>
 ```
 
 ### After
