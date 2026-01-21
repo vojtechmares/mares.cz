@@ -65,7 +65,7 @@ export const typography = {
   heading: {
     h1: "text-5xl font-sans font-bold leading-[1.1] tracking-[-0.02em]",
     h2: "text-4xl font-sans font-semibold leading-[1.2] tracking-[-0.015em]",
-    h3: "text-3xl font-sans font-semibold leading-[1.3] tracking-[-0.01em]",
+    h3: "text-[1.75rem] font-sans font-semibold leading-[1.3] tracking-[-0.01em]",
     h4: "text-xl font-sans font-medium leading-[1.4]",
     h5: "text-lg font-sans font-semibold leading-[1.5]",
     h6: "text-base font-sans font-semibold leading-[1.5]",
