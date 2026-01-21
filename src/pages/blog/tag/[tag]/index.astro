@@ -7,6 +7,7 @@ import { Heading } from "../../../../components/ui/heading";
 import { Section } from "../../../../components/ui/section";
 import Layout from "../../../../layouts/Layout.astro";
 import Breadcrumbs from "../../../../components/seo/Breadcrumbs.astro";
+import { ArticleGrid } from "../../../../features/blog/article-grid";
 
 export const prerender = true;
 
@@ -76,33 +77,6 @@ const jsonLd = {
     </Container>
   </Section>
   <Section>
-    <Container>
-      <div role="list" class="mx-auto flex max-w-2xl flex-col gap-y-16 lg:max-w-4xl">
-        {
-          articles.map((article) => (
-            <Card variant="surface">
-              <Heading level="h2" className="font-display text-3xl font-bold tracking-tight">
-                {article.data.title}
-              </Heading>
-              {/* prettier-ignore */}
-              <p class="mt-2 mb-4">{article.data.tags.map((t) => <><a href={`/blog/tag/${t}`} class:list={["underline", { "font-bold": t === tag }]}>#{t}</a>{" "}</>)}</p>
-              <p class="my-4 text-zinc-700">{article.data.description}</p>
-              <div class="flex flex-row justify-end gap-x-6">
-                <p class="my-4 text-zinc-700">
-                  {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </p>
-                <Button href={"/blog/" + article.id} variant="primary">
-                  Přečíst si článek
-                </Button>
-              </div>
-            </Card>
-          ))
-        }
-      </div>
-    </Container>
+    <ArticleGrid articles={articles} />
   </Section>
 </Layout>
