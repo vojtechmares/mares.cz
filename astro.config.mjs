@@ -17,13 +17,14 @@ export default defineConfig({
     "/meeting/beer": "https://cal.com/vojtechmares/beer",
   },
 
-  i18n: {
-    locales: ["cs", "en"],
-    defaultLocale: "cs",
-    routing: {
-      prefixDefaultLocale: false,
-    },
-  },
+  // Disable localization for now, until it is actually complete
+  // i18n: {
+  //   locales: ["cs", "en"],
+  //   defaultLocale: "cs",
+  //   routing: {
+  //     prefixDefaultLocale: false,
+  //   },
+  // },
 
   trailingSlash: "never",
 
@@ -34,13 +35,13 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      i18n: {
-        defaultLocale: "cs",
-        locales: {
-          cs: "cs-CZ",
-          en: "en-US",
-        },
-      },
+      // i18n: {
+      //   defaultLocale: "cs",
+      //   locales: {
+      //     cs: "cs-CZ",
+      //     en: "en-US",
+      //   },
+      // },
     }),
   ],
 
