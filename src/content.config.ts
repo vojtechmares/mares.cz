@@ -1,6 +1,7 @@
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
+import { sessionLoader } from "./lib/loaders/session-loader";
 
 const blog = defineCollection({
   loader: glob({
@@ -89,9 +90,12 @@ const page = defineCollection({
 // });
 
 const session = defineCollection({
-  loader: glob({
-    pattern: ["*.json"],
-    base: "./src/content/session",
+  loader: sessionLoader({
+    apiUrl: import.meta.env.SESSIONS_API_URL,
+    oidcIssuer: import.meta.env.SESSIONS_OIDC_ISSUER,
+    clientId: import.meta.env.SESSIONS_OIDC_CLIENT_ID,
+    clientSecret: import.meta.env.SESSIONS_OIDC_CLIENT_SECRET,
+    oidcAudience: import.meta.env.SESSIONS_OIDC_AUDIENCE,
   }),
   schema: z.object({
     name: z.string(),

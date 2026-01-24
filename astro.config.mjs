@@ -66,6 +66,28 @@ export default defineConfig({
         access: "public",
         default: false,
       }),
+      SESSIONS_API_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "https://api.mares-skoleni.cz",
+      }),
+      SESSIONS_OIDC_ISSUER: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SESSIONS_OIDC_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SESSIONS_OIDC_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SESSIONS_OIDC_AUDIENCE: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
     },
   },
 });
