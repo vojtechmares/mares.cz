@@ -89,13 +89,6 @@ export async function TrainingGrid() {
     return !data.draft;
   });
 
-  // Sort trainings: featured first
-  const sortedTrainings = [...trainings].sort((a, b) => {
-    if (a.data.featured && !b.data.featured) return -1;
-    if (!a.data.featured && b.data.featured) return 1;
-    return 0;
-  });
-
   return (
     <Section id="skoleni" aria-label="Training" variant="inverse">
       <Container>
@@ -111,7 +104,7 @@ export async function TrainingGrid() {
 
         {/* Responsive grid: 1 col mobile, 3 cols desktop */}
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-          {sortedTrainings.map((training) => (
+          {trainings.map((training) => (
             <TrainingCard key={training.id} training={training} />
           ))}
         </div>
