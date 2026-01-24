@@ -34,7 +34,7 @@ export async function getStaticPaths() {
   }));
 }
 
-export async function GET({ params, props }: { params: { year: string }; props: Props }) {
+export async function GET({ props }: { params: { year: string }; props: Props }) {
   const { year } = props;
   const { articles } = props;
 

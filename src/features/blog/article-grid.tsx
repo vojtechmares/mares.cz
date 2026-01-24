@@ -1,4 +1,3 @@
-import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Heading } from "../../components/ui/heading";
 import { Container } from "../../components/ui/container";
