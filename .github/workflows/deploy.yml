@@ -52,6 +52,7 @@ jobs:
         shell: bash
         run: pnpm build
         env:
+          SESSIONS_API_URL: ${{ secrets.SESSIONS_API_URL }}
           SESSIONS_OIDC_ISSUER: ${{ secrets.SESSIONS_OIDC_ISSUER }}
           SESSIONS_OIDC_CLIENT_ID: ${{ secrets.SESSIONS_OIDC_CLIENT_ID }}
           SESSIONS_OIDC_CLIENT_SECRET: ${{ secrets.SESSIONS_OIDC_CLIENT_SECRET }}
