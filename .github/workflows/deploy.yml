@@ -51,6 +51,11 @@ jobs:
       - name: build
         shell: bash
         run: pnpm build
+        env:
+          SESSIONS_OIDC_ISSUER: ${{ secrets.SESSIONS_OIDC_ISSUER }}
+          SESSIONS_OIDC_CLIENT_ID: ${{ secrets.SESSIONS_OIDC_CLIENT_ID }}
+          SESSIONS_OIDC_CLIENT_SECRET: ${{ secrets.SESSIONS_OIDC_CLIENT_SECRET }}
+          SESSIONS_OIDC_AUDIENCE: ${{ secrets.SESSIONS_OIDC_AUDIENCE }}
 
       - name: deploy
         uses: cloudflare/wrangler-action@v3
