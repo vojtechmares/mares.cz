@@ -1,5 +1,5 @@
 ---
-title: Empty
+title: Feature Flags
 backofficeID: -1
 description: |
 
@@ -19,11 +19,9 @@ price:
       currency: CZK
     - amount: 1000
       currency: EUR
-icon:
-  src: src/images/training/xxx.svg
-  alt: Some icon
-logo:
-  src: src/images/training/xxx.png
-  alt: Some logo
 draft: true
 ---
+
+- Feature Flags
+- Decouple deployment from release
+- OpenFeature

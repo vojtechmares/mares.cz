@@ -1,5 +1,6 @@
 ---
 title: GitLab CI
+backofficeID: 5
 description: |
   Interaktivní školení GitLab CI/CD: naučte se navrhnout, spustit a optimalizovat pipeline, spravovat Runnery, využívat cache a artefakty a nasazovat aplikace automatizovaně.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: ArgoCD
+backofficeID: 7
 description: |
   ArgoCD je GitOps nástroj, kterým deklarativně nasazujeme do Kubernetes. Zdrojem pravdy je Git repozitář a ArgoCD se stará o sync, tzv. reconcilaci do Kubernetes cluster.
 keywords: ["argocd", "gitops", "kubernetes", "devops", "deployment"]

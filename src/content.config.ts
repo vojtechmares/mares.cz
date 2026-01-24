@@ -33,7 +33,7 @@ const training = defineCollection({
     base: "./src/content/training",
   }),
   schema: z.object({
-    // backofficeID: z.number().positive(),
+    backofficeID: z.number(),
     title: z.string(),
     description: z.string().max(240),
     keywords: z.array(z.string()),

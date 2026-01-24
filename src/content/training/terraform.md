@@ -1,5 +1,6 @@
 ---
 title: Terraform
+backofficeID: 1
 description: |
   Školení Terraform: naučte se pracovat s Terraformem, nástrojem pro spravování vaší infrastruktury jako kódu. Díky Terraformu dokážete mít lepší přehled, snáz provádět změny napříč prostředímy a migrovat mezi vendory.
 keywords:
