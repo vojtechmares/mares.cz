@@ -1,4 +1,4 @@
-import type { TrainingSession } from "../../interfaces/training";
+import type { TrainingSession } from "../../lib/sessions";
 
 import { Button } from "../../components/ui/button";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";

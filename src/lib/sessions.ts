@@ -1,8 +1,17 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-import type { TrainingSession } from "../interfaces/training";
-
 export type Session = CollectionEntry<"session">;
+
+export interface TrainingSession {
+  name: string;
+  dates: {
+    start: string;
+    end?: string;
+  };
+  location: string;
+  price: number;
+  signUpURL?: string;
+}
 
 /**
  * Get all future sessions sorted by start date (ascending)

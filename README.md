@@ -4,7 +4,7 @@ Personal website built with Astro 5, deployed as a containerized application to 
 
 ## Overview
 
-Bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
+Bilingual (Czech/English) server-side rendered website that uses Astro Content Collections.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ Bilingual (Czech/English) server-side rendered website that fetches content from
 - **Runtime**: Node.js 24 (Alpine)
 - **Server**: Fastify
 - **Styling**: Tailwind CSS v4
-- **Content**: Strapi CMS
+- **Content**: Astro Content Collections
 - **Deployment**: Kubernetes with Helm
 
 ## Development
@@ -45,8 +45,6 @@ task docker:run
 
 Required variables (store in `.prod.env` for local development):
 
-- `STRAPI_API_URL` - Strapi CMS endpoint
-- `STRAPI_API_TOKEN` - Strapi authentication token
 - `DISABLE_ANALYTICS` - Disable Google Analytics (optional)
 
 ## Contributing

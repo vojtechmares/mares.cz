@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
-import type { TrainingSession } from "../../../../src/interfaces/training";
+import type { TrainingSession } from "../../../../src/lib/sessions";
 
 import {
   TrainingSessionsTable,
