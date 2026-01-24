@@ -25,16 +25,8 @@ describe("Link", () => {
   describe("variants", () => {
     it("should render with default variant by default", () => {
       render(<Link href="/test">Default</Link>);
-      expect(screen.getByRole("link")).toBeInTheDocument();
-    });
-
-    it("should render with underline variant", () => {
-      render(
-        <Link href="/test" variant="underline">
-          Underline
-        </Link>,
-      );
       const link = screen.getByRole("link");
+      expect(link).toBeInTheDocument();
       expect(link).toHaveClass("underline");
     });
 
