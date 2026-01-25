@@ -1,41 +1,26 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import { Button } from "../../../../components/ui/button";
-import { Card } from "../../../../components/ui/card";
+import { getCollection } from "astro:content";
 import { Container } from "../../../../components/ui/container";
 import { Heading } from "../../../../components/ui/heading";
 import { Section } from "../../../../components/ui/section";
 import Layout from "../../../../layouts/Layout.astro";
-import Breadcrumbs from "../../../../components/seo/Breadcrumbs.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
+import { CachePresets } from "../../../../lib/cache";
 
-export const prerender = true;
-
-interface Props {
-  tag: string;
-  articles: CollectionEntry<"blog">[];
+const { tag } = Astro.params;
+if (!tag) {
+  return Astro.redirect("/404", 404);
 }
 
-export async function getStaticPaths() {
-  const articles = await getCollection("blog", ({ data }) => !data.draft);
+const articles = await getCollection("blog", ({ data }) => !data.draft && data.tags.includes(tag));
 
-  // Extract unique tags
-  const tags = [...new Set(articles.flatMap((article) => article.data.tags))];
-
-  return tags
-    .filter((tag) => tag !== "")
-    .map((tag) => ({
-      params: { tag },
-      props: {
-        tag,
-        articles: articles
-          .filter((a) => a.data.tags.includes(tag))
-          .sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf()),
-      },
-    }));
+if (articles.length === 0) {
+  return Astro.redirect("/404", 404);
 }
 
-const { tag, articles } = Astro.props;
+const sortedArticles = articles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
+
+Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const meta = {
   title: `Vojtěch Mareš | Blog: #${tag}`,
@@ -69,7 +54,7 @@ const jsonLd = {
     <Container>
       <Heading variant="inverse">Blog: #{tag}</Heading>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        {articles.length} článků s tímto tagem
+        {sortedArticles.length} článků s tímto tagem
       </p>
       <p class="mt-2 text-base text-zinc-100 lg:text-xl">
         <a class="underline" href="/blog">← Zpět na blog</a>
@@ -77,6 +62,6 @@ const jsonLd = {
     </Container>
   </Section>
   <Section>
-    <ArticleGrid articles={articles} />
+    <ArticleGrid articles={sortedArticles} />
   </Section>
 </Layout>

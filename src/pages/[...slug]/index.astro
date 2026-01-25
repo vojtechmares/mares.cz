@@ -1,44 +1,24 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { StyleContent } from "../../components/style-content";
+import { CachePresets } from "../../lib/cache";
 
-interface Props {
-  page: CollectionEntry<"page">;
+const { slug } = Astro.params;
+if (!slug) {
+  return Astro.redirect("/404", 404);
 }
 
-export async function getStaticPaths() {
-  // Get all `src/content/page/` entries
-  const pages = await getCollection("page", ({ data }) => {
-    return !data.draft;
-  });
-
-  // const paths = pages.map(page => {
-  //   const [lang, ...slug] = page.id.split('/');
-  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
-  // });
-
-  return pages.map((page) => {
-    return {
-      params: { slug: page.id },
-      props: { page: page },
-    };
-  });
-
-  // return paths;
+const page = await getEntry("page", slug);
+if (!page || page.data.draft) {
+  return Astro.redirect("/404", 404);
 }
 
-// const { lang, slug } = Astro.params;
-const { slug: _slug } = Astro.params;
-const { page } = Astro.props;
-// const page = await getEntry('page', slug);
-if (!page) {
-  return new Response(null, { status: 404 });
-}
+Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const meta = {
   title: "Vojtěch Mareš | " + page.data.title,

@@ -1,23 +1,12 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import { Button } from "../../../components/ui/button";
-import { Card } from "../../../components/ui/card";
+import { getCollection } from "astro:content";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import { Section } from "../../../components/ui/section";
 import { TagList } from "../../../components/ui/tag-list";
 import Layout from "../../../layouts/Layout.astro";
-import Breadcrumbs from "../../../components/seo/Breadcrumbs.astro";
 import { ArticleGrid } from "../../../features/blog/article-grid";
-
-export const prerender = true;
-
-interface Props {
-  year: number;
-  articles: CollectionEntry<"blog">[];
-  months: { month: number; count: number }[];
-  tags: string[];
-}
+import { CachePresets } from "../../../lib/cache";
 
 const CZECH_MONTHS = [
   "Leden",
@@ -34,50 +23,34 @@ const CZECH_MONTHS = [
   "Prosinec",
 ];
 
-export async function getStaticPaths() {
-  const articles = await getCollection("blog", ({ data }) => !data.draft);
-  const currentYear = new Date().getFullYear();
+const { year: yearParam } = Astro.params;
+const year = parseInt(yearParam!);
+const currentYear = new Date().getFullYear();
 
-  // Extract valid years (filter out placeholder dates like 2030)
-  const yearMap = new Map<number, CollectionEntry<"blog">[]>();
-
-  for (const article of articles) {
-    const year = article.data.publish_time.getFullYear();
-    // Only include years up to next year (allow planned posts)
-    if (year <= currentYear + 1 && year >= 2020) {
-      if (!yearMap.has(year)) {
-        yearMap.set(year, []);
-      }
-      yearMap.get(year)!.push(article);
-    }
-  }
-
-  return Array.from(yearMap.entries()).map(([year, yearArticles]) => {
-    // Group by month for navigation
-    const monthCounts = new Map<number, number>();
-    for (const article of yearArticles) {
-      const month = article.data.publish_time.getMonth() + 1;
-      monthCounts.set(month, (monthCounts.get(month) || 0) + 1);
-    }
-
-    // Extract unique tags from articles in this year
-    const tags = [...new Set(yearArticles.flatMap((a) => a.data.tags))];
-
-    return {
-      params: { year: year.toString() },
-      props: {
-        year,
-        articles: yearArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf()),
-        months: Array.from(monthCounts.entries())
-          .map(([month, count]) => ({ month, count }))
-          .sort((a, b) => b.month - a.month),
-        tags,
-      },
-    };
-  });
+if (isNaN(year) || year < 2020 || year > currentYear + 1) {
+  return Astro.redirect("/404", 404);
 }
 
-const { year, articles, months, tags } = Astro.props;
+const allArticles = await getCollection("blog", ({ data }) => !data.draft && data.publish_time.getFullYear() === year);
+
+if (allArticles.length === 0) {
+  return Astro.redirect("/404", 404);
+}
+
+const articles = allArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
+
+const monthCounts = new Map<number, number>();
+for (const article of allArticles) {
+  const month = article.data.publish_time.getMonth() + 1;
+  monthCounts.set(month, (monthCounts.get(month) || 0) + 1);
+}
+const months = Array.from(monthCounts.entries())
+  .map(([month, count]) => ({ month, count }))
+  .sort((a, b) => b.month - a.month);
+
+const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
+
+Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 

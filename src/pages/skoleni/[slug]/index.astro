@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import { Logo } from "../../../features/training/logo";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
 import { Button } from "../../../components/ui/button";
@@ -10,43 +10,16 @@ import Layout from "../../../layouts/Layout.astro";
 import { getFutureSessionsByName, toTrainingSession } from "../../../lib/sessions";
 import { Section } from "../../../components/ui/section";
 import { StyleContent } from "../../../components/style-content";
-import { getEntry } from "astro:content";
-
-// out-out of static pre-rendering
-export const prerender = false;
-// pre-rendering is disabled because of training-session fetching
-
-interface Props {
-  training: CollectionEntry<"training">;
-}
-
-export async function getStaticPaths() {
-  const trainings = await getCollection("training", ({ data }) => {
-    return !data.draft;
-  });
-
-  // const paths = pages.map(page => {
-  //   const [lang, ...slug] = page.id.split('/');
-  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
-  // });
-
-  return trainings.map((training) => {
-    return {
-      params: { slug: training.id },
-      props: { training: training },
-    };
-  });
-
-  // return paths;
-}
+import { CachePresets } from "../../../lib/cache";
 
 const { slug } = Astro.params;
-// const { training } = Astro.props;
 
-const training = await getEntry("training", slug);
+const training = await getEntry("training", slug!);
 if (!training || training.data.draft) {
-  return new Response(null, { status: 404 });
+  return Astro.redirect("/404", 404);
 }
+
+Astro.response.headers.set("Cache-Control", CachePresets.training);
 
 const sessionEntries = await getFutureSessionsByName(training.data.title);
 const sessions = sessionEntries.map(toTrainingSession);

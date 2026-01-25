@@ -1,39 +1,15 @@
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 import { join } from "node:path";
+import type { APIContext } from "astro";
 
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
 import { imageToDataUrl, OpenGraphImageResponse } from "../../../lib/opengraph";
 
-// switch to static page rendering during build time
-export const prerender = true;
-
-interface Props {
-  training: CollectionEntry<"training">;
-}
-
-export async function getStaticPaths() {
-  const trainings = await getCollection("training", ({ data }) => {
-    return !data.draft;
-  });
-
-  // const paths = pages.map(page => {
-  //   const [lang, ...slug] = page.id.split('/');
-  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
-  // });
-
-  return trainings.map((training) => {
-    return {
-      params: { slug: training.id },
-      props: { training: training },
-    };
-  });
-
-  // return paths;
-}
-
-export async function GET({ params, props }: { params: { slug: string }; props: Props }) {
-  const { slug: _slug } = params;
-  const { training } = props;
+export async function GET({ params }: APIContext) {
+  const training = await getEntry("training", params.slug!);
+  if (!training || training.data.draft) {
+    return new Response("Not Found", { status: 404 });
+  }
 
   let iconDataUrl: string | undefined = undefined;
   if (training.data.icon?.src !== undefined) {

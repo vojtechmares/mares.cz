@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
 
@@ -9,34 +9,15 @@ import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import { StyleContent } from "../../../components/style-content";
 import { TrainingGrid } from "../../../features/training/training-grid";
+import { CachePresets } from "../../../lib/cache";
 
-interface Props {
-  article: CollectionEntry<"blog">;
+const { slug } = Astro.params;
+const article = await getEntry("blog", slug!);
+if (!article || article.data.draft) {
+  return Astro.redirect("/404", 404);
 }
 
-export async function getStaticPaths() {
-  // Get all `src/content/blog/` entries
-  const articles = await getCollection("blog", ({ data }) => {
-    return !data.draft;
-  });
-
-  // const paths = pages.map(page => {
-  //   const [lang, ...slug] = page.id.split('/');
-  //   return { params: { lang, slug: slug.join('/') || undefined }, props: page };
-  // });
-
-  return articles.map((article) => {
-    return {
-      params: { slug: article.id },
-      props: { article: article },
-    };
-  });
-
-  // return paths;
-}
-
-const { slug: _slug } = Astro.params;
-const { article } = Astro.props;
+Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const meta = {
   title: "Vojtěch Mareš | Blog: " + article.data.title,
@@ -70,17 +51,6 @@ const jsonLd = {
   image: baseUrl + "/blog/" + article.id + "/card.png",
   url: baseUrl + "/blog/" + article.id,
 };
-
-// function localeName(locale: string): null | string {
-//   switch (locale) {
-//     case "cs":
-//       return "Česky";
-//     case "en":
-//       return "English";
-//     default:
-//       return null;
-//   }
-// }
 
 const { Content } = await render(article);
 ---

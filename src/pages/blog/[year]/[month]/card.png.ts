@@ -1,4 +1,5 @@
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
 
 import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
@@ -18,57 +19,24 @@ const CZECH_MONTHS = [
   "Prosinec",
 ];
 
-interface Props {
-  year: number;
-  month: number;
-  monthName: string;
-  articles: CollectionEntry<"blog">[];
-}
+export async function GET({ params }: APIContext) {
+  const year = parseInt(params.year!);
+  const month = parseInt(params.month!);
 
-export async function getStaticPaths() {
-  const articles = await getCollection("blog", ({ data }) => !data.draft);
-  const currentYear = new Date().getFullYear();
-
-  // Group articles by year-month
-  const yearMonthMap = new Map<string, CollectionEntry<"blog">[]>();
-
-  for (const article of articles) {
-    const date = article.data.publish_time;
-    const year = date.getFullYear();
-
-    if (year <= currentYear + 1 && year >= 2020) {
-      const month = date.getMonth() + 1;
-      const key = `${year}-${String(month).padStart(2, "0")}`;
-
-      if (!yearMonthMap.has(key)) {
-        yearMonthMap.set(key, []);
-      }
-      yearMonthMap.get(key)!.push(article);
-    }
+  if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+    return new Response("Not Found", { status: 404 });
   }
 
-  return Array.from(yearMonthMap.entries()).map(([key, monthArticles]) => {
-    const [yearStr, monthStr] = key.split("-");
-    const year = parseInt(yearStr);
-    const month = parseInt(monthStr);
+  const articles = await getCollection(
+    "blog",
+    ({ data }) => !data.draft && data.publish_time.getFullYear() === year && data.publish_time.getMonth() + 1 === month,
+  );
 
-    return {
-      params: {
-        year: yearStr,
-        month: monthStr,
-      },
-      props: {
-        year,
-        month,
-        monthName: CZECH_MONTHS[month - 1],
-        articles: monthArticles,
-      },
-    };
-  });
-}
+  if (articles.length === 0) {
+    return new Response("Not Found", { status: 404 });
+  }
 
-export async function GET({ props }: { params: { year: string; month: string }; props: Props }) {
-  const { year, month, monthName, articles } = props;
+  const monthName = CZECH_MONTHS[month - 1];
 
   const component = await CreateDateArchiveImageComponent({
     title: `${monthName} ${year}`,

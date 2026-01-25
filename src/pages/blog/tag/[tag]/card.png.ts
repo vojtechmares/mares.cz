@@ -1,33 +1,20 @@
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
 
 import { CreateTagArchiveImageComponent } from "../../../../features/opengraph-images/tag-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 
-interface Props {
-  tag: string;
-  articles: CollectionEntry<"blog">[];
-}
-
-export async function getStaticPaths() {
-  const articles = await getCollection("blog", ({ data }) => !data.draft);
-
-  // Extract unique tags
-  const tags = [...new Set(articles.flatMap((article) => article.data.tags))];
-
-  return tags
-    .filter((tag) => tag !== "")
-    .map((tag) => ({
-      params: { tag },
-      props: {
-        tag,
-        articles: articles.filter((a) => a.data.tags.includes(tag)),
-      },
-    }));
-}
-
-export async function GET({ params, props }: { params: { tag: string }; props: Props }) {
+export async function GET({ params }: APIContext) {
   const { tag } = params;
-  const { articles } = props;
+  if (!tag) {
+    return new Response("Not Found", { status: 404 });
+  }
+
+  const articles = await getCollection("blog", ({ data }) => !data.draft && data.tags.includes(tag));
+
+  if (articles.length === 0) {
+    return new Response("Not Found", { status: 404 });
+  }
 
   const component = await CreateTagArchiveImageComponent({
     tag,

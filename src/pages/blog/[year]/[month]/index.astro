@@ -1,88 +1,51 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import { Button } from "../../../../components/ui/button";
-import { Card } from "../../../../components/ui/card";
+import { getCollection } from "astro:content";
 import { Container } from "../../../../components/ui/container";
 import { Heading } from "../../../../components/ui/heading";
 import { Section } from "../../../../components/ui/section";
 import { TagList } from "../../../../components/ui/tag-list";
 import Layout from "../../../../layouts/Layout.astro";
-import Breadcrumbs from "../../../../components/seo/Breadcrumbs.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
+import { CachePresets } from "../../../../lib/cache";
 
-export const prerender = true;
+const CZECH_MONTHS = [
+  "Leden",
+  "Únor",
+  "Březen",
+  "Duben",
+  "Květen",
+  "Červen",
+  "Červenec",
+  "Srpen",
+  "Září",
+  "Říjen",
+  "Listopad",
+  "Prosinec",
+];
 
-interface Props {
-  year: number;
-  month: number;
-  monthName: string;
-  articles: CollectionEntry<"blog">[];
-  tags: string[];
+const { year: yearParam, month: monthParam } = Astro.params;
+const year = parseInt(yearParam!);
+const month = parseInt(monthParam!);
+
+if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+  return Astro.redirect("/404", 404);
 }
 
-export async function getStaticPaths() {
-  const CZECH_MONTHS = [
-    "Leden",
-    "Únor",
-    "Březen",
-    "Duben",
-    "Květen",
-    "Červen",
-    "Červenec",
-    "Srpen",
-    "Září",
-    "Říjen",
-    "Listopad",
-    "Prosinec",
-  ];
+const allArticles = await getCollection(
+  "blog",
+  ({ data }) => !data.draft && data.publish_time.getFullYear() === year && data.publish_time.getMonth() + 1 === month,
+);
 
-  const articles = await getCollection("blog", ({ data }) => !data.draft);
-  const currentYear = new Date().getFullYear();
-
-  // Group articles by year-month
-  const yearMonthMap = new Map<string, CollectionEntry<"blog">[]>();
-
-  for (const article of articles) {
-    const date = article.data.publish_time;
-    const year = date.getFullYear();
-
-    // Only include valid years
-    if (year <= currentYear + 1 && year >= 2020) {
-      const month = date.getMonth() + 1;
-      const key = `${year}-${String(month).padStart(2, "0")}`;
-
-      if (!yearMonthMap.has(key)) {
-        yearMonthMap.set(key, []);
-      }
-      yearMonthMap.get(key)!.push(article);
-    }
-  }
-
-  return Array.from(yearMonthMap.entries()).map(([key, monthArticles]) => {
-    const [yearStr, monthStr] = key.split("-");
-    const year = parseInt(yearStr);
-    const month = parseInt(monthStr);
-
-    // Extract unique tags from articles in this month
-    const tags = [...new Set(monthArticles.flatMap((a) => a.data.tags))];
-
-    return {
-      params: {
-        year: yearStr,
-        month: monthStr,
-      },
-      props: {
-        year,
-        month,
-        monthName: CZECH_MONTHS[month - 1],
-        articles: monthArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf()),
-        tags,
-      },
-    };
-  });
+if (allArticles.length === 0) {
+  return Astro.redirect("/404", 404);
 }
 
-const { year, month, monthName, articles, tags } = Astro.props;
+const articles = allArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
+
+const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
+const monthName = CZECH_MONTHS[month - 1];
+
+Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
