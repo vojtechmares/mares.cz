@@ -1,0 +1,60 @@
+---
+import { getCollection, render } from "astro:content";
+import { Container } from "../components/ui/container";
+import { Heading } from "../components/ui/heading";
+import { Link } from "../components/ui/link";
+import { Section } from "../components/ui/section";
+import Layout from "../layouts/Layout.astro";
+import { Prose } from "../components/prose";
+
+const talks = (await getCollection("talk", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+// Pre-render all talk content
+const renderedTalks = await Promise.all(
+  talks.map(async (talk) => ({
+    talk,
+    Content: (await render(talk)).Content,
+  })),
+);
+
+const meta = {
+  title: "Vojtěch Mareš | Přednášky",
+  description: "Přehled přednášek a workshopů, které jsem měl možnost dělat.",
+  keywords: "přednášky, talks, workshop",
+};
+---
+
+<Layout meta={meta}>
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse" level="h1">Přednášky</Heading>
+    </Container>
+  </Section>
+  <Section>
+    <Container mode="prose">
+      {
+        renderedTalks.map(({ talk, Content }) => (
+          <article class="mb-12 last:mb-0">
+            <Heading level="h2">{talk.data.title}</Heading>
+            <p class="mt-4 text-zinc-600">
+              {talk.data.date.toLocaleDateString("cs-CZ")}
+              {" · "}
+              {talk.data.event.url ? (
+                <Link href={talk.data.event.url} external>
+                  {talk.data.event.name}
+                </Link>
+              ) : (
+                talk.data.event.name
+              )}
+            </p>
+            <Prose className="mt-6">
+              <Content />
+            </Prose>
+          </article>
+        ))
+      }
+    </Container>
+  </Section>
+</Layout>
