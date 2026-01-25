@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { Link } from "../../components/ui/link";
 
 // Social Icons
 function BlueskyIcon() {
@@ -79,14 +80,10 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               <Heading level="h3">Vojtěch Mareš</Heading>
               <ul className="mt-4 list-none">
                 <li>
-                  <a href="tel:+420732220651" className="underline">
-                    +420 732 220 651
-                  </a>
+                  <Link href="tel:+420732220651">+420 732 220 651</Link>
                 </li>
                 <li>
-                  <a href="mailto:vojtech@mares.cz" className="underline">
-                    vojtech@mares.cz
-                  </a>
+                  <Link href="mailto:vojtech@mares.cz">vojtech@mares.cz</Link>
                 </li>
                 <li className="mt-4">
                   IČO
@@ -106,9 +103,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               <ul className="mt-4 list-disc pl-4">
                 {trainings.map((training) => (
                   <li key={training.id}>
-                    <a href={"/skoleni/" + training.id} className="underline">
-                      {training.data.title}
-                    </a>
+                    <Link href={"/skoleni/" + training.id}>{training.data.title}</Link>
                   </li>
                 ))}
               </ul>
@@ -118,9 +113,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               <ul className="mt-4 list-disc pl-4">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <a href={link.href} className="underline">
-                      {link.name}
-                    </a>
+                    <Link href={link.href}>{link.name}</Link>
                   </li>
                 ))}
               </ul>
