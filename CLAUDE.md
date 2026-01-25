@@ -72,15 +72,6 @@ The application pulls content from:
   - Site URL: https://www.mares.cz
   - Meeting redirects configured to Cal.com
 
-### Markdown Processing
-
-Markdown content is converted to HTML using a unified processor pipeline (src/lib/markdown-to-html.ts):
-
-- Supports GitHub Flavored Markdown (GFM)
-- Syntax highlighting for 30+ languages via highlight.js
-- Auto-generates heading slugs
-- Allows raw HTML passthrough
-
 ### Dynamic Routes
 
 The site uses Astro's file-based routing with dynamic segments:

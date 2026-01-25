@@ -9,7 +9,7 @@ import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
 import { getFutureSessionsByName, toTrainingSession } from "../../../lib/sessions";
 import { Section } from "../../../components/ui/section";
-import { StyleContent } from "../../../components/style-content";
+import { Prose } from "../../../components/prose";
 import { CachePresets } from "../../../lib/cache";
 
 const { slug } = Astro.params;
@@ -101,9 +101,9 @@ const { Content } = await render(training);
       <Container className={training.data.draft ? "hidden" : ""}>
         <div class="md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
           <div class="md:col-span-3">
-            <StyleContent>
+            <Prose>
               <Content />
-            </StyleContent>
+            </Prose>
           </div>
           <div class="mt-8 md:col-span-2 md:mt-0">
             {
