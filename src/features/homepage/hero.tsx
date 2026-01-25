@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 
-import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
+import { Text } from "../../components/ui/text";
 
 function UnderlineSvg() {
   return (
@@ -36,10 +36,10 @@ export function Hero({ children }: HeroProps) {
             ,<br />
             DevOps architekt.
           </Heading>
-          <Body variant="lg" color="secondary" className="mt-6 md:max-w-2xl">
+          <Text variant="secondary" className="mt-6 text-lg md:max-w-2xl">
             Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a připravíme vaši IT
             infrastrukturu na rapidní škálování.
-          </Body>
+          </Text>
           <div className="mt-10 flex flex-row gap-x-6 gap-y-6 sm:justify-start md:gap-y-0">
             <Button href="https://cal.com/vojtechmares/30min">Domluvme si schůzku</Button>
             {/* <Button href="mailto:vojtech@mares.cz" style="outline">
