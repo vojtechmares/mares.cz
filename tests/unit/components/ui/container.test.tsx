@@ -48,4 +48,34 @@ describe("Container", () => {
       expect(screen.getByText("Paragraph")).toBeInTheDocument();
     });
   });
+
+  describe("mode prop", () => {
+    it("should apply standard max-width by default", () => {
+      render(<Container>Content</Container>);
+      const container = screen.getByText("Content");
+      expect(container).toHaveClass("max-w-[1280px]");
+    });
+
+    it("should apply standard max-width when mode is default", () => {
+      render(<Container mode="default">Content</Container>);
+      const container = screen.getByText("Content");
+      expect(container).toHaveClass("max-w-[1280px]");
+    });
+
+    it("should apply prose styles when mode is prose", () => {
+      render(<Container mode="prose">Content</Container>);
+      const container = screen.getByText("Content");
+      expect(container).toHaveClass("max-w-prose", "md:text-lg", "lg:text-xl");
+    });
+
+    it("should work with custom className in prose mode", () => {
+      render(
+        <Container mode="prose" className="custom-class">
+          Content
+        </Container>,
+      );
+      const container = screen.getByText("Content");
+      expect(container).toHaveClass("max-w-prose", "custom-class", "mx-auto");
+    });
+  });
 });
