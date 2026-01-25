@@ -1,11 +1,11 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Container } from "../components/ui/container";
-import { Heading } from "../components/ui/heading";
-import { Link } from "../components/ui/link";
-import { Section } from "../components/ui/section";
-import Layout from "../layouts/Layout.astro";
-import { Prose } from "../components/prose";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
+import { Link } from "../../components/ui/link";
+import { Section } from "../../components/ui/section";
+import Layout from "../../layouts/Layout.astro";
+import { Prose } from "../../components/prose";
 
 const talks = (await getCollection("talk", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),

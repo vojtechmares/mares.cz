@@ -1,0 +1,62 @@
+import type { ReactNode } from "react";
+
+import { join } from "node:path";
+
+import { imageToDataUrl } from "../../lib/opengraph";
+
+function Prednasky({ imageData }: { imageData: string }) {
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "white",
+        color: "black",
+      }}
+    >
+      <div
+        style={{
+          marginLeft: "4rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+        <p
+          style={{
+            fontWeight: 700,
+            fontSize: "4rem",
+            marginBottom: 0,
+            paddingBottom: 0,
+            color: "#f59e0b",
+          }}
+        >
+          Přednášky
+        </p>
+        <p
+          style={{
+            marginTop: "1.5rem",
+            maxWidth: "32rem",
+            fontSize: "18px",
+            lineHeight: "1.5556",
+          }}
+        >
+          Přehled přednášek a workshopů, které jsem měl možnost dělat.
+        </p>
+        <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz/prednasky</p>
+      </div>
+      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
+    </div>
+  );
+}
+
+export async function CreatePrednaskyImageComponent(): Promise<ReactNode> {
+  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
+
+  return <Prednasky imageData={avatarSrc} />;
+}
