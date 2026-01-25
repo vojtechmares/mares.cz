@@ -40,6 +40,10 @@ export const LocalizedStaticNavigationLinks = [
         name: "Blog",
         href: "/blog",
       },
+      {
+        name: "Přednášky",
+        href: "/prednasky",
+      },
     ],
   },
   {
@@ -60,6 +64,10 @@ export const LocalizedStaticNavigationLinks = [
       {
         name: "Blog",
         href: "/en/blog",
+      },
+      {
+        name: "Talks",
+        href: "/en/talks",
       },
     ],
   },
