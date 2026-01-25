@@ -71,9 +71,9 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
       </div>
 
       {/* Description - full width */}
-      <Text variant={featured ? "primary" : "muted"} className="mt-4 leading-relaxed">
+      <Body color={featured ? "primary" : "muted"} className="mt-4 leading-relaxed">
         {truncateText(training.data.description)}
-      </Text>
+      </Body>
 
       {/* CTA Button */}
       <div className="mt-auto flex justify-end pt-4">

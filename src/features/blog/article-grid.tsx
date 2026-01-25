@@ -4,7 +4,7 @@ import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
-import { Text } from "../../components/ui/text";
+import { Body } from "../../components/ui/body";
 
 // function localeName(locale: string): null | string {
 //   switch (locale) {
@@ -28,19 +28,19 @@ export function ArticleGrid({ articles }: { articles: CollectionEntry<"blog">[] 
           <Card key={article.id} variant="surface" className="flex flex-col">
             <div className="mb-4 flex flex-row justify-between">
               {/* prettier-ignore */}
-              <Text>{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`}>#{tag}</Link>{" "}</>)}</Text>
-              <Text variant="secondary">
+              <Body>{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`}>#{tag}</Link>{" "}</>)}</Body>
+              <Body color="secondary">
                 {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
                 })}
-              </Text>
+              </Body>
             </div>
             <Heading level="h3">{article.data.title}</Heading>
-            <Text variant="secondary" className="my-4">
+            <Body color="secondary" className="my-4">
               {truncateText(article.data.description)}
-            </Text>
+            </Body>
             <div className="mt-auto flex justify-end pt-4">
               <Link href={"/blog/" + article.id}>Přečíst si článek →</Link>
             </div>

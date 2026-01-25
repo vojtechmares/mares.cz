@@ -46,7 +46,7 @@ export function ReferenceCard({ authorName, authorRole, content, image }: Refere
             <Body as="div" color="primary" className="font-display text-base">
               {authorName}
             </Body>
-            <Body as="div" color="secondary" variant="sm" className="mt-1">
+            <Body as="div" color="secondary" variant="small" className="mt-1">
               {authorRole}
             </Body>
           </div>

@@ -14,8 +14,8 @@ This project uses a custom UI component library built on design tokens. Always u
 | `<h1>` - `<h6>`                      | `Heading`   | `@/components/ui/heading`   |
 | `<a>`                                | `Link`      | `@/components/ui/link`      |
 | `<button>`, `<a>` (CTA)              | `Button`    | `@/components/ui/button`    |
-| `<p>` (semantic)                     | `Text`      | `@/components/ui/text`      |
-| `<p>`, `<span>`, `<div>` (body text) | `Body`      | `@/components/ui/body`      |
+| `<p>`, `<span>`, `<div>` (body text) | `Body` ★    | `@/components/ui/body`      |
+| `<p>` (section intros only)          | `Text`      | `@/components/ui/text`      |
 | `<section>` (card)                   | `Card`      | `@/components/ui/card`      |
 | `<section>` (page section)           | `Section`   | `@/components/ui/section`   |
 | `<div>` (container)                  | `Container` | `@/components/ui/container` |
@@ -23,6 +23,8 @@ This project uses a custom UI component library built on design tokens. Always u
 | `<span>` (label)                     | `Badge`     | `@/components/ui/badge`     |
 | `<span>` (icon wrapper)              | `Icon`      | `@/components/ui/icon`      |
 | `<span>` + tags                      | `TagList`   | `@/components/ui/tag-list`  |
+
+★ **Body is the primary choice for body text.** Use in cards, content areas, and anywhere body text is needed.
 
 ## Import Convention
 
@@ -142,7 +144,7 @@ Replaces `<button>` and call-to-action `<a>` elements. Renders as `<a>` when `hr
 
 ### Text
 
-Simple paragraph with color variants. Use for semantic paragraphs.
+Simple paragraph for section introductions. **For body text in cards and content areas, use `Body` instead.**
 
 **Props:**
 | Prop | Type | Default | Description |
@@ -152,17 +154,22 @@ Simple paragraph with color variants. Use for semantic paragraphs.
 **Examples:**
 
 ```tsx
-<Text>Main content paragraph.</Text>
-<Text variant="secondary">Supporting text.</Text>
-<Text variant="muted">Subtle hint text.</Text>
-<Text variant="inverse">Text on dark background.</Text>
+// Section introduction text (after a Heading)
+<Heading level="h2">Services</Heading>
+<Text variant="secondary">What I can help you with.</Text>
+
+// On dark section backgrounds
+<Section variant="inverse">
+  <Heading level="h2" variant="inverse">Contact</Heading>
+  <Text variant="muted">Get in touch.</Text>
+</Section>
 ```
 
 ---
 
 ### Body
 
-Flexible body text component with size variants and element choice. Uses Space Mono font.
+**Primary choice for body text.** Flexible component with size variants and element choice. Uses Space Mono font.
 
 **Props:**
 | Prop | Type | Default | Description |
@@ -174,18 +181,25 @@ Flexible body text component with size variants and element choice. Uses Space M
 **Examples:**
 
 ```tsx
-// Large intro text
-<Body variant="large">
-  Welcome to my website.
-</Body>
+// Card description (most common use)
+<Card variant="surface">
+  <Heading level="h3">Title</Heading>
+  <Body color="secondary">Card description text.</Body>
+</Card>
 
-// Inline text
+// Large intro text
+<Body variant="large">Welcome to my website.</Body>
+
+// Inline metadata
 <Body as="span" variant="small" color="muted">
   Last updated: Jan 2025
 </Body>
 
-// Secondary body text
-<Body color="secondary">Additional details here.</Body>
+// On dark cards
+<Card variant="inverse">
+  <Heading level="h3" variant="inverse">Title</Heading>
+  <Body color="muted">Description on dark background.</Body>
+</Card>
 ```
 
 ---
@@ -207,7 +221,7 @@ Replaces `<section>` for card-style containers. Includes padding and optional sh
 // Basic card
 <Card>
   <Heading level="h3">Title</Heading>
-  <Text>Content here.</Text>
+  <Body>Content here.</Body>
 </Card>
 
 // White surface card with shadow
@@ -437,7 +451,7 @@ Renders a list of hashtag links for blog tags.
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       <Card variant="surface" shadow hover>
         <Heading level="h3">Card 1</Heading>
-        <Text>Content</Text>
+        <Body color="secondary">Card description text.</Body>
       </Card>
       {/* more cards */}
     </div>

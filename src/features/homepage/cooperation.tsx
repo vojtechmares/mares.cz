@@ -62,7 +62,7 @@ export function Cooperation() {
                     <Body as="span" color="inverse" className="text-2xl font-normal">
                       {step.name}
                     </Body>
-                    <Body as="span" color="muted" variant="lg">
+                    <Body as="span" color="muted" variant="large">
                       {step.description}
                     </Body>
                   </Body>
