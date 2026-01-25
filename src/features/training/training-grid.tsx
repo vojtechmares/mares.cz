@@ -97,7 +97,7 @@ export async function TrainingGrid() {
           <Heading level="h2" variant="inverse">
             DevOps školení
           </Heading>
-          <Text variant="muted" className="mt-4 text-lg tracking-tight">
+          <Text variant="muted" className="mt-4 tracking-tight">
             Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji se především na
             open-source DevOps nástroje a technologie.
           </Text>

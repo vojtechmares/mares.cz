@@ -19,5 +19,5 @@ const variantStyles: Record<TextVariant, string> = {
 };
 
 export function Text({ children, className, variant = "primary" }: TextProps) {
-  return <p className={clsx(className, variantStyles[variant])}>{children}</p>;
+  return <p className={clsx("md:text-lg lg:text-xl", className, variantStyles[variant])}>{children}</p>;
 }

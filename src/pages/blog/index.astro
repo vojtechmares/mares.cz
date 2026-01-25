@@ -42,7 +42,7 @@ const meta = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog</Heading>
-      <Text variant="inverse" className="mt-4 text-base lg:text-xl">
+      <Text variant="inverse" className="mt-4">
         {
           tags.map((tag) =>
             // prettier-ignore
@@ -51,7 +51,7 @@ const meta = {
         }
       </Text>
       <div class="mt-4 flex flex-row justify-between">
-        <Text variant="inverse" className="mt-2 text-base lg:text-xl">
+        <Text variant="inverse" className="mt-2">
           Archiv:{" "}
           {
             years.map((year, i) =>
@@ -60,7 +60,7 @@ const meta = {
             )
           }
         </Text>
-        <Text variant="inverse" className="mt-2 text-base lg:text-xl">
+        <Text variant="inverse" className="mt-2">
           Feed:{" "}
           <Link href="/blog/rss.xml" className="text-zinc-100">RSS</Link>
         </Text>

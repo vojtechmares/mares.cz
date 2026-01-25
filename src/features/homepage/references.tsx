@@ -17,7 +17,7 @@ export function ReferencesContainer({ children }: ReferencesContainerProps) {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2">Reference</Heading>
-          <Text variant="secondary" className="mt-4 text-lg tracking-tight">
+          <Text variant="secondary" className="mt-4 tracking-tight">
             Co o mně říkají moji klienti.
           </Text>
         </div>

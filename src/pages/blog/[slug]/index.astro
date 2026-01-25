@@ -62,8 +62,8 @@ const { Content } = await render(article);
     <Container>
       <Heading variant="inverse" level="h1">{article.data.title}</Heading>
       <div class="flex flex-row justify-between">
-        <Text variant="inverse" className="mt-4 text-base lg:text-xl">{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>)}</Text>
-        <Text variant="inverse" className="mt-4 text-base lg:text-xl">
+        <Text variant="inverse" className="mt-4">{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>)}</Text>
+        <Text variant="inverse" className="mt-4">
           {
             new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
               day: "numeric",
@@ -73,7 +73,7 @@ const { Content } = await render(article);
           }
         </Text>
       </div>
-      <Text variant="inverse" className="mt-4 text-base lg:text-xl">
+      <Text variant="inverse" className="mt-4">
         <Link href="/blog" className="text-zinc-100">← Zpět na blog</Link>
       </Text>
     </Container>

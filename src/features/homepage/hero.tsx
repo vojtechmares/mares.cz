@@ -36,7 +36,7 @@ export function Hero({ children }: HeroProps) {
             ,<br />
             DevOps architekt.
           </Heading>
-          <Text variant="secondary" className="mt-6 text-lg md:max-w-2xl">
+          <Text variant="secondary" className="mt-6 md:max-w-2xl">
             Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a připravíme vaši IT
             infrastrukturu na rapidní škálování.
           </Text>

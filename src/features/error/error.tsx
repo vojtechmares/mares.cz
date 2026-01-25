@@ -36,11 +36,11 @@ export function Error({ status, error = undefined }: ErrorProps) {
           <Heading level="h1" variant="inverse" className="mt-4 text-balance">
             {messages.headline}
           </Heading>
-          <Text variant="muted" className="mt-6 text-lg font-medium text-pretty sm:text-xl/8">
+          <Text variant="muted" className="mt-6 font-medium text-pretty">
             {messages.description}
           </Text>
           {error !== undefined && (
-            <Text variant="muted" className="mt-6 text-base text-pretty">
+            <Text variant="muted" className="mt-6 text-pretty">
               {error}
             </Text>
           )}

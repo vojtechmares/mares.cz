@@ -31,7 +31,7 @@ function Service({ name, description, href, featured = false, buttonText, button
       <Body as="span" color={featured ? "primary" : "inverse"} className="mt-2 font-mono text-lg font-bold">
         {price}
       </Body>
-      <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4 text-base")}>
+      <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4")}>
         {description}
       </Text>
       <div className="mt-auto flex justify-end pt-4">
@@ -51,7 +51,7 @@ export function Services() {
           <Heading level="h2" variant="inverse">
             Služby
           </Heading>
-          <Text variant="muted" className="mt-4 text-lg">
+          <Text variant="muted" className="mt-4">
             Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?
           </Text>
         </div>

@@ -41,7 +41,7 @@ export function Cooperation() {
           <Heading level="h2" variant="inverse">
             Z nuly do cloudu
           </Heading>
-          <Text variant="muted" className="mt-4 text-lg tracking-tight">
+          <Text variant="muted" className="mt-4 tracking-tight">
             Jak může vypadat naše spolupráce.
           </Text>
         </div>
