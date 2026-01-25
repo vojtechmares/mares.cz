@@ -20,7 +20,7 @@ function TrainingImage({
         flexDirection: "row",
         alignItems: "center", // flex-end
         justifyContent: "space-between", // space-between
-        color: "#ffffff",
+        color: "#d4d4d8",
         backgroundColor: "#18181b",
       }}
     >
@@ -50,6 +50,7 @@ function TrainingImage({
             fontSize: "18px",
             lineHeight: "1.5556",
             fontWeight: 300,
+            fontFamily: "Space Mono",
           }}
         >
           {description}
@@ -59,6 +60,7 @@ function TrainingImage({
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
+            fontFamily: "Space Mono",
           }}
         >
           Vojtěch Mareš
@@ -68,6 +70,7 @@ function TrainingImage({
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
+            fontFamily: "Space Mono",
           }}
         >
           DevOps achitekt & lektor
@@ -77,6 +80,7 @@ function TrainingImage({
             fontSize: "1.5rem",
             fontWeight: 500,
             marginTop: 0,
+            fontFamily: "Space Mono",
           }}
         >
           mares.cz/skoleni/{slug}

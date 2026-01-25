@@ -33,6 +33,8 @@ async function renderImage(component: ReactNode) {
   const interFontRegular = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf"));
   const interFontLight = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf"));
   const interFontBold = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf"));
+  const spaceMonoRegular = await readFile(join(process.cwd(), "./src/fonts/SpaceMono-Regular.ttf"));
+  const spaceMonoBold = await readFile(join(process.cwd(), "./src/fonts/SpaceMono-Bold.ttf"));
 
   const svg = await satori(component, {
     width: 1200,
@@ -51,6 +53,16 @@ async function renderImage(component: ReactNode) {
       {
         name: "Inter",
         data: interFontBold,
+        weight: 700,
+      },
+      {
+        name: "Space Mono",
+        data: spaceMonoRegular,
+        weight: 400,
+      },
+      {
+        name: "Space Mono",
+        data: spaceMonoBold,
         weight: 700,
       },
     ],

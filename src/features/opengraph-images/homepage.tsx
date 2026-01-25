@@ -12,8 +12,8 @@ function HomepageImage({ imageData }: { imageData: string }) {
         flexDirection: "row",
         alignItems: "center", // flex-end
         justifyContent: "space-between", // space-between
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#fafafa",
+        color: "#3f3f46",
       }}
     >
       <div
@@ -52,12 +52,13 @@ function HomepageImage({ imageData }: { imageData: string }) {
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
+            fontFamily: "Space Mono",
           }}
         >
           Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak používat moderní
           cloud-native technologie.
         </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz</p>
+        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz</p>
       </div>
       <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>

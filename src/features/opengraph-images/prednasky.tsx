@@ -14,8 +14,8 @@ function Prednasky({ imageData }: { imageData: string }) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#fafafa",
+        color: "#3f3f46",
       }}
     >
       <div
@@ -44,11 +44,12 @@ function Prednasky({ imageData }: { imageData: string }) {
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
+            fontFamily: "Space Mono",
           }}
         >
           Přehled přednášek a workshopů, které jsem měl možnost dělat.
         </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz/prednasky</p>
+        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz/prednasky</p>
       </div>
       <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>

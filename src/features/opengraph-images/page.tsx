@@ -24,8 +24,8 @@ function Page({
         flexDirection: "row",
         alignItems: "center", // flex-end
         justifyContent: "space-between", // space-between
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#fafafa",
+        color: "#3f3f46",
       }}
     >
       <div
@@ -54,11 +54,12 @@ function Page({
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
+            fontFamily: "Space Mono",
           }}
         >
           {description}
         </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500 }}>mares.cz/{slug}</p>
+        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz/{slug}</p>
       </div>
       <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>

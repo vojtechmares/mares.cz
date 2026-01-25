@@ -14,8 +14,8 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#fafafa",
+        color: "#3f3f46",
       }}
     >
       <div
@@ -52,6 +52,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             maxWidth: "32rem",
             fontSize: "1.5rem",
             lineHeight: "1.5556",
+            fontFamily: "Space Mono",
           }}
         >
           {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
@@ -61,6 +62,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
+            fontFamily: "Space Mono",
           }}
         >
           Vojtěch Mareš
@@ -70,6 +72,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
+            fontFamily: "Space Mono",
           }}
         >
           mares.cz/blog/tag/{tag}

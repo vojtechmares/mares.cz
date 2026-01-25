@@ -24,8 +24,8 @@ function ArticleImage({
         flexDirection: "row",
         alignItems: "center", // flex-end
         justifyContent: "space-between", // space-between
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "#fafafa",
+        color: "#3f3f46",
       }}
     >
       <div
@@ -62,6 +62,7 @@ function ArticleImage({
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
+            fontFamily: "Space Mono",
           }}
         >
           {description}
@@ -71,6 +72,7 @@ function ArticleImage({
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
+            fontFamily: "Space Mono",
           }}
         >
           Vojtěch Mareš
@@ -80,6 +82,7 @@ function ArticleImage({
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
+            fontFamily: "Space Mono",
           }}
         >
           mares.cz/blog/{slug}
