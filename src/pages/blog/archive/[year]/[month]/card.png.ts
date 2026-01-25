@@ -1,8 +1,8 @@
 import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
 
-import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
-import { OpenGraphImageResponse } from "../../../../lib/opengraph";
+import { CreateDateArchiveImageComponent } from "../../../../../features/opengraph-images/date-archive";
+import { OpenGraphImageResponse } from "../../../../../lib/opengraph";
 
 const CZECH_MONTHS = [
   "Leden",
@@ -42,7 +42,7 @@ export async function GET({ params, url }: APIContext) {
   const component = await CreateDateArchiveImageComponent({
     title: `${monthName} ${year}`,
     articleCount: articles.length,
-    url: `mares.cz/blog/${year}/${String(month).padStart(2, "0")}`,
+    url: `mares.cz/blog/archive/${year}/${String(month).padStart(2, "0")}`,
     baseUrl,
   });
 

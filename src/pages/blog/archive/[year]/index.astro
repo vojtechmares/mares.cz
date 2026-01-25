@@ -23,18 +23,15 @@ const CZECH_MONTHS = [
   "Prosinec",
 ];
 
-const { year: yearParam, month: monthParam } = Astro.params;
+const { year: yearParam } = Astro.params;
 const year = parseInt(yearParam!);
-const month = parseInt(monthParam!);
+const currentYear = new Date().getFullYear();
 
-if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+if (isNaN(year) || year < 2020 || year > currentYear + 1) {
   return Astro.redirect("/404", 404);
 }
 
-const allArticles = await getCollection(
-  "blog",
-  ({ data }) => !data.draft && data.publish_time.getFullYear() === year && data.publish_time.getMonth() + 1 === month,
-);
+const allArticles = await getCollection("blog", ({ data }) => !data.draft && data.publish_time.getFullYear() === year);
 
 if (allArticles.length === 0) {
   return Astro.redirect("/404", 404);
@@ -42,34 +39,42 @@ if (allArticles.length === 0) {
 
 const articles = allArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
 
+const monthCounts = new Map<number, number>();
+for (const article of allArticles) {
+  const month = article.data.publish_time.getMonth() + 1;
+  monthCounts.set(month, (monthCounts.get(month) || 0) + 1);
+}
+const months = Array.from(monthCounts.entries())
+  .map(([month, count]) => ({ month, count }))
+  .sort((a, b) => b.month - a.month);
+
 const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
-const monthName = CZECH_MONTHS[month - 1];
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
-  title: `Vojtěch Mareš | Blog: ${monthName} ${year}`,
-  description: `Články z ${monthName.toLowerCase()}u ${year} na blogu Vojtěcha Mareše. ${articles.length} článků.`,
-  keywords: `blog, devops, ${monthName} ${year}, články`,
+  title: `Vojtěch Mareš | Blog: ${year}`,
+  description: `Články z roku ${year} na blogu Vojtěcha Mareše. ${articles.length} článků.`,
+  keywords: `blog, devops, ${year}, články`,
 };
 
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `/blog/${year}/${String(month).padStart(2, "0")}/card.png`,
+    url: `/blog/archive/${year}/card.png`,
     width: 1200,
     height: 630,
-    alt: `Blog: ${monthName} ${year}`,
+    alt: `Blog: ${year}`,
   },
 };
 
 const jsonLd = {
   type: "CollectionPage" as const,
-  name: `Blog: ${monthName} ${year}`,
+  name: `Blog: ${year}`,
   description: meta.description,
-  url: `${baseUrl}/blog/${year}/${String(month).padStart(2, "0")}`,
+  url: `${baseUrl}/blog/archive/${year}`,
   numberOfItems: articles.length,
 };
 ---
@@ -77,19 +82,22 @@ const jsonLd = {
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
   <Section variant="inverse">
     <Container>
-      <Heading variant="inverse">Blog: {monthName}{" "}{year}</Heading>
+      <Heading variant="inverse">Blog: {year}</Heading>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
         <TagList tags={tags} variant="inverse" />
       </p>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        {articles.length}
-        {articles.length === 1 ? "článek" : articles.length < 5 ? "články" : "článků"}
-        v tomto měsíci
-      </p>
+      <div class="flex flex-row justify-between">
+        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+          {articles.length} článků v tomto roce
+        </p>
+        {
+          months.length > 1 &&
+            // prettier-ignore
+            <p class="mt-2 text-base text-zinc-100 lg:text-xl">{months.map((m, i) => <><a href={`/blog/archive/${year}/${String(m.month).padStart(2, "0")}`} class="underline">{CZECH_MONTHS[m.month - 1]}</a>{i < months.length - 1 ? " · " : ""}</>)}</p>
+        }
+      </div>
       <p class="mt-2 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" href={`/blog/${year}`}>← {year}</a>
-        {" · "}
-        <a class="underline" href="/blog">Blog</a>
+        <a class="underline" href="/blog">← Zpět na blog</a>
       </p>
     </Container>
   </Section>

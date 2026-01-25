@@ -1,8 +1,8 @@
 import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
 
-import { CreateDateArchiveImageComponent } from "../../../features/opengraph-images/date-archive";
-import { OpenGraphImageResponse } from "../../../lib/opengraph";
+import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
+import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 
 export async function GET({ params, url }: APIContext) {
   const baseUrl = url.origin;
@@ -23,7 +23,7 @@ export async function GET({ params, url }: APIContext) {
   const component = await CreateDateArchiveImageComponent({
     title: year.toString(),
     articleCount: articles.length,
-    url: `mares.cz/blog/${year}`,
+    url: `mares.cz/blog/archive/${year}`,
     baseUrl,
   });
 
