@@ -98,6 +98,7 @@ const session = defineCollection({
     oidcAudience: import.meta.env.SESSIONS_OIDC_AUDIENCE,
   }),
   schema: z.object({
+    trainingID: z.number(),
     name: z.string(),
     dates: z.object({
       start: z.string(),

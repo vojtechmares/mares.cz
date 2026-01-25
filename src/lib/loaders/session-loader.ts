@@ -61,6 +61,7 @@ function generateSessionId(session: APISession): string {
 function transformSession(session: APISession) {
   const startDate = session.date.split("T")[0];
   return {
+    trainingID: session.training_id,
     name: session.training_name,
     dates: {
       start: startDate,

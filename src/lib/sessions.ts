@@ -3,6 +3,8 @@ import { getCollection, type CollectionEntry } from "astro:content";
 export type Session = CollectionEntry<"session">;
 
 export interface TrainingSession {
+  trainingID: number;
+  trainingSlug?: string;
   name: string;
   dates: {
     start: string;
@@ -39,10 +41,36 @@ export async function getFutureSessionsByName(name: string): Promise<Session[]> 
  */
 export function toTrainingSession(session: Session): TrainingSession {
   return {
+    trainingID: session.data.trainingID,
     name: session.data.name,
     dates: session.data.dates,
     location: session.data.location,
     price: session.data.price,
     signUpURL: session.data.signUpURL,
   };
+}
+
+/**
+ * Build a mapping from backofficeID to training slug
+ */
+export async function getTrainingIDToSlugMap(): Promise<Map<number, string>> {
+  const trainings = await getCollection("training");
+  const map = new Map<number, string>();
+  for (const training of trainings) {
+    // Exclude drafts (backofficeID: -1)
+    if (training.data.backofficeID > 0) {
+      map.set(training.data.backofficeID, training.id);
+    }
+  }
+  return map;
+}
+
+/**
+ * Enrich sessions with training slugs for linking
+ */
+export function enrichSessionsWithSlugs(sessions: TrainingSession[], slugMap: Map<number, string>): TrainingSession[] {
+  return sessions.map((session) => ({
+    ...session,
+    trainingSlug: slugMap.get(session.trainingID),
+  }));
 }

@@ -9,19 +9,20 @@ import {
 } from "../../../../src/features/training/training-sessions-table";
 
 describe("TrainingSessionsTable", () => {
-  const createMockSession = (overrides = {}): TrainingSession =>
-    ({
-      name: "Kubernetes Workshop",
-      dates: { start: "2024-03-15" },
-      location: "Praha",
-      price: 10000,
-      signUpURL: "https://example.com/signup",
-      ...overrides,
-    }) as TrainingSession;
+  const createMockSession = (overrides = {}): TrainingSession => ({
+    trainingID: 1,
+    name: "Kubernetes Workshop",
+    dates: { start: "2024-03-15" },
+    location: "Praha",
+    price: 10000,
+    signUpURL: "https://example.com/signup",
+    ...overrides,
+  });
 
   const mockSessions: TrainingSession[] = [
     createMockSession(),
     createMockSession({
+      trainingID: 2,
       name: "Docker Workshop",
       dates: { start: "2024-03-20", end: "2024-03-21" },
       location: "Brno",
@@ -96,18 +97,34 @@ describe("TrainingSessionsTable", () => {
       expect(screen.getAllByText(/na školení kubernetes workshop/i).length).toBeGreaterThan(0);
     });
   });
+
+  describe("training name links", () => {
+    it("should render training name as link when trainingSlug is provided", () => {
+      const sessionWithSlug = createMockSession({ trainingSlug: "kubernetes" });
+      render(<TrainingSessionsTable sessions={[sessionWithSlug]} />);
+      const link = screen.getByRole("link", { name: "Kubernetes Workshop" });
+      expect(link).toHaveAttribute("href", "/skoleni/kubernetes");
+    });
+
+    it("should render training name as plain text when trainingSlug is not provided", () => {
+      const sessionWithoutSlug = createMockSession({ trainingSlug: undefined });
+      render(<TrainingSessionsTable sessions={[sessionWithoutSlug]} />);
+      expect(screen.getByText("Kubernetes Workshop")).toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: "Kubernetes Workshop" })).not.toBeInTheDocument();
+    });
+  });
 });
 
 describe("CompactTrainingSessionsTable", () => {
-  const createMockSession = (overrides = {}): TrainingSession =>
-    ({
-      name: "Kubernetes Workshop",
-      dates: { start: "2024-03-15" },
-      location: "Praha",
-      price: 10000,
-      signUpURL: "https://example.com/signup",
-      ...overrides,
-    }) as TrainingSession;
+  const createMockSession = (overrides = {}): TrainingSession => ({
+    trainingID: 1,
+    name: "Kubernetes Workshop",
+    dates: { start: "2024-03-15" },
+    location: "Praha",
+    price: 10000,
+    signUpURL: "https://example.com/signup",
+    ...overrides,
+  });
 
   const mockSessions: TrainingSession[] = [createMockSession()];
 

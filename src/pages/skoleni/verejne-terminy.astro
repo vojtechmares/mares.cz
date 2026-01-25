@@ -4,7 +4,12 @@ import { Heading } from "../../components/ui/heading";
 import { TrainingSessionsTable } from "../../features/training/training-sessions-table";
 import Layout from "../../layouts/Layout.astro";
 
-import { getFutureSessions, toTrainingSession } from "../../lib/sessions";
+import {
+  getFutureSessions,
+  toTrainingSession,
+  getTrainingIDToSlugMap,
+  enrichSessionsWithSlugs,
+} from "../../lib/sessions";
 import { Section } from "../../components/ui/section";
 import { Card } from "../../components/ui/card";
 import { TrainingGrid } from "../../features/training/training-grid";
@@ -13,7 +18,8 @@ import { TrainingGrid } from "../../features/training/training-grid";
 export const prerender = false;
 
 const sessionEntries = await getFutureSessions();
-const sessions = sessionEntries.map(toTrainingSession);
+const slugMap = await getTrainingIDToSlugMap();
+const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap);
 
 const meta = {
   title: "Vojtěch Mareš | Veřejné termíny školení",

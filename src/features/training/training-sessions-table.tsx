@@ -1,6 +1,7 @@
 import type { TrainingSession } from "../../lib/sessions";
 
 import { Button } from "../../components/ui/button";
+import { Link } from "../../components/ui/link";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
 
 export type TrainingSessionTableProps = {
@@ -33,7 +34,11 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
         {sessions.map((training) => (
           <tr key={`${training.name}-${training.dates?.start}`}>
             <td className="py-4 pr-3 pl-4 font-medium whitespace-nowrap text-zinc-900 sm:pl-0">
-              {training.name}
+              {training.trainingSlug ? (
+                <Link href={`/skoleni/${training.trainingSlug}`}>{training.name}</Link>
+              ) : (
+                training.name
+              )}
               <dl className="py-4 md:hidden">
                 <dt className="sr-only">Datum</dt>
                 <dd className="font-normal text-zinc-700">
