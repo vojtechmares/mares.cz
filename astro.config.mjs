@@ -56,7 +56,7 @@ export default defineConfig({
   },
 
   adapter: cloudflare({
-    imageService: "cloudflare",
+    imageService: "compile", // transform images with sharp for now
   }),
 
   env: {
