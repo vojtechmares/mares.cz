@@ -1,70 +1,41 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
 import { ReferencesContainer, ReferenceCard } from "./references";
 
-import avatarAntoninHoskovec from "../../images/people/antonin-hoskovec.jpg";
-import avatarLadislavCapka from "../../images/people/ladislav-capka.jpg";
-import avatarBalintCsoka from "../../images/people/balint-csoka.png";
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/images/people/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+});
 
-const references = [
-  {
-    content: `\
-      <strong>Dlouhodobá spolupráce</strong>
-      <br />
-      Když jsme Vojtu poznali, byli jsme zrovna v procesu migrace existujících Kubernetes clusterů na nové, vylepšené (vlastní) infrastrukturní balíčky. Krásně jsme si sedli v automatizaci jak vytváření/strhávání infrastruktury, tak v automatizaci nasazování a použitých technologiích (AWS, Kubernetes, Terraform, Python, GitLab. Docker). Vojta pro nás navrhnul a vytvořil nové Terraform repozitáře, pomohl nám i se školením týmu a mladších kolegů a byl dlouhodobě k dispozici pro řešení ad-hoc problémů.
-    `,
-    author: {
-      name: "Antonín Hoškovec",
-      role: "AI team lead, GLAMI",
-      image: avatarAntoninHoskovec,
-    },
-  },
-  {
-    content: `\
-      <strong>Dlouhodobá spolupráce</strong>
-      <br />
-      S Vojtou Marešem jsme za poslední roky úspěšně zvládli mnoho technických výzev, převážně ve světě Kubernetes, kde se Vojta skvěle orientuje z pohledu operations i vývoje. Společně jsme automatizovali procesy skripty jako GitHub Workflows či GitLab pipelines a řešili komplexní infrastruktury pro veřejné cloudy (AWS, GCP) i vlastní RKE2 clustery s high-availability pokrytím. Vojtovy znalosti sahají i do vývoje – jeho přesah nám umožnil vytvořit základní koncept Kubernetes operátoru v Go, který je klíčovou součástí našeho produktu. Díky své zkušenosti a schopnosti dobře se učit nové věci je pro něj svět Kubernetes otevřenou knihou, a máloco ho zde dokáže překvapit.
-    `,
-    author: {
-      name: "Ladislav Čapka",
-      role: "CTO, cybros labs",
-      image: avatarLadislavCapka,
-    },
-  },
-  {
-    content: `\
-                <strong>Školení GitHub Actions</strong>
-                <br />
-                Pán Mareš nám poskytol skvele školenia na tematiku pipelines,
-                CI/CD a hands-on ukážky s príkladmi z realného života na základe
-                jeho bohatých skúsenosti v oblasti DevOps. Máme v tíme
-                seniorných ľudí v oblasti DevOps, aj začiatočníkov, obsah a
-                forma jeho školenia bola vhodná pre obe skupiny, palec hore.
-                <br />
-                <br />
-                <strong>Školení Git & GitHub</strong>
-                <br />
-                Dozvedeli sme sa skutočne veľa o fungovaní Git-u ako takého, s
-                reálnymi ukážkami operácii (aj nie úplne každodenných) ako aj
-                CMD, tak aj v pomocných nástrojoch ako GitHub Desktop. Bolo
-                užitočné vidieť, ako sa dá najefektívnejšie pracovať s Git-om, a
-                ako to celé zapadá do každodennej práce tímu cez GitHub
-                Enteprise, ktorý vo firme používame.
-            `,
-    author: {
-      name: "Ing. Bálint Csóka",
-      role: "IT architekt, Stredoslovenská distribučná",
-      image: avatarBalintCsoka,
-    },
-  },
-];
+const references = (await getCollection("reference", (entry) => !entry.data.draft)).sort(
+  (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0),
+);
+
+const renderedReferences = await Promise.all(
+  references.map(async (ref) => {
+    const { Content } = await render(ref);
+    const imagePath = `/src/images/people/${ref.data.authorImage}`;
+    const image = images[imagePath]?.default;
+    return { ...ref, Content, image };
+  }),
+);
 ---
 
 <ReferencesContainer>
   {
-    references.map((ref) => (
-      <ReferenceCard content={ref.content} authorName={ref.author.name} authorRole={ref.author.role}>
-        <Image class="h-14 w-14 object-cover" src={ref.author.image} alt={ref.author.name} width={56} height={56} />
+    renderedReferences.map((ref) => (
+      <ReferenceCard authorName={ref.data.authorName} authorRole={ref.data.authorRole}>
+        <ref.Content slot="content" />
+        {ref.image && (
+          <Image
+            slot="image"
+            class="h-14 w-14 object-cover"
+            src={ref.image}
+            alt={ref.data.authorName}
+            width={56}
+            height={56}
+          />
+        )}
       </ReferenceCard>
     ))
   }

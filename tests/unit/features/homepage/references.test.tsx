@@ -47,15 +47,15 @@ describe("ReferencesContainer", () => {
 
 describe("ReferenceCard", () => {
   const defaultProps = {
-    content: "This is a great testimonial about the service.",
     authorName: "John Doe",
     authorRole: "CTO at Company",
+    content: <p>This is a great testimonial about the service.</p>,
   };
 
   describe("rendering", () => {
-    it("should render content as blockquote", () => {
+    it("should render content", () => {
       render(<ReferenceCard {...defaultProps} />);
-      expect(screen.getByText(defaultProps.content)).toBeInTheDocument();
+      expect(screen.getByText(/This is a great testimonial/)).toBeInTheDocument();
     });
 
     it("should render author name", () => {
@@ -73,9 +73,9 @@ describe("ReferenceCard", () => {
       expect(document.querySelector("figure")).toBeInTheDocument();
     });
 
-    it("should render blockquote element", () => {
+    it("should render content container with prose class", () => {
       render(<ReferenceCard {...defaultProps} />);
-      expect(document.querySelector("blockquote")).toBeInTheDocument();
+      expect(document.querySelector(".prose")).toBeInTheDocument();
     });
 
     it("should render figcaption element", () => {
@@ -84,25 +84,30 @@ describe("ReferenceCard", () => {
     });
   });
 
-  describe("HTML content", () => {
-    it("should render HTML content correctly", () => {
-      const htmlContent = "Great work with <strong>amazing</strong> results!";
-      render(<ReferenceCard {...defaultProps} content={htmlContent} />);
+  describe("content prop", () => {
+    it("should render ReactNode content correctly", () => {
+      render(
+        <ReferenceCard
+          authorName="Jane Doe"
+          authorRole="Developer"
+          content={
+            <p>
+              Great work with <strong>amazing</strong> results!
+            </p>
+          }
+        />,
+      );
       expect(screen.getByText(/amazing/)).toBeInTheDocument();
     });
   });
 
-  describe("children (image)", () => {
-    it("should render children for image slot", () => {
-      render(
-        <ReferenceCard {...defaultProps}>
-          <img data-testid="author-image" alt="Author" />
-        </ReferenceCard>,
-      );
+  describe("image prop", () => {
+    it("should render image in the correct slot", () => {
+      render(<ReferenceCard {...defaultProps} image={<img data-testid="author-image" alt="Author" />} />);
       expect(screen.getByTestId("author-image")).toBeInTheDocument();
     });
 
-    it("should render without children", () => {
+    it("should render without image", () => {
       render(<ReferenceCard {...defaultProps} />);
       expect(screen.getByText(defaultProps.authorName)).toBeInTheDocument();
     });

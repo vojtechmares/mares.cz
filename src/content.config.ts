@@ -85,9 +85,19 @@ const page = defineCollection({
   }),
 });
 
-// const reference = defineCollection({
-//   /* ... */
-// });
+const reference = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "./src/content/reference",
+  }),
+  schema: z.object({
+    authorName: z.string(),
+    authorRole: z.string(),
+    authorImage: z.string(),
+    order: z.number().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
 
 const session = defineCollection({
   loader: sessionLoader({
@@ -110,5 +120,4 @@ const session = defineCollection({
   }),
 });
 
-export const collections = { blog, page, training, session };
-// export const collections = { blog, training, page, reference };
+export const collections = { blog, page, training, session, reference };

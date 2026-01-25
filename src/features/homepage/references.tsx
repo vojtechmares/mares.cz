@@ -26,25 +26,23 @@ export function ReferencesContainer({ children }: ReferencesContainerProps) {
 }
 
 interface ReferenceCardProps {
-  content: string;
   authorName: string;
   authorRole: string;
-  children?: ReactNode; // For the image
+  content?: ReactNode;
+  image?: ReactNode;
 }
 
-export function ReferenceCard({ content, authorName, authorRole, children }: ReferenceCardProps) {
+export function ReferenceCard({ authorName, authorRole, content, image }: ReferenceCardProps) {
   return (
     <Card variant="surface" className="mb-10">
       <figure>
-        <blockquote className="relative">
-          <p className="text-lg tracking-tight text-zinc-900" dangerouslySetInnerHTML={{ __html: content }} />
-        </blockquote>
+        <div className="prose text-lg tracking-tight text-zinc-900">{content}</div>
         <figcaption className="relative mt-6 flex items-center justify-between border-t border-zinc-300 pt-6">
           <div>
             <div className="font-display text-base text-zinc-900">{authorName}</div>
             <div className="mt-1 text-sm text-zinc-700">{authorRole}</div>
           </div>
-          <div className="overflow-hidden bg-zinc-100">{children}</div>
+          <div className="overflow-hidden bg-zinc-100">{image}</div>
         </figcaption>
       </figure>
     </Card>
