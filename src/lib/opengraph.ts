@@ -1,8 +1,17 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { type ReactNode } from "react";
+import { initWasm, Resvg } from "@resvg/resvg-wasm";
 import satori from "satori";
-import sharp from "sharp";
+
+let wasmInitialized = false;
+
+async function initResvgWasm() {
+  if (!wasmInitialized) {
+    await initWasm(fetch("https://unpkg.com/@resvg/resvg-wasm/index_bg.wasm"));
+    wasmInitialized = true;
+  }
+}
 
 export async function imageToDataUrl(filePath: string): Promise<string> {
   const data = await readFile(filePath);
@@ -30,6 +39,8 @@ export async function OpenGraphImageResponse(component: ReactNode) {
 }
 
 async function renderImage(component: ReactNode) {
+  await initResvgWasm();
+
   const interFontRegular = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Regular.ttf"));
   const interFontLight = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Light.ttf"));
   const interFontBold = await readFile(join(process.cwd(), "./src/fonts/Inter_18pt-Bold.ttf"));
@@ -68,6 +79,8 @@ async function renderImage(component: ReactNode) {
     ],
   });
 
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
-  return png;
+  const resvg = new Resvg(svg, {
+    fitTo: { mode: "width", value: 1200 },
+  });
+  return resvg.render().asPng();
 }
