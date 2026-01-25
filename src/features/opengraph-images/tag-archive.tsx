@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 
-import { join } from "node:path";
-
 import { imageToDataUrl } from "../../lib/opengraph";
+import avatarImage from "../../images/people/vojtech-mares.png";
 
 function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articleCount: number; imageData: string }) {
   return (
@@ -86,11 +85,13 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
 export async function CreateTagArchiveImageComponent({
   tag,
   articleCount,
+  baseUrl,
 }: {
   tag: string;
   articleCount: number;
+  baseUrl: string | URL;
 }): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
+  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
   return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} />;
 }

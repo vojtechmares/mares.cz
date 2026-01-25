@@ -1,6 +1,5 @@
-import { join } from "node:path";
-
 import { imageToDataUrl } from "../../lib/opengraph";
+import avatarImage from "../../images/people/vojtech-mares.png";
 
 function HomepageImage({ imageData }: { imageData: string }) {
   return (
@@ -65,8 +64,8 @@ function HomepageImage({ imageData }: { imageData: string }) {
   );
 }
 
-export async function CreateHomepageImageComponent() {
-  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
+export async function CreateHomepageImageComponent(baseUrl: string | URL) {
+  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
   return <HomepageImage imageData={avatarSrc} />;
 }

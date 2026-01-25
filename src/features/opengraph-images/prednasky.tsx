@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 
-import { join } from "node:path";
-
 import { imageToDataUrl } from "../../lib/opengraph";
+import avatarImage from "../../images/people/vojtech-mares.png";
 
 function Prednasky({ imageData }: { imageData: string }) {
   return (
@@ -56,8 +55,8 @@ function Prednasky({ imageData }: { imageData: string }) {
   );
 }
 
-export async function CreatePrednaskyImageComponent(): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(join(process.cwd(), "./src/images/people/vojtech-mares.png"));
+export async function CreatePrednaskyImageComponent(baseUrl: string | URL): Promise<ReactNode> {
+  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
   return <Prednasky imageData={avatarSrc} />;
 }

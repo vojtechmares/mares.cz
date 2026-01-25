@@ -19,7 +19,7 @@ const CZECH_MONTHS = [
   "Prosinec",
 ];
 
-export async function GET({ params }: APIContext) {
+export async function GET({ params, site }: APIContext) {
   const year = parseInt(params.year!);
   const month = parseInt(params.month!);
 
@@ -42,7 +42,8 @@ export async function GET({ params }: APIContext) {
     title: `${monthName} ${year}`,
     articleCount: articles.length,
     url: `mares.cz/blog/${year}/${String(month).padStart(2, "0")}`,
+    baseUrl: site!,
   });
 
-  return OpenGraphImageResponse(component);
+  return OpenGraphImageResponse(component, site!);
 }
