@@ -4,7 +4,7 @@ description: Poptáváte školení, ale nenašli jste to co hledáte v mých př
 keywords: []
 featured: false
 hidden: true
-draft: true
+draft: false
 ---
 
 Poptáváte školení, ale nenašli jste to co hledáte v mých připravených školeních? Pojďme se domluvit na školení na míru vaším potřebám a požadavkům.
@@ -18,7 +18,7 @@ Poptáváte školení, ale nenašli jste to co hledáte v mých připravených �
 
 ## Kolik to stojí
 
-Cena závisí na rozsahu školení, počítejte, že v ceně jsou zahrnuté i přípravy. Typicky jde o 1 MD školení a 3 MD příprav.
+Cena závisí na rozsahu školení, počítejte, že v ceně jsou zahrnuté i přípravy. Typicky jde o 1 MD školení a 2+ MD příprav.
 
 ## Kontakt
 

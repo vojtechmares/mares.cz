@@ -3,15 +3,15 @@ title: Zásady používání cookies
 description: ""
 keywords: []
 featured: false
-hidden: true
-draft: true
+hidden: false
+draft: false
 ---
 
 ## Co jsou cookies?
 
 Cookies jsou malé textové soubory, které se ukládají ve vašem zařízení při návštěvě webových stránek. Pomáhají zajistit správné fungování webu, zlepšovat váš uživatelský zážitek a umožňují mi analyzovat návštěvnost.
 
-## Jaké cookies používám?
+## Jaké cookies web používá?
 
 Na tomto webu používám pouze cookies pro měření návštěvnosti pomocí služby Google Analytics. Tyto cookies mi pomáhají pochopit, jak web používáte, a díky tomu jej mohu vylepšovat.
 
@@ -41,4 +41,4 @@ Více informací o správě cookies najdete na následujících odkazech:
 
 Tyto zásady mohu čas od času aktualizovat. Doporučuji proto tuto stránku čas od času zkontrolovat.
 
-Poslední aktualizace: 20. března 2025
+Poslední aktualizace: 25. ledna 2026
