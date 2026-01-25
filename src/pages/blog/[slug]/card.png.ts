@@ -4,7 +4,8 @@ import type { APIContext } from "astro";
 import { CreateArticleImageComponent } from "../../../features/opengraph-images/article";
 import { OpenGraphImageResponse } from "../../../lib/opengraph";
 
-export async function GET({ params, site }: APIContext) {
+export async function GET({ params, url }: APIContext) {
+  const baseUrl = url.origin;
   const article = await getEntry("blog", params.slug!);
   if (!article || article.data.draft) {
     return new Response("Not Found", { status: 404 });
@@ -14,8 +15,8 @@ export async function GET({ params, site }: APIContext) {
     slug: article.id,
     title: article.data.title,
     description: article.data.description,
-    baseUrl: site!,
+    baseUrl,
   });
 
-  return OpenGraphImageResponse(component, site!);
+  return OpenGraphImageResponse(component, baseUrl);
 }

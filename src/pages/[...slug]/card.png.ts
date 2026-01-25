@@ -4,7 +4,8 @@ import type { APIContext } from "astro";
 import { CreatePageImageComponent } from "../../features/opengraph-images/page";
 import { OpenGraphImageResponse } from "../../lib/opengraph";
 
-export async function GET({ params, site }: APIContext) {
+export async function GET({ params, url }: APIContext) {
+  const baseUrl = url.origin;
   const { slug } = params;
   if (!slug) {
     return new Response("Not Found", { status: 404 });
@@ -19,8 +20,8 @@ export async function GET({ params, site }: APIContext) {
     slug: page.id,
     title: page.data.title,
     description: page.data.description,
-    baseUrl: site!,
+    baseUrl,
   });
 
-  return OpenGraphImageResponse(component, site!);
+  return OpenGraphImageResponse(component, baseUrl);
 }

@@ -1,4 +1,5 @@
 /// <reference types="astro/client" />
+
 interface ImportMetaEnv {
   readonly DISABLE_ANALYTICS: boolean;
   readonly SESSIONS_API_URL: string;

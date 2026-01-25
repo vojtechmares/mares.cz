@@ -1,7 +1,9 @@
 import { imageToDataUrl } from "../../lib/opengraph";
 import avatarImage from "../../images/people/vojtech-mares.png";
 
-function HomepageImage({ imageData }: { imageData: string }) {
+export async function CreateHomepageImageComponent(baseUrl: string | URL) {
+  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
+
   return (
     <div
       style={{
@@ -9,8 +11,8 @@ function HomepageImage({ imageData }: { imageData: string }) {
         width: "100%",
         display: "flex",
         flexDirection: "row",
-        alignItems: "center", // flex-end
-        justifyContent: "space-between", // space-between
+        alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor: "#fafafa",
         color: "#3f3f46",
       }}
@@ -59,13 +61,7 @@ function HomepageImage({ imageData }: { imageData: string }) {
         </p>
         <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz</p>
       </div>
-      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
+      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={avatarSrc} />
     </div>
   );
-}
-
-export async function CreateHomepageImageComponent(baseUrl: string | URL) {
-  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
-
-  return <HomepageImage imageData={avatarSrc} />;
 }

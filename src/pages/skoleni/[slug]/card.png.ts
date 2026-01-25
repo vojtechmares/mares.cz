@@ -4,7 +4,8 @@ import type { APIContext } from "astro";
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
 import { imageToDataUrl, OpenGraphImageResponse } from "../../../lib/opengraph";
 
-export async function GET({ params, site }: APIContext) {
+export async function GET({ params, url }: APIContext) {
+  const baseUrl = url.origin;
   const training = await getEntry("training", params.slug!);
   if (!training || training.data.draft) {
     return new Response("Not Found", { status: 404 });
@@ -12,7 +13,7 @@ export async function GET({ params, site }: APIContext) {
 
   let iconDataUrl: string | undefined = undefined;
   if (training.data.icon?.src !== undefined) {
-    iconDataUrl = await imageToDataUrl(training.data.icon.src, site!);
+    iconDataUrl = await imageToDataUrl(training.data.icon.src, baseUrl);
   }
 
   const component = CreateTrainingImageComponent({
@@ -22,5 +23,5 @@ export async function GET({ params, site }: APIContext) {
     image: iconDataUrl,
   });
 
-  return OpenGraphImageResponse(component, site!);
+  return OpenGraphImageResponse(component, baseUrl);
 }

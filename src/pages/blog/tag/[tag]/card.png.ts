@@ -4,7 +4,8 @@ import type { APIContext } from "astro";
 import { CreateTagArchiveImageComponent } from "../../../../features/opengraph-images/tag-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 
-export async function GET({ params, site }: APIContext) {
+export async function GET({ params, url }: APIContext) {
+  const baseUrl = url.origin;
   const { tag } = params;
   if (!tag) {
     return new Response("Not Found", { status: 404 });
@@ -19,8 +20,8 @@ export async function GET({ params, site }: APIContext) {
   const component = await CreateTagArchiveImageComponent({
     tag,
     articleCount: articles.length,
-    baseUrl: site!,
+    baseUrl,
   });
 
-  return OpenGraphImageResponse(component, site!);
+  return OpenGraphImageResponse(component, baseUrl);
 }

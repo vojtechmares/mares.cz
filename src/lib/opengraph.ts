@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
-import { initWasm, Resvg } from "@resvg/resvg-wasm";
-import satori from "satori";
+import { ImageResponse } from "workers-og";
 
 // Import fonts as URLs at build time
 import interFontRegularUrl from "../fonts/Inter_18pt-Regular.ttf";
@@ -9,33 +8,13 @@ import interFontBoldUrl from "../fonts/Inter_18pt-Bold.ttf";
 import spaceMonoRegularUrl from "../fonts/SpaceMono-Regular.ttf";
 import spaceMonoBoldUrl from "../fonts/SpaceMono-Bold.ttf";
 
-// WASM URL from CDN
-const RESVG_WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm";
-
-let wasmInitialized = false;
-
-async function initResvgWasm() {
-  if (!wasmInitialized) {
-    const wasmResponse = await fetch(RESVG_WASM_URL);
-    const wasmBytes = await wasmResponse.arrayBuffer();
-    await initWasm(wasmBytes);
-    wasmInitialized = true;
-  }
-}
-
 // Cache for fetched fonts
-let fontsCache: {
-  interRegular: ArrayBuffer;
-  interLight: ArrayBuffer;
-  interBold: ArrayBuffer;
-  spaceMonoRegular: ArrayBuffer;
-  spaceMonoBold: ArrayBuffer;
-} | null = null;
+let fontsCache: ArrayBuffer[] | null = null;
 
-async function loadFonts(baseUrl: string | URL) {
+async function loadFonts(baseUrl: string | URL): Promise<ArrayBuffer[]> {
   if (fontsCache) return fontsCache;
 
-  const [interRegular, interLight, interBold, spaceMonoRegular, spaceMonoBold] = await Promise.all([
+  fontsCache = await Promise.all([
     fetch(new URL(interFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
     fetch(new URL(interFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
     fetch(new URL(interFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
@@ -43,7 +22,6 @@ async function loadFonts(baseUrl: string | URL) {
     fetch(new URL(spaceMonoBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
   ]);
 
-  fontsCache = { interRegular, interLight, interBold, spaceMonoRegular, spaceMonoBold };
   return fontsCache;
 }
 
@@ -51,60 +29,63 @@ export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): P
   const absoluteUrl = new URL(imageUrl, baseUrl).toString();
   const response = await fetch(absoluteUrl);
   const buffer = await response.arrayBuffer();
-  const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+  const uint8Array = new Uint8Array(buffer);
+
+  // Use chunk-based conversion to avoid stack overflow with large images
+  let binary = "";
+  const chunkSize = 8192;
+  for (let i = 0; i < uint8Array.length; i += chunkSize) {
+    const chunk = uint8Array.subarray(i, i + chunkSize);
+    binary += String.fromCharCode.apply(null, chunk as unknown as number[]);
+  }
+
+  const base64 = btoa(binary);
   const contentType = response.headers.get("content-type") || "image/png";
   return `data:${contentType};base64,${base64}`;
 }
 
 export async function OpenGraphImageResponse(component: ReactNode, baseUrl: string | URL) {
-  const png = await renderImage(component, baseUrl);
+  const [interRegular, interLight, interBold, spaceMonoRegular, spaceMonoBold] = await loadFonts(baseUrl);
 
-  return new Response(new Uint8Array(png), {
-    headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": "public, max-age=31536000, immutable",
-    },
-  });
-}
-
-async function renderImage(component: ReactNode, baseUrl: string | URL) {
-  await initResvgWasm();
-  const fonts = await loadFonts(baseUrl);
-
-  const svg = await satori(component, {
+  // workers-og's ImageResponse expects the element and options
+  const response = new ImageResponse(component, {
     width: 1200,
     height: 630,
     fonts: [
       {
         name: "Inter",
-        data: fonts.interRegular,
+        data: interRegular,
         weight: 500,
       },
       {
         name: "Inter",
-        data: fonts.interLight,
+        data: interLight,
         weight: 300,
       },
       {
         name: "Inter",
-        data: fonts.interBold,
+        data: interBold,
         weight: 700,
       },
       {
         name: "Space Mono",
-        data: fonts.spaceMonoRegular,
+        data: spaceMonoRegular,
         weight: 400,
       },
       {
         name: "Space Mono",
-        data: fonts.spaceMonoBold,
+        data: spaceMonoBold,
         weight: 700,
       },
     ],
   });
 
-  const resvg = new Resvg(svg, {
-    fitTo: { mode: "width", value: 1200 },
+  // Clone response to add caching headers
+  const png = await response.arrayBuffer();
+  return new Response(png, {
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
   });
-  return resvg.render().asPng();
 }
