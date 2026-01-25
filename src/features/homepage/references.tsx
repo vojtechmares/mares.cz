@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 
+import { Body } from "../../components/ui/body";
 import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 
 interface ReferencesContainerProps {
   children?: ReactNode;
@@ -15,7 +17,9 @@ export function ReferencesContainer({ children }: ReferencesContainerProps) {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2">Reference</Heading>
-          <p className="mt-4 text-lg tracking-tight text-zinc-700">Co o mně říkají moji klienti.</p>
+          <Text variant="secondary" className="mt-4 text-lg tracking-tight">
+            Co o mně říkají moji klienti.
+          </Text>
         </div>
         <div role="list" className="mx-auto mt-10 flex max-w-2xl flex-col lg:max-w-4xl">
           {children}
@@ -39,8 +43,12 @@ export function ReferenceCard({ authorName, authorRole, content, image }: Refere
         <div className="prose text-lg tracking-tight text-zinc-900">{content}</div>
         <figcaption className="relative mt-6 flex items-center justify-between border-t border-zinc-300 pt-6">
           <div>
-            <div className="font-display text-base text-zinc-900">{authorName}</div>
-            <div className="mt-1 text-sm text-zinc-700">{authorRole}</div>
+            <Body as="div" color="primary" className="font-display text-base">
+              {authorName}
+            </Body>
+            <Body as="div" color="secondary" variant="sm" className="mt-1">
+              {authorRole}
+            </Body>
           </div>
           <div className="overflow-hidden bg-zinc-100">{image}</div>
         </figcaption>

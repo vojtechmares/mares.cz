@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import { Container } from "../../../../components/ui/container";
 import { Heading } from "../../../../components/ui/heading";
+import { Link } from "../../../../components/ui/link";
 import { Section } from "../../../../components/ui/section";
+import { Text } from "../../../../components/ui/text";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../lib/cache";
@@ -53,12 +55,12 @@ const jsonLd = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog: #{tag}</Heading>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+      <Text variant="inverse" className="mt-4 text-base lg:text-xl">
         {sortedArticles.length} článků s tímto tagem
-      </p>
-      <p class="mt-2 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" href="/blog">← Zpět na blog</a>
-      </p>
+      </Text>
+      <Text variant="inverse" className="mt-2 text-base lg:text-xl">
+        <Link href="/blog" className="text-zinc-100">← Zpět na blog</Link>
+      </Text>
     </Container>
   </Section>
   <Section>

@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
+import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 import { ArticleGrid } from "../../features/blog/article-grid";
 
@@ -40,28 +42,28 @@ const meta = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog</Heading>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+      <Text variant="inverse" className="mt-4 text-base lg:text-xl">
         {
           tags.map((tag) =>
             // prettier-ignore
-            <><a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}</>,
+            <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>,
           )
         }
-      </p>
+      </Text>
       <div class="mt-4 flex flex-row justify-between">
-        <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+        <Text variant="inverse" className="mt-2 text-base lg:text-xl">
           Archiv:{" "}
           {
             years.map((year, i) =>
               // prettier-ignore
-              <><a href={`/blog/archive/${year}`} class="underline">{year}</a>{i < years.length - 1 ? " · " : ""}</>,
+              <><Link href={`/blog/archive/${year}`} className="text-zinc-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
             )
           }
-        </p>
-        <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+        </Text>
+        <Text variant="inverse" className="mt-2 text-base lg:text-xl">
           Feed:{" "}
-          <a class="underline" type="application/rss+xml" href="/blog/rss.xml">RSS</a>
-        </p>
+          <Link href="/blog/rss.xml" className="text-zinc-100">RSS</Link>
+        </Text>
       </div>
     </Container>
   </Section>

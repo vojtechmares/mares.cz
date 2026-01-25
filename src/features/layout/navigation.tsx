@@ -1,7 +1,9 @@
 import clsx from "clsx";
 
+import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
+import { Link } from "../../components/ui/link";
 
 // import {StaticNavigationLinks} from "@/lib/site"
 
@@ -11,12 +13,10 @@ type NavLink = {
 };
 
 function LinkItem({ href, name, className = "" }: { href: string; name: string; className?: string }) {
-  const classes = "text-xl font-bold text-zinc-100 underline";
-
   return (
-    <a href={href} className={clsx(className, classes)}>
+    <Link href={href} variant="default" className={clsx(className, "text-xl font-bold text-zinc-100")}>
       {name}
-    </a>
+    </Link>
   );
 }
 
@@ -33,9 +33,12 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
           <Button href="mailto:vojtech@mares.cz" variant="accent">
-            <span className="text-lg font-bold tracking-tight text-zinc-900">
-              Napište mi <span className="hidden lg:inline">ještě dnes</span>
-            </span>
+            <Body as="span" color="primary" className="text-lg font-bold tracking-tight">
+              Napište mi{" "}
+              <Body as="span" className="hidden lg:inline">
+                ještě dnes
+              </Body>
+            </Body>
           </Button>
         </div>
       </div>
@@ -102,9 +105,12 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
         </div>
         <div className="flex items-center gap-x-8">
           <Button href="mailto:vojtech@mares.cz" variant="accent">
-            <span className="text-lg font-bold tracking-tight text-zinc-900">
-              Napište mi <span className="hidden lg:inline">ještě dnes</span>
-            </span>
+            <Body as="span" color="primary" className="text-lg font-bold tracking-tight">
+              Napište mi{" "}
+              <Body as="span" className="hidden lg:inline">
+                ještě dnes
+              </Body>
+            </Body>
           </Button>
         </div>
       </div>

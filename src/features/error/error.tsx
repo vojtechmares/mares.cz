@@ -1,4 +1,7 @@
+import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
+import { Heading } from "../../components/ui/heading";
+import { Text } from "../../components/ui/text";
 
 type ErrorProps = {
   status: number;
@@ -25,32 +28,26 @@ export function Error({ status, error = undefined }: ErrorProps) {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
       <main className="grid min-h-full place-items-center bg-zinc-900 px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center">
-          <p className="text-base font-semibold text-amber-500">{status}</p>
-          <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">
+          <Body variant="base" color="primary" className="font-semibold text-amber-500">
+            {status}
+          </Body>
+          <Heading level="h1" variant="inverse" className="mt-4 text-balance">
             {messages.headline}
-          </h1>
-          <p className="mt-6 text-lg font-medium text-pretty text-zinc-300 sm:text-xl/8">{messages.description}</p>
-          {error !== undefined && <p className="mt-6 text-base text-pretty text-zinc-300">{error}</p>}
+          </Heading>
+          <Text variant="muted" className="mt-6 text-lg font-medium text-pretty sm:text-xl/8">
+            {messages.description}
+          </Text>
+          {error !== undefined && (
+            <Text variant="muted" className="mt-6 text-base text-pretty">
+              {error}
+            </Text>
+          )}
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button href="/" variant="accent">
               Zpět na hlavní stránku
             </Button>
-            {/* <a
-              href="#"
-              className="text-sm font-semibold text-gray-900 dark:text-white"
-            >
-              Contact support <span aria-hidden="true">&rarr;</span>
-            </a> */}
           </div>
         </div>
       </main>

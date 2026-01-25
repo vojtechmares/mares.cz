@@ -2,6 +2,7 @@ import type { TrainingSession } from "../../lib/sessions";
 
 import { Button } from "../../components/ui/button";
 import { Link } from "../../components/ui/link";
+import { Text } from "../../components/ui/text";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
 
 export type TrainingSessionTableProps = {
@@ -189,5 +190,5 @@ function PublicSessionSignUpButton({ name, signUpURL }: { name: string; signUpUR
 }
 
 function SigningUpNotOpenYet() {
-  return <p>Přihlašování zatím není možné</p>;
+  return <Text variant="muted">Přihlašování zatím není možné</Text>;
 }

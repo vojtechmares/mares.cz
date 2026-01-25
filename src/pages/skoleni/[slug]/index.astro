@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import { Logo } from "../../../features/training/logo";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
+import { Body } from "../../../components/ui/body";
 import { Button } from "../../../components/ui/button";
 import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
@@ -156,9 +157,12 @@ const { Content } = await render(training);
                       </svg>
                     </div>
                     <div class="ml-3">
-                      <p class="text-xl text-blue-600">
-                        Toto školení je <span class="font-medium">dvoudenní.</span>
-                      </p>
+                      <Body color="primary" className="text-xl text-blue-600">
+                        Toto školení je{" "}
+                        <Body as="span" className="font-medium">
+                          dvoudenní.
+                        </Body>
+                      </Body>
                     </div>
                   </div>
                 </Card>

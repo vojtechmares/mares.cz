@@ -3,8 +3,9 @@ import type { CollectionEntry } from "astro:content";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
-import { Section } from "../../components/ui/section";
 import { Link } from "../../components/ui/link";
+import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 
 // Social Icons
 function BlueskyIcon() {
@@ -120,10 +121,10 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
             </div>
             <div>
               <Heading level="h3">Zaujal jsem vás?</Heading>
-              <p className="mt-4">
+              <Text className="mt-4">
                 Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi &ndash; společně
                 probereme vaše potřeby a najdeme řešení na míru.
-              </p>
+              </Text>
               <div className="mt-5 flex flex-col space-y-4 md:space-y-2">
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">
                   Domluvme si schůzku
@@ -173,9 +174,9 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 <GitHubIcon />
               </a>
             </div>
-            <p className="mt-6 text-zinc-700 md:mt-0">
+            <Text variant="secondary" className="mt-6 md:mt-0">
               Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva vyhrazena.
-            </p>
+            </Text>
           </div>
         </Container>
       </footer>

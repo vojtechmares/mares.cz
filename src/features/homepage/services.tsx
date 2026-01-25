@@ -1,5 +1,6 @@
 import clsx from "clsx";
 
+import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
@@ -27,9 +28,9 @@ function Service({ name, description, href, featured = false, buttonText, button
       <Heading level="h3" variant={featured ? "primary" : "inverse"}>
         {name}
       </Heading>
-      <span className={clsx("mt-2 font-mono text-lg font-bold", featured ? "text-black" : "text-zinc-100")}>
+      <Body as="span" color={featured ? "primary" : "inverse"} className="mt-2 font-mono text-lg font-bold">
         {price}
-      </span>
+      </Body>
       <Text variant={featured ? "primary" : "muted"} className={clsx("mt-4 text-base")}>
         {description}
       </Text>
@@ -50,7 +51,9 @@ export function Services() {
           <Heading level="h2" variant="inverse">
             Služby
           </Heading>
-          <p className="mt-4 text-lg text-zinc-300">Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?</p>
+          <Text variant="muted" className="mt-4 text-lg">
+            Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?
+          </Text>
         </div>
         <div className="mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service

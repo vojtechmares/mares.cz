@@ -1,8 +1,10 @@
 import clsx from "clsx";
 
+import { Body } from "../../components/ui/body";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 
 const steps = [
   {
@@ -39,7 +41,9 @@ export function Cooperation() {
           <Heading level="h2" variant="inverse">
             Z nuly do cloudu
           </Heading>
-          <p className="mt-4 text-lg tracking-tight text-zinc-300">Jak může vypadat naše spolupráce.</p>
+          <Text variant="muted" className="mt-4 text-lg tracking-tight">
+            Jak může vypadat naše spolupráce.
+          </Text>
         </div>
         <nav aria-label="Progress">
           <ol role="list" className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2">
@@ -54,10 +58,14 @@ export function Cooperation() {
                       <span className="h-3 w-3 bg-zinc-900" />
                     </span>
                   </span>
-                  <span className="ml-4 flex min-w-0 flex-col">
-                    <span className="text-2xl font-normal text-white">{step.name}</span>
-                    <span className="text-lg text-zinc-300">{step.description}</span>
-                  </span>
+                  <Body as="span" className="ml-4 flex min-w-0 flex-col">
+                    <Body as="span" color="inverse" className="text-2xl font-normal">
+                      {step.name}
+                    </Body>
+                    <Body as="span" color="muted" variant="lg">
+                      {step.description}
+                    </Body>
+                  </Body>
                 </div>
               </li>
             ))}

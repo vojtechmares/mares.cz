@@ -1,11 +1,13 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import { clsx } from "clsx";
 
+import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { Text } from "../../components/ui/text";
 
 // Price formatter (Czech locale - space as thousands separator)
 const formatPrice = (amount: number) => new Intl.NumberFormat("cs-CZ").format(amount);
@@ -53,26 +55,25 @@ const TrainingCard = ({ training, className }: TrainingCardProps) => {
           </Heading>
 
           {/* Duration */}
-          <span
-            className={clsx(
-              "mt-2 font-mono text-sm tracking-wider uppercase",
-              featured ? "text-black" : "text-zinc-300",
-            )}
+          <Body
+            as="span"
+            color={featured ? "primary" : "muted"}
+            className="mt-2 font-mono text-sm tracking-wider uppercase"
           >
             {getDurationText(training.data.length)}
-          </span>
+          </Body>
 
           {/* Price */}
-          <span className={clsx("mt-1 font-mono text-lg font-bold", featured ? "text-black" : "text-zinc-100")}>
+          <Body as="span" color={featured ? "primary" : "inverse"} className="mt-1 font-mono text-lg font-bold">
             od {formatPrice(price.amount)} {price.currency}
-          </span>
+          </Body>
         </div>
       </div>
 
       {/* Description - full width */}
-      <p className={clsx("mt-4 leading-relaxed", featured ? "text-black" : "text-zinc-300")}>
+      <Text variant={featured ? "primary" : "muted"} className="mt-4 leading-relaxed">
         {truncateText(training.data.description)}
-      </p>
+      </Text>
 
       {/* CTA Button */}
       <div className="mt-auto flex justify-end pt-4">
@@ -96,10 +97,10 @@ export async function TrainingGrid() {
           <Heading level="h2" variant="inverse">
             DevOps školení
           </Heading>
-          <p className="mt-4 text-lg tracking-tight text-zinc-300">
+          <Text variant="muted" className="mt-4 text-lg tracking-tight">
             Sdílím své zkušenosti a znalosti z každodenní praxe formou školení a workshopů. Zaměřuji se především na
             open-source DevOps nástroje a technologie.
-          </p>
+          </Text>
         </div>
 
         {/* Responsive grid: 1 col mobile, 3 cols desktop */}

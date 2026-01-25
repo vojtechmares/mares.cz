@@ -1,8 +1,10 @@
-import { Card } from "../../components/ui/card";
-import { Heading } from "../../components/ui/heading";
-import { Container } from "../../components/ui/container";
 import type { CollectionEntry } from "astro:content";
+
+import { Card } from "../../components/ui/card";
+import { Container } from "../../components/ui/container";
+import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
+import { Text } from "../../components/ui/text";
 
 // function localeName(locale: string): null | string {
 //   switch (locale) {
@@ -26,25 +28,21 @@ export function ArticleGrid({ articles }: { articles: CollectionEntry<"blog">[] 
           <Card key={article.id} variant="surface" className="flex flex-col">
             <div className="mb-4 flex flex-row justify-between">
               {/* prettier-ignore */}
-              <p>{article.data.tags.map((tag) => <><a href={`/blog/tag/${tag}`} className="underline">#{tag}</a>{" "}</>)}</p>
-              <p className="text-zinc-700">
+              <Text>{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`}>#{tag}</Link>{" "}</>)}</Text>
+              <Text variant="secondary">
                 {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
                 })}
-                {/* {localeName(article.locale) !== null
-                    ? " · " + localeName(article.locale)
-                    : ""} */}
-              </p>
+              </Text>
             </div>
             <Heading level="h3">{article.data.title}</Heading>
-            <p className="my-4 text-zinc-700">{truncateText(article.data.description)}</p>
+            <Text variant="secondary" className="my-4">
+              {truncateText(article.data.description)}
+            </Text>
             <div className="mt-auto flex justify-end pt-4">
               <Link href={"/blog/" + article.id}>Přečíst si článek →</Link>
-              {/* <Button href={"/blog/" + article.id} variant="primary">
-                Přečíst si článek
-              </Button> */}
             </div>
           </Card>
         ))}

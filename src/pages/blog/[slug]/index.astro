@@ -4,9 +4,11 @@ import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
 
 import "../../../styles/highlight-js/github-dark.css";
-import { Section } from "../../../components/ui/section";
 import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
+import { Link } from "../../../components/ui/link";
+import { Section } from "../../../components/ui/section";
+import { Text } from "../../../components/ui/text";
 import { Prose } from "../../../components/prose";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
@@ -60,8 +62,8 @@ const { Content } = await render(article);
     <Container>
       <Heading variant="inverse" level="h1">{article.data.title}</Heading>
       <div class="flex flex-row justify-between">
-        <p class="mt-4 text-base text-zinc-100 lg:text-xl">{article.data.tags.map((tag) => <><a href={`/blog/tag/${tag}`} class="underline">#{tag}</a>{" "}</>)}</p>
-        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        <Text variant="inverse" className="mt-4 text-base lg:text-xl">{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>)}</Text>
+        <Text variant="inverse" className="mt-4 text-base lg:text-xl">
           {
             new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
               day: "numeric",
@@ -69,11 +71,11 @@ const { Content } = await render(article);
               year: "numeric",
             })
           }
-        </p>
+        </Text>
       </div>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" href="/blog">← Zpět na blog</a>
-      </p>
+      <Text variant="inverse" className="mt-4 text-base lg:text-xl">
+        <Link href="/blog" className="text-zinc-100">← Zpět na blog</Link>
+      </Text>
     </Container>
   </Section>
   <!-- <ArticleHeader article={article} /> -->
