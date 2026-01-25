@@ -99,6 +99,22 @@ const reference = defineCollection({
   }),
 });
 
+const talk = defineCollection({
+  loader: glob({
+    pattern: ["*.mdx", "*.md"],
+    base: "./src/content/talk",
+  }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    event: z.object({
+      name: z.string(),
+      url: z.string().url().optional(),
+    }),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const session = defineCollection({
   loader: sessionLoader({
     apiUrl: import.meta.env.SESSIONS_API_URL,
@@ -120,4 +136,4 @@ const session = defineCollection({
   }),
 });
 
-export const collections = { blog, page, training, session, reference };
+export const collections = { blog, page, training, session, reference, talk };
