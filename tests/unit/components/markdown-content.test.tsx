@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
 // Create a synchronous test version since React doesn't support async client components
-function TestMarkdownContent({ content, classNames, html }: { content: string; classNames?: string; html: string }) {
+function TestMarkdownContent({ content, className, html }: { content: string; className?: string; html: string }) {
   // Suppress unused variable warning - content is for interface compatibility
   void content;
 
-  return <div className={`prose ${classNames || ""}`} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className={`prose ${className || ""}`} dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 describe("MarkdownContent", () => {
@@ -35,9 +35,9 @@ describe("MarkdownContent", () => {
   });
 
   describe("custom className", () => {
-    it("should apply custom classNames", () => {
+    it("should apply custom className", () => {
       const { container } = render(
-        <TestMarkdownContent content="Test" html="<p>Custom</p>" classNames="custom-class" />,
+        <TestMarkdownContent content="Test" html="<p>Custom</p>" className="custom-class" />,
       );
 
       const wrapper = container.querySelector("div.prose");
