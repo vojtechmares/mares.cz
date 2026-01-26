@@ -96,7 +96,7 @@ Replaces `<a>`. Handles external links automatically with proper security attrib
 <Link href="/terms" variant="muted">Terms</Link>
 
 // Email/phone links
-<Link href="tel:+420732220651">+420 732 220 651</Link>
+<Link href="tel:+420732490651">+420 732 490 651</Link>
 <Link href="mailto:vojtech@mares.cz">vojtech@mares.cz</Link>
 ```
 

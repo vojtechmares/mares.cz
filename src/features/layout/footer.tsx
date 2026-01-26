@@ -81,7 +81,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               <Heading level="h3">Vojtěch Mareš</Heading>
               <ul className="mt-4 list-none">
                 <li>
-                  <Link href="tel:+420732220651">+420 732 220 651</Link>
+                  <Link href="tel:+420732490651">+420 732 490 651</Link>
                 </li>
                 <li>
                   <Link href="mailto:vojtech@mares.cz">vojtech@mares.cz</Link>

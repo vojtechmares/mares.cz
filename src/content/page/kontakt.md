@@ -12,7 +12,7 @@ draft: true
 <td>
 <strong>Vojtěch Mareš</strong><br />
 <br />
-<a href="tel:420732220651" >+420 732 220 651</a><br />
+<a href="tel:420732490651" >+420 732 490 651</a><br />
 <a href="mailto:vojtech@mares.cz" >vojtech@mares.cz</a><br />
 <br />
 IČO: <code>06999280</code><br />
