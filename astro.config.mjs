@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
 import { defineConfig, envField } from "astro/config";
+import { getContentPages } from "./src/lib/sitemap-pages.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,6 +36,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      customPages: getContentPages("https://www.mares.cz"),
       // i18n: {
       //   defaultLocale: "cs",
       //   locales: {
