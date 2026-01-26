@@ -2,6 +2,7 @@
 authorName: Ladislav Čapka
 authorRole: CTO, cybros labs
 authorImage: ladislav-capka.jpg
+kind: cooperation
 order: 2
 draft: false
 ---

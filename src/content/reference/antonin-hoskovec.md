@@ -2,6 +2,7 @@
 authorName: Antonín Hoškovec
 authorRole: AI team lead, GLAMI
 authorImage: antonin-hoskovec.jpg
+kind: cooperation
 order: 1
 draft: false
 ---

@@ -2,6 +2,7 @@
 authorName: Ing. Bálint Csóka
 authorRole: IT architekt, Stredoslovenská distribučná
 authorImage: balint-csoka.png
+kind: training
 order: 3
 draft: false
 ---

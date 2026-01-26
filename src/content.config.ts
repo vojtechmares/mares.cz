@@ -94,6 +94,7 @@ const reference = defineCollection({
     authorName: z.string(),
     authorRole: z.string(),
     authorImage: z.string(),
+    kind: z.enum(["cooperation", "training", "consultation"]),
     order: z.number().optional(),
     draft: z.boolean().default(false),
   }),
