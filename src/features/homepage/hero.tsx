@@ -27,7 +27,7 @@ export function Hero({ children }: HeroProps) {
     <Container className="pt-16 pr-0! sm:pt-24 md:pr-4">
       <div className="flex flex-row justify-center md:flex-row md:items-end md:justify-between">
         <div className="max-w-64 md:my-auto md:max-w-200">
-          <Heading level="h1">
+          <Heading level="h1" className="text-4xl font-black! sm:text-7xl">
             Jsem{" "}
             <span className="relative whitespace-nowrap text-amber-500">
               <UnderlineSvg />
