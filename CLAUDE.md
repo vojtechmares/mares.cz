@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website (mares.cz) built with Astro 5. The site is a bilingual (Czech/English) server-side rendered website that fetches content from Strapi CMS.
+This is a personal website (mares.cz) built with Astro 5. The site is a server-side rendered website deployed to Cloudflare Workers.
 
 ## Key Commands
 
@@ -47,39 +47,37 @@ Prettier is configured with:
 
 ## Architecture
 
-### Content Sources
+### Content Collections
 
-The application pulls content from:
+All content is managed via Astro Content Collections (src/content.config.ts):
 
-1. **Strapi CMS** (src/lib/strapi.ts)
-   - Articles (blog posts)
-   - Pages (static content pages)
-   - Trainings (training course information)
-   - Requires `STRAPI_API_URL` and `STRAPI_API_TOKEN` environment variables
-   - All fetch methods return transformed TypeScript interfaces (Article, Page, Training)
-
-2. **Sessions Content Collection** (src/content/session/)
-   - Training sessions (scheduled public training dates)
-   - Stored as JSON files in the content collection
-   - Accessed via src/lib/sessions.ts helper functions
+1. **blog** - Blog posts as markdown files (src/content/blog/)
+2. **page** - Static pages as markdown (src/content/page/)
+3. **training** - Training course information (src/content/training/)
+4. **reference** - Customer references/testimonials (src/content/reference/)
+5. **talk** - Conference talks (src/content/talk/)
+6. **session** - Public training sessions loaded from external backoffice API via custom loader (src/lib/loaders/session-loader.ts)
 
 ### Server Configuration
 
 - **Astro Config** (astro.config.mjs):
   - Output mode: `server` (SSR enabled)
-  - Adapter: Node.js in middleware mode
-  - Default locale: Czech (`cs`), with English (`en`) support
+  - Adapter: Cloudflare Workers
   - Site URL: https://www.mares.cz
   - Meeting redirects configured to Cal.com
+  - i18n: Currently disabled (Czech only)
 
 ### Dynamic Routes
 
-The site uses Astro's file-based routing with dynamic segments:
+The site uses Astro's file-based routing:
 
-- `/[slug]` - Generic pages from Strapi
-- `/blog/[slug]` - Blog posts from Strapi
-- `/skoleni/[slug]` - Training course pages from Strapi
-- `/skoleni/verejne-terminy` - Public training sessions from content collection
+- `/[...slug]/` - Generic pages from content collection
+- `/blog/[slug]/` - Blog posts
+- `/blog/tag/[tag]/` - Blog posts filtered by tag
+- `/blog/archive/[year]/` and `/blog/archive/[year]/[month]/` - Blog archive
+- `/skoleni/[slug]/` - Training course pages
+- `/skoleni/verejne-terminy` - Public training sessions
+- `/prednasky/` - Conference talks
 
 Each dynamic route includes a `card.png.ts` file that generates Open Graph preview images using Satori.
 
@@ -100,9 +98,12 @@ Each dynamic route includes a `card.png.ts` file that generates Open Graph previ
 
 Required environment variables (defined in astro.config.mjs env schema):
 
-- `STRAPI_API_URL` - Strapi CMS endpoint
-- `STRAPI_API_TOKEN` - Strapi authentication token
 - `DISABLE_ANALYTICS` - Boolean to disable Google Analytics (default: false)
+- `SESSIONS_API_URL` - Backoffice API endpoint for training sessions
+- `SESSIONS_OIDC_ISSUER` - OIDC issuer URL for API authentication
+- `SESSIONS_OIDC_CLIENT_ID` - OIDC client ID
+- `SESSIONS_OIDC_CLIENT_SECRET` - OIDC client secret
+- `SESSIONS_OIDC_AUDIENCE` - OIDC audience (optional)
 
 ### SEO Components
 
@@ -119,3 +120,4 @@ The site includes comprehensive SEO components (src/components/seo/):
 
 - Tailwind CSS v4 configured via Vite plugin
 - Typography plugin for prose content
+- UI components in src/components/ui/ (React)
