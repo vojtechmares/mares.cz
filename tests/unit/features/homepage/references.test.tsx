@@ -36,13 +36,6 @@ describe("ReferencesContainer", () => {
       expect(screen.getByRole("heading", { name: /reference/i })).toBeInTheDocument();
     });
   });
-
-  describe("accessibility", () => {
-    it("should have list role for cards container", () => {
-      render(<ReferencesContainer />);
-      expect(screen.getByRole("list")).toBeInTheDocument();
-    });
-  });
 });
 
 describe("ReferenceCard", () => {

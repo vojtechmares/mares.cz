@@ -63,7 +63,7 @@ describe("CallToAction", () => {
 
     it("should have max-width constraint", () => {
       const { container } = render(<CallToAction />);
-      const wrapper = container.querySelector(".max-w-xl");
+      const wrapper = container.querySelector(".max-w-2xl");
       expect(wrapper).toBeInTheDocument();
     });
   });

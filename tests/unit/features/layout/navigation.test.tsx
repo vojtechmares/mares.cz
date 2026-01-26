@@ -58,12 +58,12 @@ describe("Navigation", () => {
   });
 
   describe("CTA button", () => {
-    it("should render email CTA button", () => {
+    it("should render meeting CTA button", () => {
       render(<Navigation links={mockLinks} />);
-      const ctaButtons = screen.getAllByRole("link", { name: /napište mi/i });
+      const ctaButtons = screen.getAllByRole("link", { name: /domluvme si schůzku/i });
       expect(ctaButtons.length).toBeGreaterThan(0);
       ctaButtons.forEach((button) => {
-        expect(button).toHaveAttribute("href", "mailto:vojtech@mares.cz");
+        expect(button).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
       });
     });
   });

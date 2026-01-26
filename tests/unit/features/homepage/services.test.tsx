@@ -42,13 +42,12 @@ describe("Services", () => {
   });
 
   describe("service buttons", () => {
-    it("should render consultation email link", () => {
+    it("should render consultation meeting link", () => {
       render(<Services />);
-      const emailLinks = screen.getAllByRole("link", {
-        name: /napište mi/i,
+      const meetingLink = screen.getByRole("link", {
+        name: /domluvme si schůzku/i,
       });
-      const emailLink = emailLinks.find((link) => link.getAttribute("href")?.includes("mailto:"));
-      expect(emailLink).toHaveAttribute("href", "mailto:vojtech@mares.cz");
+      expect(meetingLink).toHaveAttribute("href", "https://cal.com/vojtechmares/30min");
     });
 
     it("should render training list link", () => {
