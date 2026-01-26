@@ -90,6 +90,8 @@ export async function TrainingGrid() {
     return !data.draft;
   });
 
+  trainings.sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
+
   return (
     <Section id="skoleni" aria-label="Training" variant="inverse">
       <Container>
