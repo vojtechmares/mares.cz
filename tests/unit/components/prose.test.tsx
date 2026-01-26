@@ -80,7 +80,7 @@ describe("Prose", () => {
 
       const wrapper = container.querySelector("div.prose");
       expect(wrapper).toHaveClass("prose-h1:font-extrabold");
-      expect(wrapper).toHaveClass("prose-a:text-amber-800");
+      expect(wrapper).toHaveClass("prose-a:text-orange-800");
     });
   });
 

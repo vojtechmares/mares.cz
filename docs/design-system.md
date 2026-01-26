@@ -101,7 +101,7 @@ Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply v
 | ------------ | ------------------------------------------------------------- |
 | **HEX**      | #f59e0b                                                       |
 | **RGB**      | 245, 158, 11                                                  |
-| **Tailwind** | amber-500                                                     |
+| **Tailwind** | orange-500                                                    |
 | **Pouziti**  | Pozadi primarnich tlacitek, ikony akci, call-to-action plochy |
 | **Text**     | Musi byt cerny (#000)                                         |
 
@@ -116,7 +116,7 @@ Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply v
 | ------------ | ----------------------------------------------- |
 | **HEX**      | #92400E                                         |
 | **RGB**      | 146, 64, 14                                     |
-| **Tailwind** | amber-800                                       |
+| **Tailwind** | orange-800                                      |
 | **Kontrast** | WCAG AA                                         |
 | **Pouziti**  | Textove odkazy na bilem pozadi, zvyrazneny text |
 
@@ -448,15 +448,15 @@ Chybove stavy s Error barvou (#B91C1C) a pomocnym textem.
 
 ```
 /* Barvy */
-bg-amber-500        /* Primary CTA */
-bg-amber-50         /* Secondary CTA */
+bg-orange-500        /* Primary CTA */
+bg-orange-50         /* Secondary CTA */
 bg-zinc-900         /* Dark sections */
 bg-zinc-50          /* Light background */
 bg-white            /* Cards */
 text-zinc-900       /* Headings */
 text-zinc-700       /* Body text */
 text-zinc-500       /* Muted text */
-text-amber-800      /* Links */
+text-orange-800      /* Links */
 border-zinc-300     /* Light borders */
 border-zinc-700     /* Dark borders */
 

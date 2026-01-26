@@ -15,17 +15,17 @@ const baseStyles: Record<ButtonStyle, string> = {
 const styleVariants: Record<ButtonStyle, Record<ButtonVariant, string>> = {
   solid: {
     primary: `${colors.background.inverse} ${colors.text.inverse} hover:bg-zinc-700 active:bg-zinc-800 focus-visible:outline-zinc-900`,
-    accent: `${colors.accent.default} ${colors.accent.hover} active:bg-amber-500 focus-visible:outline-amber-500`,
-    secondary: `${colors.background.default} ${colors.text.primary} hover:bg-amber-50 active:bg-amber-500 focus-visible:outline-white`,
+    accent: `${colors.accent.default} ${colors.accent.hover} active:bg-orange-500 focus-visible:outline-orange-500`,
+    secondary: `${colors.background.default} ${colors.text.primary} hover:bg-orange-50 active:bg-orange-500 focus-visible:outline-white`,
   },
   outline: {
-    primary: `${colors.border.default} ${colors.text.primary} hover:ring-zinc-300 active:bg-zinc-100 focus-visible:outline-amber-500 focus-visible:ring-zinc-300`,
+    primary: `${colors.border.default} ${colors.text.primary} hover:ring-zinc-300 active:bg-zinc-100 focus-visible:outline-orange-500 focus-visible:ring-zinc-300`,
     secondary: `ring-zinc-700 ${colors.text.inverse} hover:ring-zinc-500 active:ring-zinc-700 focus-visible:outline-white`,
     accent: "", // Outline buttons cannot be accent
   },
 };
 
-const transitionStyle = "transition duration-150 ease-in-out";
+const transitionStyle = "transition duration-150 ease-in-out font-mono";
 
 const sizeStyles: Record<ButtonSize, string> = {
   medium: "px-4 py-2 text-sm",

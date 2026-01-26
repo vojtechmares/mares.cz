@@ -4,7 +4,7 @@
  * Centralized design system tokens following the 60/30/10 color principle:
  * - 60% Neutral: zinc-100 backgrounds, white surfaces
  * - 30% Primary: zinc-900/700 text
- * - 10% Accent: amber-500 highlights
+ * - 10% Accent: orange-500 highlights
  */
 
 // =============================================================================
@@ -25,17 +25,17 @@ export const colors = {
     secondary: "text-zinc-700",
     muted: "text-zinc-300",
     inverse: "text-white",
-    // Link colors - amber-800 for WCAG AA compliance
-    link: "text-amber-800",
-    linkHover: "hover:text-amber-900",
+    // Link colors - orange-800 for WCAG AA compliance
+    link: "text-orange-800",
+    linkHover: "hover:text-orange-900",
   },
 
   // 10% - Accent
   accent: {
-    default: "bg-amber-500",
-    hover: "hover:bg-amber-600",
-    text: "text-amber-500",
-    light: "bg-amber-100",
+    default: "bg-orange-500",
+    hover: "hover:bg-orange-600",
+    text: "text-orange-500",
+    light: "bg-orange-100",
   },
 
   // Borders - Design System Manual specs
@@ -63,9 +63,9 @@ export const typography = {
   // H5: 18px/1.125rem, Inter SemiBold, line-height 1.5
   // H6: 16px/1rem, Inter SemiBold, line-height 1.5
   heading: {
-    h1: "text-5xl font-sans font-bold leading-[1.1] tracking-[-0.02em]",
-    h2: "text-4xl font-sans font-semibold leading-[1.2] tracking-[-0.015em]",
-    h3: "text-[1.75rem] font-sans font-semibold leading-[1.3] tracking-[-0.01em]",
+    h1: "text-5xl font-display font-bold leading-[1.1] tracking-[-0.02em]",
+    h2: "text-4xl font-display font-semibold leading-[1.2] tracking-[-0.015em]",
+    h3: "text-[1.75rem] font-display font-semibold leading-[1.3] tracking-[-0.01em]",
     h4: "text-xl font-sans font-medium leading-[1.4]",
     h5: "text-lg font-sans font-semibold leading-[1.5]",
     h6: "text-base font-sans font-semibold leading-[1.5]",
@@ -73,13 +73,13 @@ export const typography = {
 
   // Body text sizes - Space Mono
   body: {
-    large: "text-lg font-mono leading-[1.6] tracking-[0.01em]",
-    base: "text-base font-mono leading-[1.6] tracking-[0.01em]",
-    small: "text-sm font-mono leading-[1.5] tracking-[0.01em]",
+    large: "text-lg font-sans leading-[1.6] tracking-[0.01em]",
+    base: "text-base font-sans leading-[1.6] tracking-[0.01em]",
+    small: "text-sm font-sans leading-[1.5] tracking-[0.01em]",
   },
 
   // Display font settings
-  display: "font-sans tracking-tight",
+  display: "font-display tracking-tight",
 } as const;
 
 // =============================================================================

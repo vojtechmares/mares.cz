@@ -54,7 +54,7 @@ export function Cooperation() {
                 ) : null}
                 <div className="group relative flex items-start">
                   <span className="flex h-9 items-center" aria-hidden="true">
-                    <span className="relative z-10 flex h-12 w-12 items-center justify-center border-2 border-amber-500 bg-white">
+                    <span className="relative z-10 flex h-12 w-12 items-center justify-center border-2 border-orange-500 bg-white">
                       <span className="h-3 w-3 bg-zinc-900" />
                     </span>
                   </span>

@@ -29,7 +29,7 @@ const borderStyles: Record<CardBorder, string> = {
 
 const baseStyles = `overflow-hidden ${radius.lg} ${spacing.card}`;
 
-const hoverStyles = "transition duration-300 ease hover:-translate-y-0.5 ring-1 ring-transparent hover:ring-amber-500";
+const hoverStyles = "transition duration-300 ease hover:-translate-y-0.5 ring-1 ring-transparent hover:ring-orange-500";
 
 export function Card({
   children,

@@ -19,7 +19,7 @@ ul li::before {
   content: "→";
   position: absolute;
   left: -16px;
-  color: var(--color-amber-500);
+  color: var(--color-orange-500);
   font-weight: 700;
 }
 
@@ -44,7 +44,7 @@ ol li::before {
   margin-right: 0.25rem;
   margin-left: -2.5rem;
   content: "[" counter(item) "]";
-  color: var(--color-amber-500);
+  color: var(--color-orange-500);
   font-weight: 700;
 }
 
@@ -96,7 +96,7 @@ ol.list-none li::before {
 .animate-typewriter {
   overflow: hidden;
   white-space: nowrap;
-  border-right: 2px solid var(--color-amber-500);
+  border-right: 2px solid var(--color-orange-500);
   animation:
     typewriter 3s steps(37, end),
     blink-cursor 0.8s step-end infinite;
@@ -109,5 +109,5 @@ ol.list-none li::before {
 }
 
 .hover-highlight:hover {
-  border-color: var(--color-amber-500);
+  border-color: var(--color-orange-500);
 }
