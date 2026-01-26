@@ -6,6 +6,7 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { Prose } from "../../components/prose";
 
 interface ReferencesContainerProps {
   children?: ReactNode;
@@ -21,9 +22,7 @@ export function ReferencesContainer({ children }: ReferencesContainerProps) {
             Co o mně říkají moji klienti.
           </Text>
         </div>
-        <div role="list" className="mx-auto mt-10 flex max-w-2xl flex-col lg:max-w-4xl">
-          {children}
-        </div>
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">{children}</div>
       </Container>
     </Section>
   );
@@ -38,20 +37,22 @@ interface ReferenceCardProps {
 
 export function ReferenceCard({ authorName, authorRole, content, image }: ReferenceCardProps) {
   return (
-    <Card variant="surface" className="mb-10">
-      <figure>
-        <div className="prose text-lg tracking-tight text-zinc-900">{content}</div>
-        <figcaption className="relative mt-6 flex items-center justify-between border-t border-zinc-300 pt-6">
-          <div>
-            <Body as="div" color="primary" className="font-display text-base">
-              {authorName}
-            </Body>
-            <Body as="div" color="secondary" variant="small" className="mt-1">
-              {authorRole}
-            </Body>
-          </div>
-          <div className="overflow-hidden bg-zinc-100">{image}</div>
-        </figcaption>
+    <Card variant="surface" hover={true} className="group flex h-full flex-col">
+      <figure className="flex flex-1 flex-col">
+        <Prose className="prose-p:text-base md:prose-p:text-lg">{content}</Prose>
+        <div className="mt-auto">
+          <figcaption className="relative mt-6 flex items-center border-t border-zinc-300 pt-6">
+            <div className="overflow-hidden pr-4 md:pr-6">{image}</div>
+            <div>
+              <Body as="div" color="primary" className="font-display text-base">
+                {authorName}
+              </Body>
+              <Body as="div" color="secondary" variant="small" className="mt-1">
+                {authorRole}
+              </Body>
+            </div>
+          </figcaption>
+        </div>
       </figure>
     </Card>
   );
