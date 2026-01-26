@@ -32,12 +32,9 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
           </span>
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
-          <Button href="mailto:vojtech@mares.cz" variant="accent">
-            <Body as="span" color="primary" className="text-lg font-bold tracking-tight">
-              Napište mi{" "}
-              <Body as="span" className="hidden lg:inline">
-                ještě dnes
-              </Body>
+          <Button href="https://cal.com/vojtechmares/30min" variant="accent">
+            <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
+              Domluvme si schůzku
             </Body>
           </Button>
         </div>
@@ -104,12 +101,9 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
           </div>
         </div>
         <div className="flex items-center gap-x-8">
-          <Button href="mailto:vojtech@mares.cz" variant="accent">
-            <Body as="span" color="primary" className="text-lg font-bold tracking-tight">
-              Napište mi{" "}
-              <Body as="span" className="hidden lg:inline">
-                ještě dnes
-              </Body>
+          <Button href="https://cal.com/vojtechmares/30min" variant="accent">
+            <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
+              Domluvme si schůzku
             </Body>
           </Button>
         </div>
