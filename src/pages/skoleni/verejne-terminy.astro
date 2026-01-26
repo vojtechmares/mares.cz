@@ -14,9 +14,6 @@ import { Section } from "../../components/ui/section";
 import { Card } from "../../components/ui/card";
 import { TrainingGrid } from "../../features/training/training-grid";
 
-// out-out of static pre-rendering
-export const prerender = false;
-
 const sessionEntries = await getFutureSessions();
 const slugMap = await getTrainingIDToSlugMap();
 const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap);

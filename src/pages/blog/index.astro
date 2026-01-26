@@ -8,9 +8,6 @@ import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 import { ArticleGrid } from "../../features/blog/article-grid";
 
-// switch to static page rendering during build time
-export const prerender = true;
-
 const articles = (
   await getCollection("blog", ({ data }) => {
     return !data.draft;
