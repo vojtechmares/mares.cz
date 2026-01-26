@@ -60,9 +60,9 @@ export function Services() {
             name="Konzultace"
             price="2 500 CZK / hod"
             description="Potřebujete poradit nebo si nevíte rady? Společně projdeme váš současný stav, identifikujeme problémy a navrhneme vhodná řešení."
-            buttonText="Napište mi"
-            buttonAriaLabel="Napište mi email a domluvme si konzultaci"
-            href="mailto:vojtech@mares.cz"
+            buttonText="Domluvme si schůzku"
+            buttonAriaLabel="Domluvme si schůzku "
+            href="https://cal.com/vojtechmares/30min"
           />
           <Service
             featured
