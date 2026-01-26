@@ -47,7 +47,7 @@ export function Services() {
   return (
     <Section id="sluzby" aria-label="Služby" variant="inverse">
       <Container>
-        <div className="md:text-center">
+        <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2" variant="inverse">
             Služby
           </Heading>

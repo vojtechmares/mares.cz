@@ -6,7 +6,7 @@ import { Text } from "../../components/ui/text";
 export function CallToAction() {
   return (
     <Section id="pojdme-do-toho" variant="inverse">
-      <div className="mx-auto max-w-xl text-center">
+      <div className="mx-auto max-w-2xl text-center">
         <Heading level="h2" variant="inverse">
           Pojďme do toho společně
         </Heading>
