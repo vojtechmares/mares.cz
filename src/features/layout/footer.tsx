@@ -129,9 +129,6 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">
                   Domluvme si schůzku
                 </Button>
-                <Button href="mailto:vojtech@mares.cz" size="medium">
-                  Napište mi
-                </Button>
               </div>
             </div>
           </div>
