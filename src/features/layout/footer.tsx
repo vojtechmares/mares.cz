@@ -6,6 +6,7 @@ import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { Body } from "../../components/ui/body";
 
 // Social Icons
 function BlueskyIcon() {
@@ -76,7 +77,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
     <Section className="border-t border-zinc-300">
       <footer>
         <Container>
-          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-4 lg:gap-4">
+          <div className="grid grid-cols-1 gap-y-6 pb-16 sm:pb-24 lg:grid-cols-4 lg:gap-4">
             <div>
               <Heading level="h3">Vojtěch Mareš</Heading>
               <ul className="mt-4 list-none">
@@ -121,10 +122,10 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
             </div>
             <div>
               <Heading level="h3">Zaujal jsem vás?</Heading>
-              <Text className="mt-4">
+              <Body className="mt-4">
                 Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi &ndash; společně
                 probereme vaše potřeby a najdeme řešení na míru.
-              </Text>
+              </Body>
               <div className="mt-5 flex flex-col space-y-4 md:space-y-2">
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">
                   Domluvme si schůzku
@@ -171,9 +172,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 <GitHubIcon />
               </a>
             </div>
-            <Text variant="secondary" className="mt-6 md:mt-0">
-              Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva vyhrazena.
-            </Text>
+            <Body className="mt-6 md:mt-0">Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva vyhrazena.</Body>
           </div>
         </Container>
       </footer>
