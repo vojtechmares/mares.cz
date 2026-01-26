@@ -14,9 +14,9 @@ type NavLink = {
 
 function LinkItem({ href, name, className = "" }: { href: string; name: string; className?: string }) {
   return (
-    <Link href={href} variant="default" className={clsx(className, "text-xl font-bold text-zinc-100")}>
+    <a href={href} className={clsx(className, "text-xl font-bold text-zinc-100 transition-colors hover:text-zinc-300")}>
       {name}
-    </Link>
+    </a>
   );
 }
 
