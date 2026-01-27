@@ -2,7 +2,7 @@
 title: GitHub Actions
 backofficeID: 4
 description: |
-  Školení na téma GitHub Actions: naučte se psát automatizované workflows pomocí GitHub Actions, abyste si ušetřili manuální práci s testováním a zároveň zvýšili kvalitu vaší aplikace.
+  Ušetřete hodiny ruční práce automatizací testů, buildů a nasazování. Naučíte se psát GitHub Actions workflows, tvořit vlastní actions a nastavit CI/CD, které za vás pohlídá kvalitu každé změny v kódu.
 keywords:
   [
     "github",

@@ -2,7 +2,7 @@
 title: Git
 backofficeID: 3
 description: |
-  Git je nástroj pro verzování nejen zdrojového kódu aplikací. Git umožňuje spolupráci vývojářů a vývojových týmů nad jednou codebase. Git zároveň tvoří log všech změn, kdo, co kdy, a s dobrou "commit message" i proč.
+  Zefektivněte spolupráci ve vašem vývojovém týmu. Naučíte se Git od základů po pokročilé techniky – větvení, merge strategie i řešení konfliktů. Váš tým bude pracovat paralelně na více úkolech bez obav ze ztráty kódu.
 keywords: ["git", "version control", "vcs"]
 featured: false
 length: 1

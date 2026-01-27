@@ -2,7 +2,7 @@
 title: Postgres na Kubernetes
 backofficeID: 8
 description: |
-  Školení CloudNativePG: provozujte téměř bezstarostně PostgreSQL cluster na vašem Kubernetes clusteru. CNPG za vás řeší prakticky všechnu operativu: upgrady, failover, switchover, zálohy a mnohem víc – to vše si sami vyzkoušíte a naučíte.
+  Ušetřete za managed databázi a provozujte PostgreSQL na Kubernetes s klidným spaním. Naučíte se pomocí CloudNativePG automatizovat upgrady, failover, zálohy i monitoring – vše si prakticky vyzkoušíte.
 keywords: ["postgres", "kubernetes", "devops", "database", "operator"]
 featured: false
 length: 1

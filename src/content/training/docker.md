@@ -2,7 +2,7 @@
 title: Docker
 backofficeID: 6
 description: |
-  Docker je technologie, která proces vývoje, testování a provozování softwaru velmi zjednodušuje. Na školení projdeme vše od začátků až po pokročilé funkce.
+  Zbavte se problémů s prostředími a zjednodušte nasazování aplikací. Naučíte se zabalit vaší aplikaci do kontejneru, pracovat s kontejnery a sestavit vícekontejnerové aplikace – od základů po produkční best practices.
 keywords: ["docker", "kontejner", "obraz", "build aplikace", "devops", "deployment"]
 featured: false
 length: 2

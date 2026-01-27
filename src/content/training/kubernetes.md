@@ -2,7 +2,7 @@
 title: Kubernetes
 backofficeID: 2
 description: |
-  Školení Kubernetes: naučte se zkrotit Kubernetes cluster(y), provozovat je, nasazovat aplikace. Na školení projdeme od základů práci s Kubernetes, jak vyvíjet aplikace pro Kubernetes a jak je provozovat.
+  Naučte se nasazovat a provozovat kontejnerové aplikace ve scale. Po školení budete umět spravovat cluster, nasazovat aplikace, pracovat s Helmem a řešit každodenní provozní situace s jistotou.
 keywords:
   [
     "kubernetes",
