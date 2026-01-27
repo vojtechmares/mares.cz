@@ -25,8 +25,8 @@ interface HeroProps {
 export function Hero({ children }: HeroProps) {
   return (
     <Container className="pt-16 pr-0! sm:pt-24 md:pr-4">
-      <div className="flex flex-row justify-center md:flex-row md:items-end md:justify-between">
-        <div className="max-w-64 md:my-auto md:max-w-200">
+      <div className="flex flex-row items-end justify-between">
+        <div className="max-w-64 min-w-0 shrink pb-12 md:max-w-200 md:pb-16">
           <Heading level="h1" className="text-4xl font-black! sm:text-7xl">
             Jsem{" "}
             <span className="relative whitespace-nowrap text-orange-500">
@@ -47,7 +47,7 @@ export function Hero({ children }: HeroProps) {
             </Button> */}
           </div>
         </div>
-        <div className="overflow-x-hidden">{children}</div>
+        <div className="ml-6 max-h-96 shrink-0 overflow-hidden md:ml-0 md:max-h-none">{children}</div>
       </div>
     </Container>
   );
