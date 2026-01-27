@@ -6,13 +6,13 @@ import { Picture } from "astro:assets";
 
 <HeroComponent>
   <Picture
-    class="mx-auto max-w-100 md:mx-0 md:block md:pt-0"
+    class="max-w-60 sm:max-w-80 md:max-w-100"
     priority
     loading="eager"
-    layout={"constrained"}
     src={avatarVojtechMares}
     alt="Vojtěch Mareš"
-    width="400"
-    formats={["avif", "webp"]}
+    widths={[120, 160, 240, 320, 400]}
+    sizes="(max-width: 640px) 240px, (max-width: 768px) 320px, 400px"
+    formats={["avif", "webp", "png"]}
   />
 </HeroComponent>
