@@ -9,11 +9,10 @@ import { Picture } from "astro:assets";
     class="mx-auto max-w-100 md:mx-0 md:block md:pt-0"
     priority
     loading="eager"
-    layout={"full-width"}
+    layout={"constrained"}
     src={avatarVojtechMares}
     alt="Vojtěch Mareš"
-    widths={[400, 600, 800]}
+    width="400"
     formats={["avif", "webp"]}
-    sizes={`(max-width: 768px) 400px, (max-width: 1024px) 600px, 800px`}
   />
 </HeroComponent>
