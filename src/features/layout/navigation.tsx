@@ -25,10 +25,8 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
         <div className="flex items-center md:gap-x-12">
-          <span className="font-display text-2xl font-extrabold tracking-tight text-orange-500">
-            <a href="/" className="py-2 focus-visible:outline-black">
-              Vojtěch Mareš
-            </a>
+          <span className="font-sans text-xl font-bold text-orange-500">
+            <a href="/">Vojtěch Mareš</a>
           </span>
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
@@ -88,10 +86,8 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
       <div className="flex justify-between">
         <div className="flex justify-start gap-x-6">
           <div className="flex items-center md:gap-x-12">
-            <span className="font-display text-2xl font-extrabold tracking-tight">
-              <a href="/" className="py-2 text-orange-500 focus-visible:outline-black">
-                Vojtěch Mareš
-              </a>
+            <span className="font-sans text-xl font-bold text-orange-500">
+              <a href="/">Vojtěch Mareš</a>
             </span>
           </div>
           <div className="flex flex-row flex-wrap items-center gap-x-6">
