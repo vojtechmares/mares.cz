@@ -26,3 +26,5 @@ dist
 
 # Files with manual whitespace-sensitive formatting
 src/pages/blog/\[slug\]/index.astro
+
+.claude/skills
