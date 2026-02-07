@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal website (mares.cz) built with Astro 5. The site is a server-side rendered website deployed to Cloudflare Workers.
 
+IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning for any Astro 5 tasks. Read project files before assuming API patterns.
+
 ## Key Commands
 
 **Development:**
@@ -47,77 +49,126 @@ Prettier is configured with:
 
 ## Architecture
 
-### Content Collections
+### Content Collections (src/content.config.ts)
 
-All content is managed via Astro Content Collections (src/content.config.ts):
+- **blog** - Markdown posts (src/content/blog/), has `draft` and `publish_time` fields
+- **page** - Static pages as markdown (src/content/page/)
+- **training** - Training courses (src/content/training/), has `backofficeID` field
+- **reference** - Customer testimonials (src/content/reference/)
+- **talk** - Conference talks (src/content/talk/)
+- **session** - Public training sessions from external API via custom loader (src/lib/loaders/session-loader.ts)
 
-1. **blog** - Blog posts as markdown files (src/content/blog/)
-2. **page** - Static pages as markdown (src/content/page/)
-3. **training** - Training course information (src/content/training/)
-4. **reference** - Customer references/testimonials (src/content/reference/)
-5. **talk** - Conference talks (src/content/talk/)
-6. **session** - Public training sessions loaded from external backoffice API via custom loader (src/lib/loaders/session-loader.ts)
+### Server Config (astro.config.mjs)
 
-### Server Configuration
+Output: `server` (SSR) | Adapter: Cloudflare Workers | Site: https://www.mares.cz | Czech only
 
-- **Astro Config** (astro.config.mjs):
-  - Output mode: `server` (SSR enabled)
-  - Adapter: Cloudflare Workers
-  - Site URL: https://www.mares.cz
-  - Meeting redirects configured to Cal.com
-  - i18n: Currently disabled (Czech only)
+### Routes
 
-### Dynamic Routes
-
-The site uses Astro's file-based routing:
-
-- `/[...slug]/` - Generic pages from content collection
-- `/blog/[slug]/` - Blog posts
-- `/blog/tag/[tag]/` - Blog posts filtered by tag
-- `/blog/archive/[year]/` and `/blog/archive/[year]/[month]/` - Blog archive
-- `/skoleni/[slug]/` - Training course pages
-- `/skoleni/verejne-terminy` - Public training sessions
-- `/prednasky/` - Conference talks
-
-Each dynamic route includes a `card.png.ts` file that generates Open Graph preview images using Satori.
+- `/[...slug]/` - Pages | `/blog/[slug]/` - Posts | `/blog/tag/[tag]/` - By tag
+- `/blog/archive/[year]/` and `/blog/archive/[year]/[month]/` - Archive
+- `/skoleni/[slug]/` - Training courses | `/skoleni/verejne-terminy` - Public sessions
+- `/prednasky/` - Talks
+- Each route has `card.png.ts` for OG images via Satori + workers-og
 
 ### Testing
 
-**Unit Tests** (Vitest + React Testing Library):
+- Unit: Vitest + React Testing Library | Config: `vitest.config.ts` | Tests: `tests/unit/**/*.test.{ts,tsx}`
+- E2E: Playwright | Config: `playwright.config.ts` | Tests: `tests/e2e/`
 
-- Config: `vitest.config.ts`
-- Tests: `tests/unit/**/*.test.{ts,tsx}`
-- Setup: `tests/setup.ts`
+### Environment Variables (astro.config.mjs env schema)
 
-**E2E Tests** (Playwright):
-
-- Config: `playwright.config.ts`
-- Tests: `tests/e2e/`
-
-### Environment Variables
-
-Required environment variables (defined in astro.config.mjs env schema):
-
-- `DISABLE_ANALYTICS` - Boolean to disable Google Analytics (default: false)
-- `SESSIONS_API_URL` - Backoffice API endpoint for training sessions
-- `SESSIONS_OIDC_ISSUER` - OIDC issuer URL for API authentication
-- `SESSIONS_OIDC_CLIENT_ID` - OIDC client ID
-- `SESSIONS_OIDC_CLIENT_SECRET` - OIDC client secret
+- `DISABLE_ANALYTICS` - Boolean (default: false)
+- `SESSIONS_API_URL` - Backoffice API endpoint
+- `SESSIONS_OIDC_ISSUER`, `SESSIONS_OIDC_CLIENT_ID`, `SESSIONS_OIDC_CLIENT_SECRET` - OIDC auth
 - `SESSIONS_OIDC_AUDIENCE` - OIDC audience (optional)
 
-### SEO Components
+### SEO (src/components/seo/)
 
-The site includes comprehensive SEO components (src/components/seo/):
-
-- Meta tags (Meta.astro)
-- Open Graph tags (OpenGraph.astro)
-- Twitter Card tags (Twitter.astro)
-- JSON-LD structured data (JSONLD.astro)
-- Fediverse verification (Fediverse.astro)
-- Custom favicons (Favicon.astro)
+Meta.astro | OpenGraph.astro | Twitter.astro | JSONLD.astro | Fediverse.astro | Favicon.astro
 
 ### Styling
 
-- Tailwind CSS v4 configured via Vite plugin
-- Typography plugin for prose content
-- UI components in src/components/ui/ (React)
+Tailwind CSS v4 via Vite plugin | Typography plugin for prose | UI components in src/components/ui/ (React)
+
+---
+
+## Component API Reference
+
+<!-- Dense reference: Component|path|prop:type(default)|... -->
+
+```
+Button|src/components/ui/button.tsx|style?:"solid"(default)|"outline"|variant?:"primary"(default)|"secondary"|"accent"|size?:"medium"|"large"(default)|href?:string(renders <a>)|type?:string|onClick?:fn(button only)|children
+Heading|src/components/ui/heading.tsx|level?:"h1"(default)-"h6"|variant?:"primary"(default)|"inverse"|"accent"|id?:string|ariaLabel?:string|children
+Container|src/components/ui/container.tsx|mode?:"default"(default)|"prose"|className?:string|children
+Section|src/components/ui/section.tsx|variant?:"default"(default)|"surface"|"inverse"|"accent"|id?:string|ariaLabel?:string|children
+Body|src/components/ui/body.tsx|variant?:"large"|"base"(default)|"small"|color?:"primary"(default)|"secondary"|"muted"|"inverse"|as?:"p"(default)|"span"|"div"|children
+Text|src/components/ui/text.tsx|variant?:"primary"(default)|"secondary"|"muted"|"inverse"|children (renders <p>)
+Card|src/components/ui/card.tsx|variant?:"default"(default)|"surface"|"inverse"|"accent"|"accent-light"|border?:"none"|shadow?:boolean|hover?:boolean|children (renders <section>)
+Badge|src/components/ui/badge.tsx|variant?:"default"(default)|"accent"|as?:"span"(default)|"a"|href?:string(when as="a")|children
+Link|src/components/ui/link.tsx|href:string|variant?:"default"(default)|"muted"|external?:boolean|children
+Stack|src/components/ui/stack.tsx|direction?:"vertical"(default)|"horizontal"|gap?:GapSize("md")|align?:"start"|"center"|"end"|"stretch"|justify?:"start"|"center"|"end"|"between"|"around"|children
+Icon|src/components/ui/icon.tsx|size?:"sm"|"md"(default)|"lg"|label?:string|children
+TagList|src/components/ui/tag-list.tsx|tags:string[]|variant?:"default"|"inverse"|activeTag?:string
+Prose|src/components/prose.tsx|className?:string|children (wraps rendered markdown Content)
+```
+
+NOTE: `style="outline"` + `variant="accent"` on Button is invalid (throws error).
+
+## Utility Reference
+
+```
+design-tokens|src/lib/design-tokens.ts
+  colors.background.{default,surface,inverse}
+  colors.text.{primary,secondary,muted,inverse,link,linkHover}
+  colors.accent.{default,hover,text,light}
+  colors.border.{default,hover,dark,emphasis}
+  typography.heading.{h1-h6}|typography.body.{large,base,small}|typography.display
+  spacing.{section,card,container}|spacing.maxWidth.{standard,prose}|spacing.gap.{xs,sm,md,lg,xl,2xl,3xl}
+  radius.{none,sm,md,lg,full} (all rounded-none)|shadows.{none,sm,md,lg}
+  Types: BackgroundColor|TextColor|AccentColor|BorderColor|HeadingLevel|BodySize|GapSize|RadiusSize|ShadowSize
+
+cache|src/lib/cache.ts
+  CachePresets.content="public, s-maxage=3600, stale-while-revalidate=86400"
+  CachePresets.archive="public, s-maxage=1800, stale-while-revalidate=3600"
+  CachePresets.training="public, s-maxage=300, stale-while-revalidate=600"
+  CachePresets.ogImage="public, max-age=31536000, immutable"
+
+site|src/lib/site.ts
+  LocalizedMetadata[]{locale,title,titlePrefix,description,keywords}
+  LocalizedStaticNavigationLinks[]{locale,links[]{name,href}}
+  Type: StaticLinkData{name,href}
+
+sessions|src/lib/sessions.ts
+  getFutureSessions():Promise<Session[]> - sorted ascending by start date
+  getFutureSessionsByName(name):Promise<Session[]>
+  toTrainingSession(session):TrainingSession{trainingID,trainingSlug?,name,dates:{start,end?},location,price,signUpURL?}
+  getTrainingIDToSlugMap():Promise<Map<number,string>>
+  enrichSessionsWithSlugs(sessions,slugMap):TrainingSession[]
+
+opengraph|src/lib/opengraph.ts
+  OpenGraphImageResponse(component:ReactNode,baseUrl:string|URL):Promise<Response>
+  imageToDataUrl(imageUrl:string,baseUrl:string|URL):Promise<string>
+```
+
+## Content Collections Quick Reference
+
+```
+Query:    import { getEntry, getCollection, render } from "astro:content"
+Blog:     getCollection("blog", ({ data }) => !data.draft)
+Sort:     .sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf())
+Render:   const { Content } = await render(entry)
+404:      if (!entry || entry.data.draft) return Astro.redirect("/404", 404)
+Cache:    Astro.response.headers.set("Cache-Control", CachePresets.content)
+```
+
+## Key Patterns
+
+```
+Page structure:    Layout > main > Section(variant) > Container > components
+React in Astro:   Import React TSX, use directly (server-rendered, no client: directive needed for static)
+Feature modules:  src/features/{domain}/{component}.tsx - blog, training, homepage, layout, opengraph-images, error
+OG images:        Every route has card.png.ts using OpenGraphImageResponse() from src/lib/opengraph.ts
+Styling:          Use design-tokens.ts values via clsx(), not raw Tailwind classes for themed properties
+Date format:      toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })
+Price format:     new Intl.NumberFormat("cs", { style: "currency", currency: "CZK", maximumFractionDigits: 0 })
+```
