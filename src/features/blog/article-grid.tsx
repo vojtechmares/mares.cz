@@ -1,4 +1,5 @@
 import type { CollectionEntry } from "astro:content";
+import { Fragment } from "react";
 
 import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
@@ -28,7 +29,7 @@ export function ArticleGrid({ articles }: { articles: CollectionEntry<"blog">[] 
           <Card key={article.id} variant="surface" className="flex flex-col">
             <div className="mb-4 flex flex-row justify-between">
               {/* prettier-ignore */}
-              <Body>{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`}>#{tag}</Link>{" "}</>)}</Body>
+              <Body>{article.data.tags.map((tag) => <Fragment key={tag}><Link href={`/blog/tag/${tag}`}>#{tag}</Link>{" "}</Fragment>)}</Body>
               <Body color="secondary">
                 {new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
                   day: "numeric",
