@@ -9,6 +9,9 @@ import { CallToAction } from "../features/homepage/call-to-action";
 
 import { LocalizedMetadata } from "../lib/site";
 import { TrainingGrid } from "../features/training/training-grid";
+import { CachePresets } from "../lib/cache";
+
+Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === "cs")[0];
 
@@ -34,12 +37,10 @@ const jsonLd = {
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <main>
-    <Hero />
-    <Services />
-    <Clients />
-    <TrainingGrid />
-    <References />
-    <CallToAction />
-  </main>
+  <Hero />
+  <Services />
+  <Clients />
+  <TrainingGrid />
+  <References />
+  <CallToAction />
 </Layout>

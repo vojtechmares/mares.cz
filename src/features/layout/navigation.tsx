@@ -14,7 +14,13 @@ type NavLink = {
 
 function LinkItem({ href, name, className = "" }: { href: string; name: string; className?: string }) {
   return (
-    <a href={href} className={clsx(className, "text-xl font-bold text-zinc-100 transition-colors hover:text-zinc-300")}>
+    <a
+      href={href}
+      className={clsx(
+        className,
+        "text-xl font-bold text-zinc-100 transition-colors hover:text-zinc-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500",
+      )}
+    >
       {name}
     </a>
   );
@@ -26,7 +32,12 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
       <div className="row flex justify-between">
         <div className="flex items-center md:gap-x-12">
           <span className="font-sans text-xl font-bold text-orange-500">
-            <a href="/">Vojtěch Mareš</a>
+            <a
+              href="/"
+              className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+            >
+              Vojtěch Mareš
+            </a>
           </span>
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
@@ -87,7 +98,12 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
         <div className="flex justify-start gap-x-6">
           <div className="flex items-center md:gap-x-12">
             <span className="font-sans text-xl font-bold text-orange-500">
-              <a href="/">Vojtěch Mareš</a>
+              <a
+                href="/"
+                className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+              >
+                Vojtěch Mareš
+              </a>
             </span>
           </div>
           <div className="flex flex-row flex-wrap items-center gap-x-6">

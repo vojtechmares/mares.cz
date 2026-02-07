@@ -7,6 +7,9 @@ import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 import { ArticleGrid } from "../../features/blog/article-grid";
+import { CachePresets } from "../../lib/cache";
+
+Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const articles = (
   await getCollection("blog", ({ data }) => {

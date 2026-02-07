@@ -13,9 +13,11 @@ import {
 import { Section } from "../../components/ui/section";
 import { Card } from "../../components/ui/card";
 import { TrainingGrid } from "../../features/training/training-grid";
+import { CachePresets } from "../../lib/cache";
 
-const sessionEntries = await getFutureSessions();
-const slugMap = await getTrainingIDToSlugMap();
+Astro.response.headers.set("Cache-Control", CachePresets.training);
+
+const [sessionEntries, slugMap] = await Promise.all([getFutureSessions(), getTrainingIDToSlugMap()]);
 const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap);
 
 const meta = {
@@ -49,16 +51,16 @@ const jsonLd = {
 ---
 
 <Layout meta={meta} jsonLd={jsonLd}>
-  <main>
-    <Section variant="inverse">
-      <Container>
-        <Heading variant="inverse" level="h1">Veřejné termíny školení</Heading>
-      </Container>
-    </Section>
-    <Section>
-      <Container>
-        <TrainingSessionsTable sessions={sessions} />
-        <Card variant="surface" className="mt-12 sm:mt-18">
+  <Section variant="inverse">
+    <Container>
+      <Heading variant="inverse" level="h1">Veřejné termíny školení</Heading>
+    </Container>
+  </Section>
+  <Section>
+    <Container>
+      <TrainingSessionsTable sessions={sessions} />
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 md:grid-cols-2">
+        <Card variant="surface">
           <Heading level="h3" id="podminky"> Podmínky veřejných termínů školení </Heading>
           <ul class="mt-6 list-disc pl-4">
             <li>Přihlášení na veřejný termín školení je závazné a zavazujete se k platbě.</li>
@@ -83,8 +85,11 @@ const jsonLd = {
             </li>
           </ul>
         </Card>
-      </Container>
-    </Section>
-    <TrainingGrid />
-  </main>
+        <Card variant="accent">
+          <Heading level="h3">Proč přijít právě na moje školení?</Heading>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+  <TrainingGrid />
 </Layout>

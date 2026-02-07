@@ -11,7 +11,7 @@ export type TrainingSessionTableProps = {
 
 export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
-    <table className="w-full divide-y divide-gray-300">
+    <table className="w-full divide-y divide-gray-300 tabular-nums">
       <thead>
         <tr>
           <th scope="col" className="py-3.5 pr-3 pl-4 text-left font-semibold text-zinc-900 sm:pl-0">
@@ -84,7 +84,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
 
 export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
-    <table className="min-w-full md:divide-y md:divide-zinc-300">
+    <table className="min-w-full tabular-nums md:divide-y md:divide-zinc-300">
       <thead>
         <tr>
           <th scope="col" className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell">

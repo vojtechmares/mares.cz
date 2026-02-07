@@ -142,8 +142,16 @@ const metadataDefaults = LocalizedMetadata.filter((m) => m.locale === locale)[0]
     <slot name="head" />
   </head>
   <body class="flex h-full flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:p-4 focus:text-zinc-900"
+    >
+      Přeskočit na obsah
+    </a>
     <Navigation />
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
     <CookieConsent />
   </body></html

@@ -6,6 +6,9 @@ import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
+import { CachePresets } from "../../lib/cache";
+
+Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const talks = (await getCollection("talk", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
