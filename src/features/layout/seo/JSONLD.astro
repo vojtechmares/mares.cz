@@ -69,7 +69,7 @@ interface Props {
 
 const { schema } = Astro.props;
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 let jsonLd: any;
 

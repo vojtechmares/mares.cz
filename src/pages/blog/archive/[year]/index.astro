@@ -52,7 +52,7 @@ const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
   title: `Vojtěch Mareš | Blog: ${year}`,
@@ -63,7 +63,7 @@ const meta = {
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `/blog/archive/${year}/card.png`,
+    url: `${baseUrl}/blog/archive/${year}/card.png`,
     width: 1200,
     height: 630,
     alt: `Blog: ${year}`,

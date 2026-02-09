@@ -47,7 +47,7 @@ const monthName = CZECH_MONTHS[month - 1];
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
   title: `Vojtěch Mareš | Blog: ${monthName} ${year}`,
@@ -58,7 +58,7 @@ const meta = {
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `/blog/archive/${year}/${String(month).padStart(2, "0")}/card.png`,
+    url: `${baseUrl}/blog/archive/${year}/${String(month).padStart(2, "0")}/card.png`,
     width: 1200,
     height: 630,
     alt: `Blog: ${monthName} ${year}`,

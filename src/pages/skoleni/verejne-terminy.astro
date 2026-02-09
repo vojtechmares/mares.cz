@@ -27,7 +27,7 @@ const meta = {
   keywords: "školení, termíny, devops školení, termín školení",
 };
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 // Generate Event schema for each training session
 const jsonLd = {

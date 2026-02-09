@@ -30,12 +30,12 @@ const meta = {
   keywords: `${tag}, blog, devops, ${tag} články`,
 };
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `/blog/tag/${tag}/card.png`,
+    url: `${baseUrl}/blog/tag/${tag}/card.png`,
     width: 1200,
     height: 630,
     alt: `Blog: #${tag}`,

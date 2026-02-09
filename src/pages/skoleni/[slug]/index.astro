@@ -40,14 +40,14 @@ const meta = {
 const openGraph = {
   type: "article" as const,
   image: {
-    url: Astro.site + "skoleni/" + training.id + "/card.png",
+    url: Astro.url + "skoleni/" + training.id + "/card.png",
     width: 1200,
     height: 630,
     alt: training.data.title + ": " + training.data.description,
   },
 };
 
-const baseUrl = Astro.site?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const pricing = {
   open: training.data.price.open.filter((variant) => variant.currency === "CZK")[0].amount,

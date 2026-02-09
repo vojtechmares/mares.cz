@@ -38,7 +38,7 @@ function localeToOGLocale(locale?: string) {
 }
 
 if (image?.url !== undefined && image.url.startsWith("/")) {
-  image.url = Astro.site + image.url.replace("/", "");
+  image.url = Astro.url + image.url.replace("/", "");
 }
 ---
 
