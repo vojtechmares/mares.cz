@@ -15,5 +15,9 @@
       "name": "website-mares-cz-v3-staging",
       "routes": [{ "pattern": "beta.mares.cz", "custom_domain": true }],
     },
+    "production": {
+      "name": "website-mares-cz-v3-production",
+      "routes": [{ "pattern": "www.mares.cz", "custom_domain": true }],
+    },
   },
 }
