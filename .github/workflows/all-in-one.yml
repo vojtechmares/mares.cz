@@ -72,3 +72,15 @@ jobs:
       environment: staging
       environment-url: https://beta.mares.cz
     secrets: inherit
+
+  deploy-production:
+    if: "github.ref == 'refs/heads/production'"
+    needs: [build-test]
+    permissions:
+      contents: read
+      deployments: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      environment-url: https://www.mares.cz
+    secrets: inherit
