@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export type Session = CollectionEntry<"session">;
+type Session = CollectionEntry<"session">;
 
 export interface TrainingSession {
   trainingID: number;

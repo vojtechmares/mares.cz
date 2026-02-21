@@ -15,11 +15,6 @@ export const LocalizedMetadata = [
   },
 ];
 
-export interface StaticLinkData {
-  name: string;
-  href: string;
-}
-
 export const LocalizedStaticNavigationLinks = [
   {
     locale: "cs",

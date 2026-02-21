@@ -1,2 +1,2 @@
 export { BackofficeClient } from "./client";
-export type { APISession, OIDCConfig, SessionsListParams, SessionsListResponse } from "./types";
+export type { APISession } from "./types";

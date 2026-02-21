@@ -5,7 +5,7 @@ import { Link } from "../../components/ui/link";
 import { Text } from "../../components/ui/text";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
 
-export type TrainingSessionTableProps = {
+type TrainingSessionTableProps = {
   sessions: TrainingSession[];
 };
 

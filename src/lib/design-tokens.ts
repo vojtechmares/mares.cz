@@ -147,12 +147,6 @@ export const shadows = {
 // TYPE EXPORTS
 // =============================================================================
 
-export type BackgroundColor = keyof typeof colors.background;
-export type TextColor = keyof typeof colors.text;
-export type AccentColor = keyof typeof colors.accent;
-export type BorderColor = keyof typeof colors.border;
 export type HeadingLevel = keyof typeof typography.heading;
 export type BodySize = keyof typeof typography.body;
 export type GapSize = keyof typeof spacing.gap;
-export type RadiusSize = keyof typeof radius;
-export type ShadowSize = keyof typeof shadows;
