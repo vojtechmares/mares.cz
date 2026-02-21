@@ -3,9 +3,6 @@ import clsx from "clsx";
 import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
-import { Link } from "../../components/ui/link";
-
-// import {StaticNavigationLinks} from "@/lib/site"
 
 type NavLink = {
   name: string;

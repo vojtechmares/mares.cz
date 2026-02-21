@@ -5,7 +5,6 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
-import { Text } from "../../components/ui/text";
 import { Body } from "../../components/ui/body";
 
 // Social Icons
