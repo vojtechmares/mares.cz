@@ -7,7 +7,7 @@ event:
 draft: false
 ---
 
-![Vojtěch Mareš přednáší na Kontejnery v praxi 2026](https://cdn.mares.cz//vojtech-mares-talk-kontejnery-v-praxi-2026-1.jpg)
+![Vojtěch Mareš přednáší na Kontejnery v praxi 2026](https://cdn.mares.cz/vojtech-mares-talk-kontejnery-v-praxi-2026-1.jpg)
 
 Přednášel jsem o možnostech jak zabezpečit vaše clustery, důvěřovat aplikacím, hlídat úniky dat, monitorovat a bránit se supply chain útokům.
 

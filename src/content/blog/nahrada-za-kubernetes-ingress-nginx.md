@@ -25,8 +25,8 @@ Tak hledám hledám a chci se podělit o to, co jsem našel a jak to různě fun
 
 Zkoušel jsem:
 
-- Traefik
-- NGINX-Ingress
+- [Traefik](https://traefik.io/)
+- [NGINX-Ingress](https://docs.nginx.com/nginx-ingress-controller/)
 - [HAProxy Kubernetes Ingress Controller](https://www.haproxy.com/documentation/kubernetes-ingress/)
 
 ## Traefik
