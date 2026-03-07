@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
 
@@ -15,7 +15,13 @@ import { CachePresets } from "../../../lib/cache";
 
 const { slug } = Astro.params;
 const article = await getEntry("blog", slug!);
+
 if (!article || article.data.draft) {
+  const allPosts = await getCollection("blog", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+
+  if (allPosts.length > 0) {
+    return Astro.redirect(`/blog/${allPosts[0].id}/`, 301);
+  }
   return Astro.redirect("/404", 404);
 }
 

@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { Logo } from "../../../features/training/logo";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
 import { Body } from "../../../components/ui/body";
@@ -17,6 +17,10 @@ const { slug } = Astro.params;
 
 const training = await getEntry("training", slug!);
 if (!training || training.data.draft) {
+  const allTrainings = await getCollection("training", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+  if (allTrainings.length > 0) {
+    return Astro.redirect(`/skoleni/${allTrainings[0].id}/`, 301);
+  }
   return Astro.redirect("/404", 404);
 }
 

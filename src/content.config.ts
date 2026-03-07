@@ -23,6 +23,7 @@ const blog = defineCollection({
       .optional(),
     trainingAd: z.nullable(z.string()).optional(),
     draft: z.boolean().default(true),
+    redirectFrom: z.array(z.string()).optional(),
     publish_time: z.date(),
   }),
 });
@@ -67,6 +68,7 @@ const training = defineCollection({
       ),
     }),
     draft: z.boolean().default(true),
+    redirectFrom: z.array(z.string()).optional(),
   }),
 });
 
@@ -82,6 +84,7 @@ const page = defineCollection({
     featured: z.boolean().default(false),
     hidden: z.boolean().default(false),
     draft: z.boolean().default(true),
+    redirectFrom: z.array(z.string()).optional(),
   }),
 });
 

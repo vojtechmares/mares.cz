@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
@@ -15,6 +15,10 @@ if (!slug) {
 
 const page = await getEntry("page", slug);
 if (!page || page.data.draft) {
+  const allPages = await getCollection("page", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+  if (allPages.length > 0) {
+    return Astro.redirect(`/${allPages[0].id}/`, 301);
+  }
   return Astro.redirect("/404", 404);
 }
 

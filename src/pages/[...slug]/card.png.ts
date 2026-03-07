@@ -1,4 +1,4 @@
-import { getEntry } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import type { APIContext } from "astro";
 
 import { CreatePageImageComponent } from "../../features/opengraph-images/page";
@@ -13,6 +13,10 @@ export async function GET({ params, url }: APIContext) {
 
   const page = await getEntry("page", slug);
   if (!page || page.data.draft) {
+    const allPages = await getCollection("page", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+    if (allPages.length > 0) {
+      return Response.redirect(new URL(`/${allPages[0].id}/card.png`, url).toString(), 301);
+    }
     return new Response("Not Found", { status: 404 });
   }
 
