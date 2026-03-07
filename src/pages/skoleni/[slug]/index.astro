@@ -19,7 +19,7 @@ const training = await getEntry("training", slug!);
 if (!training || training.data.draft) {
   const allTrainings = await getCollection("training", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
   if (allTrainings.length > 0) {
-    return Astro.redirect(`/skoleni/${allTrainings[0].id}/`, 301);
+    return Astro.redirect(`/skoleni/${allTrainings[0].id}`, 301);
   }
   return Astro.redirect("/404", 404);
 }
