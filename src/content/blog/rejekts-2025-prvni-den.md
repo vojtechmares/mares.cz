@@ -5,6 +5,7 @@ keywords: ["cncf rejekts", "rejekts", "kubecon", "2025", "london", "rejektsio"]
 tags: ["konference"]
 draft: false
 publish_time: 2025-03-31
+redirectFrom: ["rejeckts-2025-prvni-den"]
 ---
 
 Jsem v Londýně na šestidenním "maratonu" konferencí: Cloud Native Rejekts (30.–31. 3.), KubeCon co-located events (1. 4.) a KubeCon samotný (2.–4. 4.). Rejekts jsou první – a já mám za sebou první den. Jaký byl?
