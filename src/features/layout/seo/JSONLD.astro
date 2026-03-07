@@ -23,7 +23,6 @@ interface CollectionPageSchema {
   name: string;
   description: string;
   url: string;
-  numberOfItems: number;
 }
 
 interface CourseSchema {
@@ -167,7 +166,6 @@ if (schema.type === "BlogPosting") {
     name: collectionPage.name,
     description: collectionPage.description,
     url: collectionPage.url,
-    numberOfItems: collectionPage.numberOfItems,
     isPartOf: {
       "@type": "WebSite",
       name: "Vojtěch Mareš - DevOps architekt",
