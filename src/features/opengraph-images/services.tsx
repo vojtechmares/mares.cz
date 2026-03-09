@@ -86,9 +86,23 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
             color: "#a1a1aa",
           }}
         >
-          Pomáhám firmám budovat a spravovat moderní infrastrukturu. Od konzultace přes školení až po dlouhodobé
-          partnerství.
+          Pomáhám firmám budovat a spravovat moderní infrastrukturu.
         </p>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.25rem",
+            marginTop: "0.75rem",
+            fontFamily: "Space Mono",
+            fontSize: "1.25rem",
+            color: "#a1a1aa",
+          }}
+        >
+          <span>• Konzultace</span>
+          <span>• Školení</span>
+          <span>• Dlouhodobá spolupráce</span>
+        </div>
         <p
           style={{
             fontSize: "1.25rem",
