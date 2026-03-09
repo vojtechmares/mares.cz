@@ -30,6 +30,29 @@ const spolupráceSteps = [
   },
 ];
 
+const zahrnujeItems = [
+  "Správa infrastruktury a IaC (Terraform)",
+  "Kubernetes a kontejnerizace",
+  "Monitoring, alerting a observabilita",
+  "Bezpečnost a pravidelné revize",
+  "Škálovatelný rozsah spolupráce",
+  "CI/CD pipeline a automatizace",
+  "Integrace s AI a agenty",
+];
+
+const projektyItems = [
+  { label: "Migrace", description: "z/do cloudu i on-premise (oba směry), migrace aplikací do Kubernetes" },
+  {
+    label: "Cloudová architektura",
+    description: "cloud native patterny, spolehlivost a efektivní využití cloudu",
+  },
+  {
+    label: "Budování platform týmu",
+    description: "podpora vývojových týmů pomocí DevOps praktik a self-service přístupu",
+  },
+  { label: "Integrace AI", description: "bezpečná integrace AI a AI agentů do aplikací i platformy" },
+];
+
 export function ServicesCooperation() {
   return (
     <Section id="spoluprace" variant="surface" ariaLabel="Spolupráce">
@@ -70,22 +93,19 @@ export function ServicesCooperation() {
           </ol>
         </nav>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <Card variant="surface">
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <Card variant="surface" className="border-t-4 border-orange-500">
             <Heading level="h3">Co spolupráce zahrnuje</Heading>
             <Body as="div" color="secondary" className="mt-4">
               <ul className="list-inside list-disc space-y-2 pl-4">
-                <li>Správa infrastruktury a IaC (Terraform)</li>
-                <li>Kubernetes a kontejnerizace</li>
-                <li>Monitoring, alerting a observabilita</li>
-                <li>Bezpečnost a pravidelné revize</li>
-                <li>Škálovatelný rozsah spolupráce</li>
-                <li>CI/CD pipeline a automatizace</li>
-                <li>Integrace s AI a agenty</li>
+                {zahrnujeItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </Body>
           </Card>
-          <Card variant="surface">
+
+          <Card variant="surface" className="border-l-2 border-zinc-300">
             <Heading level="h3">Pro koho je spolupráce vhodná</Heading>
             <Body color="secondary" className="mt-4">
               Spolupracuji s firmami od startupů po enterprise — na velikosti nezáleží. Přináším technické know-how,
@@ -93,34 +113,37 @@ export function ServicesCooperation() {
               potřebám — od několika hodin týdně až po zhruba polovinu pracovního týdne.
             </Body>
           </Card>
+
           <Card variant="surface">
             <Heading level="h3">Dlouhodobá podpora a SLA</Heading>
             <Body color="secondary" className="mt-4">
               Nabízím dlouhodobou podporu s garantovanými reakčními časy. Nenabízím L1 podporu — řeším technické
               problémy na expertní úrovni. Podporu zajišťuji se svým týmem v pracovních hodinách, tj.&nbsp;Po–Pá 9–17.
             </Body>
-          </Card>
-          <Card variant="surface">
-            <Heading level="h3">Typické projekty</Heading>
-            <Body as="div" color="secondary" className="mt-4">
-              <ul className="list-inside list-disc space-y-2 pl-4">
-                <li>
-                  <strong>Migrace</strong> — z/do cloudu i on-premise (oba směry), migrace aplikací do Kubernetes
-                </li>
-                <li>
-                  <strong>Cloudová architektura</strong> — cloud native patterny, spolehlivost a efektivní využití
-                  cloudu
-                </li>
-                <li>
-                  <strong>Budování platform týmu</strong> — podpora vývojových týmů pomocí DevOps praktik a self-service
-                  přístupu
-                </li>
-                <li>
-                  <strong>Integrace AI</strong> — bezpečná integrace AI a AI agentů do aplikací i platformy
-                </li>
-              </ul>
+            <Body color="secondary" className="mt-4">
+              Součástí podpory jsou pravidelné revize infrastruktury, proaktivní aktualizace a sledování nových
+              technologií. Díky průběžné spolupráci znám vaše prostředí do detailu a dokážu reagovat rychle a efektivně.
             </Body>
           </Card>
+
+          {/* Card 4: Structured numbered list — surface with dark top border */}
+          <Card variant="surface" className="border-t-4 border-zinc-900">
+            <Heading level="h3">Typické projekty</Heading>
+            <div className="mt-4 divide-y divide-zinc-200">
+              {projektyItems.map((item, idx) => (
+                <div key={item.label} className={clsx("flex gap-4 py-3", idx === 0 && "pt-0")}>
+                  <span className="font-mono text-lg font-bold text-orange-500">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <Body as="span" color="secondary">
+                    <strong>{item.label}</strong> — {item.description}
+                  </Body>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Pricing CTA — unchanged */}
           <Card variant="inverse" className="lg:col-span-2">
             <div className="flex h-full flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
               <div>
