@@ -23,8 +23,8 @@ Jako předchozí dny, chodil jsem hodně po přednáškách, ale zastavil jsem s
 
 Takže nejdřív pár obecných novinek – o některých už třeba víte...
 
-- ArgoCD v3.0 vyjde 6. května (aktuálně je k dispozici [Release Candidate](https://github.com/argoproj/argo-cd/releases))
-- Podpora OCI artefaktů v ArgoCD bude až ve verzi 3.1, která by měla vyjít cca v srpnu
+- Argo CD v3.0 vyjde 6. května (aktuálně je k dispozici [Release Candidate](https://github.com/argoproj/argo-cd/releases))
+- Podpora OCI artefaktů v Argo CD bude až ve verzi 3.1, která by měla vyjít cca v srpnu
 - Cilium od verze 1.17 podporuje [Multi-Cluster Services API](https://github.com/kubernetes-sigs/mcs-api), viz [KEP-1645](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api)
 - Multi-Cluster Services API by mělo letos vydat `v1alpha2` API a snad se příští rok dočkáme první beta verze
 - Google Cloud Console bude podporovat **dark mode**
@@ -46,11 +46,11 @@ Nebudu zabíhat úplně do podrobností, ale ve zkratce, co to dělá a jak to f
 
 Pokud vás zajímají podrobnosti, mrkněte do repozitáře [MCS-API](https://github.com/kubernetes-sigs/mcs-api), na [KEP-1645](https://github.com/kubernetes/enhancements/tree/master/keps/sig-multicluster/1645-multi-cluster-services-api) a [dokumentaci](https://docs.cilium.io/en/stable/network/clustermesh/mcsapi/#deploying-a-simple-example-service-using-mcs-api) Cilium.
 
-### Multi-Cluster Magics with ArgoCD and Cluster Inventory
+### Multi-Cluster Magics with Argo CD and Cluster Inventory
 
-Jak začít… no prostě ArgoCD nasazovalo aplikace do **různých clusterů** na základě metrik – takové cross-cluster škálování. To demo bylo fakt černá magie!
+Jak začít… no prostě Argo CD nasazovalo aplikace do **různých clusterů** na základě metrik – takové cross-cluster škálování. To demo bylo fakt černá magie!
 
-Byl to docela fičák, takže nemám moc poznámek, ale šlo o Cluster Inventory, integraci do hub/spoke modelu a jak to celé zabalit s pomocí ArgoCD.
+Byl to docela fičák, takže nemám moc poznámek, ale šlo o Cluster Inventory, integraci do hub/spoke modelu a jak to celé zabalit s pomocí Argo CD.
 
 Podařilo se mi najít [slajdy](https://static.sched.com/hosted_files/colocatedeventseu2025/81/ArgoCon-%20Multi%20Cluster%20Magics%20with%20Argo%20CD%20and%20Cluster%20Inventory.pdf) a až bude záznam, tak si to pustím ještě jednou 😄
 
@@ -81,18 +81,18 @@ Nejprve Adobe v číslech: 430+ clusterů, 250+ Helm chartů, 550+ deploymentů 
 
 Jak na to? Uf...
 
-- ArgoCD _ApplicationSet_ + merge generátory 💪
+- Argo CD _ApplicationSet_ + merge generátory 💪
 - Očekávat neočekávané (výpadky všeho druhu a neočekávat uptime 100 %)
 - Filtrovat v alertingu/eventech pouze failing deploymenty (jinak se zblázníte)
-- Monitoring a Grafana dashboardy pro ArgoCD instanci, aplikace a cokoliv, co potřebujete
+- Monitoring a Grafana dashboardy pro Argo CD instanci, aplikace a cokoliv, co potřebujete
 
 ### Scale GitOps with the Argo CD Agent and Open Cluster Management
 
-Přednáška byla vlastně představení Open Cluster Managementu, ArgoCD Agenta a toho, jak spolu fungují.
+Přednáška byla vlastně představení Open Cluster Managementu, Argo CD Agenta a toho, jak spolu fungují.
 
-[Open Cluster Management (OCM)](https://open-cluster-management.io/) je open-source nástroj pro správu multi-cluster řešení. Umí nejen spravovat clustery (třeba pomocí [Cluster API](https://cluster-api.sigs.k8s.io/)), ale i nasazovat aplikace přes Helm charty. Existuje už pět let (a já se o něm dozvídám až teď?!), dnes podporuje jak ArgoCD, tak SIG-Multicluster.
+[Open Cluster Management (OCM)](https://open-cluster-management.io/) je open-source nástroj pro správu multi-cluster řešení. Umí nejen spravovat clustery (třeba pomocí [Cluster API](https://cluster-api.sigs.k8s.io/)), ale i nasazovat aplikace přes Helm charty. Existuje už pět let (a já se o něm dozvídám až teď?!), dnes podporuje jak Argo CD, tak SIG-Multicluster.
 
-[ArgoCD Agent](https://argocd-agent.readthedocs.io/latest/) je open-source řešení, které primárně vyvíjí Red Hat – v podstatě alternativa k Akuity Cloud Platformě (managed ArgoCD, Kargo a agent). Je to verze zdarma, ale zatím relativně v plenkách. Stable-ish verze se očekává ke konci roku. Agent zatím nepodporuje [Kargo](https://kargo.io/) ani další nástroje z Argo světa – tak uvidíme, co čas přinese.
+[Argo CD Agent](https://argocd-agent.readthedocs.io/latest/) je open-source řešení, které primárně vyvíjí Red Hat – v podstatě alternativa k Akuity Cloud Platformě (managed Argo CD, Kargo a agent). Je to verze zdarma, ale zatím relativně v plenkách. Stable-ish verze se očekává ke konci roku. Agent zatím nepodporuje [Kargo](https://kargo.io/) ani další nástroje z Argo světa – tak uvidíme, co čas přinese.
 
 Zajímavé, ale chce to ještě trochu času.
 

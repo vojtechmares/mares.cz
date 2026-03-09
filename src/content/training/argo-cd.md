@@ -26,16 +26,17 @@ icon:
   src: /assets/training/argo.svg
   alt: "Argo Project icon"
 draft: false
+redirectFrom: ["argocd"]
 ---
 
 ## Popis technologie
 
-ArgoCD je GitOps nastroj kterym nasazujeme aplikace do Kubernetes. Pracuje na zaklade deklaraticnich konfiguracnich souboru, ktete si stahuje z Gitu. To znamena, ze vse co commitneme do repozitare, se na nasadi do Kubernetes. O vsech zmenach: co, kdy, kdo udelal budeme mit prehledne zaznami v Gitu.
+Argo CD je GitOps nastroj kterym nasazujeme aplikace do Kubernetes. Pracuje na zaklade deklaraticnich konfiguracnich souboru, ktete si stahuje z Gitu. To znamena, ze vse co commitneme do repozitare, se na nasadi do Kubernetes. O vsech zmenach: co, kdy, kdo udelal budeme mit prehledne zaznami v Gitu.
 
 ## Co Vás naučím
 
 - Uvod do CD
-- Co je ArgoCD
+- Co je Argo CD
 - Instalace a konfigurace
 - GitOps
 - Plain Kubernetes manifests

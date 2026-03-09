@@ -166,7 +166,7 @@ to není tak přehledné jako čistý YAML.
 
 Na druhou stranu, Helm je za mě skvělý nástroj, jak dodávat aplikace zákazníkům třetích stran.
 Helm je v tomto ohledu mnohem snažší na distribuci a použití, než Kustomize nebo čistý YAML.
-A díky integraci Helmu do snad všech [GitOps](/blog/gitops-a-argocd) nástrojů (například [ArgoCD](https://argoproj.github.io/cd/) nebo [FluxCD](https://fluxcd.io/)),
+A díky integraci Helmu do snad všech [GitOps](/blog/gitops-a-argocd) nástrojů (například [Argo CD](https://argoproj.github.io/cd/) nebo [FluxCD](https://fluxcd.io/)),
 není problém použít ani ty.
 
 Co je trochu problematické u Helmu, je práce s Custom Resource Definitions (CRD),

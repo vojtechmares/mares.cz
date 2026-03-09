@@ -35,7 +35,7 @@ Uf. Začalo to jednoduše, pohoda, ale...
 
 Ingress-NGINX měl spoustu anotací a Traefik nic neřeší přes anotace, ale přes CRD (_IngressRoute_, _Middleware_, a další) a najít, kterou CRD potřebujete a jak ji naconfigurovat, je fakt pain.
 
-To bylo sice pracné, ale ještě se to dalo (Claude Code docela pomáhal), ale konec nastal, když jsem chtěl předělat Ingress pro ArgoCD. Chci mít nasazené ArgoCD bezpečně, tj. i v clusteru mám HTTPS a to mi prostě nešlo.
+To bylo sice pracné, ale ještě se to dalo (Claude Code docela pomáhal), ale konec nastal, když jsem chtěl předělat Ingress pro Argo CD. Chci mít nasazené Argo CD bezpečně, tj. i v clusteru mám HTTPS a to mi prostě nešlo.
 
 Zkusil jsem kombinaci několika _IngressRoute_ a _Middleware_, ale nezvítězil jsem. Triviální to rozhodně nebylo.
 

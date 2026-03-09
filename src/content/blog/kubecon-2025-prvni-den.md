@@ -15,7 +15,7 @@ Jsem v Londýně na šestidenním "maratonu" konferencí: Cloud Native Rejekts (
 
 Většinu středečního dopoledne jsem strávil networkingem v Showcase pavilonu, aneb brodil jsem se nepřebernou změtí stánků různých vendorů. Od nejznámější velké trojky cloudů (AWS, GCP, Azure), přes GitHub, Grafanu, Dynatrace a spousty menších firem – ať už cloud providerů, nebo startupů ze světa security, pipeline a kdo ví čeho ještě. Je toho prostě spousta.
 
-Zastavil jsem se mimo jiné u Akuity (firma, která vytvořila Argo projekt – ArgoCD, Workflows, Rollouts atd.), kde jsem zjišťoval, co za novinky nás čeká. Část jsem už prozradil včera. Třeba že ArgoCD v3.0 vyjde 6. května a verze 3.1, která bude plně podporovat OCI, by měla vyjít v srpnu.
+Zastavil jsem se mimo jiné u Akuity (firma, která vytvořila Argo projekt – Argo CD, Workflows, Rollouts atd.), kde jsem zjišťoval, co za novinky nás čeká. Část jsem už prozradil včera. Třeba že Argo CD v3.0 vyjde 6. května a verze 3.1, která bude plně podporovat OCI, by měla vyjít v srpnu.
 
 Kdo mě překvapil, byla Dynatrace. Měl jsem pocit, že jejich produkt tak nějak zamrznul v proprietárním světě a nikam dál se neposouvá – ale opak je pravdou. Pěkné, přehledné UI, AI pro detekci security eventů (což nevypadalo špatně) a integrace s OpenTelemetry. Mají upravený OTel collector – sice ano – ale není problém do toho posílat cokoliv, co OTel umí (logy, metriky a traces). A ještě jedno příjemné překvapení: česká stopa v Dynatrace. Na začátku jsme se bavili chvíli anglicky a pak přišla otázka: "Musím se zeptat, jste z Česka?" – obrovský icebreaker a pěkně jsme se pobavili.
 

@@ -1,14 +1,14 @@
 ---
-title: GitOps a ArgoCD
-description: V tomto článku se podíváme na GitOps a nástroj ArgoCD, který je jedním z nástrojů pro GitOps.
+title: GitOps a Argo CD
+description: V tomto článku se podíváme na GitOps a nástroj Argo CD, který je jedním z nástrojů pro GitOps.
 keywords: ["git", "gitlab", "github", "argocd", "gitops", "kargo", "argocd autopilot"]
 tags: ["kubernetes", "gitops"]
-trainingAd: argocd
+trainingAd: argo-cd
 draft: false
 publish_time: 2024-09-24
 ---
 
-V tomto článku se podíváme na GitOps a nástroj ArgoCD, který je jedním z nástrojů pro GitOps.
+V tomto článku se podíváme na GitOps a nástroj Argo CD, který je jedním z nástrojů pro GitOps.
 
 ## Co je to GitOps
 
@@ -31,7 +31,7 @@ GitOps je založen na několika principech:
 
 Hlavní výhodou GitOps oproti jiným metodám, je že GitOps jednak zaručuje korektnost nastavení v Kubernetes clusteru,
 protože jakmile se změna dostane do repozitáře, automaticky se aplikuje. Nebo když se stav clusteru změní a je jiný, než má být,
-GitOps automaticky znovu-aplikuje konfiguraci a vrátí se do správného stavu, brání tedy tzv. config-driftu. Například ArgoCD kontroluje změny každé dvě minuty (ve výchozím nastavení).
+GitOps automaticky znovu-aplikuje konfiguraci a vrátí se do správného stavu, brání tedy tzv. config-driftu. Například Argo CD kontroluje změny každé dvě minuty (ve výchozím nastavení).
 Druhým velkým plusem je, že vše je uloženo v repozitáři a je možné tedy repozitář s konfigurací považovat i za zálohu a stejně jako běžnou aplikaci,
 je možné obnovit prostředí z repozitáře.
 
@@ -57,10 +57,10 @@ Dalším rozdílem je případ, kdy máte více Kubernetes clusterů.
 V CI/CD pipeline je to celkem snadné pro dva, tři clustery, ale pokud jich máte desítky nebo stovky,
 je to extrémě obtížné spravovat.
 
-V případě GitOps/ArgoCD máme stále jeden identický repozitář ze kterého může dělat pull libovolný počet ArgoCD instancí napříč různými clustery i napříč cloudy.
+V případě GitOps/Argo CD máme stále jeden identický repozitář ze kterého může dělat pull libovolný počet Argo CD instancí napříč různými clustery i napříč cloudy.
 Pokud bychom případně chtěli nebo potřebovali vytvořit nějak specifickou konfiguraci pro cluster,
 region nebo třeba dle země, stačí vytvořit konfigurační soubor a načítat takovou konfiguraci například pomocí **ApplicationSetu**.
-Ale takové řešení se lépe dělá s jednou instancí ArgoCD nebo alespoň ne s ArgoCD instancí v každém clusteru.
+Ale takové řešení se lépe dělá s jednou instancí Argo CD nebo alespoň ne s Argo CD instancí v každém clusteru.
 
 ## Slepice a vejce problém
 
@@ -73,7 +73,7 @@ Tedy s GitOps postupy a nástroji, je vlastně nemožné dostat ty samé GitOps 
 Dnes je mnoho různých postupů a nástrojů, které se snaží tento problém řešit.
 Typicky se jedná o "bootstrap skript" nebo nástroj do příkazové řádky, kterým můžeme nainstalovat GitOps nástroje do clusteru.
 Případně pokud vaše Kubernetes clustery spravujete [Terraformem](/blog/terraform-infrastruktura-jako-kod), můžete využít například
-[Helm provideru](https://registry.terraform.io/providers/hashicorp/helm/latest) a nainstalovat ArgoCD do každého clusteru právě Terraformem. Což je vcelku elegantní řešení:
+[Helm provideru](https://registry.terraform.io/providers/hashicorp/helm/latest) a nainstalovat Argo CD do každého clusteru právě Terraformem. Což je vcelku elegantní řešení:
 
 ```hcl
 provider "helm" {
@@ -103,11 +103,11 @@ resource "helm_release" "argocd" {
 }
 ```
 
-## ArgoCD
+## Argo CD
 
 ![argo.png](https://cdn.mares.cz/argo_2ee95661b5.png)
 
-[ArgoCD](https://argoproj.github.io/cd/) je open-source nástroj, který právě staví nad GitOps paradigmem.
+[Argo CD](https://argoproj.github.io/cd/) je open-source nástroj, který právě staví nad GitOps paradigmem.
 Jedná se o jeden z nejoblíbenějších nástrojů pro GitOps v Kubernetes ekosystému.
 Je primárně vyvíjený firmou [Akuity](https://akuity.io/), i když dnes už patří pod [CNCF](https://www.cncf.io/) a [projekt](https://landscape.cncf.io/?item=app-definition-and-development--continuous-integration-delivery--argo) je ve stavu _Graduated_.
 
@@ -118,14 +118,14 @@ Argo je dokonce celá rodina nástrojů, které se integrují a rozšiřují Kub
 - [Argo Events](https://argoproj.github.io/events/) - Eventing systém pro Kubernetes, zároveň má řadu integrací (AWS, kalendář, Slack, PubSub, webhooky a další...)
 - [Argo Rollouts](https://argoproj.github.io/rollouts/) - Pokročilé nasazování aplikací do Kubernetes (blue/green, canary,...)
 
-ArgoCD podporuje jednak obyčejné YAML manifesty, ale i zmiňovaný Kustomize, jsonnet a Helm.
+Argo CD podporuje jednak obyčejné YAML manifesty, ale i zmiňovaný Kustomize, jsonnet a Helm.
 Zároveň je bezpotíží možné používat Kuberentes operátory a _custom resources_, které přinášejí.
 
-ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, ale i projekty a jejich dělení.
+Argo CD má několik svých vlastních _resources_, kterými popisuje aplikace, ale i projekty a jejich dělení.
 
 - **Application** - resource popisující aplikaci, zdrojový repozitář, verzi a případně Helm values apod.
 
-  Příklad ArgoCD aplikace, která se stará o instanci mého ArgoCD:
+  Příklad Argo CD aplikace, která se stará o instanci mého Argo CD:
 
   ```yaml
   apiVersion: argoproj.io/v1alpha1
@@ -137,7 +137,7 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
       argocd.argoproj.io/sync-wave: "1"
     # finalizery na aplikaci,
     # pokud je pritomen finalizer `resources-finalizer.argocd.argoproj.io`
-    # pak pri smazani ArgoCD aplikace se automaticky (kaskadove)
+    # pak pri smazani Argo CD aplikace se automaticky (kaskadove)
     # mazou i vsechny resources, ktere tato aplikace vytvorila
     finalizers:
       - resources-finalizer.argocd.argoproj.io
@@ -152,8 +152,8 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
       syncOptions:
         - CreateNamespace=true
     # do jakeho Kubernetes clusteru se ma aplikace nasadit
-    # v tomto pripade stejny cluster, kde bezi ArgoCD
-    # ale je mozne zvolit i dalsi cluster(y), ktere ArgoCD instance zna (viz config)
+    # v tomto pripade stejny cluster, kde bezi Argo CD
+    # ale je mozne zvolit i dalsi cluster(y), ktere Argo CD instance zna (viz config)
     destination:
       server: "https://kubernetes.default.svc"
       namespace: argocd
@@ -171,7 +171,7 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
         # take je mozne mit ulozene v jinem souboru ve stejnem repozitari
         valuesObject:
           global:
-            domain: argocd.example.com # priklad, svoje ArgoCD nechci verejne publikovat :P
+            domain: argocd.example.com # priklad, svoje Argo CD nechci verejne publikovat :P
           server:
             ingress:
               enabled: true
@@ -194,7 +194,7 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
 
 - **Project** - projekt, do kterého patří různé aplikace, zároveň určuje, jaké typy resources je možné v rámci projektu spravovat a v jakých namespace.
 
-  Příklad ArgoCD projektu, pod který spadají všechny Argo komponenty:
+  Příklad Argo CD projektu, pod který spadají všechny Argo komponenty:
 
   ```yaml
   apiVersion: argoproj.io/v1alpha1
@@ -222,7 +222,7 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
 
 - **ApplicationSet** - kolekce aplikace, tj. jedna aplikace nainstalovaná vícekrát. Například pro jednotlivé tenanty nebo do několika clusterů.
 
-  Příklad ArgoCD ApplicationSetu, který nasadí Guestbook aplikaci do tří clusterů:
+  Příklad Argo CD ApplicationSetu, který nasadí Guestbook aplikaci do tří clusterů:
 
   ```yaml
   apiVersion: argoproj.io/v1alpha1
@@ -257,13 +257,13 @@ ArgoCD má několik svých vlastních _resources_, kterými popisuje aplikace, a
 
   Seznam všech generátorů a jak je použít najdete v [dokumentaci](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generators/).
 
-Populární alternativou k ArgoCD je [FluxCD](https://fluxcd.io/).
+Populární alternativou k Argo CD je [FluxCD](https://fluxcd.io/).
 
-### Jak začít s ArgoCD?
+### Jak začít s Argo CD?
 
-V první řadě je třeba ArgoCD nainstalovat do clusteru 😄
+V první řadě je třeba Argo CD nainstalovat do clusteru 😄
 
-K tomu máme několik možností, [Kustomize](https://kustomize.sigs.k8s.io/), [Helm](https://helm.sh/) nebo [ArgoCD Autopilot](#argocd-autopilot) (o tom píšu později), který nástroj si vyberete nechám na vaší preferenci.
+K tomu máme několik možností, [Kustomize](https://kustomize.sigs.k8s.io/), [Helm](https://helm.sh/) nebo [Argo CD Autopilot](#argocd-autopilot) (o tom píšu později), který nástroj si vyberete nechám na vaší preferenci.
 
 **Kustomize**:
 
@@ -302,8 +302,8 @@ helm repo update
 helm install argocd argo/argo-cd --namespace argocd --create-namespace --values ./argocd-values.yaml
 ```
 
-Tím máme ArgoCD v clusteru a můžeme přidat první repozitář, vytvořit první aplikaci
-a začít nasazovat aplikace s ArgoCD a pomužívat GitOps.
+Tím máme Argo CD v clusteru a můžeme přidat první repozitář, vytvořit první aplikaci
+a začít nasazovat aplikace s Argo CD a pomužívat GitOps.
 
 Repozitář můžeme přidat přes `argocd` CLI, o tom později, nebo v UI.
 Repozitář v UI přidáme v Settings > Repositories > +Connect Repository.
@@ -336,12 +336,12 @@ Protože aplikace je Kubernetes resource, musíme ji dostat do clusteru, což ud
 kubectl apply -f hello-world-app.yaml
 ```
 
-A v ArgoCD UI bychom nyní měli vidět naši **hello-world** aplikaci!
+A v Argo CD UI bychom nyní měli vidět naši **hello-world** aplikaci!
 
 Abychom nemuseli přidávat každou aplikaci zvlášť ručně do clusteru přes `kubectl`,
 používá se tzv. **app-of-apps**, tedy aplikace aplikací.
 
-Jedná se o ArgoCD aplikaci, která ukazuje do repozitáře a do složky, kde jsou uloženy všechny manifesty všech aplikací.
+Jedná se o Argo CD aplikaci, která ukazuje do repozitáře a do složky, kde jsou uloženy všechny manifesty všech aplikací.
 
 Pak je ale potřeba používat finalizery, aby když nějakou aplikaci odstraníme, aby se smazala z clusteru. A nebo naopak ne,
 abychom nic automaticky nemazali a zabránili tak případné chybě a problémům.
@@ -365,7 +365,7 @@ spec:
   source:
     path: apps/
     directory:
-      # recurse=true, jak název naznačuje, znamená, že ArgoCD hledá manifesty ve všech podsložkách
+      # recurse=true, jak název naznačuje, znamená, že Argo CD hledá manifesty ve všech podsložkách
       # což se občas může hodit
       recurse: true
     repoURL: git@gitlab.example.com:infra/gitops.git
@@ -375,7 +375,7 @@ spec:
     namespace: default
 ```
 
-Pokud bychom chtěli si v ArgoCD UI udělat větší pořádek, což třeba při větším počtu aplikací je dobrý nápad.
+Pokud bychom chtěli si v Argo CD UI udělat větší pořádek, což třeba při větším počtu aplikací je dobrý nápad.
 A nebo pokud nasazujete dedikované instance aplikace pro jednotlivé tenanty například, je dobré používat projekty.
 
 ```yaml
@@ -404,14 +404,14 @@ V projektu mimo jiné definujeme, do jakých clusterů, _namespace_ a jaké druh
 A díky [Kyvernu](https://kyverno.io/) do každého _namespace_ vkládat _ResourceQuota_ a _NetworkPolicy_
 a omezovat tak oprávnění a zamezovat jednotlivým instancím interagovat s jinými.
 
-### ArgoCD CLI
+### Argo CD CLI
 
-[`argocd`](https://argo-cd.readthedocs.io/en/stable/cli_installation/) je CLI (program pro příkazovou řádku) nástroj, který vám usnadní práci s ArgoCD. Můžete s ním vytvářet aplikace, projekty, získávat informace o aplikacích, spravovat v ArgoCD clustery, spravovat repozitáře (Git, Helm,...) a další věci.
+[`argocd`](https://argo-cd.readthedocs.io/en/stable/cli_installation/) je CLI (program pro příkazovou řádku) nástroj, který vám usnadní práci s Argo CD. Můžete s ním vytvářet aplikace, projekty, získávat informace o aplikacích, spravovat v Argo CD clustery, spravovat repozitáře (Git, Helm,...) a další věci.
 
-Pokud jste příznivci terminálu, určitě se na `argocd` podívejte. Je to super nástroj, díky kterému můžete začít s ArgoCD během pár minut a nemusíte se učit CRD a psát je ručně,
+Pokud jste příznivci terminálu, určitě se na `argocd` podívejte. Je to super nástroj, díky kterému můžete začít s Argo CD během pár minut a nemusíte se učit CRD a psát je ručně,
 i když s tím vám dnes hbitě poradí ChatGPT nebo GitHub Copilot.
 
-1. port-forwarding na ArgoCD _Service_
+1. port-forwarding na Argo CD _Service_
 
    ```bash
    kubectl port-forward svc/argocd-server -n argocd 8080:443
@@ -426,14 +426,14 @@ i když s tím vám dnes hbitě poradí ChatGPT nebo GitHub Copilot.
 3. otevřete svůj webový prohlížeč a jděte na adresu
    `http://localhost:8080` a přihlaste se
 
-### ArgoCD Autopilot
+### Argo CD Autopilot
 
-[ArgoCD Autopilot](https://argocd-autopilot.readthedocs.io/en/stable/) je CLI nástroj,
-který vám pomůže jednat nasadit ArgoCD do clusteru a dále spravovat všechny aplikace, projekty apod.
-ArgoCD Autopilot má vybraný pohled (opinionated) jak by měl vypadat Gitový repozitář, kam ArgoCD kouká
+[Argo CD Autopilot](https://argocd-autopilot.readthedocs.io/en/stable/) je CLI nástroj,
+který vám pomůže jednat nasadit Argo CD do clusteru a dále spravovat všechny aplikace, projekty apod.
+Argo CD Autopilot má vybraný pohled (opinionated) jak by měl vypadat Gitový repozitář, kam Argo CD kouká
 a řeší jak má takový repozitář vypadat a jak má být uspořádaný (složky, soubory, aplikace, projekty,...).
 
-Takže vám dokáže velmi usnadnit práci a nemusíte přemýšlet, kam daná věc patří, ArgoCD Autopilot to vyřeší za vás.
+Takže vám dokáže velmi usnadnit práci a nemusíte přemýšlet, kam daná věc patří, Argo CD Autopilot to vyřeší za vás.
 Na druhou stranu, jako každý _opinionated_ nástroj není moc flexibilní a je možné, že vám jeho přístup nebude vyhovovat. 🤷‍♂️
 
 ```bash
@@ -446,15 +446,15 @@ export GIT_TOKEN="xxx"
 # HTTPS cesta k repozitáři
 export GIT_REPO=https://gitlab.example.com/<group>/<repo>
 
-# Bootstrap ArgoCD do clusteru a setup repozitáře
+# Bootstrap Argo CD do clusteru a setup repozitáře
 # Poznámka: argocd-autopilot automaticky udělá push do repozitáře
 argocd-autopilot repo bootstrap
 ```
 
-V ArgoCD pak uvidíte tři aplikace:
+V Argo CD pak uvidíte tři aplikace:
 
-- **autopilot-bootstrap** - tedy bootstrap celého Autopilota a ArgoCD
-- **argo-cd** - deployment ArgoCD přes Kustomize ze složky `bootstrap/argo-cd/`
+- **autopilot-bootstrap** - tedy bootstrap celého Autopilota a Argo CD
+- **argo-cd** - deployment Argo CD přes Kustomize ze složky `bootstrap/argo-cd/`
 - **root** - aplikace, která zastřešuje všechny projekty,
   ve výchozím stavu žádné projekty nejsou a ve složce `projects/` je pouze prázdný "dummy" soubor
 
@@ -469,12 +469,12 @@ argocd-autopilot app create hello-world \
   --wait-timeout 2m
 ```
 
-### ArgoCD Image Updater plugin
+### Argo CD Image Updater plugin
 
-[ArgoCD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable/) řeší automatické sledování (_watch_) Docker/OCI registrů,
+[Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable/) řeší automatické sledování (_watch_) Docker/OCI registrů,
 zda není k dispozici nová verze obrazu (_image_) odpovídající například regulárnímu výrazu.
 
-Pokud je nový _image_ k dispozici, automaticky upraví manifest ArgoCD aplikace, čímž dojde k automatickému nasazení nové verze.
+Pokud je nový _image_ k dispozici, automaticky upraví manifest Argo CD aplikace, čímž dojde k automatickému nasazení nové verze.
 A také udělá _commit_ do Git repozitáře, abychom měli vše aktuální.
 
 Je to tedy jednoduché a přímočaré řešení, ale vlastně je až příliž jednoduché a nejde s ním dělat složitější věci.
@@ -485,13 +485,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    # Jediné co potřebujete, je tato anotace na ArgoCD aplikaci
+    # Jediné co potřebujete, je tato anotace na Argo CD aplikaci
     # a nainstalovaný a nastavený Image Updater plugin, vše pak funguje automaticky (automagicky :D)
     argocd-image-updater.argoproj.io/image-list: gcr.io/heptio-images/ks-guestbook-demo:^0.1
     # pro aktualizaci Git repozitáře je třeba ale přidat ještě jednu anotaci:
     argocd-image-updater.argoproj.io/write-back-method: git
     # případně je k dispozici ještě hodnota `arogcd`, v ten moment se nedělá push (write-back) do repozitáře
-    # a změny se drží pouze v ArgoCD, což jde ale proti GitOps principu: co je v repozitáři je nasazené
+    # a změny se drží pouze v Argo CD, což jde ale proti GitOps principu: co je v repozitáři je nasazené
   name: guestbook
   namespace: argocd
 spec:
@@ -539,7 +539,7 @@ Pojďme si rozebrat jednotlivé Kargo pojmy:
 
 - **Promotion** - Jde o požadavek na přesunutí _Freight_-u z jednoho _Stage_ do druhého. _Promotion_ může být automatická nebo manuální.
 
-Kargo pak využívá ArgoCD **ApplicationSet**, kterým tvoří aplikace pro jednotlivé _Stages_:
+Kargo pak využívá Argo CD **ApplicationSet**, kterým tvoří aplikace pro jednotlivé _Stages_:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1

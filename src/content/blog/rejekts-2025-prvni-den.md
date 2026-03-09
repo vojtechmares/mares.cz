@@ -60,7 +60,7 @@ Co si odnáším: Flatcar je ještě lepší než dřív! sysext je skvělý zp�
 
 Tohle mě opravdu nadchlo a těším se, až budu dělat všechny clustery na Flatcar Linuxu – třeba na [k0s](https://k0sproject.io/) – a nebudu muset řešit aktualizace. Všechno se udělá samo!
 
-### Building Air-Gapped Control Planes for a Global Pharma Leader Using Crossplane and ArgoCD
+### Building Air-Gapped Control Planes for a Global Pharma Leader Using Crossplane and Argo CD
 
 Přednášeli Antonela Cukurin a Yury Tsarev.
 
