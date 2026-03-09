@@ -38,6 +38,7 @@ function ArticleImage({
       >
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 500,
             fontSize: "2.5rem",
             color: "#f59e0b",
@@ -47,6 +48,7 @@ function ArticleImage({
         </p>
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "4rem",
             marginTop: 0,
@@ -61,7 +63,7 @@ function ArticleImage({
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           {description}
@@ -71,7 +73,7 @@ function ArticleImage({
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           Vojtěch Mareš
@@ -81,7 +83,7 @@ function ArticleImage({
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           mares.cz/blog/{slug}

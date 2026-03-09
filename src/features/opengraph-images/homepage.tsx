@@ -28,6 +28,7 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL) {
       >
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "4rem",
             marginBottom: 0,
@@ -39,6 +40,7 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL) {
         </p>
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "4rem",
             marginTop: 0,
@@ -53,13 +55,13 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL) {
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak používat moderní
           cloud-native technologie.
         </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz</p>
+        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Inter" }}>mares.cz</p>
       </div>
       <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={avatarSrc} />
     </div>

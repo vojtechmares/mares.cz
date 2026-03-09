@@ -28,6 +28,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
       >
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 500,
             fontSize: "2.5rem",
             color: "#f59e0b",
@@ -37,6 +38,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
         </p>
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "5rem",
             marginTop: 0,
@@ -51,7 +53,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             maxWidth: "32rem",
             fontSize: "1.5rem",
             lineHeight: "1.5556",
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
@@ -61,7 +63,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           Vojtěch Mareš
@@ -71,7 +73,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           mares.cz/blog/tag/{tag}

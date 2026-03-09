@@ -28,6 +28,7 @@ function Prednasky({ imageData }: { imageData: string }) {
       >
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "4rem",
             marginBottom: 0,
@@ -43,12 +44,12 @@ function Prednasky({ imageData }: { imageData: string }) {
             maxWidth: "32rem",
             fontSize: "18px",
             lineHeight: "1.5556",
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           Přehled přednášek a workshopů, které jsem měl možnost dělat.
         </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Space Mono" }}>mares.cz/prednasky</p>
+        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Inter" }}>mares.cz/prednasky</p>
       </div>
       <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
     </div>

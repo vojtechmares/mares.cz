@@ -1,12 +1,15 @@
 import { type ReactNode } from "react";
-import { ImageResponse } from "workers-og";
+import satori from "satori";
+import { initWasm, Resvg } from "@resvg/resvg-wasm";
+import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
 
 // Import fonts as URLs at build time
 import interFontRegularUrl from "../fonts/Inter_18pt-Regular.ttf";
 import interFontLightUrl from "../fonts/Inter_18pt-Light.ttf";
 import interFontBoldUrl from "../fonts/Inter_18pt-Bold.ttf";
-import spaceMonoRegularUrl from "../fonts/SpaceMono-Regular.ttf";
-import spaceMonoBoldUrl from "../fonts/SpaceMono-Bold.ttf";
+import ibmPlexSansFontRegularUrl from "../fonts/IBMPlexSans-Regular.ttf";
+import ibmPlexSansFontLightUrl from "../fonts/IBMPlexSans-Light.ttf";
+import ibmPlexSansFontBoldUrl from "../fonts/IBMPlexSans-Bold.ttf";
 
 // Cache for fetched fonts
 let fontsCache: ArrayBuffer[] | null = null;
@@ -18,11 +21,29 @@ async function loadFonts(baseUrl: string | URL): Promise<ArrayBuffer[]> {
     fetch(new URL(interFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
     fetch(new URL(interFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
     fetch(new URL(interFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(spaceMonoRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(spaceMonoBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    fetch(new URL(ibmPlexSansFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    fetch(new URL(ibmPlexSansFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    fetch(new URL(ibmPlexSansFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
   ]);
 
   return fontsCache;
+}
+
+// Guard against double WASM initialization
+let resvgInitialized = false;
+
+async function ensureResvgWasm(): Promise<void> {
+  if (resvgInitialized) return;
+  try {
+    await initWasm(resvgWasm as unknown as WebAssembly.Module);
+  } catch (e) {
+    if (e instanceof Error && e.message.includes("Already initialized")) {
+      // WASM was initialized in a previous module evaluation (e.g. Vite HMR)
+    } else {
+      throw e;
+    }
+  }
+  resvgInitialized = true;
 }
 
 export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): Promise<string> {
@@ -45,12 +66,16 @@ export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): P
 }
 
 export async function OpenGraphImageResponse(component: ReactNode, baseUrl: string | URL) {
-  const [interRegular, interLight, interBold, spaceMonoRegular, spaceMonoBold] = await loadFonts(baseUrl);
+  const [interRegular, interLight, interBold, ibmPlexSansRegular, ibmPlexSansLight, ibmPlexSansBold] =
+    await loadFonts(baseUrl);
 
-  // workers-og's ImageResponse expects the element and options
-  const response = new ImageResponse(component, {
-    width: 1200,
-    height: 630,
+  const width = 1200;
+  const height = 630;
+
+  // Render React element to SVG using satori
+  const svg = await satori(component, {
+    width,
+    height,
     fonts: [
       {
         name: "Inter",
@@ -68,20 +93,28 @@ export async function OpenGraphImageResponse(component: ReactNode, baseUrl: stri
         weight: 700,
       },
       {
-        name: "Space Mono",
-        data: spaceMonoRegular,
-        weight: 400,
+        name: "IBM Plex Sans",
+        data: ibmPlexSansRegular,
+        weight: 500,
       },
       {
-        name: "Space Mono",
-        data: spaceMonoBold,
+        name: "IBM Plex Sans",
+        data: ibmPlexSansLight,
+        weight: 300,
+      },
+      {
+        name: "IBM Plex Sans",
+        data: ibmPlexSansBold,
         weight: 700,
       },
     ],
   });
 
-  // Clone response to add caching headers
-  const png = await response.arrayBuffer();
+  // Convert SVG to PNG using resvg-wasm
+  await ensureResvgWasm();
+  const resvg = new Resvg(svg, { fitTo: { mode: "width", value: width } });
+  const png = resvg.render().asPng();
+
   return new Response(png, {
     headers: {
       "Content-Type": "image/png",

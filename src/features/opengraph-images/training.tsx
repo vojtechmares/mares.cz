@@ -35,6 +35,7 @@ function TrainingImage({
       >
         <p
           style={{
+            fontFamily: "IBM Plex Sans",
             fontWeight: 700,
             fontSize: "4rem",
             marginBottom: 0,
@@ -50,7 +51,7 @@ function TrainingImage({
             fontSize: "18px",
             lineHeight: "1.5556",
             fontWeight: 300,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           {description}
@@ -60,7 +61,7 @@ function TrainingImage({
             fontSize: "2rem",
             fontWeight: 500,
             marginBottom: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           Vojtěch Mareš
@@ -70,7 +71,7 @@ function TrainingImage({
             fontSize: "1.5rem",
             fontWeight: 300,
             marginTop: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           DevOps achitekt & lektor
@@ -80,7 +81,7 @@ function TrainingImage({
             fontSize: "1.5rem",
             fontWeight: 500,
             marginTop: 0,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
           }}
         >
           mares.cz/skoleni/{slug}

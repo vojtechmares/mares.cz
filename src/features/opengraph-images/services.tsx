@@ -15,7 +15,7 @@ function StatItem({ value, description }: StatItemProps) {
     >
       <span
         style={{
-          fontFamily: "Space Mono",
+          fontFamily: "Inter",
           fontSize: "1.75rem",
           fontWeight: 700,
           color: "#ffffff",
@@ -25,7 +25,7 @@ function StatItem({ value, description }: StatItemProps) {
       </span>
       <span
         style={{
-          fontFamily: "Space Mono",
+          fontFamily: "Inter",
           fontSize: "1rem",
           color: "#a1a1aa",
           marginTop: "0.25rem",
@@ -67,6 +67,7 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
             display: "flex",
             flexDirection: "column",
             fontWeight: 700,
+            fontFamily: "IBM Plex Sans",
             fontSize: "3.5rem",
             color: "#ffffff",
             lineHeight: 1.15,
@@ -82,7 +83,7 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
             marginTop: "1.5rem",
             fontSize: "1.25rem",
             lineHeight: 1.6,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
             color: "#a1a1aa",
           }}
         >
@@ -94,7 +95,7 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
             flexDirection: "column",
             gap: "0.25rem",
             marginTop: "0.75rem",
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
             fontSize: "1.25rem",
             color: "#a1a1aa",
           }}
@@ -107,7 +108,7 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
           style={{
             fontSize: "1.25rem",
             fontWeight: 400,
-            fontFamily: "Space Mono",
+            fontFamily: "Inter",
             color: "#71717a",
             marginTop: "auto",
             marginBottom: 0,
