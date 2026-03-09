@@ -45,8 +45,8 @@ importers:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
       satori:
-        specifier: ^0.18.4
-        version: 0.18.4
+        specifier: ^0.24.0
+        version: 0.24.1
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
@@ -2944,8 +2944,8 @@ packages:
     resolution: {integrity: sha512-vu/49vdc8MzV5jUchs3TIRDCOkOvMc1iJ11MrZvhg9tE4ziKIEIBjBZvies6a9sfM2vQ2gc3dXeu6rCK7AztHA==}
     engines: {node: '>=16'}
 
-  satori@0.18.4:
-    resolution: {integrity: sha512-HanEzgXHlX3fzpGgxPoR3qI7FDpc/B+uE/KplzA6BkZGlWMaH98B/1Amq+OBF1pYPlGNzAXPYNHlrEVBvRBnHQ==}
+  satori@0.24.1:
+    resolution: {integrity: sha512-Lqj26wYdMjGR1AE/cwYkcpAFdf1EG0y0amitwu1+JnwCIrGd7cOI+Olap6ASeeOI58wydF0sfs8JET61XM0j/Q==}
     engines: {node: '>=16'}
 
   sax@1.4.4:
@@ -6379,7 +6379,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       yoga-wasm-web: 0.3.3
 
-  satori@0.18.4:
+  satori@0.24.1:
     dependencies:
       '@shuding/opentype.js': 1.4.0-beta.0
       css-background-parser: 0.1.0
