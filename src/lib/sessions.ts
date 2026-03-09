@@ -5,6 +5,7 @@ type Session = CollectionEntry<"session">;
 export interface TrainingSession {
   trainingID: number;
   trainingSlug?: string;
+  trainingDescription?: string;
   name: string;
   dates: {
     start: string;

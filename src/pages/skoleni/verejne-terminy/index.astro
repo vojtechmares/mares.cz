@@ -19,8 +19,23 @@ import { CachePresets } from "../../../lib/cache";
 
 Astro.response.headers.set("Cache-Control", CachePresets.training);
 
-const [sessionEntries, slugMap] = await Promise.all([getFutureSessions(), getTrainingIDToSlugMap()]);
-const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap);
+const [sessionEntries, slugMap, allTrainings] = await Promise.all([
+  getFutureSessions(),
+  getTrainingIDToSlugMap(),
+  getCollection("training"),
+]);
+
+const descriptionMap = new Map<number, string>();
+for (const t of allTrainings) {
+  if (t.data.backofficeID > 0) {
+    descriptionMap.set(t.data.backofficeID, t.data.description);
+  }
+}
+
+const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap).map((s) => ({
+  ...s,
+  trainingDescription: descriptionMap.get(s.trainingID),
+}));
 
 const meta = {
   title: "Vojtěch Mareš | Veřejné termíny školení",
@@ -29,7 +44,7 @@ const meta = {
   keywords: "školení, termíny, devops školení, termín školení",
 };
 
-const trainings = await getCollection("training", ({ data }) => !data.draft);
+const trainings = allTrainings.filter(({ data }) => !data.draft);
 const nextSession = sessions.length > 0 ? sessions[0] : null;
 
 const openGraph = {

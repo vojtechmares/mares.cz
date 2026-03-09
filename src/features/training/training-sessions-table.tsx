@@ -11,136 +11,113 @@ type TrainingSessionTableProps = {
 
 export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
-    <table className="w-full divide-y divide-gray-300 tabular-nums">
-      <thead>
-        <tr>
-          <th scope="col" className="py-3.5 pr-3 pl-4 text-left font-semibold text-zinc-900 sm:pl-0">
-            Školení
-          </th>
-          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
-            Datum
-          </th>
-          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
-            Místo
-          </th>
-          <th scope="col" className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
-            Cena
-          </th>
-          <th scope="col" className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell">
-            <span className="sr-only">Přihlásit se</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-zinc-300">
-        {sessions.map((training) => (
-          <tr key={`${training.name}-${training.dates?.start}`}>
-            <td className="py-4 pr-3 pl-4 font-medium whitespace-nowrap text-zinc-900 sm:pl-0">
+    <div className="divide-y divide-zinc-300">
+      {sessions.map((training) => (
+        <article key={`${training.name}-${training.dates?.start}`} className="py-6 md:py-8">
+          {/* Mobile layout */}
+          <div className="md:hidden">
+            <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+              <TrainingDate dates={training.dates} />
+            </p>
+            <p className="text-base text-zinc-500">9:00–17:00</p>
+            <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.01em]">
               {training.trainingSlug ? (
                 <Link href={`/skoleni/${training.trainingSlug}`}>{training.name}</Link>
               ) : (
                 training.name
               )}
-              <dl className="py-4 md:hidden">
-                <dt className="sr-only">Datum</dt>
-                <dd className="font-normal text-zinc-700">
-                  <TrainingDate dates={training.dates} />
-                </dd>
-                <dt className="sr-only">Místo</dt>
-                <dd className="font-normal text-zinc-700">{training.location}</dd>
-                <dt className="sr-only">Cena</dt>
-                <dd className="font-normal text-zinc-700">
-                  <TrainingPrice price={training.price} />
-                </dd>
-                <dt className="sr-only">Přihlásit se</dt>
-                <dd className="mt-4 font-normal text-zinc-700">
-                  {training.signUpURL ? (
-                    <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
-                  ) : (
-                    <SigningUpNotOpenYet />
-                  )}
-                </dd>
-              </dl>
-            </td>
-            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
-              <TrainingDate dates={training.dates} />
-            </td>
-            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">{training.location}</td>
-            <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
-              <TrainingPrice price={training.price} />
-            </td>
-            <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
+            </h3>
+            {training.trainingDescription && (
+              <p className="mt-1 text-base text-zinc-600">{training.trainingDescription}</p>
+            )}
+            <div className="mt-4 flex items-center gap-4">
               {training.signUpURL ? (
                 <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
               ) : (
                 <SigningUpNotOpenYet />
               )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              <TrainingPrice price={training.price} />
+            </div>
+          </div>
+
+          {/* Desktop layout: 3-column grid */}
+          <div className="hidden md:grid md:grid-cols-[180px_1fr_auto] md:items-center md:gap-8">
+            <div>
+              <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+                <TrainingDate dates={training.dates} />
+              </p>
+              <p className="text-base text-zinc-500">9:00–17:00</p>
+              <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            </div>
+            <div>
+              <h3 className="font-display text-xl font-semibold tracking-[-0.01em]">
+                {training.trainingSlug ? (
+                  <Link href={`/skoleni/${training.trainingSlug}`}>{training.name}</Link>
+                ) : (
+                  training.name
+                )}
+              </h3>
+              {training.trainingDescription && (
+                <p className="mt-1 text-base text-zinc-600">{training.trainingDescription}</p>
+              )}
+            </div>
+            <div className="flex items-center gap-6">
+              <TrainingPrice price={training.price} />
+              {training.signUpURL ? (
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+              ) : (
+                <SigningUpNotOpenYet />
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
 export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   return (
-    <table className="min-w-full tabular-nums md:divide-y md:divide-zinc-300">
-      <thead>
-        <tr>
-          <th scope="col" className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
-            Datum
-          </th>
-          <th scope="col" className="hidden py-3.5 text-left font-semibold text-zinc-900 md:table-cell">
-            Místo
-          </th>
-          {/* <th
-                        scope="col"
-                        className="hidden px-3 py-3.5 text-left font-semibold text-zinc-900 md:table-cell"
-                    >
-                        Cena
-                    </th> */}
-          <th scope="col" className="relative hidden py-3.5 pr-4 pl-3 sm:pr-0 md:table-cell">
-            <span className="sr-only">Přihlásit se</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-zinc-300">
-        {sessions.map((training) => (
-          <tr key={`${training.name}-${training.dates?.start}`}>
-            <td className="py-4 font-medium whitespace-nowrap text-zinc-900">
+    <div className="divide-y divide-zinc-300">
+      {sessions.map((training) => (
+        <article key={`${training.name}-${training.dates?.start}`} className="py-6 md:py-8">
+          {/* Mobile layout */}
+          <div className="md:hidden">
+            <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
               <TrainingDate dates={training.dates} />
-              <dl className="py-4 md:hidden">
-                <dt className="sr-only">Místo</dt>
-                <dd className="font-normal text-zinc-700">{training.location}</dd>
-                {/* <dt className="sr-only">Cena</dt>
-                                <dd className="font-normal text-zinc-700">
-                                    <TrainingPrice price={training.price} />
-                                </dd> */}
-                <dt className="sr-only">Přihlásit se</dt>
-                <dd className="mt-4 font-normal text-zinc-700">
-                  {training.signUpURL ? (
-                    <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
-                  ) : (
-                    <SigningUpNotOpenYet />
-                  )}
-                </dd>
-              </dl>
-            </td>
-            <td className="hidden py-4 whitespace-nowrap text-zinc-700 md:table-cell">{training.location}</td>
-            {/* <td className="hidden px-3 py-4 whitespace-nowrap text-zinc-700 md:table-cell">
-                            <TrainingPrice price={training.price} />
-                        </td> */}
-            <td className="relative hidden py-4 pr-4 pl-3 text-right font-medium whitespace-nowrap sm:pr-0 md:table-cell">
+            </p>
+            <p className="text-base text-zinc-500">9:00–17:00</p>
+            <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            <div className="mt-4">
               {training.signUpURL ? (
                 <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
               ) : (
                 <SigningUpNotOpenYet />
               )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+            </div>
+          </div>
+
+          {/* Desktop layout */}
+          <div className="hidden md:flex md:items-center md:justify-between md:gap-8">
+            <div>
+              <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+                <TrainingDate dates={training.dates} />
+              </p>
+              <p className="text-base text-zinc-500">9:00–17:00</p>
+              <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            </div>
+            <div>
+              {training.signUpURL ? (
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+              ) : (
+                <SigningUpNotOpenYet />
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -151,20 +128,25 @@ type TrainingDateProps = {
   };
 };
 
+function formatDayMonth(date: Date): string {
+  return `${date.getDate()}.${date.getMonth() + 1}.`;
+}
+
 function TrainingDate({ dates }: TrainingDateProps) {
-  const start = FormatTrainingDate(dates.start);
+  const startDate = new Date(dates.start);
 
   if (typeof dates.end !== "undefined" && dates.end !== null) {
-    const end = FormatTrainingDate(dates.end);
+    const endDate = new Date(dates.end);
 
     return (
       <>
-        {start} - {end}
+        {formatDayMonth(startDate)}–{formatDayMonth(endDate)}
+        {endDate.getFullYear()}
       </>
     );
   }
 
-  return <>{start}</>;
+  return <>{FormatTrainingDate(dates.start)}</>;
 }
 
 function TrainingPrice({ price }: { price: number }) {
@@ -174,9 +156,10 @@ function TrainingPrice({ price }: { price: number }) {
   const exclTax = FormatTrainingPrice(price);
 
   return (
-    <>
-      {exclTax} ({inclTax} vč. DPH)
-    </>
+    <div className="text-right text-zinc-700 tabular-nums">
+      <p className="text-base font-semibold">{inclTax}</p>
+      <p className="text-base italic">{exclTax} bez DPH</p>
+    </div>
   );
 }
 
