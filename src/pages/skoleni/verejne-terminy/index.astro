@@ -1,19 +1,21 @@
 ---
-import { Container } from "../../components/ui/container";
-import { Heading } from "../../components/ui/heading";
-import { TrainingSessionsTable } from "../../features/training/training-sessions-table";
-import Layout from "../../layouts/Layout.astro";
+import { Container } from "../../../components/ui/container";
+import { Heading } from "../../../components/ui/heading";
+import { TrainingSessionsTable } from "../../../features/training/training-sessions-table";
+import { SessionsHero } from "../../../features/training/sessions-hero";
+import Layout from "../../../layouts/Layout.astro";
 
+import { getCollection } from "astro:content";
 import {
   getFutureSessions,
   toTrainingSession,
   getTrainingIDToSlugMap,
   enrichSessionsWithSlugs,
-} from "../../lib/sessions";
-import { Section } from "../../components/ui/section";
-import { Card } from "../../components/ui/card";
-import { TrainingGrid } from "../../features/training/training-grid";
-import { CachePresets } from "../../lib/cache";
+} from "../../../lib/sessions";
+import { Section } from "../../../components/ui/section";
+import { Card } from "../../../components/ui/card";
+import { TrainingGrid } from "../../../features/training/training-grid";
+import { CachePresets } from "../../../lib/cache";
 
 Astro.response.headers.set("Cache-Control", CachePresets.training);
 
@@ -25,6 +27,19 @@ const meta = {
   description:
     "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
   keywords: "školení, termíny, devops školení, termín školení",
+};
+
+const trainings = await getCollection("training", ({ data }) => !data.draft);
+const nextSession = sessions.length > 0 ? sessions[0] : null;
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: Astro.url + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: "Veřejné termíny školení",
+  },
 };
 
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
@@ -50,13 +65,13 @@ const jsonLd = {
 };
 ---
 
-<Layout meta={meta} jsonLd={jsonLd}>
-  <Section variant="inverse">
-    <Container>
-      <Heading variant="inverse" level="h1">Veřejné termíny školení</Heading>
-    </Container>
-  </Section>
-  <Section>
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+  <SessionsHero
+    sessionCount={sessions.length}
+    topicCount={trainings.length}
+    nextSessionDate={nextSession ? new Date(nextSession.dates.start).toISOString() : null}
+  />
+  <Section id="terminy">
     <Container>
       <TrainingSessionsTable sessions={sessions} />
       <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 md:grid-cols-2">

@@ -18,11 +18,16 @@ export async function GET({ params, url }: APIContext) {
     return new Response("Not Found", { status: 404 });
   }
 
-  const component = await CreateArticleImageComponent({
+  const words = article.body?.split(/\s+/).length ?? 0;
+  const readingTimeMinutes = Math.max(1, Math.round(words / 200));
+
+  const component = CreateArticleImageComponent({
     slug: article.id,
     title: article.data.title,
     description: article.data.description,
-    baseUrl,
+    publishDate: article.data.publish_time,
+    tags: article.data.tags,
+    readingTimeMinutes,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

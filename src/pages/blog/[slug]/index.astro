@@ -1,15 +1,12 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
+import { BlogArticleHero } from "../../../features/blog/blog-article-hero";
 import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
 
 import "../../../styles/highlight-js/github-dark.css";
-import { Container } from "../../../components/ui/container";
-import { Heading } from "../../../components/ui/heading";
-import { Link } from "../../../components/ui/link";
-import { Section } from "../../../components/ui/section";
-import { Text } from "../../../components/ui/text";
 import { Prose } from "../../../components/prose";
+import { Section } from "../../../components/ui/section";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
 
@@ -61,29 +58,19 @@ const jsonLd = {
 };
 
 const { Content } = await render(article);
+
+const words = article.body?.split(/\s+/).length ?? 0;
+const readingTimeMinutes = Math.max(1, Math.round(words / 200));
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <Section variant="inverse">
-    <Container>
-      <Heading variant="inverse" level="h1">{article.data.title}</Heading>
-      <div class="flex flex-row justify-between">
-        <Text variant="inverse" className="mt-4">{article.data.tags.map((tag) => <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>)}</Text>
-        <Text variant="inverse" className="mt-4">
-          {
-            new Date(article.data.publish_time as Date).toLocaleDateString("cs-CZ", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })
-          }
-        </Text>
-      </div>
-      <Text variant="inverse" className="mt-4">
-        <Link href="/blog" className="text-zinc-100">← Zpět na blog</Link>
-      </Text>
-    </Container>
-  </Section>
+  <BlogArticleHero
+    title={article.data.title}
+    description={article.data.description}
+    publishDate={article.data.publish_time}
+    tags={article.data.tags}
+    readingTimeMinutes={readingTimeMinutes}
+  />
   <!-- <ArticleHeader article={article} /> -->
   <Section>
     <Prose>

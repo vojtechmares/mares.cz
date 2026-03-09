@@ -13,6 +13,7 @@ type CardProps = {
   border?: CardBorder;
   shadow?: boolean;
   hover?: boolean;
+  id?: string;
 };
 
 const variantStyles: Record<CardVariant, string> = {
@@ -38,9 +39,11 @@ export function Card({
   border = "none",
   shadow: showShadow = false,
   hover = false,
+  id,
 }: CardProps) {
   return (
     <section
+      id={id}
       className={clsx(
         variantStyles[variant],
         borderStyles[border],

@@ -43,7 +43,7 @@ function Page({
             fontSize: "4rem",
             marginBottom: 0,
             paddingBottom: 0,
-            color: "#f59e0b",
+            color: "#f54a00",
           }}
         >
           {title}

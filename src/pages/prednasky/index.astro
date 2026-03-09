@@ -7,12 +7,17 @@ import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
 import { CachePresets } from "../../lib/cache";
+import { TalksHero } from "../../features/talks/talks-hero";
 
 Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const talks = (await getCollection("talk", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+
+const talkCount = talks.length;
+const eventCount = new Set(talks.map((t) => t.data.event.name)).size;
+const yearsOfSpeaking = new Date().getFullYear() - Math.min(...talks.map((t) => t.data.date.getFullYear()));
 
 // Pre-render all talk content
 const renderedTalks = await Promise.all(
@@ -27,14 +32,20 @@ const meta = {
   description: "Přehled přednášek a workshopů, které jsem měl možnost dělat.",
   keywords: "přednášky, talks, workshop",
 };
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: Astro.url + "/card.png",
+    width: 1200,
+    height: 630,
+    alt: "Přednášky na konferencích",
+  },
+};
 ---
 
-<Layout meta={meta}>
-  <Section variant="inverse">
-    <Container>
-      <Heading variant="inverse" level="h1">Přednášky</Heading>
-    </Container>
-  </Section>
+<Layout meta={meta} openGraph={openGraph}>
+  <TalksHero talkCount={talkCount} eventCount={eventCount} yearsOfSpeaking={yearsOfSpeaking} />
   <Section>
     <Container mode="prose">
       {

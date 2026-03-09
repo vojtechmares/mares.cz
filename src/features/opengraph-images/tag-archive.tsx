@@ -31,7 +31,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontFamily: "IBM Plex Sans",
             fontWeight: 500,
             fontSize: "2.5rem",
-            color: "#f59e0b",
+            color: "#f54a00",
           }}
         >
           Blog

@@ -1,101 +1,38 @@
-import type { ReactNode } from "react";
-
-function TrainingImage({
-  slug,
-  title,
-  description,
-  imageData,
-}: {
-  slug: string;
-  title: string;
+interface StatItemProps {
+  value: string;
   description: string;
-  imageData?: string;
-}) {
+}
+
+function StatItem({ value, description }: StatItemProps) {
   return (
     <div
       style={{
-        height: "100%",
-        width: "100%",
         display: "flex",
-        flexDirection: "row",
-        alignItems: "center", // flex-end
-        justifyContent: "space-between", // space-between
-        color: "#d4d4d8",
-        backgroundColor: "#18181b",
+        flexDirection: "column",
+        borderLeft: "3px solid #f54a00",
+        paddingLeft: "1.5rem",
       }}
     >
-      <div
+      <span
         style={{
-          marginLeft: "4rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100%",
+          fontFamily: "Inter",
+          fontSize: "1.75rem",
+          fontWeight: 700,
+          color: "#ffffff",
         }}
       >
-        <p
-          style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 700,
-            fontSize: "4rem",
-            marginBottom: 0,
-            paddingBottom: 0,
-          }}
-        >
-          {title} školení
-        </p>
-        <p
-          style={{
-            marginTop: "1.5rem",
-            maxWidth: "32rem",
-            fontSize: "18px",
-            lineHeight: "1.5556",
-            fontWeight: 300,
-            fontFamily: "Inter",
-          }}
-        >
-          {description}
-        </p>
-        <p
-          style={{
-            fontSize: "2rem",
-            fontWeight: 500,
-            marginBottom: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          Vojtěch Mareš
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 300,
-            marginTop: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          DevOps achitekt & lektor
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 500,
-            marginTop: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          mares.cz/skoleni/{slug}
-        </p>
-      </div>
-      {imageData !== undefined && (
-        <img
-          style={{ position: "absolute", right: 60, filter: `invert(100%)` }}
-          width={400}
-          height={400}
-          alt=""
-          src={imageData}
-        />
-      )}
+        {value}
+      </span>
+      <span
+        style={{
+          fontFamily: "Inter",
+          fontSize: "1rem",
+          color: "#a1a1aa",
+          marginTop: "0.25rem",
+        }}
+      >
+        {description}
+      </span>
     </div>
   );
 }
@@ -104,12 +41,114 @@ export function CreateTrainingImageComponent({
   slug,
   title,
   description,
-  image = undefined,
+  length,
+  price,
+  image,
 }: {
   slug: string;
   title: string;
   description: string;
+  length: number;
+  price: number;
   image?: string;
-}): ReactNode {
-  return <TrainingImage slug={slug} title={title} description={description} imageData={image} />;
+}) {
+  const formatter = new Intl.NumberFormat("cs", {
+    style: "currency",
+    currency: "CZK",
+    maximumFractionDigits: 0,
+  });
+
+  const durationLabel = length === 1 ? "1 den" : `${length} dny`;
+
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "#18181b",
+        padding: "3.5rem 4rem",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          maxWidth: "540px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flex: 1,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            {image !== undefined && (
+              <img style={{ filter: "invert(100%)" }} width={80} height={80} alt="" src={image} />
+            )}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                fontWeight: 700,
+                fontFamily: "IBM Plex Sans",
+                fontSize: "3.5rem",
+                color: "#ffffff",
+                lineHeight: 1.15,
+              }}
+            >
+              <span style={{ color: "#f54a00" }}>{title}</span>
+              <span>školení</span>
+            </div>
+          </div>
+          <p
+            style={{
+              marginTop: "1.5rem",
+              fontSize: "1.25rem",
+              lineHeight: 1.6,
+              fontFamily: "Inter",
+              color: "#a1a1aa",
+            }}
+          >
+            {description}
+          </p>
+        </div>
+        <p
+          style={{
+            fontSize: "1.25rem",
+            fontWeight: 400,
+            fontFamily: "Inter",
+            color: "#71717a",
+            marginBottom: 0,
+          }}
+        >
+          mares.cz/skoleni/{slug}
+        </p>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "2rem",
+        }}
+      >
+        <StatItem value={durationLabel} description="délka školení" />
+        <StatItem value={formatter.format(price)} description="cena za osobu bez DPH" />
+      </div>
+    </div>
+  );
 }

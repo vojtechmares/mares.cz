@@ -23,10 +23,14 @@ export async function GET({ params, url }: APIContext) {
     iconDataUrl = await imageToDataUrl(training.data.icon.src, baseUrl);
   }
 
+  const pricing = training.data.price.open.filter((variant) => variant.currency === "CZK")[0].amount;
+
   const component = CreateTrainingImageComponent({
     slug: training.id,
     title: training.data.title,
     description: training.data.description,
+    length: training.data.length,
+    price: pricing,
     image: iconDataUrl,
   });
 

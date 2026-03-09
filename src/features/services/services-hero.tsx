@@ -13,7 +13,7 @@ export function ServicesHero({ trainingCount }: ServicesHeroProps) {
   return (
     <Section variant="inverse" ariaLabel="Služby">
       <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div className="flex flex-col gap-y-8 lg:flex-row lg:justify-between lg:gap-y-0">
           <div>
             <Heading variant="inverse" level="h1">
               DevOps služby na <span className="text-orange-500">míru</span>

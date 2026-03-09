@@ -37,8 +37,23 @@ function StatItem({ value, description }: StatItemProps) {
   );
 }
 
-export function CreateServicesImageComponent({ trainingCount }: { trainingCount: number }) {
-  const years = `${new Date().getFullYear() - 2020}+`;
+export function CreateSessionsImageComponent({
+  sessionCount,
+  topicCount,
+  nextSessionDate,
+}: {
+  sessionCount: number;
+  topicCount: number;
+  nextSessionDate: string | null;
+}) {
+  const formattedDate = nextSessionDate
+    ? new Date(nextSessionDate).toLocaleDateString("cs-CZ", {
+        day: "numeric",
+        month: "long",
+      })
+    : null;
+
+  const hasStats = sessionCount > 0;
 
   return (
     <div
@@ -80,10 +95,10 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
               lineHeight: 1.15,
             }}
           >
-            <span>DevOps služby</span>
             <span>
-              na&nbsp;<span style={{ color: "#f54a00" }}>míru</span>
+              Veřejné&nbsp;<span style={{ color: "#f54a00" }}>termíny</span>
             </span>
+            <span>školení</span>
           </div>
           <p
             style={{
@@ -94,23 +109,10 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
               color: "#a1a1aa",
             }}
           >
-            Pomáhám firmám budovat a spravovat moderní infrastrukturu.
+            {hasStats
+              ? "Otevřená školení pro jednotlivce i malé týmy. Přihlaste se na vypsaný termín a získejte praktické zkušenosti z oblasti DevOps a kontejnerů."
+              : "Momentálně nejsou vypsány žádné veřejné termíny. Podívejte se na nabídku školení — rádi vám připravíme termín na míru."}
           </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.25rem",
-              marginTop: "0.75rem",
-              fontFamily: "Inter",
-              fontSize: "1.25rem",
-              color: "#a1a1aa",
-            }}
-          >
-            <span>• Konzultace</span>
-            <span>• Školení</span>
-            <span>• Dlouhodobá spolupráce</span>
-          </div>
         </div>
         <p
           style={{
@@ -121,21 +123,23 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
             marginBottom: 0,
           }}
         >
-          mares.cz/sluzby
+          mares.cz/skoleni/verejne-terminy
         </p>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: "2rem",
-        }}
-      >
-        <StatItem value={`${years} let`} description="praxe v DevOps a cloudové infrastruktuře" />
-        <StatItem value="20+ projektů" description="úspěšně dokončených napříč obory" />
-        <StatItem value={`${trainingCount} školení`} description="pravidelně vypisovaných témat" />
-      </div>
+      {hasStats && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: "2rem",
+          }}
+        >
+          <StatItem value={`${sessionCount} termínů`} description="vypsaných v nejbližších měsících" />
+          <StatItem value={`${topicCount} témat`} description="z oblasti DevOps a kontejnerů" />
+          {formattedDate && <StatItem value={formattedDate} description="nejbližší volný termín" />}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,19 +1,65 @@
-import type { ReactNode } from "react";
+interface StatItemProps {
+  value: string;
+  description: string;
+}
 
-import { imageToDataUrl } from "../../lib/opengraph";
-import avatarImage from "../../images/people/vojtech-mares.png";
+function StatItem({ value, description }: StatItemProps) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        borderLeft: "3px solid #f54a00",
+        paddingLeft: "1.5rem",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "Inter",
+          fontSize: "1.75rem",
+          fontWeight: 700,
+          color: "#ffffff",
+        }}
+      >
+        {value}
+      </span>
+      <span
+        style={{
+          fontFamily: "Inter",
+          fontSize: "1rem",
+          color: "#a1a1aa",
+          marginTop: "0.25rem",
+        }}
+      >
+        {description}
+      </span>
+    </div>
+  );
+}
 
-function ArticleImage({
+export function CreateArticleImageComponent({
   slug,
   title,
   description,
-  imageData,
+  publishDate,
+  tags,
+  readingTimeMinutes,
 }: {
   slug: string;
   title: string;
   description: string;
-  imageData: string;
+  publishDate: Date;
+  tags: string[];
+  readingTimeMinutes: number;
 }) {
+  const formattedDate = new Date(publishDate).toLocaleDateString("cs-CZ", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const tagsDisplay = tags.map((t) => `#${t}`).join(" ");
+
   return (
     <div
       style={{
@@ -21,91 +67,77 @@ function ArticleImage({
         width: "100%",
         display: "flex",
         flexDirection: "row",
-        alignItems: "center", // flex-end
-        justifyContent: "space-between", // space-between
-        backgroundColor: "#fafafa",
-        color: "#3f3f46",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "#18181b",
+        padding: "3.5rem 4rem",
       }}
     >
       <div
         style={{
-          marginLeft: "4rem",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           height: "100%",
+          maxWidth: "540px",
         }}
       >
-        <p
+        <div
           style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 500,
-            fontSize: "2.5rem",
-            color: "#f59e0b",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flex: 1,
           }}
         >
-          Na blogu
-        </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontWeight: 700,
+              fontFamily: "IBM Plex Sans",
+              fontSize: "2.75rem",
+              color: "#ffffff",
+              lineHeight: 1.15,
+            }}
+          >
+            <span>{title}</span>
+          </div>
+          <p
+            style={{
+              marginTop: "1.5rem",
+              fontSize: "1.25rem",
+              lineHeight: 1.6,
+              fontFamily: "Inter",
+              color: "#a1a1aa",
+            }}
+          >
+            {description}
+          </p>
+        </div>
         <p
           style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 700,
-            fontSize: "4rem",
-            marginTop: 0,
-            maxWidth: "42rem",
-          }}
-        >
-          {title}
-        </p>
-        <p
-          style={{
-            marginTop: "1.5rem",
-            maxWidth: "32rem",
-            fontSize: "18px",
-            lineHeight: "1.5556",
+            fontSize: "1.25rem",
+            fontWeight: 400,
             fontFamily: "Inter",
-          }}
-        >
-          {description}
-        </p>
-        <p
-          style={{
-            fontSize: "2rem",
-            fontWeight: 500,
+            color: "#71717a",
             marginBottom: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          Vojtěch Mareš
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 300,
-            marginTop: 0,
-            fontFamily: "Inter",
           }}
         >
           mares.cz/blog/{slug}
         </p>
       </div>
-      <img style={{ position: "absolute", bottom: 0, right: 60 }} height={600} alt="" src={imageData} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "2rem",
+        }}
+      >
+        <StatItem value={formattedDate} description="datum publikace" />
+        <StatItem value={tagsDisplay} description={tags.length === 1 ? "téma článku" : "témata článku"} />
+        <StatItem value={`${readingTimeMinutes} min`} description="doba čtení" />
+      </div>
     </div>
   );
-}
-
-export async function CreateArticleImageComponent({
-  slug,
-  title,
-  description,
-  baseUrl,
-}: {
-  slug: string;
-  title: string;
-  description: string;
-  baseUrl: string | URL;
-}): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
-
-  return <ArticleImage slug={slug} title={title} description={description} imageData={avatarSrc} />;
 }
