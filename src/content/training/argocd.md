@@ -1,13 +1,13 @@
 ---
-title: ArgoCD
+title: Argo CD
 backofficeID: 7
 description: |
-  Přestaňte ručně nasazovat do Kubernetes. S ArgoCD budete mít nasazení verzovaná v Gitu, automaticky synchronizovaná a snadno vratitelná. Naučíte se GitOps přístup, který šetří čas a zvyšuje spolehlivost.
+  Přestaňte ručně nasazovat do Kubernetes. S Argo CD budete mít nasazení verzovaná v Gitu, automaticky synchronizovaná a snadno vratitelná. Naučíte se GitOps přístup, který šetří čas a zvyšuje spolehlivost.
 keywords: ["argocd", "gitops", "kubernetes", "devops", "deployment"]
 featured: false
 length: 1
 ad: |
-  Už vás nebaví do nekonečna psát CI/CD pipeliny a nasazovat každou aplikaci do Kubernetes skrz pipeline? Vyzkoušejte GitOps přístup s ArgoCD: všechny informace o nasazených aplikacích jsou přehledně verzované v Git repozitáři. A zároveň to slouží i jako záloha, kdyby vám Kubernetes cluster spadnul... Přijďte na veřejný termín školení nebo se domluvme na firemním školení.
+  Už vás nebaví do nekonečna psát CI/CD pipeliny a nasazovat každou aplikaci do Kubernetes skrz pipeline? Vyzkoušejte GitOps přístup s Argo CD: všechny informace o nasazených aplikacích jsou přehledně verzované v Git repozitáři. A zároveň to slouží i jako záloha, kdyby vám Kubernetes cluster spadnul... Přijďte na veřejný termín školení nebo se domluvme na firemním školení.
 price:
   open:
     - amount: 5400

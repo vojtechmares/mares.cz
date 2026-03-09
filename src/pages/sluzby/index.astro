@@ -1,0 +1,53 @@
+---
+import { CallToAction } from "../../features/homepage/call-to-action";
+import References from "../../features/homepage/References.astro";
+import { ServicesConsultation } from "../../features/services/services-consultation";
+import { ServicesCooperation } from "../../features/services/services-cooperation";
+import { ServicesHero } from "../../features/services/services-hero";
+import { ServicesTraining } from "../../features/services/services-training";
+import Layout from "../../layouts/Layout.astro";
+import { CachePresets } from "../../lib/cache";
+import { getCollection } from "astro:content";
+
+Astro.response.headers.set("Cache-Control", CachePresets.content);
+
+const trainings = await getCollection("training", ({ data }) => !data.draft);
+
+const meta = {
+  title: "Vojtěch Mareš | Služby",
+  description:
+    "Freelance DevOps a Platform architekt. Nabízím konzultace, školení a dlouhodobou spolupráci v oblasti cloudové infrastruktury.",
+  keywords: "služby, konzultace, školení, spolupráce, devops, infrastruktura",
+};
+---
+
+<Layout
+  meta={meta}
+  openGraph={{
+    type: "website",
+    image: {
+      url: new URL("/sluzby/card.png", Astro.url).toString(),
+      width: 1200,
+      height: 630,
+      alt: "Služby - Vojtěch Mareš",
+    },
+  }}
+>
+  <ServicesHero trainingCount={trainings.length} />
+
+  <ServicesCooperation />
+
+  <ServicesTraining
+    trainings={trainings.map((t) => ({
+      id: t.id,
+      title: t.data.title,
+      description: t.data.description,
+    }))}
+  />
+
+  <ServicesConsultation />
+
+  <References />
+
+  <CallToAction />
+</Layout>

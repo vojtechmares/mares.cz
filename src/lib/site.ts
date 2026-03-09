@@ -29,7 +29,7 @@ export const LocalizedStaticNavigationLinks = [
       },
       {
         name: "Služby",
-        href: "/#sluzby",
+        href: "/sluzby",
       },
       {
         name: "Blog",
