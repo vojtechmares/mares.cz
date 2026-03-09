@@ -35,3 +35,7 @@ pnpm-debug.log*
 
 # test coverage
 coverage/
+
+# playwright-cli
+.playwright-cli/
+.playwright-mcp/
