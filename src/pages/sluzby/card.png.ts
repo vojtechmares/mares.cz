@@ -1,17 +1,13 @@
 import type { APIContext } from "astro";
+import { getCollection } from "astro:content";
 
-import { CreatePageImageComponent } from "../../features/opengraph-images/page";
+import { CreateServicesImageComponent } from "../../features/opengraph-images/services";
 import { OpenGraphImageResponse } from "../../lib/opengraph";
 
 export async function GET({ url }: APIContext) {
   const baseUrl = url.origin;
-  const component = await CreatePageImageComponent({
-    slug: "sluzby",
-    title: "Služby",
-    description:
-      "Freelance DevOps a Platform architekt. Nabízím konzultace, školení a dlouhodobou spolupráci v oblasti cloudové infrastruktury.",
-    baseUrl,
-  });
+  const trainings = await getCollection("training");
+  const component = CreateServicesImageComponent({ trainingCount: trainings.length });
 
   return OpenGraphImageResponse(component, baseUrl);
 }
