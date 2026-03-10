@@ -1,4 +1,4 @@
-import type { Loader, LoaderContext } from "astro/loaders";
+import type { LiveLoader } from "astro/loaders";
 import { BackofficeClient, type APISession } from "../backoffice";
 
 interface SessionLoaderConfig {
@@ -9,45 +9,37 @@ interface SessionLoaderConfig {
   oidcAudience?: string;
 }
 
-export function sessionLoader(config: SessionLoaderConfig): Loader {
+export function sessionLoader(config: SessionLoaderConfig): LiveLoader {
+  const fetchSessions = async () => {
+    const client = new BackofficeClient(config.apiUrl, {
+      issuer: config.oidcIssuer,
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      audience: config.oidcAudience,
+    });
+
+    const sessions = await client.getSessions({
+      limit: 24,
+      sort: "date",
+      order: "asc",
+      status: ["SCHEDULED", "CONFIRMED"],
+    });
+
+    return sessions.map((session) => ({
+      id: generateSessionId(session),
+      data: transformSession(session),
+    }));
+  };
+
   return {
     name: "session-loader",
-    load: async (context: LoaderContext) => {
-      const { store, logger, parseData, generateDigest } = context;
-
-      const client = new BackofficeClient(config.apiUrl, {
-        issuer: config.oidcIssuer,
-        clientId: config.clientId,
-        clientSecret: config.clientSecret,
-        audience: config.oidcAudience,
-      });
-
-      logger.info("Fetching sessions from backoffice API...");
-
-      const sessions = await client.getSessions({
-        limit: 24,
-        sort: "date",
-        order: "asc",
-        status: ["SCHEDULED", "CONFIRMED"],
-      });
-
-      logger.info(`Received ${sessions.length} sessions`);
-
-      store.clear();
-
-      for (const session of sessions) {
-        const id = generateSessionId(session);
-        const data = transformSession(session);
-        const parsedData = await parseData({ id, data });
-
-        store.set({
-          id,
-          data: parsedData,
-          digest: generateDigest(data),
-        });
-      }
-
-      logger.info(`Loaded ${sessions.length} sessions into content collection`);
+    async loadCollection() {
+      const entries = await fetchSessions();
+      return { entries };
+    },
+    async loadEntry({ filter }) {
+      const entries = await fetchSessions();
+      return entries.find((entry) => entry.id === filter.id);
     },
   };
 }

@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, getLiveCollection, type CollectionEntry } from "astro:content";
 
 type Session = CollectionEntry<"session">;
 
@@ -20,10 +20,10 @@ export interface TrainingSession {
  * Get all future sessions sorted by start date (ascending)
  */
 export async function getFutureSessions(): Promise<Session[]> {
-  const sessions = await getCollection("session");
+  const { entries = [] } = await getLiveCollection("session");
   const today = new Date().toISOString().split("T")[0];
 
-  return sessions
+  return entries
     .filter((session) => session.data.dates.start >= today)
     .sort((a, b) => new Date(a.data.dates.start).getTime() - new Date(b.data.dates.start).getTime());
 }

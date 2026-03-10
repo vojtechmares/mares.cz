@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { getCollection } from "astro:content";
+import { getCollection, getLiveCollection } from "astro:content";
 
 import {
   toTrainingSession,
@@ -11,7 +11,6 @@ import {
 
 const createMockSessionEntry = (overrides: Record<string, unknown> = {}) => ({
   id: "test-session",
-  collection: "session" as const,
   data: {
     trainingID: 1,
     name: "Kubernetes Workshop",
@@ -57,16 +56,16 @@ describe("enrichSessionsWithSlugs", () => {
 
 describe("getFutureSessions", () => {
   beforeEach(() => {
-    vi.mocked(getCollection).mockReset();
+    vi.mocked(getLiveCollection).mockReset();
   });
 
   it("filters past sessions and sorts ascending by start date", async () => {
-    const sessions = [
+    const entries = [
       createMockSessionEntry({ id: "future-2", data: { dates: { start: "2099-12-01" } } }),
       createMockSessionEntry({ id: "past", data: { dates: { start: "2020-01-01" } } }),
       createMockSessionEntry({ id: "future-1", data: { dates: { start: "2099-06-01" } } }),
     ];
-    vi.mocked(getCollection).mockResolvedValue(sessions as any);
+    vi.mocked(getLiveCollection).mockResolvedValue({ entries } as any);
     const result = await getFutureSessions();
     expect(result).toHaveLength(2);
     expect(result[0].id).toBe("future-1");
@@ -76,15 +75,15 @@ describe("getFutureSessions", () => {
 
 describe("getFutureSessionsByName", () => {
   beforeEach(() => {
-    vi.mocked(getCollection).mockReset();
+    vi.mocked(getLiveCollection).mockReset();
   });
 
   it("filters by name case-insensitively", async () => {
-    const sessions = [
+    const entries = [
       createMockSessionEntry({ id: "s1", data: { name: "Kubernetes Workshop", dates: { start: "2099-06-01" } } }),
       createMockSessionEntry({ id: "s2", data: { name: "Docker Workshop", dates: { start: "2099-06-01" } } }),
     ];
-    vi.mocked(getCollection).mockResolvedValue(sessions as any);
+    vi.mocked(getLiveCollection).mockResolvedValue({ entries } as any);
     const result = await getFutureSessionsByName("kubernetes workshop");
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe("s1");

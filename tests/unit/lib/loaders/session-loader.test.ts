@@ -44,19 +44,6 @@ const createMockAPISession = (overrides: Partial<APISession> = {}): APISession =
 });
 
 describe("sessionLoader", () => {
-  let mockStore: { clear: ReturnType<typeof vi.fn>; set: ReturnType<typeof vi.fn> };
-  let mockLogger: { info: ReturnType<typeof vi.fn> };
-  let mockParseData: ReturnType<typeof vi.fn>;
-  let mockGenerateDigest: ReturnType<typeof vi.fn>;
-
-  beforeEach(() => {
-    mockStore = { clear: vi.fn(), set: vi.fn() };
-    mockLogger = { info: vi.fn() };
-    mockParseData = vi.fn(({ data }) => Promise.resolve(data));
-    mockGenerateDigest = vi.fn(() => "digest-123");
-    mockGetSessions = vi.fn();
-  });
-
   const config = {
     apiUrl: "https://api.example.com",
     oidcIssuer: "https://auth.example.com",
@@ -64,32 +51,26 @@ describe("sessionLoader", () => {
     clientSecret: "client-secret",
   };
 
-  const loadContext = () =>
-    ({
-      store: mockStore,
-      logger: mockLogger,
-      parseData: mockParseData,
-      generateDigest: mockGenerateDigest,
-    }) as any;
+  const collectionContext = () => ({ collection: "session" }) as any;
+
+  beforeEach(() => {
+    mockGetSessions = vi.fn();
+  });
 
   it("generates session ID from slugified name and date", async () => {
     mockGetSessions.mockResolvedValue([createMockAPISession()]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    expect(mockStore.set).toHaveBeenCalledWith(
-      expect.objectContaining({
-        id: "kubernetes-workshop-2024-06-15",
-      }),
-    );
+    expect(result.entries[0].id).toBe("kubernetes-workshop-2024-06-15");
   });
 
   it("transforms API session to content data", async () => {
     mockGetSessions.mockResolvedValue([createMockAPISession()]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    expect(mockParseData).toHaveBeenCalledWith({
+    expect(result.entries[0]).toEqual({
       id: "kubernetes-workshop-2024-06-15",
       data: {
         trainingID: 10,
@@ -105,36 +86,25 @@ describe("sessionLoader", () => {
   it("calculates end date for multi-day sessions", async () => {
     mockGetSessions.mockResolvedValue([createMockAPISession({ length: 3 })]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    const parseCall = mockParseData.mock.calls[0][0];
-    expect(parseCall.data.dates.end).toBe("2024-06-17");
+    expect(result.entries[0].data.dates.end).toBe("2024-06-17");
   });
 
   it("omits end date for single-day sessions", async () => {
     mockGetSessions.mockResolvedValue([createMockAPISession({ length: 1 })]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    const parseCall = mockParseData.mock.calls[0][0];
-    expect(parseCall.data.dates.end).toBeUndefined();
+    expect(result.entries[0].data.dates.end).toBeUndefined();
   });
 
   it("omits signUpURL when null", async () => {
     mockGetSessions.mockResolvedValue([createMockAPISession({ signup_url: null })]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    const parseCall = mockParseData.mock.calls[0][0];
-    expect(parseCall.data.signUpURL).toBeUndefined();
-  });
-
-  it("clears store before loading", async () => {
-    mockGetSessions.mockResolvedValue([]);
-    const loader = sessionLoader(config);
-    await loader.load(loadContext());
-
-    expect(mockStore.clear).toHaveBeenCalled();
+    expect(result.entries[0].data.signUpURL).toBeUndefined();
   });
 
   it("loads multiple sessions", async () => {
@@ -143,15 +113,15 @@ describe("sessionLoader", () => {
       createMockAPISession({ id: 2, training_name: "Docker" }),
     ]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    const result = await loader.loadCollection(collectionContext());
 
-    expect(mockStore.set).toHaveBeenCalledTimes(2);
+    expect(result.entries).toHaveLength(2);
   });
 
   it("passes correct params to getSessions", async () => {
     mockGetSessions.mockResolvedValue([]);
     const loader = sessionLoader(config);
-    await loader.load(loadContext());
+    await loader.loadCollection(collectionContext());
 
     expect(mockGetSessions).toHaveBeenCalledWith({
       limit: 24,
@@ -164,7 +134,7 @@ describe("sessionLoader", () => {
   it("passes oidcAudience to BackofficeClient", async () => {
     mockGetSessions.mockResolvedValue([]);
     const loader = sessionLoader({ ...config, oidcAudience: "my-audience" });
-    await loader.load(loadContext());
+    await loader.loadCollection(collectionContext());
 
     const instance = (BackofficeClient as any).lastInstance;
     expect(instance.config).toEqual({
@@ -181,5 +151,28 @@ describe("sessionLoader", () => {
   it("has correct loader name", () => {
     const loader = sessionLoader(config);
     expect(loader.name).toBe("session-loader");
+  });
+
+  it("loadEntry returns matching entry by ID", async () => {
+    mockGetSessions.mockResolvedValue([createMockAPISession()]);
+    const loader = sessionLoader(config);
+    const result = await loader.loadEntry({
+      filter: { id: "kubernetes-workshop-2024-06-15" },
+      collection: "session",
+    });
+
+    expect(result).toBeDefined();
+    expect(result!.id).toBe("kubernetes-workshop-2024-06-15");
+  });
+
+  it("loadEntry returns undefined for non-existent ID", async () => {
+    mockGetSessions.mockResolvedValue([createMockAPISession()]);
+    const loader = sessionLoader(config);
+    const result = await loader.loadEntry({
+      filter: { id: "non-existent" },
+      collection: "session",
+    });
+
+    expect(result).toBeUndefined();
   });
 });
