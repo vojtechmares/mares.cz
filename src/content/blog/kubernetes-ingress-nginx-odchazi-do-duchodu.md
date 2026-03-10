@@ -88,7 +88,7 @@ Gateway API není náhrada za Ingress ve smyslu "1:1", je potřeba udělat změn
 - Pokud používáte Cert-Manager, je třeba zapnout podporu Gateway API…
 - external-dns potřebuje zapnout podporu, aby sledovalo resource typu Route a _Gateway_
 
-Na pomoc s migrací z Ingressu na Gateway API existuje nástroj [ingress2gateway](https://github.com/kubernetes-sigs/ingress2gateway) a Gateway API má o migraci i [stránku](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/) v dokumentaci.
+Na pomoc s migrací z Ingressu na Gateway API existuje nástroj [ingress2gateway](https://github.com/kubernetes-sigs/ingress2gateway) a Gateway API má o migraci i [stránku](https://gateway-api.sigs.k8s.io/guides/getting-started/migrating-from-ingress/) v dokumentaci.
 
 Čemu bych se naopak vyhnul, je Cilium řešení, jak pro Ingress tak pro Gateway API. Mrzí mě to, protože [Cilium](https://cilium.io/) mám moc rád a má spoustu skvělých fičur. Ale Ingress a Gateway API je hrozné – vyzkoušeno za vás. Je to prakticky nesrovnatelné s Ingress-NGINXem co se fičur týče, neumí to URL rewrite, redirect, proxy body size a další užitečné a skoro bych i řekl základní věci.
 

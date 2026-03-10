@@ -112,7 +112,7 @@ Užitečné nástroje nejen pro práci s OCI:
 
 - [Oras](https://oras.land/) – nástroj pro práci s OCI artefakty
 - [Cosign](https://github.com/sigstore/cosign) – podepisování (primárně container imagů)
-- [Trivy](https://trivy.dev/latest/) – skenování bezpečnostních zranitelností
+- [Trivy](https://trivy.dev/) – skenování bezpečnostních zranitelností
 - [Skopeo](https://github.com/containers/skopeo) – nástroj pro práci se vzdálenými container imagi
 
 Co si odnáším: OCI je prakticky repozitář pro všechny artefakty, vše se dá podepsat a připojit SBOM – bezpečnost bez kompromisů. Kubernetes (1.33, beta feature) plánuje podporu pro OCI volume mount do kontejneru.
