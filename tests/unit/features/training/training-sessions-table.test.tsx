@@ -31,23 +31,15 @@ describe("TrainingSessionsTable", () => {
   ];
 
   describe("rendering", () => {
-    it("should render table element", () => {
+    it("should render session articles", () => {
       render(<TrainingSessionsTable sessions={mockSessions} />);
-      expect(screen.getByRole("table")).toBeInTheDocument();
-    });
-
-    it("should render table headers", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
-      expect(screen.getByRole("columnheader", { name: /školení/i })).toBeInTheDocument();
-      expect(screen.getByRole("columnheader", { name: /datum/i })).toBeInTheDocument();
-      expect(screen.getByRole("columnheader", { name: /místo/i })).toBeInTheDocument();
-      expect(screen.getByRole("columnheader", { name: /cena/i })).toBeInTheDocument();
+      expect(screen.getAllByRole("article")).toHaveLength(2);
     });
 
     it("should render all sessions", () => {
       render(<TrainingSessionsTable sessions={mockSessions} />);
-      expect(screen.getByText("Kubernetes Workshop")).toBeInTheDocument();
-      expect(screen.getByText("Docker Workshop")).toBeInTheDocument();
+      expect(screen.getAllByText("Kubernetes Workshop").length).toBeGreaterThan(0);
+      expect(screen.getAllByText("Docker Workshop").length).toBeGreaterThan(0);
     });
   });
 
@@ -84,10 +76,9 @@ describe("TrainingSessionsTable", () => {
   });
 
   describe("empty sessions", () => {
-    it("should render table with no rows when sessions is empty", () => {
-      render(<TrainingSessionsTable sessions={[]} />);
-      expect(screen.getByRole("table")).toBeInTheDocument();
-      expect(screen.queryAllByRole("row")).toHaveLength(1); // Only header row
+    it("should render no articles when sessions is empty", () => {
+      const { container } = render(<TrainingSessionsTable sessions={[]} />);
+      expect(container.querySelectorAll("article")).toHaveLength(0);
     });
   });
 
@@ -102,14 +93,17 @@ describe("TrainingSessionsTable", () => {
     it("should render training name as link when trainingSlug is provided", () => {
       const sessionWithSlug = createMockSession({ trainingSlug: "kubernetes" });
       render(<TrainingSessionsTable sessions={[sessionWithSlug]} />);
-      const link = screen.getByRole("link", { name: "Kubernetes Workshop" });
-      expect(link).toHaveAttribute("href", "/skoleni/kubernetes");
+      const links = screen.getAllByRole("link", { name: "Kubernetes Workshop" });
+      expect(links.length).toBeGreaterThan(0);
+      links.forEach((link) => {
+        expect(link).toHaveAttribute("href", "/skoleni/kubernetes");
+      });
     });
 
     it("should render training name as plain text when trainingSlug is not provided", () => {
       const sessionWithoutSlug = createMockSession({ trainingSlug: undefined });
       render(<TrainingSessionsTable sessions={[sessionWithoutSlug]} />);
-      expect(screen.getByText("Kubernetes Workshop")).toBeInTheDocument();
+      expect(screen.getAllByText("Kubernetes Workshop").length).toBeGreaterThan(0);
       expect(screen.queryByRole("link", { name: "Kubernetes Workshop" })).not.toBeInTheDocument();
     });
   });
@@ -129,18 +123,9 @@ describe("CompactTrainingSessionsTable", () => {
   const mockSessions: TrainingSession[] = [createMockSession()];
 
   describe("rendering", () => {
-    it("should render table element", () => {
+    it("should render session articles", () => {
       render(<CompactTrainingSessionsTable sessions={mockSessions} />);
-      expect(screen.getByRole("table")).toBeInTheDocument();
-    });
-
-    it("should render compact headers (no training name, no price)", () => {
-      render(<CompactTrainingSessionsTable sessions={mockSessions} />);
-      expect(screen.getByRole("columnheader", { name: /datum/i })).toBeInTheDocument();
-      expect(screen.getByRole("columnheader", { name: /místo/i })).toBeInTheDocument();
-      // Should NOT have "Školení" and "Cena" headers in compact version
-      expect(screen.queryByRole("columnheader", { name: /^školení$/i })).not.toBeInTheDocument();
-      expect(screen.queryByRole("columnheader", { name: /^cena$/i })).not.toBeInTheDocument();
+      expect(screen.getAllByRole("article")).toHaveLength(1);
     });
 
     it("should render sessions", () => {
@@ -166,9 +151,9 @@ describe("CompactTrainingSessionsTable", () => {
   });
 
   describe("empty sessions", () => {
-    it("should render table with no rows when sessions is empty", () => {
-      render(<CompactTrainingSessionsTable sessions={[]} />);
-      expect(screen.getByRole("table")).toBeInTheDocument();
+    it("should render no articles when sessions is empty", () => {
+      const { container } = render(<CompactTrainingSessionsTable sessions={[]} />);
+      expect(container.querySelectorAll("article")).toHaveLength(0);
     });
   });
 });
