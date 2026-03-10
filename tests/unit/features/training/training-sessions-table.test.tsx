@@ -89,6 +89,19 @@ describe("TrainingSessionsTable", () => {
     });
   });
 
+  describe("training description", () => {
+    it("should render description when trainingDescription is provided", () => {
+      const session = createMockSession({ trainingDescription: "Hands-on Docker workshop" });
+      render(<TrainingSessionsTable sessions={[session]} />);
+      expect(screen.getAllByText("Hands-on Docker workshop").length).toBeGreaterThan(0);
+    });
+
+    it("should not render description when trainingDescription is not provided", () => {
+      render(<TrainingSessionsTable sessions={[createMockSession()]} />);
+      expect(screen.queryByText("Hands-on Docker workshop")).not.toBeInTheDocument();
+    });
+  });
+
   describe("training name links", () => {
     it("should render training name as link when trainingSlug is provided", () => {
       const sessionWithSlug = createMockSession({ trainingSlug: "kubernetes" });
