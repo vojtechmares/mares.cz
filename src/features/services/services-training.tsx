@@ -78,7 +78,7 @@ export function ServicesTraining({ trainings }: ServicesTrainingProps) {
               </ul>
             </Body>
             <div className="mt-auto pt-6">
-              <Button href="/skoleni/" variant="primary">
+              <Button href="#skoleni" variant="primary">
                 Seznam školení
               </Button>
             </div>
