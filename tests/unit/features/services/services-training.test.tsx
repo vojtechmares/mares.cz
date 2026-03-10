@@ -57,7 +57,7 @@ describe("ServicesTraining", () => {
 
   it("should render training list link", () => {
     render(<ServicesTraining trainings={mockTrainings} />);
-    expect(screen.getByRole("link", { name: /seznam školení/i })).toHaveAttribute("href", "/skoleni/");
+    expect(screen.getByRole("link", { name: /seznam školení/i })).toHaveAttribute("href", "#skoleni");
   });
 
   it("should render empty grid when no trainings", () => {
