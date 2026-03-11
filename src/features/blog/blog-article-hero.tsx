@@ -40,13 +40,13 @@ export function BlogArticleHero({ title, description, publishDate, tags, reading
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{formattedDate}</span>
+              <span className="font-sans text-3xl font-bold text-white">{formattedDate}</span>
               <Body color="muted" className="mt-1">
                 datum publikace
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">
+              <span className="font-sans text-3xl font-bold text-white">
                 {tags.map((tag, i) => (
                   <span key={tag}>
                     <Link href={`/blog/tag/${tag}`} className="text-white hover:text-orange-400">
@@ -61,7 +61,7 @@ export function BlogArticleHero({ title, description, publishDate, tags, reading
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{readingTimeMinutes} min</span>
+              <span className="font-sans text-3xl font-bold text-white">{readingTimeMinutes} min</span>
               <Body color="muted" className="mt-1">
                 doba čtení
               </Body>

@@ -26,19 +26,19 @@ export function TalksHero({ talkCount, eventCount, yearsOfSpeaking }: TalksHeroP
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{talkCount} přednášek</span>
+              <span className="font-sans text-3xl font-bold text-white">{talkCount} přednášek</span>
               <Body color="muted" className="mt-1">
                 na odborných konferencích
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{eventCount} konferencí</span>
+              <span className="font-sans text-3xl font-bold text-white">{eventCount} konferencí</span>
               <Body color="muted" className="mt-1">
                 v ČR i zahraničí
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{yearsOfSpeaking}+ roky</span>
+              <span className="font-sans text-3xl font-bold text-white">{yearsOfSpeaking}+ roky</span>
               <Body color="muted" className="mt-1">
                 zkušeností s přednášením
               </Body>

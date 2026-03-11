@@ -5,6 +5,12 @@ import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 
+function formatSessionCount(count: number): string {
+  if (count === 1) return `${count} termín`;
+  if (count >= 2 && count <= 4) return `${count} termíny`;
+  return `${count} termínů`;
+}
+
 interface SessionsHeroProps {
   sessionCount: number;
   topicCount: number;
@@ -62,20 +68,20 @@ export function SessionsHero({ sessionCount, topicCount, nextSessionDate }: Sess
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{sessionCount} termínů</span>
+              <span className="font-sans text-3xl font-bold text-white">{formatSessionCount(sessionCount)}</span>
               <Body color="muted" className="mt-1">
                 vypsaných v nejbližších měsících
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{topicCount} témat</span>
+              <span className="font-sans text-3xl font-bold text-white">{topicCount} témat</span>
               <Body color="muted" className="mt-1">
                 z oblasti DevOps a kontejnerů
               </Body>
             </div>
             {formattedDate && (
               <div className="border-l-2 border-orange-500 pl-6">
-                <span className="font-mono text-3xl font-bold text-white">{formattedDate}</span>
+                <span className="font-sans text-3xl font-bold text-white">{formattedDate}</span>
                 <Body color="muted" className="mt-1">
                   nejbližší volný termín
                 </Body>

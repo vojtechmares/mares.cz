@@ -37,19 +37,19 @@ export function ServicesHero({ trainingCount }: ServicesHeroProps) {
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{new Date().getFullYear() - 2020}+ let</span>
+              <span className="font-sans text-3xl font-bold text-white">{new Date().getFullYear() - 2020}+ let</span>
               <Body color="muted" className="mt-1">
                 praxe v DevOps a cloudové infrastruktuře
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">20+ projektů</span>
+              <span className="font-sans text-3xl font-bold text-white">20+ projektů</span>
               <Body color="muted" className="mt-1">
                 úspěšně dokončených napříč obory
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{trainingCount} školení</span>
+              <span className="font-sans text-3xl font-bold text-white">{trainingCount} školení</span>
               <Body color="muted" className="mt-1">
                 pravidelně vypisovaných témat
               </Body>

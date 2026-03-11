@@ -44,13 +44,13 @@ export function TrainingHero({ title, description, length, price, logo }: Traini
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{durationLabel}</span>
+              <span className="font-sans text-3xl font-bold text-white">{durationLabel}</span>
               <Body color="muted" className="mt-1">
                 délka školení
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-mono text-3xl font-bold text-white">{formatter.format(price)}</span>
+              <span className="font-sans text-3xl font-bold text-white">{formatter.format(price)}</span>
               <Body color="muted" className="mt-1">
                 cena za osobu bez DPH
               </Body>
