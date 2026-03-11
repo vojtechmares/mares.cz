@@ -60,9 +60,28 @@ export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): P
   return `data:${contentType};base64,${base64}`;
 }
 
+// Singleton promise for WASM initialization — prevents race condition in workers-og
+// where concurrent requests can both attempt WebAssembly.instantiate before the
+// module-level guard is set (there's an await between the check and the assignment).
+let wasmReady: Promise<void> | null = null;
+
 export async function OpenGraphImageResponse(component: ReactNode, baseUrl: string | URL) {
   const [interRegular, interLight, interBold, ibmPlexSansRegular, ibmPlexSansLight, ibmPlexSansBold] =
     await loadFonts(baseUrl);
+
+  if (!wasmReady) {
+    wasmReady = new ImageResponse(
+      { type: "div", props: { style: { display: "flex" }, children: "" } },
+      {
+        width: 1,
+        height: 1,
+        fonts: [{ name: "i", data: interRegular, weight: 400 as const, style: "normal" as const }],
+      },
+    )
+      .arrayBuffer()
+      .then(() => {});
+  }
+  await wasmReady;
 
   return new ImageResponse(component, {
     width: 1200,
