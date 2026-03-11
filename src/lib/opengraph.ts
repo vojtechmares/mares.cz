@@ -1,7 +1,5 @@
 import { type ReactNode } from "react";
-import satori from "satori";
-import { initWasm, Resvg } from "@resvg/resvg-wasm";
-import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
+import { ImageResponse } from "workers-og";
 
 // Import fonts as URLs at build time
 import interFontRegularUrl from "../fonts/Inter_18pt-Regular.ttf";
@@ -29,23 +27,6 @@ async function loadFonts(baseUrl: string | URL): Promise<ArrayBuffer[]> {
   return fontsCache;
 }
 
-// Guard against double WASM initialization
-let resvgInitialized = false;
-
-async function ensureResvgWasm(): Promise<void> {
-  if (resvgInitialized) return;
-  try {
-    await initWasm(resvgWasm as unknown as WebAssembly.Module);
-  } catch (e) {
-    if (e instanceof Error && e.message.includes("Already initialized")) {
-      // WASM was initialized in a previous module evaluation (e.g. Vite HMR)
-    } else {
-      throw e;
-    }
-  }
-  resvgInitialized = true;
-}
-
 export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): Promise<string> {
   const absoluteUrl = new URL(imageUrl, baseUrl).toString();
   const response = await fetch(absoluteUrl);
@@ -69,55 +50,48 @@ export async function OpenGraphImageResponse(component: ReactNode, baseUrl: stri
   const [interRegular, interLight, interBold, ibmPlexSansRegular, ibmPlexSansLight, ibmPlexSansBold] =
     await loadFonts(baseUrl);
 
-  const width = 1200;
-  const height = 630;
-
-  // Render React element to SVG using satori
-  const svg = await satori(component, {
-    width,
-    height,
+  return new ImageResponse(component, {
+    width: 1200,
+    height: 630,
     fonts: [
       {
         name: "Inter",
         data: interRegular,
         weight: 500,
+        style: "normal",
       },
       {
         name: "Inter",
         data: interLight,
         weight: 300,
+        style: "normal",
       },
       {
         name: "Inter",
         data: interBold,
         weight: 700,
+        style: "normal",
       },
       {
         name: "IBM Plex Sans",
         data: ibmPlexSansRegular,
         weight: 500,
+        style: "normal",
       },
       {
         name: "IBM Plex Sans",
         data: ibmPlexSansLight,
         weight: 300,
+        style: "normal",
       },
       {
         name: "IBM Plex Sans",
         data: ibmPlexSansBold,
         weight: 700,
+        style: "normal",
       },
     ],
-  });
-
-  // Convert SVG to PNG using resvg-wasm
-  await ensureResvgWasm();
-  const resvg = new Resvg(svg, { fitTo: { mode: "width", value: width } });
-  const png = resvg.render().asPng();
-
-  return new Response(png, {
     headers: {
-      "Content-Type": "image/png",
       "Cache-Control": "public, max-age=31536000, immutable",
     },
   });
