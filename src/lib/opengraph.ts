@@ -9,6 +9,20 @@ import ibmPlexSansFontRegularUrl from "../fonts/IBMPlexSans-Regular.ttf";
 import ibmPlexSansFontLightUrl from "../fonts/IBMPlexSans-Light.ttf";
 import ibmPlexSansFontBoldUrl from "../fonts/IBMPlexSans-Bold.ttf";
 
+// Use Cloudflare ASSETS binding for self-fetches (avoids network round-trip and
+// global_fetch_strictly_public restrictions), falling back to regular fetch in local dev.
+async function assetFetch(url: string | URL): Promise<Response> {
+  try {
+    const { env } = await import("cloudflare:workers");
+    if (env?.ASSETS) {
+      return env.ASSETS.fetch(typeof url === "string" ? url : url.toString());
+    }
+  } catch {
+    // Not in CF Workers runtime (local dev)
+  }
+  return fetch(url);
+}
+
 // Cache for fetched fonts
 let fontsCache: ArrayBuffer[] | null = null;
 
@@ -16,12 +30,12 @@ async function loadFonts(baseUrl: string | URL): Promise<ArrayBuffer[]> {
   if (fontsCache) return fontsCache;
 
   fontsCache = await Promise.all([
-    fetch(new URL(interFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(interFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(interFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(ibmPlexSansFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(ibmPlexSansFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
-    fetch(new URL(ibmPlexSansFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(interFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(interFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(interFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(ibmPlexSansFontRegularUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(ibmPlexSansFontLightUrl, baseUrl)).then((r) => r.arrayBuffer()),
+    assetFetch(new URL(ibmPlexSansFontBoldUrl, baseUrl)).then((r) => r.arrayBuffer()),
   ]);
 
   return fontsCache;
@@ -29,7 +43,7 @@ async function loadFonts(baseUrl: string | URL): Promise<ArrayBuffer[]> {
 
 export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): Promise<string> {
   const absoluteUrl = new URL(imageUrl, baseUrl).toString();
-  const response = await fetch(absoluteUrl);
+  const response = await assetFetch(absoluteUrl);
   const buffer = await response.arrayBuffer();
   const uint8Array = new Uint8Array(buffer);
 
