@@ -2,7 +2,7 @@
 title: "CloudNativePG - PostgreSQL on Kubernetes the right way"
 date: 2024-06-07
 event:
-  name: "KCD Prague 2024"
+  name: "Kubernetes Community Day Prague 2024"
   url: "https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/"
 draft: false
 ---

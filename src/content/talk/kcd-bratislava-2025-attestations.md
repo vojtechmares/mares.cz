@@ -2,7 +2,7 @@
 title: "Attestations & supply chain security from Git to Kubernetes"
 date: 2025-06-06
 event:
-  name: "KCD Czech & Slovak - Bratislava 2025"
+  name: "Kubernetes Community Day Bratislava 2025"
   url: "https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-amp-slovak-bratislava-2025/"
 draft: false
 ---
