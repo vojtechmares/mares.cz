@@ -56,12 +56,6 @@ jobs:
           sbom: true
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/web:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/web:buildcache,mode=max
-          secrets: |
-            SESSIONS_OIDC_ISSUER=${{ secrets.SESSIONS_OIDC_ISSUER }}
-            SESSIONS_OIDC_CLIENT_ID=${{ secrets.SESSIONS_OIDC_CLIENT_ID }}
-            SESSIONS_OIDC_CLIENT_SECRET=${{ secrets.SESSIONS_OIDC_CLIENT_SECRET }}
-            SESSIONS_API_URL=${{ secrets.SESSIONS_API_URL }}
-            SESSIONS_OIDC_AUDIENCE=${{ secrets.SESSIONS_OIDC_AUDIENCE }}
 
   deploy-to-staging:
     name: deploy to staging
