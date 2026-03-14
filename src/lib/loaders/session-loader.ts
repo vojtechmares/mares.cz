@@ -9,8 +9,23 @@ interface SessionLoaderConfig {
   oidcAudience?: string;
 }
 
-export function sessionLoader(config: SessionLoaderConfig): LiveLoader {
+type SessionLoaderConfigInit = SessionLoaderConfig | (() => SessionLoaderConfig | Promise<SessionLoaderConfig>);
+
+export function sessionLoader(configInit: SessionLoaderConfigInit): LiveLoader {
+  const resolveConfig = async (): Promise<SessionLoaderConfig> => {
+    const raw = typeof configInit === "function" ? await configInit() : configInit;
+    return {
+      apiUrl: stripQuotes(raw.apiUrl),
+      oidcIssuer: stripQuotes(raw.oidcIssuer),
+      clientId: stripQuotes(raw.clientId),
+      clientSecret: stripQuotes(raw.clientSecret),
+      oidcAudience: raw.oidcAudience ? stripQuotes(raw.oidcAudience) : undefined,
+    };
+  };
+
   const fetchSessions = async () => {
+    const config = await resolveConfig();
+
     const client = new BackofficeClient(config.apiUrl, {
       issuer: config.oidcIssuer,
       clientId: config.clientId,
@@ -65,6 +80,16 @@ function transformSession(session: APISession) {
     price: session.pricing_amount,
     ...(session.signup_url && { signUpURL: session.signup_url }),
   };
+}
+
+function stripQuotes(value: string): string {
+  if (
+    value.length >= 2 &&
+    ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'")))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
 }
 
 function calculateEndDate(startDate: string, lengthDays: number): string {
