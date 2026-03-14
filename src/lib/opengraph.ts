@@ -1,12 +1,58 @@
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { type ReactNode } from "react";
+import { Resvg } from "@resvg/resvg-js";
+import satori from "satori";
+
+import { CachePresets } from "./cache";
+
+let interRegular: Buffer | null = null;
+let interBold: Buffer | null = null;
+
+function loadFonts() {
+  if (!interRegular) {
+    interRegular = readFileSync("./src/fonts/Inter_18pt-Regular.ttf");
+  }
+  if (!interBold) {
+    interBold = readFileSync("./src/fonts/Inter_18pt-Bold.ttf");
+  }
+  return [
+    { name: "Inter", data: interRegular, weight: 400 as const },
+    { name: "Inter", data: interBold, weight: 700 as const },
+  ];
+}
+
+const MIME_TYPES: Record<string, string> = {
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".gif": "image/gif",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+};
+
+function getMimeType(filePath: string): string {
+  const ext = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+  return MIME_TYPES[ext] || "image/png";
+}
 
 export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): Promise<string> {
+  const urlPath = new URL(imageUrl, "http://localhost").pathname;
+  const filePath = join("./dist/client", urlPath);
+
+  // In production, read directly from the built client assets on disk.
+  // In dev, dist/client doesn't exist so fall back to HTTP fetch.
+  if (existsSync(filePath)) {
+    const buffer = readFileSync(filePath);
+    const contentType = getMimeType(urlPath);
+    return `data:${contentType};base64,${buffer.toString("base64")}`;
+  }
+
   const absoluteUrl = new URL(imageUrl, baseUrl).toString();
   const response = await fetch(absoluteUrl);
   const buffer = await response.arrayBuffer();
   const uint8Array = new Uint8Array(buffer);
 
-  // Use chunk-based conversion to avoid stack overflow with large images
   let binary = "";
   const chunkSize = 8192;
   for (let i = 0; i < uint8Array.length; i += chunkSize) {
@@ -19,13 +65,23 @@ export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): P
   return `data:${contentType};base64,${base64}`;
 }
 
-// TODO: Re-implement OG image generation for Node.js (e.g. with @vercel/og or satori + sharp)
-export async function OpenGraphImageResponse(_component: ReactNode, _baseUrl: string | URL): Promise<Response> {
-  return new Response("OG image generation not yet implemented for Node.js", {
-    status: 501,
+export async function OpenGraphImageResponse(component: ReactNode, _baseUrl: string | URL): Promise<Response> {
+  const fonts = loadFonts();
+
+  const svg = await satori(component, {
+    width: 1200,
+    height: 630,
+    fonts,
+  });
+
+  const resvg = new Resvg(svg);
+  const pngBuffer = resvg.render().asPng();
+  const png = new Uint8Array(pngBuffer.buffer, pngBuffer.byteOffset, pngBuffer.byteLength);
+
+  return new Response(png, {
     headers: {
-      "Content-Type": "text/plain",
-      "Cache-Control": "no-cache",
+      "Content-Type": "image/png",
+      "Cache-Control": CachePresets.ogImage,
     },
   });
 }
