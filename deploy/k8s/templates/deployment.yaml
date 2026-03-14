@@ -61,6 +61,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-config
+            - secretRef:
+                name: {{ .Release.Name }}-oidc-credentials
           securityContext:
             runAsNonRoot: true
             runAsUser: 1001
