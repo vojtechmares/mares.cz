@@ -1,12 +1,5 @@
 /// <reference types="astro/client" />
 
-declare module "cloudflare:workers" {
-  export const env: {
-    ASSETS: { fetch(input: string | Request): Promise<Response> };
-    [key: string]: unknown;
-  };
-}
-
 interface ImportMetaEnv {
   readonly DISABLE_ANALYTICS: boolean;
   readonly SESSIONS_API_URL: string;

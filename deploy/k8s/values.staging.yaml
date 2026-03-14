@@ -1,0 +1,12 @@
+hostname: beta.mares.cz
+
+redirects:
+  enabled: true
+  permanent: true
+
+  hosts:
+    - staging.website.maresdev.com
+
+config:
+  env:
+    SESSIONS_API_URL: https://api.mares-skoleni.cz

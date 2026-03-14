@@ -1,10 +1,11 @@
-import cloudflare from "@astrojs/cloudflare";
+import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import { getContentPages } from "./src/lib/sitemap-pages.ts";
+import { serverBuild } from "./src/integrations/server-build.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -45,6 +46,7 @@ export default defineConfig({
       //   },
       // },
     }),
+    serverBuild(),
   ],
 
   image: {
@@ -57,9 +59,7 @@ export default defineConfig({
     ],
   },
 
-  adapter: cloudflare({
-    imageService: "passthrough", // no image optimization, images served as-is from cdn.mares.cz
-  }),
+  adapter: node({ mode: "middleware" }),
 
   env: {
     schema: {

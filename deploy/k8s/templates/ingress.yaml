@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/target: "lbh.knowing-koala.k8s.vxm.cz"
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    haproxy.org/ssl-redirect: "true"
+    haproxy.org/ssl-redirect-port: "443"
+spec:
+  ingressClassName: haproxy
+  tls:
+    - hosts:
+        - {{ .Values.config.host | quote }}
+      secretName: {{ .Release.Name }}-ingress-tls
+  rules:
+    - host: {{ .Values.config.host | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}
+                port:
+                  name: http

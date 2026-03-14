@@ -31,7 +31,6 @@ pnpm-debug.log*
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-.wrangler
 
 # test coverage
 coverage/
