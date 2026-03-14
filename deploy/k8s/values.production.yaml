@@ -1,0 +1,8 @@
+hostname: www.mares.cz
+
+config:
+  env:
+    SESSIONS_API_URL: https://api.mares-skoleni.cz
+
+secrets:
+  oidcCredentials: website-mares-cz-oidc-credentials
