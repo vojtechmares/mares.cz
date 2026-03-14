@@ -27,4 +27,7 @@ config:
   env:
     SESSIONS_API_URL: https://api.example.com
 
+secrets:
+  oidcCredentials: some-secret-store-key
+
 replicas: 2
