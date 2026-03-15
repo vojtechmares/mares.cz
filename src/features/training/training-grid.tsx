@@ -91,7 +91,7 @@ export async function TrainingGrid({ locale }: { locale: Locale }) {
   trainings.sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
 
   return (
-    <Section id="skoleni" aria-label="Training" variant="inverse">
+    <Section id={locale === "en" ? "training" : "skoleni"} aria-label="Training" variant="inverse">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2" variant="inverse">
