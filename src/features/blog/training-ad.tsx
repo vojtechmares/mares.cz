@@ -5,8 +5,10 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 
-export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
+export async function TrainingAd({ trainingSlug, locale }: { trainingSlug?: string; locale: Locale }) {
   if (!trainingSlug) {
     return <></>;
   }
@@ -24,17 +26,17 @@ export async function TrainingAd({ trainingSlug }: { trainingSlug?: string }) {
           <div className="flex flex-col justify-between md:flex-row">
             <div className="max-w-3xl">
               <Heading level="h2" variant="inverse">
-                {training.data.title} školení
+                {training.data.title} {t(locale, "blog.training_ad_suffix")}
               </Heading>
               <Text variant="inverse" className="mt-4">
                 {training.data.ad}
               </Text>
               <div className="flex flex-col md:flex-row md:gap-x-6">
                 <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
-                  Nezávazně poptat firemní školení
+                  {t(locale, "blog.training_ad_cta_corporate")}
                 </Button>
-                <Button href={"/skoleni/" + training.id} variant="secondary" className="mt-10">
-                  Více informací o školení
+                <Button href={localizeUrl("/skoleni/" + training.id, locale)} variant="secondary" className="mt-10">
+                  {t(locale, "blog.training_ad_cta_more_info")}
                 </Button>
               </div>
             </div>

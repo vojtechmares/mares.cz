@@ -22,24 +22,24 @@ describe("Footer", () => {
 
   describe("rendering", () => {
     it("should render footer element", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(document.querySelector("footer")).toBeInTheDocument();
     });
 
     it("should render brand name", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("heading", { name: /vojtěch mareš/i })).toBeInTheDocument();
     });
   });
 
   describe("contact information", () => {
     it("should render phone number", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("link", { name: /\+420 732 490 651/i })).toHaveAttribute("href", "tel:+420732490651");
     });
 
     it("should render email", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       const emailLinks = screen.getAllByRole("link", {
         name: /vojtech@mares\.cz/i,
       });
@@ -47,31 +47,31 @@ describe("Footer", () => {
     });
 
     it("should render company ID (IČO)", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByText("06999280")).toBeInTheDocument();
     });
 
     it("should render VAT ID (DIČ)", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByText("CZ9709180063")).toBeInTheDocument();
     });
   });
 
   describe("trainings section", () => {
     it("should render trainings heading", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("heading", { name: /školení/i })).toBeInTheDocument();
     });
 
     it("should render all trainings", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       mockTrainings.forEach((training) => {
         expect(screen.getByRole("link", { name: training.data.title })).toBeInTheDocument();
       });
     });
 
     it("should render training links with correct href", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       mockTrainings.forEach((training) => {
         expect(screen.getByRole("link", { name: training.data.title })).toHaveAttribute(
           "href",
@@ -83,12 +83,12 @@ describe("Footer", () => {
 
   describe("links section", () => {
     it("should render links heading", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("heading", { name: /důležité odkazy/i })).toBeInTheDocument();
     });
 
     it("should render links", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       mockLinks.forEach((link) => {
         expect(screen.getByRole("link", { name: link.name })).toHaveAttribute("href", link.href);
       });
@@ -97,12 +97,12 @@ describe("Footer", () => {
 
   describe("CTA section", () => {
     it("should render CTA heading", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("heading", { name: /zaujal jsem vás/i })).toBeInTheDocument();
     });
 
     it("should render meeting booking button", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByRole("link", { name: /domluvme si schůzku/i })).toHaveAttribute(
         "href",
         "https://cal.com/vojtechmares/30min",
@@ -112,27 +112,27 @@ describe("Footer", () => {
 
   describe("social links", () => {
     it("should render Bluesky link", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByLabelText(/bluesky/i)).toHaveAttribute("href", "https://bsky.app/profile/mares.cz");
     });
 
     it("should render LinkedIn link", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByLabelText(/linkedin/i)).toHaveAttribute("href", "https://www.linkedin.com/in/vojtech-mares/");
     });
 
     it("should render X link", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByLabelText(/na X/i)).toHaveAttribute("href", "https://x.com/vojtechmares_");
     });
 
     it("should render GitHub link", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByLabelText(/github/i)).toHaveAttribute("href", "https://github.com/vojtechmares");
     });
 
     it("should open social links in new tab", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       const socialLinks = [
         screen.getByLabelText(/bluesky/i),
         screen.getByLabelText(/linkedin/i),
@@ -147,12 +147,12 @@ describe("Footer", () => {
 
   describe("copyright", () => {
     it("should render copyright text with current year", () => {
-      render(<Footer {...defaultProps} />);
+      render(<Footer locale="cs" {...defaultProps} />);
       expect(screen.getByText(/copyright.*2024.*vojtěch mareš/i)).toBeInTheDocument();
     });
 
     it("should update copyright year dynamically", () => {
-      render(<Footer {...defaultProps} currentYear={2025} />);
+      render(<Footer locale="cs" {...defaultProps} currentYear={2025} />);
       expect(screen.getByText(/copyright.*2025.*vojtěch mareš/i)).toBeInTheDocument();
     });
   });

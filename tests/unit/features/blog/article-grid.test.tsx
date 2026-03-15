@@ -20,7 +20,7 @@ const createMockArticle = (overrides: Record<string, unknown> = {}) => ({
 describe("ArticleGrid", () => {
   it("renders article cards with title, tags, date and description", () => {
     const articles = [createMockArticle()];
-    render(<ArticleGrid articles={articles as any} />);
+    render(<ArticleGrid locale="cs" articles={articles as any} />);
     expect(screen.getByText("Test Article")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "#docker" })).toHaveAttribute("href", "/blog/tag/docker");
     expect(screen.getByText("A short description")).toBeInTheDocument();
@@ -29,20 +29,20 @@ describe("ArticleGrid", () => {
   it("truncates descriptions longer than 120 characters", () => {
     const longDesc = "A".repeat(150);
     const articles = [createMockArticle({ data: { description: longDesc } })];
-    render(<ArticleGrid articles={articles as any} />);
+    render(<ArticleGrid locale="cs" articles={articles as any} />);
     expect(screen.getByText("A".repeat(120) + "…")).toBeInTheDocument();
   });
 
   it("does not truncate descriptions of 120 chars or fewer", () => {
     const shortDesc = "A".repeat(120);
     const articles = [createMockArticle({ data: { description: shortDesc } })];
-    render(<ArticleGrid articles={articles as any} />);
+    render(<ArticleGrid locale="cs" articles={articles as any} />);
     expect(screen.getByText(shortDesc)).toBeInTheDocument();
   });
 
   it("links to correct article URLs", () => {
     const articles = [createMockArticle({ id: "my-post" })];
-    render(<ArticleGrid articles={articles as any} />);
+    render(<ArticleGrid locale="cs" articles={articles as any} />);
     const link = screen.getByRole("link", { name: /přečíst si článek/i });
     expect(link).toHaveAttribute("href", "/blog/my-post");
   });
@@ -52,7 +52,7 @@ describe("ArticleGrid", () => {
       createMockArticle({ id: "post-1", data: { title: "First" } }),
       createMockArticle({ id: "post-2", data: { title: "Second" } }),
     ];
-    render(<ArticleGrid articles={articles as any} />);
+    render(<ArticleGrid locale="cs" articles={articles as any} />);
     expect(screen.getByText("First")).toBeInTheDocument();
     expect(screen.getByText("Second")).toBeInTheDocument();
   });

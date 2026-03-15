@@ -5,26 +5,31 @@ import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { t, type Locale } from "../../i18n";
 
-const consultationAreas = [
-  { name: "Revize infrastruktury", description: "Audit současného stavu a doporučení" },
-  { name: "Výběr technologií", description: "Porovnání nástrojů a platforem" },
-  { name: "CI/CD pipeline", description: "Návrh nebo optimalizace build procesů" },
-  { name: "Optimalizace nákladů", description: "Rychlá analýza nákladů a návrh úspor" },
-];
+const areaKeys = [
+  { name: "services_consultation.area1_name", description: "services_consultation.area1_description" },
+  { name: "services_consultation.area2_name", description: "services_consultation.area2_description" },
+  { name: "services_consultation.area3_name", description: "services_consultation.area3_description" },
+  { name: "services_consultation.area4_name", description: "services_consultation.area4_description" },
+] as const;
 
-export function ServicesConsultation() {
+export function ServicesConsultation({ locale }: { locale: Locale }) {
+  const areas = areaKeys.map((a) => ({
+    name: t(locale, a.name),
+    description: t(locale, a.description),
+  }));
+
   return (
-    <Section id="konzultace" variant="inverse" ariaLabel="Konzultace">
+    <Section id="konzultace" variant="inverse" ariaLabel={t(locale, "services_consultation.heading")}>
       <Container>
         <div className="border-l-4 border-orange-500 pl-8 md:pl-12">
-          <Badge variant="accent">Jednorázová spolupráce</Badge>
+          <Badge variant="accent">{t(locale, "services_consultation.badge")}</Badge>
           <Heading level="h2" variant="inverse" className="mt-4">
-            Konzultace
+            {t(locale, "services_consultation.heading")}
           </Heading>
           <Body variant="large" color="muted" className="mt-4 max-w-2xl">
-            Potřebujete expertní pohled na vaši infrastrukturu, ale nehledáte dlouhodobý závazek? Konzultace jsou
-            ideální pro jednorázové úkoly, audity nebo strategické rozhodování v rozsahu do 2 člověkodnů.
+            {t(locale, "services_consultation.description")}
           </Body>
 
           <div className="mt-12 flex flex-col gap-8">
@@ -32,10 +37,10 @@ export function ServicesConsultation() {
               <span className="font-mono text-3xl font-bold text-orange-500">01</span>
               <div>
                 <Body color="inverse" className="text-xl font-semibold">
-                  Úvodní schůzka
+                  {t(locale, "services_consultation.step1_name")}
                 </Body>
                 <Body color="muted" className="mt-1">
-                  30 minut zdarma — probereme váš problém a domluvíme se na dalším postupu.
+                  {t(locale, "services_consultation.step1_description")}
                 </Body>
               </div>
             </div>
@@ -43,10 +48,10 @@ export function ServicesConsultation() {
               <span className="font-mono text-3xl font-bold text-orange-500">02</span>
               <div>
                 <Body color="inverse" className="text-xl font-semibold">
-                  Analýza a audit
+                  {t(locale, "services_consultation.step2_name")}
                 </Body>
                 <Body color="muted" className="mt-1">
-                  Projdu vaši infrastrukturu, kód nebo procesy a připravím detailní zprávu.
+                  {t(locale, "services_consultation.step2_description")}
                 </Body>
               </div>
             </div>
@@ -54,20 +59,20 @@ export function ServicesConsultation() {
               <span className="font-mono text-3xl font-bold text-orange-500">03</span>
               <div>
                 <Body color="inverse" className="text-xl font-semibold">
-                  Doporučení a akční plán
+                  {t(locale, "services_consultation.step3_name")}
                 </Body>
                 <Body color="muted" className="mt-1">
-                  Dostanete konkrétní kroky s prioritami, které můžete ihned implementovat.
+                  {t(locale, "services_consultation.step3_description")}
                 </Body>
               </div>
             </div>
           </div>
 
           <Heading level="h3" variant="inverse" className="mt-16">
-            Typické oblasti konzultací
+            {t(locale, "services_consultation.areas_heading")}
           </Heading>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {consultationAreas.map((area) => (
+            {areas.map((area) => (
               <Card key={area.name} variant="surface">
                 <Heading level="h4" className="text-base">
                   {area.name}
@@ -82,14 +87,14 @@ export function ServicesConsultation() {
 
         <Card variant="accent" className="mx-auto mt-12 max-w-lg text-center">
           <Body as="span" className="font-mono text-2xl font-bold">
-            2 500 CZK / hod
+            {t(locale, "services_consultation.price")}
           </Body>
           <Body color="secondary" className="mt-2">
-            Rozsah do 2 člověkodnů
+            {t(locale, "services_consultation.scope")}
           </Body>
           <div className="mt-6">
             <Button href="https://cal.com/vojtechmares/30min" variant="primary">
-              Domluvme si schůzku
+              {t(locale, "nav.schedule_meeting")}
             </Button>
           </div>
         </Card>

@@ -12,17 +12,17 @@ describe("Navigation", () => {
 
   describe("rendering", () => {
     it("should render navigation with brand name", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
       expect(screen.getAllByText("Vojtěch Mareš").length).toBeGreaterThan(0);
     });
 
     it("should render as header element", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
       expect(document.querySelector("header")).toBeInTheDocument();
     });
 
     it("should render navigation elements", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
       const navElements = screen.getAllByRole("navigation");
       expect(navElements.length).toBeGreaterThan(0);
     });
@@ -30,7 +30,7 @@ describe("Navigation", () => {
 
   describe("links", () => {
     it("should render all provided links", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
 
       mockLinks.forEach((link) => {
         expect(screen.getAllByText(link.name).length).toBeGreaterThan(0);
@@ -38,7 +38,7 @@ describe("Navigation", () => {
     });
 
     it("should render links with correct href attributes", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
 
       mockLinks.forEach((link) => {
         const linkElements = screen.getAllByRole("link", { name: link.name });
@@ -49,7 +49,7 @@ describe("Navigation", () => {
     });
 
     it("should render home link", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
       const homeLinks = screen.getAllByRole("link", { name: /vojtěch mareš/i });
       homeLinks.forEach((homeLink) => {
         expect(homeLink).toHaveAttribute("href", "/");
@@ -59,7 +59,7 @@ describe("Navigation", () => {
 
   describe("CTA button", () => {
     it("should render meeting CTA button", () => {
-      render(<Navigation links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} />);
       const ctaButtons = screen.getAllByRole("link", { name: /domluvme si schůzku/i });
       expect(ctaButtons.length).toBeGreaterThan(0);
       ctaButtons.forEach((button) => {
@@ -70,14 +70,14 @@ describe("Navigation", () => {
 
   describe("responsive layouts", () => {
     it("should render mobile navigation", () => {
-      const { container } = render(<Navigation links={mockLinks} />);
+      const { container } = render(<Navigation locale="cs" links={mockLinks} />);
       // Mobile nav has lg:hidden class
       const navs = container.querySelectorAll("nav");
       expect(navs.length).toBe(2); // Mobile and desktop
     });
 
     it("should render desktop navigation", () => {
-      const { container } = render(<Navigation links={mockLinks} />);
+      const { container } = render(<Navigation locale="cs" links={mockLinks} />);
       const navs = container.querySelectorAll("nav");
       expect(navs.length).toBe(2); // Mobile and desktop
     });
@@ -85,7 +85,7 @@ describe("Navigation", () => {
 
   describe("empty links", () => {
     it("should render with empty links array", () => {
-      render(<Navigation links={[]} />);
+      render(<Navigation locale="cs" links={[]} />);
       expect(screen.getAllByText("Vojtěch Mareš").length).toBeGreaterThan(0);
     });
   });

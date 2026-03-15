@@ -6,17 +6,17 @@ import { Clients } from "../../../../src/features/homepage/clients";
 describe("Clients", () => {
   describe("rendering", () => {
     it("should render section with correct id", () => {
-      render(<Clients />);
+      render(<Clients locale="cs" />);
       expect(document.getElementById("clients")).toBeInTheDocument();
     });
 
     it("should render main heading", () => {
-      render(<Clients />);
+      render(<Clients locale="cs" />);
       expect(screen.getByRole("heading", { name: /moji klienti/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
-      render(<Clients />);
+      render(<Clients locale="cs" />);
       expect(screen.getByText(/společnosti, které mi důvěřují/i)).toBeInTheDocument();
     });
   });
@@ -24,7 +24,7 @@ describe("Clients", () => {
   describe("children", () => {
     it("should render children (client logos)", () => {
       render(
-        <Clients>
+        <Clients locale="cs">
           <img data-testid="client-logo" alt="Client" />
           <img data-testid="client-logo-2" alt="Client 2" />
         </Clients>,
@@ -34,7 +34,7 @@ describe("Clients", () => {
     });
 
     it("should render without children", () => {
-      render(<Clients />);
+      render(<Clients locale="cs" />);
       expect(screen.getByRole("heading", { name: /moji klienti/i })).toBeInTheDocument();
     });
   });
@@ -42,7 +42,7 @@ describe("Clients", () => {
   describe("layout", () => {
     it("should contain grid container for logos", () => {
       const { container } = render(
-        <Clients>
+        <Clients locale="cs">
           <div>Logo</div>
         </Clients>,
       );

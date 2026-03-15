@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Clients } from "./clients";
+import type { Locale } from "../../i18n";
 
 import logoGLAMI from "../../images/logos/glami.svg";
 import logoFakturoid from "../../images/logos/fakturoid.svg";
@@ -8,6 +9,8 @@ import logoCybroslabs from "../../images/logos/cybroslabs-black.jpeg";
 import logoNUMOTEQ from "../../images/logos/numoteq.png";
 import logoNOTINO from "../../images/logos/notino.svg";
 import logoPartners from "../../images/logos/partners.png";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 type Client = {
   name: string;
@@ -24,7 +27,7 @@ const clients: Client[] = [
 ];
 ---
 
-<Clients>
+<Clients locale={locale}>
   {
     clients.map((client) => (
       <Image

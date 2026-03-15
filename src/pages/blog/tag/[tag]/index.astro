@@ -8,6 +8,10 @@ import { Text } from "../../../../components/ui/text";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../lib/cache";
+import { t, type Locale } from "../../../../i18n";
+import { localizeUrl } from "../../../../i18n/routes";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 const { tag } = Astro.params;
 if (!tag) {
@@ -25,9 +29,9 @@ const sortedArticles = articles.sort((a, b) => b.data.publish_time.valueOf() - a
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const meta = {
-  title: `Vojtěch Mareš | Blog: #${tag}`,
-  description: `Články na téma ${tag} na blogu Vojtěcha Mareše. ${articles.length} článků o ${tag}.`,
-  keywords: `${tag}, blog, devops, ${tag} články`,
+  title: t(locale, "blog.tag_meta_title", { tag }),
+  description: t(locale, "blog.tag_meta_description", { tag, count: articles.length }),
+  keywords: t(locale, "blog.tag_meta_keywords", { tag }),
 };
 
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
@@ -44,7 +48,7 @@ const openGraph = {
 
 const jsonLd = {
   type: "CollectionPage" as const,
-  name: `Články s tagem #${tag}`,
+  name: t(locale, "blog.tag_heading", { tag }),
   description: meta.description,
   url: `${baseUrl}/blog/tag/${tag}`,
 };
@@ -55,14 +59,15 @@ const jsonLd = {
     <Container>
       <Heading variant="inverse">Blog: #{tag}</Heading>
       <Text variant="inverse" className="mt-4">
-        {sortedArticles.length} článků s tímto tagem
+        {sortedArticles.length}
+        {locale === "cs" ? "článků s tímto tagem" : "articles with this tag"}
       </Text>
       <Text variant="inverse" className="mt-2">
-        <Link href="/blog" className="text-zinc-100">← Zpět na blog</Link>
+        <Link href={localizeUrl("/blog", locale)} className="text-zinc-100">{t(locale, "blog.back_to_blog")}</Link>
       </Text>
     </Container>
   </Section>
   <Section>
-    <ArticleGrid articles={sortedArticles} />
+    <ArticleGrid articles={sortedArticles} locale={locale} />
   </Section>
 </Layout>

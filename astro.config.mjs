@@ -19,14 +19,13 @@ export default defineConfig({
     "/meeting/beer": "https://cal.com/vojtechmares/beer",
   },
 
-  // Disable localization for now, until it is actually complete
-  // i18n: {
-  //   locales: ["cs", "en"],
-  //   defaultLocale: "cs",
-  //   routing: {
-  //     prefixDefaultLocale: false,
-  //   },
-  // },
+  i18n: {
+    locales: ["cs", "en"],
+    defaultLocale: "cs",
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 
   trailingSlash: "never",
 

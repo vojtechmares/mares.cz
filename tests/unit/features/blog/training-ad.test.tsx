@@ -10,7 +10,7 @@ describe("TrainingAd", () => {
   });
 
   it("renders empty when trainingSlug is not provided", async () => {
-    const { container } = render(await TrainingAd({ trainingSlug: undefined }));
+    const { container } = render(await TrainingAd({ locale: "cs", trainingSlug: undefined }));
     expect(container.innerHTML).toBe("");
   });
 
@@ -24,7 +24,7 @@ describe("TrainingAd", () => {
       },
     } as any);
 
-    render(await TrainingAd({ trainingSlug: "kubernetes" }));
+    render(await TrainingAd({ locale: "cs", trainingSlug: "kubernetes" }));
     expect(screen.getByRole("heading", { name: /kubernetes školení/i })).toBeInTheDocument();
     expect(screen.getByText("Learn Kubernetes with practical exercises.")).toBeInTheDocument();
   });
@@ -39,7 +39,7 @@ describe("TrainingAd", () => {
       },
     } as any);
 
-    render(await TrainingAd({ trainingSlug: "kubernetes" }));
+    render(await TrainingAd({ locale: "cs", trainingSlug: "kubernetes" }));
     expect(screen.getByRole("link", { name: /nezávazně poptat firemní školení/i })).toHaveAttribute(
       "href",
       "mailto:vojtech@mares.cz",
@@ -60,7 +60,7 @@ describe("TrainingAd", () => {
       },
     } as any);
 
-    render(await TrainingAd({ trainingSlug: "kubernetes" }));
+    render(await TrainingAd({ locale: "cs", trainingSlug: "kubernetes" }));
     const img = document.querySelector("img");
     expect(img).toHaveAttribute("src", "/icons/kubernetes.svg");
   });
@@ -69,7 +69,7 @@ describe("TrainingAd", () => {
     vi.mocked(getEntry).mockResolvedValue(undefined as any);
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-    const { container } = render(await TrainingAd({ trainingSlug: "nonexistent" }));
+    const { container } = render(await TrainingAd({ locale: "cs", trainingSlug: "nonexistent" }));
     expect(container.innerHTML).toBe("");
 
     consoleSpy.mockRestore();
@@ -79,7 +79,7 @@ describe("TrainingAd", () => {
     vi.mocked(getEntry).mockRejectedValue(new Error("Network error"));
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-    const { container } = render(await TrainingAd({ trainingSlug: "failing" }));
+    const { container } = render(await TrainingAd({ locale: "cs", trainingSlug: "failing" }));
     expect(container.innerHTML).toBe("");
     expect(consoleSpy).toHaveBeenCalled();
 

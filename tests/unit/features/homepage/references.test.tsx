@@ -6,17 +6,17 @@ import { ReferencesContainer, ReferenceCard } from "../../../../src/features/hom
 describe("ReferencesContainer", () => {
   describe("rendering", () => {
     it("should render section with correct id", () => {
-      render(<ReferencesContainer />);
+      render(<ReferencesContainer locale="cs" />);
       expect(document.getElementById("references")).toBeInTheDocument();
     });
 
     it("should render main heading", () => {
-      render(<ReferencesContainer />);
+      render(<ReferencesContainer locale="cs" />);
       expect(screen.getByRole("heading", { name: /reference/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
-      render(<ReferencesContainer />);
+      render(<ReferencesContainer locale="cs" />);
       expect(screen.getByText(/co o mně říkají moji klienti/i)).toBeInTheDocument();
     });
   });
@@ -24,7 +24,7 @@ describe("ReferencesContainer", () => {
   describe("children", () => {
     it("should render children (reference cards)", () => {
       render(
-        <ReferencesContainer>
+        <ReferencesContainer locale="cs">
           <div data-testid="reference-card">Card content</div>
         </ReferencesContainer>,
       );
@@ -32,7 +32,7 @@ describe("ReferencesContainer", () => {
     });
 
     it("should render without children", () => {
-      render(<ReferencesContainer />);
+      render(<ReferencesContainer locale="cs" />);
       expect(screen.getByRole("heading", { name: /reference/i })).toBeInTheDocument();
     });
   });

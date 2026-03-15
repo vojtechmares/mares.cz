@@ -7,6 +7,8 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 
 type ServiceProps = {
   name: string;
@@ -43,43 +45,43 @@ function Service({ name, description, href, featured = false, buttonText, button
   );
 }
 
-export function Services() {
+export function Services({ locale }: { locale: Locale }) {
   return (
-    <Section id="sluzby" aria-label="Služby" variant="inverse">
+    <Section id="sluzby" aria-label={t(locale, "services.heading")} variant="inverse">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <Heading level="h2" variant="inverse">
-            Služby
+            {t(locale, "services.heading")}
           </Heading>
           <Text variant="muted" className="mt-4">
-            Co dělám a jak vám mohu pomoci rozvinout vaši IT infrastrukturu?
+            {t(locale, "services.subheading")}
           </Text>
         </div>
         <div className="mt-10 grid max-h-none max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:mx-0">
           <Service
-            name="Konzultace"
-            price="2 500 CZK / hod"
-            description="Potřebujete poradit nebo si nevíte rady? Společně projdeme váš současný stav, identifikujeme problémy a navrhneme vhodná řešení."
-            buttonText="Domluvme si schůzku"
-            buttonAriaLabel="Domluvme si schůzku "
+            name={t(locale, "services.consultation")}
+            price={t(locale, "services.consultation_price")}
+            description={t(locale, "services.consultation_description")}
+            buttonText={t(locale, "services.consultation_cta")}
+            buttonAriaLabel={t(locale, "services.consultation_cta_aria")}
             href="https://cal.com/vojtechmares/30min"
           />
           <Service
             featured
-            name="Školení"
-            price="od 5 400 CZK"
-            description="Formou workshopu seznámím váš tým s moderními cloudovými technologiemi a naučím vás je efektivně využívat. Vše si společně vyzkoušíme na praktických příkladech. Veškeré materiály ze školení a ukázkové příklady vám zůstanou."
-            href="/#skoleni"
-            buttonText="Seznam školení"
-            buttonAriaLabel="Odkaz na seznam školení"
+            name={t(locale, "services.training")}
+            price={t(locale, "services.training_price")}
+            description={t(locale, "services.training_description")}
+            href={localizeUrl("/#skoleni", locale)}
+            buttonText={t(locale, "services.training_cta")}
+            buttonAriaLabel={t(locale, "services.training_cta_aria")}
           />
           <Service
-            name="DevOps spolupráce"
-            price="cena dle domluvy"
-            description="Nabízím dlouhodobou spolupráci, při které se kompletně postarám o vaši infrastrukturu, pravidelné aktualizace a požadavky vašich aplikací. Společně budeme rozvíjet vaši platformu tak, aby odpovídala vašim aktuálním potřebám."
-            href="/sluzby"
-            buttonText="Všechny služby"
-            buttonAriaLabel="Co pro můžu udělat"
+            name={t(locale, "services.cooperation")}
+            price={t(locale, "services.cooperation_price")}
+            description={t(locale, "services.cooperation_description")}
+            href={localizeUrl("/sluzby", locale)}
+            buttonText={t(locale, "services.cooperation_cta")}
+            buttonAriaLabel={t(locale, "services.cooperation_cta_aria")}
           />
         </div>
       </Container>

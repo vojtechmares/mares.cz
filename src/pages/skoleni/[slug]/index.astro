@@ -2,7 +2,6 @@
 import { getCollection, getEntry, render } from "astro:content";
 import { TrainingHero } from "../../../features/training/training-hero";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
-import { Body } from "../../../components/ui/body";
 import { Button } from "../../../components/ui/button";
 import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
@@ -12,6 +11,10 @@ import { getFutureSessionsByName, toTrainingSession } from "../../../lib/session
 import { Section } from "../../../components/ui/section";
 import { Prose } from "../../../components/prose";
 import { CachePresets } from "../../../lib/cache";
+import { t, type Locale } from "../../../i18n";
+import { formatPrice } from "../../../i18n/formatting";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 const { slug } = Astro.params;
 
@@ -29,14 +32,8 @@ Astro.response.headers.set("Cache-Control", CachePresets.training);
 const sessionEntries = await getFutureSessionsByName(training.data.title);
 const sessions = sessionEntries.map(toTrainingSession);
 
-const formatter = new Intl.NumberFormat("cs", {
-  style: "currency",
-  currency: "CZK",
-  maximumFractionDigits: 0,
-});
-
 const meta = {
-  title: "Vojtěch Mareš | " + training.data.title + " školení",
+  title: "Vojtěch Mareš | " + training.data.title + " " + t(locale, "training_page.training_suffix"),
   description: training.data.description,
   keywords: training.data.keywords.join(","),
 };
@@ -60,7 +57,7 @@ const pricing = {
 
 const jsonLd = {
   type: "Course" as const,
-  name: training.data.title + " školení",
+  name: training.data.title + " " + t(locale, "training_page.training_suffix"),
   description: training.data.description,
   provider: {
     name: "Vojtěch Mareš",
@@ -92,6 +89,7 @@ const { Content } = await render(training);
     length={training.data.length}
     price={pricing.open}
     logo={training.data.logo ?? training.data.icon}
+    locale={locale}
   />
   <Section id="obsah">
     <Container className={training.data.draft ? "hidden" : ""}>
@@ -106,43 +104,36 @@ const { Content } = await render(training);
             sessions.length > 0 ? (
               <Card id="terminy" className="mb-10" variant="surface">
                 <Heading level="h2" className="mb-4">
-                  Veřejné termíny školení
+                  {t(locale, "training_page.public_sessions")}
                 </Heading>
-                <CompactTrainingSessionsTable sessions={sessions} />
+                <CompactTrainingSessionsTable sessions={sessions} locale={locale} />
               </Card>
             ) : null
           }
           <Card className="mb-10" variant="surface">
-            <Heading level="h2" className="mb-4">Cena za školení</Heading>
+            <Heading level="h2" className="mb-4">{t(locale, "training_page.price_label")}</Heading>
             <dl class="sm:divide-y sm:divide-zinc-300">
               <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                <dt class="font-medium text-zinc-700">Veřejný termín</dt>
+                <dt class="font-medium text-zinc-700">{t(locale, "training_page.public_session")}</dt>
                 <dd class="text-zinc-900">
-                  {formatter.format(pricing.open)} bez DPH
+                  {formatPrice(pricing.open, locale)}
+                  {t(locale, "training_page.excl_vat")}
                 </dd>
               </div>
               <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                <dt class="font-medium text-zinc-700">Firemní školení</dt>
+                <dt class="font-medium text-zinc-700">{t(locale, "training_page.corporate_training")}</dt>
                 <dd class="text-zinc-900">
-                  {formatter.format(pricing.corporate)} bez DPH
+                  {formatPrice(pricing.corporate, locale)}
+                  {t(locale, "training_page.excl_vat")}
                 </dd>
               </div>
             </dl>
             <Button variant="accent" className="text-lg font-medium" href="mailto:vojtech@mares.cz">
-              Nezávazně poptat
+              {t(locale, "training_page.request_quote")}
             </Button>
           </Card>
         </div>
       </div>
     </Container>
   </Section>
-  <!-- {training.publishedAt !== null && (
-        <Section>
-         <Container
-           className="my-32 flex justify-center"
-         >
-        <h1 class="text-4xl font-bold">Toto školení teprve připravuji.</h1>
-      </Container>
-      </Section>
-      )} -->
 </Layout>

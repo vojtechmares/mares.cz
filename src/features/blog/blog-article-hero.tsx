@@ -5,6 +5,9 @@ import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { t, type Locale } from "../../i18n";
+import { formatDate } from "../../i18n/formatting";
+import { localizeUrl } from "../../i18n/routes";
 
 interface BlogArticleHeroProps {
   title: string;
@@ -12,14 +15,18 @@ interface BlogArticleHeroProps {
   publishDate: Date;
   tags: string[];
   readingTimeMinutes: number;
+  locale: Locale;
 }
 
-export function BlogArticleHero({ title, description, publishDate, tags, readingTimeMinutes }: BlogArticleHeroProps) {
-  const formattedDate = new Date(publishDate).toLocaleDateString("cs-CZ", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+export function BlogArticleHero({
+  title,
+  description,
+  publishDate,
+  tags,
+  readingTimeMinutes,
+  locale,
+}: BlogArticleHeroProps) {
+  const formattedDate = formatDate(publishDate, locale);
 
   return (
     <Section variant="inverse" ariaLabel="Článek">
@@ -33,8 +40,8 @@ export function BlogArticleHero({ title, description, publishDate, tags, reading
               {description}
             </Text>
             <div className="mt-8">
-              <Button size="medium" href="/blog" variant="accent">
-                ← Zpět na blog
+              <Button size="medium" href={localizeUrl("/blog", locale)} variant="accent">
+                {t(locale, "blog.back_to_blog")}
               </Button>
             </div>
           </div>
@@ -42,14 +49,14 @@ export function BlogArticleHero({ title, description, publishDate, tags, reading
             <div className="border-l-2 border-orange-500 pl-6">
               <span className="font-sans text-3xl font-bold text-white">{formattedDate}</span>
               <Body color="muted" className="mt-1">
-                datum publikace
+                {t(locale, "blog.publish_date")}
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
               <span className="font-sans text-3xl font-bold text-white">
                 {tags.map((tag, i) => (
                   <span key={tag}>
-                    <Link href={`/blog/tag/${tag}`} className="text-white hover:text-orange-400">
+                    <Link href={localizeUrl(`/blog/tag/${tag}`, locale)} className="text-white hover:text-orange-400">
                       #{tag}
                     </Link>
                     {i < tags.length - 1 && " "}
@@ -57,13 +64,13 @@ export function BlogArticleHero({ title, description, publishDate, tags, reading
                 ))}
               </span>
               <Body color="muted" className="mt-1">
-                {tags.length === 1 ? "téma článku" : "témata článku"}
+                {tags.length === 1 ? t(locale, "blog.topic_singular") : t(locale, "blog.topic_plural")}
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
               <span className="font-sans text-3xl font-bold text-white">{readingTimeMinutes} min</span>
               <Body color="muted" className="mt-1">
-                doba čtení
+                {t(locale, "blog.reading_time")}
               </Body>
             </div>
           </div>

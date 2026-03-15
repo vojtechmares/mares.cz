@@ -6,6 +6,8 @@ import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
 import { Body } from "../../components/ui/body";
+import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 
 // Social Icons
 function BlueskyIcon() {
@@ -69,9 +71,10 @@ interface FooterProps {
   trainings: CollectionEntry<"training">[];
   links: { name: string; href: string }[];
   currentYear: number;
+  locale: Locale;
 }
 
-export function Footer({ links, trainings, currentYear }: FooterProps) {
+export function Footer({ links, trainings, currentYear, locale }: FooterProps) {
   return (
     <Section className="border-t border-zinc-300">
       <footer>
@@ -87,30 +90,30 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                   <Link href="mailto:vojtech@mares.cz">vojtech@mares.cz</Link>
                 </li>
                 <li className="mt-4">
-                  IČO
+                  {t(locale, "footer.company_id_label")}
                   <br />
                   <code id="company-id">06999280</code>
                 </li>
                 <li className="mt-2">
-                  DIČ
+                  {t(locale, "footer.vat_id_label")}
                   <br />
                   <code id="vat-id">CZ9709180063</code>
                 </li>
-                <li className="mt-2">Jsem plátce DPH</li>
+                <li className="mt-2">{t(locale, "footer.vat_payer")}</li>
               </ul>
             </div>
             <div>
-              <Heading level="h3">Školení</Heading>
+              <Heading level="h3">{t(locale, "footer.training")}</Heading>
               <ul className="mt-4 list-disc pl-4">
                 {trainings.map((training) => (
                   <li key={training.id}>
-                    <Link href={"/skoleni/" + training.id}>{training.data.title}</Link>
+                    <Link href={localizeUrl("/skoleni/" + training.id, locale)}>{training.data.title}</Link>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <Heading level="h3">Důležité odkazy</Heading>
+              <Heading level="h3">{t(locale, "footer.important_links")}</Heading>
               <ul className="mt-4 list-disc pl-4">
                 {links.map((link) => (
                   <li key={link.href}>
@@ -120,14 +123,11 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
               </ul>
             </div>
             <div>
-              <Heading level="h3">Zaujal jsem vás?</Heading>
-              <Body className="mt-4">
-                Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi &ndash; společně
-                probereme vaše potřeby a najdeme řešení na míru.
-              </Body>
+              <Heading level="h3">{t(locale, "footer.interested_heading")}</Heading>
+              <Body className="mt-4">{t(locale, "footer.interested_text")}</Body>
               <div className="mt-5 flex flex-col space-y-4 md:space-y-2">
                 <Button href="https://cal.com/vojtechmares/30min" size="medium">
-                  Domluvme si schůzku
+                  {t(locale, "nav.schedule_meeting")}
                 </Button>
               </div>
             </div>
@@ -139,7 +139,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 className="group"
-                aria-label="Vojtěch Mareš na Bluesky"
+                aria-label={t(locale, "footer.bluesky_label")}
               >
                 <BlueskyIcon />
               </a>
@@ -148,7 +148,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 className="group"
-                aria-label="Vojtěch Mareš na LinkedIn"
+                aria-label={t(locale, "footer.linkedin_label")}
               >
                 <LinkedInIcon />
               </a>
@@ -157,7 +157,7 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 className="group"
-                aria-label="Vojtěch Mareš na X"
+                aria-label={t(locale, "footer.x_label")}
               >
                 <XIcon />
               </a>
@@ -166,12 +166,12 @@ export function Footer({ links, trainings, currentYear }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 className="group"
-                aria-label="Vojtěch Mareš na GitHub"
+                aria-label={t(locale, "footer.github_label")}
               >
                 <GitHubIcon />
               </a>
             </div>
-            <Body className="mt-6 md:mt-0">Copyright &copy; {currentYear} Vojtěch Mareš. Všechna práva vyhrazena.</Body>
+            <Body className="mt-6 md:mt-0">{t(locale, "footer.copyright", { year: currentYear })}</Body>
           </div>
         </Container>
       </footer>

@@ -7,21 +7,11 @@ import { TagList } from "../../../../../components/ui/tag-list";
 import Layout from "../../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../../lib/cache";
+import { t, type Locale } from "../../../../../i18n";
+import { getMonthName, formatArticleCount } from "../../../../../i18n/formatting";
+import { localizeUrl } from "../../../../../i18n/routes";
 
-const CZECH_MONTHS = [
-  "Leden",
-  "Únor",
-  "Březen",
-  "Duben",
-  "Květen",
-  "Červen",
-  "Červenec",
-  "Srpen",
-  "Září",
-  "Říjen",
-  "Listopad",
-  "Prosinec",
-];
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 const { year: yearParam, month: monthParam } = Astro.params;
 const year = parseInt(yearParam!);
@@ -43,16 +33,21 @@ if (allArticles.length === 0) {
 const articles = allArticles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
 
 const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
-const monthName = CZECH_MONTHS[month - 1];
+const monthName = getMonthName(month, locale);
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
-  title: `Vojtěch Mareš | Blog: ${monthName} ${year}`,
-  description: `Články z ${monthName.toLowerCase()}u ${year} na blogu Vojtěcha Mareše. ${articles.length} článků.`,
-  keywords: `blog, devops, ${monthName} ${year}, články`,
+  title: t(locale, "blog.month_meta_title", { month: monthName, year }),
+  description: t(locale, "blog.month_meta_description", {
+    month: monthName,
+    month_lower: monthName.toLowerCase(),
+    year,
+    count: articles.length,
+  }),
+  keywords: t(locale, "blog.month_meta_keywords", { month: monthName, year }),
 };
 
 const openGraph = {
@@ -81,18 +76,17 @@ const jsonLd = {
         <TagList tags={tags} variant="inverse" />
       </p>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        {articles.length}
-        {articles.length === 1 ? "článek" : articles.length < 5 ? "články" : "článků"}
-        v tomto měsíci
+        {formatArticleCount(articles.length, locale)}
+        {locale === "cs" ? " v tomto měsíci" : " this month"}
       </p>
       <p class="mt-2 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" href={`/blog/archive/${year}`}>← {year}</a>
+        <a class="underline" href={localizeUrl(`/blog/archive/${year}`, locale)}>← {year}</a>
         {" · "}
-        <a class="underline" href="/blog">Blog</a>
+        <a class="underline" href={localizeUrl("/blog", locale)}>Blog</a>
       </p>
     </Container>
   </Section>
   <Section>
-    <ArticleGrid articles={articles} />
+    <ArticleGrid articles={articles} locale={locale} />
   </Section>
 </Layout>

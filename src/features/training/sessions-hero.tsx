@@ -4,42 +4,35 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
-
-function formatSessionCount(count: number): string {
-  if (count === 1) return `${count} termín`;
-  if (count >= 2 && count <= 4) return `${count} termíny`;
-  return `${count} termínů`;
-}
+import { t, type Locale } from "../../i18n";
+import { formatSessionCount, formatDate } from "../../i18n/formatting";
 
 interface SessionsHeroProps {
   sessionCount: number;
   topicCount: number;
   nextSessionDate: string | null;
+  locale: Locale;
 }
 
-export function SessionsHero({ sessionCount, topicCount, nextSessionDate }: SessionsHeroProps) {
-  const formattedDate = nextSessionDate
-    ? new Date(nextSessionDate).toLocaleDateString("cs-CZ", {
-        day: "numeric",
-        month: "long",
-      })
-    : null;
+export function SessionsHero({ sessionCount, topicCount, nextSessionDate, locale }: SessionsHeroProps) {
+  const formattedDate = nextSessionDate ? formatDate(nextSessionDate, locale, { day: "numeric", month: "long" }) : null;
 
   if (sessionCount === 0) {
     return (
-      <Section variant="inverse" ariaLabel="Veřejné termíny školení">
+      <Section variant="inverse" ariaLabel={t(locale, "sessions_hero.aria_label")}>
         <Container>
           <div>
             <Heading variant="inverse" level="h1">
-              Veřejné <span className="text-orange-500">termíny</span> školení
+              {t(locale, "sessions_hero.heading_public")}{" "}
+              <span className="text-orange-500">{t(locale, "sessions_hero.heading_sessions")}</span>{" "}
+              {t(locale, "sessions_hero.heading_training")}
             </Heading>
             <Text variant="muted" className="mt-6 max-w-xl">
-              Momentálně nejsou vypsány žádné veřejné termíny. Podívejte se na nabídku školení — rádi vám připravíme
-              termín na míru.
+              {t(locale, "sessions_hero.no_sessions_text")}
             </Text>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button size="medium" href="#skoleni" variant="accent">
-                Všechna školení
+                {t(locale, "sessions_hero.all_trainings")}
               </Button>
             </div>
           </div>
@@ -49,41 +42,46 @@ export function SessionsHero({ sessionCount, topicCount, nextSessionDate }: Sess
   }
 
   return (
-    <Section variant="inverse" ariaLabel="Veřejné termíny školení">
+    <Section variant="inverse" ariaLabel={t(locale, "sessions_hero.aria_label")}>
       <Container>
         <div className="flex flex-col gap-y-8 lg:flex-row lg:justify-between lg:gap-y-0">
           <div>
             <Heading variant="inverse" level="h1">
-              Veřejné <span className="text-orange-500">termíny</span> školení
+              {t(locale, "sessions_hero.heading_public")}{" "}
+              <span className="text-orange-500">{t(locale, "sessions_hero.heading_sessions")}</span>{" "}
+              {t(locale, "sessions_hero.heading_training")}
             </Heading>
             <Text variant="muted" className="mt-6 max-w-xl">
-              Otevřená školení pro jednotlivce i malé týmy. Přihlaste se na vypsaný termín a získejte praktické
-              zkušenosti z oblasti DevOps a kontejnerů pod vedením zkušeného lektora.
+              {t(locale, "sessions_hero.description")}
             </Text>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button size="medium" href="#skoleni" variant="accent">
-                Všechna školení
+                {t(locale, "sessions_hero.all_trainings")}
               </Button>
             </div>
           </div>
           <div className="flex flex-col gap-6">
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-sans text-3xl font-bold text-white">{formatSessionCount(sessionCount)}</span>
+              <span className="font-sans text-3xl font-bold text-white">
+                {formatSessionCount(sessionCount, locale)}
+              </span>
               <Body color="muted" className="mt-1">
-                vypsaných v nejbližších měsících
+                {t(locale, "sessions_hero.sessions_upcoming")}
               </Body>
             </div>
             <div className="border-l-2 border-orange-500 pl-6">
-              <span className="font-sans text-3xl font-bold text-white">{topicCount} témat</span>
+              <span className="font-sans text-3xl font-bold text-white">
+                {topicCount} {t(locale, "sessions_hero.topics_suffix")}
+              </span>
               <Body color="muted" className="mt-1">
-                z oblasti DevOps a kontejnerů
+                {t(locale, "sessions_hero.topics_label")}
               </Body>
             </div>
             {formattedDate && (
               <div className="border-l-2 border-orange-500 pl-6">
                 <span className="font-sans text-3xl font-bold text-white">{formattedDate}</span>
                 <Body color="muted" className="mt-1">
-                  nejbližší volný termín
+                  {t(locale, "sessions_hero.next_session")}
                 </Body>
               </div>
             )}

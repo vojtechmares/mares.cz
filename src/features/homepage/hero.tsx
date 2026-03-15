@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Text } from "../../components/ui/text";
+import { t, type Locale } from "../../i18n";
 
 function UnderlineSvg() {
   return (
@@ -19,32 +20,29 @@ function UnderlineSvg() {
 }
 
 interface HeroProps {
+  locale: Locale;
   children?: ReactNode;
 }
 
-export function Hero({ children }: HeroProps) {
+export function Hero({ locale, children }: HeroProps) {
   return (
     <Container className="pt-16 pr-0! sm:pt-24 md:pr-4">
       <div className="flex flex-row items-end justify-between">
         <div className="max-w-64 min-w-0 shrink pb-12 md:max-w-200 md:pb-16">
           <Heading level="h1" className="text-4xl font-black! sm:text-7xl">
-            Jsem{" "}
+            {t(locale, "hero.intro")}{" "}
             <span className="relative whitespace-nowrap text-orange-500">
               <UnderlineSvg />
               <span className="relative">Vojtěch Mareš</span>
             </span>
             ,<br />
-            DevOps architekt.
+            {t(locale, "hero.role")}
           </Heading>
           <Text variant="secondary" className="mt-6 md:max-w-2xl">
-            Společně snížíme vaše náklady na infrastrukturu, zbavíme se technického dluhu a připravíme vaši IT
-            infrastrukturu na rapidní škálování.
+            {t(locale, "hero.description")}
           </Text>
           <div className="mt-10 flex flex-row gap-x-6 gap-y-6 sm:justify-start md:gap-y-0">
-            <Button href="https://cal.com/vojtechmares/30min">Domluvme si schůzku</Button>
-            {/* <Button href="mailto:vojtech@mares.cz" style="outline">
-              Napište mi
-            </Button> */}
+            <Button href="https://cal.com/vojtechmares/30min">{t(locale, "nav.schedule_meeting")}</Button>
           </div>
         </div>
         <div className="ml-6 max-h-96 shrink-0 overflow-hidden md:ml-0 md:max-h-none">{children}</div>

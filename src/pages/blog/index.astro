@@ -8,6 +8,10 @@ import { Text } from "../../components/ui/text";
 import Layout from "../../layouts/Layout.astro";
 import { ArticleGrid } from "../../features/blog/article-grid";
 import { CachePresets } from "../../lib/cache";
+import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
@@ -32,9 +36,9 @@ const years = [
 ].sort((a, b) => b - a);
 
 const meta = {
-  title: "Vojtěch Mareš | Blog",
-  description: "Články na méme blogu nejen o DevOps.",
-  keywords: "blog, devops blog, články",
+  title: t(locale, "blog.meta_title"),
+  description: t(locale, "blog.meta_description"),
+  keywords: t(locale, "blog.meta_keywords"),
 };
 ---
 
@@ -46,28 +50,28 @@ const meta = {
         {
           tags.map((tag) =>
             // prettier-ignore
-            <><Link href={`/blog/tag/${tag}`} className="text-zinc-100">#{tag}</Link>{" "}</>,
+            <><Link href={localizeUrl(`/blog/tag/${tag}`, locale)} className="text-zinc-100">#{tag}</Link>{" "}</>,
           )
         }
       </Text>
       <div class="mt-4 flex flex-row justify-between">
         <Text variant="inverse" className="mt-2">
-          Archiv:{" "}
+          {t(locale, "blog.archive_label")}{" "}
           {
             years.map((year, i) =>
               // prettier-ignore
-              <><Link href={`/blog/archive/${year}`} className="text-zinc-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
+              <><Link href={localizeUrl(`/blog/archive/${year}`, locale)} className="text-zinc-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
             )
           }
         </Text>
         <Text variant="inverse" className="mt-2">
-          Feed:{" "}
+          {t(locale, "blog.feed_label")}{" "}
           <Link href="/blog/rss.xml" className="text-zinc-100">RSS</Link>
         </Text>
       </div>
     </Container>
   </Section>
   <Section>
-    <ArticleGrid articles={articles} />
+    <ArticleGrid articles={articles} locale={locale} />
   </Section>
 </Layout>

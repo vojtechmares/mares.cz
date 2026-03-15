@@ -7,21 +7,11 @@ import { TagList } from "../../../../components/ui/tag-list";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../lib/cache";
+import { t, type Locale } from "../../../../i18n";
+import { getMonthName, formatArticleCount } from "../../../../i18n/formatting";
+import { localizeUrl } from "../../../../i18n/routes";
 
-const CZECH_MONTHS = [
-  "Leden",
-  "Únor",
-  "Březen",
-  "Duben",
-  "Květen",
-  "Červen",
-  "Červenec",
-  "Srpen",
-  "Září",
-  "Říjen",
-  "Listopad",
-  "Prosinec",
-];
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 const { year: yearParam } = Astro.params;
 const year = parseInt(yearParam!);
@@ -55,9 +45,9 @@ Astro.response.headers.set("Cache-Control", CachePresets.archive);
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
 const meta = {
-  title: `Vojtěch Mareš | Blog: ${year}`,
-  description: `Články z roku ${year} na blogu Vojtěcha Mareše. ${articles.length} článků.`,
-  keywords: `blog, devops, ${year}, články`,
+  title: t(locale, "blog.year_meta_title", { year }),
+  description: t(locale, "blog.year_meta_description", { year, count: articles.length }),
+  keywords: t(locale, "blog.year_meta_keywords", { year }),
 };
 
 const openGraph = {
@@ -87,20 +77,21 @@ const jsonLd = {
       </p>
       <div class="flex flex-row justify-between">
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-          {articles.length} článků v tomto roce
+          {formatArticleCount(articles.length, locale)}
+          {locale === "cs" ? "v tomto roce" : "this year"}
         </p>
         {
           months.length > 0 &&
             // prettier-ignore
-            <p class="mt-2 text-base text-zinc-100 lg:text-xl">{months.map((m, i) => <><a href={`/blog/archive/${year}/${String(m.month).padStart(2, "0")}`} class="underline">{CZECH_MONTHS[m.month - 1]}</a>{i < months.length - 1 ? " · " : ""}</>)}</p>
+            <p class="mt-2 text-base text-zinc-100 lg:text-xl">{months.map((m, i) => <><a href={localizeUrl(`/blog/archive/${year}/${String(m.month).padStart(2, "0")}`, locale)} class="underline">{getMonthName(m.month, locale)}</a>{i < months.length - 1 ? " · " : ""}</>)}</p>
         }
       </div>
       <p class="mt-2 text-base text-zinc-100 lg:text-xl">
-        <a class="underline" href="/blog">← Zpět na blog</a>
+        <a class="underline" href={localizeUrl("/blog", locale)}>{t(locale, "blog.back_to_blog")}</a>
       </p>
     </Container>
   </Section>
   <Section>
-    <ArticleGrid articles={articles} />
+    <ArticleGrid articles={articles} locale={locale} />
   </Section>
 </Layout>

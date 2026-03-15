@@ -6,25 +6,25 @@ import { Hero } from "../../../../src/features/homepage/hero";
 describe("Hero", () => {
   describe("rendering", () => {
     it("should render main heading with name", () => {
-      render(<Hero />);
+      render(<Hero locale="cs" />);
       expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
       expect(screen.getByText(/vojtěch mareš/i)).toBeInTheDocument();
     });
 
     it("should render DevOps architect title", () => {
-      render(<Hero />);
+      render(<Hero locale="cs" />);
       expect(screen.getByText(/devops architekt/i)).toBeInTheDocument();
     });
 
     it("should render description paragraph", () => {
-      render(<Hero />);
+      render(<Hero locale="cs" />);
       expect(screen.getByText(/snížíme vaše náklady na infrastrukturu/i)).toBeInTheDocument();
     });
   });
 
   describe("CTA buttons", () => {
     it("should render meeting booking button", () => {
-      render(<Hero />);
+      render(<Hero locale="cs" />);
       expect(screen.getByRole("link", { name: /domluvme si schůzku/i })).toHaveAttribute(
         "href",
         "https://cal.com/vojtechmares/30min",
@@ -35,7 +35,7 @@ describe("Hero", () => {
   describe("children", () => {
     it("should render children", () => {
       render(
-        <Hero>
+        <Hero locale="cs">
           <div data-testid="hero-child">Child content</div>
         </Hero>,
       );
@@ -44,14 +44,14 @@ describe("Hero", () => {
     });
 
     it("should render without children", () => {
-      render(<Hero />);
+      render(<Hero locale="cs" />);
       expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
     });
   });
 
   describe("decorative elements", () => {
     it("should have decorative SVG underline", () => {
-      const { container } = render(<Hero />);
+      const { container } = render(<Hero locale="cs" />);
       const svg = container.querySelector('svg[aria-hidden="true"]');
       expect(svg).toBeInTheDocument();
     });

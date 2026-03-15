@@ -8,16 +8,18 @@ import { ServicesTraining } from "../../features/services/services-training";
 import Layout from "../../layouts/Layout.astro";
 import { CachePresets } from "../../lib/cache";
 import { getCollection } from "astro:content";
+import { t, type Locale } from "../../i18n";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const trainings = await getCollection("training", ({ data }) => !data.draft);
 
 const meta = {
-  title: "Vojtěch Mareš | Služby",
-  description:
-    "Freelance DevOps a Platform architekt. Nabízím konzultace, školení a dlouhodobou spolupráci v oblasti cloudové infrastruktury.",
-  keywords: "služby, konzultace, školení, spolupráce, devops, infrastruktura",
+  title: t(locale, "services_page.meta_title"),
+  description: t(locale, "services_page.meta_description"),
+  keywords: t(locale, "services_page.meta_keywords"),
 };
 ---
 
@@ -29,15 +31,16 @@ const meta = {
       url: new URL("/sluzby/card.png", Astro.url).toString(),
       width: 1200,
       height: 630,
-      alt: "Služby - Vojtěch Mareš",
+      alt: t(locale, "services_page.og_alt"),
     },
   }}
 >
-  <ServicesHero trainingCount={trainings.length} />
+  <ServicesHero trainingCount={trainings.length} locale={locale} />
 
-  <ServicesCooperation />
+  <ServicesCooperation locale={locale} />
 
   <ServicesTraining
+    locale={locale}
     trainings={trainings.map((t) => ({
       id: t.id,
       title: t.data.title,
@@ -45,9 +48,9 @@ const meta = {
     }))}
   />
 
-  <ServicesConsultation />
+  <ServicesConsultation locale={locale} />
 
   <References />
 
-  <CallToAction />
+  <CallToAction locale={locale} />
 </Layout>

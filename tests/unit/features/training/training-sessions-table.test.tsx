@@ -32,12 +32,12 @@ describe("TrainingSessionsTable", () => {
 
   describe("rendering", () => {
     it("should render session articles", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
+      render(<TrainingSessionsTable locale="cs" sessions={mockSessions} />);
       expect(screen.getAllByRole("article")).toHaveLength(2);
     });
 
     it("should render all sessions", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
+      render(<TrainingSessionsTable locale="cs" sessions={mockSessions} />);
       expect(screen.getAllByText("Kubernetes Workshop").length).toBeGreaterThan(0);
       expect(screen.getAllByText("Docker Workshop").length).toBeGreaterThan(0);
     });
@@ -45,7 +45,7 @@ describe("TrainingSessionsTable", () => {
 
   describe("session details", () => {
     it("should display location", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
+      render(<TrainingSessionsTable locale="cs" sessions={mockSessions} />);
       expect(screen.getAllByText("Praha").length).toBeGreaterThan(0);
       expect(screen.getAllByText("Brno").length).toBeGreaterThan(0);
     });
@@ -53,13 +53,13 @@ describe("TrainingSessionsTable", () => {
 
   describe("sign up button", () => {
     it("should render sign up button when URL is available", () => {
-      render(<TrainingSessionsTable sessions={mockSessions} />);
+      render(<TrainingSessionsTable locale="cs" sessions={mockSessions} />);
       const buttons = screen.getAllByRole("link", { name: /přihlásit se/i });
       expect(buttons.length).toBeGreaterThan(0);
     });
 
     it("should link to sign up form", () => {
-      render(<TrainingSessionsTable sessions={[createMockSession()]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[createMockSession()]} />);
       const buttons = screen.getAllByRole("link", { name: /přihlásit se/i });
       buttons.forEach((button) => {
         expect(button).toHaveAttribute("href", "https://example.com/signup");
@@ -70,21 +70,21 @@ describe("TrainingSessionsTable", () => {
       const sessionWithoutSignUp = createMockSession({
         signUpURL: undefined,
       });
-      render(<TrainingSessionsTable sessions={[sessionWithoutSignUp]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[sessionWithoutSignUp]} />);
       expect(screen.getAllByText(/přihlašování zatím není možné/i).length).toBeGreaterThan(0);
     });
   });
 
   describe("empty sessions", () => {
     it("should render no articles when sessions is empty", () => {
-      const { container } = render(<TrainingSessionsTable sessions={[]} />);
+      const { container } = render(<TrainingSessionsTable locale="cs" sessions={[]} />);
       expect(container.querySelectorAll("article")).toHaveLength(0);
     });
   });
 
   describe("accessibility", () => {
     it("should have screen reader text for sign up button", () => {
-      render(<TrainingSessionsTable sessions={[createMockSession()]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[createMockSession()]} />);
       expect(screen.getAllByText(/na školení kubernetes workshop/i).length).toBeGreaterThan(0);
     });
   });
@@ -92,12 +92,12 @@ describe("TrainingSessionsTable", () => {
   describe("training description", () => {
     it("should render description when trainingDescription is provided", () => {
       const session = createMockSession({ trainingDescription: "Hands-on Docker workshop" });
-      render(<TrainingSessionsTable sessions={[session]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[session]} />);
       expect(screen.getAllByText("Hands-on Docker workshop").length).toBeGreaterThan(0);
     });
 
     it("should not render description when trainingDescription is not provided", () => {
-      render(<TrainingSessionsTable sessions={[createMockSession()]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[createMockSession()]} />);
       expect(screen.queryByText("Hands-on Docker workshop")).not.toBeInTheDocument();
     });
   });
@@ -105,7 +105,7 @@ describe("TrainingSessionsTable", () => {
   describe("training name links", () => {
     it("should render training name as link when trainingSlug is provided", () => {
       const sessionWithSlug = createMockSession({ trainingSlug: "kubernetes" });
-      render(<TrainingSessionsTable sessions={[sessionWithSlug]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[sessionWithSlug]} />);
       const links = screen.getAllByRole("link", { name: "Kubernetes Workshop" });
       expect(links.length).toBeGreaterThan(0);
       links.forEach((link) => {
@@ -115,7 +115,7 @@ describe("TrainingSessionsTable", () => {
 
     it("should render training name as plain text when trainingSlug is not provided", () => {
       const sessionWithoutSlug = createMockSession({ trainingSlug: undefined });
-      render(<TrainingSessionsTable sessions={[sessionWithoutSlug]} />);
+      render(<TrainingSessionsTable locale="cs" sessions={[sessionWithoutSlug]} />);
       expect(screen.getAllByText("Kubernetes Workshop").length).toBeGreaterThan(0);
       expect(screen.queryByRole("link", { name: "Kubernetes Workshop" })).not.toBeInTheDocument();
     });
@@ -137,19 +137,19 @@ describe("CompactTrainingSessionsTable", () => {
 
   describe("rendering", () => {
     it("should render session articles", () => {
-      render(<CompactTrainingSessionsTable sessions={mockSessions} />);
+      render(<CompactTrainingSessionsTable locale="cs" sessions={mockSessions} />);
       expect(screen.getAllByRole("article")).toHaveLength(1);
     });
 
     it("should render sessions", () => {
-      render(<CompactTrainingSessionsTable sessions={mockSessions} />);
+      render(<CompactTrainingSessionsTable locale="cs" sessions={mockSessions} />);
       expect(screen.getAllByText("Praha").length).toBeGreaterThan(0);
     });
   });
 
   describe("sign up button", () => {
     it("should render sign up button when URL is available", () => {
-      render(<CompactTrainingSessionsTable sessions={mockSessions} />);
+      render(<CompactTrainingSessionsTable locale="cs" sessions={mockSessions} />);
       const buttons = screen.getAllByRole("link", { name: /přihlásit se/i });
       expect(buttons.length).toBeGreaterThan(0);
     });
@@ -158,14 +158,14 @@ describe("CompactTrainingSessionsTable", () => {
       const sessionWithoutSignUp = createMockSession({
         signUpURL: undefined,
       });
-      render(<CompactTrainingSessionsTable sessions={[sessionWithoutSignUp]} />);
+      render(<CompactTrainingSessionsTable locale="cs" sessions={[sessionWithoutSignUp]} />);
       expect(screen.getAllByText(/přihlašování zatím není možné/i).length).toBeGreaterThan(0);
     });
   });
 
   describe("empty sessions", () => {
     it("should render no articles when sessions is empty", () => {
-      const { container } = render(<CompactTrainingSessionsTable sessions={[]} />);
+      const { container } = render(<CompactTrainingSessionsTable locale="cs" sessions={[]} />);
       expect(container.querySelectorAll("article")).toHaveLength(0);
     });
   });

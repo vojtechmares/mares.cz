@@ -7,19 +7,21 @@ import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 import { Prose } from "../../components/prose";
+import { t, type Locale } from "../../i18n";
 
 interface ReferencesContainerProps {
+  locale: Locale;
   children?: ReactNode;
 }
 
-export function ReferencesContainer({ children }: ReferencesContainerProps) {
+export function ReferencesContainer({ locale, children }: ReferencesContainerProps) {
   return (
-    <Section id="references" variant="default" aria-label="Co o mně napsali moji klienti.">
+    <Section id="references" variant="default" aria-label={t(locale, "references.aria_label")}>
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <Heading level="h2">Reference</Heading>
+          <Heading level="h2">{t(locale, "references.heading")}</Heading>
           <Text variant="secondary" className="mt-4 tracking-tight">
-            Co o mně říkají moji klienti.
+            {t(locale, "references.subheading")}
           </Text>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">{children}</div>

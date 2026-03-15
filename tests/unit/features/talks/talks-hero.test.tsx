@@ -11,29 +11,29 @@ describe("TalksHero", () => {
   };
 
   it("renders talk count", () => {
-    render(<TalksHero {...defaultProps} />);
+    render(<TalksHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("42 přednášek")).toBeInTheDocument();
   });
 
   it("renders event count", () => {
-    render(<TalksHero {...defaultProps} />);
+    render(<TalksHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("15 konferencí")).toBeInTheDocument();
   });
 
   it("renders years of speaking", () => {
-    render(<TalksHero {...defaultProps} />);
+    render(<TalksHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("8+ roky")).toBeInTheDocument();
   });
 
   it("renders Czech labels", () => {
-    render(<TalksHero {...defaultProps} />);
+    render(<TalksHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("na odborných konferencích")).toBeInTheDocument();
     expect(screen.getByText("v ČR i zahraničí")).toBeInTheDocument();
     expect(screen.getByText("zkušeností s přednášením")).toBeInTheDocument();
   });
 
-  it("has ariaLabel 'Přednášky'", () => {
-    render(<TalksHero {...defaultProps} />);
-    expect(screen.getByRole("region", { name: "Přednášky" })).toBeInTheDocument();
+  it("has ariaLabel 'Přednášky na'", () => {
+    render(<TalksHero locale="cs" {...defaultProps} />);
+    expect(screen.getByRole("region", { name: "Přednášky na" })).toBeInTheDocument();
   });
 });

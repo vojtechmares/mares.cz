@@ -27,27 +27,27 @@ describe("TrainingGrid", () => {
 
   it("renders training cards with title and price", async () => {
     vi.mocked(getCollection).mockResolvedValue([createMockTraining()] as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("Kubernetes")).toBeInTheDocument();
     expect(screen.getByText(/15\s?000/)).toBeInTheDocument();
   });
 
   it("renders duration text", async () => {
     vi.mocked(getCollection).mockResolvedValue([createMockTraining()] as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("2 dny")).toBeInTheDocument();
   });
 
   it("renders '1 den' for single-day training", async () => {
     vi.mocked(getCollection).mockResolvedValue([createMockTraining({ data: { length: 1 } })] as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("1 den")).toBeInTheDocument();
   });
 
   it("truncates long descriptions", async () => {
     const longDesc = "B".repeat(300);
     vi.mocked(getCollection).mockResolvedValue([createMockTraining({ data: { description: longDesc } })] as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("B".repeat(240) + "…")).toBeInTheDocument();
   });
 
@@ -57,7 +57,7 @@ describe("TrainingGrid", () => {
       createMockTraining({ id: "k8s", data: { title: "Kubernetes", featured: true } }),
     ];
     vi.mocked(getCollection).mockResolvedValue(trainings as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     const headings = screen.getAllByRole("heading", { level: 3 });
     expect(headings[0]).toHaveTextContent("Kubernetes");
     expect(headings[1]).toHaveTextContent("Docker");
@@ -71,14 +71,14 @@ describe("TrainingGrid", () => {
       ];
       return Promise.resolve(all.filter((t) => filter({ data: t.data })));
     }) as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("Published")).toBeInTheDocument();
     expect(screen.queryByText("Draft")).not.toBeInTheDocument();
   });
 
   it("links to training detail page", async () => {
     vi.mocked(getCollection).mockResolvedValue([createMockTraining({ id: "kubernetes" })] as any);
-    render(await TrainingGrid());
+    render(await TrainingGrid({ locale: "cs" }));
     const link = screen.getByRole("link", { name: "O školení" });
     expect(link).toHaveAttribute("href", "/skoleni/kubernetes");
   });

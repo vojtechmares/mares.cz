@@ -16,6 +16,9 @@ import { Section } from "../../../components/ui/section";
 import { Card } from "../../../components/ui/card";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
+import { t, type Locale } from "../../../i18n";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.training);
 
@@ -26,9 +29,9 @@ const [sessionEntries, slugMap, allTrainings] = await Promise.all([
 ]);
 
 const descriptionMap = new Map<number, string>();
-for (const t of allTrainings) {
-  if (t.data.backofficeID > 0) {
-    descriptionMap.set(t.data.backofficeID, t.data.description);
+for (const tr of allTrainings) {
+  if (tr.data.backofficeID > 0) {
+    descriptionMap.set(tr.data.backofficeID, tr.data.description);
   }
 }
 
@@ -38,10 +41,9 @@ const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), 
 }));
 
 const meta = {
-  title: "Vojtěch Mareš | Veřejné termíny školení",
-  description:
-    "Vypsané veřejné termíny školení, na které se může přihlásit každý. A nebo pokud nechcete firemní školení, ale jen poslat například pár zaměstnanců...",
-  keywords: "školení, termíny, devops školení, termín školení",
+  title: t(locale, "sessions_page.meta_title"),
+  description: t(locale, "sessions_page.meta_description"),
+  keywords: t(locale, "sessions_page.meta_keywords"),
 };
 
 const trainings = allTrainings.filter(({ data }) => !data.draft);
@@ -53,7 +55,7 @@ const openGraph = {
     url: Astro.url + "/card.png",
     width: 1200,
     height: 630,
-    alt: "Veřejné termíny školení",
+    alt: t(locale, "sessions_page.og_alt"),
   },
 };
 
@@ -85,67 +87,91 @@ const jsonLd = {
     sessionCount={sessions.length}
     topicCount={trainings.length}
     nextSessionDate={nextSession ? new Date(nextSession.dates.start).toISOString() : null}
+    locale={locale}
   />
   <Section id="terminy">
     <Container>
-      <TrainingSessionsTable sessions={sessions} />
+      <TrainingSessionsTable sessions={sessions} locale={locale} />
       <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 md:grid-cols-2">
         <Card variant="surface">
-          <Heading level="h3" id="podminky"> Podmínky veřejných termínů školení </Heading>
+          <Heading level="h3" id="podminky">{t(locale, "sessions_page.conditions_heading")}</Heading>
           <ul class="mt-6 list-disc pl-4">
-            <li>Přihlášení na veřejný termín školení je závazné a zavazujete se k platbě.</li>
+            <li>{t(locale, "sessions_page.condition_binding")}</li>
             <li>
-              Minimální počet účastníků pro uskuteční školení je <strong>5</strong>.
+              {t(locale, "sessions_page.condition_min")}
+              <strong>{t(locale, "sessions_page.condition_min_count")}</strong>.
             </li>
             <li>
-              Maximální počet účastníků na termínu je <strong>12</strong>.
+              {t(locale, "sessions_page.condition_max")}
+              <strong>{t(locale, "sessions_page.condition_max_count")}</strong>.
             </li>
             <li>
-              Školení je potvrzeno <strong>týden</strong> předem, nebo zrušeno z důvodu nízké účasti.
+              {t(locale, "sessions_page.condition_confirmed")}
+              <strong>{t(locale, "sessions_page.condition_confirmed_when")}</strong>
+              {t(locale, "sessions_page.condition_confirmed_suffix")}
             </li>
             <li>
-              Při odhlášení <strong>min. týden předem</strong> vracím <strong>plnou částku</strong>.
+              {t(locale, "sessions_page.condition_cancel_early")}
+              <strong>{t(locale, "sessions_page.condition_cancel_early_when")}</strong>
+              {t(locale, "sessions_page.condition_cancel_early_result")}
+              <strong>{t(locale, "sessions_page.condition_cancel_early_amount")}</strong>.
             </li>
             <li>
-              Při odhlášení <strong>méně jak týden předem</strong> vracím pouze
-              <strong>50% z ceny školení</strong>.
+              {t(locale, "sessions_page.condition_cancel_early")}
+              <strong>{t(locale, "sessions_page.condition_cancel_late_when")}</strong>
+              {t(locale, "sessions_page.condition_cancel_late_result")}
+              <strong>{t(locale, "sessions_page.condition_cancel_late_amount")}</strong>.
             </li>
             <li>
-              Nabízím slevu <strong>50% pro studenty denního studia</strong> při doložení platného dokladu (potvrzení o studiu).
+              {t(locale, "sessions_page.condition_student_discount")}
+              <strong>{t(locale, "sessions_page.condition_student_discount_detail")}</strong>
+              {t(locale, "sessions_page.condition_student_proof")}
             </li>
           </ul>
         </Card>
         <Card variant="inverse">
-          <Heading level="h3" variant="inverse">Proč přijít právě na moje školení?</Heading>
+          <Heading level="h3" variant="inverse">{t(locale, "sessions_page.why_heading")}</Heading>
           <ul class="mt-6 list-disc pl-4 text-white">
             <li>
-              Školení probíhají
-              <strong>formou workshopu</strong> — vše si prakticky vyzkoušíte na vlastním počítači.
+              {locale === "cs" ? "Školení probíhají" : "Training is delivered in"}
+              <strong>{t(locale, "sessions_page.why_workshop")}</strong> — {
+                t(locale, "sessions_page.why_workshop_detail")
+              }
             </li>
             <li>
-              Ukázky a příklady vycházejí z
-              <strong>reálných projektů</strong>, ne z učebnic.
+              {locale === "cs" ? "Ukázky a příklady vycházejí z" : "Examples come from"}
+              <strong>{t(locale, "sessions_page.why_real_projects")}</strong>, {
+                t(locale, "sessions_page.why_real_projects_detail")
+              }
             </li>
             <li>
-              Ve skupině je
-              <strong>maximálně 12 účastníků</strong>, takže je prostor pro vaše dotazy.
+              {locale === "cs" ? "Ve skupině je" : "Groups have"}
+              <strong>{t(locale, "sessions_page.why_small_groups")}</strong>, {
+                t(locale, "sessions_page.why_small_groups_detail")
+              }
             </li>
             <li>
-              Obdržíte
-              <strong>všechny materiály a ukázkový kód</strong>, ke kterým se můžete kdykoli vrátit.
+              {locale === "cs" ? "Obdržíte" : "You receive"}
+              <strong>{t(locale, "sessions_page.why_materials")}</strong>, {
+                t(locale, "sessions_page.why_materials_detail")
+              }
             </li>
             <li>
-              Pracujeme výhradně s
-              <strong>open-source nástroji</strong>, které jsou standardem v oboru.
+              {locale === "cs" ? "Pracujeme výhradně s" : "We work exclusively with"}
+              <strong>{t(locale, "sessions_page.why_open_source")}</strong>, {
+                t(locale, "sessions_page.why_open_source_detail")
+              }
             </li>
             <li>
-              Mým cílem je
-              <strong>předat vám know-how</strong>, abyste byli po školení soběstační.
+              {locale === "cs" ? "Mým cílem je" : "My goal is to"}
+              <strong>{t(locale, "sessions_page.why_knowledge")}</strong>, {
+                t(locale, "sessions_page.why_knowledge_detail")
+              }
             </li>
           </ul>
         </Card>
       </div>
     </Container>
   </Section>
-  <TrainingGrid />
+  <TrainingGrid locale={locale} />
 </Layout>

@@ -4,12 +4,15 @@ import { Button } from "../../components/ui/button";
 import { Link } from "../../components/ui/link";
 import { Text } from "../../components/ui/text";
 import { FormatTrainingDate, FormatTrainingPrice } from "../../lib/training";
+import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 
 type TrainingSessionTableProps = {
   sessions: TrainingSession[];
+  locale: Locale;
 };
 
-export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
+export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTableProps) {
   return (
     <div className="divide-y divide-zinc-300">
       {sessions.map((training) => (
@@ -19,11 +22,11 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
             <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
               <TrainingDate dates={training.dates} />
             </p>
-            <p className="text-base text-zinc-500">9:00–17:00</p>
+            <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
             <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
             <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.01em]">
               {training.trainingSlug ? (
-                <Link href={`/skoleni/${training.trainingSlug}`}>{training.name}</Link>
+                <Link href={localizeUrl(`/skoleni/${training.trainingSlug}`, locale)}>{training.name}</Link>
               ) : (
                 training.name
               )}
@@ -33,11 +36,11 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
             )}
             <div className="mt-4 flex items-center gap-4">
               {training.signUpURL ? (
-                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
               ) : (
-                <SigningUpNotOpenYet />
+                <SigningUpNotOpenYet locale={locale} />
               )}
-              <TrainingPrice price={training.price} />
+              <TrainingPrice price={training.price} locale={locale} />
             </div>
           </div>
 
@@ -47,13 +50,13 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
               <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
                 <TrainingDate dates={training.dates} />
               </p>
-              <p className="text-base text-zinc-500">9:00–17:00</p>
+              <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
               <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
             </div>
             <div>
               <h3 className="font-display text-xl font-semibold tracking-[-0.01em]">
                 {training.trainingSlug ? (
-                  <Link href={`/skoleni/${training.trainingSlug}`}>{training.name}</Link>
+                  <Link href={localizeUrl(`/skoleni/${training.trainingSlug}`, locale)}>{training.name}</Link>
                 ) : (
                   training.name
                 )}
@@ -63,11 +66,11 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
               )}
             </div>
             <div className="flex items-center gap-6">
-              <TrainingPrice price={training.price} />
+              <TrainingPrice price={training.price} locale={locale} />
               {training.signUpURL ? (
-                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
               ) : (
-                <SigningUpNotOpenYet />
+                <SigningUpNotOpenYet locale={locale} />
               )}
             </div>
           </div>
@@ -77,7 +80,7 @@ export function TrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
   );
 }
 
-export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableProps) {
+export function CompactTrainingSessionsTable({ sessions, locale }: TrainingSessionTableProps) {
   return (
     <div className="divide-y divide-zinc-300">
       {sessions.map((training) => (
@@ -87,13 +90,13 @@ export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableP
             <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
               <TrainingDate dates={training.dates} />
             </p>
-            <p className="text-base text-zinc-500">9:00–17:00</p>
+            <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
             <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
             <div className="mt-4">
               {training.signUpURL ? (
-                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
               ) : (
-                <SigningUpNotOpenYet />
+                <SigningUpNotOpenYet locale={locale} />
               )}
             </div>
           </div>
@@ -104,14 +107,14 @@ export function CompactTrainingSessionsTable({ sessions }: TrainingSessionTableP
               <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
                 <TrainingDate dates={training.dates} />
               </p>
-              <p className="text-base text-zinc-500">9:00–17:00</p>
+              <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
               <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
             </div>
             <div>
               {training.signUpURL ? (
-                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} />
+                <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
               ) : (
-                <SigningUpNotOpenYet />
+                <SigningUpNotOpenYet locale={locale} />
               )}
             </div>
           </div>
@@ -149,7 +152,7 @@ function TrainingDate({ dates }: TrainingDateProps) {
   return <>{FormatTrainingDate(dates.start)}</>;
 }
 
-function TrainingPrice({ price }: { price: number }) {
+function TrainingPrice({ price, locale }: { price: number; locale: Locale }) {
   const tax = 1.21; // 21%
 
   const inclTax = FormatTrainingPrice(price * tax);
@@ -158,20 +161,22 @@ function TrainingPrice({ price }: { price: number }) {
   return (
     <div className="text-right text-zinc-700 tabular-nums">
       <p className="text-base font-semibold">{inclTax}</p>
-      <p className="text-base italic">{exclTax} bez DPH</p>
+      <p className="text-base italic">
+        {exclTax} {t(locale, "sessions_table.excl_vat")}
+      </p>
     </div>
   );
 }
 
-function PublicSessionSignUpButton({ name, signUpURL }: { name: string; signUpURL: string }) {
+function PublicSessionSignUpButton({ name, signUpURL, locale }: { name: string; signUpURL: string; locale: Locale }) {
   return (
     <Button href={signUpURL} variant="accent">
-      Přihlásit se
-      <span className="sr-only">na školení {name}</span>
+      {t(locale, "sessions_table.sign_up")}
+      <span className="sr-only">{t(locale, "sessions_table.sign_up_aria", { name })}</span>
     </Button>
   );
 }
 
-function SigningUpNotOpenYet() {
-  return <Text variant="muted">Přihlašování zatím není možné</Text>;
+function SigningUpNotOpenYet({ locale }: { locale: Locale }) {
+  return <Text variant="muted">{t(locale, "sessions_table.sign_up_not_open")}</Text>;
 }

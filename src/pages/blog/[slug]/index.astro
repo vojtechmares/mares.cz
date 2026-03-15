@@ -9,6 +9,9 @@ import { Prose } from "../../../components/prose";
 import { Section } from "../../../components/ui/section";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
+import type { Locale } from "../../../i18n";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 const { slug } = Astro.params;
 const article = await getEntry("blog", slug!);
@@ -70,6 +73,7 @@ const readingTimeMinutes = Math.max(1, Math.round(words / 200));
     publishDate={article.data.publish_time}
     tags={article.data.tags}
     readingTimeMinutes={readingTimeMinutes}
+    locale={locale}
   />
   <!-- <ArticleHeader article={article} /> -->
   <Section>
@@ -79,6 +83,6 @@ const readingTimeMinutes = Math.max(1, Math.round(words / 200));
       </article>
     </Prose>
   </Section>
-  {article.data.trainingAd !== undefined && <TrainingAd trainingSlug={article.data.trainingAd as string} />}
-  {article.data.trainingAd === undefined && <TrainingGrid />}
+  {article.data.trainingAd !== undefined && <TrainingAd trainingSlug={article.data.trainingAd as string} locale={locale} />}
+  {article.data.trainingAd === undefined && <TrainingGrid locale={locale} />}
 </Layout>

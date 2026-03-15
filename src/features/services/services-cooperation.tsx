@@ -7,70 +7,61 @@ import { Card } from "../../components/ui/card";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
+import { t, type Locale } from "../../i18n";
 
-const spolupráceSteps = [
-  {
-    name: "Úvodní analýza",
-    description:
-      "Společně zmapujeme váš současný stav — infrastrukturu, procesy i tým. Identifikujeme slabá místa a příležitosti ke zlepšení.",
-  },
-  {
-    name: "Návrh řešení",
-    description:
-      "Na základě analýzy připravím konkrétní plán kroků s prioritami, časovým odhadem a očekávanými výsledky.",
-  },
-  {
-    name: "Implementace",
-    description:
-      "Pracuji iterativně — každý sprint přináší měřitelný pokrok. Infrastruktura jako kód, automatizace, Kubernetes.",
-  },
-  {
-    name: "Podpora a SLA",
-    description: "Po nasazení nabízím průběžnou podporu s SLA v pracovní dny Po–Pá 9–17 přes e-mail nebo Slack.",
-  },
-];
+const stepKeys = [
+  { name: "services_cooperation.step1_name", description: "services_cooperation.step1_description" },
+  { name: "services_cooperation.step2_name", description: "services_cooperation.step2_description" },
+  { name: "services_cooperation.step3_name", description: "services_cooperation.step3_description" },
+  { name: "services_cooperation.step4_name", description: "services_cooperation.step4_description" },
+] as const;
 
-const zahrnujeItems = [
-  "Správa infrastruktury a IaC (Terraform)",
-  "Kubernetes a kontejnerizace",
-  "Monitoring, alerting a observabilita",
-  "Bezpečnost a pravidelné revize",
-  "Škálovatelný rozsah spolupráce",
-  "CI/CD pipeline a automatizace",
-  "Integrace s AI a agenty",
-];
+const includesKeys = [
+  "services_cooperation.includes1",
+  "services_cooperation.includes2",
+  "services_cooperation.includes3",
+  "services_cooperation.includes4",
+  "services_cooperation.includes5",
+  "services_cooperation.includes6",
+  "services_cooperation.includes7",
+] as const;
 
-const projektyItems = [
-  { label: "Migrace", description: "z/do cloudu i on-premise (oba směry), migrace aplikací do Kubernetes" },
-  {
-    label: "Cloudová architektura",
-    description: "cloud native patterny, spolehlivost a efektivní využití cloudu",
-  },
-  {
-    label: "Budování platform týmu",
-    description: "podpora vývojových týmů pomocí DevOps praktik a self-service přístupu",
-  },
-  { label: "Integrace AI", description: "bezpečná integrace AI a AI agentů do aplikací i platformy" },
-];
+const projectKeys = [
+  { label: "services_cooperation.project1_label", description: "services_cooperation.project1_description" },
+  { label: "services_cooperation.project2_label", description: "services_cooperation.project2_description" },
+  { label: "services_cooperation.project3_label", description: "services_cooperation.project3_description" },
+  { label: "services_cooperation.project4_label", description: "services_cooperation.project4_description" },
+] as const;
 
-export function ServicesCooperation() {
+export function ServicesCooperation({ locale }: { locale: Locale }) {
+  const steps = stepKeys.map((s) => ({
+    name: t(locale, s.name),
+    description: t(locale, s.description),
+  }));
+
+  const includesItems = includesKeys.map((key) => t(locale, key));
+
+  const projektyItems = projectKeys.map((p) => ({
+    label: t(locale, p.label),
+    description: t(locale, p.description),
+  }));
+
   return (
-    <Section id="spoluprace" variant="surface" ariaLabel="Spolupráce">
+    <Section id="spoluprace" variant="surface" ariaLabel={t(locale, "services_cooperation.heading")}>
       <Container>
-        <Badge variant="accent">Dlouhodobé partnerství</Badge>
+        <Badge variant="accent">{t(locale, "services_cooperation.badge")}</Badge>
         <Heading level="h2" className="mt-4">
-          Spolupráce
+          {t(locale, "services_cooperation.heading")}
         </Heading>
         <Body variant="large" className="mt-4 max-w-2xl">
-          Dlouhodobé partnerství, při kterém se kompletně postarám o vaši infrastrukturu. Pravidelné aktualizace, rozvoj
-          platformy a podpora vašich aplikací — vše s jasně definovanými procesy.
+          {t(locale, "services_cooperation.description")}
         </Body>
 
         <nav aria-label="Kroky spolupráce" className="mt-12">
           <ol role="list" className="mx-auto max-w-3xl overflow-hidden pt-2">
-            {spolupráceSteps.map((step, idx) => (
-              <li key={step.name} className={clsx(idx !== spolupráceSteps.length - 1 ? "pb-10" : "", "relative")}>
-                {idx !== spolupráceSteps.length - 1 ? (
+            {steps.map((step, idx) => (
+              <li key={step.name} className={clsx(idx !== steps.length - 1 ? "pb-10" : "", "relative")}>
+                {idx !== steps.length - 1 ? (
                   <div className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-zinc-300" aria-hidden="true" />
                 ) : null}
                 <div className="group relative flex items-start">
@@ -95,10 +86,10 @@ export function ServicesCooperation() {
 
         <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <Card variant="surface" className="border-t-4 border-orange-500">
-            <Heading level="h3">Co spolupráce zahrnuje</Heading>
+            <Heading level="h3">{t(locale, "services_cooperation.includes_heading")}</Heading>
             <Body as="div" color="secondary" className="mt-4">
               <ul className="list-inside list-disc space-y-2 pl-4">
-                {zahrnujeItems.map((item) => (
+                {includesItems.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
@@ -106,29 +97,24 @@ export function ServicesCooperation() {
           </Card>
 
           <Card variant="surface" className="border-l-2 border-zinc-300">
-            <Heading level="h3">Pro koho je spolupráce vhodná</Heading>
+            <Heading level="h3">{t(locale, "services_cooperation.suitable_heading")}</Heading>
             <Body color="secondary" className="mt-4">
-              Spolupracuji s firmami od startupů po enterprise — na velikosti nezáleží. Přináším technické know-how,
-              které firmě chybí, ať už jde o infrastrukturu, automatizaci, nebo DevOps kulturu. Rozsah přizpůsobím vašim
-              potřebám — od několika hodin týdně až po zhruba polovinu pracovního týdne.
+              {t(locale, "services_cooperation.suitable_description")}
             </Body>
           </Card>
 
           <Card variant="surface">
-            <Heading level="h3">Dlouhodobá podpora a SLA</Heading>
+            <Heading level="h3">{t(locale, "services_cooperation.support_heading")}</Heading>
             <Body color="secondary" className="mt-4">
-              Nabízím dlouhodobou podporu s garantovanými reakčními časy. Nenabízím L1 podporu — řeším technické
-              problémy na expertní úrovni. Podporu zajišťuji se svým týmem v pracovních hodinách, tj.&nbsp;Po–Pá 9–17.
+              {t(locale, "services_cooperation.support_text1")}
             </Body>
             <Body color="secondary" className="mt-4">
-              Součástí podpory jsou pravidelné revize infrastruktury, proaktivní aktualizace a sledování nových
-              technologií. Díky průběžné spolupráci znám vaše prostředí do detailu a dokážu reagovat rychle a efektivně.
+              {t(locale, "services_cooperation.support_text2")}
             </Body>
           </Card>
 
-          {/* Card 4: Structured numbered list — surface with dark top border */}
           <Card variant="surface" className="border-t-4 border-zinc-900">
-            <Heading level="h3">Typické projekty</Heading>
+            <Heading level="h3">{t(locale, "services_cooperation.projects_heading")}</Heading>
             <div className="mt-4 divide-y divide-zinc-200">
               {projektyItems.map((item, idx) => (
                 <div key={item.label} className={clsx("flex gap-4 py-3", idx === 0 && "pt-0")}>
@@ -143,19 +129,18 @@ export function ServicesCooperation() {
             </div>
           </Card>
 
-          {/* Pricing CTA — unchanged */}
           <Card variant="inverse" className="lg:col-span-2">
             <div className="flex h-full flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
               <div>
                 <Body as="span" color="inverse" className="font-mono text-2xl font-bold">
-                  cena dle domluvy
+                  {t(locale, "services_cooperation.price")}
                 </Body>
                 <Body color="muted" className="mt-2">
-                  Rozsah a podmínky dle vašich potřeb
+                  {t(locale, "services_cooperation.price_label")}
                 </Body>
               </div>
               <Button href="https://cal.com/vojtechmares/30min" variant="secondary">
-                Domluvme si schůzku
+                {t(locale, "nav.schedule_meeting")}
               </Button>
             </div>
           </Card>

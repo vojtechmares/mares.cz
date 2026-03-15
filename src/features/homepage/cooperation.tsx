@@ -5,44 +5,31 @@ import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
+import { t, type Locale } from "../../i18n";
 
-const steps = [
-  {
-    name: "Analýza současného stavu",
-    description: "Identifikujeme slabá místa ve vaší infrastruktuře, aplikaci nebo obojím. ",
-  },
-  {
-    name: "Návrh řešení",
-    description:
-      "Navrhnu efektivní řešení, jak tato slabá místa odstranit, upozorním na rizika a společně naplánujeme případné další kroky.",
-  },
-  {
-    name: "Implementace",
-    description:
-      "Přesunu vaši aplikaci do Kubernetes, ať už na vašem vlastním hardware, nebo v public cloudu. Veškerá infrastruktura bude jasně definovaná jako kód pomocí Terraformu.",
-  },
-  {
-    name: "Školení vašeho týmu",
-    description:
-      "Naučím vás používat moderní technologie tak, aby byly efektivním nástrojem pro rozvoj vašich aplikací a byznysu a ne břemenem.",
-  },
-  {
-    name: "Dlouhodobá spolupráce a podpora",
-    description:
-      "Budeme průběžně rozvíjet infrastrukturu podle aktuálních potřeb vašich aplikací. Nabízím také možnost podpory a SLA, díky čemuž získáte jistotu a rychlé řešení v případě jakýchkoli problémů.",
-  },
-];
+const stepKeys = [
+  { name: "cooperation.step1_name", description: "cooperation.step1_description" },
+  { name: "cooperation.step2_name", description: "cooperation.step2_description" },
+  { name: "cooperation.step3_name", description: "cooperation.step3_description" },
+  { name: "cooperation.step4_name", description: "cooperation.step4_description" },
+  { name: "cooperation.step5_name", description: "cooperation.step5_description" },
+] as const;
 
-export function Cooperation() {
+export function Cooperation({ locale }: { locale: Locale }) {
+  const steps = stepKeys.map((s) => ({
+    name: t(locale, s.name),
+    description: t(locale, s.description),
+  }));
+
   return (
-    <Section id="z-nuly-do-cloudu" aria-label="Z nuly do cloudu" variant="inverse">
+    <Section id="z-nuly-do-cloudu" aria-label={t(locale, "cooperation.heading")} variant="inverse">
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <Heading level="h2" variant="inverse">
-            Z nuly do cloudu
+            {t(locale, "cooperation.heading")}
           </Heading>
           <Text variant="muted" className="mt-4 tracking-tight">
-            Jak může vypadat naše spolupráce.
+            {t(locale, "cooperation.subheading")}
           </Text>
         </div>
         <nav aria-label="Progress">

@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
+import { t, type Locale } from "../../i18n";
 
 type NavLink = {
   name: string;
@@ -23,7 +24,7 @@ function LinkItem({ href, name, className = "" }: { href: string; name: string; 
   );
 }
 
-function MobileNavigation({ links }: { links: NavLink[] }) {
+function MobileNavigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
   return (
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
@@ -40,7 +41,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
         <div className="flex items-center gap-x-5 md:gap-x-8">
           <Button href="https://cal.com/vojtechmares/30min" variant="accent">
             <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
-              Domluvme si schůzku
+              {t(locale, "nav.schedule_meeting")}
             </Body>
           </Button>
         </div>
@@ -54,41 +55,7 @@ function MobileNavigation({ links }: { links: NavLink[] }) {
   );
 }
 
-// desktop navigation v2, needs more links to be added, to make it look good
-// function DesktopNavigation() {
-//   return (
-//     <nav className="relative z-50 hidden lg:block">
-//       <div className="flex justify-between">
-//         <div className="flex items-center md:gap-x-12">
-//           <span className="text-2xl font-extrabold tracking-tight">
-//             <Link
-//               href="/"
-//               className="py-2 focus-visible:outline-black"
-//             >
-//               Vojtěch Mareš
-//             </Link>
-//           </span>
-//         </div>
-//         <div className="flex items-center gap-x-8">
-//           <Button href="mailto:vojtech@mares.cz" color="amber">
-//             <span className="text-lg font-bold tracking-tight">
-//               Napište mi <span className="hidden lg:inline">ještě dnes</span>
-//             </span>
-//           </Button>
-//         </div>
-//       </div>
-//       <div className="mt-6">
-//         <div className="flex flex-row flex-wrap gap-x-6 gap-y-3">
-//           {links.map((link) => (
-//             <LinkItem key={link.name} href={link.href} name={link.name} />
-//           ))}
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// }
-
-function DesktopNavigation({ links }: { links: NavLink[] }) {
+function DesktopNavigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
   return (
     <nav className="relative z-50 hidden lg:block">
       <div className="flex justify-between">
@@ -112,38 +79,22 @@ function DesktopNavigation({ links }: { links: NavLink[] }) {
         <div className="flex items-center gap-x-8">
           <Button href="https://cal.com/vojtechmares/30min" variant="accent">
             <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
-              Domluvme si schůzku
+              {t(locale, "nav.schedule_meeting")}
             </Body>
           </Button>
         </div>
       </div>
-      {/* <div className="mt-6">
-        <div className="flex flex-row flex-wrap gap-x-6 gap-y-3">
-          {links.map((link) => (
-            <LinkItem key={link.name} href={link.href} name={link.name} />
-          ))}
-        </div>
-      </div> */}
     </nav>
   );
 }
 
-export function Navigation({ links }: { links: NavLink[] }) {
-  // const pageLinks: NavLink[] = pages
-  //     .filter((page) => page.featured)
-  //     .map((page) => ({
-  //         name: page.title,
-  //         href: `/${page.slug}`,
-  //     }));
-
-  //   const links = [...StaticNavigationLinks, ...pageLinks]
-
+export function Navigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
   return (
     <>
       <header className="bg-zinc-900 py-4 lg:py-1">
         <Container>
-          <MobileNavigation links={links} />
-          <DesktopNavigation links={links} />
+          <MobileNavigation links={links} locale={locale} />
+          <DesktopNavigation links={links} locale={locale} />
         </Container>
       </header>
     </>

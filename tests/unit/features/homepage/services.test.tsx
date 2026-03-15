@@ -6,36 +6,36 @@ import { Services } from "../../../../src/features/homepage/services";
 describe("Services", () => {
   describe("rendering", () => {
     it("should render section with correct id", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(document.getElementById("sluzby")).toBeInTheDocument();
     });
 
     it("should render main heading", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(screen.getByRole("heading", { name: /služby/i, level: 2 })).toBeInTheDocument();
     });
 
     it("should render description", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(screen.getByText(/co dělám a jak vám mohu pomoci/i)).toBeInTheDocument();
     });
   });
 
   describe("service cards", () => {
     it("should render consultation service", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(screen.getByRole("heading", { name: /konzultace/i })).toBeInTheDocument();
       expect(screen.getByText(/potřebujete poradit/i)).toBeInTheDocument();
     });
 
     it("should render training service (featured)", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(screen.getByRole("heading", { name: /^školení$/i })).toBeInTheDocument();
       expect(screen.getByText(/formou workshopu/i)).toBeInTheDocument();
     });
 
     it("should render DevOps cooperation service", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       expect(screen.getByRole("heading", { name: /devops spolupráce/i })).toBeInTheDocument();
       expect(screen.getByText(/dlouhodobou spolupráci/i)).toBeInTheDocument();
     });
@@ -43,7 +43,7 @@ describe("Services", () => {
 
   describe("service buttons", () => {
     it("should render consultation meeting link", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       const meetingLink = screen.getByRole("link", {
         name: /domluvme si schůzku/i,
       });
@@ -51,7 +51,7 @@ describe("Services", () => {
     });
 
     it("should render training list link", () => {
-      render(<Services />);
+      render(<Services locale="cs" />);
       const trainingLink = screen.getByRole("link", {
         name: /seznam školení/i,
       });

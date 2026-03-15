@@ -13,13 +13,13 @@ describe("BlogArticleHero", () => {
   };
 
   it("renders title and description", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("Deploying to Kubernetes")).toBeInTheDocument();
     expect(screen.getByText("A guide to Kubernetes deployments")).toBeInTheDocument();
   });
 
   it("renders formatted date in Czech locale", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     const formatted = new Date("2024-06-15").toLocaleDateString("cs-CZ", {
       day: "numeric",
       month: "long",
@@ -29,7 +29,7 @@ describe("BlogArticleHero", () => {
   });
 
   it("renders tags as links", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     const k8sLink = screen.getByRole("link", { name: "#kubernetes" });
     expect(k8sLink).toHaveAttribute("href", "/blog/tag/kubernetes");
     const devopsLink = screen.getByRole("link", { name: "#devops" });
@@ -37,22 +37,22 @@ describe("BlogArticleHero", () => {
   });
 
   it("renders 'témata článku' for multiple tags", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("témata článku")).toBeInTheDocument();
   });
 
   it("renders 'téma článku' for a single tag", () => {
-    render(<BlogArticleHero {...defaultProps} tags={["kubernetes"]} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} tags={["kubernetes"]} />);
     expect(screen.getByText("téma článku")).toBeInTheDocument();
   });
 
   it("renders reading time with 'min' suffix", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     expect(screen.getByText("5 min")).toBeInTheDocument();
   });
 
   it("renders back to blog button", () => {
-    render(<BlogArticleHero {...defaultProps} />);
+    render(<BlogArticleHero locale="cs" {...defaultProps} />);
     const link = screen.getByRole("link", { name: /zpět na blog/i });
     expect(link).toHaveAttribute("href", "/blog");
   });

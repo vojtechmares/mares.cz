@@ -8,6 +8,10 @@ import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
 import { CachePresets } from "../../lib/cache";
 import { TalksHero } from "../../features/talks/talks-hero";
+import { t, type Locale } from "../../i18n";
+import { formatDate } from "../../i18n/formatting";
+
+const locale = (Astro.currentLocale ?? "cs") as Locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.content);
 
@@ -28,9 +32,9 @@ const renderedTalks = await Promise.all(
 );
 
 const meta = {
-  title: "Vojtěch Mareš | Přednášky",
-  description: "Přehled přednášek a workshopů, které jsem měl možnost dělat.",
-  keywords: "přednášky, talks, workshop",
+  title: t(locale, "talks.meta_title"),
+  description: t(locale, "talks.meta_description"),
+  keywords: t(locale, "talks.meta_keywords"),
 };
 
 const openGraph = {
@@ -39,13 +43,13 @@ const openGraph = {
     url: Astro.url + "/card.png",
     width: 1200,
     height: 630,
-    alt: "Přednášky na konferencích",
+    alt: t(locale, "talks.og_alt"),
   },
 };
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
-  <TalksHero talkCount={talkCount} eventCount={eventCount} yearsOfSpeaking={yearsOfSpeaking} />
+  <TalksHero talkCount={talkCount} eventCount={eventCount} yearsOfSpeaking={yearsOfSpeaking} locale={locale} />
   <Section>
     <Container mode="prose">
       {
@@ -53,7 +57,7 @@ const openGraph = {
           <article class="mb-12 last:mb-0">
             <Heading level="h2">{talk.data.title}</Heading>
             <p class="mt-4 text-zinc-600">
-              {talk.data.date.toLocaleDateString("cs-CZ")}
+              {formatDate(talk.data.date, locale, { day: "numeric", month: "numeric", year: "numeric" })}
               {" · "}
               {talk.data.event.url ? (
                 <Link href={talk.data.event.url} external>

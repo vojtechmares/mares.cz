@@ -14,7 +14,7 @@ describe("CookieConsentBar", () => {
   });
 
   it("should render the cookie consent bar", () => {
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     expect(screen.getByText(/Tento web používá soubory cookies/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Přijmout vše/i })).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("CookieConsentBar", () => {
   });
 
   it("should render link to cookie policy", () => {
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const link = screen.getByRole("link", {
       name: /zásadách používání cookies/i,
@@ -36,7 +36,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const acceptButton = screen.getByRole("button", { name: /Přijmout vše/i });
     await user.click(acceptButton);
@@ -50,7 +50,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const denyButton = screen.getByRole("button", { name: /Odmítnout vše/i });
     await user.click(denyButton);
@@ -64,7 +64,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const acceptButton = screen.getByRole("button", { name: /Přijmout vše/i });
     await user.click(acceptButton);
@@ -79,7 +79,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const denyButton = screen.getByRole("button", { name: /Odmítnout vše/i });
     await user.click(denyButton);
@@ -94,7 +94,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const acceptButton = screen.getByRole("button", { name: /Přijmout vše/i });
     await user.click(acceptButton);
@@ -114,7 +114,7 @@ describe("CookieConsentBar", () => {
     const mockAction = vi.mocked(actions.setCookieConsent);
     mockAction.mockResolvedValue({ data: { success: true }, error: undefined });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const denyButton = screen.getByRole("button", { name: /Odmítnout vše/i });
     await user.click(denyButton);
@@ -136,7 +136,7 @@ describe("CookieConsentBar", () => {
       error: { code: "BAD_REQUEST", message: "Invalid input" },
     });
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const acceptButton = screen.getByRole("button", { name: /Přijmout vše/i });
     await user.click(acceptButton);
@@ -158,7 +158,7 @@ describe("CookieConsentBar", () => {
 
     mockAction.mockRejectedValue(new Error("Network error"));
 
-    render(<CookieConsentBar />);
+    render(<CookieConsentBar locale="cs" />);
 
     const acceptButton = screen.getByRole("button", { name: /Přijmout vše/i });
     await user.click(acceptButton);
