@@ -39,13 +39,13 @@ export const en: Record<TranslationKey, string> = {
   "services.heading": "Services",
   "services.subheading": "What I do and how I can help you grow your IT infrastructure.",
   "services.consultation": "Consultation",
-  "services.consultation_price": "CZK 2,500 / hour",
+  "services.consultation_price": "€100 / hour",
   "services.consultation_description":
     "Need advice or not sure where to start? We\u2019ll review your current setup, identify issues, and propose the right solutions.",
   "services.consultation_cta": "Schedule a meeting",
   "services.consultation_cta_aria": "Schedule a meeting",
   "services.training": "Training",
-  "services.training_price": "from CZK 5,400",
+  "services.training_price": "from €220",
   "services.training_description":
     "Through hands-on workshops, I\u2019ll introduce your team to modern cloud technologies and teach you how to use them effectively. Everything is practiced on real examples. All training materials and sample code are yours to keep.",
   "services.training_cta": "Training courses",
