@@ -46,7 +46,7 @@ export const LocalizedStaticNavigationLinks = [
     links: [
       {
         name: "Training",
-        href: "/#training",
+        href: "/en#training",
       },
       {
         name: "Training sessions",
@@ -54,7 +54,7 @@ export const LocalizedStaticNavigationLinks = [
       },
       {
         name: "Services",
-        href: "/en/#services",
+        href: "/en/services",
       },
       {
         name: "Blog",

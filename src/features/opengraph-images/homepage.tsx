@@ -1,7 +1,8 @@
 import { imageToDataUrl } from "../../lib/opengraph";
 import avatarImage from "../../images/people/vojtech-mares.png";
+import { t, type Locale } from "../../i18n";
 
-export async function CreateHomepageImageComponent(baseUrl: string | URL) {
+export async function CreateHomepageImageComponent(baseUrl: string | URL, locale: Locale = "cs") {
   const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
   return (
@@ -47,7 +48,7 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL) {
             paddingTop: 0,
           }}
         >
-          DevOps architekt.
+          {t(locale, "hero.role")}
         </p>
         <p
           style={{
@@ -58,8 +59,7 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL) {
             fontFamily: "Inter",
           }}
         >
-          Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak používat moderní
-          cloud-native technologie.
+          {t(locale, "og.homepage_description")}
         </p>
         <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Inter" }}>mares.cz</p>
       </div>

@@ -2,8 +2,20 @@ import type { ReactNode } from "react";
 
 import { imageToDataUrl } from "../../lib/opengraph";
 import avatarImage from "../../images/people/vojtech-mares.png";
+import type { Locale } from "../../i18n";
+import { formatArticleCount } from "../../i18n/formatting";
 
-function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articleCount: number; imageData: string }) {
+function TagArchiveImage({
+  tag,
+  articleCount,
+  imageData,
+  locale,
+}: {
+  tag: string;
+  articleCount: number;
+  imageData: string;
+  locale: Locale;
+}) {
   return (
     <div
       style={{
@@ -56,7 +68,7 @@ function TagArchiveImage({ tag, articleCount, imageData }: { tag: string; articl
             fontFamily: "Inter",
           }}
         >
-          {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
+          {formatArticleCount(articleCount, locale)}
         </p>
         <p
           style={{
@@ -88,12 +100,14 @@ export async function CreateTagArchiveImageComponent({
   tag,
   articleCount,
   baseUrl,
+  locale = "cs",
 }: {
   tag: string;
   articleCount: number;
   baseUrl: string | URL;
+  locale?: Locale;
 }): Promise<ReactNode> {
   const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
-  return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} />;
+  return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} locale={locale} />;
 }

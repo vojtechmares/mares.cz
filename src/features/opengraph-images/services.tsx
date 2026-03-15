@@ -1,3 +1,5 @@
+import { t, type Locale } from "../../i18n";
+
 interface StatItemProps {
   value: string;
   description: string;
@@ -37,7 +39,13 @@ function StatItem({ value, description }: StatItemProps) {
   );
 }
 
-export function CreateServicesImageComponent({ trainingCount }: { trainingCount: number }) {
+export function CreateServicesImageComponent({
+  trainingCount,
+  locale = "cs",
+}: {
+  trainingCount: number;
+  locale?: Locale;
+}) {
   const years = `${new Date().getFullYear() - 2020}+`;
 
   return (
@@ -80,9 +88,10 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
               lineHeight: 1.15,
             }}
           >
-            <span>DevOps služby</span>
+            <span>{t(locale, "services_hero.heading")}</span>
             <span>
-              na&nbsp;<span style={{ color: "#f54a00" }}>míru</span>
+              {locale === "cs" ? "na" : ""}&nbsp;
+              <span style={{ color: "#f54a00" }}>{t(locale, "services_hero.heading_accent")}</span>
             </span>
           </div>
           <p
@@ -94,7 +103,7 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
               color: "#a1a1aa",
             }}
           >
-            Pomáhám firmám budovat a spravovat moderní infrastrukturu.
+            {t(locale, "og.services_description")}
           </p>
           <div
             style={{
@@ -107,9 +116,9 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
               color: "#a1a1aa",
             }}
           >
-            <span>• Konzultace</span>
-            <span>• Školení</span>
-            <span>• Dlouhodobá spolupráce</span>
+            <span>• {t(locale, "og.services_bullet_consultation")}</span>
+            <span>• {t(locale, "og.services_bullet_training")}</span>
+            <span>• {t(locale, "og.services_bullet_cooperation")}</span>
           </div>
         </div>
         <p
@@ -132,9 +141,15 @@ export function CreateServicesImageComponent({ trainingCount }: { trainingCount:
           gap: "2rem",
         }}
       >
-        <StatItem value={`${years} let`} description="praxe v DevOps a cloudové infrastruktuře" />
-        <StatItem value="20+ projektů" description="úspěšně dokončených napříč obory" />
-        <StatItem value={`${trainingCount} školení`} description="pravidelně vypisovaných témat" />
+        <StatItem
+          value={`${years} ${t(locale, "services_hero.years_suffix")}`}
+          description={t(locale, "services_hero.years_label")}
+        />
+        <StatItem value={t(locale, "services_hero.projects")} description={t(locale, "services_hero.projects_label")} />
+        <StatItem
+          value={t(locale, "services_hero.training_count", { count: trainingCount })}
+          description={t(locale, "services_hero.training_count_label")}
+        />
       </div>
     </div>
   );

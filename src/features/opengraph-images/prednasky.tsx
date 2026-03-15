@@ -1,3 +1,5 @@
+import { t, type Locale } from "../../i18n";
+
 interface StatItemProps {
   value: string;
   description: string;
@@ -41,10 +43,12 @@ export function CreatePrednaskyImageComponent({
   talkCount,
   eventCount,
   yearsOfSpeaking,
+  locale = "cs",
 }: {
   talkCount: number;
   eventCount: number;
   yearsOfSpeaking: number;
+  locale?: Locale;
 }) {
   return (
     <div
@@ -86,8 +90,8 @@ export function CreatePrednaskyImageComponent({
               lineHeight: 1.15,
             }}
           >
-            <span>Přednášky na</span>
-            <span style={{ color: "#f54a00" }}>konferencích</span>
+            <span>{t(locale, "talks.heading")}</span>
+            <span style={{ color: "#f54a00" }}>{t(locale, "talks.heading_accent")}</span>
           </div>
           <p
             style={{
@@ -98,8 +102,7 @@ export function CreatePrednaskyImageComponent({
               color: "#a1a1aa",
             }}
           >
-            Pravidelně přednáším na odborných konferencích v Česku i zahraničí. Sdílím praktické zkušenosti z oblasti
-            DevOps, cloud-native technologií a moderní infrastruktury.
+            {t(locale, "talks.description")}
           </p>
         </div>
         <p
@@ -122,9 +125,18 @@ export function CreatePrednaskyImageComponent({
           gap: "2rem",
         }}
       >
-        <StatItem value={`${talkCount} přednášek`} description="na odborných konferencích" />
-        <StatItem value={`${eventCount} konferencí`} description="v ČR i zahraničí" />
-        <StatItem value={`${yearsOfSpeaking}+ roky`} description="zkušeností s přednášením" />
+        <StatItem
+          value={t(locale, "talks.talk_count", { count: talkCount })}
+          description={t(locale, "talks.talk_count_label")}
+        />
+        <StatItem
+          value={t(locale, "talks.event_count", { count: eventCount })}
+          description={t(locale, "talks.event_count_label")}
+        />
+        <StatItem
+          value={t(locale, "talks.years_count", { count: yearsOfSpeaking })}
+          description={t(locale, "talks.years_count_label")}
+        />
       </div>
     </div>
   );

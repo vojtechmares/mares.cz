@@ -1,4 +1,6 @@
 ---
+import { t, type Locale } from "../../../i18n";
+
 interface BlogPostSchema {
   type: "BlogPosting";
   headline: string;
@@ -64,9 +66,10 @@ interface ItemListSchema {
 
 interface Props {
   schema: BlogPostSchema | WebsiteSchema | CollectionPageSchema | CourseSchema | ItemListSchema;
+  locale?: Locale;
 }
 
-const { schema } = Astro.props;
+const { schema, locale = "cs" } = Astro.props;
 
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
@@ -107,14 +110,14 @@ if (schema.type === "BlogPosting") {
   jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Vojtěch Mareš - DevOps architekt",
+    name: t(locale, "jsonld.site_name"),
     url: baseUrl,
-    description: "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    description: t(locale, "jsonld.person_description"),
     author: {
       "@type": "Person",
       name: "Vojtěch Mareš",
       url: baseUrl,
-      jobTitle: "DevOps architekt",
+      jobTitle: t(locale, "jsonld.job_title"),
       sameAs: [
         "https://github.com/vojtechmares",
         "https://linkedin.com/in/vojtech-mares",
@@ -149,9 +152,8 @@ if (schema.type === "BlogPosting") {
     "@type": "Person",
     name: "Vojtěch Mareš",
     url: baseUrl,
-    jobTitle: "DevOps architekt",
-    description:
-      "DevOps architekt, konzultant a lektor na volné noze se zaměřením na Kubernetes, CI/CD a cloud native technologie",
+    jobTitle: t(locale, "jsonld.job_title"),
+    description: t(locale, "jsonld.person_description"),
     sameAs: [
       "https://github.com/vojtechmares",
       "https://linkedin.com/in/vojtech-mares",
@@ -168,7 +170,7 @@ if (schema.type === "BlogPosting") {
     url: collectionPage.url,
     isPartOf: {
       "@type": "WebSite",
-      name: "Vojtěch Mareš - DevOps architekt",
+      name: t(locale, "jsonld.site_name"),
       url: baseUrl,
     },
   };

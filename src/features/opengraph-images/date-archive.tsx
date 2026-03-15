@@ -2,17 +2,21 @@ import type { ReactNode } from "react";
 
 import { imageToDataUrl } from "../../lib/opengraph";
 import avatarImage from "../../images/people/vojtech-mares.png";
+import { t, type Locale } from "../../i18n";
+import { formatArticleCount } from "../../i18n/formatting";
 
 function DateArchiveImage({
   title,
   articleCount,
   url,
   imageData,
+  locale,
 }: {
   title: string;
   articleCount: number;
   url: string;
   imageData: string;
+  locale: Locale;
 }) {
   return (
     <div
@@ -44,7 +48,7 @@ function DateArchiveImage({
             color: "#f54a00",
           }}
         >
-          Blog archiv
+          {t(locale, "og.blog_archive")}
         </p>
         <p
           style={{
@@ -66,7 +70,7 @@ function DateArchiveImage({
             fontFamily: "Inter",
           }}
         >
-          {articleCount} {articleCount === 1 ? "článek" : articleCount < 5 ? "články" : "článků"}
+          {formatArticleCount(articleCount, locale)}
         </p>
         <p
           style={{
@@ -99,13 +103,15 @@ export async function CreateDateArchiveImageComponent({
   articleCount,
   url,
   baseUrl,
+  locale = "cs",
 }: {
   title: string;
   articleCount: number;
   url: string;
   baseUrl: string | URL;
+  locale?: Locale;
 }): Promise<ReactNode> {
   const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
 
-  return <DateArchiveImage title={title} articleCount={articleCount} url={url} imageData={avatarSrc} />;
+  return <DateArchiveImage title={title} articleCount={articleCount} url={url} imageData={avatarSrc} locale={locale} />;
 }

@@ -12,17 +12,17 @@ describe("Navigation", () => {
 
   describe("rendering", () => {
     it("should render navigation with brand name", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       expect(screen.getAllByText("Vojtěch Mareš").length).toBeGreaterThan(0);
     });
 
     it("should render as header element", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       expect(document.querySelector("header")).toBeInTheDocument();
     });
 
     it("should render navigation elements", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       const navElements = screen.getAllByRole("navigation");
       expect(navElements.length).toBeGreaterThan(0);
     });
@@ -30,7 +30,7 @@ describe("Navigation", () => {
 
   describe("links", () => {
     it("should render all provided links", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
 
       mockLinks.forEach((link) => {
         expect(screen.getAllByText(link.name).length).toBeGreaterThan(0);
@@ -38,7 +38,7 @@ describe("Navigation", () => {
     });
 
     it("should render links with correct href attributes", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
 
       mockLinks.forEach((link) => {
         const linkElements = screen.getAllByRole("link", { name: link.name });
@@ -49,7 +49,7 @@ describe("Navigation", () => {
     });
 
     it("should render home link", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       const homeLinks = screen.getAllByRole("link", { name: /vojtěch mareš/i });
       homeLinks.forEach((homeLink) => {
         expect(homeLink).toHaveAttribute("href", "/");
@@ -59,7 +59,7 @@ describe("Navigation", () => {
 
   describe("CTA button", () => {
     it("should render meeting CTA button", () => {
-      render(<Navigation locale="cs" links={mockLinks} />);
+      render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       const ctaButtons = screen.getAllByRole("link", { name: /domluvme si schůzku/i });
       expect(ctaButtons.length).toBeGreaterThan(0);
       ctaButtons.forEach((button) => {
@@ -70,14 +70,14 @@ describe("Navigation", () => {
 
   describe("responsive layouts", () => {
     it("should render mobile navigation", () => {
-      const { container } = render(<Navigation locale="cs" links={mockLinks} />);
+      const { container } = render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       // Mobile nav has lg:hidden class
       const navs = container.querySelectorAll("nav");
       expect(navs.length).toBe(2); // Mobile and desktop
     });
 
     it("should render desktop navigation", () => {
-      const { container } = render(<Navigation locale="cs" links={mockLinks} />);
+      const { container } = render(<Navigation locale="cs" links={mockLinks} currentPath="/" />);
       const navs = container.querySelectorAll("nav");
       expect(navs.length).toBe(2); // Mobile and desktop
     });
@@ -85,7 +85,7 @@ describe("Navigation", () => {
 
   describe("empty links", () => {
     it("should render with empty links array", () => {
-      render(<Navigation locale="cs" links={[]} />);
+      render(<Navigation locale="cs" links={[]} currentPath="/" />);
       expect(screen.getAllByText("Vojtěch Mareš").length).toBeGreaterThan(0);
     });
   });

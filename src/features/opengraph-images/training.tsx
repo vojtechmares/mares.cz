@@ -1,3 +1,6 @@
+import { t, type Locale } from "../../i18n";
+import { formatDuration, formatPrice } from "../../i18n/formatting";
+
 interface StatItemProps {
   value: string;
   description: string;
@@ -44,6 +47,7 @@ export function CreateTrainingImageComponent({
   length,
   price,
   image,
+  locale = "cs",
 }: {
   slug: string;
   title: string;
@@ -51,14 +55,10 @@ export function CreateTrainingImageComponent({
   length: number;
   price: number;
   image?: string;
+  locale?: Locale;
 }) {
-  const formatter = new Intl.NumberFormat("cs", {
-    style: "currency",
-    currency: "CZK",
-    maximumFractionDigits: 0,
-  });
-
-  const durationLabel = length === 1 ? "1 den" : `${length} dny`;
+  const durationLabel = formatDuration(length, locale);
+  const priceLabel = formatPrice(price, locale);
 
   return (
     <div
@@ -111,7 +111,7 @@ export function CreateTrainingImageComponent({
               }}
             >
               <span style={{ color: "#f54a00" }}>{title}</span>
-              <span>školení</span>
+              <span>{t(locale, "training_hero.training_suffix")}</span>
             </div>
           </div>
           <p
@@ -146,8 +146,8 @@ export function CreateTrainingImageComponent({
           gap: "2rem",
         }}
       >
-        <StatItem value={durationLabel} description="délka školení" />
-        <StatItem value={formatter.format(price)} description="cena za osobu bez DPH" />
+        <StatItem value={durationLabel} description={t(locale, "training_hero.duration_label")} />
+        <StatItem value={priceLabel} description={t(locale, "training_hero.price_label")} />
       </div>
     </div>
   );

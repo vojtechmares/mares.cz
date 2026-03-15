@@ -1,3 +1,6 @@
+import { t, type Locale } from "../../i18n";
+import { formatDate } from "../../i18n/formatting";
+
 interface StatItemProps {
   value: string;
   description: string;
@@ -44,6 +47,7 @@ export function CreateArticleImageComponent({
   publishDate,
   tags,
   readingTimeMinutes,
+  locale = "cs",
 }: {
   slug: string;
   title: string;
@@ -51,14 +55,11 @@ export function CreateArticleImageComponent({
   publishDate: Date;
   tags: string[];
   readingTimeMinutes: number;
+  locale?: Locale;
 }) {
-  const formattedDate = new Date(publishDate).toLocaleDateString("cs-CZ", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const formattedDate = formatDate(publishDate, locale);
 
-  const tagsDisplay = tags.map((t) => `#${t}`).join(" ");
+  const tagsDisplay = tags.map((tag) => `#${tag}`).join(" ");
 
   return (
     <div
@@ -134,9 +135,12 @@ export function CreateArticleImageComponent({
           gap: "2rem",
         }}
       >
-        <StatItem value={formattedDate} description="datum publikace" />
-        <StatItem value={tagsDisplay} description={tags.length === 1 ? "téma článku" : "témata článku"} />
-        <StatItem value={`${readingTimeMinutes} min`} description="doba čtení" />
+        <StatItem value={formattedDate} description={t(locale, "blog.publish_date")} />
+        <StatItem
+          value={tagsDisplay}
+          description={tags.length === 1 ? t(locale, "blog.topic_singular") : t(locale, "blog.topic_plural")}
+        />
+        <StatItem value={`${readingTimeMinutes} min`} description={t(locale, "blog.reading_time")} />
       </div>
     </div>
   );

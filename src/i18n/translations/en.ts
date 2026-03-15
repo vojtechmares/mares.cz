@@ -361,6 +361,38 @@ export const en: Record<TranslationKey, string> = {
   // Talks page
   "talks_page.heading": "Conference talks",
 
+  // Blog - inline suffixes
+  "blog.tag_article_count_suffix": "articles with this tag",
+  "blog.year_article_suffix": "this year",
+  "blog.month_article_suffix": "this month",
+
+  // Sessions page - "why" prefixes
+  "sessions_page.why_workshop_prefix": "Training is delivered in",
+  "sessions_page.why_real_projects_prefix": "Examples come from",
+  "sessions_page.why_small_groups_prefix": "Groups have",
+  "sessions_page.why_materials_prefix": "You receive",
+  "sessions_page.why_open_source_prefix": "We work exclusively with",
+  "sessions_page.why_knowledge_prefix": "My goal is to",
+
+  // OG images
+  "og.homepage_description":
+    "I\u2019ll reduce your infrastructure costs, eliminate technical debt, and teach your team to use modern cloud-native technologies.",
+  "og.blog_archive": "Blog archive",
+  "og.services_description": "I help companies build and manage modern infrastructure.",
+  "og.services_bullet_consultation": "Consulting",
+  "og.services_bullet_training": "Training",
+  "og.services_bullet_cooperation": "Long-term partnership",
+
+  // JSONLD
+  "jsonld.job_title": "DevOps architect",
+  "jsonld.site_name": "Vojtěch Mareš - DevOps architect",
+  "jsonld.person_description":
+    "Freelance DevOps architect, consultant and instructor specializing in Kubernetes, CI/CD and cloud native technologies",
+
+  // Language switcher
+  "lang_switch.cs": "Czech",
+  "lang_switch.en": "English",
+
   // Formatting
   "format.months.1": "January",
   "format.months.2": "February",

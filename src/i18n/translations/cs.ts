@@ -357,6 +357,38 @@ export const cs = {
   // Talks page
   "talks_page.heading": "Přednášky na konferencích",
 
+  // Blog - inline suffixes
+  "blog.tag_article_count_suffix": "článků s tímto tagem",
+  "blog.year_article_suffix": "v tomto roce",
+  "blog.month_article_suffix": "v tomto měsíci",
+
+  // Sessions page - "why" prefixes
+  "sessions_page.why_workshop_prefix": "Školení probíhají",
+  "sessions_page.why_real_projects_prefix": "Ukázky a příklady vycházejí z",
+  "sessions_page.why_small_groups_prefix": "Ve skupině je",
+  "sessions_page.why_materials_prefix": "Obdržíte",
+  "sessions_page.why_open_source_prefix": "Pracujeme výhradně s",
+  "sessions_page.why_knowledge_prefix": "Mým cílem je",
+
+  // OG images
+  "og.homepage_description":
+    "Snížím Vaše náklady na infrastrukturu, zbavím Vás technického dluhu. Naučím Váš tým, jak používat moderní cloud-native technologie.",
+  "og.blog_archive": "Blog archiv",
+  "og.services_description": "Pomáhám firmám budovat a spravovat moderní infrastrukturu.",
+  "og.services_bullet_consultation": "Konzultace",
+  "og.services_bullet_training": "Školení",
+  "og.services_bullet_cooperation": "Dlouhodobá spolupráce",
+
+  // JSONLD
+  "jsonld.job_title": "DevOps architekt",
+  "jsonld.site_name": "Vojtěch Mareš - DevOps architekt",
+  "jsonld.person_description":
+    "DevOps architekt, konzultant a lektor na volné noze se zaměřením na Kubernetes, CI/CD a cloud native technologie",
+
+  // Language switcher
+  "lang_switch.cs": "Česky",
+  "lang_switch.en": "English",
+
   // Formatting
   "format.months.1": "Leden",
   "format.months.2": "Únor",

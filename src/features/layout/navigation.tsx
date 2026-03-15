@@ -4,6 +4,7 @@ import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { t, type Locale } from "../../i18n";
+import { LanguageSwitcher } from "./language-switcher";
 
 type NavLink = {
   name: string;
@@ -24,7 +25,7 @@ function LinkItem({ href, name, className = "" }: { href: string; name: string; 
   );
 }
 
-function MobileNavigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
+function MobileNavigation({ links, locale, currentPath }: { links: NavLink[]; locale: Locale; currentPath: string }) {
   return (
     <nav className="relative z-50 lg:hidden">
       <div className="row flex justify-between">
@@ -39,6 +40,7 @@ function MobileNavigation({ links, locale }: { links: NavLink[]; locale: Locale 
           </span>
         </div>
         <div className="flex items-center gap-x-5 md:gap-x-8">
+          <LanguageSwitcher locale={locale} currentPath={currentPath} />
           <Button href="https://cal.com/vojtechmares/30min" variant="accent">
             <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
               {t(locale, "nav.schedule_meeting")}
@@ -55,7 +57,7 @@ function MobileNavigation({ links, locale }: { links: NavLink[]; locale: Locale 
   );
 }
 
-function DesktopNavigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
+function DesktopNavigation({ links, locale, currentPath }: { links: NavLink[]; locale: Locale; currentPath: string }) {
   return (
     <nav className="relative z-50 hidden lg:block">
       <div className="flex justify-between">
@@ -77,6 +79,7 @@ function DesktopNavigation({ links, locale }: { links: NavLink[]; locale: Locale
           </div>
         </div>
         <div className="flex items-center gap-x-8">
+          <LanguageSwitcher locale={locale} currentPath={currentPath} />
           <Button href="https://cal.com/vojtechmares/30min" variant="accent">
             <Body as="span" color="primary" className="font-mono! text-lg font-bold tracking-tight">
               {t(locale, "nav.schedule_meeting")}
@@ -88,13 +91,13 @@ function DesktopNavigation({ links, locale }: { links: NavLink[]; locale: Locale
   );
 }
 
-export function Navigation({ links, locale }: { links: NavLink[]; locale: Locale }) {
+export function Navigation({ links, locale, currentPath }: { links: NavLink[]; locale: Locale; currentPath: string }) {
   return (
     <>
       <header className="bg-zinc-900 py-4 lg:py-1">
         <Container>
-          <MobileNavigation links={links} locale={locale} />
-          <DesktopNavigation links={links} locale={locale} />
+          <MobileNavigation links={links} locale={locale} currentPath={currentPath} />
+          <DesktopNavigation links={links} locale={locale} currentPath={currentPath} />
         </Container>
       </header>
     </>

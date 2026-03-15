@@ -1,3 +1,6 @@
+import { t, type Locale } from "../../i18n";
+import { formatDate, formatSessionCount } from "../../i18n/formatting";
+
 interface StatItemProps {
   value: string;
   description: string;
@@ -41,17 +44,14 @@ export function CreateSessionsImageComponent({
   sessionCount,
   topicCount,
   nextSessionDate,
+  locale = "cs",
 }: {
   sessionCount: number;
   topicCount: number;
   nextSessionDate: string | null;
+  locale?: Locale;
 }) {
-  const formattedDate = nextSessionDate
-    ? new Date(nextSessionDate).toLocaleDateString("cs-CZ", {
-        day: "numeric",
-        month: "long",
-      })
-    : null;
+  const formattedDate = nextSessionDate ? formatDate(nextSessionDate, locale, { day: "numeric", month: "long" }) : null;
 
   const hasStats = sessionCount > 0;
 
@@ -96,9 +96,10 @@ export function CreateSessionsImageComponent({
             }}
           >
             <span>
-              Veřejné&nbsp;<span style={{ color: "#f54a00" }}>termíny</span>
+              {t(locale, "sessions_hero.heading_public")}&nbsp;
+              <span style={{ color: "#f54a00" }}>{t(locale, "sessions_hero.heading_sessions")}</span>
             </span>
-            <span>školení</span>
+            <span>{t(locale, "sessions_hero.heading_training")}</span>
           </div>
           <p
             style={{
@@ -109,9 +110,7 @@ export function CreateSessionsImageComponent({
               color: "#a1a1aa",
             }}
           >
-            {hasStats
-              ? "Otevřená školení pro jednotlivce i malé týmy. Přihlaste se na vypsaný termín a získejte praktické zkušenosti z oblasti DevOps a kontejnerů."
-              : "Momentálně nejsou vypsány žádné veřejné termíny. Podívejte se na nabídku školení — rádi vám připravíme termín na míru."}
+            {hasStats ? t(locale, "sessions_hero.description") : t(locale, "sessions_hero.no_sessions_text")}
           </p>
         </div>
         <p
@@ -135,9 +134,15 @@ export function CreateSessionsImageComponent({
             gap: "2rem",
           }}
         >
-          <StatItem value={`${sessionCount} termínů`} description="vypsaných v nejbližších měsících" />
-          <StatItem value={`${topicCount} témat`} description="z oblasti DevOps a kontejnerů" />
-          {formattedDate && <StatItem value={formattedDate} description="nejbližší volný termín" />}
+          <StatItem
+            value={formatSessionCount(sessionCount, locale)}
+            description={t(locale, "sessions_hero.sessions_upcoming")}
+          />
+          <StatItem
+            value={`${topicCount} ${t(locale, "sessions_hero.topics_suffix")}`}
+            description={t(locale, "sessions_hero.topics_label")}
+          />
+          {formattedDate && <StatItem value={formattedDate} description={t(locale, "sessions_hero.next_session")} />}
         </div>
       )}
     </div>
