@@ -1,4 +1,4 @@
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { clsx } from "clsx";
 
 import { Body } from "../../components/ui/body";
@@ -11,6 +11,7 @@ import { Text } from "../../components/ui/text";
 import { t, type Locale } from "../../i18n";
 import { formatDuration, formatNumber } from "../../i18n/formatting";
 import { localizeUrl } from "../../i18n/routes";
+import { getLocalizedCollection, bareSlug } from "../../lib/content";
 
 // Truncate description to keep cards clean
 const truncateText = (text: string, maxLength = 240) =>
@@ -75,7 +76,10 @@ const TrainingCard = ({ training, locale, className }: TrainingCardProps) => {
 
       {/* CTA Button */}
       <div className="mt-auto flex justify-end pt-4">
-        <Button href={localizeUrl("/skoleni/" + training.id, locale)} variant={featured ? "primary" : "accent"}>
+        <Button
+          href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)}
+          variant={featured ? "primary" : "accent"}
+        >
           {t(locale, "training_grid.about")}
         </Button>
       </div>
@@ -84,7 +88,7 @@ const TrainingCard = ({ training, locale, className }: TrainingCardProps) => {
 };
 
 export async function TrainingGrid({ locale }: { locale: Locale }) {
-  const trainings = await getCollection("training", ({ data }) => {
+  const trainings = await getLocalizedCollection("training", locale, ({ data }) => {
     return !data.draft;
   });
 

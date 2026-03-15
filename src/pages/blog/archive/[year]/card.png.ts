@@ -1,8 +1,8 @@
-import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
 
 import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
+import { getLocalizedCollection } from "../../../../lib/content";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
@@ -15,7 +15,11 @@ export async function GET(context: APIContext) {
     return new Response("Not Found", { status: 404 });
   }
 
-  const articles = await getCollection("blog", ({ data }) => !data.draft && data.publish_time.getFullYear() === year);
+  const articles = await getLocalizedCollection(
+    "blog",
+    locale,
+    ({ data }) => !data.draft && data.publish_time.getFullYear() === year,
+  );
 
   if (articles.length === 0) {
     return new Response("Not Found", { status: 404 });

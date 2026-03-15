@@ -7,14 +7,14 @@ import { ServicesHero } from "../../features/services/services-hero";
 import { ServicesTraining } from "../../features/services/services-training";
 import Layout from "../../layouts/Layout.astro";
 import { CachePresets } from "../../lib/cache";
-import { getCollection } from "astro:content";
 import { t } from "../../i18n";
+import { getLocalizedCollection, bareSlug } from "../../lib/content";
 
 const locale = Astro.locals.locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.content);
 
-const trainings = await getCollection("training", ({ data }) => !data.draft);
+const trainings = await getLocalizedCollection("training", locale, ({ data }) => !data.draft);
 
 const meta = {
   title: t(locale, "services_page.meta_title"),
@@ -42,7 +42,7 @@ const meta = {
   <ServicesTraining
     locale={locale}
     trainings={trainings.map((t) => ({
-      id: t.id,
+      id: bareSlug(t.id),
       title: t.data.title,
       description: t.data.description,
     }))}

@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import { Container } from "../../../../components/ui/container";
 import { Heading } from "../../../../components/ui/heading";
 import { Section } from "../../../../components/ui/section";
@@ -10,6 +9,7 @@ import { CachePresets } from "../../../../lib/cache";
 import { t } from "../../../../i18n";
 import { getMonthName, formatArticleCount } from "../../../../i18n/formatting";
 import { localizeUrl } from "../../../../i18n/routes";
+import { getLocalizedCollection } from "../../../../lib/content";
 
 const locale = Astro.locals.locale;
 
@@ -21,7 +21,11 @@ if (isNaN(year) || year < 2020 || year > currentYear + 1) {
   return Astro.redirect("/404", 404);
 }
 
-const allArticles = await getCollection("blog", ({ data }) => !data.draft && data.publish_time.getFullYear() === year);
+const allArticles = await getLocalizedCollection(
+  "blog",
+  locale,
+  ({ data }) => !data.draft && data.publish_time.getFullYear() === year,
+);
 
 if (allArticles.length === 0) {
   return Astro.redirect("/404", 404);

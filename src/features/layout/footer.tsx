@@ -8,6 +8,7 @@ import { Section } from "../../components/ui/section";
 import { Body } from "../../components/ui/body";
 import { t, type Locale } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
+import { bareSlug } from "../../lib/content";
 
 // Social Icons
 function BlueskyIcon() {
@@ -107,7 +108,7 @@ export function Footer({ links, trainings, currentYear, locale }: FooterProps) {
               <ul className="mt-4 list-disc pl-4">
                 {trainings.map((training) => (
                   <li key={training.id}>
-                    <Link href={localizeUrl("/skoleni/" + training.id, locale)}>{training.data.title}</Link>
+                    <Link href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)}>{training.data.title}</Link>
                   </li>
                 ))}
               </ul>

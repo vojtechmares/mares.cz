@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { render } from "astro:content";
 
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
@@ -7,17 +7,25 @@ import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
 import { CachePresets } from "../../lib/cache";
+import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../lib/content";
+import { localizeUrl } from "../../i18n/routes";
+
+const locale = Astro.locals.locale;
 
 const { slug } = Astro.params;
 if (!slug) {
   return Astro.redirect("/404", 404);
 }
 
-const page = await getEntry("page", slug);
+const page = await getLocalizedEntry("page", slug, locale);
 if (!page || page.data.draft) {
-  const allPages = await getCollection("page", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+  const allPages = await getLocalizedCollection(
+    "page",
+    locale,
+    ({ data }) => !data.draft && data.redirectFrom?.includes(slug!),
+  );
   if (allPages.length > 0) {
-    return Astro.redirect(`/${allPages[0].id}`, 301);
+    return Astro.redirect(localizeUrl(`/${bareSlug(allPages[0].id)}`, locale), 301);
   }
   return Astro.redirect("/404", 404);
 }

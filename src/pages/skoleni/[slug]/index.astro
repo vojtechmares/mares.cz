@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { render } from "astro:content";
 import { TrainingHero } from "../../../features/training/training-hero";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
 import { Button } from "../../../components/ui/button";
@@ -13,16 +13,22 @@ import { Prose } from "../../../components/prose";
 import { CachePresets } from "../../../lib/cache";
 import { t } from "../../../i18n";
 import { formatPrice } from "../../../i18n/formatting";
+import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
+import { localizeUrl } from "../../../i18n/routes";
 
 const locale = Astro.locals.locale;
 
 const { slug } = Astro.params;
 
-const training = await getEntry("training", slug!);
+const training = await getLocalizedEntry("training", slug!, locale);
 if (!training || training.data.draft) {
-  const allTrainings = await getCollection("training", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+  const allTrainings = await getLocalizedCollection(
+    "training",
+    locale,
+    ({ data }) => !data.draft && data.redirectFrom?.includes(slug!),
+  );
   if (allTrainings.length > 0) {
-    return Astro.redirect(`/skoleni/${allTrainings[0].id}`, 301);
+    return Astro.redirect(localizeUrl(`/skoleni/${bareSlug(allTrainings[0].id)}`, locale), 301);
   }
   return Astro.redirect("/404", 404);
 }

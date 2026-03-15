@@ -58,8 +58,8 @@ export async function getTrainingIDToSlugMap(): Promise<Map<number, string>> {
   const trainings = await getCollection("training");
   const map = new Map<number, string>();
   for (const training of trainings) {
-    // Exclude drafts (backofficeID: -1)
-    if (training.data.backofficeID > 0) {
+    // Exclude drafts (backofficeID: -1) and English entries (use Czech slugs as canonical)
+    if (training.data.backofficeID > 0 && !training.id.includes("/")) {
       map.set(training.data.backofficeID, training.id);
     }
   }

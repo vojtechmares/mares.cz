@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 
 export async function GET(context: any) {
   const articles = (
-    await getCollection("blog", ({ data }) => {
-      return !data.draft;
+    await getCollection("blog", ({ id, data }) => {
+      return !data.draft && !id.includes("/");
     })
   ).sort((a, b) => {
     return b.data.publish_time.valueOf() - a.data.publish_time.valueOf();

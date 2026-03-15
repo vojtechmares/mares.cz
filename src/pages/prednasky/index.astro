@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
@@ -10,12 +10,13 @@ import { CachePresets } from "../../lib/cache";
 import { TalksHero } from "../../features/talks/talks-hero";
 import { t } from "../../i18n";
 import { formatDate } from "../../i18n/formatting";
+import { getLocalizedCollection } from "../../lib/content";
 
 const locale = Astro.locals.locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.content);
 
-const talks = (await getCollection("talk", ({ data }) => !data.draft)).sort(
+const talks = (await getLocalizedCollection("talk", locale, ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 

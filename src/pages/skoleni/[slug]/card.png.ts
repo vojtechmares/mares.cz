@@ -1,20 +1,25 @@
-import { getCollection, getEntry } from "astro:content";
 import type { APIContext } from "astro";
 
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
 import { imageToDataUrl, OpenGraphImageResponse } from "../../../lib/opengraph";
+import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
+import { localizeUrl } from "../../../i18n/routes";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
   const locale = context.locals.locale;
-  const training = await getEntry("training", context.params.slug!);
+  const training = await getLocalizedEntry("training", context.params.slug!, locale);
   if (!training || training.data.draft) {
-    const allTrainings = await getCollection(
+    const allTrainings = await getLocalizedCollection(
       "training",
+      locale,
       ({ data }) => !data.draft && data.redirectFrom?.includes(context.params.slug!),
     );
     if (allTrainings.length > 0) {
-      return Response.redirect(new URL(`/skoleni/${allTrainings[0].id}/card.png`, context.url).toString(), 301);
+      return Response.redirect(
+        new URL(localizeUrl(`/skoleni/${bareSlug(allTrainings[0].id)}/card.png`, locale), context.url).toString(),
+        301,
+      );
     }
     return new Response("Not Found", { status: 404 });
   }

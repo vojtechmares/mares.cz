@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import { Navigation as Navbar } from "./navigation";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
-import { englishPathToCzech } from "../../i18n/routes";
+import { englishPathToCzech, localizeUrl } from "../../i18n/routes";
+import { getLocalizedCollection, bareSlug } from "../../lib/content";
 
 const locale = Astro.locals.locale;
 
@@ -10,13 +10,13 @@ const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
   return links.locale === locale;
 })[0].links;
 
-const pages = await getCollection("page", ({ data }) => {
+const pages = await getLocalizedCollection("page", locale, ({ data }) => {
   return !data.draft && data.featured;
 });
 
 const pageLinks = pages
   .map((page) => {
-    return { name: page.data.title, href: `/${page.id}` };
+    return { name: page.data.title, href: localizeUrl(`/${bareSlug(page.id)}`, locale) };
   })
   .filter((link) => {
     return link !== undefined;

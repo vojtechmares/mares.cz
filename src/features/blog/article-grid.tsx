@@ -9,6 +9,7 @@ import { Body } from "../../components/ui/body";
 import { t, type Locale } from "../../i18n";
 import { formatDate } from "../../i18n/formatting";
 import { localizeUrl } from "../../i18n/routes";
+import { bareSlug } from "../../lib/content";
 
 const truncateText = (text: string, maxLength = 120) =>
   text.length > maxLength ? text.slice(0, maxLength).trim() + "…" : text;
@@ -35,7 +36,7 @@ export function ArticleGrid({ articles, locale }: { articles: CollectionEntry<"b
               {truncateText(article.data.description)}
             </Body>
             <div className="mt-auto flex justify-end pt-4">
-              <Link href={localizeUrl("/blog/" + article.id, locale)}>{t(locale, "blog.read_article")}</Link>
+              <Link href={localizeUrl("/blog/" + bareSlug(article.id), locale)}>{t(locale, "blog.read_article")}</Link>
             </div>
           </Card>
         ))}

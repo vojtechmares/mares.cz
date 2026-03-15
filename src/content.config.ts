@@ -4,7 +4,7 @@ import { defineCollection } from "astro:content";
 
 const blog = defineCollection({
   loader: glob({
-    pattern: ["*.mdx", "*.md"],
+    pattern: ["**/*.mdx", "**/*.md"],
     base: "./src/content/blog",
   }),
   schema: z.object({
@@ -29,7 +29,7 @@ const blog = defineCollection({
 
 const training = defineCollection({
   loader: glob({
-    pattern: ["*.mdx", "*.md"],
+    pattern: ["**/*.mdx", "**/*.md"],
     base: "./src/content/training",
   }),
   schema: z.object({
@@ -73,7 +73,7 @@ const training = defineCollection({
 
 const page = defineCollection({
   loader: glob({
-    pattern: ["*.mdx", "*.md"],
+    pattern: ["**/*.mdx", "**/*.md"],
     base: "./src/content/page",
   }),
   schema: z.object({
@@ -89,7 +89,7 @@ const page = defineCollection({
 
 const reference = defineCollection({
   loader: glob({
-    pattern: ["*.md"],
+    pattern: ["**/*.md"],
     base: "./src/content/reference",
   }),
   schema: z.object({
@@ -104,7 +104,7 @@ const reference = defineCollection({
 
 const talk = defineCollection({
   loader: glob({
-    pattern: ["*.mdx", "*.md"],
+    pattern: ["**/*.mdx", "**/*.md"],
     base: "./src/content/talk",
   }),
   schema: z.object({

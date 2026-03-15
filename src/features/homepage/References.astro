@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { ReferencesContainer, ReferenceCard } from "./references";
+import { getLocalizedCollection } from "../../lib/content";
 
 const locale = Astro.locals.locale;
 
@@ -9,7 +10,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/images/people/
   eager: true,
 });
 
-const references = (await getCollection("reference", (entry) => !entry.data.draft)).sort(
+const references = (await getLocalizedCollection("reference", locale, (entry) => !entry.data.draft)).sort(
   (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0),
 );
 

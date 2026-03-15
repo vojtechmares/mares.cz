@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
 import { Link } from "../../components/ui/link";
@@ -10,13 +9,14 @@ import { ArticleGrid } from "../../features/blog/article-grid";
 import { CachePresets } from "../../lib/cache";
 import { t } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
+import { getLocalizedCollection } from "../../lib/content";
 
 const locale = Astro.locals.locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const articles = (
-  await getCollection("blog", ({ data }) => {
+  await getLocalizedCollection("blog", locale, ({ data }) => {
     return !data.draft;
   })
 ).sort((a, b) => {

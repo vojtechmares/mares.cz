@@ -1,9 +1,9 @@
 import type { APIContext } from "astro";
-import { getCollection } from "astro:content";
 
 import { CreateSessionsImageComponent } from "../../../features/opengraph-images/sessions";
 import { OpenGraphImageResponse } from "../../../lib/opengraph";
 import { getFutureSessions, toTrainingSession } from "../../../lib/sessions";
+import { getLocalizedCollection } from "../../../lib/content";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
 
   const [sessionEntries, trainings] = await Promise.all([
     getFutureSessions(),
-    getCollection("training", ({ data }) => !data.draft),
+    getLocalizedCollection("training", locale, ({ data }) => !data.draft),
   ]);
   const sessions = sessionEntries.map(toTrainingSession);
 

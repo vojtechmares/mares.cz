@@ -69,7 +69,7 @@ describe("TrainingGrid", () => {
         createMockTraining({ id: "draft", data: { title: "Draft", draft: true } }),
         createMockTraining({ id: "published", data: { title: "Published", draft: false } }),
       ];
-      return Promise.resolve(all.filter((t) => filter({ data: t.data })));
+      return Promise.resolve(all.filter((t) => filter(t)));
     }) as any);
     render(await TrainingGrid({ locale: "cs" }));
     expect(screen.getByText("Published")).toBeInTheDocument();

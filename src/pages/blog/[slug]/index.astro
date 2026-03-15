@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { render } from "astro:content";
 import { BlogArticleHero } from "../../../features/blog/blog-article-hero";
 import { TrainingAd } from "../../../features/blog/training-ad";
 import Layout from "../../../layouts/Layout.astro";
@@ -9,17 +9,19 @@ import { Prose } from "../../../components/prose";
 import { Section } from "../../../components/ui/section";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
+import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
+import { localizeUrl } from "../../../i18n/routes";
 
 const locale = Astro.locals.locale;
 
 const { slug } = Astro.params;
-const article = await getEntry("blog", slug!);
+const article = await getLocalizedEntry("blog", slug!, locale);
 
 if (!article || article.data.draft) {
-  const allPosts = await getCollection("blog", ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
+  const allPosts = await getLocalizedCollection("blog", locale, ({ data }) => !data.draft && data.redirectFrom?.includes(slug!));
 
   if (allPosts.length > 0) {
-    return Astro.redirect(`/blog/${allPosts[0].id}`, 301);
+    return Astro.redirect(localizeUrl(`/blog/${bareSlug(allPosts[0].id)}`, locale), 301);
   }
   return Astro.redirect("/404", 404);
 }
@@ -55,8 +57,8 @@ const jsonLd = {
     url: baseUrl,
   },
   keywords: article.data.keywords.join(","),
-  image: baseUrl + "/blog/" + article.id + "/card.png",
-  url: baseUrl + "/blog/" + article.id,
+  image: baseUrl + "/blog/" + bareSlug(article.id) + "/card.png",
+  url: baseUrl + "/blog/" + bareSlug(article.id),
 };
 
 const { Content } = await render(article);

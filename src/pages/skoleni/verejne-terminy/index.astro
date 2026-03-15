@@ -5,7 +5,6 @@ import { TrainingSessionsTable } from "../../../features/training/training-sessi
 import { SessionsHero } from "../../../features/training/sessions-hero";
 import Layout from "../../../layouts/Layout.astro";
 
-import { getCollection } from "astro:content";
 import {
   getFutureSessions,
   toTrainingSession,
@@ -17,6 +16,7 @@ import { Card } from "../../../components/ui/card";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
 import { t } from "../../../i18n";
+import { getLocalizedCollection } from "../../../lib/content";
 
 const locale = Astro.locals.locale;
 
@@ -25,7 +25,7 @@ Astro.response.headers.set("Cache-Control", CachePresets.training);
 const [sessionEntries, slugMap, allTrainings] = await Promise.all([
   getFutureSessions(),
   getTrainingIDToSlugMap(),
-  getCollection("training"),
+  getLocalizedCollection("training", locale),
 ]);
 
 const descriptionMap = new Map<number, string>();

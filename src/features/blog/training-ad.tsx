@@ -1,5 +1,3 @@
-import { getEntry } from "astro:content";
-
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { Heading } from "../../components/ui/heading";
@@ -7,6 +5,7 @@ import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 import { t, type Locale } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
+import { getLocalizedEntry, bareSlug } from "../../lib/content";
 
 export async function TrainingAd({ trainingSlug, locale }: { trainingSlug?: string; locale: Locale }) {
   if (!trainingSlug) {
@@ -14,7 +13,7 @@ export async function TrainingAd({ trainingSlug, locale }: { trainingSlug?: stri
   }
 
   try {
-    const training = await getEntry("training", trainingSlug);
+    const training = await getLocalizedEntry("training", trainingSlug, locale);
 
     if (training === undefined) {
       throw new Error("Training is undefined for slug: " + trainingSlug);
@@ -35,7 +34,11 @@ export async function TrainingAd({ trainingSlug, locale }: { trainingSlug?: stri
                 <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
                   {t(locale, "blog.training_ad_cta_corporate")}
                 </Button>
-                <Button href={localizeUrl("/skoleni/" + training.id, locale)} variant="secondary" className="mt-10">
+                <Button
+                  href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)}
+                  variant="secondary"
+                  className="mt-10"
+                >
                   {t(locale, "blog.training_ad_cta_more_info")}
                 </Button>
               </div>

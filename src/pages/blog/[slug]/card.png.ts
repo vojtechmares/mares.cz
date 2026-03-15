@@ -1,20 +1,25 @@
-import { getCollection, getEntry } from "astro:content";
 import type { APIContext } from "astro";
 
 import { CreateArticleImageComponent } from "../../../features/opengraph-images/article";
 import { OpenGraphImageResponse } from "../../../lib/opengraph";
+import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
+import { localizeUrl } from "../../../i18n/routes";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
   const locale = context.locals.locale;
-  const article = await getEntry("blog", context.params.slug!);
+  const article = await getLocalizedEntry("blog", context.params.slug!, locale);
   if (!article || article.data.draft) {
-    const allPosts = await getCollection(
+    const allPosts = await getLocalizedCollection(
       "blog",
+      locale,
       ({ data }) => !data.draft && data.redirectFrom?.includes(context.params.slug!),
     );
     if (allPosts.length > 0) {
-      return Response.redirect(new URL(`/blog/${allPosts[0].id}/card.png`, context.url).toString(), 301);
+      return Response.redirect(
+        new URL(localizeUrl(`/blog/${bareSlug(allPosts[0].id)}/card.png`, locale), context.url).toString(),
+        301,
+      );
     }
     return new Response("Not Found", { status: 404 });
   }
