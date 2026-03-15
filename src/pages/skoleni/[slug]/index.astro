@@ -12,7 +12,7 @@ import { Section } from "../../../components/ui/section";
 import { Prose } from "../../../components/prose";
 import { CachePresets } from "../../../lib/cache";
 import { t } from "../../../i18n";
-import { formatPrice } from "../../../i18n/formatting";
+import { formatPrice, getCurrencyForLocale } from "../../../i18n/formatting";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
 import { localizeUrl } from "../../../i18n/routes";
 
@@ -56,9 +56,10 @@ const openGraph = {
 
 const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
 
+const currency = getCurrencyForLocale(locale);
 const pricing = {
-  open: training.data.price.open.filter((variant) => variant.currency === "CZK")[0].amount,
-  corporate: training.data.price.corporate.filter((variant) => variant.currency === "CZK")[0].amount,
+  open: training.data.price.open.filter((variant) => variant.currency === currency)[0].amount,
+  corporate: training.data.price.corporate.filter((variant) => variant.currency === currency)[0].amount,
 };
 
 const jsonLd = {
@@ -71,7 +72,7 @@ const jsonLd = {
   },
   offers: {
     price: pricing.open,
-    priceCurrency: "CZK",
+    priceCurrency: currency,
   },
   ...(sessions.length > 0 && {
     hasCourseInstance: sessions.map((session) => ({

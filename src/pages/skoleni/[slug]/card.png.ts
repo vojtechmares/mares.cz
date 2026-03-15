@@ -4,6 +4,7 @@ import { CreateTrainingImageComponent } from "../../../features/opengraph-images
 import { imageToDataUrl, OpenGraphImageResponse } from "../../../lib/opengraph";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
 import { localizeUrl } from "../../../i18n/routes";
+import { getCurrencyForLocale } from "../../../i18n/formatting";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
@@ -29,7 +30,8 @@ export async function GET(context: APIContext) {
     iconDataUrl = await imageToDataUrl(training.data.icon.src, baseUrl);
   }
 
-  const pricing = training.data.price.open.filter((variant) => variant.currency === "CZK")[0].amount;
+  const currency = getCurrencyForLocale(locale);
+  const pricing = training.data.price.open.filter((variant) => variant.currency === currency)[0].amount;
 
   const component = CreateTrainingImageComponent({
     slug: training.id,

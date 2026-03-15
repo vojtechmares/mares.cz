@@ -1,9 +1,8 @@
-export function FormatTrainingPrice(price: number): string {
-  return price.toLocaleString("cs-CZ", {
-    style: "currency",
-    currency: "CZK",
-    minimumFractionDigits: 0,
-  });
+import type { Locale } from "../i18n/types";
+import { formatPrice } from "../i18n/formatting";
+
+export function FormatTrainingPrice(price: number, locale: Locale = "cs"): string {
+  return formatPrice(price, locale);
 }
 
 export function FormatTrainingDate(date: string): string {

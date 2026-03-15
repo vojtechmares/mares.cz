@@ -155,8 +155,8 @@ function TrainingDate({ dates }: TrainingDateProps) {
 function TrainingPrice({ price, locale }: { price: number; locale: Locale }) {
   const tax = 1.21; // 21%
 
-  const inclTax = FormatTrainingPrice(price * tax);
-  const exclTax = FormatTrainingPrice(price);
+  const inclTax = FormatTrainingPrice(price * tax, locale);
+  const exclTax = FormatTrainingPrice(price, locale);
 
   return (
     <div className="text-right text-zinc-700 tabular-nums">

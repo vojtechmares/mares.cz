@@ -16,6 +16,7 @@ import { Card } from "../../../components/ui/card";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
 import { t } from "../../../i18n";
+import { getCurrencyForLocale } from "../../../i18n/formatting";
 import { getLocalizedCollection } from "../../../lib/content";
 
 const locale = Astro.locals.locale;
@@ -74,7 +75,7 @@ const jsonLd = {
     organizerName: "Vojtěch Mareš",
     organizerUrl: baseUrl,
     price: session.price,
-    priceCurrency: "CZK",
+    priceCurrency: getCurrencyForLocale(locale),
     ...(session.signUpURL && {
       offerUrl: session.signUpURL,
     }),

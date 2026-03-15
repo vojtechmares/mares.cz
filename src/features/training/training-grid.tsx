@@ -9,7 +9,7 @@ import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import { Text } from "../../components/ui/text";
 import { t, type Locale } from "../../i18n";
-import { formatDuration, formatNumber } from "../../i18n/formatting";
+import { formatDuration, formatNumber, getCurrencyForLocale } from "../../i18n/formatting";
 import { localizeUrl } from "../../i18n/routes";
 import { getLocalizedCollection, bareSlug } from "../../lib/content";
 
@@ -25,7 +25,8 @@ type TrainingCardProps = {
 
 const TrainingCard = ({ training, locale, className }: TrainingCardProps) => {
   const featured = training.data.featured;
-  const price = training.data.price.open[0];
+  const currency = getCurrencyForLocale(locale);
+  const price = training.data.price.open.find((v) => v.currency === currency) ?? training.data.price.open[0];
 
   return (
     <Card

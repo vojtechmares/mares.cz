@@ -6,6 +6,18 @@ const DATE_LOCALE_MAP: Record<Locale, string> = {
   en: "en-US",
 };
 
+const LOCALE_CURRENCY_MAP: Record<Locale, string> = {
+  cs: "CZK",
+  en: "EUR",
+};
+
+/**
+ * Get the currency code for a given locale.
+ */
+export function getCurrencyForLocale(locale: Locale): string {
+  return LOCALE_CURRENCY_MAP[locale];
+}
+
 /**
  * Format a date using the locale-appropriate format.
  */
@@ -15,12 +27,12 @@ export function formatDate(date: Date | string, locale: Locale, options?: Intl.D
 }
 
 /**
- * Format a price. Currency is always CZK regardless of locale.
+ * Format a price using the locale-appropriate currency.
  */
 export function formatPrice(amount: number, locale: Locale): string {
   return new Intl.NumberFormat(DATE_LOCALE_MAP[locale], {
     style: "currency",
-    currency: "CZK",
+    currency: LOCALE_CURRENCY_MAP[locale],
     maximumFractionDigits: 0,
   }).format(amount);
 }
