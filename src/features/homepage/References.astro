@@ -2,9 +2,8 @@
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { ReferencesContainer, ReferenceCard } from "./references";
-import type { Locale } from "../../i18n";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/images/people/*.{jpg,jpeg,png,webp}", {
   eager: true,

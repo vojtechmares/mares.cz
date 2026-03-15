@@ -4,9 +4,10 @@ import type { APIContext } from "astro";
 import { CreateTagArchiveImageComponent } from "../../../../features/opengraph-images/tag-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 
-export async function GET({ params, url }: APIContext) {
-  const baseUrl = url.origin;
-  const { tag } = params;
+export async function GET(context: APIContext) {
+  const baseUrl = context.url.origin;
+  const locale = context.locals.locale;
+  const { tag } = context.params;
   if (!tag) {
     return new Response("Not Found", { status: 404 });
   }
@@ -21,6 +22,7 @@ export async function GET({ params, url }: APIContext) {
     tag,
     articleCount: articles.length,
     baseUrl,
+    locale,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

@@ -2,16 +2,19 @@
 import "../styles/global.css";
 
 import { Error } from "../features/error/error";
+
+const locale = Astro.locals.locale;
+const lang = locale === "en" ? "en" : "cs";
 ---
 
 <!doctype html>
-<html lang="cs" class="min-h-full">
+<html lang={lang} class="min-h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
   </head>
   <body class="min-h-full bg-zinc-900">
-    <Error status={404} />
+    <Error status={404} locale={locale} />
   </body>
 </html>

@@ -7,11 +7,11 @@ import { TagList } from "../../../../components/ui/tag-list";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../lib/cache";
-import { t, type Locale } from "../../../../i18n";
+import { t } from "../../../../i18n";
 import { getMonthName, formatArticleCount } from "../../../../i18n/formatting";
 import { localizeUrl } from "../../../../i18n/routes";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const { year: yearParam } = Astro.params;
 const year = parseInt(yearParam!);
@@ -78,7 +78,7 @@ const jsonLd = {
       <div class="flex flex-row justify-between">
         <p class="mt-4 text-base text-zinc-100 lg:text-xl">
           {formatArticleCount(articles.length, locale)}
-          {locale === "cs" ? "v tomto roce" : "this year"}
+          {t(locale, "blog.year_article_suffix")}
         </p>
         {
           months.length > 0 &&

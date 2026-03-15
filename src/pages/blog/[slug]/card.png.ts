@@ -4,16 +4,17 @@ import type { APIContext } from "astro";
 import { CreateArticleImageComponent } from "../../../features/opengraph-images/article";
 import { OpenGraphImageResponse } from "../../../lib/opengraph";
 
-export async function GET({ params, url }: APIContext) {
-  const baseUrl = url.origin;
-  const article = await getEntry("blog", params.slug!);
+export async function GET(context: APIContext) {
+  const baseUrl = context.url.origin;
+  const locale = context.locals.locale;
+  const article = await getEntry("blog", context.params.slug!);
   if (!article || article.data.draft) {
     const allPosts = await getCollection(
       "blog",
-      ({ data }) => !data.draft && data.redirectFrom?.includes(params.slug!),
+      ({ data }) => !data.draft && data.redirectFrom?.includes(context.params.slug!),
     );
     if (allPosts.length > 0) {
-      return Response.redirect(new URL(`/blog/${allPosts[0].id}/card.png`, url).toString(), 301);
+      return Response.redirect(new URL(`/blog/${allPosts[0].id}/card.png`, context.url).toString(), 301);
     }
     return new Response("Not Found", { status: 404 });
   }
@@ -28,6 +29,7 @@ export async function GET({ params, url }: APIContext) {
     publishDate: article.data.publish_time,
     tags: article.data.tags,
     readingTimeMinutes,
+    locale,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

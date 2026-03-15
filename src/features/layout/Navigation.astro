@@ -2,9 +2,9 @@
 import { getCollection } from "astro:content";
 import { Navigation as Navbar } from "./navigation";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
-import type { Locale } from "../../i18n";
+import { englishPathToCzech } from "../../i18n/routes";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
   return links.locale === locale;
@@ -23,6 +23,9 @@ const pageLinks = pages
   });
 
 const links = [...(staticLinks as { name: string; href: string }[]), ...pageLinks];
+
+// Compute Czech path for language switcher (strip /en prefix and translate back)
+const currentPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : Astro.url.pathname;
 ---
 
-<Navbar links={links} locale={locale} />
+<Navbar links={links} locale={locale} currentPath={currentPath} />

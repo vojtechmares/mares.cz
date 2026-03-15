@@ -2,9 +2,8 @@
 import { getCollection } from "astro:content";
 import { Footer as FooterComponent } from "./footer";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
-import type { Locale } from "../../i18n";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
   return links.locale === locale;

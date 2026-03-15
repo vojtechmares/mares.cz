@@ -4,9 +4,10 @@ import type { APIContext } from "astro";
 import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 
-export async function GET({ params, url }: APIContext) {
-  const baseUrl = url.origin;
-  const yearParam = params.year;
+export async function GET(context: APIContext) {
+  const baseUrl = context.url.origin;
+  const locale = context.locals.locale;
+  const yearParam = context.params.year;
   const year = parseInt(yearParam!);
   const currentYear = new Date().getFullYear();
 
@@ -25,6 +26,7 @@ export async function GET({ params, url }: APIContext) {
     articleCount: articles.length,
     url: `mares.cz/blog/archive/${year}`,
     baseUrl,
+    locale,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

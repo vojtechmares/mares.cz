@@ -8,10 +8,10 @@ import { Text } from "../../../../components/ui/text";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
 import { CachePresets } from "../../../../lib/cache";
-import { t, type Locale } from "../../../../i18n";
+import { t } from "../../../../i18n";
 import { localizeUrl } from "../../../../i18n/routes";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const { tag } = Astro.params;
 if (!tag) {
@@ -60,7 +60,7 @@ const jsonLd = {
       <Heading variant="inverse">Blog: #{tag}</Heading>
       <Text variant="inverse" className="mt-4">
         {sortedArticles.length}
-        {locale === "cs" ? "článků s tímto tagem" : "articles with this tag"}
+        {t(locale, "blog.tag_article_count_suffix")}
       </Text>
       <Text variant="inverse" className="mt-2">
         <Link href={localizeUrl("/blog", locale)} className="text-zinc-100">{t(locale, "blog.back_to_blog")}</Link>

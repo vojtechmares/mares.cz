@@ -4,16 +4,17 @@ import type { APIContext } from "astro";
 import { CreateTrainingImageComponent } from "../../../features/opengraph-images/training";
 import { imageToDataUrl, OpenGraphImageResponse } from "../../../lib/opengraph";
 
-export async function GET({ params, url }: APIContext) {
-  const baseUrl = url.origin;
-  const training = await getEntry("training", params.slug!);
+export async function GET(context: APIContext) {
+  const baseUrl = context.url.origin;
+  const locale = context.locals.locale;
+  const training = await getEntry("training", context.params.slug!);
   if (!training || training.data.draft) {
     const allTrainings = await getCollection(
       "training",
-      ({ data }) => !data.draft && data.redirectFrom?.includes(params.slug!),
+      ({ data }) => !data.draft && data.redirectFrom?.includes(context.params.slug!),
     );
     if (allTrainings.length > 0) {
-      return Response.redirect(new URL(`/skoleni/${allTrainings[0].id}/card.png`, url).toString(), 301);
+      return Response.redirect(new URL(`/skoleni/${allTrainings[0].id}/card.png`, context.url).toString(), 301);
     }
     return new Response("Not Found", { status: 404 });
   }
@@ -32,6 +33,7 @@ export async function GET({ params, url }: APIContext) {
     length: training.data.length,
     price: pricing,
     image: iconDataUrl,
+    locale,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

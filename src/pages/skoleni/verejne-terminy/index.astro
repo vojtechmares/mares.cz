@@ -16,9 +16,9 @@ import { Section } from "../../../components/ui/section";
 import { Card } from "../../../components/ui/card";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
-import { t, type Locale } from "../../../i18n";
+import { t } from "../../../i18n";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 Astro.response.headers.set("Cache-Control", CachePresets.training);
 
@@ -133,38 +133,38 @@ const jsonLd = {
           <Heading level="h3" variant="inverse">{t(locale, "sessions_page.why_heading")}</Heading>
           <ul class="mt-6 list-disc pl-4 text-white">
             <li>
-              {locale === "cs" ? "Školení probíhají" : "Training is delivered in"}
-              <strong>{t(locale, "sessions_page.why_workshop")}</strong> — {
+              {t(locale, "sessions_page.why_workshop_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_workshop")}</strong> — {
                 t(locale, "sessions_page.why_workshop_detail")
               }
             </li>
             <li>
-              {locale === "cs" ? "Ukázky a příklady vycházejí z" : "Examples come from"}
-              <strong>{t(locale, "sessions_page.why_real_projects")}</strong>, {
+              {t(locale, "sessions_page.why_real_projects_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_real_projects")}</strong>, {
                 t(locale, "sessions_page.why_real_projects_detail")
               }
             </li>
             <li>
-              {locale === "cs" ? "Ve skupině je" : "Groups have"}
-              <strong>{t(locale, "sessions_page.why_small_groups")}</strong>, {
+              {t(locale, "sessions_page.why_small_groups_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_small_groups")}</strong>, {
                 t(locale, "sessions_page.why_small_groups_detail")
               }
             </li>
             <li>
-              {locale === "cs" ? "Obdržíte" : "You receive"}
-              <strong>{t(locale, "sessions_page.why_materials")}</strong>, {
+              {t(locale, "sessions_page.why_materials_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_materials")}</strong>, {
                 t(locale, "sessions_page.why_materials_detail")
               }
             </li>
             <li>
-              {locale === "cs" ? "Pracujeme výhradně s" : "We work exclusively with"}
-              <strong>{t(locale, "sessions_page.why_open_source")}</strong>, {
+              {t(locale, "sessions_page.why_open_source_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_open_source")}</strong>, {
                 t(locale, "sessions_page.why_open_source_detail")
               }
             </li>
             <li>
-              {locale === "cs" ? "Mým cílem je" : "My goal is to"}
-              <strong>{t(locale, "sessions_page.why_knowledge")}</strong>, {
+              {t(locale, "sessions_page.why_knowledge_prefix")}
+              {" "}<strong>{t(locale, "sessions_page.why_knowledge")}</strong>, {
                 t(locale, "sessions_page.why_knowledge_detail")
               }
             </li>

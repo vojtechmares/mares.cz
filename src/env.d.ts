@@ -1,5 +1,11 @@
 /// <reference types="astro/client" />
 
+declare namespace App {
+  interface Locals {
+    locale: import("./i18n/types").Locale;
+  }
+}
+
 interface ImportMetaEnv {
   readonly DISABLE_ANALYTICS: boolean;
   readonly SESSIONS_API_URL: string;

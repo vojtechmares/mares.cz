@@ -5,8 +5,9 @@ import { CreateSessionsImageComponent } from "../../../features/opengraph-images
 import { OpenGraphImageResponse } from "../../../lib/opengraph";
 import { getFutureSessions, toTrainingSession } from "../../../lib/sessions";
 
-export async function GET({ url }: APIContext) {
-  const baseUrl = url.origin;
+export async function GET(context: APIContext) {
+  const baseUrl = context.url.origin;
+  const locale = context.locals.locale;
 
   const [sessionEntries, trainings] = await Promise.all([
     getFutureSessions(),
@@ -18,6 +19,6 @@ export async function GET({ url }: APIContext) {
   const topicCount = trainings.length;
   const nextSessionDate = sessions.length > 0 ? new Date(sessions[0].dates.start).toISOString() : null;
 
-  const component = CreateSessionsImageComponent({ sessionCount, topicCount, nextSessionDate });
+  const component = CreateSessionsImageComponent({ sessionCount, topicCount, nextSessionDate, locale });
   return OpenGraphImageResponse(component, baseUrl);
 }

@@ -9,9 +9,8 @@ import { Prose } from "../../../components/prose";
 import { Section } from "../../../components/ui/section";
 import { TrainingGrid } from "../../../features/training/training-grid";
 import { CachePresets } from "../../../lib/cache";
-import type { Locale } from "../../../i18n";
 
-const locale = (Astro.currentLocale ?? "cs") as Locale;
+const locale = Astro.locals.locale;
 
 const { slug } = Astro.params;
 const article = await getEntry("blog", slug!);
