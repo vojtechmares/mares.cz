@@ -4,6 +4,7 @@ import { Body } from "../../components/ui/body";
 import { Button } from "../../components/ui/button";
 import { Container } from "../../components/ui/container";
 import { t, type Locale } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 import { LanguageSwitcher } from "./language-switcher";
 
 type NavLink = {
@@ -32,7 +33,7 @@ function MobileNavigation({ links, locale, currentPath }: { links: NavLink[]; lo
         <div className="flex items-center md:gap-x-12">
           <span className="font-sans text-xl font-bold text-orange-500">
             <a
-              href="/"
+              href={localizeUrl("/", locale)}
               className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
             >
               Vojtěch Mareš
@@ -65,7 +66,7 @@ function DesktopNavigation({ links, locale, currentPath }: { links: NavLink[]; l
           <div className="flex items-center md:gap-x-12">
             <span className="font-sans text-xl font-bold text-orange-500">
               <a
-                href="/"
+                href={localizeUrl("/", locale)}
                 className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
               >
                 Vojtěch Mareš
