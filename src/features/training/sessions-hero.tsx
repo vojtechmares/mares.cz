@@ -31,7 +31,7 @@ export function SessionsHero({ sessionCount, topicCount, nextSessionDate, locale
               {t(locale, "sessions_hero.no_sessions_text")}
             </Text>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button size="medium" href="#skoleni" variant="accent">
+              <Button size="medium" href={locale === "en" ? "#training" : "#skoleni"} variant="accent">
                 {t(locale, "sessions_hero.all_trainings")}
               </Button>
             </div>
@@ -55,7 +55,7 @@ export function SessionsHero({ sessionCount, topicCount, nextSessionDate, locale
               {t(locale, "sessions_hero.description")}
             </Text>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button size="medium" href="#skoleni" variant="accent">
+              <Button size="medium" href={locale === "en" ? "#training" : "#skoleni"} variant="accent">
                 {t(locale, "sessions_hero.all_trainings")}
               </Button>
             </div>
