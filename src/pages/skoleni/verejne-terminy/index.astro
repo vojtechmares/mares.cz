@@ -10,6 +10,7 @@ import {
   toTrainingSession,
   getTrainingIDToSlugMap,
   enrichSessionsWithSlugs,
+  getSessionPrice,
 } from "../../../lib/sessions";
 import { Section } from "../../../components/ui/section";
 import { Card } from "../../../components/ui/card";
@@ -74,7 +75,7 @@ const jsonLd = {
     location: session.location,
     organizerName: "Vojtěch Mareš",
     organizerUrl: baseUrl,
-    price: session.price,
+    price: getSessionPrice(session.pricing, locale),
     priceCurrency: getCurrencyForLocale(locale),
     ...(session.signUpURL && {
       offerUrl: session.signUpURL,

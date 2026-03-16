@@ -1,4 +1,6 @@
 import { getCollection, getLiveCollection, type CollectionEntry } from "astro:content";
+import { getCurrencyForLocale } from "../i18n/formatting";
+import type { Locale } from "../i18n/types";
 
 type Session = CollectionEntry<"session">;
 
@@ -12,7 +14,7 @@ export interface TrainingSession {
     end?: string;
   };
   location: string;
-  price: number;
+  pricing: Array<{ currency: "CZK" | "EUR"; amount: number }>;
   signUpURL?: string;
 }
 
@@ -46,9 +48,19 @@ export function toTrainingSession(session: Session): TrainingSession {
     name: session.data.name,
     dates: session.data.dates,
     location: session.data.location,
-    price: session.data.price,
+    pricing: session.data.pricing,
     signUpURL: session.data.signUpURL,
   };
+}
+
+/**
+ * Get the price amount for a given locale from a pricing array.
+ * Falls back to the first entry if the locale's currency is not found.
+ */
+export function getSessionPrice(pricing: Array<{ currency: "CZK" | "EUR"; amount: number }>, locale: Locale): number {
+  const currency = getCurrencyForLocale(locale);
+  const match = pricing.find((p) => p.currency === currency);
+  return match ? match.amount : pricing[0].amount;
 }
 
 /**

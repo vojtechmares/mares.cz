@@ -14,7 +14,10 @@ describe("TrainingSessionsTable", () => {
     name: "Kubernetes Workshop",
     dates: { start: "2024-03-15" },
     location: "Praha",
-    price: 10000,
+    pricing: [
+      { currency: "CZK", amount: 10000 },
+      { currency: "EUR", amount: 390 },
+    ],
     signUpURL: "https://example.com/signup",
     ...overrides,
   });
@@ -26,7 +29,10 @@ describe("TrainingSessionsTable", () => {
       name: "Docker Workshop",
       dates: { start: "2024-03-20", end: "2024-03-21" },
       location: "Brno",
-      price: 8000,
+      pricing: [
+        { currency: "CZK", amount: 8000 },
+        { currency: "EUR", amount: 310 },
+      ],
     }),
   ];
 
@@ -128,7 +134,10 @@ describe("CompactTrainingSessionsTable", () => {
     name: "Kubernetes Workshop",
     dates: { start: "2024-03-15" },
     location: "Praha",
-    price: 10000,
+    pricing: [
+      { currency: "CZK", amount: 10000 },
+      { currency: "EUR", amount: 390 },
+    ],
     signUpURL: "https://example.com/signup",
     ...overrides,
   });

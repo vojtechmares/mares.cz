@@ -32,8 +32,10 @@ const createMockAPISession = (overrides: Partial<APISession> = {}): APISession =
   date: "2024-06-15T09:00:00Z",
   location: "Praha",
   address: "Some Address",
-  pricing_currency: "CZK",
-  pricing_amount: 15000,
+  pricing: [
+    { currency: "CZK", amount: 15000 },
+    { currency: "EUR", amount: 590 },
+  ],
   status: "SCHEDULED",
   signup_url: "https://example.com/signup",
   create_time: "2024-01-01T00:00:00Z",
@@ -77,7 +79,10 @@ describe("sessionLoader", () => {
         name: "Kubernetes Workshop",
         dates: { start: "2024-06-15", end: "2024-06-16" },
         location: "Praha",
-        price: 15000,
+        pricing: [
+          { currency: "CZK", amount: 15000 },
+          { currency: "EUR", amount: 590 },
+        ],
         signUpURL: "https://example.com/signup",
       },
     });

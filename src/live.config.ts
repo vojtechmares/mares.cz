@@ -27,7 +27,7 @@ const session = defineLiveCollection({
       end: z.string().optional(),
     }),
     location: z.string(),
-    price: z.number(),
+    pricing: z.array(z.object({ amount: z.number(), currency: z.enum(["CZK", "EUR"]) })),
     signUpURL: z.string().url().optional(),
   }),
 });

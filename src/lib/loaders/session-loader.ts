@@ -77,7 +77,7 @@ function transformSession(session: APISession) {
       }),
     },
     location: session.location,
-    price: session.pricing_amount,
+    pricing: session.pricing,
     ...(session.signup_url && { signUpURL: session.signup_url }),
   };
 }

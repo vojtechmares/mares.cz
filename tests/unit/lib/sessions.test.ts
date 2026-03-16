@@ -7,6 +7,7 @@ import {
   getFutureSessions,
   getFutureSessionsByName,
   getTrainingIDToSlugMap,
+  getSessionPrice,
 } from "../../../src/lib/sessions";
 
 const createMockSessionEntry = (overrides: Record<string, unknown> = {}) => ({
@@ -16,7 +17,10 @@ const createMockSessionEntry = (overrides: Record<string, unknown> = {}) => ({
     name: "Kubernetes Workshop",
     dates: { start: "2099-06-15" },
     location: "Praha",
-    price: 15000,
+    pricing: [
+      { currency: "CZK", amount: 15000 },
+      { currency: "EUR", amount: 590 },
+    ],
     signUpURL: "https://example.com/signup",
     ...((overrides.data as Record<string, unknown>) ?? {}),
   },
@@ -32,7 +36,10 @@ describe("toTrainingSession", () => {
       name: "Kubernetes Workshop",
       dates: { start: "2099-06-15" },
       location: "Praha",
-      price: 15000,
+      pricing: [
+        { currency: "CZK", amount: 15000 },
+        { currency: "EUR", amount: 590 },
+      ],
       signUpURL: "https://example.com/signup",
     });
   });
@@ -40,14 +47,36 @@ describe("toTrainingSession", () => {
 
 describe("enrichSessionsWithSlugs", () => {
   it("adds trainingSlug from map", () => {
-    const sessions = [{ trainingID: 1, name: "K8s", dates: { start: "2099-01-01" }, location: "Praha", price: 10000 }];
+    const sessions = [
+      {
+        trainingID: 1,
+        name: "K8s",
+        dates: { start: "2099-01-01" },
+        location: "Praha",
+        pricing: [
+          { currency: "CZK" as const, amount: 10000 },
+          { currency: "EUR" as const, amount: 390 },
+        ],
+      },
+    ];
     const map = new Map([[1, "kubernetes"]]);
     const result = enrichSessionsWithSlugs(sessions, map);
     expect(result[0].trainingSlug).toBe("kubernetes");
   });
 
   it("leaves trainingSlug undefined when not in map", () => {
-    const sessions = [{ trainingID: 99, name: "K8s", dates: { start: "2099-01-01" }, location: "Praha", price: 10000 }];
+    const sessions = [
+      {
+        trainingID: 99,
+        name: "K8s",
+        dates: { start: "2099-01-01" },
+        location: "Praha",
+        pricing: [
+          { currency: "CZK" as const, amount: 10000 },
+          { currency: "EUR" as const, amount: 390 },
+        ],
+      },
+    ];
     const map = new Map([[1, "kubernetes"]]);
     const result = enrichSessionsWithSlugs(sessions, map);
     expect(result[0].trainingSlug).toBeUndefined();
@@ -116,5 +145,25 @@ describe("getTrainingIDToSlugMap", () => {
     const map = await getTrainingIDToSlugMap();
     expect(map.size).toBe(1);
     expect(map.get(5)).toBe("valid");
+  });
+});
+
+describe("getSessionPrice", () => {
+  const pricing = [
+    { currency: "CZK" as const, amount: 15000 },
+    { currency: "EUR" as const, amount: 590 },
+  ];
+
+  it("returns CZK amount for cs locale", () => {
+    expect(getSessionPrice(pricing, "cs")).toBe(15000);
+  });
+
+  it("returns EUR amount for en locale", () => {
+    expect(getSessionPrice(pricing, "en")).toBe(590);
+  });
+
+  it("falls back to first entry when currency is missing", () => {
+    const czkOnly = [{ currency: "CZK" as const, amount: 15000 }];
+    expect(getSessionPrice(czkOnly, "en")).toBe(15000);
   });
 });

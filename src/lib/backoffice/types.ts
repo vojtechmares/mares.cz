@@ -8,8 +8,7 @@ export interface APISession {
   date: string;
   location: string;
   address: string;
-  pricing_currency: "CZK" | "EUR";
-  pricing_amount: number;
+  pricing: Array<{ currency: "CZK" | "EUR"; amount: number }>;
   status: "DRAFT" | "SCHEDULED" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
   signup_url: string | null;
   create_time: string;

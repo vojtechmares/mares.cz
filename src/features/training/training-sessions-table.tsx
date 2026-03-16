@@ -1,4 +1,4 @@
-import type { TrainingSession } from "../../lib/sessions";
+import { type TrainingSession, getSessionPrice } from "../../lib/sessions";
 
 import { Button } from "../../components/ui/button";
 import { Link } from "../../components/ui/link";
@@ -40,7 +40,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
               ) : (
                 <SigningUpNotOpenYet locale={locale} />
               )}
-              <TrainingPrice price={training.price} locale={locale} />
+              <TrainingPrice pricing={training.pricing} locale={locale} />
             </div>
           </div>
 
@@ -66,7 +66,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
               )}
             </div>
             <div className="flex items-center gap-6">
-              <TrainingPrice price={training.price} locale={locale} />
+              <TrainingPrice pricing={training.pricing} locale={locale} />
               {training.signUpURL ? (
                 <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
               ) : (
@@ -152,7 +152,14 @@ function TrainingDate({ dates }: TrainingDateProps) {
   return <>{FormatTrainingDate(dates.start)}</>;
 }
 
-function TrainingPrice({ price, locale }: { price: number; locale: Locale }) {
+function TrainingPrice({
+  pricing,
+  locale,
+}: {
+  pricing: Array<{ currency: "CZK" | "EUR"; amount: number }>;
+  locale: Locale;
+}) {
+  const price = getSessionPrice(pricing, locale);
   const tax = 1.21; // 21%
 
   const inclTax = FormatTrainingPrice(price * tax, locale);
