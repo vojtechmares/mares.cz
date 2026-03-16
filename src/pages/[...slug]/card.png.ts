@@ -5,8 +5,8 @@ import { OpenGraphImageResponse } from "../../lib/opengraph";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../lib/content";
 import { localizeUrl } from "../../i18n/routes";
 
-export async function GET({ params, url, locals }: APIContext) {
-  const baseUrl = url.origin;
+export async function GET({ params, url, locals, site }: APIContext) {
+  const baseUrl = site?.origin ?? "https://www.mares.cz";
   const locale = locals.locale;
   const { slug } = params;
   if (!slug) {

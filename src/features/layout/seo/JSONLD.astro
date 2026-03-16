@@ -1,5 +1,6 @@
 ---
 import { t, type Locale } from "../../../i18n";
+import { canonicalUrl } from "../../../lib/url";
 
 interface BlogPostSchema {
   type: "BlogPosting";
@@ -71,7 +72,7 @@ interface Props {
 
 const { schema, locale = "cs" } = Astro.props;
 
-const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = canonicalUrl(Astro.url, Astro.site).toString().replace(/\/$/, "");
 
 let jsonLd: any;
 

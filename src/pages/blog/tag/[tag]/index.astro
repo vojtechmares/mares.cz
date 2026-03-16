@@ -34,7 +34,7 @@ const meta = {
   keywords: t(locale, "blog.tag_meta_keywords", { tag }),
 };
 
-const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/$/, "");
 
 const openGraph = {
   type: "website" as const,

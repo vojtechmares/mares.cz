@@ -17,7 +17,7 @@ const site = "@vojtechmares_";
 let { title, description, image = undefined } = Astro.props;
 
 if (image?.url.startsWith("/")) {
-  image.url = Astro.url + image.url.replace("/", "");
+  image.url = new URL(image.url, Astro.site ?? "https://www.mares.cz").toString();
 }
 ---
 

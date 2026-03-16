@@ -38,14 +38,19 @@ function localeToOGLocale(locale?: string) {
 }
 
 if (image?.url !== undefined && image.url.startsWith("/")) {
-  image.url = Astro.url + image.url.replace("/", "");
+  image.url = new URL(image.url, Astro.site ?? "https://www.mares.cz").toString();
 }
 ---
 
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={url !== undefined ? url.toString() : Astro.url.href} />
+<meta
+  property="og:url"
+  content={url !== undefined
+    ? url.toString()
+    : new URL(Astro.url.pathname, Astro.site ?? "https://www.mares.cz").toString()}
+/>
 <meta property="og:site_name" content="Vojtěch Mareš - DevOps architekt" />
 <meta property="og:locale" content={localeToOGLocale(locale)} />
 {localeAlternate !== undefined && <meta property="og:locale:alternate" content={localeToOGLocale(localeAlternate)} />}

@@ -1,4 +1,6 @@
 ---
+import { canonicalUrl } from "../../../lib/url";
+
 interface Props {
   title?: string;
   prefixedTitle?: string;
@@ -21,4 +23,4 @@ let {
 <meta name="keywords" content={keywords} />
 <meta name="author" content="Vojtěch Mareš" />
 <meta name="theme-color" content="#ffffff" />
-<link rel="canonical" href={canonical !== undefined ? canonical : Astro.url.toString()} />
+<link rel="canonical" href={canonical !== undefined ? canonical : canonicalUrl(Astro.url, Astro.site).toString()} />

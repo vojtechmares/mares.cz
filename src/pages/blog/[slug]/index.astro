@@ -37,14 +37,14 @@ const meta = {
 const openGraph = {
   type: "article" as const,
   image: {
-    url: Astro.url + "/card.png",
+    url: new URL("card.png", new URL(Astro.url.pathname + "/", Astro.site)).toString(),
     width: 1200,
     height: 630,
     alt: article.data.title + ": " + article.data.description,
   },
 };
 
-const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/$/, "");
 
 const jsonLd = {
   type: "BlogPosting" as const,

@@ -4,7 +4,7 @@ import { CreateHomepageImageComponent } from "../features/opengraph-images/homep
 import { OpenGraphImageResponse } from "../lib/opengraph";
 
 export async function GET(context: APIContext) {
-  const baseUrl = context.url.origin;
+  const baseUrl = context.site?.origin ?? "https://www.mares.cz";
   const locale = context.locals.locale;
   const component = await CreateHomepageImageComponent(baseUrl, locale);
 

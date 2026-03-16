@@ -6,7 +6,7 @@ import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../li
 import { localizeUrl } from "../../../i18n/routes";
 
 export async function GET(context: APIContext) {
-  const baseUrl = context.url.origin;
+  const baseUrl = context.site?.origin ?? "https://www.mares.cz";
   const locale = context.locals.locale;
   const article = await getLocalizedEntry("blog", context.params.slug!, locale);
   if (!article || article.data.draft) {

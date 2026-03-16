@@ -28,7 +28,7 @@ const meta = {
   openGraph={{
     type: "website",
     image: {
-      url: new URL("/sluzby/card.png", Astro.url).toString(),
+      url: new URL("/sluzby/card.png", Astro.site ?? "https://www.mares.cz").toString(),
       width: 1200,
       height: 630,
       alt: t(locale, "services_page.og_alt"),

@@ -6,7 +6,7 @@ import { getMonthName } from "../../../../../i18n/formatting";
 import { getLocalizedCollection } from "../../../../../lib/content";
 
 export async function GET(context: APIContext) {
-  const baseUrl = context.url.origin;
+  const baseUrl = context.site?.origin ?? "https://www.mares.cz";
   const locale = context.locals.locale;
   const year = parseInt(context.params.year!);
   const month = parseInt(context.params.month!);

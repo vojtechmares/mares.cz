@@ -53,14 +53,14 @@ const nextSession = sessions.length > 0 ? sessions[0] : null;
 const openGraph = {
   type: "website" as const,
   image: {
-    url: Astro.url + "/card.png",
+    url: new URL("card.png", new URL(Astro.url.pathname + "/", Astro.site)).toString(),
     width: 1200,
     height: 630,
     alt: t(locale, "sessions_page.og_alt"),
   },
 };
 
-const baseUrl = Astro.url?.toString().replace(/\/$/, "") || "https://www.mares.cz";
+const baseUrl = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/$/, "");
 
 // Generate Event schema for each training session
 const jsonLd = {
