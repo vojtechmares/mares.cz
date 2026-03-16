@@ -108,6 +108,18 @@ describe("TrainingSessionsTable", () => {
     });
   });
 
+  describe("language", () => {
+    it("should display language below location", () => {
+      render(<TrainingSessionsTable locale="cs" sessions={mockSessions} />);
+      expect(screen.getAllByText("Česky").length).toBeGreaterThan(0);
+    });
+
+    it("should display language in English locale", () => {
+      render(<TrainingSessionsTable locale="en" sessions={mockSessions} />);
+      expect(screen.getAllByText("Czech").length).toBeGreaterThan(0);
+    });
+  });
+
   describe("training name links", () => {
     it("should render training name as link when trainingSlug is provided", () => {
       const sessionWithSlug = createMockSession({ trainingSlug: "kubernetes" });
@@ -169,6 +181,13 @@ describe("CompactTrainingSessionsTable", () => {
       });
       render(<CompactTrainingSessionsTable locale="cs" sessions={[sessionWithoutSignUp]} />);
       expect(screen.getAllByText(/přihlašování zatím není možné/i).length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("language", () => {
+    it("should display language below location", () => {
+      render(<CompactTrainingSessionsTable locale="cs" sessions={mockSessions} />);
+      expect(screen.getAllByText("Česky").length).toBeGreaterThan(0);
     });
   });
 

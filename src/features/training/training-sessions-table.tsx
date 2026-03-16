@@ -24,6 +24,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
             </p>
             <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
             <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
             <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.01em]">
               {training.trainingSlug ? (
                 <Link href={localizeUrl(`/skoleni/${training.trainingSlug}`, locale)}>{training.name}</Link>
@@ -52,6 +53,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
               </p>
               <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
               <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+              <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
             </div>
             <div>
               <h3 className="font-display text-xl font-semibold tracking-[-0.01em]">
@@ -92,6 +94,7 @@ export function CompactTrainingSessionsTable({ sessions, locale }: TrainingSessi
             </p>
             <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
             <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+            <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
             <div className="mt-4">
               {training.signUpURL ? (
                 <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
@@ -109,6 +112,7 @@ export function CompactTrainingSessionsTable({ sessions, locale }: TrainingSessi
               </p>
               <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
               <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
+              <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
             </div>
             <div>
               {training.signUpURL ? (

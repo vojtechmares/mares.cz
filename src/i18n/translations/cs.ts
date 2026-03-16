@@ -125,6 +125,7 @@ export const cs = {
   "sessions_table.sign_up": "Přihlásit se",
   "sessions_table.sign_up_aria": "na školení {name}",
   "sessions_table.sign_up_not_open": "Přihlašování zatím není možné",
+  "sessions_table.language": "Česky",
   "sessions_table.excl_vat": "bez DPH",
 
   // Blog - Article Hero

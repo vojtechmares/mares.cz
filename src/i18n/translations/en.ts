@@ -127,6 +127,7 @@ export const en: Record<TranslationKey, string> = {
   "sessions_table.sign_up": "Sign up",
   "sessions_table.sign_up_aria": "for {name} training",
   "sessions_table.sign_up_not_open": "Registration not yet available",
+  "sessions_table.language": "Czech",
   "sessions_table.excl_vat": "excl. VAT",
 
   // Blog - Article Hero
