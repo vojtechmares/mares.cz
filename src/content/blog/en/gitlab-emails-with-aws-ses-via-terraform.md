@@ -5,6 +5,8 @@ keywords: []
 tags: ["gitlab", "terraform", "aws-ses", "emails"]
 draft: false
 publish_time: 2022-04-12
+redirectFrom: ["emaily-z-gitlabu-pres-aws-ses-pomoci-terraformu"]
+alternate: "emaily-z-gitlabu-pres-aws-ses-pomoci-terraformu"
 ---
 
 > **NOTE**: I've setup the SES for my GitLab two years ago, but just now I finally get into writing the blog post.

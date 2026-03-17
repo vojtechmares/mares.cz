@@ -5,6 +5,8 @@ keywords: []
 tags: ["kubernetes", "hetzner", "argocd", "gitops"]
 draft: false
 publish_time: 2022-11-17
+redirectFrom: ["upgrade-k3s-clusteru-pomoci-system-upgrade-controller-a-argo-cd"]
+alternate: "upgrade-k3s-clusteru-pomoci-system-upgrade-controller-a-argo-cd"
 ---
 
 I've recently migrated my k3s cluster on Hetzner from bare metal to VMs. I do not need that many compute resources and I do not want to maintain storage on Longhorn.
