@@ -37,4 +37,17 @@ describe("TagList", () => {
     const link = screen.getByRole("link");
     expect(link).toHaveClass("text-zinc-900");
   });
+
+  it("generates English locale URLs with /en prefix", () => {
+    render(<TagList tags={["docker", "kubernetes"]} locale="en" />);
+    const links = screen.getAllByRole("link");
+    expect(links[0]).toHaveAttribute("href", "/en/blog/tag/docker");
+    expect(links[1]).toHaveAttribute("href", "/en/blog/tag/kubernetes");
+  });
+
+  it("generates Czech locale URLs without prefix by default", () => {
+    render(<TagList tags={["docker"]} locale="cs" />);
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", "/blog/tag/docker");
+  });
 });

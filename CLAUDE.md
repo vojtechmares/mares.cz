@@ -108,7 +108,7 @@ Badge|src/components/ui/badge.tsx|variant?:"default"(default)|"accent"|as?:"span
 Link|src/components/ui/link.tsx|href:string|variant?:"default"(default)|"muted"|external?:boolean|children
 Stack|src/components/ui/stack.tsx|direction?:"vertical"(default)|"horizontal"|gap?:GapSize("md")|align?:"start"|"center"|"end"|"stretch"|justify?:"start"|"center"|"end"|"between"|"around"|children
 Icon|src/components/ui/icon.tsx|size?:"sm"|"md"(default)|"lg"|label?:string|children
-TagList|src/components/ui/tag-list.tsx|tags:string[]|variant?:"default"|"inverse"|activeTag?:string
+TagList|src/components/ui/tag-list.tsx|tags:string[]|variant?:"default"|"inverse"|activeTag?:string|locale?:Locale("cs")
 Prose|src/components/prose.tsx|className?:string|children (wraps rendered markdown Content)
 ```
 

@@ -74,7 +74,7 @@ const jsonLd = {
     <Container>
       <Heading variant="inverse">Blog: {monthName}{" "}{year}</Heading>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
-        <TagList tags={tags} variant="inverse" />
+        <TagList tags={tags} variant="inverse" locale={locale} />
       </p>
       <p class="mt-4 text-base text-zinc-100 lg:text-xl">
         {formatArticleCount(articles.length, locale)}
