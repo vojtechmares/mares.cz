@@ -84,6 +84,7 @@ const page = defineCollection({
     hidden: z.boolean().default(false),
     draft: z.boolean().default(true),
     redirectFrom: z.array(z.string()).optional(),
+    alternate: z.string().optional(),
   }),
 });
 

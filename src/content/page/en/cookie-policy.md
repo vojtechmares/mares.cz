@@ -5,6 +5,7 @@ keywords: []
 featured: false
 hidden: false
 draft: false
+alternate: "zasady-pouzivani-cookies"
 ---
 
 ## What are cookies?

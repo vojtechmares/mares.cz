@@ -5,6 +5,7 @@ keywords: []
 featured: false
 hidden: false
 draft: false
+alternate: "cookie-policy"
 ---
 
 ## Co jsou cookies?

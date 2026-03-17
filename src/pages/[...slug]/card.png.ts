@@ -26,6 +26,17 @@ export async function GET({ params, url, locals, site }: APIContext) {
         301,
       );
     }
+    const alternatePages = await getLocalizedCollection(
+      "page",
+      locale,
+      ({ data }) => !data.draft && data.alternate === slug,
+    );
+    if (alternatePages.length > 0) {
+      return Response.redirect(
+        new URL(localizeUrl(`/${bareSlug(alternatePages[0].id)}/card.png`, locale), url).toString(),
+        301,
+      );
+    }
     return new Response("Not Found", { status: 404 });
   }
 

@@ -27,6 +27,14 @@ if (!page || page.data.draft) {
   if (allPages.length > 0) {
     return Astro.redirect(localizeUrl(`/${bareSlug(allPages[0].id)}`, locale), 301);
   }
+  const alternatePages = await getLocalizedCollection(
+    "page",
+    locale,
+    ({ data }) => !data.draft && data.alternate === slug,
+  );
+  if (alternatePages.length > 0) {
+    return Astro.redirect(localizeUrl(`/${bareSlug(alternatePages[0].id)}`, locale), 301);
+  }
   return Astro.redirect("/404", 404);
 }
 
