@@ -1,6 +1,6 @@
 ---
 title: "CloudNativePG: PostgreSQL na Kubernetes"
-description: "CloudNativePG je open-source Kubernetes operátor pro PostgreSQL od EnterpriseDB. CNPG řeší vše kolem PostgreSQL clusteru: vytvoření, škálování, zálohování, obnovu, monitoring a další."
+description: "CloudNativePG je open-source Kubernetes operátor pro PostgreSQL. Řeší vytvoření, škálování, zálohování, obnovu i monitoring clusteru."
 keywords: ["kubernetes", "postgres", "cloudnative", "cnpg", "cloudnativepg", "postgresql"]
 tags: ["kubernetes", "postgres"]
 trainingAd: postgres-on-k8s

@@ -1,6 +1,6 @@
 ---
 title: KubeCon Co-located Events 2025 in London
-description: KubeCon is starting and it's traditionally preceded by co-located events. ArgoCon, CiliumCon, Platform Engineering Day, Data on Kubernetes, and many more... Here's everything I learned and discovered!
+description: "Notes from KubeCon 2025 co-located events in London: ArgoCon, CiliumCon, Platform Engineering Day, Data on Kubernetes, and more."
 keywords: ["kubecon", "kubecon europe", "kubecon london", "2025", "london", "kubecon 2025"]
 tags: ["konference"]
 draft: false

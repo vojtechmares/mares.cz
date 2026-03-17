@@ -1,6 +1,6 @@
 ---
 title: "Terraform: Infrastruktura jako kód"
-description: Terraform je nástroj, kterým můžeme spravovat infrastrukturu jako kód. Co to znamená a proč je to důležité? Aneb konec klikání v konzoli a hledání, jak jsme vlastně ten server před rokem nastavili.
+description: "Terraform umožňuje spravovat infrastrukturu jako kód – verzovaně, opakovatelně a bez klikání v konzoli. Co to znamená a proč je to důležité."
 keywords: ["infrastruktura", "terraform", "infrastructure-as-code", "devops", "cloud", "hashicorp"]
 tags: ["infrastructure-as-code", "terraform"]
 trainingAd: terraform

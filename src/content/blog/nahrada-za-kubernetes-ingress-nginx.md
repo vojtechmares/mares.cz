@@ -1,6 +1,6 @@
 ---
 title: Náhrada za Kubernetes Ingress-NGINX
-description: Hledání náhrady za Kubernetes Ingress-NGINX, který končí. Ingress controllery jsou hrozivý a všechno je strašně komplikované... Ingress-NGINX byl jednoduchý a hledání jednoduché náhrady stojí za bačkoru.
+description: "Hledání jednoduché náhrady za Kubernetes Ingress-NGINX. Ingress controllery jsou složité a najít prostou alternativu není snadné."
 keywords:
   [
     "kubernetes",

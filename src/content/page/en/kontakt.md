@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: xxx
+description: "Contact details, billing address, and payment information for Vojtěch Mareš – freelance DevOps architect."
 keywords: ["contact", "address", "bank details", "iban"]
 featured: false
 hidden: true

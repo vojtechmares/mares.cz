@@ -1,6 +1,6 @@
 ---
 title: KubeCon přidružené akce 2025 v Londýně
-description: Začíná KubeCon a tradičně mu předchází přidružené akce, tzv. co-located events. ArgoCon, CiliumCon, Platform Engineering Day, Data on Kubernetes a řada dalších... Co všechno jsem se dozvěděl a co jsem objevil!
+description: "Poznámky z přidružených akcí KubeConu 2025 v Londýně: ArgoCon, CiliumCon, Platform Engineering Day, Data on Kubernetes a další."
 keywords: ["kubecon", "kubecon europe", "kubecon london", "2025", "london", "kubecon 2025"]
 tags: ["konference"]
 draft: false

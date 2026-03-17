@@ -2,7 +2,7 @@
 title: GitHub Actions
 backofficeID: 4
 description: |
-  Save hours of manual work by automating tests, builds, and deployments. Learn how to write GitHub Actions workflows, create custom actions, and set up CI/CD that watches the quality of every code change for you.
+  Automate tests, builds, and deployments with GitHub Actions. Learn to write workflows, create custom actions, and set up reliable CI/CD.
 keywords:
   [
     "github",

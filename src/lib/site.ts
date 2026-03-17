@@ -3,14 +3,16 @@ export const LocalizedMetadata = [
     locale: "cs",
     title: "Vojtěch Mareš - DevOps architekt",
     titlePrefix: "Vojtěch Mareš",
-    description: "Vojtěch Mareš - DevOps architekt, konzultant a lektor na volné noze",
+    description:
+      "Vojtěch Mareš - freelance DevOps architekt, konzultant a lektor. Kubernetes, CI/CD a cloud native technologie.",
     keywords: "devops, devops achitekt, konzultant, lektor, školení, devops školení, freelancer",
   },
   {
     locale: "en",
     title: "Vojtěch Mareš - DevOps architect",
     titlePrefix: "Vojtěch Mareš",
-    description: "Vojtěch Mareš - DevOps architect, consultant, lector, and freelancer",
+    description:
+      "Vojtěch Mareš - freelance DevOps architect, consultant, and trainer. Kubernetes, CI/CD, and cloud native technologies.",
     keywords: "devops, devops architect, consultant, lector, training, devops training, freelancer",
   },
 ];

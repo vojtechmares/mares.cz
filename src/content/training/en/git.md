@@ -2,7 +2,7 @@
 title: Git
 backofficeID: 3
 description: |
-  Streamline collaboration in your dev team. Learn Git from basics to advanced techniques — branching, merge strategies, and conflict resolution. Work on multiple tasks in parallel without losing code.
+  Learn Git from basics to advanced techniques — branching, merge strategies, and conflict resolution. Work in parallel without losing code.
 keywords: ["git", "version control", "vcs"]
 featured: false
 length: 1

@@ -2,7 +2,7 @@
 title: GitLab CI
 backofficeID: 5
 description: |
-  Zrychlete vývoj a eliminujte chyby při nasazování. Naučíte se navrhnout efektivní GitLab CI/CD pipeline, správně nastavit Runnery a plně automatizovat cestu kódu od commitu až po produkci.
+  Navrhněte efektivní GitLab CI/CD pipeline, nastavte Runnery a automatizujte cestu od commitu po produkci. Praktický workshop.
 keywords:
   [
     "GitLab CI školení",

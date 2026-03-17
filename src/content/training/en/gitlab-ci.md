@@ -2,7 +2,7 @@
 title: GitLab CI
 backofficeID: 5
 description: |
-  Speed up development and eliminate deployment errors. Learn how to design efficient GitLab CI/CD pipelines, properly configure Runners, and fully automate the path from commit to production.
+  Design efficient GitLab CI/CD pipelines, configure Runners, and automate the path from commit to production. Hands-on workshop.
 keywords:
   [
     "GitLab CI training",

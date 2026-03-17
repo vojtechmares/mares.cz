@@ -1,6 +1,6 @@
 ---
 title: "Terraform: Infrastructure as Code"
-description: Terraform is a tool for managing infrastructure as code. What does that mean and why does it matter? No more clicking through consoles and trying to figure out how we actually configured that server a year ago.
+description: "Terraform lets you manage infrastructure as code — versioned, repeatable, and no more clicking through consoles or guessing server configs."
 keywords: ["infrastructure", "terraform", "infrastructure-as-code", "devops", "cloud", "hashicorp"]
 tags: ["infrastructure-as-code", "terraform"]
 trainingAd: terraform

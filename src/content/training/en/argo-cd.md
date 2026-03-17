@@ -2,7 +2,7 @@
 title: Argo CD
 backofficeID: 7
 description: |
-  Stop deploying to Kubernetes manually. With Argo CD, your deployments will be versioned in Git, automatically synchronized, and easy to roll back. Learn the GitOps approach that saves time and increases reliability.
+  Stop deploying to Kubernetes manually. Learn GitOps with Argo CD — versioned deployments in Git, auto-sync, and easy rollbacks.
 keywords: ["argocd", "gitops", "kubernetes", "devops", "deployment"]
 featured: false
 length: 1

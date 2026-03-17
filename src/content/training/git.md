@@ -2,7 +2,7 @@
 title: Git
 backofficeID: 3
 description: |
-  Zefektivněte spolupráci ve vašem vývojovém týmu. Naučíte se Git od základů po pokročilé techniky – větvení, merge strategie i řešení konfliktů. Váš tým bude pracovat paralelně na více úkolech bez obav ze ztráty kódu.
+  Naučte se Git od základů po pokročilé techniky – větvení, merge strategie a řešení konfliktů. Paralelní práce bez ztráty kódu.
 keywords: ["git", "version control", "vcs"]
 featured: false
 length: 1

@@ -2,7 +2,7 @@
 title: Kubernetes
 backofficeID: 2
 description: |
-  Naučte se nasazovat a provozovat kontejnerové aplikace ve scale. Po školení budete umět spravovat cluster, nasazovat aplikace, pracovat s Helmem a řešit každodenní provozní situace s jistotou.
+  Naučte se nasazovat a provozovat kontejnerové aplikace ve scale. Správa clusteru, Helm a každodenní provozní situace.
 keywords:
   [
     "kubernetes",

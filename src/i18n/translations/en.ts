@@ -150,7 +150,8 @@ export const en: Record<TranslationKey, string> = {
 
   // Blog - Index page
   "blog.meta_title": "Vojtěch Mareš | Blog",
-  "blog.meta_description": "Articles on my blog, not just about DevOps.",
+  "blog.meta_description":
+    "Articles about DevOps, Kubernetes, CI/CD, and cloud native technologies. Practical insights and tips from real-world projects.",
   "blog.meta_keywords": "blog, devops blog, articles",
   "blog.archive_label": "Archive:",
   "blog.feed_label": "Feed:",
@@ -176,7 +177,8 @@ export const en: Record<TranslationKey, string> = {
 
   // Talks
   "talks.meta_title": "Vojtěch Mareš | Talks",
-  "talks.meta_description": "Overview of talks and workshops I\u2019ve had the opportunity to give.",
+  "talks.meta_description":
+    "Overview of my talks and workshops at conferences in the Czech Republic and abroad. DevOps, Kubernetes, and cloud native topics.",
   "talks.meta_keywords": "talks, conferences, workshops",
   "talks.og_alt": "Conference talks",
   "talks.heading": "Talks at",

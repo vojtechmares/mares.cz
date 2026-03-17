@@ -2,7 +2,7 @@
 title: Terraform
 backofficeID: 1
 description: |
-  Získejte kontrolu nad cloudovou infrastrukturou. Naučíte se spravovat prostředí jako kód – verzovaně, opakovatelně a bez manuálního klikání. Váš tým bude provádět změny rychleji, bezpečněji a s plným přehledem.
+  Získejte kontrolu nad cloudovou infrastrukturou. Naučte se spravovat prostředí jako kód s Terraformem – verzovaně, opakovatelně a auditovatelně.
 keywords:
   [
     "terraform",

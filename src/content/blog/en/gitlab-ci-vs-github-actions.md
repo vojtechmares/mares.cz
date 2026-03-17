@@ -1,6 +1,6 @@
 ---
 title: GitLab CI vs GitHub Actions
-description: In this article, I'll go in depth on the very popular CI/CD tools GitLab CI and GitHub Actions -- not just from the pipeline perspective, but also runners and other features.
+description: "An in-depth comparison of GitLab CI and GitHub Actions — covering pipelines, runners, and key features of both CI/CD platforms."
 keywords: ["git", "ci", "runner", "gitlab ci", "github actions", "gitlab", "github"]
 tags: ["continuous-integration"]
 trainingAd: github-actions

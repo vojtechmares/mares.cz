@@ -2,7 +2,7 @@
 title: Postgres on Kubernetes
 backofficeID: 8
 description: |
-  Save on managed database costs and run PostgreSQL on Kubernetes with peace of mind. Learn how to use CloudNativePG to automate upgrades, failover, backups, and monitoring — all hands-on.
+  Run PostgreSQL on Kubernetes with CloudNativePG. Learn to automate upgrades, failover, backups, and monitoring — hands-on workshop.
 keywords: ["postgres", "kubernetes", "devops", "database", "operator"]
 featured: false
 length: 1

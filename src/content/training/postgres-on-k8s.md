@@ -2,7 +2,7 @@
 title: Postgres na Kubernetes
 backofficeID: 8
 description: |
-  Ušetřete za managed databázi a provozujte PostgreSQL na Kubernetes s klidným spaním. Naučíte se pomocí CloudNativePG automatizovat upgrady, failover, zálohy i monitoring – vše si prakticky vyzkoušíte.
+  Provozujte PostgreSQL na Kubernetes s CloudNativePG. Naučte se automatizovat upgrady, failover, zálohy a monitoring – praktický workshop.
 keywords: ["postgres", "kubernetes", "devops", "database", "operator"]
 featured: false
 length: 1

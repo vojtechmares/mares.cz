@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Ingress-NGINX odchází do důchodu
-description: Ingress-NGINX končí a od března 2026 přechází do režimu minimální údržby. Projekt InGate, který měl být jeho nástupcem, se nakonec nerozjel a také míří do archivu. Co to znamená pro vaše Kubernetes clustery, jaké jsou reálné alternativy a na co si dát pozor při migraci? Připravil jsem přehled možností a doporučení podle praktických zkušeností.
+description: "Ingress-NGINX od března 2026 přechází do režimu minimální údržby. Co to znamená, jaké jsou alternativy a na co si dát pozor při migraci."
 keywords:
   [
     "kubernetes",

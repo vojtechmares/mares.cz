@@ -1,6 +1,6 @@
 ---
 title: S3 as the FTP of the Cloud
-description: In this article, we take a closer look at AWS S3, also known as object storage, and how it has become practically the standard for cloud storage. We also look at cloud-hosted and self-hosted solutions.
+description: "A closer look at AWS S3 and object storage as the cloud standard. Comparing cloud-hosted and self-hosted solutions for your workloads."
 keywords: ["s3", "aws", "object storage", "cloud", "cloud native"]
 tags: ["object-storage"]
 draft: false

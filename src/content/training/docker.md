@@ -2,7 +2,7 @@
 title: Docker
 backofficeID: 6
 description: |
-  Zbavte se problémů s prostředími a zjednodušte nasazování aplikací. Naučíte se zabalit vaší aplikaci do kontejneru, pracovat s kontejnery a sestavit vícekontejnerové aplikace – od základů po produkční best practices.
+  Naučte se zabalit aplikaci do kontejneru a nasadit ji do produkce. Od základů Dockeru po vícekontejnerové aplikace a best practices.
 keywords: ["docker", "kontejner", "obraz", "build aplikace", "devops", "deployment"]
 featured: false
 length: 2

@@ -2,7 +2,7 @@
 title: Docker
 backofficeID: 6
 description: |
-  Eliminate environment issues and simplify application deployment. Learn how to package your application into a container, work with containers, and build multi-container applications — from the basics to production best practices.
+  Learn to package your app into a container and deploy it to production. From Docker basics to multi-container apps and best practices.
 keywords: ["docker", "container", "image", "application build", "devops", "deployment"]
 featured: false
 length: 2

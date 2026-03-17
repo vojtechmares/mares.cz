@@ -1,6 +1,6 @@
 ---
 title: Replacing Kubernetes Ingress-NGINX
-description: Searching for a replacement for Kubernetes Ingress-NGINX, which is ending. Ingress controllers are daunting and everything is terribly complicated... Ingress-NGINX was simple, and finding a simple replacement is a real pain.
+description: "Finding a simple replacement for Kubernetes Ingress-NGINX. Ingress controllers are complex, and matching the simplicity of NGINX is hard."
 keywords:
   [
     "kubernetes",

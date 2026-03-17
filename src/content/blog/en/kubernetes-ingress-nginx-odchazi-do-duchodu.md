@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Ingress-NGINX Is Retiring
-description: Ingress-NGINX is ending and will transition to minimal maintenance mode starting March 2026. The InGate project, which was supposed to be its successor, never took off and is also heading to the archive. What does this mean for your Kubernetes clusters, what are the realistic alternatives, and what should you watch out for during migration? I've prepared an overview of options and recommendations based on practical experience.
+description: "Ingress-NGINX enters minimal maintenance in March 2026. What it means for your clusters, realistic alternatives, and migration tips."
 keywords:
   [
     "kubernetes",

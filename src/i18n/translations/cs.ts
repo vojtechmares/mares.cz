@@ -148,7 +148,8 @@ export const cs = {
 
   // Blog - Index page
   "blog.meta_title": "Vojtěch Mareš | Blog",
-  "blog.meta_description": "Články na méme blogu nejen o DevOps.",
+  "blog.meta_description":
+    "Články o DevOps, Kubernetes, CI/CD a cloud native technologiích. Praktické zkušenosti a tipy z reálných projektů.",
   "blog.meta_keywords": "blog, devops blog, články",
   "blog.archive_label": "Archiv:",
   "blog.feed_label": "Feed:",
@@ -174,7 +175,8 @@ export const cs = {
 
   // Talks
   "talks.meta_title": "Vojtěch Mareš | Přednášky",
-  "talks.meta_description": "Přehled přednášek a workshopů, které jsem měl možnost dělat.",
+  "talks.meta_description":
+    "Přehled přednášek a workshopů na odborných konferencích v ČR i zahraničí. DevOps, Kubernetes a cloud native témata.",
   "talks.meta_keywords": "přednášky, talks, workshop",
   "talks.og_alt": "Přednášky na konferencích",
   "talks.heading": "Přednášky na",

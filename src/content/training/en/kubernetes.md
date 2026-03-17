@@ -2,7 +2,7 @@
 title: Kubernetes
 backofficeID: 2
 description: |
-  Learn how to deploy and run containerized applications at scale. After the training, you will be able to manage clusters, deploy applications, work with Helm, and handle everyday operational tasks with confidence.
+  Learn to deploy and run containerized apps at scale. Manage clusters, deploy with Helm, and handle everyday Kubernetes operations.
 keywords:
   [
     "kubernetes",

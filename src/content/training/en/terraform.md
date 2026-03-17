@@ -2,7 +2,7 @@
 title: Terraform
 backofficeID: 1
 description: |
-  Take control of your cloud infrastructure. Learn to manage environments as code — versioned, repeatable, and without manual clicking. Your team will make changes faster, safer, and with full visibility.
+  Take control of your cloud infrastructure. Learn to manage environments as code with Terraform — versioned, repeatable, and auditable.
 keywords: ["terraform", "devops", "infrastructure", "cloud", "aws", "azure", "gcp", "infrastructure as code"]
 featured: false
 length: 1

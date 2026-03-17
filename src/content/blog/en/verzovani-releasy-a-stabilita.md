@@ -1,6 +1,6 @@
 ---
 title: Versioning, Releases, and Stability
-description: Versioning. A common topic, and another problem alongside "naming things, cache invalidation, off by one errors" – the fourth IT problem is versioning. What versioning schemes exist, how I use them and why, and which ones are unsuitable. Versioning isn't just about one thing either – today we version source code of a service, we have a version of the product/application as a whole, and then we also version things like machine learning models. In short, versioning is fun.
+description: "Versioning is the fourth great IT problem. A look at versioning schemes, their trade-offs, and how to version services, products, and ML models."
 keywords: ["versioning", "application", "api", "product", "breaking changes", "stability"]
 tags: [""]
 draft: true

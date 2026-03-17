@@ -1,6 +1,6 @@
 ---
 title: S3 jako FTP cloudu
-description: V článku se podíváme zblízka na AWS S3, neboli object storage a jak se stalo prakticky standardem pro cloudová úložiště. Mimo to se podíváme na cloudová a i self-hosted řešení.
+description: "Bližší pohled na AWS S3 a object storage jako standard cloudových úložišť. Srovnání cloudových a self-hosted řešení pro vaše workloady."
 keywords: ["s3", "aws", "object storage", "cloud", "cloud native"]
 tags: ["object-storage"]
 draft: false

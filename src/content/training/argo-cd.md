@@ -2,7 +2,7 @@
 title: Argo CD
 backofficeID: 7
 description: |
-  Přestaňte ručně nasazovat do Kubernetes. S Argo CD budete mít nasazení verzovaná v Gitu, automaticky synchronizovaná a snadno vratitelná. Naučíte se GitOps přístup, který šetří čas a zvyšuje spolehlivost.
+  Přestaňte ručně nasazovat do Kubernetes. Naučte se GitOps s Argo CD – verzovaná nasazení v Gitu, automatická synchronizace a snadný rollback.
 keywords: ["argocd", "gitops", "kubernetes", "devops", "deployment"]
 featured: false
 length: 1

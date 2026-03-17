@@ -1,6 +1,6 @@
 ---
 title: "Upgrading k3s cluster with System Upgrade Controller and Argo CD"
-description: The k3s upgrade experience with System Upgrade Controller and Argo CD
+description: "How to automate k3s cluster upgrades using System Upgrade Controller and Argo CD with a GitOps approach."
 keywords: []
 tags: ["kubernetes", "hetzner", "argocd", "gitops"]
 draft: false

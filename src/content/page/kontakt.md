@@ -1,6 +1,6 @@
 ---
 title: Kontakt
-description: xxx
+description: "Kontaktní údaje, fakturační adresa a platební údaje Vojtěcha Mareše – DevOps architekta na volné noze."
 keywords: ["kontakt", "adresa", "bankovní spojení", "iban"]
 featured: false
 hidden: true
