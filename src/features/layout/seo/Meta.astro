@@ -19,9 +19,9 @@ let {
 
 if (import.meta.env.DEV && description !== undefined) {
   const len = description.length;
-  if (len < 50 || len > 155) {
+  if (len < 90 || len > 160) {
     console.warn(
-      `[SEO] Description should be 50–155 characters (got ${len}) on ${Astro.url.pathname}: "${description}"`,
+      `[SEO] Description should be 90–160 characters (got ${len}) on ${Astro.url.pathname}: "${description}"`,
     );
   }
 }
