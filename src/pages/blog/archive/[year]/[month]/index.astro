@@ -38,7 +38,7 @@ const monthName = getMonthName(month, locale);
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
-const baseUrl = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/$/, "");
+const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
 
 const meta = {
   title: t(locale, "blog.month_meta_title", { month: monthName, year }),

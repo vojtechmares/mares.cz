@@ -8,6 +8,7 @@ import { ServicesTraining } from "../../features/services/services-training";
 import Layout from "../../layouts/Layout.astro";
 import { CachePresets } from "../../lib/cache";
 import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
 import { getLocalizedCollection, bareSlug } from "../../lib/content";
 
 const locale = Astro.locals.locale;
@@ -28,7 +29,7 @@ const meta = {
   openGraph={{
     type: "website",
     image: {
-      url: new URL("/sluzby/card.png", Astro.site ?? "https://www.mares.cz").toString(),
+      url: new URL(localizeUrl("/sluzby", locale) + "/card.png", Astro.site ?? "https://www.mares.cz").toString(),
       width: 1200,
       height: 630,
       alt: t(locale, "services_page.og_alt"),
