@@ -17,6 +17,8 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2025-11-19
+redirectFrom: ["kubernetes-ingress-nginx-odchazi-do-duchodu"]
+alternate: "kubernetes-ingress-nginx-odchazi-do-duchodu"
 ---
 
 This year (2025) at KubeCon in London, the maintainers of the Kubernetes Ingress-NGINX project (an open-source [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) controller, directly from the Kubernetes project) announced that its development would be discontinued and its support eventually ended. The replacement for Ingress-NGINX was supposed to be the [InGate](https://github.com/kubernetes-sigs/ingate) project.

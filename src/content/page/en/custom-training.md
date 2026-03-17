@@ -5,6 +5,8 @@ keywords: []
 featured: false
 hidden: true
 draft: false
+redirectFrom: ["skoleni-na-miru"]
+alternate: "skoleni-na-miru"
 ---
 
 Looking for training but haven't found what you need among my existing courses? Let's arrange a custom training tailored to your needs and requirements.

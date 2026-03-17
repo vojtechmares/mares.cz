@@ -6,6 +6,7 @@ tags: ["git"]
 trainingAd: git
 draft: false
 publish_time: 2024-08-19
+alternate: "what-is-git"
 ---
 
 Co je to Git? Možná pro někoho banální otázka, ale pro některé je to stále záhada. Krátké shrnutí, co Git je a jak se používá.

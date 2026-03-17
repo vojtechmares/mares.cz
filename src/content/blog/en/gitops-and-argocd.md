@@ -6,6 +6,8 @@ tags: ["kubernetes", "gitops"]
 trainingAd: argo-cd
 draft: false
 publish_time: 2024-09-24
+redirectFrom: ["gitops-a-argocd"]
+alternate: "gitops-a-argocd"
 ---
 
 In this article, we'll look at GitOps and the Argo CD tool, which is one of the tools for implementing GitOps.
@@ -72,7 +74,7 @@ With GitOps practices and tools, it is essentially impossible to get those same 
 
 Today there are many different approaches and tools trying to solve this problem.
 Typically it's a "bootstrap script" or CLI tool that you can use to install GitOps tools into the cluster.
-Alternatively, if you manage your Kubernetes clusters with [Terraform](/en/blog/terraform-infrastruktura-jako-kod), you can use, for example,
+Alternatively, if you manage your Kubernetes clusters with [Terraform](/en/blog/terraform-infrastructure-as-code), you can use, for example,
 the [Helm provider](https://registry.terraform.io/providers/hashicorp/helm/latest) and install Argo CD into every cluster via Terraform. Which is a fairly elegant solution:
 
 ```hcl

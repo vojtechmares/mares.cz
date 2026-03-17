@@ -16,6 +16,7 @@ keywords:
   ]
 featured: false
 draft: false
+alternate: "business-cooperation"
 ---
 
 Pokud máte zájem o spolupráci v oblasti školení a konzultací v DevOps, rád se s vámi domluvím na podmínkách. Ať už jste obchodník, který chce nabídnout mé služby svým klientům, nebo firma hledající expertní školení na míru, neváhejte mě kontaktovat.

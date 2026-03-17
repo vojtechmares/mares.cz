@@ -5,6 +5,7 @@ keywords: ["verzování", "aplikace", "api", "produkt", "breaking changes", "sta
 tags: [""]
 draft: true
 publish_time: 2020-01-01
+alternate: "versioning-releases-and-stability"
 ---
 
 Původně tenhle článek měl mít téma 'Verzovací schémata', ale jak jsem tak psal, tak se mi to vymklo z rukou a tak jsme teď tady 😃

@@ -6,6 +6,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2024-10-01
+alternate: "helm-vs-kustomize-vs-yaml"
 ---
 
 Nasazování aplikací do Kubernetes clusteru má několik způsobů, na tři velké se podíváme v tomhle článku.

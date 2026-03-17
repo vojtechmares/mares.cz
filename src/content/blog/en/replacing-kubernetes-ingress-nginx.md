@@ -17,9 +17,11 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2026-03-05
+redirectFrom: ["nahrada-za-kubernetes-ingress-nginx"]
+alternate: "nahrada-za-kubernetes-ingress-nginx"
 ---
 
-I recently wrote an article [Kubernetes Ingress-NGINX Is Retiring](/en/blog/kubernetes-ingress-nginx-odchazi-do-duchodu) and mentioned that I would be looking for a replacement.
+I recently wrote an article [Kubernetes Ingress-NGINX Is Retiring](/en/blog/kubernetes-ingress-nginx-is-retiring) and mentioned that I would be looking for a replacement.
 
 So I've been searching and searching, and I want to share what I found and how things worked and didn't work.
 

@@ -6,6 +6,8 @@ tags: ["infrastructure-as-code", "terraform"]
 trainingAd: terraform
 draft: false
 publish_time: 2024-09-02
+redirectFrom: ["terraform-infrastruktura-jako-kod"]
+alternate: "terraform-infrastruktura-jako-kod"
 ---
 
 [Terraform](https://www.terraform.io/) is a tool for managing infrastructure as code. What does that mean and why does it matter? No more clicking through consoles and trying to figure out how we actually configured that server a year ago.

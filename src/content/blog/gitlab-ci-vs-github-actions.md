@@ -6,6 +6,7 @@ tags: ["continuous-integration"]
 trainingAd: github-actions
 draft: false
 publish_time: 2024-09-16
+alternate: "gitlab-ci-vs-github-actions"
 ---
 
 V tomhle článku se rozepíšu o velice populárních CI/CD nástrojích GitLab CI a GitHub Actions.

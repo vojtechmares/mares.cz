@@ -5,6 +5,7 @@ keywords: []
 featured: false
 hidden: true
 draft: false
+alternate: "custom-training"
 ---
 
 Poptáváte školení, ale nenašli jste to co hledáte v mých připravených školeních? Pojďme se domluvit na školení na míru vaším potřebám a požadavkům.

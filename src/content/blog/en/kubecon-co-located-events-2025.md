@@ -5,6 +5,8 @@ keywords: ["kubecon", "kubecon europe", "kubecon london", "2025", "london", "kub
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-02
+redirectFrom: ["kubecon-pridruzene-akce-2025"]
+alternate: "kubecon-pridruzene-akce-2025"
 ---
 
 I'm in London for a six-day conference "marathon": Cloud Native Rejekts (March 30–31), KubeCon co-located events (April 1), and KubeCon itself (April 2–4). The co-located events are behind us, and here are my notes and discoveries.
@@ -100,6 +102,6 @@ Interesting, but it needs a bit more time.
 
 _I'll be adding more articles from each day of the conferences throughout the week._
 
-- [Rejekts 2025 in London – Day One](/en/blog/rejekts-2025-prvni-den)
-- [Rejekts 2025 in London – Day Two](/en/blog/rejekts-2025-druhy-den)
-- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-pridruzene-akce-2025) _(this article)_
+- [Rejekts 2025 in London – Day One](/en/blog/rejekts-2025-day-one)
+- [Rejekts 2025 in London – Day Two](/en/blog/rejekts-2025-day-two)
+- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-co-located-events-2025) _(this article)_

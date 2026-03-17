@@ -5,6 +5,7 @@ keywords: ["kontakt", "adresa", "bankovní spojení", "iban"]
 featured: false
 hidden: true
 draft: true
+alternate: "contact"
 ---
 
 <table>

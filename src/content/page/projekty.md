@@ -4,6 +4,7 @@ description: Projekty, které vyvíjím, spravuji a udržuji. Například Terraf
 keywords: ["projekty", "projects", "repositories", "git", "terraform", "golang"]
 featured: false
 draft: false
+alternate: "projects"
 ---
 
 ## Terraform Module Cloudflare AWS SES Verification

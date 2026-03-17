@@ -61,13 +61,31 @@ const jsonLd = {
   url: baseUrl + "/blog/" + bareSlug(article.id),
 };
 
+const articleSlug = bareSlug(article.id);
+const alternateSlug = article.data.alternate;
+
+let alternateUrls: { cs: string; en: string } | undefined;
+if (alternateSlug) {
+  if (locale === "cs") {
+    alternateUrls = {
+      cs: new URL(`/blog/${articleSlug}`, Astro.site).toString(),
+      en: new URL(`/en/blog/${alternateSlug}`, Astro.site).toString(),
+    };
+  } else {
+    alternateUrls = {
+      cs: new URL(`/blog/${alternateSlug}`, Astro.site).toString(),
+      en: new URL(`/en/blog/${articleSlug}`, Astro.site).toString(),
+    };
+  }
+}
+
 const { Content } = await render(article);
 
 const words = article.body?.split(/\s+/).length ?? 0;
 const readingTimeMinutes = Math.max(1, Math.round(words / 200));
 ---
 
-<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd} alternateUrls={alternateUrls}>
   <BlogArticleHero
     title={article.data.title}
     description={article.data.description}

@@ -17,6 +17,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2025-11-19
+alternate: "kubernetes-ingress-nginx-is-retiring"
 ---
 
 Letos (v roce 2025) na KubeConu v Londýně, maintaineři Kubernetes projektu Ingress-NGINX (open-source [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) controller, přímo od Kubernetes projektu) oznámili, že bude ukončen jeho vývoj a následně i jeho podpora. Náhradou za Ingress-NGINX měl být projekt [InGate](https://github.com/kubernetes-sigs/ingate).

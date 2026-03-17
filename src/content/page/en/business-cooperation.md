@@ -16,6 +16,8 @@ keywords:
   ]
 featured: false
 draft: false
+redirectFrom: ["obchodni-spoluprace"]
+alternate: "obchodni-spoluprace"
 ---
 
 If you are interested in partnering on training and consulting in DevOps, I would be happy to discuss terms with you. Whether you are a reseller looking to offer my services to your clients, or a company seeking expert custom training, feel free to get in touch.

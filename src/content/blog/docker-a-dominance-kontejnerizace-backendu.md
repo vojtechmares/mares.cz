@@ -7,6 +7,7 @@ tags: ["kontejnery", "kubernetes"]
 trainingAd: docker
 draft: false
 publish_time: 2024-09-10
+alternate: "docker-and-backend-containerization-dominance"
 ---
 
 V tomhle článku se budu věnovat historii kontejnerů, kontejnerizaci aplikací a historii orchestrace kontejnerů.

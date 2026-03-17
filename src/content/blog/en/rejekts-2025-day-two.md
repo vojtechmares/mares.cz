@@ -5,7 +5,8 @@ keywords: ["cncf rejekts", "rejekts", "kubecon", "2025", "london", "rejektsio"]
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-01
-redirectFrom: ["rejeckts-2025-druhy-den"]
+redirectFrom: ["rejeckts-2025-druhy-den", "rejekts-2025-druhy-den"]
+alternate: "rejekts-2025-druhy-den"
 ---
 
 I'm in London for a six-day "marathon" of conferences: Cloud Native Rejekts (March 30--31), KubeCon co-located events (April 1), and KubeCon itself (April 2--4). Rejekts are first -- and I've finished the second day. How was it?
@@ -134,6 +135,6 @@ For those of you not in London who want to watch the talks at least from a recor
 
 _I'll be adding more articles from each day of the conferences throughout the week._
 
-- [Rejekts 2025 in London -- Day One](/en/blog/rejekts-2025-prvni-den)
-- [Rejekts 2025 in London -- Day Two](/en/blog/rejekts-2025-druhy-den) _(this article)_
-- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-pridruzene-akce-2025)
+- [Rejekts 2025 in London -- Day One](/en/blog/rejekts-2025-day-one)
+- [Rejekts 2025 in London -- Day Two](/en/blog/rejekts-2025-day-two) _(this article)_
+- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-co-located-events-2025)

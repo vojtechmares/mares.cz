@@ -7,6 +7,8 @@ tags: ["kontejnery", "kubernetes"]
 trainingAd: docker
 draft: false
 publish_time: 2024-09-10
+redirectFrom: ["docker-a-dominance-kontejnerizace-backendu"]
+alternate: "docker-a-dominance-kontejnerizace-backendu"
 ---
 
 In this article, I'll cover the history of containers, application containerization, and the history of container orchestration.
@@ -313,7 +315,7 @@ The power of containers isn't just in their portability and universality. Contai
 software that manages running containers across multiple machines. Even across thousands of machines in a cluster!
 
 One of the pioneers of container orchestration was Google, which in 2003 began building the internal tool Borg to manage all their clusters and run all their applications.
-From Borg came the open-source project Kubernetes, which was founded at Google in 2014. I wrote more about the history of Kubernetes in the article [Why Kubernetes?](/en/blog/proc-kubernetes#trochu-v%C3%ADc-historie).
+From Borg came the open-source project Kubernetes, which was founded at Google in 2014. I wrote more about the history of Kubernetes in the article [Why Kubernetes?](/en/blog/why-kubernetes#trochu-v%C3%ADc-historie).
 
 Below I've expanded on popular orchestration tools, from managed services to solutions you can run yourself.
 

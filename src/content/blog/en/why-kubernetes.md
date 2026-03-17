@@ -6,6 +6,8 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2024-08-26
+redirectFrom: ["proc-kubernetes"]
+alternate: "proc-kubernetes"
 ---
 
 This year in June, Kubernetes celebrated its tenth anniversary. Over that time, the project has gained enormous popularity and spread absolutely everywhere (from data centers, through edge to AI including "homelab"), and a huge ecosystem has formed around Kubernetes, mainly thanks to CNCF ([Cloud Native Computing Foundation](https://www.cncf.io/)).

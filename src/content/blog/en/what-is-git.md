@@ -6,6 +6,8 @@ tags: ["git"]
 trainingAd: git
 draft: false
 publish_time: 2024-08-19
+redirectFrom: ["co-je-to-git"]
+alternate: "co-je-to-git"
 ---
 
 What is Git? Perhaps a trivial question for some, but for others it's still a mystery. A brief summary of what Git is and how to use it.

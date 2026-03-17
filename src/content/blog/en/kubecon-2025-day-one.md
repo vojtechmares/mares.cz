@@ -5,6 +5,8 @@ keywords: ["kubecon", "kubecon eu", "kubecon europe", "kubecon 2025", "konferenc
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-03
+redirectFrom: ["kubecon-2025-prvni-den"]
+alternate: "kubecon-2025-prvni-den"
 ---
 
 KubeCon is finally here and with it an endless stream of news — not just from the world of Kubernetes and Cloud Native.
@@ -98,7 +100,7 @@ On the other hand, hand on heart — who thinks about supply chain security from
 
 _I'll be adding more articles from each day of the conferences throughout the week._
 
-- [Rejekts 2025 in London – Day One](/en/blog/rejeckts-2025-prvni-den)
-- [Rejekts 2025 in London – Day Two](/en/blog/rejeckts-2025-druhy-den)
-- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-pridruzene-akce-2025)
-- [KubeCon 2025 in London – Day One](/en/blog/kubecon-2025-prvni-den) _(this article)_
+- [Rejekts 2025 in London – Day One](/en/blog/rejekts-2025-day-one)
+- [Rejekts 2025 in London – Day Two](/en/blog/rejekts-2025-day-two)
+- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-co-located-events-2025)
+- [KubeCon 2025 in London – Day One](/en/blog/kubecon-2025-day-one) _(this article)_

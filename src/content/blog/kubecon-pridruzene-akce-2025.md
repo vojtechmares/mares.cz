@@ -5,6 +5,7 @@ keywords: ["kubecon", "kubecon europe", "kubecon london", "2025", "london", "kub
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-02
+alternate: "kubecon-co-located-events-2025"
 ---
 
 Jsem v Londýně na šestidenním "maratonu" konferencí: Cloud Native Rejekts (30.–31. 3.), KubeCon co-located events (1. 4.) a KubeCon samotný (2.–4. 4.). Co-located events jsou za námi a tady jsou moje poznámky a objevy.

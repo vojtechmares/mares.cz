@@ -6,6 +6,7 @@ tags: ["kubernetes", "postgres"]
 trainingAd: postgres-on-k8s
 draft: false
 publish_time: 2024-10-17
+alternate: "cloudnativepg-postgresql-on-kubernetes"
 ---
 
 CloudNativePG je open-source Kubernetes operátor pro PostgreSQL od

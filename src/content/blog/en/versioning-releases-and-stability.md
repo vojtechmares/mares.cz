@@ -5,6 +5,8 @@ keywords: ["versioning", "application", "api", "product", "breaking changes", "s
 tags: [""]
 draft: true
 publish_time: 2020-01-01
+redirectFrom: ["verzovani-releasy-a-stabilita"]
+alternate: "verzovani-releasy-a-stabilita"
 ---
 
 Originally, this article was supposed to be about "Versioning Schemes," but as I was writing, things got out of hand, and so here we are.

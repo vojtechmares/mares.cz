@@ -6,6 +6,7 @@ tags: ["infrastructure-as-code", "terraform"]
 trainingAd: terraform
 draft: false
 publish_time: 2024-09-02
+alternate: "terraform-infrastructure-as-code"
 ---
 
 [Terraform](https://www.terraform.io/) je nástroj, kterým můžeme spravovat infrastrukturu jako kód. Co to znamená a proč je to důležité?

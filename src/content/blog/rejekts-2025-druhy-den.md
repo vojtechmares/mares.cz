@@ -6,6 +6,7 @@ tags: ["konference"]
 draft: false
 publish_time: 2025-04-01
 redirectFrom: ["rejeckts-2025-druhy-den"]
+alternate: "rejekts-2025-day-two"
 ---
 
 Jsem v Londýně na šestidenním "maratonu" konferencí: Cloud Native Rejekts (30.–31. 3.), KubeCon co-located events (1. 4.) a KubeCon samotný (2.–4. 4.). Rejekts jsou první – a já mám za sebou druhý den. Jaký byl?

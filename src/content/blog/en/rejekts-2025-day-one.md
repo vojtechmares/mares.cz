@@ -5,7 +5,8 @@ keywords: ["cncf rejekts", "rejekts", "kubecon", "2025", "london", "rejektsio"]
 tags: ["konference"]
 draft: false
 publish_time: 2025-03-31
-redirectFrom: ["rejeckts-2025-prvni-den"]
+redirectFrom: ["rejeckts-2025-prvni-den", "rejekts-2025-prvni-den"]
+alternate: "rejekts-2025-prvni-den"
 ---
 
 I'm in London for a six-day conference "marathon": Cloud Native Rejekts (March 30–31), KubeCon co-located events (April 1), and KubeCon itself (April 2–4). Rejekts comes first – and I've just wrapped up day one. How was it?
@@ -106,7 +107,7 @@ OCI registry today supports practically everything:
 - attestations (provenance proof, Git metadata, author...)
 - signatures
 
-Interesting fact: [CloudNativePG](/en/blog/cloudnativepg-postgresql-na-kubernetes) plans to use OCI artifacts for distributing PostgreSQL extensions – thanks to Kubernetes 1.33+, which makes it possible to mount an OCI artifact as a volume mount into a running container.
+Interesting fact: [CloudNativePG](/en/blog/cloudnativepg-postgresql-on-kubernetes) plans to use OCI artifacts for distributing PostgreSQL extensions – thanks to Kubernetes 1.33+, which makes it possible to mount an OCI artifact as a volume mount into a running container.
 
 Useful tools, not just for working with OCI:
 
@@ -159,6 +160,6 @@ For those of you who aren't in London and want to watch the talks at least from 
 
 _I'll be adding more articles from each day of the conferences throughout the week._
 
-- [Rejekts 2025 in London – Day One](/en/blog/rejekts-2025-prvni-den) (this article)
-- [Rejekts 2025 in London – Day Two](/en/blog/rejekts-2025-druhy-den)
-- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-pridruzene-akce-2025)
+- [Rejekts 2025 in London – Day One](/en/blog/rejekts-2025-day-one) (this article)
+- [Rejekts 2025 in London – Day Two](/en/blog/rejekts-2025-day-two)
+- [KubeCon Co-located Events 2025 in London](/en/blog/kubecon-co-located-events-2025)

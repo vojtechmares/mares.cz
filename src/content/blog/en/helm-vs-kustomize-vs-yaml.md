@@ -6,6 +6,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2024-10-01
+alternate: "helm-vs-kustomize-vs-yaml"
 ---
 
 There are several ways to deploy applications to a Kubernetes cluster — in this article, we'll look at three major ones.
@@ -166,7 +167,7 @@ it's not as clean as plain YAML.
 
 On the other hand, Helm is, in my view, a great tool for delivering applications to third-party customers.
 In this regard, Helm is much easier to distribute and use than Kustomize or plain YAML.
-And thanks to Helm's integration into virtually all [GitOps](/en/blog/gitops-a-argocd) tools (such as [Argo CD](https://argoproj.github.io/cd/) or [FluxCD](https://fluxcd.io/)),
+And thanks to Helm's integration into virtually all [GitOps](/en/blog/gitops-and-argocd) tools (such as [Argo CD](https://argoproj.github.io/cd/) or [FluxCD](https://fluxcd.io/)),
 using them is not a problem either.
 
 What is somewhat problematic with Helm is working with Custom Resource Definitions (CRDs),
@@ -328,7 +329,7 @@ I personally don't have much experience with it, but it's another very popular t
 
 ### Terraform
 
-[Terraform](https://www.terraform.io/), which I wrote about in [this article](/en/blog/terraform-infrastruktura-jako-kod), is also an option for deploying applications to a Kubernetes cluster.
+[Terraform](https://www.terraform.io/), which I wrote about in [this article](/en/blog/terraform-infrastructure-as-code), is also an option for deploying applications to a Kubernetes cluster.
 
 Specifically, using the [Kubernetes provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs), we can create and manage resources in a Kubernetes cluster.
 Individual _resources_ are then native _Terraform resources_ in HCL (HashiCorp Configuration Language).

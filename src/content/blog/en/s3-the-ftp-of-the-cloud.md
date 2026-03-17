@@ -5,6 +5,8 @@ keywords: ["s3", "aws", "object storage", "cloud", "cloud native"]
 tags: ["object-storage"]
 draft: false
 publish_time: 2024-10-28
+redirectFrom: ["s3-jako-ftp-cloudu"]
+alternate: "s3-jako-ftp-cloudu"
 ---
 
 In this article, we take a closer look at AWS S3, also known as object storage, and how it has become practically the standard for cloud storage. We also look at cloud-hosted and self-hosted solutions.

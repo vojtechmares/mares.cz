@@ -23,6 +23,7 @@ const blog = defineCollection({
     trainingAd: z.nullable(z.string()).optional(),
     draft: z.boolean().default(true),
     redirectFrom: z.array(z.string()).optional(),
+    alternate: z.string().optional(),
     publish_time: z.date(),
   }),
 });

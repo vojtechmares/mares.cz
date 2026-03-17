@@ -5,6 +5,7 @@ keywords: ["prometheus", "upgrade", "opentelemetry", "otel", "monitoring"]
 tags: ["prometheus"]
 draft: false
 publish_time: 2024-11-18
+alternate: "prometheus-v3"
 ---
 
 ![Prometheus logo](https://cdn.mares.cz/prometheus_logo_small_342fd1fef1.png)

@@ -17,6 +17,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2026-03-05
+alternate: "replacing-kubernetes-ingress-nginx"
 ---
 
 Nedávno jsem napsal článek [Kubernetes Ingress-NGINX odchází do důchodu](https://www.mares.cz/blog/kubernetes-ingress-nginx-odchazi-do-duchodu) a zmínil jsem, že budu hledat náhradu.

@@ -6,6 +6,7 @@ tags: ["konference"]
 trainingAd:
 draft: false
 publish_time: 2024-06-08
+alternate: "kcd-prague-2024"
 ---
 
 Ve dnech 6. a 7. června 2024 se v Praze v budově FIT ČVUT konala konferece [Kubernetes Community Days Prague 2024](https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/), kterou pořádala [Česko-Slovenská CNCF komunita](https://community.cncf.io/kcd-czech-slovak/).

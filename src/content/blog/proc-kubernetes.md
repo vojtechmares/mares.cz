@@ -6,6 +6,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2024-08-26
+alternate: "why-kubernetes"
 ---
 
 Letos v červnu oslavilo Kubernetes deset let 🎂. Za tu dobu se projektu dostalo obrovské popularity a

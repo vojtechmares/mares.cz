@@ -5,6 +5,8 @@ keywords: ["contact", "address", "bank details", "iban"]
 featured: false
 hidden: true
 draft: true
+redirectFrom: ["kontakt"]
+alternate: "kontakt"
 ---
 
 <table>

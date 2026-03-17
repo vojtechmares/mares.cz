@@ -6,6 +6,7 @@ tags: ["kubernetes", "gitops"]
 trainingAd: argo-cd
 draft: false
 publish_time: 2024-09-24
+alternate: "gitops-and-argocd"
 ---
 
 V tomto článku se podíváme na GitOps a nástroj Argo CD, který je jedním z nástrojů pro GitOps.
