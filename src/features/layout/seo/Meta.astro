@@ -16,6 +16,15 @@ let {
   keywords = undefined,
   canonical = undefined,
 } = Astro.props;
+
+if (import.meta.env.DEV && description !== undefined) {
+  const len = description.length;
+  if (len < 50 || len > 155) {
+    console.warn(
+      `[SEO] Description should be 50–155 characters (got ${len}) on ${Astro.url.pathname}: "${description}"`,
+    );
+  }
+}
 ---
 
 <title>{title}</title>
