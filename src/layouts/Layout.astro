@@ -104,6 +104,7 @@ const metadataDefaults = LocalizedMetadata.filter((m) => m.locale === locale)[0]
 const czechPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : Astro.url.pathname;
 const csUrl = new URL(czechPath, Astro.site).toString();
 const enUrl = new URL(localizeUrl(czechPath, "en"), Astro.site).toString();
+const localeCanonical = locale === "en" ? enUrl : csUrl;
 ---
 
 <!doctype html>
@@ -120,6 +121,7 @@ const enUrl = new URL(localizeUrl(czechPath, "en"), Astro.site).toString();
       title={meta?.title ?? metadataDefaults.title}
       description={meta?.description ?? metadataDefaults.description}
       keywords={meta?.keywords}
+      canonical={meta?.canonical ?? localeCanonical}
     />
     <Twitter
       title={meta?.title ?? metadataDefaults.title}
