@@ -38,7 +38,7 @@ const monthName = getMonthName(month, locale);
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
-const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
+const monthPath = `/blog/archive/${year}/${String(month).padStart(2, "0")}`;
 
 const meta = {
   title: t(locale, "blog.month_meta_title", { month: monthName, year }),
@@ -54,7 +54,7 @@ const meta = {
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `${baseUrl}/blog/archive/${year}/${String(month).padStart(2, "0")}/card.png`,
+    url: new URL(localizeUrl(monthPath, locale) + "/card.png", Astro.site).toString(),
     width: 1200,
     height: 630,
     alt: `Blog: ${monthName} ${year}`,
@@ -65,7 +65,7 @@ const jsonLd = {
   type: "CollectionPage" as const,
   name: `Blog: ${monthName} ${year}`,
   description: meta.description,
-  url: `${baseUrl}/blog/archive/${year}/${String(month).padStart(2, "0")}`,
+  url: new URL(localizeUrl(monthPath, locale), Astro.site).toString(),
 };
 ---
 

@@ -141,6 +141,9 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
           title={meta?.title ?? metadataDefaults.title}
           description={meta?.description ?? metadataDefaults.description}
           image={openGraph.image}
+          locale={locale}
+          localeAlternate={locale === "en" ? "cs" : "en"}
+          url={localeCanonical}
         />
       )
     }

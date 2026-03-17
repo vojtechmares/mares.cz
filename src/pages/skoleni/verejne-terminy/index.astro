@@ -55,14 +55,12 @@ const nextSession = sessions.length > 0 ? sessions[0] : null;
 const openGraph = {
   type: "website" as const,
   image: {
-    url: new URL("card.png", new URL(localizeUrl(Astro.url.pathname, locale) + "/", Astro.site)).toString(),
+    url: new URL(localizeUrl("/skoleni/verejne-terminy", locale) + "/card.png", Astro.site).toString(),
     width: 1200,
     height: 630,
     alt: t(locale, "sessions_page.og_alt"),
   },
 };
-
-const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
 
 // Generate Event schema for each training session
 const jsonLd = {
@@ -75,7 +73,7 @@ const jsonLd = {
     }),
     location: session.location,
     organizerName: "Vojtěch Mareš",
-    organizerUrl: baseUrl,
+    organizerUrl: new URL(localizeUrl("/", locale), Astro.site).toString().replace(/\/$/, ""),
     price: getSessionPrice(session.pricing, locale),
     priceCurrency: getCurrencyForLocale(locale),
     ...(session.signUpURL && {

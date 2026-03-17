@@ -37,14 +37,14 @@ const meta = {
 const openGraph = {
   type: "article" as const,
   image: {
-    url: new URL("card.png", new URL(localizeUrl(Astro.url.pathname, locale) + "/", Astro.site)).toString(),
+    url: new URL(localizeUrl("/blog/" + slug, locale) + "/card.png", Astro.site).toString(),
     width: 1200,
     height: 630,
     alt: article.data.title + ": " + article.data.description,
   },
 };
 
-const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
+const localizedRoot = new URL(localizeUrl("/", locale), Astro.site).toString().replace(/\/$/, "");
 
 const jsonLd = {
   type: "BlogPosting" as const,
@@ -54,11 +54,11 @@ const jsonLd = {
   dateModified: article.data.publish_time?.toISOString() || new Date().toISOString(),
   author: {
     name: "Vojtěch Mareš",
-    url: baseUrl,
+    url: localizedRoot,
   },
   keywords: article.data.keywords.join(","),
-  image: baseUrl + "/blog/" + bareSlug(article.id) + "/card.png",
-  url: baseUrl + "/blog/" + bareSlug(article.id),
+  image: new URL(localizeUrl("/blog/" + bareSlug(article.id), locale) + "/card.png", Astro.site).toString(),
+  url: new URL(localizeUrl("/blog/" + bareSlug(article.id), locale), Astro.site).toString(),
 };
 
 const articleSlug = bareSlug(article.id);

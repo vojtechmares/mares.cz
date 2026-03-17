@@ -46,8 +46,6 @@ const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
 
 Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
-const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
-
 const meta = {
   title: t(locale, "blog.year_meta_title", { year }),
   description: t(locale, "blog.year_meta_description", { year, count: articles.length }),
@@ -57,7 +55,7 @@ const meta = {
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `${baseUrl}/blog/archive/${year}/card.png`,
+    url: new URL(localizeUrl("/blog/archive/" + year, locale) + "/card.png", Astro.site).toString(),
     width: 1200,
     height: 630,
     alt: `Blog: ${year}`,
@@ -68,7 +66,7 @@ const jsonLd = {
   type: "CollectionPage" as const,
   name: `Blog: ${year}`,
   description: meta.description,
-  url: `${baseUrl}/blog/archive/${year}`,
+  url: new URL(localizeUrl("/blog/archive/" + year, locale), Astro.site).toString(),
 };
 ---
 

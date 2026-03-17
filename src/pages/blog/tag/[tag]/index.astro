@@ -34,12 +34,10 @@ const meta = {
   keywords: t(locale, "blog.tag_meta_keywords", { tag }),
 };
 
-const baseUrl = new URL(localizeUrl(Astro.url.pathname, locale), Astro.site).toString().replace(/\/$/, "");
-
 const openGraph = {
   type: "website" as const,
   image: {
-    url: `${baseUrl}/blog/tag/${tag}/card.png`,
+    url: new URL(localizeUrl("/blog/tag/" + tag, locale) + "/card.png", Astro.site).toString(),
     width: 1200,
     height: 630,
     alt: `Blog: #${tag}`,
@@ -50,7 +48,7 @@ const jsonLd = {
   type: "CollectionPage" as const,
   name: t(locale, "blog.tag_heading", { tag }),
   description: meta.description,
-  url: `${baseUrl}/blog/tag/${tag}`,
+  url: new URL(localizeUrl("/blog/tag/" + tag, locale), Astro.site).toString(),
 };
 ---
 
