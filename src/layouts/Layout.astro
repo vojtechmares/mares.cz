@@ -34,6 +34,11 @@ interface Props {
     };
   };
 
+  alternateUrls?: {
+    cs: string;
+    en: string;
+  };
+
   jsonLd?:
     | {
         type: "BlogPosting";
@@ -93,7 +98,7 @@ interface Props {
       };
 }
 
-const { meta, openGraph = undefined, jsonLd = undefined } = Astro.props;
+const { meta, openGraph = undefined, jsonLd = undefined, alternateUrls } = Astro.props;
 
 const locale = Astro.locals.locale;
 const lang = locale === "en" ? "en" : "cs";
@@ -102,8 +107,8 @@ const metadataDefaults = LocalizedMetadata.filter((m) => m.locale === locale)[0]
 
 // Compute Czech path for hreflang (strip /en prefix and translate back)
 const czechPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : Astro.url.pathname;
-const csUrl = new URL(czechPath, Astro.site).toString();
-const enUrl = new URL(localizeUrl(czechPath, "en"), Astro.site).toString();
+const csUrl = alternateUrls?.cs ?? new URL(czechPath, Astro.site).toString();
+const enUrl = alternateUrls?.en ?? new URL(localizeUrl(czechPath, "en"), Astro.site).toString();
 const localeCanonical = locale === "en" ? enUrl : csUrl;
 ---
 

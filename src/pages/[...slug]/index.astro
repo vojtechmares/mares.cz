@@ -56,10 +56,28 @@ const openGraph = {
   },
 };
 
+const pageSlug = bareSlug(page.id);
+const alternateSlug = page.data.alternate;
+
+let alternateUrls: { cs: string; en: string } | undefined;
+if (alternateSlug) {
+  if (locale === "cs") {
+    alternateUrls = {
+      cs: new URL(`/${pageSlug}`, Astro.site).toString(),
+      en: new URL(`/en/${alternateSlug}`, Astro.site).toString(),
+    };
+  } else {
+    alternateUrls = {
+      cs: new URL(`/${alternateSlug}`, Astro.site).toString(),
+      en: new URL(`/en/${pageSlug}`, Astro.site).toString(),
+    };
+  }
+}
+
 const { Content } = await render(page);
 ---
 
-<Layout meta={meta} openGraph={openGraph}>
+<Layout meta={meta} openGraph={openGraph} alternateUrls={alternateUrls}>
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse" level="h1">{page.data.title}</Heading>
