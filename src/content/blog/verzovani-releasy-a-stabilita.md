@@ -5,6 +5,7 @@ keywords: ["verzování", "aplikace", "api", "produkt", "breaking changes", "sta
 tags: [""]
 draft: true
 publish_time: 2020-01-01
+redirectFrom: ["versioning-releases-and-stability"]
 alternate: "versioning-releases-and-stability"
 ---
 

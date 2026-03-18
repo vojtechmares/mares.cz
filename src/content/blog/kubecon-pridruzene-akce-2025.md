@@ -5,6 +5,7 @@ keywords: ["kubecon", "kubecon europe", "kubecon london", "2025", "london", "kub
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-02
+redirectFrom: ["kubecon-co-located-events-2025"]
 alternate: "kubecon-co-located-events-2025"
 ---
 

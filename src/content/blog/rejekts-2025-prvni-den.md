@@ -5,7 +5,7 @@ keywords: ["cncf rejekts", "rejekts", "kubecon", "2025", "london", "rejektsio"]
 tags: ["konference"]
 draft: false
 publish_time: 2025-03-31
-redirectFrom: ["rejeckts-2025-prvni-den"]
+redirectFrom: ["rejeckts-2025-prvni-den", "rejekts-2025-day-one"]
 alternate: "rejekts-2025-day-one"
 ---
 

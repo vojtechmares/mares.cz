@@ -6,6 +6,7 @@ tags: ["infrastructure-as-code", "terraform"]
 trainingAd: terraform
 draft: false
 publish_time: 2024-09-02
+redirectFrom: ["terraform-infrastructure-as-code"]
 alternate: "terraform-infrastructure-as-code"
 ---
 

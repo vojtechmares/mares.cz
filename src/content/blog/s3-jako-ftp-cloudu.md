@@ -5,6 +5,7 @@ keywords: ["s3", "aws", "object storage", "cloud", "cloud native"]
 tags: ["object-storage"]
 draft: false
 publish_time: 2024-10-28
+redirectFrom: ["s3-the-ftp-of-the-cloud"]
 alternate: "s3-the-ftp-of-the-cloud"
 ---
 

@@ -5,6 +5,7 @@ keywords: ["kubecon", "kubecon eu", "kubecon europe", "kubecon 2025", "konferenc
 tags: ["konference"]
 draft: false
 publish_time: 2025-04-03
+redirectFrom: ["kubecon-2025-day-one"]
 alternate: "kubecon-2025-day-one"
 ---
 

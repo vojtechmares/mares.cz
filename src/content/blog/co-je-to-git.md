@@ -6,6 +6,7 @@ tags: ["git"]
 trainingAd: git
 draft: false
 publish_time: 2024-08-19
+redirectFrom: ["what-is-git"]
 alternate: "what-is-git"
 ---
 

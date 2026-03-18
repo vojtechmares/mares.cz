@@ -17,6 +17,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2026-03-05
+redirectFrom: ["replacing-kubernetes-ingress-nginx"]
 alternate: "replacing-kubernetes-ingress-nginx"
 ---
 

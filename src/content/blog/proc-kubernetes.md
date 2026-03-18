@@ -6,6 +6,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2024-08-26
+redirectFrom: ["why-kubernetes"]
 alternate: "why-kubernetes"
 ---
 

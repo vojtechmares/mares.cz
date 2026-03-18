@@ -5,6 +5,7 @@ keywords: ["gitlab", "terraform", "aws", "ses", "smtp", "emaily", "dns"]
 tags: ["gitlab", "terraform", "aws-ses", "emails"]
 draft: false
 publish_time: 2022-04-12
+redirectFrom: ["gitlab-emails-with-aws-ses-via-terraform"]
 alternate: "gitlab-emails-with-aws-ses-via-terraform"
 ---
 

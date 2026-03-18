@@ -17,6 +17,7 @@ tags: ["kubernetes"]
 trainingAd: kubernetes
 draft: false
 publish_time: 2025-11-19
+redirectFrom: ["kubernetes-ingress-nginx-is-retiring"]
 alternate: "kubernetes-ingress-nginx-is-retiring"
 ---
 

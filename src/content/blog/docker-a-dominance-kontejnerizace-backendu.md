@@ -7,6 +7,7 @@ tags: ["kontejnery", "kubernetes"]
 trainingAd: docker
 draft: false
 publish_time: 2024-09-10
+redirectFrom: ["docker-and-backend-containerization-dominance"]
 alternate: "docker-and-backend-containerization-dominance"
 ---
 

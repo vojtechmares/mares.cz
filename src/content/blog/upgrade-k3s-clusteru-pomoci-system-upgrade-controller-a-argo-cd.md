@@ -5,6 +5,7 @@ keywords: ["kubernetes", "k3s", "upgrade", "system upgrade controller", "argocd"
 tags: ["kubernetes", "hetzner", "argocd", "gitops"]
 draft: false
 publish_time: 2022-11-17
+redirectFrom: ["upgrading-k3s-with-system-upgrade-controller-and-argo-cd"]
 alternate: "upgrading-k3s-with-system-upgrade-controller-and-argo-cd"
 ---
 
