@@ -133,3 +133,21 @@ jobs:
       - name: Fail the job if Helm deploy failed
         if: steps.helm_deploy.outcome == 'failure'
         run: exit 1
+
+  smoke-test-og-images:
+    name: smoke test OG images
+    runs-on: ubuntu-24.04
+    needs: [deploy-to-production]
+    continue-on-error: true
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: install hurl
+        run: |
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/6.1.1/hurl_6.1.1_amd64.deb
+          sudo apt-get install -y ./hurl_6.1.1_amd64.deb
+
+      - name: run OG image smoke tests
+        run: hurl --test --variable base_url=https://www.mares.cz tests/hurl/og-*.hurl
