@@ -29,3 +29,12 @@ const currentPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : A
 ---
 
 <Navbar links={links} locale={locale} currentPath={currentPath} />
+
+<script>
+  document.querySelectorAll("[data-lang-switcher] a[data-lang]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const lang = (link as HTMLAnchorElement).dataset.lang;
+      document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+    });
+  });
+</script>
