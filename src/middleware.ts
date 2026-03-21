@@ -19,6 +19,10 @@ import { englishPathToCzech, localizeUrl } from "./i18n/routes";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
 
+  if (pathname.startsWith("/api/")) {
+    return next();
+  }
+
   if (pathname.startsWith("/en")) {
     context.locals.locale = "en";
     const czechPath = englishPathToCzech(pathname);
