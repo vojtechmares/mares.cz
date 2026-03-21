@@ -49,6 +49,18 @@ export function getContentPages(site: string): string[] {
   const contentDir = join(import.meta.dirname, "..", "content");
   const urls: string[] = [];
 
+  // Static pages not generated from content collections
+  urls.push(`${base}/`);
+  urls.push(`${base}/en/`);
+  urls.push(`${base}/blog`);
+  urls.push(`${base}/en/blog`);
+  urls.push(`${base}/prednasky`);
+  urls.push(`${base}/en/talks`);
+  urls.push(`${base}/sluzby`);
+  urls.push(`${base}/en/services`);
+  urls.push(`${base}/skoleni/verejne-terminy`);
+  urls.push(`${base}/en/training/public-sessions`);
+
   // Czech blog posts
   const blogDir = join(contentDir, "blog");
   const archiveDates = new Set<string>();

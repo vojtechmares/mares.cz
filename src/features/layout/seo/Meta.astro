@@ -3,19 +3,12 @@ import { canonicalUrl } from "../../../lib/url";
 
 interface Props {
   title?: string;
-  prefixedTitle?: string;
   description?: string;
   keywords?: string;
   canonical?: string;
 }
 
-let {
-  title = undefined,
-  prefixedTitle = undefined,
-  description = undefined,
-  keywords = undefined,
-  canonical = undefined,
-} = Astro.props;
+let { title = undefined, description = undefined, keywords = undefined, canonical = undefined } = Astro.props;
 
 if (import.meta.env.DEV && description !== undefined) {
   const len = description.length;
@@ -32,4 +25,5 @@ if (import.meta.env.DEV && description !== undefined) {
 <meta name="keywords" content={keywords} />
 <meta name="author" content="Vojtěch Mareš" />
 <meta name="theme-color" content="#ffffff" />
+<meta name="robots" content="max-image-preview:large" />
 <link rel="canonical" href={canonical !== undefined ? canonical : canonicalUrl(Astro.url, Astro.site).toString()} />

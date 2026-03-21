@@ -32,6 +32,12 @@ interface Props {
       height: number;
       alt: string;
     };
+    article?: {
+      publishedTime?: string;
+      modifiedTime?: string;
+      author?: string;
+      tags?: string[];
+    };
   };
 
   alternateUrls?: {
@@ -81,6 +87,9 @@ interface Props {
           courseMode: string;
           location: string;
         }[];
+        inLanguage?: string;
+        timeRequired?: string;
+        courseCode?: string;
       }
     | {
         type: "ItemList";
@@ -94,6 +103,7 @@ interface Props {
           price: number;
           priceCurrency: string;
           offerUrl?: string;
+          url?: string;
         }[];
       };
 }
@@ -144,17 +154,16 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
           locale={locale}
           localeAlternate={locale === "en" ? "cs" : "en"}
           url={localeCanonical}
+          article={openGraph.article}
         />
       )
     }
     {jsonLd !== undefined && <JSONLD schema={jsonLd} locale={locale} />}
+    <link rel="alternate" type="application/rss+xml" title="Blog – Vojtěch Mareš (CZ)" href="/blog/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Blog – Vojtěch Mareš (EN)" href="/en/blog/rss.xml" />
+    <link rel="dns-prefetch" href="https://cdn.mares.cz" />
     <link rel="preconnect" href="https://cdn.mares.cz" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/ibm-plex-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
     <GoogleAnalytics />
     <slot name="head" />
   </head>

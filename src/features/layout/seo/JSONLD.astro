@@ -46,6 +46,9 @@ interface CourseSchema {
     courseMode: string;
     location: string;
   }[];
+  inLanguage?: string;
+  timeRequired?: string;
+  courseCode?: string;
 }
 
 interface EventSchema {
@@ -58,6 +61,7 @@ interface EventSchema {
   price: number;
   priceCurrency: string;
   offerUrl?: string;
+  url?: string;
 }
 
 interface ItemListSchema {
@@ -123,15 +127,9 @@ if (schema.type === "BlogPosting") {
         "https://github.com/vojtechmares",
         "https://linkedin.com/in/vojtech-mares",
         "https://twitter.com/vojtechmares_",
+        "https://bsky.app/profile/mares.cz",
+        "https://mastodon.social/@vojtechmares",
       ],
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/blog?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
     },
   };
 } else if (schema.type === "Organization") {
@@ -140,11 +138,12 @@ if (schema.type === "BlogPosting") {
     "@type": "Organization",
     name: "Vojtěch Mareš",
     url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
     sameAs: [
       "https://github.com/vojtechmares",
       "https://linkedin.com/in/vojtech-mares",
       "https://twitter.com/vojtechmares_",
+      "https://bsky.app/profile/mares.cz",
+      "https://mastodon.social/@vojtechmares",
     ],
   };
 } else if (schema.type === "Person") {
@@ -159,6 +158,8 @@ if (schema.type === "BlogPosting") {
       "https://github.com/vojtechmares",
       "https://linkedin.com/in/vojtech-mares",
       "https://twitter.com/vojtechmares_",
+      "https://bsky.app/profile/mares.cz",
+      "https://mastodon.social/@vojtechmares",
     ],
   };
 } else if (schema.type === "CollectionPage") {
@@ -194,6 +195,9 @@ if (schema.type === "BlogPosting") {
         priceCurrency: course.offers.priceCurrency,
       },
     }),
+    ...(course.inLanguage && { inLanguage: course.inLanguage }),
+    ...(course.timeRequired && { timeRequired: course.timeRequired }),
+    ...(course.courseCode && { courseCode: course.courseCode }),
     ...(course.hasCourseInstance && {
       hasCourseInstance: course.hasCourseInstance.map((instance) => ({
         "@type": "CourseInstance",
@@ -220,6 +224,8 @@ if (schema.type === "BlogPosting") {
         name: event.name,
         startDate: event.startDate,
         ...(event.endDate && { endDate: event.endDate }),
+        ...(event.url && { url: event.url }),
+        eventStatus: "https://schema.org/EventScheduled",
         location: {
           "@type": "Place",
           name: event.location,

@@ -42,6 +42,12 @@ const openGraph = {
     height: 630,
     alt: article.data.title + ": " + article.data.description,
   },
+  article: {
+    publishedTime: article.data.publish_time?.toISOString(),
+    modifiedTime: article.data.publish_time?.toISOString(),
+    author: "Vojtěch Mareš",
+    tags: article.data.tags,
+  },
 };
 
 const localizedRoot = new URL(localizeUrl("/", locale), Astro.site).toString().replace(/\/$/, "");

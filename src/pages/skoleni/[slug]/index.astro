@@ -15,6 +15,7 @@ import { t } from "../../../i18n";
 import { formatPrice, getCurrencyForLocale } from "../../../i18n/formatting";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
 import { localizeUrl } from "../../../i18n/routes";
+import { truncateDescription, formatCourseTimeRequired } from "../../../lib/seo";
 
 const locale = Astro.locals.locale;
 
@@ -40,7 +41,7 @@ const sessions = sessionEntries.map(toTrainingSession);
 
 const meta = {
   title: "Vojtěch Mareš | " + training.data.title + " " + t(locale, "training_page.training_suffix"),
-  description: training.data.description,
+  description: truncateDescription(training.data.description),
   keywords: training.data.keywords.join(","),
 };
 
@@ -72,6 +73,9 @@ const jsonLd = {
     price: pricing.open,
     priceCurrency: currency,
   },
+  inLanguage: locale === "en" ? "en" : "cs",
+  timeRequired: formatCourseTimeRequired(training.data.length),
+  courseCode: slug,
   ...(sessions.length > 0 && {
     hasCourseInstance: sessions.map((session) => ({
       startDate: new Date(session.dates.start).toISOString(),

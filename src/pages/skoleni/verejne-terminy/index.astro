@@ -79,6 +79,9 @@ const jsonLd = {
     ...(session.signUpURL && {
       offerUrl: session.signUpURL,
     }),
+    ...(session.trainingSlug && {
+      url: new URL(localizeUrl(`/skoleni/${session.trainingSlug}`, locale), Astro.site).toString(),
+    }),
   })),
 };
 ---

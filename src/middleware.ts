@@ -43,7 +43,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     context.locals.locale = "cs";
   }
 
-  return next();
+  const response = await next();
+  response.headers.set("Content-Language", context.locals.locale === "en" ? "en" : "cs");
+  return response;
 });
 
 /**

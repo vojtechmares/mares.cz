@@ -31,6 +31,7 @@ export function TrainingHero({ title, description, length, price, logo, locale }
                   src={logo.src}
                   alt={`${title} logo`}
                   className={`h-20 w-auto shrink-0 ${logo.src.endsWith(".svg") ? "invert" : ""}`}
+                  fetchPriority="high"
                 />
               )}
               <Heading variant="inverse" level="h1">
