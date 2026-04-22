@@ -68,11 +68,6 @@ export default defineConfig({
 
   env: {
     schema: {
-      DISABLE_ANALYTICS: envField.boolean({
-        context: "server",
-        access: "public",
-        default: false,
-      }),
       SESSIONS_API_URL: envField.string({
         context: "server",
         access: "secret",

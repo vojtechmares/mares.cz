@@ -15,11 +15,6 @@ HTTP 200
 [Asserts]
 header "content-type" contains "image/png"
 
-GET {{base_url}}/zasady-pouzivani-cookies/card.png
-HTTP 200
-[Asserts]
-header "content-type" contains "image/png"
-
 # Dynamic page OG images — English
 
 GET {{base_url}}/en/projects/card.png
@@ -33,11 +28,6 @@ HTTP 200
 header "content-type" contains "image/png"
 
 GET {{base_url}}/en/business-cooperation/card.png
-HTTP 200
-[Asserts]
-header "content-type" contains "image/png"
-
-GET {{base_url}}/en/cookie-policy/card.png
 HTTP 200
 [Asserts]
 header "content-type" contains "image/png"

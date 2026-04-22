@@ -10,8 +10,6 @@ import Twitter from "../features/layout/seo/Twitter.astro";
 import OpenGraph from "../features/layout/seo/OpenGraph.astro";
 import JSONLD from "../features/layout/seo/JSONLD.astro";
 import { LocalizedMetadata } from "../lib/site";
-import GoogleAnalytics from "../features/analytics/GoogleAnalytics.astro";
-import CookieConsent from "../features/layout/CookieConsent.astro";
 import { t } from "../i18n";
 import { localizeUrl } from "../i18n/routes";
 import { englishPathToCzech } from "../i18n/routes";
@@ -165,7 +163,6 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
     <link rel="dns-prefetch" href="https://cdn.mares.cz" />
     <link rel="preconnect" href="https://cdn.mares.cz" />
     <link rel="preload" href="/fonts/ibm-plex-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <GoogleAnalytics />
     <FathomAnalytics />
     <slot name="head" />
   </head>
@@ -181,6 +178,5 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
       <slot />
     </main>
     <Footer />
-    <CookieConsent />
   </body></html
 >

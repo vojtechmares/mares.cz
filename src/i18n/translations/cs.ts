@@ -20,13 +20,6 @@ export const cs = {
   "footer.github_label": "Vojtěch Mareš na GitHub",
   "footer.copyright": "Copyright \u00A9 {year} Vojtěch Mareš. Všechna práva vyhrazena.",
 
-  // Layout - Cookie consent
-  "cookie.text":
-    "Tento web používá soubory cookies k analýze návštěvnosti pomocí služby Google Analytics. Díky nim můžu zlepšovat svoje stránky na základě anonymních statistik. Více informací najdete v",
-  "cookie.policy_link": "zásadách používání cookies",
-  "cookie.accept": "Přijmout vše",
-  "cookie.deny": "Odmítnout vše",
-
   // Homepage - Hero
   "hero.intro": "Jsem",
   "hero.role": "DevOps architekt.",

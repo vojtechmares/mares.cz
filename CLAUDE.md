@@ -77,7 +77,6 @@ Output: `server` (SSR) | Adapter: Cloudflare Workers | Site: https://www.mares.c
 
 ### Environment Variables (astro.config.mjs env schema)
 
-- `DISABLE_ANALYTICS` - Boolean (default: false)
 - `SESSIONS_API_URL` - Backoffice API endpoint
 - `SESSIONS_OIDC_ISSUER`, `SESSIONS_OIDC_CLIENT_ID`, `SESSIONS_OIDC_CLIENT_SECRET` - OIDC auth
 - `SESSIONS_OIDC_AUDIENCE` - OIDC audience (optional)

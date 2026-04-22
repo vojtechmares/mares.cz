@@ -41,12 +41,6 @@ task docker:build
 task docker:run
 ```
 
-## Environment Variables
-
-Required variables (store in `.prod.env` for local development):
-
-- `DISABLE_ANALYTICS` - Disable Google Analytics (optional)
-
 ## Contributing
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages

@@ -22,13 +22,6 @@ export const en: Record<TranslationKey, string> = {
   "footer.github_label": "Vojtěch Mareš on GitHub",
   "footer.copyright": "Copyright \u00A9 {year} Vojtěch Mareš. All rights reserved.",
 
-  // Layout - Cookie consent
-  "cookie.text":
-    "This website uses cookies for traffic analysis via Google Analytics. They help me improve the site based on anonymous statistics. More information in the",
-  "cookie.policy_link": "cookie policy",
-  "cookie.accept": "Accept all",
-  "cookie.deny": "Deny all",
-
   // Homepage - Hero
   "hero.intro": "I'm",
   "hero.role": "DevOps architect.",
