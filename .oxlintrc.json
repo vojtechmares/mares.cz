@@ -1,8 +1,6 @@
 {
   "plugins": ["react", "jsx-a11y", "node"],
-  "rules": {
-    "react": "error",
-    "jsx-a11y": "error",
-    "node": "error"
+  "categories": {
+    "correctness": "error"
   }
 }
