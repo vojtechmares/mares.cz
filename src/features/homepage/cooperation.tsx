@@ -33,7 +33,7 @@ export function Cooperation({ locale }: { locale: Locale }) {
           </Text>
         </div>
         <nav aria-label="Progress">
-          <ol role="list" className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2">
+          <ol className="mx-auto mt-10 max-w-3xl overflow-hidden pt-2">
             {steps.map((step, stepIdx) => (
               <li key={step.name} className={clsx(stepIdx !== steps.length - 1 ? "pb-10" : "", "relative")}>
                 {stepIdx !== steps.length - 1 ? (

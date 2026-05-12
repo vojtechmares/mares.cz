@@ -17,30 +17,34 @@ const truncateText = (text: string, maxLength = 120) =>
 export function ArticleGrid({ articles, locale }: { articles: CollectionEntry<"blog">[]; locale: Locale }) {
   return (
     <Container>
-      <div role="list" className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {articles.map((article) => (
-          <Card key={article.id} variant="surface" className="flex flex-col">
-            <div className="mb-4 flex flex-row justify-between">
-              {/* prettier-ignore */}
-              <Body>{article.data.tags.map((tag) => <Fragment key={tag}><Link href={localizeUrl(`/blog/tag/${tag}`, locale)}>#{tag}</Link>{" "}</Fragment>)}</Body>
-              <Body color="secondary">
-                {formatDate(article.data.publish_time as Date, locale, {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
+          <li key={article.id}>
+            <Card variant="surface" className="flex flex-col">
+              <div className="mb-4 flex flex-row justify-between">
+                {/* prettier-ignore */}
+                <Body>{article.data.tags.map((tag) => <Fragment key={tag}><Link href={localizeUrl(`/blog/tag/${tag}`, locale)}>#{tag}</Link>{" "}</Fragment>)}</Body>
+                <Body color="secondary">
+                  {formatDate(article.data.publish_time as Date, locale, {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </Body>
+              </div>
+              <Heading level="h3">{article.data.title}</Heading>
+              <Body color="secondary" className="my-4">
+                {truncateText(article.data.description)}
               </Body>
-            </div>
-            <Heading level="h3">{article.data.title}</Heading>
-            <Body color="secondary" className="my-4">
-              {truncateText(article.data.description)}
-            </Body>
-            <div className="mt-auto flex justify-end pt-4">
-              <Link href={localizeUrl("/blog/" + bareSlug(article.id), locale)}>{t(locale, "blog.read_article")}</Link>
-            </div>
-          </Card>
+              <div className="mt-auto flex justify-end pt-4">
+                <Link href={localizeUrl("/blog/" + bareSlug(article.id), locale)}>
+                  {t(locale, "blog.read_article")}
+                </Link>
+              </div>
+            </Card>
+          </li>
         ))}
-      </div>
+      </ul>
     </Container>
   );
 }

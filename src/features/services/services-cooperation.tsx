@@ -58,7 +58,7 @@ export function ServicesCooperation({ locale }: { locale: Locale }) {
         </Body>
 
         <nav aria-label="Kroky spolupráce" className="mt-12">
-          <ol role="list" className="mx-auto max-w-3xl overflow-hidden pt-2">
+          <ol className="mx-auto max-w-3xl overflow-hidden pt-2">
             {steps.map((step, idx) => (
               <li key={step.name} className={clsx(idx !== steps.length - 1 ? "pb-10" : "", "relative")}>
                 {idx !== steps.length - 1 ? (
