@@ -4,7 +4,7 @@ authorRole: CEO, NUMOTEQ
 authorImage: lukas-frana.png
 kind: cooperation
 order: 4
-draft: true
+draft: false
 ---
 
 **Dlouhodobá spolupráce**
