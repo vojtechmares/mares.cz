@@ -32,7 +32,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (!context.locals.locale) {
     const langCookie = context.cookies.get("lang");
 
-    if (!langCookie) {
+    if (!langCookie && !isMachineReadablePath(pathname)) {
       const acceptLang = context.request.headers.get("Accept-Language");
       if (acceptLang && !prefersCzechOrSlovak(acceptLang)) {
         const englishUrl = localizeUrl(pathname, "en");
@@ -47,6 +47,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
   response.headers.set("Content-Language", context.locals.locale === "en" ? "en" : "cs");
   return response;
 });
+
+/**
+ * Routes that are fetched by machines (crawlers, feed readers) against the canonical
+ * Czech URL. Accept-Language negotiation must not redirect these, or unfurled link
+ * previews end up with the wrong-locale card image.
+ */
+function isMachineReadablePath(pathname: string): boolean {
+  return pathname.endsWith("/card.png") || pathname.endsWith("/rss.xml") || pathname === "/robots.txt";
+}
 
 /**
  * Parse Accept-Language header and check if the top preferred language is Czech or Slovak.
