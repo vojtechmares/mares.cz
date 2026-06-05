@@ -5,7 +5,6 @@ import { Section } from "../../../../components/ui/section";
 import { TagList } from "../../../../components/ui/tag-list";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
-import { CachePresets } from "../../../../lib/cache";
 import { t } from "../../../../i18n";
 import { getMonthName, formatArticleCount } from "../../../../i18n/formatting";
 import { localizeUrl } from "../../../../i18n/routes";
@@ -43,8 +42,6 @@ const months = Array.from(monthCounts.entries())
   .sort((a, b) => b.month - a.month);
 
 const tags = [...new Set(allArticles.flatMap((a) => a.data.tags))];
-
-Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const meta = {
   title: t(locale, "blog.year_meta_title", { year }),

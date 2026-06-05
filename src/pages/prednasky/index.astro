@@ -6,7 +6,6 @@ import { Link } from "../../components/ui/link";
 import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
-import { CachePresets } from "../../lib/cache";
 import { TalksHero } from "../../features/talks/talks-hero";
 import { t } from "../../i18n";
 import { formatDate } from "../../i18n/formatting";
@@ -14,8 +13,6 @@ import { localizeUrl } from "../../i18n/routes";
 import { getLocalizedCollection } from "../../lib/content";
 
 const locale = Astro.locals.locale;
-
-Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const talks = (await getLocalizedCollection("talk", locale, ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),

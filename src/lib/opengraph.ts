@@ -4,8 +4,6 @@ import { type ReactNode } from "react";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 
-import { CachePresets } from "./cache";
-
 let interRegular: Buffer | null = null;
 let interBold: Buffer | null = null;
 
@@ -81,7 +79,6 @@ export async function OpenGraphImageResponse(component: ReactNode, _baseUrl: str
   return new Response(png, {
     headers: {
       "Content-Type": "image/png",
-      "Cache-Control": CachePresets.ogImage,
     },
   });
 }

@@ -6,7 +6,6 @@ import { Section } from "../../../../components/ui/section";
 import { Text } from "../../../../components/ui/text";
 import Layout from "../../../../layouts/Layout.astro";
 import { ArticleGrid } from "../../../../features/blog/article-grid";
-import { CachePresets } from "../../../../lib/cache";
 import { t } from "../../../../i18n";
 import { localizeUrl } from "../../../../i18n/routes";
 import { getLocalizedCollection } from "../../../../lib/content";
@@ -25,8 +24,6 @@ if (articles.length === 0) {
 }
 
 const sortedArticles = articles.sort((a, b) => b.data.publish_time.valueOf() - a.data.publish_time.valueOf());
-
-Astro.response.headers.set("Cache-Control", CachePresets.archive);
 
 const meta = {
   title: t(locale, "blog.tag_meta_title", { tag }),

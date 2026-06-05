@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { CachePresets } from "../../../../lib/cache";
 
 export const GET: APIRoute = async () => {
   const trainings = await getCollection("training", ({ id, data }) => !data.draft && id !== "empty");
@@ -23,7 +22,6 @@ export const GET: APIRoute = async () => {
   return new Response(JSON.stringify(items), {
     headers: {
       "Content-Type": "application/json",
-      "Cache-Control": CachePresets.training,
     },
   });
 };

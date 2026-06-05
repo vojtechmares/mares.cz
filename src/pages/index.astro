@@ -10,9 +10,6 @@ import { CallToAction } from "../features/homepage/call-to-action";
 import { LocalizedMetadata } from "../lib/site";
 import { localizeUrl } from "../i18n/routes";
 import { TrainingGrid } from "../features/training/training-grid";
-import { CachePresets } from "../lib/cache";
-
-Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const locale = Astro.locals.locale;
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === locale)[0];

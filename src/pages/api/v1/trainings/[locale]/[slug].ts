@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import yaml from "js-yaml";
-import { CachePresets } from "../../../../../lib/cache";
 
 export const GET: APIRoute = async ({ params }) => {
   const { locale, slug } = params;
@@ -23,7 +22,6 @@ export const GET: APIRoute = async ({ params }) => {
   return new Response(markdown, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": CachePresets.training,
     },
   });
 };

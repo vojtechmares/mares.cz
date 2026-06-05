@@ -6,7 +6,6 @@ import { Heading } from "../../components/ui/heading";
 import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
 import { Prose } from "../../components/prose";
-import { CachePresets } from "../../lib/cache";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../lib/content";
 import { localizeUrl } from "../../i18n/routes";
 
@@ -37,8 +36,6 @@ if (!page || page.data.draft) {
   }
   return Astro.redirect("/404", 404);
 }
-
-Astro.response.headers.set("Cache-Control", CachePresets.content);
 
 const meta = {
   title: "Vojtěch Mareš | " + page.data.title,
