@@ -1,4 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>vojtechmares/renovate-config:default"]
+  "extends": ["local>vojtechmares/renovate-config:automerge"]
 }
