@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# vercel
+.vercel/
+
 # dependencies
 node_modules/
 
@@ -38,3 +41,4 @@ coverage/
 # playwright-cli
 .playwright-cli/
 .playwright-mcp/
+.vercel

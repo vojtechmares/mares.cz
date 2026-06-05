@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website (mares.cz) built with Astro 5. The site is a server-side rendered website deployed to Cloudflare Workers.
+This is a personal website (mares.cz) built with Astro 6. The site is a server-side rendered website deployed to Vercel (project `mares-cz`) via the `@astrojs/vercel` adapter, with serverless functions in the `fra1` (Frankfurt) region.
 
-IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning for any Astro 5 tasks. Read project files before assuming API patterns.
+IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning for any Astro 6 tasks. Read project files before assuming API patterns.
 
 ## Key Commands
 
@@ -14,7 +14,7 @@ IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning for an
 
 - `pnpm dev` - Start development server at localhost:4321
 - `pnpm build` - Build production site to ./dist/
-- `pnpm preview` - Preview with Wrangler dev server
+- `vercel dev` - Run the app locally through the Vercel runtime (closest to production)
 
 **Formatting & Linting:**
 
@@ -60,7 +60,7 @@ Prettier is configured with:
 
 ### Server Config (astro.config.mjs)
 
-Output: `server` (SSR) | Adapter: Cloudflare Workers | Site: https://www.mares.cz | Czech only
+Output: `server` (SSR) | Adapter: `@astrojs/vercel` (region `fra1`, skewProtection) | Site: https://www.mares.cz | Czech + English (i18n)
 
 ### Routes
 

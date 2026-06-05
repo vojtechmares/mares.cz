@@ -1,11 +1,10 @@
-import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import { getContentPages } from "./src/lib/sitemap-pages.ts";
-import { serverBuild } from "./src/integrations/server-build.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -51,7 +50,6 @@ export default defineConfig({
       //   },
       // },
     }),
-    serverBuild(),
   ],
 
   image: {
@@ -64,7 +62,10 @@ export default defineConfig({
     ],
   },
 
-  adapter: node({ mode: "middleware" }),
+  adapter: vercel({
+    skewProtection: true,
+    includeFiles: ["./src/fonts/Inter_18pt-Regular.ttf", "./src/fonts/Inter_18pt-Bold.ttf"],
+  }),
 
   env: {
     schema: {
