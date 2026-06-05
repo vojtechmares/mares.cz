@@ -1,6 +1,6 @@
 # mares.cz
 
-Personal website built with Astro 5, deployed as a containerized application to Kubernetes.
+Personal website built with Astro 6, deployed to Vercel.
 
 ## Overview
 
@@ -8,12 +8,12 @@ Bilingual (Czech/English) server-side rendered website that uses Astro Content C
 
 ## Tech Stack
 
-- **Framework**: Astro 5 with SSR
-- **Runtime**: Node.js 24 (Alpine)
-- **Server**: Fastify
+- **Framework**: Astro 6 with SSR
+- **Runtime**: Node.js 24
+- **UI**: React 19
 - **Styling**: Tailwind CSS v4
 - **Content**: Astro Content Collections
-- **Deployment**: Kubernetes with Helm
+- **Deployment**: Vercel (`@astrojs/vercel` adapter, region `fra1`)
 
 ## Development
 
@@ -27,18 +27,18 @@ pnpm dev
 # Build for production
 pnpm build
 
-# Run production build locally
-pnpm run-like-prod
+# Run the app locally through the Vercel runtime
+vercel dev
 ```
 
-## Docker
+## Testing
 
 ```bash
-# Build container image
-task docker:build
+# Unit tests (Vitest)
+pnpm test
 
-# Run container locally
-task docker:run
+# E2E tests (Playwright)
+npx playwright test
 ```
 
 ## Contributing
