@@ -64,6 +64,8 @@ export default defineConfig({
 
   adapter: vercel({
     skewProtection: true,
+    imageService: true,
+    devImageService: "sharp",
     includeFiles: ["./src/fonts/Inter_18pt-Regular.ttf", "./src/fonts/Inter_18pt-Bold.ttf"],
   }),
 
