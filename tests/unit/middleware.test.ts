@@ -90,6 +90,16 @@ describe("locale middleware", () => {
     expect(result).toBe(SENTINEL_RESPONSE);
   });
 
+  it("does NOT redirect /_image even when Accept-Language prefers English", async () => {
+    const ctx = buildContext({ pathname: "/_image", acceptLanguage: "en-US,en;q=0.9" });
+    const { result, next } = await run(ctx);
+
+    expect(ctx.redirect).not.toHaveBeenCalled();
+    expect(ctx.rewrite).not.toHaveBeenCalled();
+    expect(next).toHaveBeenCalled();
+    expect(result).toBe(SENTINEL_RESPONSE);
+  });
+
   it("rewrites /en/.../card.png to the Czech path and sets English locale", async () => {
     const ctx = buildContext({ pathname: "/en/blog/some-post/card.png" });
     const { result } = await run(ctx);

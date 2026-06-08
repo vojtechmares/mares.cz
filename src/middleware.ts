@@ -19,7 +19,10 @@ import { englishPathToCzech, localizeUrl } from "./i18n/routes";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
 
-  if (pathname.startsWith("/api/")) {
+  // Internal Astro endpoints (/_image, /_astro, /_server-islands, ...) and API
+  // routes are not user-facing pages. Skip i18n entirely so Accept-Language
+  // negotiation never redirects or rewrites them.
+  if (pathname.startsWith("/api/") || pathname.startsWith("/_")) {
     return next();
   }
 
