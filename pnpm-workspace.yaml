@@ -2,3 +2,24 @@ allowBuilds:
   '@tailwindcss/oxide': true
   esbuild: true
   sharp: true
+
+# trustPolicyExclude allowlists specific package versions that pnpm's
+# supply-chain "trust downgrade" heuristic flags. semver@6.3.1 is the
+# legitimate 2023 ReDoS-fix release, pulled in transitively via
+# @vitejs/plugin-react -> @babel/core. It lacks provenance attestation that an
+# earlier release carried, which trips the no-downgrade policy. Excluding only
+# this exact version keeps the guardrail active for everything else.
+trustPolicyExclude:
+  - 'semver@6.3.1'
+
+# minimumReleaseAgeExclude opts specific packages out of the 15-day publish
+# cooldown (pnpm's minimumReleaseAge default). The AWS SDK ecosystem publishes
+# multiple times a week, so @aws-sdk/* and @smithy/* are almost always inside
+# the cooldown window; tar is a transitive build dep (@vercel/nft ->
+# node-pre-gyp) whose latest release is also recent. The cooldown stays active
+# for everything else.
+minimumReleaseAgeExclude:
+  - '@aws-sdk/*'
+  - '@smithy/*'
+  - '@aws-crypto/*'
+  - 'tar'
