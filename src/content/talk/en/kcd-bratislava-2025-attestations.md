@@ -11,5 +11,5 @@ At KCD, after a year (this time in Bratislava), I gave a talk on attestations an
 
 If you want to try it yourself, check out the [demo project on GitHub](https://github.com/vojtechmares-examples/kcd-bratislava-2025-oci-attestations), the [recording on YouTube](https://www.youtube.com/watch?v=7mFHxt7nlE4), or get started on your own with [Sigstore](https://www.sigstore.dev/) and [Cosign](https://github.com/sigstore/cosign)!
 
-![KCD2025 157.jpg](https://cdn.mares.cz//KCD_2025_157_b89caf4f63.jpg)
-![KCD2025 204.jpg](https://cdn.mares.cz//KCD_2025_204_6d911fc7a6.jpg)
+![KCD2025 157.jpg](https://cdn.mares.cz/%2FKCD_2025_157_b89caf4f63.jpg)
+![KCD2025 204.jpg](https://cdn.mares.cz/%2FKCD_2025_204_6d911fc7a6.jpg)
