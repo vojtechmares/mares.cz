@@ -3,6 +3,7 @@ import { Container } from "../../../components/ui/container";
 import { Heading } from "../../../components/ui/heading";
 import { TrainingSessionsTable } from "../../../features/training/training-sessions-table";
 import { SessionsHero } from "../../../features/training/sessions-hero";
+import { TrainingNewsletterSignUp } from "../../../features/training/training-newsletter-signup";
 import Layout from "../../../layouts/Layout.astro";
 
 import {
@@ -93,7 +94,7 @@ const jsonLd = {
   <Section id="terminy">
     <Container>
       <TrainingSessionsTable sessions={sessions} locale={locale} />
-      <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 md:grid-cols-2">
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 lg:grid-cols-2">
         <Card variant="surface">
           <Heading level="h3" id="podminky">{t(locale, "sessions_page.conditions_heading")}</Heading>
           <ul class="mt-6 list-disc pl-4">
@@ -171,6 +172,7 @@ const jsonLd = {
             </li>
           </ul>
         </Card>
+        <TrainingNewsletterSignUp client:load locale={locale} />
       </div>
     </Container>
   </Section>

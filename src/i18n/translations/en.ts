@@ -394,6 +394,26 @@ export const en: Record<TranslationKey, string> = {
   "lang_switch.cs": "Czech",
   "lang_switch.en": "English",
 
+  // Training news newsletter signup
+  "newsletter.heading": "New training dates",
+  "newsletter.description":
+    "None of the scheduled dates work for you? Leave me your contact and I'll let you know as soon as new dates open up.",
+  "newsletter.cadence": "I send this email roughly once every three months.",
+  "newsletter.czech_only_note": "The newsletter is currently in Czech only.",
+  "newsletter.name_label": "Full name",
+  "newsletter.email_label": "Email",
+  "newsletter.consent_label": "I agree that my name and email may be used to send me training news.",
+  "newsletter.submit": "Subscribe",
+  "newsletter.submitting": "Submitting…",
+  "newsletter.success_confirm":
+    "Almost there! Please confirm your subscription by clicking the link in the email we just sent you.",
+  "newsletter.success_already": "Looks like you're already subscribed. Thank you!",
+  "newsletter.error_message": "Something went wrong. Please try again.",
+  "newsletter.retry": "Try again",
+  "newsletter.error_required": "This field is required.",
+  "newsletter.error_email": "Enter a valid email.",
+  "newsletter.error_consent": "We can't subscribe you without your consent.",
+
   // Formatting
   "format.months.1": "January",
   "format.months.2": "February",

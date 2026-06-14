@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import { TrainingHero } from "../../../features/training/training-hero";
 import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
+import { TrainingNewsletterSignUp } from "../../../features/training/training-newsletter-signup";
 import { Button } from "../../../components/ui/button";
 import { Card } from "../../../components/ui/card";
 import { Container } from "../../../components/ui/container";
@@ -138,6 +139,7 @@ const { Content } = await render(training);
               {t(locale, "training_page.request_quote")}
             </Button>
           </Card>
+          <TrainingNewsletterSignUp client:load locale={locale} trainingSlug={slug} />
         </div>
       </div>
     </Container>

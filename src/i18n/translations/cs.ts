@@ -390,6 +390,26 @@ export const cs = {
   "lang_switch.cs": "Česky",
   "lang_switch.en": "English",
 
+  // Training news newsletter signup
+  "newsletter.heading": "Nový termín školení",
+  "newsletter.description":
+    "Nehodí se vám žádný z vypsaných termínů? Nechte mi na sebe kontakt a dám vám vědět, jakmile vypíšu nové termíny.",
+  "newsletter.cadence": "E-mail posílám přibližně jednou za tři měsíce.",
+  "newsletter.czech_only_note": "Newsletter je zatím pouze v češtině.",
+  "newsletter.name_label": "Jméno a příjmení",
+  "newsletter.email_label": "E-mail",
+  "newsletter.consent_label": "Souhlasím, aby mé jméno a e-mail byly použity k zasílání novinek o školeních.",
+  "newsletter.submit": "Přihlásit se k odběru",
+  "newsletter.submitting": "Odesílám…",
+  "newsletter.success_confirm":
+    "Skoro hotovo! Potvrďte prosím odběr kliknutím na odkaz v e-mailu, který jsme vám právě poslali.",
+  "newsletter.success_already": "Vypadá to, že už novinky odebíráte. Děkujeme!",
+  "newsletter.error_message": "Něco se pokazilo. Zkuste to prosím znovu.",
+  "newsletter.retry": "Zkusit znovu",
+  "newsletter.error_required": "Toto pole je povinné.",
+  "newsletter.error_email": "Zadejte platný e-mail.",
+  "newsletter.error_consent": "Bez souhlasu vás bohužel nemůžeme přihlásit.",
+
   // Formatting
   "format.months.1": "Leden",
   "format.months.2": "Únor",

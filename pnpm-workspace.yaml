@@ -1,17 +1,13 @@
 # allowBuilds opts specific packages into running install/postinstall scripts
-# (pnpm blocks them by default). @swc/core and cbor-extract come in via the
-# `workflow` package: @swc/core powers @workflow/astro's build-time transform
-# (this is an Astro project, so it is actually used) and its postinstall just
-# verifies the native binding / arranges a wasm fallback; cbor-extract's install
-# resolves a prebuilt native accelerator for cbor serialization. @nestjs/core's
-# only script is `opencollective || exit 0` (a funding banner) and the Nest
-# integration is unused here, so it stays blocked.
+# (pnpm blocks them by default). @tailwindcss/oxide (Tailwind v4's native
+# engine), esbuild, and sharp (native image processing) ship prebuilt native
+# bindings their install scripts resolve, and are all genuinely used here.
+# msw is a transitive test dep (via vitest); its postinstall only copies a
+# mock service worker we don't use, so its build stays blocked.
 allowBuilds:
-  '@nestjs/core': false
-  '@swc/core': true
   '@tailwindcss/oxide': true
-  cbor-extract: true
   esbuild: true
+  msw: false
   sharp: true
 
 # trustPolicyExclude allowlists specific package versions that pnpm's
@@ -20,14 +16,8 @@ allowBuilds:
 # @vitejs/plugin-react -> @babel/core. It lacks provenance attestation that an
 # earlier release carried, which trips the no-downgrade policy. Excluding only
 # this exact version keeps the guardrail active for everything else.
-#
-# chokidar@4.0.3 is the legitimate 2024-12-18 release by paulmillr (canonical
-# github.com/paulmillr/chokidar maintainer), pulled in transitively via
-# workflow -> @workflow/cli. Like semver above, it lacks provenance attestation
-# an earlier release carried, which trips the no-downgrade policy.
 trustPolicyExclude:
   - 'semver@6.3.1'
-  - 'chokidar@4.0.3'
 
 # minimumReleaseAgeExclude opts specific packages out of the 15-day publish
 # cooldown (pnpm's minimumReleaseAge default). The AWS SDK ecosystem publishes

@@ -7,6 +7,7 @@ export default defineConfig({
     alias: {
       "astro:content": new URL("./tests/mocks/astro-content.ts", import.meta.url).pathname,
       "astro:middleware": new URL("./tests/mocks/astro-middleware.ts", import.meta.url).pathname,
+      "@/": new URL("./src/", import.meta.url).pathname,
     },
   },
   test: {

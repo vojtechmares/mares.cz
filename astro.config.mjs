@@ -93,6 +93,15 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
+      ECOMAIL_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      ECOMAIL_TRAINING_LIST_ID: envField.string({
+        context: "server",
+        access: "secret",
+        default: "2",
+      }),
     },
   },
 });
