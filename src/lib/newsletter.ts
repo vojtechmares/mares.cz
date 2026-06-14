@@ -118,7 +118,7 @@ export async function subscribeToEcomail(
   const { name, surname } = splitFullName(input.name);
 
   try {
-    const res = await fetch(`https://api.ecomail.cz/lists/${opts.listId}/subscribe`, {
+    const res = await fetch(`https://api2.ecomailapp.cz/lists/${opts.listId}/subscribe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

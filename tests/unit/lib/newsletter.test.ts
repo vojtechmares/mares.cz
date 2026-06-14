@@ -129,7 +129,7 @@ describe("subscribeToEcomail", () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0];
-    expect(url).toBe("https://api.ecomail.cz/lists/7/subscribe");
+    expect(url).toBe("https://api2.ecomailapp.cz/lists/7/subscribe");
     expect(init.headers.key).toBe("test-key");
     expect(JSON.parse(init.body)).toMatchObject({
       subscriber_data: {
