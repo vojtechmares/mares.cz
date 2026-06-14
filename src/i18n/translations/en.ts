@@ -13,6 +13,7 @@ export const en: Record<TranslationKey, string> = {
   "footer.vat_payer": "VAT registered",
   "footer.training": "Training",
   "footer.important_links": "Important links",
+  "footer.devops_wiki": "DevOps Wiki",
   "footer.interested_heading": "Interested?",
   "footer.interested_text":
     "Interested in working together but not sure how I can help? Get in touch \u2013 we\u2019ll discuss your needs and find a tailored solution.",

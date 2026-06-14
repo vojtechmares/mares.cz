@@ -11,6 +11,7 @@ export const cs = {
   "footer.vat_payer": "Jsem plátce DPH",
   "footer.training": "Školení",
   "footer.important_links": "Důležité odkazy",
+  "footer.devops_wiki": "DevOps Wiki",
   "footer.interested_heading": "Zaujal jsem vás?",
   "footer.interested_text":
     "Zaujal jsem vás, ale nejste si jistí, jak přesně bych vám mohl pomoci? Ozvěte se mi \u2013 společně probereme vaše potřeby a najdeme řešení na míru.",

@@ -65,7 +65,7 @@ function GitHubIcon() {
 
 interface FooterProps {
   trainings: CollectionEntry<"training">[];
-  links: { name: string; href: string }[];
+  links: { name: string; href: string; external?: boolean }[];
   currentYear: number;
   locale: Locale;
 }
@@ -113,7 +113,9 @@ export function Footer({ links, trainings, currentYear, locale }: FooterProps) {
               <ul className="mt-4 list-disc pl-4">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href}>{link.name}</Link>
+                    <Link href={link.href} external={link.external}>
+                      {link.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

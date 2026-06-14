@@ -3,6 +3,7 @@ import { Footer as FooterComponent } from "./footer";
 import { LocalizedStaticNavigationLinks } from "../../lib/site";
 import { getLocalizedCollection, bareSlug } from "../../lib/content";
 import { localizeUrl } from "../../i18n/routes";
+import { t } from "../../i18n";
 
 const locale = Astro.locals.locale;
 
@@ -26,7 +27,9 @@ const pageLinks = pages
     return link !== undefined;
   });
 
-const links = [...(staticLinks as { name: string; href: string }[]), ...pageLinks];
+const externalLinks = [{ name: t(locale, "footer.devops_wiki"), href: "https://wiki.mares.cz", external: true }];
+
+const links = [...(staticLinks as { name: string; href: string }[]), ...pageLinks, ...externalLinks];
 ---
 
 <FooterComponent links={links} trainings={trainings} currentYear={new Date().getFullYear()} locale={locale} />
