@@ -3,7 +3,7 @@ import type { Locale } from "../i18n/types";
 /**
  * Shared contract for the training-news newsletter signup, used by both the
  * client component (src/features/training/training-newsletter-signup.tsx) and
- * the API route (src/pages/api/v1/newsletter/training-signup.ts).
+ * the signup action (src/actions/index.ts).
  */
 
 /** Name of the hidden honeypot field. Bots tend to fill it; humans never see it. */
@@ -104,4 +104,52 @@ export function buildEcomailTags(input: NewsletterSignupInput): string[] {
   const tags = ["web-training-news", `lang:${input.locale}`];
   if (input.trainingSlug) tags.push(`training:${input.trainingSlug}`);
   return tags;
+}
+
+/**
+ * Subscribe a validated signup to Ecomail. Secrets are dependency-injected so this
+ * stays framework-agnostic and unit-testable. Maps the Ecomail subscriber status
+ * (1 = subscribed, 2 = unsubscribed, 6 = unconfirmed) onto NewsletterSignupResponse.
+ */
+export async function subscribeToEcomail(
+  input: NewsletterSignupInput,
+  opts: { apiKey: string; listId: string },
+): Promise<NewsletterSignupResponse> {
+  const { name, surname } = splitFullName(input.name);
+
+  try {
+    const res = await fetch(`https://api.ecomail.cz/lists/${opts.listId}/subscribe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        key: opts.apiKey,
+      },
+      body: JSON.stringify({
+        subscriber_data: {
+          name,
+          surname,
+          email: input.email,
+          tags: buildEcomailTags(input),
+        },
+        // Double opt-in is enabled on the list: Ecomail sends the confirmation
+        // email itself. Don't fire autoresponders before the user confirms.
+        trigger_autoresponders: false,
+        update_existing: true,
+        resubscribe: false,
+        skip_confirmation: false,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error(`Ecomail subscribe failed: ${res.status} ${await res.text().catch(() => "")}`);
+      return { ok: false, error: "ecomail_failed" };
+    }
+
+    const data = (await res.json().catch(() => ({}))) as { status?: number };
+    const status: EcomailStatus = data.status === 1 || data.status === 2 || data.status === 6 ? data.status : 6;
+    return { ok: true, status };
+  } catch (error) {
+    console.error("Ecomail subscribe error", error);
+    return { ok: false, error: "ecomail_failed" };
+  }
 }

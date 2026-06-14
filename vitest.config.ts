@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      "astro:actions": new URL("./tests/mocks/astro-actions.ts", import.meta.url).pathname,
       "astro:content": new URL("./tests/mocks/astro-content.ts", import.meta.url).pathname,
       "astro:middleware": new URL("./tests/mocks/astro-middleware.ts", import.meta.url).pathname,
       "@/": new URL("./src/", import.meta.url).pathname,

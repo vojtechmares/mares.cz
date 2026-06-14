@@ -19,7 +19,8 @@ The form has an in-code **honeypot** (`HONEYPOT_FIELD` in `src/lib/newsletter.ts
 but the rate limit is **not** in code - it must be configured on the platform.
 
 - [ ] In the Vercel dashboard → Firewall, add a rate-limit rule scoped to
-      `POST /api/v1/newsletter/training-signup` (suggested: ~5 requests / minute per IP).
+      `POST /_actions/newsletter.signup` (the Astro Action endpoint; suggested: ~5
+      requests / minute per IP).
 
 ## 3. Secrets / Ecomail config
 

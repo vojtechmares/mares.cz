@@ -1,3 +1,4 @@
+import { actions } from "astro:actions";
 import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,12 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Body } from "@/components/ui/body";
 import { t, type Locale } from "@/i18n";
-import {
-  EMAIL_REGEX,
-  HONEYPOT_FIELD,
-  type NewsletterFieldErrors,
-  type NewsletterSignupResponse,
-} from "@/lib/newsletter";
+import { EMAIL_REGEX, HONEYPOT_FIELD, type NewsletterFieldErrors } from "@/lib/newsletter";
 
 type Props = {
   locale: Locale;
@@ -22,8 +18,6 @@ type Props = {
 };
 
 type Status = "idle" | "submitting" | "success_confirm" | "success_already" | "error";
-
-const ENDPOINT = "/api/v1/newsletter/training-signup";
 
 export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
   const fieldId = useId();
@@ -59,23 +53,20 @@ export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
     setStatus("submitting");
 
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          locale,
-          trainingSlug: trainingSlug ?? null,
-          consent,
-          [HONEYPOT_FIELD]: honeypot,
-        }),
+      const { data, error } = await actions.newsletter.signup({
+        name: name.trim(),
+        email: email.trim(),
+        locale,
+        trainingSlug: trainingSlug ?? null,
+        consent,
+        [HONEYPOT_FIELD]: honeypot,
       });
-      const data = (await res.json().catch(() => null)) as NewsletterSignupResponse | null;
 
-      if (res.ok && data?.ok) {
+      if (error) {
+        setStatus("error");
+      } else if (data.ok) {
         setStatus(data.status === 1 ? "success_already" : "success_confirm");
-      } else if (data && !data.ok && data.error === "validation") {
+      } else if (data.error === "validation") {
         setErrors(data.fields);
         setStatus("idle");
       } else {

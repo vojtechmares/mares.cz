@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { buildEcomailTags, splitFullName, validateSignup } from "@/lib/newsletter";
+import { buildEcomailTags, splitFullName, subscribeToEcomail, validateSignup } from "@/lib/newsletter";
 
 const valid = {
   name: "Jan Novák",
@@ -99,5 +99,70 @@ describe("buildEcomailTags", () => {
       "web-training-news",
       "lang:en",
     ]);
+  });
+});
+
+describe("subscribeToEcomail", () => {
+  const input = { name: "Jan Novák", email: "jan@example.com", locale: "cs" as const, trainingSlug: "react-pro" };
+  const opts = { apiKey: "test-key", listId: "7" };
+
+  function mockFetch(response: { ok: boolean; status?: number; body?: unknown }) {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: response.ok,
+      status: response.status ?? (response.ok ? 200 : 502),
+      json: async () => response.body ?? {},
+      text: async () => "error body",
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it("posts subscriber data to the list with the API key and split name", async () => {
+    const fetchMock = mockFetch({ ok: true, body: { status: 6 } });
+
+    await subscribeToEcomail(input, opts);
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url).toBe("https://api.ecomail.cz/lists/7/subscribe");
+    expect(init.headers.key).toBe("test-key");
+    expect(JSON.parse(init.body)).toMatchObject({
+      subscriber_data: {
+        name: "Jan",
+        surname: "Novák",
+        email: "jan@example.com",
+        tags: ["web-training-news", "lang:cs", "training:react-pro"],
+      },
+      trigger_autoresponders: false,
+      update_existing: true,
+      skip_confirmation: false,
+    });
+  });
+
+  it("maps the Ecomail subscriber status onto the response", async () => {
+    mockFetch({ ok: true, body: { status: 1 } });
+    expect(await subscribeToEcomail(input, opts)).toEqual({ ok: true, status: 1 });
+  });
+
+  it("defaults to status 6 for an unexpected status", async () => {
+    mockFetch({ ok: true, body: { status: 99 } });
+    expect(await subscribeToEcomail(input, opts)).toEqual({ ok: true, status: 6 });
+  });
+
+  it("returns ecomail_failed on a non-ok response", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    mockFetch({ ok: false, status: 500 });
+    expect(await subscribeToEcomail(input, opts)).toEqual({ ok: false, error: "ecomail_failed" });
+  });
+
+  it("returns ecomail_failed when fetch throws", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network down")));
+    expect(await subscribeToEcomail(input, opts)).toEqual({ ok: false, error: "ecomail_failed" });
   });
 });
