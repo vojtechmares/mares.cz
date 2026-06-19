@@ -160,6 +160,8 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
     {jsonLd !== undefined && <JSONLD schema={jsonLd} locale={locale} />}
     <link rel="alternate" type="application/rss+xml" title="Blog – Vojtěch Mareš (CZ)" href="/blog/rss.xml" />
     <link rel="alternate" type="application/rss+xml" title="Blog – Vojtěch Mareš (EN)" href="/en/blog/rss.xml" />
+    {/* Public SSH keys, GitHub-style (github.com/<username>.keys). Static, unlocalized. */}
+    <link rel="ssh-keys" type="text/plain" href="/keys.txt" />
     <link rel="dns-prefetch" href="https://cdn.mares.cz" />
     <link rel="preconnect" href="https://cdn.mares.cz" />
     <link rel="preload" href="/fonts/ibm-plex-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
