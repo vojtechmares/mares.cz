@@ -1,12 +1,32 @@
 ---
 import { Hero as HeroComponent } from "./hero";
+import TextType from "../../components/text-type";
 import avatarVojtechMares from "../../images/people/vojtech-mares.png";
 import { Picture } from "astro:assets";
 
 const locale = Astro.locals.locale;
+
+const roles = [
+  "DevOps Architect",
+  "Platform Engineer",
+  "Site Reliability Engineer",
+  "Infrastructure Engineer",
+  "*your* Staff Engineer",
+];
 ---
 
 <HeroComponent locale={locale}>
+  <TextType
+    slot="role"
+    client:load
+    as="span"
+    text={roles}
+    startDeleting={true}
+    typingSpeed={70}
+    deletingSpeed={40}
+    pauseDuration={2000}
+    cursorClassName="text-orange-500"
+  />
   <Picture
     class="max-w-60 sm:max-w-80 md:max-w-100"
     priority
