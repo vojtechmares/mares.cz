@@ -23,10 +23,22 @@ trustPolicyExclude:
 # cooldown (pnpm's minimumReleaseAge default). The AWS SDK ecosystem publishes
 # multiple times a week, so @aws-sdk/* and @smithy/* are almost always inside
 # the cooldown window; tar is a transitive build dep (@vercel/nft ->
-# node-pre-gyp) whose latest release is also recent. The cooldown stays active
-# for everything else.
+# node-pre-gyp) whose latest release is also recent. astro and @astrojs/* are
+# excluded to allow adopting the Astro 7 major immediately on release (within
+# the cooldown window); narrow the list once the framework version stabilises.
+# The cooldown stays active for everything else.
 minimumReleaseAgeExclude:
   - '@aws-sdk/*'
   - '@smithy/*'
   - '@aws-crypto/*'
   - 'tar'
+  - 'astro'
+  - '@astrojs/*'
+  # satteri is Astro 7's new default markdown processor, pulled in transitively
+  # via @astrojs/markdown-satteri; recently published alongside the v7 release.
+  # @bruits/* holds satteri's per-platform native bindings (@bruits/satteri-*).
+  - 'satteri'
+  - '@bruits/*'
+  # @napi-rs/wasm-runtime backs Astro 7's native Rust compiler binding
+  # (@astrojs/compiler-rs -> @astrojs/compiler-binding-wasm32-wasi).
+  - '@napi-rs/wasm-runtime'
