@@ -154,7 +154,7 @@ pro build imagů, tak aby byl výsledek co nejmenší.
 - `Dockerfile` - soubor, ve kterém popíšeme, jak má být kontejner vytvořen
   Příklad pro Node.js:
 
-  ```Dockerfile
+  ```dockerfile
   # syntax=docker/dockerfile:1
   FROM node:lts
 
@@ -182,7 +182,7 @@ pro build imagů, tak aby byl výsledek co nejmenší.
 
   Příklad multi-stage `Dockerfile` pro Node.js, který využívám pro build tohoto 😉 webu:
 
-  ```Dockerfile
+  ```dockerfile
   # syntax=docker/dockerfile:1
   FROM node:20-alpine AS base
 

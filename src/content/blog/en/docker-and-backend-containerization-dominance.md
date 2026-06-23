@@ -154,7 +154,7 @@ to build images so the result is as small as possible.
 - `Dockerfile` - a file describing how the container should be built
   Example for Node.js:
 
-  ```Dockerfile
+  ```dockerfile
   # syntax=docker/dockerfile:1
   FROM node:lts
 
@@ -182,7 +182,7 @@ to build images so the result is as small as possible.
 
   Example of a multi-stage `Dockerfile` for Node.js that I use to build this website:
 
-  ```Dockerfile
+  ```dockerfile
   # syntax=docker/dockerfile:1
   FROM node:20-alpine AS base
 
