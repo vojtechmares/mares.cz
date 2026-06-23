@@ -64,7 +64,7 @@ const jsonLd = {
         {
           tags.map((tag) =>
             // prettier-ignore
-            <><Link href={localizeUrl(`/blog/tag/${tag}`, locale)} className="text-zinc-100">#{tag}</Link>{" "}</>,
+            <><Link href={localizeUrl(`/blog/tag/${tag}`, locale)} className="text-neutral-100">#{tag}</Link>{" "}</>,
           )
         }
       </Text>
@@ -74,13 +74,13 @@ const jsonLd = {
           {
             years.map((year, i) =>
               // prettier-ignore
-              <><Link href={localizeUrl(`/blog/archive/${year}`, locale)} className="text-zinc-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
+              <><Link href={localizeUrl(`/blog/archive/${year}`, locale)} className="text-neutral-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
             )
           }
         </Text>
         <Text variant="inverse" className="mt-2">
           {t(locale, "blog.feed_label")}{" "}
-          <Link href={localizeUrl("/blog/rss.xml", locale)} className="text-zinc-100">RSS</Link>
+          <Link href={localizeUrl("/blog/rss.xml", locale)} className="text-neutral-100">RSS</Link>
         </Text>
       </div>
     </Container>

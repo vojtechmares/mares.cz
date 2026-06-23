@@ -55,7 +55,7 @@ const openGraph = {
         renderedTalks.map(({ talk, Content }) => (
           <article class="mb-12 last:mb-0">
             <Heading level="h2">{talk.data.title}</Heading>
-            <p class="mt-4 text-zinc-600">
+            <p class="mt-4 text-neutral-600">
               {formatDate(talk.data.date, locale, { day: "numeric", month: "numeric", year: "numeric" })}
               {" · "}
               {talk.data.event.url ? (

@@ -268,7 +268,7 @@ ol.list-none li::before {
 /*
  * shadcn's default base layer (global `body { bg-background }`, `* { border-border }`,
  * `html { font-sans }`) is intentionally omitted: the existing site keeps its own
- * background (bg-zinc-100 on <html>) and styling while shadcn tokens stay available
+ * background (bg-neutral-100 on <html>) and styling while shadcn tokens stay available
  * for new shadcn components. Only the pointer-cursor rule (--pointer) is kept.
  */
 @layer base {

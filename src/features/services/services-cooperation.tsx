@@ -62,12 +62,12 @@ export function ServicesCooperation({ locale }: { locale: Locale }) {
             {steps.map((step, idx) => (
               <li key={step.name} className={clsx(idx !== steps.length - 1 ? "pb-10" : "", "relative")}>
                 {idx !== steps.length - 1 ? (
-                  <div className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-zinc-300" aria-hidden="true" />
+                  <div className="absolute top-4 left-6 mt-0.5 -ml-px h-full w-0.5 bg-neutral-300" aria-hidden="true" />
                 ) : null}
                 <div className="group relative flex items-start">
                   <span className="flex h-9 items-center" aria-hidden="true">
                     <span className="relative z-10 flex h-12 w-12 items-center justify-center border-2 border-orange-500 bg-white">
-                      <span className="h-3 w-3 bg-zinc-900" />
+                      <span className="h-3 w-3 bg-neutral-900" />
                     </span>
                   </span>
                   <Body as="span" className="ml-4 flex min-w-0 flex-col">
@@ -96,7 +96,7 @@ export function ServicesCooperation({ locale }: { locale: Locale }) {
             </Body>
           </Card>
 
-          <Card variant="surface" className="border-l-2 border-zinc-300">
+          <Card variant="surface" className="border-l-2 border-neutral-300">
             <Heading level="h3">{t(locale, "services_cooperation.suitable_heading")}</Heading>
             <Body color="secondary" className="mt-4">
               {t(locale, "services_cooperation.suitable_description")}
@@ -113,9 +113,9 @@ export function ServicesCooperation({ locale }: { locale: Locale }) {
             </Body>
           </Card>
 
-          <Card variant="surface" className="border-t-4 border-zinc-900">
+          <Card variant="surface" className="border-t-4 border-neutral-900">
             <Heading level="h3">{t(locale, "services_cooperation.projects_heading")}</Heading>
-            <div className="mt-4 divide-y divide-zinc-200">
+            <div className="mt-4 divide-y divide-neutral-200">
               {projektyItems.map((item, idx) => (
                 <div key={item.label} className={clsx("flex gap-4 py-3", idx === 0 && "pt-0")}>
                   <span className="font-mono text-lg font-bold text-orange-500">

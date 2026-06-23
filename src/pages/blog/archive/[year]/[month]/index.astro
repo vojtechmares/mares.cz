@@ -70,14 +70,14 @@ const jsonLd = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog: {monthName}{" "}{year}</Heading>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+      <p class="mt-4 text-base text-neutral-100 lg:text-xl">
         <TagList tags={tags} variant="inverse" locale={locale} />
       </p>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+      <p class="mt-4 text-base text-neutral-100 lg:text-xl">
         {formatArticleCount(articles.length, locale)}
         {" "}{t(locale, "blog.month_article_suffix")}
       </p>
-      <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+      <p class="mt-2 text-base text-neutral-100 lg:text-xl">
         <a class="underline" href={localizeUrl(`/blog/archive/${year}`, locale)}>← {year}</a>
         {" · "}
         <a class="underline" href={localizeUrl("/blog", locale)}>Blog</a>

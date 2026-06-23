@@ -18,7 +18,7 @@ function LinkItem({ href, name, className = "" }: { href: string; name: string; 
       href={href}
       className={clsx(
         className,
-        "text-xl font-bold text-zinc-100 transition-colors hover:text-zinc-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500",
+        "text-xl font-bold text-neutral-100 transition-colors hover:text-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500",
       )}
     >
       {name}
@@ -95,7 +95,7 @@ function DesktopNavigation({ links, locale, currentPath }: { links: NavLink[]; l
 export function Navigation({ links, locale, currentPath }: { links: NavLink[]; locale: Locale; currentPath: string }) {
   return (
     <>
-      <header className="bg-zinc-900 py-4 lg:py-1">
+      <header className="bg-neutral-900 py-4 lg:py-1">
         <Container>
           <MobileNavigation links={links} locale={locale} currentPath={currentPath} />
           <DesktopNavigation links={links} locale={locale} currentPath={currentPath} />

@@ -29,7 +29,7 @@ function StatItem({ value, description }: StatItemProps) {
         style={{
           fontFamily: "Inter",
           fontSize: "1rem",
-          color: "#a1a1aa",
+          color: "#a3a3a3",
           marginTop: "0.25rem",
         }}
       >
@@ -59,7 +59,7 @@ export function CreatePrednaskyImageComponent({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#18181b",
+        backgroundColor: "#171717",
         padding: "3.5rem 4rem",
       }}
     >
@@ -99,7 +99,7 @@ export function CreatePrednaskyImageComponent({
               fontSize: "1.25rem",
               lineHeight: 1.6,
               fontFamily: "Inter",
-              color: "#a1a1aa",
+              color: "#a3a3a3",
             }}
           >
             {t(locale, "talks.description")}
@@ -110,7 +110,7 @@ export function CreatePrednaskyImageComponent({
             fontSize: "1.25rem",
             fontWeight: 400,
             fontFamily: "Inter",
-            color: "#71717a",
+            color: "#737373",
             marginBottom: 0,
           }}
         >

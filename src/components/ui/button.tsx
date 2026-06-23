@@ -14,13 +14,13 @@ const baseStyles: Record<ButtonStyle, string> = {
 
 const styleVariants: Record<ButtonStyle, Record<ButtonVariant, string>> = {
   solid: {
-    primary: `${colors.background.inverse} ${colors.text.inverse} hover:bg-zinc-700 active:bg-zinc-800 focus-visible:outline-zinc-900`,
+    primary: `${colors.background.inverse} ${colors.text.inverse} hover:bg-neutral-700 active:bg-neutral-800 focus-visible:outline-neutral-900`,
     accent: `${colors.accent.default} ${colors.accent.hover} active:bg-orange-500 focus-visible:outline-orange-500`,
     secondary: `${colors.background.default} ${colors.text.primary} hover:bg-orange-50 active:bg-orange-500 focus-visible:outline-white`,
   },
   outline: {
-    primary: `${colors.border.default} ${colors.text.primary} hover:ring-zinc-300 active:bg-zinc-100 focus-visible:outline-orange-500 focus-visible:ring-zinc-300`,
-    secondary: `ring-zinc-700 ${colors.text.inverse} hover:ring-zinc-500 active:ring-zinc-700 focus-visible:outline-white`,
+    primary: `${colors.border.default} ${colors.text.primary} hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-orange-500 focus-visible:ring-neutral-300`,
+    secondary: `ring-neutral-700 ${colors.text.inverse} hover:ring-neutral-500 active:ring-neutral-700 focus-visible:outline-white`,
     accent: "", // Outline buttons cannot be accent
   },
 };

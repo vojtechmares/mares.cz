@@ -43,7 +43,7 @@ export function ReferenceCard({ authorName, authorRole, content, image }: Refere
       <figure className="flex flex-1 flex-col">
         <Prose className="prose-p:text-base md:prose-p:text-lg">{content}</Prose>
         <div className="mt-auto">
-          <figcaption className="relative mt-6 flex items-center border-t border-zinc-300 pt-6">
+          <figcaption className="relative mt-6 flex items-center border-t border-neutral-300 pt-6">
             <div className="overflow-hidden pr-4 md:pr-6">{image}</div>
             <div>
               <Body as="div" color="primary" className="font-display text-base">

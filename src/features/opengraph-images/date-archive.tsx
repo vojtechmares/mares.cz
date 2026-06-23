@@ -28,7 +28,7 @@ function DateArchiveImage({
         alignItems: "center",
         justifyContent: "space-between",
         backgroundColor: "#fafafa",
-        color: "#3f3f46",
+        color: "#404040",
       }}
     >
       <div

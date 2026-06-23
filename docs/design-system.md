@@ -85,13 +85,13 @@ Monospace system pro technicky vzhled - Inter pro nadpisy, Space Mono pro text i
 **Vnoreny seznam:**
 
 - Level 1: `->` (sipka Amber-500)
-- Level 2: `*` (tecka Zinc-500)
+- Level 2: `*` (tecka Neutral-500)
 
 ---
 
-## 2. Barvy (Amber + Zinc)
+## 2. Barvy (Amber + Neutral)
 
-Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply vzhled.
+Tepla amber v kombinaci s neutralni Neutral paletou. Zajistuje kontrastni a teply vzhled.
 
 ### 2A. Barevna Paleta
 
@@ -120,23 +120,23 @@ Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply v
 | **Kontrast** | WCAG AA                                         |
 | **Pouziti**  | Textove odkazy na bilem pozadi, zvyrazneny text |
 
-#### Dark Background - Zinc-900
+#### Dark Background - Neutral-900
 
 | Property        | Value                                                  |
 | --------------- | ------------------------------------------------------ |
-| **HEX**         | #18181B                                                |
-| **RGB**         | 24, 24, 27                                             |
-| **Tailwind**    | zinc-900                                               |
+| **HEX**         | #171717                                                |
+| **RGB**         | 23, 23, 23                                             |
+| **Tailwind**    | neutral-900                                            |
 | **Pouziti**     | Nadpisy, tmave pozadi sekci (hero, footer), code bloky |
 | **Text na nem** | White (#FFFFFF)                                        |
 
-### Zinc Palette pro Text
+### Neutral Palette pro Text
 
-| Color    | HEX     | Tailwind | Pouziti                          |
-| -------- | ------- | -------- | -------------------------------- |
-| Zinc-700 | #3F3F46 | zinc-700 | Bezny text na svetlem pozadi     |
-| Zinc-500 | #71717A | zinc-500 | Sekundarni text, popisky (small) |
-| Zinc-300 | #D4D4D8 | zinc-300 | Sekundarni text na tmavem pozadi |
+| Color       | HEX     | Tailwind    | Pouziti                          |
+| ----------- | ------- | ----------- | -------------------------------- |
+| Neutral-700 | #404040 | neutral-700 | Bezny text na svetlem pozadi     |
+| Neutral-500 | #737373 | neutral-500 | Sekundarni text, popisky (small) |
+| Neutral-300 | #D4D4D4 | neutral-300 | Sekundarni text na tmavem pozadi |
 
 ### Neutralni (White & Black)
 
@@ -155,10 +155,10 @@ Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply v
 
 ### 2B. Barevne Kombinace Pozadi
 
-| Typ           | Pozadi             | Bloky              |
-| ------------- | ------------------ | ------------------ |
-| Svetle pozadi | Zinc-50 (#FAFAFA)  | Bila (#FFFFFF)     |
-| Tmave pozadi  | Zinc-900 (#18181B) | Zinc-900 (#18181B) |
+| Typ           | Pozadi                | Bloky                 |
+| ------------- | --------------------- | --------------------- |
+| Svetle pozadi | Neutral-50 (#FAFAFA)  | Bila (#FFFFFF)        |
+| Tmave pozadi  | Neutral-900 (#171717) | Neutral-900 (#171717) |
 
 ### 2C. Syntax Highlighting
 
@@ -175,12 +175,12 @@ Tepla amber v kombinaci s neutralni Zinc paletou. Zajistuje kontrastni a teply v
 
 **Na svetlem pozadi:**
 
-- Base: Zinc-300
-- Hover/Active: Zinc-500
+- Base: Neutral-300
+- Hover/Active: Neutral-500
 
 **Na tmavem pozadi:**
 
-- Base: Zinc-700
+- Base: Neutral-700
 - Emphasis: 2px
 
 **Tloustky hranic:**
@@ -247,7 +247,7 @@ Web je mobile-first s responzivnimi container sirkami. Grid layout je volitelny 
 
 Struktura pro clanky a obsah:
 
-1. Tmave hero pozadi (Zinc-900)
+1. Tmave hero pozadi (Neutral-900)
 2. Titulek (H1)
 3. Tagy + Datum vydani
 4. Obsah v prose rezimu
@@ -308,12 +308,12 @@ Zvyrazneni bloku pri najeti mysi - tenky oranzovy ramecek.
 
 ### Hlavni Navigacni Bar (Desktop)
 
-| Vlastnost     | Hodnota  |
-| ------------- | -------- |
-| Vyska         | 56px     |
-| Padding X     | 24px     |
-| Pozadi        | Zinc-900 |
-| Spodni border | Zinc-900 |
+| Vlastnost     | Hodnota     |
+| ------------- | ----------- |
+| Vyska         | 56px        |
+| Padding X     | 24px        |
+| Pozadi        | Neutral-900 |
+| Spodni border | Neutral-900 |
 
 **Stavy odkazu:**
 
@@ -324,11 +324,11 @@ Zvyrazneni bloku pri najeti mysi - tenky oranzovy ramecek.
 
 ### Mobilni Navigace (2 radky, bez hamburgeru)
 
-| Vlastnost        | Hodnota  |
-| ---------------- | -------- |
-| Vyska prvni rady | 48px     |
-| Padding X        | 16px     |
-| Pozadi           | Zinc-900 |
+| Vlastnost        | Hodnota     |
+| ---------------- | ----------- |
+| Vyska prvni rady | 48px        |
+| Padding X        | 16px        |
+| Pozadi           | Neutral-900 |
 
 **Struktura:**
 
@@ -358,10 +358,10 @@ Zvyrazneni bloku pri najeti mysi - tenky oranzovy ramecek.
 
 ### Kontextualni Bloky
 
-| Typ              | Pozadi        | Text           | Tlacitka              |
-| ---------------- | ------------- | -------------- | --------------------- |
-| Standardni sekce | Zinc-50/White | Zinc-700       | Primarni + Sekundarni |
-| Tmava sekce      | Zinc-900      | White/Zinc-300 | Primarni + Sekundarni |
+| Typ              | Pozadi           | Text              | Tlacitka              |
+| ---------------- | ---------------- | ----------------- | --------------------- |
+| Standardni sekce | Neutral-50/White | Neutral-700       | Primarni + Sekundarni |
+| Tmava sekce      | Neutral-900      | White/Neutral-300 | Primarni + Sekundarni |
 
 ### Article Cards
 
@@ -376,7 +376,7 @@ Struktura pro seznam clanku s nahledem:
 
 **Vizualni alternativy bez fotografii:**
 
-- Gradient Zinc-900 -> Zinc-700 + velka ikona (Phosphor) s opacity
+- Gradient Neutral-900 -> Neutral-700 + velka ikona (Phosphor) s opacity
 - Tmave pozadi + snippet kodu se syntax highlighting
 - Grid pattern pozadi + Amber ctverec s ikonou uprostred
 
@@ -450,15 +450,15 @@ Chybove stavy s Error barvou (#B91C1C) a pomocnym textem.
 /* Barvy */
 bg-orange-500        /* Primary CTA */
 bg-orange-50         /* Secondary CTA */
-bg-zinc-900         /* Dark sections */
-bg-zinc-50          /* Light background */
+bg-neutral-900         /* Dark sections */
+bg-neutral-50          /* Light background */
 bg-white            /* Cards */
-text-zinc-900       /* Headings */
-text-zinc-700       /* Body text */
-text-zinc-500       /* Muted text */
+text-neutral-900       /* Headings */
+text-neutral-700       /* Body text */
+text-neutral-500       /* Muted text */
 text-orange-800      /* Links */
-border-zinc-300     /* Light borders */
-border-zinc-700     /* Dark borders */
+border-neutral-300     /* Light borders */
+border-neutral-700     /* Dark borders */
 
 /* Typography */
 font-sans           /* Inter (headings) */
@@ -476,8 +476,8 @@ rounded-none        /* Vse bez zaobleni */
   --color-primary: #f59e0b; /* Amber-500 */
   --color-primary-hover: #d97706; /* Amber-600 */
   --color-text-link: #92400e; /* Amber-800 */
-  --color-dark: #18181b; /* Zinc-900 */
-  --color-light: #fafafa; /* Zinc-50 */
+  --color-dark: #171717; /* Neutral-900 */
+  --color-light: #fafafa; /* Neutral-50 */
 
   /* Typography */
   --font-display: "Inter", sans-serif;

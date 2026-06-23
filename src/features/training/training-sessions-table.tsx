@@ -14,17 +14,17 @@ type TrainingSessionTableProps = {
 
 export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTableProps) {
   return (
-    <div className="divide-y divide-zinc-300">
+    <div className="divide-y divide-neutral-300">
       {sessions.map((training) => (
         <article key={`${training.name}-${training.dates?.start}`} className="py-6 md:py-8">
           {/* Mobile layout */}
           <div className="md:hidden">
-            <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+            <p className="font-display text-lg font-semibold text-neutral-900 tabular-nums">
               <TrainingDate dates={training.dates} />
             </p>
-            <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
-            <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
-            <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
+            <p className="text-base text-neutral-500">{t(locale, "sessions_table.time")}</p>
+            <p className="mt-1 text-base font-semibold text-neutral-500">{training.location}</p>
+            <p className="text-base font-semibold text-neutral-500">{t(locale, "sessions_table.language")}</p>
             <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.01em]">
               {training.trainingSlug ? (
                 <Link href={localizeUrl(`/skoleni/${training.trainingSlug}`, locale)}>{training.name}</Link>
@@ -33,7 +33,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
               )}
             </h3>
             {training.trainingDescription && (
-              <p className="mt-1 text-base text-zinc-600">{training.trainingDescription}</p>
+              <p className="mt-1 text-base text-neutral-600">{training.trainingDescription}</p>
             )}
             <div className="mt-4 flex items-center gap-4">
               {training.signUpURL ? (
@@ -48,12 +48,12 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
           {/* Desktop layout: 3-column grid */}
           <div className="hidden md:grid md:grid-cols-[180px_1fr_auto] md:items-center md:gap-8">
             <div>
-              <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+              <p className="font-display text-lg font-semibold text-neutral-900 tabular-nums">
                 <TrainingDate dates={training.dates} />
               </p>
-              <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
-              <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
-              <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
+              <p className="text-base text-neutral-500">{t(locale, "sessions_table.time")}</p>
+              <p className="mt-1 text-base font-semibold text-neutral-500">{training.location}</p>
+              <p className="text-base font-semibold text-neutral-500">{t(locale, "sessions_table.language")}</p>
             </div>
             <div>
               <h3 className="font-display text-xl font-semibold tracking-[-0.01em]">
@@ -64,7 +64,7 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
                 )}
               </h3>
               {training.trainingDescription && (
-                <p className="mt-1 text-base text-zinc-600">{training.trainingDescription}</p>
+                <p className="mt-1 text-base text-neutral-600">{training.trainingDescription}</p>
               )}
             </div>
             <div className="flex items-center gap-6">
@@ -84,17 +84,17 @@ export function TrainingSessionsTable({ sessions, locale }: TrainingSessionTable
 
 export function CompactTrainingSessionsTable({ sessions, locale }: TrainingSessionTableProps) {
   return (
-    <div className="divide-y divide-zinc-300">
+    <div className="divide-y divide-neutral-300">
       {sessions.map((training) => (
         <article key={`${training.name}-${training.dates?.start}`} className="py-6 md:py-8">
           {/* Mobile layout */}
           <div className="md:hidden">
-            <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+            <p className="font-display text-lg font-semibold text-neutral-900 tabular-nums">
               <TrainingDate dates={training.dates} />
             </p>
-            <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
-            <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
-            <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
+            <p className="text-base text-neutral-500">{t(locale, "sessions_table.time")}</p>
+            <p className="mt-1 text-base font-semibold text-neutral-500">{training.location}</p>
+            <p className="text-base font-semibold text-neutral-500">{t(locale, "sessions_table.language")}</p>
             <div className="mt-4">
               {training.signUpURL ? (
                 <PublicSessionSignUpButton name={training.name} signUpURL={training.signUpURL} locale={locale} />
@@ -107,12 +107,12 @@ export function CompactTrainingSessionsTable({ sessions, locale }: TrainingSessi
           {/* Desktop layout */}
           <div className="hidden md:flex md:items-center md:justify-between md:gap-8">
             <div>
-              <p className="font-display text-lg font-semibold text-zinc-900 tabular-nums">
+              <p className="font-display text-lg font-semibold text-neutral-900 tabular-nums">
                 <TrainingDate dates={training.dates} />
               </p>
-              <p className="text-base text-zinc-500">{t(locale, "sessions_table.time")}</p>
-              <p className="mt-1 text-base font-semibold text-zinc-500">{training.location}</p>
-              <p className="text-base font-semibold text-zinc-500">{t(locale, "sessions_table.language")}</p>
+              <p className="text-base text-neutral-500">{t(locale, "sessions_table.time")}</p>
+              <p className="mt-1 text-base font-semibold text-neutral-500">{training.location}</p>
+              <p className="text-base font-semibold text-neutral-500">{t(locale, "sessions_table.language")}</p>
             </div>
             <div>
               {training.signUpURL ? (
@@ -170,7 +170,7 @@ function TrainingPrice({
   const exclTax = FormatTrainingPrice(price, locale);
 
   return (
-    <div className="text-right text-zinc-700 tabular-nums">
+    <div className="text-right text-neutral-700 tabular-nums">
       <p className="text-base font-semibold">{inclTax}</p>
       <p className="text-base italic">
         {exclTax} {t(locale, "sessions_table.excl_vat")}

@@ -14,8 +14,8 @@ type TagListProps = {
 };
 
 const variantStyles: Record<TagListVariant, string> = {
-  default: "text-zinc-900 underline",
-  inverse: "text-zinc-100 underline",
+  default: "text-neutral-900 underline",
+  inverse: "text-neutral-100 underline",
 };
 
 export function TagList({ tags, variant = "default", activeTag, className, locale = "cs" }: TagListProps) {

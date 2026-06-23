@@ -2,8 +2,8 @@
  * Design Tokens
  *
  * Centralized design system tokens following the 60/30/10 color principle:
- * - 60% Neutral: zinc-100 backgrounds, white surfaces
- * - 30% Primary: zinc-900/700 text
+ * - 60% Neutral: neutral-100 backgrounds, white surfaces
+ * - 30% Primary: neutral-900/700 text
  * - 10% Accent: orange-500 highlights
  */
 
@@ -14,16 +14,16 @@
 export const colors = {
   // 60% - Neutral backgrounds
   background: {
-    default: "bg-zinc-100",
+    default: "bg-neutral-100",
     surface: "bg-white",
-    inverse: "bg-zinc-900",
+    inverse: "bg-neutral-900",
   },
 
   // 30% - Primary text
   text: {
-    primary: "text-zinc-900",
-    secondary: "text-zinc-700",
-    muted: "text-zinc-300",
+    primary: "text-neutral-900",
+    secondary: "text-neutral-700",
+    muted: "text-neutral-300",
     inverse: "text-white",
     // Link colors - orange-800 for WCAG AA compliance
     link: "text-orange-800",
@@ -41,10 +41,10 @@ export const colors = {
   // Borders - Design System Manual specs
   border: {
     // Light background borders
-    default: "border-zinc-300",
-    hover: "border-zinc-500",
+    default: "border-neutral-300",
+    hover: "border-neutral-500",
     // Dark background borders
-    dark: "border-zinc-700",
+    dark: "border-neutral-700",
     // Emphasis border (2px)
     emphasis: "border-2",
   },

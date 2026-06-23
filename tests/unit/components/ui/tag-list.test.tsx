@@ -29,13 +29,13 @@ describe("TagList", () => {
   it("applies inverse variant styles", () => {
     render(<TagList tags={["docker"]} variant="inverse" />);
     const link = screen.getByRole("link");
-    expect(link).toHaveClass("text-zinc-100");
+    expect(link).toHaveClass("text-neutral-100");
   });
 
   it("applies default variant styles", () => {
     render(<TagList tags={["docker"]} />);
     const link = screen.getByRole("link");
-    expect(link).toHaveClass("text-zinc-900");
+    expect(link).toHaveClass("text-neutral-900");
   });
 
   it("generates English locale URLs with /en prefix", () => {

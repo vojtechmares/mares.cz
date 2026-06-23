@@ -479,7 +479,7 @@ Renders a list of hashtag links for blog tags.
 ### Footer with Links
 
 ```tsx
-<Section className="border-t border-zinc-300">
+<Section className="border-t border-neutral-300">
   <Container>
     <Heading level="h3">Contact</Heading>
     <ul>
@@ -503,7 +503,7 @@ Renders a list of hashtag links for blog tags.
 
 Components use design tokens from `src/lib/design-tokens.ts`:
 
-- **Colors:** 60/30/10 rule (zinc backgrounds, zinc text, amber accent)
+- **Colors:** 60/30/10 rule (neutral backgrounds, neutral text, amber accent)
 - **Typography:** Inter for headings, Space Mono for body
 - **Spacing:** 8px grid system
 - **Radius:** Currently disabled (all `rounded-none`)

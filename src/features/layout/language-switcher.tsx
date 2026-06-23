@@ -18,18 +18,18 @@ export function LanguageSwitcher({ locale, currentPath }: LanguageSwitcherProps)
         data-lang="cs"
         className={clsx(
           "px-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500",
-          locale === "cs" ? "font-bold text-white" : "text-zinc-400 hover:text-zinc-200",
+          locale === "cs" ? "font-bold text-white" : "text-neutral-400 hover:text-neutral-200",
         )}
       >
         CS
       </a>
-      <span className="text-zinc-600">|</span>
+      <span className="text-neutral-600">|</span>
       <a
         href={locale === "en" ? currentUrl : alternateUrl}
         data-lang="en"
         className={clsx(
           "px-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500",
-          locale === "en" ? "font-bold text-white" : "text-zinc-400 hover:text-zinc-200",
+          locale === "en" ? "font-bold text-white" : "text-neutral-400 hover:text-neutral-200",
         )}
       >
         EN

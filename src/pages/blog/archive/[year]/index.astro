@@ -71,21 +71,21 @@ const jsonLd = {
   <Section variant="inverse">
     <Container>
       <Heading variant="inverse">Blog: {year}</Heading>
-      <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+      <p class="mt-4 text-base text-neutral-100 lg:text-xl">
         <TagList tags={tags} variant="inverse" locale={locale} />
       </p>
       <div class="flex flex-row justify-between">
-        <p class="mt-4 text-base text-zinc-100 lg:text-xl">
+        <p class="mt-4 text-base text-neutral-100 lg:text-xl">
           {formatArticleCount(articles.length, locale)}
           {t(locale, "blog.year_article_suffix")}
         </p>
         {
           months.length > 0 &&
             // prettier-ignore
-            <p class="mt-2 text-base text-zinc-100 lg:text-xl">{months.map((m, i) => <><a href={localizeUrl(`/blog/archive/${year}/${String(m.month).padStart(2, "0")}`, locale)} class="underline">{getMonthName(m.month, locale)}</a>{i < months.length - 1 ? " · " : ""}</>)}</p>
+            <p class="mt-2 text-base text-neutral-100 lg:text-xl">{months.map((m, i) => <><a href={localizeUrl(`/blog/archive/${year}/${String(m.month).padStart(2, "0")}`, locale)} class="underline">{getMonthName(m.month, locale)}</a>{i < months.length - 1 ? " · " : ""}</>)}</p>
         }
       </div>
-      <p class="mt-2 text-base text-zinc-100 lg:text-xl">
+      <p class="mt-2 text-base text-neutral-100 lg:text-xl">
         <a class="underline" href={localizeUrl("/blog", locale)}>{t(locale, "blog.back_to_blog")}</a>
       </p>
     </Container>
