@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, createElement, useMemo, useCallback, type ElementType } from "react";
-import { gsap } from "gsap";
 
 interface TextTypeProps {
   className?: string;
@@ -88,16 +87,28 @@ const TextType = ({
   }, [startOnVisible]);
 
   useEffect(() => {
-    if (showCursor && cursorRef.current) {
+    if (!showCursor || !cursorRef.current) return;
+
+    let tween: GSAPTween | undefined;
+    let cancelled = false;
+
+    // gsap is browser-only; import it dynamically so it never runs during SSR.
+    void import("gsap").then(({ gsap }) => {
+      if (cancelled || !cursorRef.current) return;
       gsap.set(cursorRef.current, { opacity: 1 });
-      gsap.to(cursorRef.current, {
+      tween = gsap.to(cursorRef.current, {
         opacity: 0,
         duration: cursorBlinkDuration,
         repeat: -1,
         yoyo: true,
         ease: "power2.inOut",
       });
-    }
+    });
+
+    return () => {
+      cancelled = true;
+      tween?.kill();
+    };
   }, [showCursor, cursorBlinkDuration]);
 
   useEffect(() => {
