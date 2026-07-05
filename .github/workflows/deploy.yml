@@ -1,0 +1,70 @@
+name: Deploy
+
+# Continuous deployment to Cloudflare Workers.
+#   push to `main`       -> staging    (mares-cz-staging,    https://beta.mares.cz)
+#   push to `production` -> production (mares-cz-production, https://www.mares.cz)
+#
+# Requires a `CLOUDFLARE_API_TOKEN` repository secret (Settings -> Secrets and
+# variables -> Actions) with permissions to edit Workers, Workers KV, and
+# Workers Routes on the mares.cz zone. App secrets (SESSIONS_*, ECOMAIL_*, ...)
+# are managed per-worker with `wrangler secret bulk` and are not set here.
+
+on:
+  push:
+    branches:
+      - main
+      - production
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy ${{ github.ref_name == 'production' && 'production' || 'staging' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      HUSKY: "0"
+      CLOUDFLARE_ACCOUNT_ID: f24333bb3c47d6db753e57e2a0c90082
+      # main -> staging, production -> production
+      CF_ENV: ${{ github.ref_name == 'production' && 'production' || 'staging' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build (${{ env.CF_ENV }})
+        run: pnpm build
+        env:
+          CLOUDFLARE_ENV: ${{ env.CF_ENV }}
+
+      - name: Deploy to Cloudflare (${{ env.CF_ENV }})
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN secret is not set - skipping deploy. Add it under Settings -> Secrets and variables -> Actions to enable deploys."
+            exit 0
+          fi
+          pnpm exec wrangler deploy -c dist/server/wrangler.json
