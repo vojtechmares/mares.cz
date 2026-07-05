@@ -9,6 +9,7 @@ allowBuilds:
   esbuild: true
   msw: false
   sharp: true
+  workerd: true
 
 # trustPolicyExclude allowlists specific package versions that pnpm's
 # supply-chain "trust downgrade" heuristic flags. semver@6.3.1 is the

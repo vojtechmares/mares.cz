@@ -36,8 +36,7 @@ export async function CreateHomepageImageComponent(baseUrl: string | URL, locale
             paddingBottom: 0,
           }}
         >
-          <span style={{ whiteSpace: "nowrap", color: "#f54a00" }}>Vojtěch Mareš</span>
-          <br />,
+          <span style={{ whiteSpace: "nowrap", color: "#f54a00" }}>Vojtěch Mareš</span>,
         </p>
         <p
           style={{

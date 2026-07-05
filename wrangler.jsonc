@@ -1,0 +1,91 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mares-cz",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+  },
+  "browser": {
+    "binding": "BROWSER",
+  },
+  "images": {
+    "binding": "IMAGES",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "6a5ccbe5a26446888af35037abc88cb1",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+  // Deployments always target an environment (`--env staging` / `--env production`,
+  // or `CLOUDFLARE_ENV=<name> pnpm build`). Bindings are NOT inherited by Wrangler
+  // environments, so they are repeated in each block.
+  "env": {
+    "staging": {
+      "name": "mares-cz-staging",
+      "routes": [
+        {
+          "pattern": "beta.mares.cz",
+          "custom_domain": true,
+        },
+      ],
+      "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+      },
+      "browser": {
+        "binding": "BROWSER",
+      },
+      "images": {
+        "binding": "IMAGES",
+      },
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "c597c79d74cf4d07b483cd8d3e48705d",
+        },
+      ],
+      "observability": {
+        "enabled": true,
+      },
+    },
+    "production": {
+      "name": "mares-cz-production",
+      "routes": [
+        {
+          "pattern": "www.mares.cz",
+          "custom_domain": true,
+        },
+        {
+          "pattern": "mares.cz",
+          "custom_domain": true,
+        },
+      ],
+      "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+      },
+      "browser": {
+        "binding": "BROWSER",
+      },
+      "images": {
+        "binding": "IMAGES",
+      },
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "fd249d30d418420d8b5006b61807a9e1",
+        },
+      ],
+      "observability": {
+        "enabled": true,
+      },
+    },
+  },
+}

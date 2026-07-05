@@ -28,14 +28,27 @@ const clients: Client[] = [
 
 <Clients locale={locale}>
   {
-    clients.map((client) => (
-      <Image
-        alt={client.name}
-        src={client.logo}
-        class="col-span-2 max-h-18 w-full object-contain lg:col-span-1"
-        loading={"lazy"}
-        decoding={"async"}
-      />
-    ))
+    clients.map((client) =>
+      // SVGs are already scalable and are not processed by the Cloudflare Images
+      // binding (which rejects vector input), so serve them directly. Raster
+      // logos still go through <Image> for AVIF/WebP optimization.
+      client.logo.format === "svg" ? (
+        <img
+          alt={client.name}
+          src={client.logo.src}
+          class="col-span-2 max-h-18 w-full object-contain lg:col-span-1"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <Image
+          alt={client.name}
+          src={client.logo}
+          class="col-span-2 max-h-18 w-full object-contain lg:col-span-1"
+          loading={"lazy"}
+          decoding={"async"}
+        />
+      ),
+    )
   }
 </Clients>

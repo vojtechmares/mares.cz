@@ -5,7 +5,7 @@ import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 import { getLocalizedCollection } from "../../../../lib/content";
 
 export async function GET(context: APIContext) {
-  const baseUrl = context.site?.origin ?? "https://www.mares.cz";
+  const baseUrl = context.url.origin;
   const locale = context.locals.locale;
   const yearParam = context.params.year;
   const year = parseInt(yearParam!);

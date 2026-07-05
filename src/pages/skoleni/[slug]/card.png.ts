@@ -7,7 +7,7 @@ import { localizeUrl } from "../../../i18n/routes";
 import { getCurrencyForLocale } from "../../../i18n/formatting";
 
 export async function GET(context: APIContext) {
-  const baseUrl = context.site?.origin ?? "https://www.mares.cz";
+  const baseUrl = context.url.origin;
   const locale = context.locals.locale;
   const training = await getLocalizedEntry("training", context.params.slug!, locale);
   if (!training || training.data.draft) {

@@ -17,6 +17,15 @@ import { englishPathToCzech, localizeUrl } from "./i18n/routes";
  * the locale on the second pass.
  */
 export const onRequest = defineMiddleware(async (context, next) => {
+  // Canonical host: the production environment serves www.mares.cz, so redirect
+  // the apex (mares.cz) to it, preserving path and query. Other hosts
+  // (beta.mares.cz, *.workers.dev, localhost) are left untouched.
+  if (context.url.hostname === "mares.cz") {
+    const target = new URL(context.url);
+    target.hostname = "www.mares.cz";
+    return context.redirect(target.toString(), 301);
+  }
+
   const { pathname } = context.url;
 
   // Internal Astro endpoints (/_image, /_astro, /_server-islands, ...) and API

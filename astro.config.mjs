@@ -1,6 +1,6 @@
+import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
 import { defineConfig, envField } from "astro/config";
@@ -30,12 +30,6 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
-    ssr: {
-      external: ["@resvg/resvg-js"],
-    },
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
-    },
   },
 
   integrations: [
@@ -62,11 +56,17 @@ export default defineConfig({
     ],
   },
 
-  adapter: vercel({
-    skewProtection: true,
-    imageService: true,
-    devImageService: "sharp",
-    includeFiles: ["./src/fonts/Inter_18pt-Regular.ttf", "./src/fonts/Inter_18pt-Bold.ttf"],
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+    // Optimize images with native Cloudflare Images: build-time (Sharp) for
+    // prerendered routes, and the runtime `IMAGES` binding for on-demand SSR
+    // transforms (resize/format negotiation to AVIF/WebP).
+    imageService: {
+      build: "compile",
+      runtime: "cloudflare-binding",
+    },
   }),
 
   env: {
