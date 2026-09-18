@@ -33,10 +33,14 @@ export function ServicesTraining({ trainings, locale }: ServicesTrainingProps) {
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {trainings.map((training) => (
-            // oxlint-disable-next-line jsx-a11y/control-has-associated-label -- label comes from the Heading inside Card
-            <a key={training.id} href={localizeUrl("/skoleni/" + training.id, locale)} className="flex h-full">
+            <a
+              key={training.id}
+              href={localizeUrl("/skoleni/" + training.id, locale)}
+              aria-labelledby={`services-training-${training.id}`}
+              className="flex h-full"
+            >
               <Card variant="surface" hover className="flex h-full flex-col">
-                <Heading level="h3" className="text-lg">
+                <Heading level="h3" id={`services-training-${training.id}`} className="text-lg">
                   {training.title}
                 </Heading>
                 <Body color="secondary" className="mt-2">
