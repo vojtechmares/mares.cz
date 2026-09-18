@@ -28,3 +28,6 @@ dist
 src/pages/blog/\[slug\]/index.astro
 
 .claude/skills
+
+# Generated Cloudflare Worker types (wrangler types)
+worker-configuration.d.ts

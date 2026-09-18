@@ -187,6 +187,7 @@ const TextType = ({
 
   return createElement(
     Component,
+    // oxlint-disable-next-line react/refs -- passes the ref object as a prop, never reads .current
     {
       ref: containerRef,
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,

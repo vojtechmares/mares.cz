@@ -226,15 +226,15 @@ Ukážeme si, jak jednoduše spojit Terraform a GitLab CI. Takže Terraform nemu
 
    ```yaml
    include:
-   - template: Terraform/Base.gitlab-ci.yml
-   - template: Jobs/SAST-IaC.gitlab-ci.yml
+     - template: Terraform/Base.gitlab-ci.yml
+     - template: Jobs/SAST-IaC.gitlab-ci.yml
 
    stages:
-   - validate
-   - test
-   - build
-   - deploy
-   - cleanup
+     - validate
+     - test
+     - build
+     - deploy
+     - cleanup
 
    fmt:
    extends: .terraform:fmt

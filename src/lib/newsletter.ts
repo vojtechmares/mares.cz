@@ -53,8 +53,7 @@ function asTrimmedString(value: unknown): string {
 }
 
 export type ValidationResult =
-  | { ok: true; value: NewsletterSignupInput }
-  | { ok: false; fields: NewsletterFieldErrors };
+  { ok: true; value: NewsletterSignupInput } | { ok: false; fields: NewsletterFieldErrors };
 
 /**
  * Validate an untrusted signup body. The client validates first for UX, but this

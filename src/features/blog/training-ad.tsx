@@ -12,50 +12,51 @@ export async function TrainingAd({ trainingSlug, locale }: { trainingSlug?: stri
     return <></>;
   }
 
+  let training;
   try {
-    const training = await getLocalizedEntry("training", trainingSlug, locale);
+    training = await getLocalizedEntry("training", trainingSlug, locale);
 
     if (training === undefined) {
       throw new Error("Training is undefined for slug: " + trainingSlug);
     }
-
-    return (
-      <Section id="skoleni" variant="inverse">
-        <Container>
-          <div className="flex flex-col justify-between md:flex-row">
-            <div className="max-w-3xl">
-              <Heading level="h2" variant="inverse">
-                {training.data.title} {t(locale, "blog.training_ad_suffix")}
-              </Heading>
-              <Text variant="inverse" className="mt-4">
-                {training.data.ad}
-              </Text>
-              <div className="flex flex-col md:flex-row md:gap-x-6">
-                <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
-                  {t(locale, "blog.training_ad_cta_corporate")}
-                </Button>
-                <Button
-                  href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)}
-                  variant="secondary"
-                  className="mt-10"
-                >
-                  {t(locale, "blog.training_ad_cta_more_info")}
-                </Button>
-              </div>
-            </div>
-            <img
-              src={training.data.icon?.src as string}
-              alt=""
-              className="mx-auto hidden p-2 invert md:block"
-              width="196"
-              height="196"
-            />
-          </div>
-        </Container>
-      </Section>
-    );
   } catch (error) {
     console.error("Failed to load training ad:", error);
     return <></>;
   }
+
+  return (
+    <Section id="skoleni" variant="inverse">
+      <Container>
+        <div className="flex flex-col justify-between md:flex-row">
+          <div className="max-w-3xl">
+            <Heading level="h2" variant="inverse">
+              {training.data.title} {t(locale, "blog.training_ad_suffix")}
+            </Heading>
+            <Text variant="inverse" className="mt-4">
+              {training.data.ad}
+            </Text>
+            <div className="flex flex-col md:flex-row md:gap-x-6">
+              <Button href="mailto:vojtech@mares.cz" variant="accent" className="mt-10">
+                {t(locale, "blog.training_ad_cta_corporate")}
+              </Button>
+              <Button
+                href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)}
+                variant="secondary"
+                className="mt-10"
+              >
+                {t(locale, "blog.training_ad_cta_more_info")}
+              </Button>
+            </div>
+          </div>
+          <img
+            src={training.data.icon?.src as string}
+            alt=""
+            className="mx-auto hidden p-2 invert md:block"
+            width="196"
+            height="196"
+          />
+        </div>
+      </Container>
+    </Section>
+  );
 }
