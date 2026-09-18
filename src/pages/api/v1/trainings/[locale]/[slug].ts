@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
-import yaml from "js-yaml";
+import { dump } from "js-yaml";
 
 export const GET: APIRoute = async ({ params }) => {
   const { locale, slug } = params;
@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const frontmatter = yaml.dump(entry.data, { lineWidth: -1 });
+  const frontmatter = dump(entry.data, { lineWidth: -1 });
   const markdown = `---\n${frontmatter}---\n${entry.body}`;
 
   return new Response(markdown, {
