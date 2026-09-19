@@ -21,11 +21,10 @@ function UnderlineSvg() {
 
 interface HeroProps {
   locale: Locale;
-  role?: ReactNode;
   children?: ReactNode;
 }
 
-export function Hero({ locale, role, children }: HeroProps) {
+export function Hero({ locale, children }: HeroProps) {
   return (
     <Container className="pt-16 pr-0! sm:pt-24 md:pr-4">
       <div className="flex flex-row items-end justify-between">
@@ -37,7 +36,7 @@ export function Hero({ locale, role, children }: HeroProps) {
               <span className="relative">Vojtěch Mareš</span>
             </span>
             ,<br />
-            {role ?? t(locale, "hero.role")}
+            {t(locale, "hero.role")}
           </Heading>
           <Text variant="secondary" className="mt-6 md:max-w-2xl">
             {t(locale, "hero.description")}
