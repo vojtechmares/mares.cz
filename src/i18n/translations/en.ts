@@ -1,6 +1,6 @@
 import type { TranslationKey } from "./cs";
 
-export const en: Record<TranslationKey, string> = {
+export const en: Partial<Record<TranslationKey, string>> = {
   // Layout - Navigation
   "nav.schedule_meeting": "Schedule a meeting",
 

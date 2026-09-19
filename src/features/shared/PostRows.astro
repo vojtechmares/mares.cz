@@ -1,0 +1,36 @@
+---
+export interface PostRow {
+  href: string;
+  title: string;
+  date: Date;
+  /** Shown as `#tag`. */
+  tag?: string;
+  /** Optional right-aligned meta (e.g. reading time). */
+  meta?: string;
+  external?: boolean;
+}
+
+interface Props {
+  posts: PostRow[];
+  size?: "default" | "lg";
+}
+
+const { posts, size = "default" } = Astro.props;
+
+const isoDate = (date: Date) => date.toISOString().slice(0, 10);
+---
+
+<div class="rows">
+  {
+    posts.map((post) => (
+      <a class:list={["row", "row--post", size === "lg" && "row--post-lg"]} href={post.href}>
+        <time class="row__meta" datetime={isoDate(post.date)}>
+          {isoDate(post.date)}
+        </time>
+        <span class="row__tag">{post.tag ? `#${post.tag}` : ""}</span>
+        <span class="row__title">{post.title}</span>
+        <span class="row__meta">{post.meta ?? ""}</span>
+      </a>
+    ))
+  }
+</div>

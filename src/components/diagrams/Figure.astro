@@ -1,0 +1,18 @@
+---
+interface Props {
+  /** Figure number, unique per page. */
+  n: number | string;
+  caption: string;
+  class?: string;
+  /** The diagram renders the caption itself (e.g. next to a status line). */
+  inlineCaption?: boolean;
+}
+
+const { n, caption, class: className, inlineCaption = false } = Astro.props;
+const num = String(n).padStart(2, "0");
+---
+
+<figure class:list={["fig", "dg", className]}>
+  <slot />
+  {!inlineCaption && <figcaption>{`fig. ${num} — ${caption}`}</figcaption>}
+</figure>

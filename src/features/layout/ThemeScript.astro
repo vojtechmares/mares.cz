@@ -1,0 +1,43 @@
+---
+// Applies the persisted theme before first paint (no flash) and wires the header switch.
+// The choice lives in localStorage under `mares-theme`; without one the OS preference wins.
+---
+
+<meta name="theme-color" content="#FAF8F5" />
+<script is:inline>
+  (function () {
+    var KEY = "mares-theme";
+    var BG = { light: "#FAF8F5", dark: "#14120F" };
+    var root = document.documentElement;
+
+    function apply(theme) {
+      root.dataset.theme = theme;
+      root.style.background = BG[theme];
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", BG[theme]);
+    }
+
+    var stored = null;
+    try {
+      stored = localStorage.getItem(KEY);
+    } catch (e) {}
+    var theme =
+      stored === "dark" || stored === "light"
+        ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+    apply(theme);
+
+    document.addEventListener("click", function (event) {
+      var target = event.target instanceof Element ? event.target.closest("[data-theme-switch]") : null;
+      if (!target) return;
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      apply(next);
+      target.setAttribute("aria-pressed", String(next === "dark"));
+      try {
+        localStorage.setItem(KEY, next);
+      } catch (e) {}
+    });
+  })();
+</script>

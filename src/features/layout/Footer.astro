@@ -1,35 +1,106 @@
 ---
-import { Footer as FooterComponent } from "./footer";
-import { LocalizedStaticNavigationLinks } from "../../lib/site";
-import { getLocalizedCollection, bareSlug } from "../../lib/content";
-import { localizeUrl } from "../../i18n/routes";
 import { t } from "../../i18n";
+import { englishPathToCzech, getAlternateUrl, localizeUrl } from "../../i18n/routes";
+import { bareSlug, getLocalizedCollection } from "../../lib/content";
+import { Contact, SocialLinks } from "../../lib/site";
 
 const locale = Astro.locals.locale;
+const currentPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : Astro.url.pathname;
 
-const staticLinks = LocalizedStaticNavigationLinks.filter((links) => {
-  return links.locale === locale;
-})[0].links as { name: string; href: string }[];
+const pages = await getLocalizedCollection("page", locale, ({ data }) => !data.draft && !data.hidden);
 
-const pages = await getLocalizedCollection("page", locale, ({ data }) => {
-  return !data.draft;
-});
-
-const trainings = await getLocalizedCollection("training", locale, ({ data }) => {
-  return !data.draft;
-});
-
-const pageLinks = pages
-  .map((page) => {
-    return { name: page.data.title, href: localizeUrl(`/${bareSlug(page.id)}`, locale) };
-  })
-  .filter((link) => {
-    return link !== undefined;
-  });
-
-const externalLinks = [{ name: t(locale, "footer.devops_wiki"), href: "https://wiki.mares.cz", external: true }];
-
-const links = [...(staticLinks as { name: string; href: string }[]), ...pageLinks, ...externalLinks];
+const webLinks = [
+  { name: t(locale, "nav.training"), href: localizeUrl("/skoleni", locale) },
+  { name: t(locale, "nav.sessions"), href: localizeUrl("/skoleni/verejne-terminy", locale) },
+  { name: t(locale, "nav.services"), href: localizeUrl("/sluzby", locale) },
+  { name: t(locale, "nav.blog"), href: localizeUrl("/blog", locale) },
+  { name: t(locale, "nav.talks"), href: localizeUrl("/prednasky", locale) },
+  ...pages.map((page) => ({ name: page.data.title, href: localizeUrl(`/${bareSlug(page.id)}`, locale) })),
+  { name: t(locale, "footer.devops_wiki"), href: "https://wiki.mares.cz", external: true },
+];
 ---
 
-<FooterComponent links={links} trainings={trainings} currentYear={new Date().getFullYear()} locale={locale} />
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <a href={localizeUrl("/", locale)} class="wordmark">{Contact.name}</a>
+        <ul class="site-footer__legal">
+          <li>
+            {t(locale, "footer.company_id_label")}{" "}
+            <span id="company-id">{Contact.companyId}</span>
+          </li>
+          <li>
+            {t(locale, "footer.vat_id_label")}{" "}
+            <span id="vat-id">{Contact.vatId}</span>
+          </li>
+          <li>{t(locale, "footer.vat_payer_short")}</li>
+          <li>{t(locale, "footer.location")}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__title">{t(locale, "footer.contact")}</h2>
+        <ul class="site-footer__list">
+          <li><a href={`mailto:${Contact.email}`}>{Contact.email}</a></li>
+          <li><a href={Contact.phoneHref} class="mono">{Contact.phone}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__title">{t(locale, "footer.web")}</h2>
+        <ul class="site-footer__list">
+          {
+            webLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={"external" in link ? "_blank" : undefined}
+                  rel={"external" in link ? "noreferrer" : undefined}
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__title">{t(locale, "footer.elsewhere")}</h2>
+        <ul class="site-footer__list">
+          {
+            SocialLinks.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="me noreferrer">
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© {new Date().getFullYear()} {Contact.name}</span>
+      <span data-lang-switcher>
+        <a
+          href={getAlternateUrl(currentPath, locale)}
+          data-lang={locale === "cs" ? "en" : "cs"}
+          hreflang={locale === "cs" ? "en" : "cs"}
+        >
+          {locale === "cs" ? "English" : "Česky"}
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("[data-lang-switcher] a[data-lang]").forEach((link) => {
+    link.addEventListener("click", () => {
+      document.cookie = `lang=${link.dataset.lang}; path=/; max-age=31536000; SameSite=Lax`;
+    });
+  });
+</script>

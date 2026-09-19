@@ -1,24 +1,58 @@
 ---
-import { CallToAction } from "../../features/homepage/call-to-action";
-import References from "../../features/homepage/References.astro";
-import { ServicesConsultation } from "../../features/services/services-consultation";
-import { ServicesCooperation } from "../../features/services/services-cooperation";
-import { ServicesHero } from "../../features/services/services-hero";
-import { ServicesTraining } from "../../features/services/services-training";
+import CostBars from "../../components/diagrams/CostBars.astro";
+import Pipeline from "../../components/diagrams/Pipeline.astro";
+import Terminal from "../../components/diagrams/Terminal.astro";
+import ClientLogos from "../../features/shared/ClientLogos.astro";
+import Quotes from "../../features/shared/Quotes.astro";
+import ServiceRows from "../../features/shared/ServiceRows.astro";
+import StepRows from "../../features/shared/StepRows.astro";
 import Layout from "../../layouts/Layout.astro";
-import { t } from "../../i18n";
+
+import { t, type TranslationKey } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
-import { getLocalizedCollection, bareSlug } from "../../lib/content";
+import { getCatalog } from "../../lib/catalog";
+import { MeetingUrl } from "../../lib/site";
 
 const locale = Astro.locals.locale;
 
-const trainings = await getLocalizedCollection("training", locale, ({ data }) => !data.draft);
+const catalog = await getCatalog(locale);
 
 const meta = {
   title: t(locale, "services_page.meta_title"),
   description: t(locale, "services_page.meta_description"),
   keywords: t(locale, "services_page.meta_keywords"),
 };
+
+const key = (name: string) => name as TranslationKey;
+
+const steps = (prefix: string, count: number) =>
+  Array.from({ length: count }, (_, index) => ({
+    name: t(locale, key(`${prefix}.step${index + 1}_name`)),
+    description: t(locale, key(`${prefix}.step${index + 1}_description`)),
+  }));
+
+const cooperationIncludes = Array.from({ length: 7 }, (_, index) =>
+  t(locale, key(`services_cooperation.includes${index + 1}`)),
+);
+
+const cooperationProjects = Array.from({ length: 4 }, (_, index) => ({
+  label: t(locale, key(`services_cooperation.project${index + 1}_label`)),
+  description: t(locale, key(`services_cooperation.project${index + 1}_description`)),
+}));
+
+const consultationAreas = Array.from({ length: 4 }, (_, index) => ({
+  label: t(locale, key(`services_consultation.area${index + 1}_name`)),
+  description: t(locale, key(`services_consultation.area${index + 1}_description`)),
+}));
+
+const trainingBenefits = [1, 2, 3].map((index) => t(locale, key(`services_training.benefit${index}`)));
+
+const yearsOfPractice = new Date().getFullYear() - 2020;
+const stats = [
+  `${yearsOfPractice}+ ${t(locale, "services_hero.years_suffix")} ${t(locale, "services_hero.years_label")}`,
+  `${t(locale, "services_hero.projects")} ${t(locale, "services_hero.projects_label")}`,
+  `${t(locale, "services_hero.training_count", { count: catalog.length })} ${t(locale, "services_hero.training_count_label")}`,
+];
 ---
 
 <Layout
@@ -33,22 +67,198 @@ const meta = {
     },
   }}
 >
-  <ServicesHero trainingCount={trainings.length} locale={locale} />
+  <section class="section section--first">
+    <div class="wrap">
+      <p class="eyebrow">// {t(locale, "services_page.eyebrow")}</p>
+      <h1 class="h-page">{t(locale, "services_page.heading")}</h1>
+      <p class="lead lead--wide">{t(locale, "services_hero.description")}</p>
+    </div>
+  </section>
 
-  <ServicesCooperation locale={locale} />
+  <section>
+    <div class="wrap">
+      <ServiceRows variant="wide" linked={false} />
+      <p class="note" style="padding-top: 8px">{stats.join(" · ")}</p>
+    </div>
+  </section>
 
-  <ServicesTraining
-    locale={locale}
-    trainings={trainings.map((t) => ({
-      id: bareSlug(t.id),
-      title: t.data.title,
-      description: t.data.description,
-    }))}
-  />
+  {/* ------------------------------------------------------------ cooperation */}
+  <section class="section" id="spoluprace">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">{t(locale, "services_cooperation.badge")}</p>
+        <h2 class="h2">{t(locale, "services_cooperation.heading")}</h2>
+        <p class="body">{t(locale, "services_cooperation.description")}</p>
+        <a href={MeetingUrl} class="link-arrow">{t(locale, "services_page.cooperation_cta")} →</a>
+      </div>
+      <div class="split__media">
+        <Pipeline
+          n={1}
+          caption={t(locale, "services_page.fig_process")}
+          nodes={[
+            { label: "analýza", sub: "stav · rizika" },
+            { label: "návrh", sub: "plán · priority" },
+            { label: "sprinty", sub: "IaC · K8s · CI/CD" },
+            { label: "podpora", sub: "SLA · po–pá 9–17" },
+          ]}
+        />
+      </div>
+    </div>
 
-  <ServicesConsultation locale={locale} />
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_page.process_heading")}</h3>
+      <StepRows steps={steps("services_cooperation", 4)} />
+    </div>
 
-  <References />
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_cooperation.includes_heading")}</h3>
+      <ul class="rows">
+        {
+          cooperationIncludes.map((item) => (
+            <li class="row row--kv" style="grid-template-columns: 24px minmax(0, 1fr)">
+              <span class="row__num" aria-hidden="true">
+                +
+              </span>
+              <span class="row__desc" style="color: var(--ink)">
+                {item}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
 
-  <CallToAction locale={locale} />
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_cooperation.projects_heading")}</h3>
+      <div class="rows">
+        {
+          cooperationProjects.map((project) => (
+            <div class="row row--service" style="grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr)">
+              <span class="row__title">{project.label}</span>
+              <span class="row__desc">{project.description}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_cooperation.suitable_heading")}</h3>
+      <p class="body">{t(locale, "services_cooperation.suitable_description")}</p>
+    </div>
+
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_cooperation.support_heading")}</h3>
+      <div>
+        <p class="body">{t(locale, "services_cooperation.support_text1")}</p>
+        <p class="body" style="margin-top: 16px">{t(locale, "services_cooperation.support_text2")}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* --------------------------------------------------------------- training */}
+  <section class="section" id="skoleni">
+    <div class="wrap split split--flip">
+      <div class="split__media">
+        <Terminal
+          n={2}
+          id="svc-training"
+          chrome
+          caption={t(locale, "services_page.fig_training")}
+          lines={[
+            { cmd: "kubectl get pods -n workshop" },
+            { out: "NAME         READY   STATUS" },
+            { out: "ucastnik-01  1/1     Running", hl: "Running" },
+            { out: "ucastnik-02  1/1     Running", hl: "Running" },
+            { out: "ucastnik-03  0/1     CrashLoopBackOff" },
+            { cmd: "kubectl logs ucastnik-03 --previous" },
+            { out: "error: DATABASE_URL is not set", hl: "DATABASE_URL" },
+          ]}
+        />
+      </div>
+      <div>
+        <p class="eyebrow">{t(locale, "services_training.badge")}</p>
+        <h2 class="h2">{t(locale, "services_training.heading")}</h2>
+        <p class="body">{t(locale, "services_training.description")}</p>
+        <a href={localizeUrl("/skoleni", locale)} class="link-arrow">{t(locale, "services_training.training_list")} →</a
+        >
+      </div>
+    </div>
+
+    <div class="wrap" style="margin-top: 72px">
+      <div class="rows">
+        <a class="row row--service-wide" href={localizeUrl("/skoleni/verejne-terminy", locale)}>
+          <span class="row__title">{t(locale, "services_training.public_sessions")}</span>
+          <span class="row__desc">{t(locale, "services_training.public_sessions_description")}</span>
+          <span class="row__value row__value--end">
+            {t(locale, "price.training_value")}
+            <span class="row__unit"> / {t(locale, "price.training_unit")}</span>
+          </span>
+        </a>
+        <a class="row row--service-wide" href={localizeUrl("/skoleni", locale)}>
+          <span class="row__title">{t(locale, "services_training.corporate")}</span>
+          <span class="row__desc">{t(locale, "services_training.corporate_description")}</span>
+          <span class="row__value row__value--end">{t(locale, "price.cooperation_value")}</span>
+        </a>
+      </div>
+      <p class="note" style="padding-top: 16px">{trainingBenefits.join(" · ")}</p>
+    </div>
+  </section>
+
+  {/* ----------------------------------------------------------- consultation */}
+  <section class="section" id="konzultace">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">{t(locale, "services_consultation.badge")}</p>
+        <h2 class="h2">{t(locale, "services_consultation.heading")}</h2>
+        <p class="body">{t(locale, "services_consultation.description")}</p>
+        <a href={MeetingUrl} class="link-arrow">{t(locale, "services_page.consultation_cta")} →</a>
+      </div>
+      <div class="split__media">
+        <CostBars
+          n={3}
+          caption={t(locale, "services_page.fig_costs")}
+          before={t(locale, "services_page.costs_before")}
+          after={t(locale, "services_page.costs_after")}
+        />
+      </div>
+    </div>
+
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_page.consultation_process_heading")}</h3>
+      <StepRows steps={steps("services_consultation", 3)} />
+    </div>
+
+    <div class="wrap aside-split" style="margin-top: 72px">
+      <h3 class="h3">{t(locale, "services_consultation.areas_heading")}</h3>
+      <div>
+        <div class="rows">
+          {
+            consultationAreas.map((area) => (
+              <div class="row row--service" style="grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr)">
+                <span class="row__title">{area.label}</span>
+                <span class="row__desc">{area.description}</span>
+              </div>
+            ))
+          }
+        </div>
+        <p class="note" style="padding-top: 16px">
+          {t(locale, "services_consultation.price")} · {t(locale, "services_consultation.scope")}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">{t(locale, "references.heading")}</p>
+      <h2 class="h2" style="margin-bottom: 48px">{t(locale, "references.subheading")}</h2>
+      <Quotes />
+    </div>
+  </section>
+
+  <div style="margin-top: 88px">
+    <ClientLogos />
+  </div>
+  <div style="height: 104px"></div>
 </Layout>

@@ -1,15 +1,20 @@
 ---
+import Pipeline from "../components/diagrams/Pipeline.astro";
+import SelfHealing from "../components/diagrams/SelfHealing.astro";
+import ClientLogos from "../features/shared/ClientLogos.astro";
+import CourseRows from "../features/shared/CourseRows.astro";
+import Portrait from "../features/shared/Portrait.astro";
+import PostRows from "../features/shared/PostRows.astro";
+import Quotes from "../features/shared/Quotes.astro";
+import ServiceRows from "../features/shared/ServiceRows.astro";
 import Layout from "../layouts/Layout.astro";
-import Hero from "../features/homepage/Hero.astro";
-import Clients from "../features/homepage/Clients.astro";
-import References from "../features/homepage/References.astro";
 
-import { Services } from "../features/homepage/services";
-import { CallToAction } from "../features/homepage/call-to-action";
-
-import { LocalizedMetadata } from "../lib/site";
+import { t } from "../i18n";
 import { localizeUrl } from "../i18n/routes";
-import { TrainingGrid } from "../features/training/training-grid";
+import { getCatalog } from "../lib/catalog";
+import { getLocalizedCollection } from "../lib/content";
+import { getPublishedPosts, toPostRow } from "../lib/posts";
+import { Contact, LocalizedMetadata, MeetingUrl } from "../lib/site";
 
 const locale = Astro.locals.locale;
 const defaultMetadata = LocalizedMetadata.filter((m) => m.locale === locale)[0];
@@ -33,13 +38,136 @@ const openGraph = {
 const jsonLd = {
   type: "WebSite" as const,
 };
+
+const [catalog, posts, talks] = await Promise.all([
+  getCatalog(locale),
+  getPublishedPosts(locale),
+  getLocalizedCollection("talk", locale, ({ data }) => !data.draft),
+]);
+
+// Latest texts and talks in one list, newest first.
+const LATEST_COUNT = 7;
+const latest = [
+  ...posts.slice(0, LATEST_COUNT).map((post) => ({ ...toPostRow(post, locale), meta: undefined })),
+  ...talks.map((talk) => ({
+    href: localizeUrl("/prednasky", locale),
+    title: talk.data.title,
+    date: talk.data.date,
+    tag: t(locale, "home.talk_tag"),
+    meta: talk.data.event.name,
+  })),
+]
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+  .slice(0, LATEST_COUNT);
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <Hero />
-  <Services locale={locale} />
-  <Clients />
-  <TrainingGrid locale={locale} />
-  <References />
-  <CallToAction locale={locale} />
+  <section class="section section--first">
+    <div class="wrap split">
+      <div>
+        <div class="byline" style="margin-bottom: 28px">
+          <Portrait variant="avatar" loading="eager" />
+          <span>
+            <span class="byline__name">{Contact.name}</span>
+            <span class="byline__role">{t(locale, "home.byline_role")}</span>
+          </span>
+        </div>
+        <h1 class="h-hero">{t(locale, "home.hero_title")}</h1>
+        <p class="lead">{t(locale, "hero.description")}</p>
+        <div class="actions">
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "nav.cta")}</a>
+          <a href={localizeUrl("/skoleni", locale)} class="link-arrow link-arrow--ink">
+            {t(locale, "home.hero_cta_secondary")} →
+          </a>
+        </div>
+      </div>
+      <div class="split__media">
+        <Pipeline
+          n={1}
+          caption={t(locale, "home.fig_pipeline")}
+          nodes={[
+            { label: "git push", sub: "main@a1f9c" },
+            { label: "CI build", sub: "test · image" },
+            { label: "Argo CD", sub: "sync · diff" },
+            { label: "cluster", sub: "3/3 ready" },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <ClientLogos />
+
+  <section class="section" id="sluzby">
+    <div class="wrap aside-split">
+      <div>
+        <p class="eyebrow">01 — {t(locale, "home.services_eyebrow")}</p>
+        <h2 class="h2">{t(locale, "home.services_heading")}</h2>
+      </div>
+      <div>
+        <ServiceRows />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split split--flip">
+      <div class="split__media">
+        <SelfHealing n={2} />
+      </div>
+      <div>
+        <p class="eyebrow">02 — {t(locale, "home.approach_eyebrow")}</p>
+        <h2 class="h2">{t(locale, "home.approach_heading")}</h2>
+        <p class="body">{t(locale, "cta.description")}</p>
+        <a href={localizeUrl("/sluzby", locale)} class="link-arrow">{t(locale, "home.approach_link")} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id={locale === "en" ? "training" : "skoleni"}>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">03 — {t(locale, "home.training_eyebrow")}</p>
+          <h2 class="h2">{t(locale, "home.training_heading")}</h2>
+          <p class="lead-sm">{t(locale, "training_grid.subheading")}</p>
+        </div>
+        <a href={localizeUrl("/skoleni", locale)} class="link-arrow">{t(locale, "home.training_link")} →</a>
+      </div>
+      <CourseRows courses={catalog} compact />
+    </div>
+  </section>
+
+  <section class="section" id="references">
+    <div class="wrap">
+      <Quotes />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split split--flip" style="grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr)">
+      <div class="split__media">
+        <Portrait />
+      </div>
+      <div>
+        <p class="eyebrow">04 — {t(locale, "home.about_eyebrow")}</p>
+        <h2 class="h2">{t(locale, "home.about_heading")}</h2>
+        <p class="body">{t(locale, "talks.description")}</p>
+        <a href={localizeUrl("/o-mne", locale)} class="link-arrow">{t(locale, "home.about_link")} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">05 — {t(locale, "home.posts_eyebrow")}</p>
+          <h2 class="h2">{t(locale, "home.posts_heading")}</h2>
+        </div>
+        <a href={localizeUrl("/blog", locale)} class="link-arrow">{t(locale, "home.posts_link")} →</a>
+      </div>
+      <PostRows posts={latest} />
+    </div>
+  </section>
 </Layout>

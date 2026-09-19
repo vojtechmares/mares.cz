@@ -1,0 +1,33 @@
+---
+import { t } from "../../i18n";
+import { formatDuration, formatPrice } from "../../i18n/formatting";
+import { localizeUrl } from "../../i18n/routes";
+import type { CatalogItem } from "../../lib/catalog";
+
+interface Props {
+  courses: CatalogItem[];
+  /** Clamp descriptions to two lines (homepage). */
+  compact?: boolean;
+}
+
+const locale = Astro.locals.locale;
+const { courses, compact = false } = Astro.props;
+---
+
+<div class:list={["rows", compact && "rows--compact"]}>
+  {
+    courses.map((course) => (
+      <a class="row row--course" href={localizeUrl(`/skoleni/${course.slug}`, locale)}>
+        <span class="row__title">{course.title}</span>
+        <span class="row__desc">{course.description}</span>
+        <span class="row__meta">{formatDuration(course.length, locale)}</span>
+        <span class="row__meta row__level">
+          {t(locale, "training_grid.price_from")} {formatPrice(course.priceOpen, locale)}
+        </span>
+        <span class="row__arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    ))
+  }
+</div>

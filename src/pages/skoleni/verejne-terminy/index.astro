@@ -1,9 +1,8 @@
 ---
-import { Container } from "../../../components/ui/container";
-import { Heading } from "../../../components/ui/heading";
-import { TrainingSessionsTable } from "../../../features/training/training-sessions-table";
-import { SessionsHero } from "../../../features/training/sessions-hero";
 import { TrainingNewsletterSignUp } from "../../../features/training/training-newsletter-signup";
+import Seats from "../../../components/diagrams/Seats.astro";
+import CourseRows from "../../../features/shared/CourseRows.astro";
+import SessionRows from "../../../features/shared/SessionRows.astro";
 import Layout from "../../../layouts/Layout.astro";
 
 import {
@@ -13,18 +12,17 @@ import {
   enrichSessionsWithSlugs,
   getSessionPrice,
 } from "../../../lib/sessions";
-import { Section } from "../../../components/ui/section";
-import { Card } from "../../../components/ui/card";
-import { TrainingGrid } from "../../../features/training/training-grid";
 import { t } from "../../../i18n";
 import { getCurrencyForLocale } from "../../../i18n/formatting";
 import { localizeUrl } from "../../../i18n/routes";
 import { getLocalizedCollection } from "../../../lib/content";
+import { getCatalog } from "../../../lib/catalog";
+import { formatSessionCount } from "../../../i18n/formatting";
 
 const locale = Astro.locals.locale;
 
 const [sessionEntries, slugMap, allTrainings] = await Promise.all([
-  getFutureSessions(),
+  getFutureSessions().catch(() => []),
   getTrainingIDToSlugMap(),
   getLocalizedCollection("training", locale),
 ]);
@@ -82,99 +80,132 @@ const jsonLd = {
     }),
   })),
 };
+
+const catalog = await getCatalog(locale);
+
+const conditions = [
+  [t(locale, "sessions_page.condition_binding")],
+  [t(locale, "sessions_page.condition_min"), t(locale, "sessions_page.condition_min_count"), "."],
+  [t(locale, "sessions_page.condition_max"), t(locale, "sessions_page.condition_max_count"), "."],
+  [
+    t(locale, "sessions_page.condition_confirmed"),
+    t(locale, "sessions_page.condition_confirmed_when"),
+    t(locale, "sessions_page.condition_confirmed_suffix"),
+  ],
+  [
+    t(locale, "sessions_page.condition_cancel_early"),
+    t(locale, "sessions_page.condition_cancel_early_when"),
+    `${t(locale, "sessions_page.condition_cancel_early_result")} ${t(locale, "sessions_page.condition_cancel_early_amount")}.`,
+  ],
+  [
+    t(locale, "sessions_page.condition_cancel_early"),
+    t(locale, "sessions_page.condition_cancel_late_when"),
+    `${t(locale, "sessions_page.condition_cancel_late_result")} ${t(locale, "sessions_page.condition_cancel_late_amount")}.`,
+  ],
+  [
+    t(locale, "sessions_page.condition_student_discount"),
+    t(locale, "sessions_page.condition_student_discount_detail"),
+    t(locale, "sessions_page.condition_student_proof"),
+  ],
+];
+
+const reasons = ["workshop", "real_projects", "small_groups", "materials", "open_source", "knowledge"].map((id) => [
+  t(locale, `sessions_page.why_${id}_prefix` as Parameters<typeof t>[1]),
+  t(locale, `sessions_page.why_${id}` as Parameters<typeof t>[1]),
+  t(locale, `sessions_page.why_${id}_detail` as Parameters<typeof t>[1]),
+]);
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <SessionsHero
-    sessionCount={sessions.length}
-    topicCount={trainings.length}
-    nextSessionDate={nextSession ? new Date(nextSession.dates.start).toISOString() : null}
-    locale={locale}
-  />
-  <Section id="terminy">
-    <Container>
-      <TrainingSessionsTable sessions={sessions} locale={locale} />
-      <div class="mt-12 grid grid-cols-1 gap-8 sm:mt-18 lg:grid-cols-2">
-        <Card variant="surface">
-          <Heading level="h3" id="podminky">{t(locale, "sessions_page.conditions_heading")}</Heading>
-          <ul class="mt-6 list-disc pl-4">
-            <li>{t(locale, "sessions_page.condition_binding")}</li>
-            <li>
-              {t(locale, "sessions_page.condition_min")}{" "}
-              <strong>{t(locale, "sessions_page.condition_min_count")}</strong>.
+  <section class="section section--first">
+    <div class="wrap split">
+      <div>
+        <a href={localizeUrl("/skoleni", locale)} class="back-link">← {t(locale, "course.back")}</a>
+        <h1 class="h-page">{t(locale, "sessions_page.heading")}</h1>
+        <p class="lead">{t(locale, "sessions_hero.description")}</p>
+        {
+          nextSession && (
+            <p class="note note--status" style="margin-top: 16px">
+              <span class="dot" aria-hidden="true" />
+              {`${formatSessionCount(sessions.length, locale)} ${t(locale, "sessions_hero.sessions_upcoming")}`}
+            </p>
+          )
+        }
+      </div>
+      <div class="split__media">
+        <Seats n={1} caption={t(locale, "sessions_page.fig_seats")} />
+      </div>
+    </div>
+  </section>
+
+  <section id="terminy">
+    <div class="wrap">
+      {
+        sessions.length > 0 ? (
+          <SessionRows sessions={sessions} />
+        ) : (
+          <div class="rows">
+            <p class="row row__desc">{t(locale, "sessions_hero.no_sessions_text")}</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section" id="podminky">
+    <div class="wrap aside-split">
+      <h2 class="h2">{t(locale, "sessions_page.conditions_heading")}</h2>
+      <ul class="rows">
+        {
+          conditions.map(([before, strong, after]) => (
+            <li class="row">
+              <span class="row__desc">
+                {before} {strong && <strong style="color: var(--ink); font-weight: 500">{strong}</strong>} {after}
+              </span>
             </li>
-            <li>
-              {t(locale, "sessions_page.condition_max")}{" "}
-              <strong>{t(locale, "sessions_page.condition_max_count")}</strong>.
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap aside-split">
+      <h2 class="h2">{t(locale, "sessions_page.why_heading")}</h2>
+      <ol class="rows">
+        {
+          reasons.map(([before, strong, after], index) => (
+            <li class="row row--step">
+              <span class="row__num">{String(index + 1).padStart(2, "0")}</span>
+              <span class="row__desc">
+                {before} <strong style="color: var(--ink); font-weight: 500">{strong}</strong> – {after}
+              </span>
             </li>
-            <li>
-              {t(locale, "sessions_page.condition_confirmed")}{" "}
-              <strong>{t(locale, "sessions_page.condition_confirmed_when")}</strong>{" "}
-              {t(locale, "sessions_page.condition_confirmed_suffix")}
-            </li>
-            <li>
-              {t(locale, "sessions_page.condition_cancel_early")}{" "}
-              <strong>{t(locale, "sessions_page.condition_cancel_early_when")}</strong>{" "}
-              {t(locale, "sessions_page.condition_cancel_early_result")}{" "}
-              <strong>{t(locale, "sessions_page.condition_cancel_early_amount")}</strong>.
-            </li>
-            <li>
-              {t(locale, "sessions_page.condition_cancel_early")}{" "}
-              <strong>{t(locale, "sessions_page.condition_cancel_late_when")}</strong>{" "}
-              {t(locale, "sessions_page.condition_cancel_late_result")}{" "}
-              <strong>{t(locale, "sessions_page.condition_cancel_late_amount")}</strong>.
-            </li>
-            <li>
-              {t(locale, "sessions_page.condition_student_discount")}{" "}
-              <strong>{t(locale, "sessions_page.condition_student_discount_detail")}</strong>{" "}
-              {t(locale, "sessions_page.condition_student_proof")}
-            </li>
-          </ul>
-        </Card>
-        <Card variant="inverse">
-          <Heading level="h3" variant="inverse">{t(locale, "sessions_page.why_heading")}</Heading>
-          <ul class="mt-6 list-disc pl-4 text-white">
-            <li>
-              {t(locale, "sessions_page.why_workshop_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_workshop")}</strong> — {
-                t(locale, "sessions_page.why_workshop_detail")
-              }
-            </li>
-            <li>
-              {t(locale, "sessions_page.why_real_projects_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_real_projects")}</strong>, {
-                t(locale, "sessions_page.why_real_projects_detail")
-              }
-            </li>
-            <li>
-              {t(locale, "sessions_page.why_small_groups_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_small_groups")}</strong>, {
-                t(locale, "sessions_page.why_small_groups_detail")
-              }
-            </li>
-            <li>
-              {t(locale, "sessions_page.why_materials_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_materials")}</strong>, {
-                t(locale, "sessions_page.why_materials_detail")
-              }
-            </li>
-            <li>
-              {t(locale, "sessions_page.why_open_source_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_open_source")}</strong>, {
-                t(locale, "sessions_page.why_open_source_detail")
-              }
-            </li>
-            <li>
-              {t(locale, "sessions_page.why_knowledge_prefix")}
-              {" "}<strong>{t(locale, "sessions_page.why_knowledge")}</strong>, {
-                t(locale, "sessions_page.why_knowledge_detail")
-              }
-            </li>
-          </ul>
-        </Card>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap aside-split">
+      <p class="eyebrow">{t(locale, "course.newsletter_eyebrow")}</p>
+      <div style="max-width: 520px">
         <TrainingNewsletterSignUp client:load locale={locale} />
       </div>
-    </Container>
-  </Section>
-  <TrainingGrid locale={locale} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">{t(locale, "home.training_eyebrow")}</p>
+          <h2 class="h2">{t(locale, "home.training_heading")}</h2>
+        </div>
+        <a href={localizeUrl("/skoleni", locale)} class="link-arrow">{t(locale, "home.training_link")} →</a>
+      </div>
+      <CourseRows courses={catalog} compact />
+    </div>
+  </section>
 </Layout>

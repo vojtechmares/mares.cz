@@ -1,13 +1,16 @@
 ---
 import { render } from "astro:content";
-import { BlogArticleHero } from "../../../features/blog/blog-article-hero";
-import { TrainingAd } from "../../../features/blog/training-ad";
+import TrainingAd from "../../../features/blog/TrainingAd.astro";
+import CourseRows from "../../../features/shared/CourseRows.astro";
+import PostRows from "../../../features/shared/PostRows.astro";
+import Portrait from "../../../features/shared/Portrait.astro";
+import Toc from "../../../features/shared/Toc.astro";
 import Layout from "../../../layouts/Layout.astro";
 
-import "../../../styles/highlight-js/github-dark.css";
-import { Prose } from "../../../components/prose";
-import { Section } from "../../../components/ui/section";
-import { TrainingGrid } from "../../../features/training/training-grid";
+import { t } from "../../../i18n";
+import { formatDate } from "../../../i18n/formatting";
+import { getCatalog } from "../../../lib/catalog";
+import { getPublishedPosts, readingTimeMinutes, toPostRow } from "../../../lib/posts";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
 import { localizeUrl } from "../../../i18n/routes";
 
@@ -83,29 +86,82 @@ if (alternateSlug) {
   }
 }
 
-const { Content } = await render(article);
+const { Content, headings } = await render(article);
 
-const words = article.body?.split(/\s+/).length ?? 0;
-const readingTimeMinutes = Math.max(1, Math.round(words / 200));
+const readingTime = readingTimeMinutes(article.body);
+
+// Related reading: newest posts sharing a tag, topped up with the latest ones.
+const MORE_COUNT = 4;
+const others = (await getPublishedPosts(locale)).filter((post) => post.id !== article.id);
+const related = others.filter((post) => post.data.tags.some((tag) => article.data.tags.includes(tag)));
+const more = [...new Set([...related, ...others])].slice(0, MORE_COUNT);
+
+const catalog = article.data.trainingAd ? [] : await getCatalog(locale);
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd} alternateUrls={alternateUrls}>
-  <BlogArticleHero
-    title={article.data.title}
-    description={article.data.description}
-    publishDate={article.data.publish_time}
-    tags={article.data.tags}
-    readingTimeMinutes={readingTimeMinutes}
-    locale={locale}
-  />
-  <!-- <ArticleHeader article={article} /> -->
-  <Section>
-    <Prose>
-      <article>
-        <Content />
-      </article>
-    </Prose>
-  </Section>
-  {article.data.trainingAd !== undefined && <TrainingAd trainingSlug={article.data.trainingAd as string} locale={locale} />}
-  {article.data.trainingAd === undefined && <TrainingGrid locale={locale} />}
+  <section class="section section--first" style="padding-bottom: 56px">
+    <div class="wrap">
+      <a href={localizeUrl("/blog", locale)} class="back-link">← {t(locale, "blog.back")}</a>
+      <div class="tags" style="margin-bottom: 16px">
+        {article.data.tags.map((tag) => <a href={localizeUrl(`/blog/tag/${tag}`, locale)}>#{tag}</a>)}
+      </div>
+      <h1 class="h-post">{article.data.title}</h1>
+      <p class="lead" style="max-width: 760px">{article.data.description}</p>
+      <div class="post-meta">
+        <time datetime={article.data.publish_time.toISOString()}>{formatDate(article.data.publish_time, locale)}</time>
+        <span>{t(locale, "blog.reading_minutes", { count: readingTime })}</span>
+        <span>Vojtěch Mareš</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap article-grid">
+      <Toc headings={headings} title={t(locale, "blog.toc")} />
+      <div>
+        <article class="prose">
+          <Content />
+        </article>
+        <div class="byline" style="margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule); max-width: 760px">
+          <Portrait variant="avatar" />
+          <span>
+            <span class="byline__name">Vojtěch Mareš</span>
+            <span class="byline__role">{t(locale, "home.byline_role")}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {article.data.trainingAd && <TrainingAd trainingSlug={article.data.trainingAd} />}
+
+  {
+    catalog.length > 0 && (
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">{t(locale, "home.training_eyebrow")}</p>
+              <h2 class="h2">{t(locale, "home.training_heading")}</h2>
+            </div>
+            <a href={localizeUrl("/skoleni", locale)} class="link-arrow">
+              {t(locale, "home.training_link")} →
+            </a>
+          </div>
+          <CourseRows courses={catalog} compact />
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2">{t(locale, "blog.more_heading")}</h2>
+        <a href={localizeUrl("/blog", locale)} class="link-arrow">{t(locale, "home.posts_link")} →</a>
+      </div>
+      <PostRows posts={more.map((post) => toPostRow(post, locale))} />
+    </div>
+  </section>
 </Layout>

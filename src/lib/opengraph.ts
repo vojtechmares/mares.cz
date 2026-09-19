@@ -22,18 +22,29 @@ export async function imageToDataUrl(imageUrl: string, baseUrl: string | URL): P
  *
  * The cards are rendered from an `about:blank` document (`page.setContent`),
  * which has a null origin. Cross-origin `@font-face` fetches from there are
- * CORS-blocked, so we inline the fonts as `data:` URLs instead. The TTFs are
- * read once per isolate through the `ASSETS` binding (no CORS, and they stay out
- * of the JS bundle) and cached.
+ * CORS-blocked, so we inline the fonts as `data:` URLs instead. The woff2 files
+ * are read once per isolate through the `ASSETS` binding (no CORS, and they stay
+ * out of the JS bundle) and cached.
  *
- * In production only the Inter TTFs were ever handed to Satori, so any
- * `font-family: "IBM Plex Sans"` in the card components silently fell back to
- * Inter. We reproduce that exact rendering by aliasing both families to Inter.
+ * The files are the fontsource subsets of the site's own families (IBM Plex Sans
+ * and JetBrains Mono). Czech needs both `latin` and `latin-ext` - ě, š, č, ř, ž, ů
+ * live in the latter - and each face keeps its fontsource `unicode-range` so
+ * Chrome stitches the two subsets into one family.
  */
-const FONT_FILES = {
-  regular: "Inter_18pt-Regular.ttf",
-  bold: "Inter_18pt-Bold.ttf",
+const UNICODE_RANGES = {
+  latin:
+    "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
+  "latin-ext":
+    "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF",
 } as const;
+
+type FontSubset = keyof typeof UNICODE_RANGES;
+
+const FONT_FACES = [
+  { family: "IBM Plex Sans", file: "ibm-plex-sans", weight: 400 },
+  { family: "IBM Plex Sans", file: "ibm-plex-sans", weight: 600 },
+  { family: "JetBrains Mono", file: "jetbrains-mono", weight: 400 },
+] as const;
 
 let fontFaceCssCache: string | null = null;
 
@@ -49,22 +60,23 @@ function toBase64(buffer: ArrayBuffer): string {
 
 async function loadFontDataUrl(file: string): Promise<string> {
   const response = await env.ASSETS.fetch(new URL(`/fonts/${file}`, "https://assets.local"));
-  return `data:font/ttf;base64,${toBase64(await response.arrayBuffer())}`;
+  return `data:font/woff2;base64,${toBase64(await response.arrayBuffer())}`;
 }
 
 async function getFontFaceCss(): Promise<string> {
   if (fontFaceCssCache) return fontFaceCssCache;
 
-  const [regular, bold] = await Promise.all([loadFontDataUrl(FONT_FILES.regular), loadFontDataUrl(FONT_FILES.bold)]);
+  const subsets = Object.keys(UNICODE_RANGES) as FontSubset[];
+  const faces = await Promise.all(
+    FONT_FACES.flatMap(({ family, file, weight }) =>
+      subsets.map(async (subset) => {
+        const src = await loadFontDataUrl(`${file}-${subset}-${weight}-normal.woff2`);
+        return `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};src:url('${src}') format('woff2');unicode-range:${UNICODE_RANGES[subset]};}`;
+      }),
+    ),
+  );
 
-  const face = (family: string, weight: number, src: string) =>
-    `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};src:url('${src}') format('truetype');}`;
-
-  fontFaceCssCache =
-    face("Inter", 400, regular) +
-    face("Inter", 700, bold) +
-    face("IBM Plex Sans", 400, regular) +
-    face("IBM Plex Sans", 700, bold);
+  fontFaceCssCache = faces.join("");
 
   return fontFaceCssCache;
 }
@@ -82,7 +94,7 @@ export async function OpenGraphImageResponse(component: ReactNode, _baseUrl: str
     `*{margin:0;padding:0;box-sizing:border-box;}` +
     fontFaceCss +
     `html,body{width:${OG_WIDTH}px;height:${OG_HEIGHT}px;overflow:hidden;}` +
-    `body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}` +
+    `body{font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}` +
     `</style></head><body>${markup}</body></html>`;
 
   const browser = await puppeteer.launch(env.BROWSER);

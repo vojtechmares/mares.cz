@@ -1,0 +1,117 @@
+---
+import Figure from "./Figure.astro";
+import type { TerminalLine } from "./types";
+
+interface Props {
+  n: number | string;
+  caption: string;
+  /** Unique per page - namespaces the generated keyframes. */
+  id: string;
+  lines: TerminalLine[];
+  /** Window dots in the top-left corner. */
+  chrome?: boolean;
+}
+
+const { n, caption, id, lines, chrome = false } = Astro.props;
+
+// Timeline of one 12s loop, in seconds. Commands are typed, output lines just appear,
+// the finished screen is held and then cleared before the loop restarts.
+const LOOP = 12;
+const CLEAR_AT = 11.3;
+const TYPE_SPEED = 0.055;
+const AFTER_CMD = 0.55;
+const AFTER_OUT = 0.3;
+
+let cursor = 0.4;
+const raw = lines.map((line) => {
+  const start = cursor;
+  if ("cmd" in line) {
+    const typing = Math.min(1.8, line.cmd.length * TYPE_SPEED);
+    cursor += typing + AFTER_CMD;
+    return { start, end: start + typing };
+  }
+  cursor += AFTER_OUT;
+  return { start, end: start };
+});
+
+// Leave at least 2.5s of fully rendered screen; compress the script if it runs long.
+const scale = Math.min(1, (CLEAR_AT - 2.5) / cursor);
+const pct = (seconds: number) => `${((seconds * scale * 100) / LOOP).toFixed(2)}%`;
+const clear = `${((CLEAR_AT * 100) / LOOP).toFixed(2)}%`;
+
+const cmdIndexes = lines.flatMap((line, index) => ("cmd" in line ? [index] : []));
+
+const css = lines
+  .map((line, index) => {
+    const { start, end } = raw[index];
+    const name = `${id}-${index}`;
+    const startPct = pct(start);
+    // Visibility keyframes are played with `step-end`: each value holds until the next keyframe.
+    const visible = `@keyframes ${name}-v{0%{opacity:0}${startPct}{opacity:1}${clear},100%{opacity:0}}`;
+    if (!("cmd" in line)) return visible;
+
+    const nextCmd = cmdIndexes[cmdIndexes.indexOf(index) + 1];
+    const cursorEnd = nextCmd === undefined ? clear : pct(raw[nextCmd].start);
+    const chars = line.cmd.length;
+    return [
+      visible,
+      `@keyframes ${name}-t{0%,${startPct}{width:0;animation-timing-function:steps(${chars},end)}${pct(end)},100%{width:${chars}ch}}`,
+      `@keyframes ${name}-c{0%{opacity:0}${startPct}{opacity:1}${cursorEnd},100%{opacity:0}}`,
+    ].join("");
+  })
+  .join("");
+
+const anim = (name: string, timing = "linear") => `animation: ${name} ${LOOP}s ${timing} infinite`;
+const lastCmd = cmdIndexes[cmdIndexes.length - 1];
+
+function splitHighlight(text: string, hl?: string): [string, string, string] {
+  if (!hl || !text.includes(hl)) return [text, "", ""];
+  const at = text.indexOf(hl);
+  return [text.slice(0, at), hl, text.slice(at + hl.length)];
+}
+---
+
+<Figure n={n} caption={caption}>
+  <style set:html={css}></style>
+  {
+    chrome && (
+      <div class="term__chrome" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+    )
+  }
+  <div class="term__body">
+    {
+      lines.map((line, index) => {
+        const name = `${id}-${index}`;
+        if ("cmd" in line) {
+          return (
+            <span class="term__line" style={anim(`${name}-v`, "step-end")}>
+              <span class="term__prompt">$ </span>
+              <span class="term__typed" style={anim(`${name}-t`)}>
+                {line.cmd}
+              </span>
+              <span
+                class:list={["term__cursor", index === lastCmd && "term__cursor--last"]}
+                style={anim(`${name}-c`, "step-end")}
+                aria-hidden="true"
+              >
+                <b />
+              </span>
+            </span>
+          );
+        }
+        const [before, hl, after] = splitHighlight(line.out, line.hl);
+        return (
+          <span class="term__line term__line--out" style={anim(`${name}-v`, "step-end")}>
+            {before}
+            {hl && <span class="term__hl">{hl}</span>}
+            {after}
+          </span>
+        );
+      })
+    }
+  </div>
+</Figure>

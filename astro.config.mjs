@@ -28,6 +28,14 @@ export default defineConfig({
 
   trailingSlash: "never",
 
+  markdown: {
+    // Monochrome code blocks that follow the light/dark tokens: colours come from the
+    // --astro-code-* custom properties in src/styles/global.css, not from a syntax theme.
+    shikiConfig: {
+      theme: "css-variables",
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

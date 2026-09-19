@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 
-import Navigation from "../features/layout/Navigation.astro";
+import Header from "../features/layout/Header.astro";
 import Footer from "../features/layout/Footer.astro";
 import Meta from "../features/layout/seo/Meta.astro";
 import Favicon from "../features/layout/seo/Favicon.astro";
@@ -13,6 +13,7 @@ import { LocalizedMetadata } from "../lib/site";
 import { t } from "../i18n";
 import { localizeUrl } from "../i18n/routes";
 import { englishPathToCzech } from "../i18n/routes";
+import ThemeScript from "../features/layout/ThemeScript.astro";
 import FathomAnalytics from "../features/analytics/FathomAnalytics.astro";
 
 interface Props {
@@ -122,7 +123,7 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
 ---
 
 <!doctype html>
-<html lang={lang} class="h-full scroll-smooth bg-neutral-100 font-sans [font-feature-settings:'ss01'] antialiased">
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -164,18 +165,13 @@ const localeCanonical = locale === "en" ? enUrl : csUrl;
     <link rel="ssh-keys" type="text/plain" href="/keys.txt" />
     <link rel="dns-prefetch" href="https://cdn.mares.cz" />
     <link rel="preconnect" href="https://cdn.mares.cz" />
-    <link rel="preload" href="/fonts/ibm-plex-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <ThemeScript />
     <FathomAnalytics />
     <slot name="head" />
   </head>
-  <body class="flex h-full flex-col">
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:p-4 focus:text-neutral-900"
-    >
-      {t(locale, "layout.skip_to_content")}
-    </a>
-    <Navigation />
+  <body>
+    <a href="#main-content" class="skip-link">{t(locale, "layout.skip_to_content")}</a>
+    <Header />
     <main id="main-content">
       <slot />
     </main>

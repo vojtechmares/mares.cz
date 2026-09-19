@@ -1,0 +1,44 @@
+---
+import { t, type TranslationKey } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+
+interface Props {
+  /** "wide" is the full-width variant used on the services page. */
+  variant?: "default" | "wide";
+  /** Link rows to the matching section of the services page. */
+  linked?: boolean;
+}
+
+const locale = Astro.locals.locale;
+const { variant = "default", linked = true } = Astro.props;
+
+const services: { id: string; anchor: string; unit?: TranslationKey }[] = [
+  { id: "consultation", anchor: "konzultace", unit: "price.consultation_unit" },
+  { id: "training", anchor: "skoleni", unit: "price.training_unit" },
+  { id: "cooperation", anchor: "spoluprace" },
+];
+
+const rowClass = ["row", variant === "wide" ? "row--service-wide" : "row--service"];
+---
+
+<div class="rows">
+  {
+    services.map((service) => {
+      const Tag = linked ? "a" : "div";
+      return (
+        <Tag class:list={rowClass} href={linked ? `${localizeUrl("/sluzby", locale)}#${service.anchor}` : undefined}>
+          <span class="row__title">{t(locale, `services.${service.id}` as TranslationKey)}</span>
+          <span class="row__desc">{t(locale, `services.${service.id}_short` as TranslationKey)}</span>
+          <span class="row__value row__value--end">
+            {t(locale, `price.${service.id}_value` as TranslationKey)}
+            {service.unit && <span class="row__unit"> / {t(locale, service.unit)}</span>}
+          </span>
+        </Tag>
+      );
+    })
+  }
+</div>
+<p class="note note--status">
+  <span class="dot" aria-hidden="true"></span>
+  {t(locale, "home.services_note")}
+</p>

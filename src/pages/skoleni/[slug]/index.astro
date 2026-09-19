@@ -1,18 +1,15 @@
 ---
 import { render } from "astro:content";
-import { TrainingHero } from "../../../features/training/training-hero";
-import { CompactTrainingSessionsTable } from "../../../features/training/training-sessions-table";
+import Terminal from "../../../components/diagrams/Terminal.astro";
+import SessionRows from "../../../features/shared/SessionRows.astro";
+import Toc from "../../../features/shared/Toc.astro";
 import { TrainingNewsletterSignUp } from "../../../features/training/training-newsletter-signup";
-import { Button } from "../../../components/ui/button";
-import { Card } from "../../../components/ui/card";
-import { Container } from "../../../components/ui/container";
-import { Heading } from "../../../components/ui/heading";
 import Layout from "../../../layouts/Layout.astro";
 import { getFutureSessionsByName, toTrainingSession } from "../../../lib/sessions";
-import { Section } from "../../../components/ui/section";
-import { Prose } from "../../../components/prose";
+import { getTrainingTerminal } from "../../../lib/training-terminals";
+import { MeetingUrl } from "../../../lib/site";
 import { t } from "../../../i18n";
-import { formatPrice, getCurrencyForLocale } from "../../../i18n/formatting";
+import { formatDuration, formatPrice, getCurrencyForLocale } from "../../../i18n/formatting";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../../lib/content";
 import { localizeUrl } from "../../../i18n/routes";
 import { truncateDescription, formatCourseTimeRequired } from "../../../lib/seo";
@@ -34,7 +31,7 @@ if (!training || training.data.draft) {
   return Astro.redirect("/404", 404);
 }
 
-const sessionEntries = await getFutureSessionsByName(training.data.title);
+const sessionEntries = await getFutureSessionsByName(training.data.title).catch(() => []);
 const sessions = sessionEntries.map(toTrainingSession);
 
 const meta = {
@@ -86,62 +83,123 @@ const jsonLd = {
   }),
 };
 
-const { Content } = await render(training);
+const { Content, headings } = await render(training);
+
+const icon = training.data.icon ?? training.data.logo;
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <TrainingHero
-    title={training.data.title}
-    description={training.data.description}
-    length={training.data.length}
-    price={pricing.open}
-    logo={training.data.logo ?? training.data.icon}
-    locale={locale}
-  />
-  <Section id="obsah">
-    <Container className={training.data.draft ? "hidden" : ""}>
-      <div class="md:grid md:grid-cols-5 md:gap-x-4 md:gap-y-4">
-        <div class="md:col-span-3">
-          <Prose>
-            <Content />
-          </Prose>
+  <section class="section section--first">
+    <div class="wrap split">
+      <div>
+        <a href={localizeUrl("/skoleni", locale)} class="back-link">← {t(locale, "course.back")}</a>
+        <div class="course-title">
+          {icon && <img class="tech-mark" src={icon.src} alt="" width="36" height="36" />}
+          <h1 class="h-page">{training.data.title}</h1>
         </div>
-        <div class="mt-8 md:col-span-2 md:mt-0">
-          {
-            sessions.length > 0 ? (
-              <Card id="terminy" className="mb-10" variant="surface">
-                <Heading level="h2" className="mb-4">
-                  {t(locale, "training_page.public_sessions")}
-                </Heading>
-                <CompactTrainingSessionsTable sessions={sessions} locale={locale} />
-              </Card>
-            ) : null
-          }
-          <Card className="mb-10" variant="surface">
-            <Heading level="h2" className="mb-4">{t(locale, "training_page.price_label")}</Heading>
-            <dl class="sm:divide-y sm:divide-neutral-300">
-              <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                <dt class="font-medium text-neutral-700">{t(locale, "training_page.public_session")}</dt>
-                <dd class="text-neutral-900">
-                  {formatPrice(pricing.open, locale)}
-                  {t(locale, "training_page.excl_vat")}
-                </dd>
-              </div>
-              <div class="sm:grid sm:grid-cols-2 sm:gap-4 sm:py-5">
-                <dt class="font-medium text-neutral-700">{t(locale, "training_page.corporate_training")}</dt>
-                <dd class="text-neutral-900">
-                  {formatPrice(pricing.corporate, locale)}
-                  {t(locale, "training_page.excl_vat")}
-                </dd>
-              </div>
-            </dl>
-            <Button variant="accent" className="text-lg font-medium" href="mailto:vojtech@mares.cz">
-              {t(locale, "training_page.request_quote")}
-            </Button>
-          </Card>
-          <TrainingNewsletterSignUp client:load locale={locale} trainingSlug={slug} />
+        <p class="lead" style="margin-top: 24px">{training.data.description}</p>
+
+        <dl class="meta-list">
+          <dt>{t(locale, "course.length")}</dt>
+          <dd>{formatDuration(training.data.length, locale)} ({training.data.length * 8} h)</dd>
+          <dt>{t(locale, "course.form")}</dt>
+          <dd>{t(locale, "course.form_value")}</dd>
+          <dt>{t(locale, "course.price_open")}</dt>
+          <dd class="mono">
+            {formatPrice(pricing.open, locale)} / {t(locale, "price.per_person")}
+          </dd>
+          <dt>{t(locale, "course.price_corporate")}</dt>
+          <dd class="mono">
+            {formatPrice(pricing.corporate, locale)} / {t(locale, "price.per_session")}
+          </dd>
+        </dl>
+
+        <div class="actions">
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "course.cta")}</a>
+          <a href="#terminy" class="link-arrow link-arrow--ink">{t(locale, "course.cta_sessions")} →</a>
         </div>
       </div>
-    </Container>
-  </Section>
+      <div class="split__media">
+        <Terminal
+          n={1}
+          id="course"
+          chrome
+          caption={t(locale, "course.fig_terminal")}
+          lines={getTrainingTerminal(slug!)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="obsah">
+    <div class="wrap article-grid article-grid--aside">
+      <Toc headings={headings} title={t(locale, "course.toc")} />
+      <article class="prose">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="terminy">
+    <div class="wrap aside-split">
+      <div>
+        <p class="eyebrow">{t(locale, "course.sessions_eyebrow")}</p>
+        <h2 class="h2">{t(locale, "training_page.public_sessions")}</h2>
+      </div>
+      <div>
+        {
+          sessions.length > 0 ? (
+            <SessionRows sessions={sessions} compact />
+          ) : (
+            <div class="rows">
+              <p class="row row__desc">{t(locale, "sessions_hero.no_sessions_text")}</p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap aside-split">
+      <div>
+        <p class="eyebrow">{t(locale, "course.price_eyebrow")}</p>
+        <h2 class="h2">{t(locale, "training_page.price_label")}</h2>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="row row--service">
+            <span class="row__title">{t(locale, "training_page.public_session")}</span>
+            <span class="row__desc">{t(locale, "services_training.public_sessions_description")}</span>
+            <span class="row__value row__value--end">
+              {formatPrice(pricing.open, locale)}
+              <span class="row__unit"> {t(locale, "training_page.excl_vat")}</span>
+            </span>
+          </div>
+          <div class="row row--service">
+            <span class="row__title">{t(locale, "training_page.corporate_training")}</span>
+            <span class="row__desc">{t(locale, "services_training.corporate_description")}</span>
+            <span class="row__value row__value--end">
+              {formatPrice(pricing.corporate, locale)}
+              <span class="row__unit"> {t(locale, "training_page.excl_vat")}</span>
+            </span>
+          </div>
+        </div>
+        <div class="actions">
+          <a href="mailto:vojtech@mares.cz" class="btn btn--primary">{t(locale, "training_page.request_quote")}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap aside-split">
+      <div>
+        <p class="eyebrow">{t(locale, "course.newsletter_eyebrow")}</p>
+      </div>
+      <div style="max-width: 520px">
+        <TrainingNewsletterSignUp client:load locale={locale} trainingSlug={slug} />
+      </div>
+    </div>
+  </section>
 </Layout>

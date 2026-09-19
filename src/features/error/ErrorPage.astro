@@ -1,0 +1,86 @@
+---
+import "../../styles/global.css";
+
+import ThemeScript from "../layout/ThemeScript.astro";
+import Figure from "../../components/diagrams/Figure.astro";
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+
+interface Props {
+  status: 404 | 500;
+  /** Technical detail (error message) shown under the description. */
+  detail?: string;
+}
+
+// Standalone document on purpose: an error page must not depend on content
+// collections or remote data the way the regular layout (nav, footer) does.
+const { status, detail } = Astro.props;
+const locale = Astro.locals.locale ?? "cs";
+const lang = locale === "en" ? "en" : "cs";
+
+const headline = t(locale, status === 404 ? "error.404_headline" : "error.500_headline");
+const description = t(locale, status === 404 ? "error.404_description" : "error.500_description");
+const path = status === 404 ? Astro.url.pathname.slice(0, 28) : "/";
+---
+
+<!doctype html>
+<html lang={lang} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{status} · Vojtěch Mareš</title>
+    <link rel="icon" href="/favicon.ico" />
+    <ThemeScript />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a href={localizeUrl("/", locale)} class="wordmark">Vojtěch Mareš</a>
+        <div class="header-tools">
+          <button type="button" class="theme-switch" data-theme-switch aria-label={t(locale, "nav.theme_switch")}>
+            <span class="theme-switch__dot" aria-hidden="true"></span>
+            <span class="theme-switch__label" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="section section--first section--last">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">// {status}</p>
+            <h1 class="h-hero">{headline}</h1>
+            <p class="lead">{description}</p>
+            {
+              detail && (
+                <p class="note" style="margin-top: 16px">
+                  {detail}
+                </p>
+              )
+            }
+            <div class="actions">
+              <a href={localizeUrl("/", locale)} class="btn btn--primary">{t(locale, "error.back_home")}</a>
+              <a href={localizeUrl("/blog", locale)} class="link-arrow link-arrow--ink">{t(locale, "nav.blog")} →</a>
+            </div>
+          </div>
+          <div class="split__media">
+            <Figure n={1} caption={t(locale, "error.fig")}>
+              <pre class="ascii" aria-hidden="true"
+                ><span class="ink">GET {path}</span>
+  │
+  ▼
+┌──────────┐    ┌──────────┐    ┌──────────┐
+│ <span class="travel" style="--i: 0">ingress </span> │───▶│ <span class="travel" style="--i: 1">service </span> │───▶│ <span class="travel" style="--i: 2">pod     </span> │
+└──────────┘    └──────────┘    └──────────┘
+                                      │
+                                      ▼
+                                <span class="travel hl-rest" style="--i: 3">{status === 404 ? "404 Not Found" : "500 Server Error"}</span></pre
+              >
+            </Figure>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body></html
+>

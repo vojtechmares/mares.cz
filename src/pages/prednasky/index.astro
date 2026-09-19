@@ -1,12 +1,6 @@
 ---
 import { render } from "astro:content";
-import { Container } from "../../components/ui/container";
-import { Heading } from "../../components/ui/heading";
-import { Link } from "../../components/ui/link";
-import { Section } from "../../components/ui/section";
 import Layout from "../../layouts/Layout.astro";
-import { Prose } from "../../components/prose";
-import { TalksHero } from "../../features/talks/talks-hero";
 import { t } from "../../i18n";
 import { formatDate } from "../../i18n/formatting";
 import { localizeUrl } from "../../i18n/routes";
@@ -48,30 +42,51 @@ const openGraph = {
 ---
 
 <Layout meta={meta} openGraph={openGraph}>
-  <TalksHero talkCount={talkCount} eventCount={eventCount} yearsOfSpeaking={yearsOfSpeaking} locale={locale} />
-  <Section>
-    <Container mode="prose">
-      {
-        renderedTalks.map(({ talk, Content }) => (
-          <article class="mb-12 last:mb-0">
-            <Heading level="h2">{talk.data.title}</Heading>
-            <p class="mt-4 text-neutral-600">
-              {formatDate(talk.data.date, locale, { day: "numeric", month: "numeric", year: "numeric" })}
-              {" · "}
-              {talk.data.event.url ? (
-                <Link href={talk.data.event.url} external>
-                  {talk.data.event.name}
-                </Link>
-              ) : (
-                talk.data.event.name
-              )}
-            </p>
-            <Prose className="mt-6">
-              <Content />
-            </Prose>
-          </article>
-        ))
-      }
-    </Container>
-  </Section>
+  <section class="section section--first">
+    <div class="wrap">
+      <p class="eyebrow">// {t(locale, "talks.eyebrow")}</p>
+      <h1 class="h-page">{t(locale, "talks_page.heading")}</h1>
+      <p class="lead lead--wide">{t(locale, "talks.description")}</p>
+      <p class="note" style="margin-top: 24px">
+        {
+          [
+            `${t(locale, "talks.talk_count", { count: talkCount })} ${t(locale, "talks.talk_count_label")}`,
+            `${t(locale, "talks.event_count", { count: eventCount })} ${t(locale, "talks.event_count_label")}`,
+            `${t(locale, "talks.years_count", { count: yearsOfSpeaking })} ${t(locale, "talks.years_count_label")}`,
+          ].join(" · ")
+        }
+      </p>
+    </div>
+  </section>
+
+  <section class="section--last">
+    <div class="wrap">
+      <div class="rows">
+        {
+          renderedTalks.map(({ talk, Content }) => (
+            <article class="row row--talk">
+              <time class="row__meta" datetime={talk.data.date.toISOString().slice(0, 10)}>
+                {talk.data.date.toISOString().slice(0, 10)}
+              </time>
+              <div>
+                <h2 class="row__title">{talk.data.title}</h2>
+                <p class="row__tag" style="margin-top: 4px">
+                  {talk.data.event.url ? (
+                    <a href={talk.data.event.url} target="_blank" rel="noreferrer" class="link">
+                      {talk.data.event.name} ↗
+                    </a>
+                  ) : (
+                    talk.data.event.name
+                  )}
+                </p>
+                <div class="prose prose--compact" style="margin-top: 16px">
+                  <Content />
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Layout>

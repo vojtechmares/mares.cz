@@ -17,55 +17,32 @@ export const LocalizedMetadata = [
   },
 ];
 
-export const LocalizedStaticNavigationLinks = [
-  {
-    locale: "cs",
-    links: [
-      {
-        name: "Školení",
-        href: "/#skoleni",
-      },
-      {
-        name: "Termíny školení",
-        href: "/skoleni/verejne-terminy",
-      },
-      {
-        name: "Služby",
-        href: "/sluzby",
-      },
-      {
-        name: "Blog",
-        href: "/blog",
-      },
-      {
-        name: "Přednášky",
-        href: "/prednasky",
-      },
-    ],
-  },
-  {
-    locale: "en",
-    links: [
-      {
-        name: "Training",
-        href: "/en#training",
-      },
-      {
-        name: "Training sessions",
-        href: "/en/training/public-sessions",
-      },
-      {
-        name: "Services",
-        href: "/en/services",
-      },
-      {
-        name: "Blog",
-        href: "/en/blog",
-      },
-      {
-        name: "Talks",
-        href: "/en/talks",
-      },
-    ],
-  },
-];
+/**
+ * Primary navigation. `href` is the Czech (internal) path - localize it with `localizeUrl()`.
+ * `match` lists path prefixes that mark the item as active.
+ */
+export const PrimaryNavigation = [
+  { key: "nav.training", href: "/skoleni", match: ["/skoleni"] },
+  { key: "nav.services", href: "/sluzby", match: ["/sluzby"] },
+  { key: "nav.about", href: "/o-mne", match: ["/o-mne"] },
+  { key: "nav.blog", href: "/blog", match: ["/blog", "/prednasky"] },
+  { key: "nav.contact", href: "/kontakt", match: ["/kontakt"] },
+] as const;
+
+export const MeetingUrl = "https://cal.com/vojtechmares/30min";
+
+export const Contact = {
+  name: "Vojtěch Mareš",
+  email: "vojtech@mares.cz",
+  phone: "+420 732 490 651",
+  phoneHref: "tel:+420732490651",
+  companyId: "06999280",
+  vatId: "CZ9709180063",
+} as const;
+
+export const SocialLinks = [
+  { name: "GitHub", href: "https://github.com/vojtechmares" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/vojtech-mares/" },
+  { name: "Bluesky", href: "https://bsky.app/profile/mares.cz" },
+  { name: "X", href: "https://x.com/vojtechmares_" },
+] as const;

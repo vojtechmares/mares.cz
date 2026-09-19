@@ -1,0 +1,91 @@
+---
+import ClientLogos from "../../features/shared/ClientLogos.astro";
+import Portrait from "../../features/shared/Portrait.astro";
+import Layout from "../../layouts/Layout.astro";
+
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+import { getLocalizedCollection } from "../../lib/content";
+import { Contact, MeetingUrl } from "../../lib/site";
+
+const locale = Astro.locals.locale;
+
+const talks = (await getLocalizedCollection("talk", locale, ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const meta = {
+  title: t(locale, "about.meta_title"),
+  description: t(locale, "jsonld.person_description"),
+  keywords: "devops, kubernetes, lektor, konzultant, freelancer",
+};
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: new URL(localizeUrl("/", locale).replace(/\/$/, "") + "/card.png", Astro.site).toString(),
+    width: 1200,
+    height: 630,
+    alt: meta.title,
+  },
+};
+
+const jsonLd = { type: "Person" as const };
+---
+
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+  <section class="section section--first">
+    <div class="wrap split split--top" style="grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr)">
+      <div>
+        <Portrait loading="eager" />
+        <p class="note" style="margin-top: 16px; line-height: 1.8">
+          {t(locale, "about.facts_1")}
+          <br />
+          {t(locale, "about.facts_2")}
+        </p>
+      </div>
+
+      <div>
+        <p class="eyebrow">// {t(locale, "about.eyebrow")}</p>
+        <h1 class="h-page">{Contact.name}</h1>
+
+        <div class="prose" style="margin-top: 32px; font-size: 19px; line-height: 1.6">
+          <p>{t(locale, "jsonld.person_description")}.</p>
+          <p>{t(locale, "hero.description")}</p>
+          <p>{t(locale, "training_grid.subheading")}</p>
+          <p>{t(locale, "talks.description")}</p>
+        </div>
+
+        <div class="actions">
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "nav.cta")}</a>
+          <a href={localizeUrl("/sluzby", locale)} class="link-arrow link-arrow--ink">
+            {t(locale, "home.approach_link")} →
+          </a>
+        </div>
+
+        <div class="section-head" style="margin-top: 72px; margin-bottom: 20px">
+          <h2 class="h3">{t(locale, "about.talks_heading")}</h2>
+          <a href={localizeUrl("/prednasky", locale)} class="link-arrow">{t(locale, "about.talks_link")} →</a>
+        </div>
+        <div class="rows">
+          {
+            talks.map((talk) => (
+              <a class="row row--time" href={localizeUrl("/prednasky", locale)}>
+                <span class="row__num">{talk.data.date.toISOString().slice(0, 7)}</span>
+                <span>
+                  <span class="row__desc" style="display: block; color: var(--ink)">
+                    {talk.data.title}
+                  </span>
+                  <span class="row__unit">{talk.data.event.name}</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ClientLogos />
+  <div style="height: 104px"></div>
+</Layout>

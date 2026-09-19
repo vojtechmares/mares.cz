@@ -1,0 +1,76 @@
+---
+import { t } from "../../i18n";
+import { formatPrice } from "../../i18n/formatting";
+import { localizeUrl } from "../../i18n/routes";
+import { getSessionPrice, type TrainingSession } from "../../lib/sessions";
+
+interface Props {
+  sessions: TrainingSession[];
+  /** Hide the training name (on a training detail page every row is the same training). */
+  compact?: boolean;
+}
+
+const locale = Astro.locals.locale;
+const { sessions, compact = false } = Astro.props;
+
+const VAT = 1.21;
+
+const dayMonth = (date: Date) => `${date.getDate()}. ${date.getMonth() + 1}.`;
+
+function formatDates(dates: TrainingSession["dates"]): string {
+  const start = new Date(dates.start);
+  if (!dates.end) return `${dayMonth(start)} ${start.getFullYear()}`;
+  const end = new Date(dates.end);
+  return `${dayMonth(start)} – ${dayMonth(end)} ${end.getFullYear()}`;
+}
+---
+
+<div class="rows">
+  {
+    sessions.map((session) => {
+      const price = getSessionPrice(session.pricing, locale);
+      return (
+        <article class:list={["row", "row--session", compact && "row--session-compact"]}>
+          <div>
+            <time class="row__value" datetime={session.dates.start}>
+              {formatDates(session.dates)}
+            </time>
+            <div class="row__unit">{t(locale, "sessions_table.time")}</div>
+          </div>
+          <div>
+            {!compact && (
+              <h3 class="row__title">
+                {session.trainingSlug ? (
+                  <a href={localizeUrl(`/skoleni/${session.trainingSlug}`, locale)} class="row__title-link">
+                    {session.name}
+                  </a>
+                ) : (
+                  session.name
+                )}
+              </h3>
+            )}
+            <div class="row__meta">
+              {session.location} · {t(locale, "sessions_table.language")}
+            </div>
+          </div>
+          <div class="row__value row__value--end">
+            {formatPrice(price * VAT, locale)}
+            <div class="row__unit">
+              {formatPrice(price, locale)} {t(locale, "sessions_table.excl_vat")}
+            </div>
+          </div>
+          <div>
+            {session.signUpURL ? (
+              <a href={session.signUpURL} class="btn btn--primary">
+                {t(locale, "sessions_table.sign_up")}
+                <span class="sr-only">{t(locale, "sessions_table.sign_up_aria", { name: session.name })}</span>
+              </a>
+            ) : (
+              <span class="row__unit">{t(locale, "sessions_table.sign_up_not_open")}</span>
+            )}
+          </div>
+        </article>
+      );
+    })
+  }
+</div>

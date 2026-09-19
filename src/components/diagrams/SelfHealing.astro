@@ -1,0 +1,49 @@
+---
+import Figure from "./Figure.astro";
+
+interface Props {
+  n: number | string;
+  caption?: string;
+}
+
+const { n, caption = "self-healing" } = Astro.props;
+const num = String(n).padStart(2, "0");
+
+/** on = running pod, off = free slot, die/spawn = the pod that gets rescheduled */
+const cluster = [
+  { name: "node-1", pods: ["on", "on", "off", "off"] },
+  { name: "node-2", pods: ["on", "on", "die", "off"] },
+  { name: "node-3", pods: ["on", "off", "spawn", "off"] },
+];
+---
+
+<Figure n={n} caption={caption} inlineCaption>
+  <div
+    class="heal__nodes"
+    role="img"
+    aria-label="Tři nody clusteru. Pod, který spadne, se sám nastartuje na jiném nodu."
+  >
+    {
+      cluster.map((node) => (
+        <div class="heal__node">
+          <span class="heal__name">{node.name}</span>
+          <div class="heal__pods">
+            {node.pods.map((pod) => (
+              <span class:list={["pod", `pod--${pod}`]} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div class="heal__status">
+    <span>replicas: 6</span>
+    <span>
+      ready:&nbsp;<span class="flip">
+        <span class="flip__a">6/6</span>
+        <span class="flip__b" aria-hidden="true">5/6</span>
+      </span>
+    </span>
+    <figcaption class="figcaption">{`fig. ${num} — ${caption}`}</figcaption>
+  </div>
+</Figure>

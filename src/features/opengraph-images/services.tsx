@@ -1,43 +1,5 @@
 import { t, type Locale } from "../../i18n";
-
-interface StatItemProps {
-  value: string;
-  description: string;
-}
-
-function StatItem({ value, description }: StatItemProps) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        borderLeft: "3px solid #f54a00",
-        paddingLeft: "1.5rem",
-      }}
-    >
-      <span
-        style={{
-          fontFamily: "Inter",
-          fontSize: "1.75rem",
-          fontWeight: 700,
-          color: "#ffffff",
-        }}
-      >
-        {value}
-      </span>
-      <span
-        style={{
-          fontFamily: "Inter",
-          fontSize: "1rem",
-          color: "#a3a3a3",
-          marginTop: "0.25rem",
-        }}
-      >
-        {description}
-      </span>
-    </div>
-  );
-}
+import { OgFrame } from "./frame";
 
 export function CreateServicesImageComponent({
   trainingCount,
@@ -47,110 +9,30 @@ export function CreateServicesImageComponent({
   locale?: Locale;
 }) {
   const years = `${new Date().getFullYear() - 2020}+`;
+  const bullets = [
+    t(locale, "og.services_bullet_consultation"),
+    t(locale, "og.services_bullet_training"),
+    t(locale, "og.services_bullet_cooperation"),
+  ];
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#171717",
-        padding: "3.5rem 4rem",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          maxWidth: "540px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            flex: 1,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontWeight: 700,
-              fontFamily: "IBM Plex Sans",
-              fontSize: "3.5rem",
-              color: "#ffffff",
-              lineHeight: 1.15,
-            }}
-          >
-            <span>{t(locale, "services_hero.heading")}</span>
-            <span>
-              {locale === "cs" ? "na" : ""}&nbsp;
-              <span style={{ color: "#f54a00" }}>{t(locale, "services_hero.heading_accent")}</span>
-            </span>
-          </div>
-          <p
-            style={{
-              marginTop: "1.5rem",
-              fontSize: "1.25rem",
-              lineHeight: 1.6,
-              fontFamily: "Inter",
-              color: "#a3a3a3",
-            }}
-          >
-            {t(locale, "og.services_description")}
-          </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.25rem",
-              marginTop: "0.75rem",
-              fontFamily: "Inter",
-              fontSize: "1.25rem",
-              color: "#a3a3a3",
-            }}
-          >
-            <span>• {t(locale, "og.services_bullet_consultation")}</span>
-            <span>• {t(locale, "og.services_bullet_training")}</span>
-            <span>• {t(locale, "og.services_bullet_cooperation")}</span>
-          </div>
-        </div>
-        <p
-          style={{
-            fontSize: "1.25rem",
-            fontWeight: 400,
-            fontFamily: "Inter",
-            color: "#737373",
-            marginBottom: 0,
-          }}
-        >
-          mares.cz/sluzby
-        </p>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: "2rem",
-        }}
-      >
-        <StatItem
-          value={`${years} ${t(locale, "services_hero.years_suffix")}`}
-          description={t(locale, "services_hero.years_label")}
-        />
-        <StatItem value={t(locale, "services_hero.projects")} description={t(locale, "services_hero.projects_label")} />
-        <StatItem
-          value={t(locale, "services_hero.training_count", { count: trainingCount })}
-          description={t(locale, "services_hero.training_count_label")}
-        />
-      </div>
-    </div>
+    <OgFrame
+      url="mares.cz/sluzby"
+      eyebrow={t(locale, "services.heading")}
+      title={`${t(locale, "services_hero.heading")} ${t(locale, "services_hero.heading_accent")}`}
+      description={t(locale, "og.services_description")}
+      meta={bullets.join(" · ")}
+      stats={[
+        {
+          label: t(locale, "services_hero.years_label"),
+          value: `${years} ${t(locale, "services_hero.years_suffix")}`,
+        },
+        { label: t(locale, "services_hero.projects_label"), value: t(locale, "services_hero.projects") },
+        {
+          label: t(locale, "services_hero.training_count_label"),
+          value: t(locale, "services_hero.training_count", { count: trainingCount }),
+        },
+      ]}
+    />
   );
 }
