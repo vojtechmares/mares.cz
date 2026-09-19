@@ -1,0 +1,112 @@
+name: Preview
+
+# Preview deployments for pull requests targeting `main`.
+#
+# Uploads the PR build as a new *version* of the staging worker (mares-cz-staging)
+# without deploying it, so https://beta.mares.cz keeps serving `main`. The version
+# is reachable on a workers.dev preview URL with a stable per-PR alias:
+#   https://pr-<number>-mares-cz-staging.<account-subdomain>.workers.dev
+#
+# The preview shares the staging worker's secrets and bindings (SESSION KV, ...).
+# Requires `preview_urls: true` on the staging environment in wrangler.jsonc (applied
+# by the next staging deploy) and the same `CLOUDFLARE_API_TOKEN` secret as deploy.yml.
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Deploy preview
+    # Secrets are not available to pull requests from forks.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      HUSKY: "0"
+      CLOUDFLARE_ACCOUNT_ID: f24333bb3c47d6db753e57e2a0c90082
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      # GITHUB_SHA is the merge commit on pull_request events.
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build (staging)
+        run: pnpm build
+        env:
+          CLOUDFLARE_ENV: staging
+
+      - name: Upload preview version
+        id: upload
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-output.json
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN secret is not set - skipping preview. Add it under Settings -> Secrets and variables -> Actions to enable previews."
+            exit 0
+          fi
+          pnpm exec wrangler versions upload -c dist/server/wrangler.json \
+            --preview-alias "pr-${PR_NUMBER}" \
+            --tag "pr-${PR_NUMBER}" \
+            --message "PR #${PR_NUMBER} @ ${HEAD_SHA::7}"
+
+          url=$(jq -rs 'map(select(.type == "version-upload")) | last | .preview_alias_url // .preview_url // empty' "$WRANGLER_OUTPUT_FILE_PATH")
+          if [ -z "$url" ]; then
+            echo "::error::Version uploaded but no preview URL was returned - enable preview URLs on mares-cz-staging (deploy staging with preview_urls: true)."
+            exit 1
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Preview: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment preview URL
+        if: steps.upload.outputs.url != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_URL: ${{ steps.upload.outputs.url }}
+        run: |
+          marker="<!-- preview-deployment -->"
+          body="${marker}
+          Preview deployed: ${PREVIEW_URL}
+
+          Commit \`${HEAD_SHA::7}\`, uploaded as a version of \`mares-cz-staging\` (shares staging secrets and data)."
+
+          comment_id=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate \
+            --jq "map(select(.body | startswith(\"${marker}\"))) | .[0].id // empty" | head -n 1)
+          if [ -n "$comment_id" ]; then
+            gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="$body" > /dev/null
+          fi
