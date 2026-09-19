@@ -1,12 +1,10 @@
 ---
 import { render } from "astro:content";
 
-import { Container } from "../../components/ui/container";
-import { Heading } from "../../components/ui/heading";
-import { Section } from "../../components/ui/section";
+import Toc from "../../features/shared/Toc.astro";
 import Layout from "../../layouts/Layout.astro";
-import { Prose } from "../../components/prose";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../lib/content";
+import { t } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
 
 const locale = Astro.locals.locale;
@@ -71,20 +69,24 @@ if (alternateSlug) {
   }
 }
 
-const { Content } = await render(page);
+const { Content, headings } = await render(page);
 ---
 
 <Layout meta={meta} openGraph={openGraph} alternateUrls={alternateUrls}>
-  <Section variant="inverse">
-    <Container>
-      <Heading variant="inverse" level="h1">{page.data.title}</Heading>
-    </Container>
-  </Section>
-  <Section>
-    <article>
-      <Prose>
+  <section class="section section--first" style="padding-bottom: 56px">
+    <div class="wrap">
+      <p class="eyebrow">// {page.data.title}</p>
+      <h1 class="h-page">{page.data.title}</h1>
+      <p class="lead lead--wide">{page.data.description}</p>
+    </div>
+  </section>
+
+  <section class="section--last">
+    <div class="wrap article-grid">
+      <Toc headings={headings} title={t(locale, "blog.toc")} />
+      <article class="prose">
         <Content />
-      </Prose>
-    </article>
-  </Section>
+      </article>
+    </div>
+  </section>
 </Layout>

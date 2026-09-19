@@ -1,0 +1,39 @@
+---
+import Figure from "./Figure.astro";
+import { t } from "../../i18n";
+
+interface Props {
+  n: number | string;
+  caption: string;
+  min?: number;
+  max?: number;
+}
+
+const locale = Astro.locals.locale;
+const { n, caption, min = 5, max = 12 } = Astro.props;
+
+/** Seats up to `min` are always taken, the next few fill in a loop, the rest stay free. */
+const FILLING = 4;
+const seats = Array.from({ length: max }, (_, index) => {
+  if (index < min) return { kind: "min", i: 0 };
+  if (index < min + FILLING) return { kind: "fill", i: index - min };
+  return { kind: "free", i: 0 };
+});
+---
+
+<Figure n={n} caption={caption}>
+  <div class="seats" role="img" aria-label={t(locale, "diagram.seats_label", { min, max })}>
+    {
+      seats.map((seat, index) => (
+        <span class:list={["seat", `seat--${seat.kind}`]} style={`--i: ${seat.i}`}>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      ))
+    }
+  </div>
+  <div class="dg__legend">
+    <span>min: <b>{min}</b></span>
+    <span>max: <b>{max}</b></span>
+    <span>status: <span class="hl">{t(locale, "diagram.seats_status")}</span></span>
+  </div>
+</Figure>

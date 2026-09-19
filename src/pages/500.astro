@@ -1,24 +1,11 @@
 ---
-import "../styles/global.css";
-import { Error as ErrorComponent } from "../features/error/error";
+import ErrorPage from "../features/error/ErrorPage.astro";
 
 interface Props {
   error: unknown;
 }
 
 const { error } = Astro.props;
-const locale = Astro.locals.locale;
-const lang = locale === "en" ? "en" : "cs";
 ---
 
-<!doctype html>
-<html lang={lang} class="min-h-full">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-  </head>
-  <body class="min-h-full bg-neutral-900">
-    <ErrorComponent status={500} error={error instanceof Error ? error.message : "Unknown error"} locale={locale} />
-  </body>
-</html>
+<ErrorPage status={500} detail={error instanceof Error ? error.message : undefined} />

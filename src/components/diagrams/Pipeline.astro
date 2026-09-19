@@ -1,0 +1,57 @@
+---
+import Figure from "./Figure.astro";
+
+type Node = { label: string; sub: string };
+
+interface Props {
+  n: number | string;
+  caption: string;
+  /** Exactly four nodes - the loop lights each one for a quarter of the cycle. */
+  nodes: [Node, Node, Node, Node];
+}
+
+const { n, caption, nodes } = Astro.props;
+
+const W = 360;
+const GAP = 20;
+const BOX_W = (W - GAP * (nodes.length - 1)) / nodes.length;
+const BOX_H = 36;
+const TOP = 8;
+const MID = TOP + BOX_H / 2;
+---
+
+<Figure n={n} caption={caption}>
+  <svg viewBox={`0 0 ${W} 76`} role="img" aria-label={nodes.map((node) => node.label).join(" → ")}>
+    {
+      nodes.slice(0, -1).map((_, i) => {
+        const x = (i + 1) * BOX_W + i * GAP;
+        return <line class="pipe__wire" x1={x + 3} x2={x + GAP - 3} y1={MID} y2={MID} />;
+      })
+    }
+    {
+      nodes.map((node, i) => {
+        const x = i * (BOX_W + GAP);
+        const rest = i === 0;
+        return (
+          <g style={`--i: ${i}`}>
+            <rect
+              class:list={["pipe__box", rest && "pipe__box--rest"]}
+              x={x + 0.625}
+              y={TOP}
+              width={BOX_W - 1.25}
+              height={BOX_H}
+              rx="3"
+            />
+            <circle class:list={["pipe__dot", rest && "pipe__dot--rest"]} cx={x + 9} cy={MID} r="2.25" />
+            <text class:list={["pipe__label", rest && "pipe__label--rest"]} x={x + BOX_W / 2 + 3} y={MID + 3.5}>
+              {node.label}
+            </text>
+            <text class="pipe__sub" x={x + BOX_W / 2} y={TOP + BOX_H + 16}>
+              {node.sub}
+            </text>
+          </g>
+        );
+      })
+    }
+  </svg>
+</Figure>

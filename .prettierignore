@@ -31,3 +31,6 @@ src/pages/blog/\[slug\]/index.astro
 
 # Generated Cloudflare Worker types (wrangler types)
 worker-configuration.d.ts
+
+# design source files, kept verbatim
+design-v5/

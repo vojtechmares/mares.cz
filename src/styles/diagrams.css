@@ -1,0 +1,655 @@
+/* =============================================================================
+   Diagrams - looping CSS-only figures (12s linear, 4s ease-in-out for pulses).
+   Every frame has to be legible on its own; reduced motion freezes the loops
+   at their resting frame (the base styles), it never hides a diagram.
+   ============================================================================= */
+
+.dg {
+  --loop: 12s;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.dg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.dg text {
+  font-family: var(--font-mono);
+}
+
+/* ---------------------------------------------------------------- pipeline */
+
+.pipe__box {
+  fill: var(--surface);
+  stroke: var(--rule2);
+  stroke-width: 1.25;
+  animation: lit var(--loop) linear infinite;
+  animation-delay: calc((var(--i) - 4) * var(--loop) / 4);
+}
+
+.pipe__label {
+  font-size: 9.5px;
+  fill: var(--muted);
+  text-anchor: middle;
+  animation: litText var(--loop) linear infinite;
+  animation-delay: calc((var(--i) - 4) * var(--loop) / 4);
+}
+
+.pipe__sub {
+  font-size: 7.5px;
+  fill: var(--faint);
+  text-anchor: middle;
+}
+
+.pipe__dot {
+  fill: var(--accent);
+  opacity: 0;
+  animation: litDot var(--loop) linear infinite;
+  animation-delay: calc((var(--i) - 4) * var(--loop) / 4);
+}
+
+.pipe__wire {
+  stroke: var(--rule2);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 3;
+  animation: dash var(--loop) linear infinite;
+}
+
+/* first node is the resting "lit" one when motion is reduced */
+.pipe__box--rest {
+  stroke: var(--accent);
+}
+
+.pipe__label--rest {
+  fill: var(--accent);
+}
+
+.pipe__dot--rest {
+  opacity: 1;
+}
+
+@keyframes lit {
+  0%,
+  23% {
+    stroke: var(--accent);
+  }
+  25%,
+  98% {
+    stroke: var(--rule2);
+  }
+  100% {
+    stroke: var(--accent);
+  }
+}
+
+@keyframes litText {
+  0%,
+  23% {
+    fill: var(--accent);
+  }
+  25%,
+  98% {
+    fill: var(--muted);
+  }
+  100% {
+    fill: var(--accent);
+  }
+}
+
+@keyframes litDot {
+  0%,
+  23% {
+    opacity: 1;
+  }
+  25%,
+  98% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+/* ------------------------------------------------------------ self-healing */
+
+.heal__nodes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.heal__node {
+  border: 1px dashed var(--rule2);
+  border-radius: 3px;
+  padding: 10px 12px 12px;
+}
+
+.heal__name {
+  display: block;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+
+.heal__pods {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pod {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  border: 1px solid var(--rule2);
+  background: var(--surface);
+}
+
+.pod--on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pod--none {
+  border-color: transparent;
+  background: transparent;
+}
+
+.pod--die {
+  background: var(--accent);
+  border-color: var(--accent);
+  animation: podDie var(--loop) linear infinite;
+}
+
+.pod--spawn {
+  border-color: transparent;
+  background: transparent;
+  animation: podSpawn var(--loop) linear infinite;
+}
+
+.heal__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.heal__status .figcaption {
+  margin: 0 0 0 auto;
+}
+
+.flip {
+  position: relative;
+  display: inline-block;
+}
+
+.flip__b {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  opacity: 0;
+  animation: statusFlip var(--loop) linear infinite;
+}
+
+.flip__a {
+  animation: statusFlipInv var(--loop) linear infinite;
+}
+
+@keyframes podDie {
+  0%,
+  38% {
+    background: var(--accent);
+    border-color: var(--accent);
+    opacity: 1;
+  }
+  40% {
+    background: var(--accent);
+    border-color: var(--accent);
+    opacity: 0.3;
+  }
+  42%,
+  92% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    opacity: 1;
+  }
+  94%,
+  100% {
+    background: var(--accent);
+    border-color: var(--accent);
+    opacity: 1;
+  }
+}
+
+@keyframes podSpawn {
+  0%,
+  44% {
+    background: transparent;
+    border: 1px dashed transparent;
+  }
+  46%,
+  50% {
+    background: transparent;
+    border: 1px dashed var(--accent);
+  }
+  52%,
+  90% {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  92%,
+  100% {
+    background: transparent;
+    border: 1px dashed transparent;
+  }
+}
+
+@keyframes statusFlip {
+  0%,
+  39.9% {
+    opacity: 0;
+  }
+  40%,
+  51.9% {
+    opacity: 1;
+  }
+  52%,
+  90.9% {
+    opacity: 0;
+  }
+  91%,
+  93.9% {
+    opacity: 1;
+  }
+  94%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes statusFlipInv {
+  0%,
+  39.9% {
+    opacity: 1;
+  }
+  40%,
+  51.9% {
+    opacity: 0;
+  }
+  52%,
+  90.9% {
+    opacity: 1;
+  }
+  91%,
+  93.9% {
+    opacity: 0;
+  }
+  94%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------- terminal */
+
+.term__chrome {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.term__chrome i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--rule2);
+}
+
+.term__chrome i:last-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.term__body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.term__line {
+  display: block;
+  white-space: pre;
+  min-height: 1.7em;
+}
+
+.term__line--out {
+  color: var(--muted);
+}
+
+.term__prompt,
+.term__hl {
+  color: var(--accent);
+}
+
+.term__typed {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  white-space: pre;
+}
+
+.term__cursor {
+  display: inline-block;
+  opacity: 0;
+  vertical-align: bottom;
+}
+
+.term__cursor--last {
+  opacity: 1;
+}
+
+.term__cursor > b {
+  display: inline-block;
+  width: 7px;
+  height: 1.05em;
+  margin: 0 0 0.3em 2px;
+  vertical-align: bottom;
+  background: var(--accent);
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .term__body {
+    font-size: 11px;
+  }
+}
+
+/* --------------------------------------------------------------- cost bars */
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--ink);
+  height: 180px;
+  align-items: end;
+}
+
+.bars__group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  height: 100%;
+  align-items: end;
+}
+
+.bar {
+  height: var(--h);
+  background: var(--shade);
+  border-radius: 1px 1px 0 0;
+  transform-origin: bottom;
+}
+
+.bar--accent {
+  background: var(--accent);
+  animation: grow 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.3s);
+}
+
+.bars__labels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  padding: 14px 24px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@keyframes grow {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.82);
+  }
+}
+
+/* ------------------------------------------------------------------- seats */
+
+.seats {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.seat {
+  aspect-ratio: 1.6;
+  border-radius: 3px;
+  border: 1px solid var(--rule2);
+  background: var(--surface);
+  display: grid;
+  place-content: center;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+.seat--min {
+  background: var(--shade);
+  border-color: var(--shade);
+  color: var(--muted);
+}
+
+.seat--fill {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  animation: var(--loop) linear infinite;
+}
+
+/* seats 6-9 sign up one after another, then the next term starts again at the minimum */
+.seat--fill:nth-child(6) {
+  animation-name: seatFill0;
+}
+.seat--fill:nth-child(7) {
+  animation-name: seatFill1;
+}
+.seat--fill:nth-child(8) {
+  animation-name: seatFill2;
+}
+.seat--fill:nth-child(9) {
+  animation-name: seatFill3;
+}
+
+@keyframes seatFill0 {
+  0%,
+  8% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+  10%,
+  96% {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  98%,
+  100% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+}
+
+@keyframes seatFill1 {
+  0%,
+  28% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+  30%,
+  96% {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  98%,
+  100% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+}
+
+@keyframes seatFill2 {
+  0%,
+  48% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+  50%,
+  96% {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  98%,
+  100% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+}
+
+@keyframes seatFill3 {
+  0%,
+  68% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+  70%,
+  96% {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  98%,
+  100% {
+    background: var(--surface);
+    border-color: var(--rule2);
+    color: var(--faint);
+  }
+}
+
+.seat--free {
+  border-style: dashed;
+}
+
+.dg__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.dg__legend b {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.dg__legend .hl {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------- ascii */
+
+.ascii {
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--muted);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.ascii .hl {
+  color: var(--accent);
+}
+
+.ascii .ink {
+  color: var(--ink);
+}
+
+/* resting frame: the response is the highlighted value */
+.ascii .hl-rest {
+  color: var(--accent);
+}
+
+.ascii .travel {
+  animation: asciiTravel var(--loop) linear infinite;
+  animation-delay: calc((var(--i) - 4) * var(--loop) / 4);
+}
+
+@keyframes asciiTravel {
+  0%,
+  23% {
+    color: var(--accent);
+  }
+  25%,
+  100% {
+    color: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  .ascii {
+    font-size: 10px;
+  }
+}
+
+/* ---------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .dg *,
+  .dg *::before,
+  .dg *::after {
+    animation: none !important;
+  }
+}

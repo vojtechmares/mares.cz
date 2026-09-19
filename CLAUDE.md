@@ -66,7 +66,8 @@ Output: `server` (SSR) | Adapter: `@astrojs/vercel` (region `fra1`, skewProtecti
 
 - `/[...slug]/` - Pages | `/blog/[slug]/` - Posts | `/blog/tag/[tag]/` - By tag
 - `/blog/archive/[year]/` and `/blog/archive/[year]/[month]/` - Archive
-- `/skoleni/[slug]/` - Training courses | `/skoleni/verejne-terminy` - Public sessions
+- `/skoleni/` - Training catalog | `/skoleni/[slug]/` - Training courses | `/skoleni/verejne-terminy` - Public sessions
+- `/o-mne/` - About | `/kontakt/` - Contact (Czech only for now)
 - `/prednasky/` - Talks
 - Each route has `card.png.ts` for OG images via Satori + workers-og
 
@@ -85,46 +86,55 @@ Output: `server` (SSR) | Adapter: `@astrojs/vercel` (region `fra1`, skewProtecti
 
 Meta.astro | OpenGraph.astro | Twitter.astro | JSONLD.astro | Fediverse.astro | Favicon.astro
 
-### Styling
+### Styling (design v5)
 
-Tailwind CSS v4 via Vite plugin | Typography plugin for prose | UI components in src/components/ui/ (React)
+Spec in `design-v5/DESIGN.md` + `design-v5/DESIGN-BRIEF.md`. Global CSS in `src/styles/global.css` (tokens, layout, rows, prose) and `src/styles/diagrams.css` (looping figures). Tailwind v4 is still loaded (preflight + utilities) but pages use the semantic global classes. Light/dark via `:root[data-theme]`, persisted in `localStorage` as `mares-theme` (`src/features/layout/ThemeScript.astro`). See the `ui-components` skill for the full class and component reference.
 
 ---
 
-## Component API Reference
-
-<!-- Dense reference: Component|path|prop:type(default)|... -->
+## Building blocks
 
 ```
-Button|src/components/ui/button.tsx|style?:"solid"(default)|"outline"|variant?:"primary"(default)|"secondary"|"accent"|size?:"medium"|"large"(default)|href?:string(renders <a>)|type?:string|onClick?:fn(button only)|children
-Heading|src/components/ui/heading.tsx|level?:"h1"(default)-"h6"|variant?:"primary"(default)|"inverse"|"accent"|id?:string|ariaLabel?:string|children
-Container|src/components/ui/container.tsx|mode?:"default"(default)|"prose"|className?:string|children
-Section|src/components/ui/section.tsx|variant?:"default"(default)|"surface"|"inverse"|"accent"|id?:string|ariaLabel?:string|children
-Body|src/components/ui/body.tsx|variant?:"large"|"base"(default)|"small"|color?:"primary"(default)|"secondary"|"muted"|"inverse"|as?:"p"(default)|"span"|"div"|children
-Text|src/components/ui/text.tsx|variant?:"primary"(default)|"secondary"|"muted"|"inverse"|children (renders <p>)
-Card|src/components/ui/card.tsx|variant?:"default"(default)|"surface"|"inverse"|"accent"|"accent-light"|border?:"none"|shadow?:boolean|hover?:boolean|children (renders <section>)
-Badge|src/components/ui/badge.tsx|variant?:"default"(default)|"accent"|as?:"span"(default)|"a"|href?:string(when as="a")|children
-Link|src/components/ui/link.tsx|href:string|variant?:"default"(default)|"muted"|external?:boolean|children
-Stack|src/components/ui/stack.tsx|direction?:"vertical"(default)|"horizontal"|gap?:GapSize("md")|align?:"start"|"center"|"end"|"stretch"|justify?:"start"|"center"|"end"|"between"|"around"|children
-Icon|src/components/ui/icon.tsx|size?:"sm"|"md"(default)|"lg"|label?:string|children
-TagList|src/components/ui/tag-list.tsx|tags:string[]|variant?:"default"|"inverse"|activeTag?:string|locale?:Locale("cs")
-Prose|src/components/prose.tsx|className?:string|children (wraps rendered markdown Content)
+Layout|src/layouts/Layout.astro|meta?|openGraph?|jsonLd?|alternateUrls? (Header + Footer + ThemeScript)
+Header|src/features/layout/Header.astro|sticky, Školení dropdown from getCatalog(), theme switch, mobile <details> menu
+Footer|src/features/layout/Footer.astro|4 columns, language link
+CourseRows|src/features/shared/CourseRows.astro|courses:CatalogItem[]|compact?:boolean
+ServiceRows|src/features/shared/ServiceRows.astro|variant?:"default"|"wide"|linked?:boolean
+PostRows|src/features/shared/PostRows.astro|posts:PostRow[]{href,title,date,tag?,meta?}|size?:"default"|"lg"
+SessionRows|src/features/shared/SessionRows.astro|sessions:TrainingSession[]|compact?:boolean
+StepRows|src/features/shared/StepRows.astro|steps:{name,description,value?}[]
+Quotes|src/features/shared/Quotes.astro|limit?:number (reference collection)
+ClientLogos|src/features/shared/ClientLogos.astro|monochrome client logo strip
+Portrait|src/features/shared/Portrait.astro|variant?:"frame"|"avatar"|"avatar-lg"|loading?
+Toc|src/features/shared/Toc.astro|headings:MarkdownHeading[]|title:string|maxDepth?:number
+BlogListing|src/features/blog/BlogListing.astro|title|lead?|back?|articles|tags?|activeTag?|links?|linksLabel?
+TrainingAd|src/features/blog/TrainingAd.astro|trainingSlug:string|n?:number
+ErrorPage|src/features/error/ErrorPage.astro|status:404|500|detail?:string
+Figure|src/components/diagrams/Figure.astro|n|caption|inlineCaption? (diagram window)
+Pipeline|src/components/diagrams/Pipeline.astro|n|caption|nodes:[{label,sub} x4]
+SelfHealing|src/components/diagrams/SelfHealing.astro|n|caption?
+Terminal|src/components/diagrams/Terminal.astro|n|caption|id(unique per page)|lines:TerminalLine[]|chrome?
+CostBars|src/components/diagrams/CostBars.astro|n|caption|before|after
+Seats|src/components/diagrams/Seats.astro|n|caption|min?|max?
 ```
 
-NOTE: `style="outline"` + `variant="accent"` on Button is invalid (throws error).
+NOTE: figure numbers (`n`) must be unique per page. Diagrams are CSS-only 12s loops; the base style is the reduced-motion resting frame.
 
 ## Utility Reference
 
 ```
-design-tokens|src/lib/design-tokens.ts
-  colors.background.{default,surface,inverse}
-  colors.text.{primary,secondary,muted,inverse,link,linkHover}
-  colors.accent.{default,hover,text,light}
-  colors.border.{default,hover,dark,emphasis}
-  typography.heading.{h1-h6}|typography.body.{large,base,small}|typography.display
-  spacing.{section,card,container}|spacing.maxWidth.{standard,prose}|spacing.gap.{xs,sm,md,lg,xl,2xl,3xl}
-  radius.{none,sm,md,lg,full} (all rounded-none)|shadows.{none,sm,md,lg}
-  Types: BackgroundColor|TextColor|AccentColor|BorderColor|HeadingLevel|BodySize|GapSize|RadiusSize|ShadowSize
+design-tokens|src/lib/design-tokens.ts (v5, mirrored as CSS custom properties in global.css)
+  color.{light,dark}.{bg,surface,ink,muted,faint,rule,rule2,shade,shade2,code,accent,accent2,onAccent,bgVeil}
+  font.{sans,mono}|type.{hero,pageTitle,postTitle,h2,h3,lead,rowTitle,body,bodySm,rowBody,uiSans,monoUi,monoSm,monoXs,monoXxs}
+  space|layout.{maxWidth,gutter,section*,proseWidth,measure,headerHeight}|radius.{none,xs,sm,md,lg,full}|border|motion
+  cssVars(theme):Record<string,string>
+
+catalog|src/lib/catalog.ts
+  getCatalog(locale):Promise<CatalogItem[]> - published trainings, featured first
+  CatalogItem{slug,title,description,length,featured,priceOpen,priceCorporate,icon?}
+
+posts|src/lib/posts.ts
+  getPublishedPosts(locale)|toPostRow(post,locale)|readingTimeMinutes(body)
 
 cache|src/lib/cache.ts
   CachePresets.content="public, s-maxage=3600, stale-while-revalidate=86400"
@@ -134,8 +144,7 @@ cache|src/lib/cache.ts
 
 site|src/lib/site.ts
   LocalizedMetadata[]{locale,title,titlePrefix,description,keywords}
-  LocalizedStaticNavigationLinks[]{locale,links[]{name,href}}
-  Type: StaticLinkData{name,href}
+  PrimaryNavigation[]{key,href,match[]}|MeetingUrl|Contact{name,email,phone,...}|SocialLinks[]{name,href}
 
 sessions|src/lib/sessions.ts
   getFutureSessions():Promise<Session[]> - sorted ascending by start date
@@ -163,11 +172,11 @@ Cache:    Astro.response.headers.set("Cache-Control", CachePresets.content)
 ## Key Patterns
 
 ```
-Page structure:    Layout > main > Section(variant) > Container > components
-React in Astro:   Import React TSX, use directly (server-rendered, no client: directive needed for static)
-Feature modules:  src/features/{domain}/{component}.tsx - blog, training, homepage, layout, opengraph-images, error
+Page structure:    Layout > section.section > div.wrap(.split|.aside-split) > global classes / shared .astro blocks
+React in Astro:   Only for interactive islands (newsletter form, client:load); everything else is .astro
+Feature modules:  src/features/{domain}/ - shared, blog, training, layout, opengraph-images, error
 OG images:        Every route has card.png.ts using OpenGraphImageResponse() from src/lib/opengraph.ts
-Styling:          Use design-tokens.ts values via clsx(), not raw Tailwind classes for themed properties
+Styling:          Global semantic classes + var(--token); never hardcode a hex, no shadows, one accent (see ui-components skill)
 Date format:      toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })
 Price format:     new Intl.NumberFormat("cs", { style: "currency", currency: "CZK", maximumFractionDigits: 0 })
 ```

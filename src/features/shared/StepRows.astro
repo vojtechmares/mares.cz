@@ -1,0 +1,26 @@
+---
+interface Props {
+  steps: { name: string; description: string; value?: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="rows">
+  {
+    steps.map((step, index) => (
+      <li class="row row--step">
+        <span class="row__num">{String(index + 1).padStart(2, "0")}</span>
+        <span>
+          <span class="row__title" style="display: block">
+            {step.name}
+          </span>
+          <span class="row__desc" style="display: block; margin-top: 4px">
+            {step.description}
+          </span>
+        </span>
+        {step.value && <span class="row__meta">{step.value}</span>}
+      </li>
+    ))
+  }
+</ol>

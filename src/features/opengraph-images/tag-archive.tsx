@@ -1,105 +1,14 @@
 import type { ReactNode } from "react";
 
-import { imageToDataUrl } from "../../lib/opengraph";
-import avatarImage from "../../images/people/vojtech-mares.png";
-import type { Locale } from "../../i18n";
+import { t, type Locale } from "../../i18n";
 import { formatArticleCount } from "../../i18n/formatting";
+import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
 
-function TagArchiveImage({
-  tag,
-  articleCount,
-  imageData,
-  locale,
-}: {
-  tag: string;
-  articleCount: number;
-  imageData: string;
-  locale: Locale;
-}) {
-  return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#fafafa",
-        color: "#404040",
-      }}
-    >
-      <div
-        style={{
-          marginLeft: "4rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100%",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 500,
-            fontSize: "2.5rem",
-            color: "#f54a00",
-          }}
-        >
-          Blog
-        </p>
-        <p
-          style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 700,
-            fontSize: "5rem",
-            marginTop: 0,
-            maxWidth: "42rem",
-          }}
-        >
-          #{tag}
-        </p>
-        <p
-          style={{
-            marginTop: "1.5rem",
-            maxWidth: "32rem",
-            fontSize: "1.5rem",
-            lineHeight: "1.5556",
-            fontFamily: "Inter",
-          }}
-        >
-          {formatArticleCount(articleCount, locale)}
-        </p>
-        <p
-          style={{
-            fontSize: "2rem",
-            fontWeight: 500,
-            marginBottom: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          Vojtěch Mareš
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 300,
-            marginTop: 0,
-            fontFamily: "Inter",
-          }}
-        >
-          mares.cz/blog/tag/{tag}
-        </p>
-      </div>
-      <img style={{ position: "absolute", bottom: 0, right: 60 }} height={600} alt="" src={imageData} />
-    </div>
-  );
-}
-
+// Async and `baseUrl` are part of the signature the card routes call; the card no longer fetches any image.
 export async function CreateTagArchiveImageComponent({
   tag,
   articleCount,
-  baseUrl,
   locale = "cs",
 }: {
   tag: string;
@@ -107,7 +16,12 @@ export async function CreateTagArchiveImageComponent({
   baseUrl: string | URL;
   locale?: Locale;
 }): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
-
-  return <TagArchiveImage tag={tag} articleCount={articleCount} imageData={avatarSrc} locale={locale} />;
+  return (
+    <OgFrame
+      url={displayUrl(`/blog/tag/${tag}`, locale)}
+      eyebrow={t(locale, "blog.og_heading")}
+      title={`#${tag}`}
+      stats={[{ label: t(locale, "og.blog_archive"), value: formatArticleCount(articleCount, locale) }]}
+    />
+  );
 }

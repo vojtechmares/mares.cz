@@ -1,0 +1,111 @@
+---
+import { t, type TranslationKey } from "../../i18n";
+import { formatDuration, formatPrice } from "../../i18n/formatting";
+import { englishPathToCzech, localizeUrl } from "../../i18n/routes";
+import { getCatalog } from "../../lib/catalog";
+import { MeetingUrl, PrimaryNavigation } from "../../lib/site";
+
+const locale = Astro.locals.locale;
+const currentPath = locale === "en" ? englishPathToCzech(Astro.url.pathname) : Astro.url.pathname;
+
+const catalog = await getCatalog(locale);
+
+const isActive = (match: readonly string[]) =>
+  match.some((prefix) => currentPath === prefix || currentPath.startsWith(prefix + "/"));
+
+const courseMeta = (course: (typeof catalog)[number]) =>
+  `${formatDuration(course.length, locale)} · ${t(locale, "training_grid.price_from")} ${formatPrice(course.priceOpen, locale)}`;
+---
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a href={localizeUrl("/", locale)} class="wordmark">Vojtěch Mareš</a>
+
+    <nav class="nav" aria-label={t(locale, "nav.label")}>
+      {
+        PrimaryNavigation.map((item) => {
+          const active = isActive(item.match);
+          const href = localizeUrl(item.href, locale);
+          const label = t(locale, item.key as TranslationKey);
+
+          if (item.key !== "nav.training") {
+            return (
+              <div class="nav__item">
+                <a href={href} class="nav__link" data-active={active ? "" : undefined}>
+                  {label}
+                </a>
+              </div>
+            );
+          }
+
+          return (
+            <div class="nav__item">
+              <a href={href} class="nav__link" data-active={active ? "" : undefined} aria-haspopup="true">
+                {label}
+                <svg class="nav__chev" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M2 3.75 5 6.75 8 3.75" stroke="currentColor" stroke-width="1.25" />
+                </svg>
+              </a>
+              <div class="nav__panel">
+                <div class="nav__courses">
+                  {catalog.map((course) => (
+                    <a href={localizeUrl(`/skoleni/${course.slug}`, locale)} class="nav__course">
+                      <span class="nav__course-name">{course.title}</span>
+                      <span class="nav__course-meta">{courseMeta(course)}</span>
+                    </a>
+                  ))}
+                </div>
+                <div class="nav__panel-foot">
+                  <a href={href} class="link-arrow">
+                    {t(locale, "nav.catalog")} →
+                  </a>
+                  <a href={localizeUrl("/skoleni/verejne-terminy", locale)} class="link-arrow link-arrow--ink">
+                    {t(locale, "nav.sessions")} →
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </nav>
+
+    <div class="header-tools">
+      <button type="button" class="theme-switch" data-theme-switch aria-label={t(locale, "nav.theme_switch")}>
+        <span class="theme-switch__dot" aria-hidden="true"></span>
+        <span class="theme-switch__label" aria-hidden="true"></span>
+      </button>
+      <a href={MeetingUrl} class="btn btn--secondary">{t(locale, "nav.cta")} →</a>
+
+      <details class="menu">
+        <summary aria-label={t(locale, "nav.label")}></summary>
+        <div class="menu__panel">
+          {
+            PrimaryNavigation.map((item) => (
+              <>
+                <a href={localizeUrl(item.href, locale)} class="menu__link">
+                  {t(locale, item.key as TranslationKey)}
+                </a>
+                {item.key === "nav.training" && (
+                  <>
+                    {catalog.map((course) => (
+                      <a href={localizeUrl(`/skoleni/${course.slug}`, locale)} class="menu__link menu__link--sub">
+                        {course.title}
+                        <span>{formatDuration(course.length, locale)}</span>
+                      </a>
+                    ))}
+                    <a href={localizeUrl("/skoleni/verejne-terminy", locale)} class="menu__link menu__link--sub">
+                      {t(locale, "nav.sessions")}
+                      <span>→</span>
+                    </a>
+                  </>
+                )}
+              </>
+            ))
+          }
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "nav.cta")}</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

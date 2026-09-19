@@ -4,6 +4,7 @@ import { CreateDateArchiveImageComponent } from "../../../../../features/opengra
 import { OpenGraphImageResponse } from "../../../../../lib/opengraph";
 import { getMonthName } from "../../../../../i18n/formatting";
 import { getLocalizedCollection } from "../../../../../lib/content";
+import { displayUrl } from "../../../../../i18n/routes";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
@@ -30,7 +31,7 @@ export async function GET(context: APIContext) {
   const component = await CreateDateArchiveImageComponent({
     title: `${monthName} ${year}`,
     articleCount: articles.length,
-    url: `mares.cz/blog/archive/${year}/${String(month).padStart(2, "0")}`,
+    url: displayUrl(`/blog/archive/${year}/${String(month).padStart(2, "0")}`, locale),
     baseUrl,
     locale,
   });

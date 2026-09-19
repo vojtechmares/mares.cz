@@ -60,6 +60,10 @@ export function getContentPages(site: string): string[] {
   urls.push(`${base}/en/services`);
   urls.push(`${base}/skoleni/verejne-terminy`);
   urls.push(`${base}/en/training/public-sessions`);
+  // v5 redesign pages - Czech only until the English versions ship
+  urls.push(`${base}/skoleni`);
+  urls.push(`${base}/o-mne`);
+  urls.push(`${base}/kontakt`);
 
   // Czech blog posts
   const blogDir = join(contentDir, "blog");

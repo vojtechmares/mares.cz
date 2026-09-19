@@ -1,0 +1,81 @@
+---
+import Portrait from "../../features/shared/Portrait.astro";
+import Layout from "../../layouts/Layout.astro";
+
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+import { Contact, MeetingUrl, SocialLinks } from "../../lib/site";
+
+const locale = Astro.locals.locale;
+
+const meta = {
+  title: t(locale, "contact.meta_title"),
+  description: t(locale, "footer.interested_text"),
+  keywords: t(locale, "contact.meta_keywords"),
+};
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: new URL(localizeUrl("/", locale).replace(/\/$/, "") + "/card.png", Astro.site).toString(),
+    width: 1200,
+    height: 630,
+    alt: meta.title,
+  },
+};
+---
+
+<Layout meta={meta} openGraph={openGraph}>
+  <section class="section section--first section--last">
+    <div class="wrap split split--top">
+      <div>
+        <p class="eyebrow">// {t(locale, "contact.eyebrow")}</p>
+        <h1 class="h-page">{t(locale, "contact.heading")}</h1>
+        <p class="lead">{t(locale, "footer.interested_text")}</p>
+
+        <div class="byline" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule)">
+          <Portrait variant="avatar-lg" loading="eager" />
+          <span>
+            <span class="byline__name">{Contact.name}</span>
+            <span class="byline__role">{t(locale, "services_consultation.step1_description")}</span>
+          </span>
+        </div>
+
+        <div class="actions">
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "contact.cta")}</a>
+        </div>
+      </div>
+
+      <dl class="rows">
+        <div class="row row--kv">
+          <dt class="row__meta">{t(locale, "contact.email")}</dt>
+          <dd><a href={`mailto:${Contact.email}`} class="contact-value">{Contact.email}</a></dd>
+        </div>
+        <div class="row row--kv">
+          <dt class="row__meta">{t(locale, "contact.phone")}</dt>
+          <dd><a href={Contact.phoneHref} class="contact-value mono">{Contact.phone}</a></dd>
+        </div>
+        <div class="row row--kv">
+          <dt class="row__meta">{t(locale, "contact.ids")}</dt>
+          <dd class="contact-value mono">{Contact.companyId} / {Contact.vatId}</dd>
+        </div>
+        <div class="row row--kv">
+          <dt class="row__meta">{t(locale, "contact.seat")}</dt>
+          <dd class="contact-value">{t(locale, "footer.location")}</dd>
+        </div>
+        <div class="row row--kv">
+          <dt class="row__meta">{t(locale, "contact.elsewhere")}</dt>
+          <dd class="contact-links">
+            {
+              SocialLinks.map((link) => (
+                <a href={link.href} target="_blank" rel="me noreferrer" class="link">
+                  {link.name}
+                </a>
+              ))
+            }
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,118 @@
+---
+import Seats from "../../components/diagrams/Seats.astro";
+import CourseRows from "../../features/shared/CourseRows.astro";
+import SessionRows from "../../features/shared/SessionRows.astro";
+import Layout from "../../layouts/Layout.astro";
+
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+import { getCatalog } from "../../lib/catalog";
+import { getLocalizedEntry } from "../../lib/content";
+import {
+  enrichSessionsWithSlugs,
+  getFutureSessions,
+  getTrainingIDToSlugMap,
+  toTrainingSession,
+} from "../../lib/sessions";
+import { MeetingUrl } from "../../lib/site";
+
+const locale = Astro.locals.locale;
+
+const [catalog, sessionEntries, slugMap, customTrainingPage] = await Promise.all([
+  getCatalog(locale),
+  getFutureSessions().catch(() => []),
+  getTrainingIDToSlugMap(),
+  getLocalizedEntry("page", locale === "en" ? "custom-training" : "skoleni-na-miru", locale),
+]);
+
+const UPCOMING_COUNT = 3;
+const sessions = enrichSessionsWithSlugs(sessionEntries.map(toTrainingSession), slugMap).slice(0, UPCOMING_COUNT);
+
+const meta = {
+  title: t(locale, "catalog.meta_title"),
+  description: t(locale, "training_grid.subheading"),
+  keywords: t(locale, "sessions_page.meta_keywords"),
+};
+
+const openGraph = {
+  type: "website" as const,
+  image: {
+    url: new URL(localizeUrl("/skoleni/verejne-terminy", locale) + "/card.png", Astro.site).toString(),
+    width: 1200,
+    height: 630,
+    alt: t(locale, "training_grid.heading"),
+  },
+};
+
+const jsonLd = {
+  type: "CollectionPage" as const,
+  name: t(locale, "catalog.meta_title"),
+  description: t(locale, "training_grid.subheading"),
+  url: new URL(localizeUrl("/skoleni", locale), Astro.site).toString(),
+};
+---
+
+<Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
+  <section class="section section--first">
+    <div class="wrap">
+      <p class="eyebrow">// {t(locale, "catalog.eyebrow")}</p>
+      <h1 class="h-page">{t(locale, "catalog.heading")}</h1>
+      <p class="lead lead--wide">{t(locale, "training_grid.subheading")}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <CourseRows courses={catalog} />
+      <p class="note" style="padding-top: 24px">{t(locale, "catalog.note")}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split split--top">
+      <div>
+        <p class="eyebrow">{t(locale, "services_training.public_sessions")}</p>
+        <h2 class="h2">{t(locale, "catalog.sessions_heading")}</h2>
+        <p class="body">{t(locale, "services_training.public_sessions_description")}</p>
+        <a href={localizeUrl("/skoleni/verejne-terminy", locale)} class="link-arrow">
+          {t(locale, "catalog.sessions_link")} →
+        </a>
+      </div>
+      <div class="split__media">
+        <Seats n={1} caption={t(locale, "catalog.fig_seats")} />
+      </div>
+    </div>
+    {
+      sessions.length > 0 && (
+        <div class="wrap" style="margin-top: 56px">
+          <SessionRows sessions={sessions} />
+        </div>
+      )
+    }
+  </section>
+
+  <section class="section">
+    <div class="wrap aside-split">
+      <div>
+        <p class="eyebrow">{t(locale, "services_training.corporate")}</p>
+        <h2 class="h2">{t(locale, "catalog.custom_heading")}</h2>
+      </div>
+      <div>
+        <p class="body">{t(locale, "services_training.corporate_description")}</p>
+        <div class="actions">
+          <a href={MeetingUrl} class="btn btn--primary">{t(locale, "course.cta")}</a>
+          {
+            customTrainingPage && !customTrainingPage.data.draft && (
+              <a
+                href={localizeUrl(locale === "en" ? "/custom-training" : "/skoleni-na-miru", locale)}
+                class="link-arrow link-arrow--ink"
+              >
+                {customTrainingPage.data.title} →
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

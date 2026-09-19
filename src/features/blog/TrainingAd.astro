@@ -1,0 +1,54 @@
+---
+import Terminal from "../../components/diagrams/Terminal.astro";
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+import { bareSlug, getLocalizedEntry } from "../../lib/content";
+import { getTrainingTerminal } from "../../lib/training-terminals";
+
+interface Props {
+  trainingSlug: string;
+  /** Figure number - has to stay unique within the page. */
+  n?: number;
+}
+
+const locale = Astro.locals.locale;
+const { trainingSlug, n = 1 } = Astro.props;
+
+const training = await getLocalizedEntry("training", trainingSlug, locale);
+if (!training) {
+  console.error("Failed to load training ad: no training for slug " + trainingSlug);
+}
+---
+
+{
+  training && (
+    <section class="section" id="skoleni">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">{t(locale, "blog.training_ad_eyebrow")}</p>
+          <h2 class="h2">
+            {training.data.title} {t(locale, "blog.training_ad_suffix")}
+          </h2>
+          <p class="body">{training.data.ad}</p>
+          <div class="actions">
+            <a href="mailto:vojtech@mares.cz" class="btn btn--primary">
+              {t(locale, "blog.training_ad_cta_corporate")}
+            </a>
+            <a href={localizeUrl("/skoleni/" + bareSlug(training.id), locale)} class="link-arrow link-arrow--ink">
+              {t(locale, "blog.training_ad_cta_more_info")} →
+            </a>
+          </div>
+        </div>
+        <div class="split__media">
+          <Terminal
+            n={n}
+            id="training-ad"
+            chrome
+            caption={t(locale, "course.fig_terminal")}
+            lines={getTrainingTerminal(bareSlug(training.id))}
+          />
+        </div>
+      </div>
+    </section>
+  )
+}

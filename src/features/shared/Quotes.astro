@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+import { t } from "../../i18n";
+import { getLocalizedCollection } from "../../lib/content";
+
+interface Props {
+  /** Limit the number of rendered references. */
+  limit?: number;
+}
+
+const locale = Astro.locals.locale;
+const { limit } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/images/people/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+});
+
+const references = (await getLocalizedCollection("reference", locale, (entry) => !entry.data.draft))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .slice(0, limit);
+
+const rendered = await Promise.all(
+  references.map(async (reference) => ({
+    data: reference.data,
+    Content: (await render(reference)).Content,
+    image: images[`/src/images/people/${reference.data.authorImage}`]?.default,
+  })),
+);
+
+const kindLabel = {
+  cooperation: t(locale, "services.cooperation"),
+  training: t(locale, "services.training"),
+  consultation: t(locale, "services.consultation"),
+};
+---
+
+<div class="quotes" aria-label={t(locale, "references.aria_label")}>
+  {
+    rendered.map(({ data, Content, image }) => (
+      <figure class="quote">
+        <span class="quote__kind">{kindLabel[data.kind].toLowerCase()}</span>
+        <blockquote class="quote__text">
+          <Content />
+        </blockquote>
+        <figcaption class="byline">
+          {image && (
+            <span class="avatar hatch">
+              <Image src={image} alt="" width={88} height={88} loading="lazy" decoding="async" />
+            </span>
+          )}
+          <span>
+            <span class="byline__name">{data.authorName}</span>
+            <span class="byline__role">{data.authorRole}</span>
+          </span>
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>

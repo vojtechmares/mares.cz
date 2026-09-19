@@ -3,6 +3,7 @@ import type { APIContext } from "astro";
 import { CreateDateArchiveImageComponent } from "../../../../features/opengraph-images/date-archive";
 import { OpenGraphImageResponse } from "../../../../lib/opengraph";
 import { getLocalizedCollection } from "../../../../lib/content";
+import { displayUrl } from "../../../../i18n/routes";
 
 export async function GET(context: APIContext) {
   const baseUrl = context.url.origin;
@@ -28,7 +29,7 @@ export async function GET(context: APIContext) {
   const component = await CreateDateArchiveImageComponent({
     title: year.toString(),
     articleCount: articles.length,
-    url: `mares.cz/blog/archive/${year}`,
+    url: displayUrl(`/blog/archive/${year}`, locale),
     baseUrl,
     locale,
   });

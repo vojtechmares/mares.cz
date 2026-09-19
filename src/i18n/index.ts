@@ -3,7 +3,8 @@ import { cs } from "./translations/cs";
 import { en } from "./translations/en";
 import type { Locale } from "./types";
 
-const translations: Record<Locale, Record<TranslationKey, string>> = { cs, en };
+// English may lag behind Czech (the v5 redesign ships Czech first) - missing keys fall back to Czech.
+const translations: Record<Locale, Partial<Record<TranslationKey, string>>> = { cs, en };
 
 /**
  * Get a translated string for the given locale and key.
@@ -11,7 +12,7 @@ const translations: Record<Locale, Record<TranslationKey, string>> = { cs, en };
  * will be replaced with the corresponding value from `params`.
  */
 export function t(locale: Locale, key: TranslationKey, params?: Record<string, string | number>): string {
-  const value = translations[locale][key];
+  const value = translations[locale][key] ?? cs[key];
   if (!params) return value;
 
   return value.replace(/\{(\w+)\}/g, (_, name) => {

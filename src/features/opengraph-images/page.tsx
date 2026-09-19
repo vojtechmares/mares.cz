@@ -1,83 +1,22 @@
 import type { ReactNode } from "react";
 
-import { imageToDataUrl } from "../../lib/opengraph";
-import avatarImage from "../../images/people/vojtech-mares.png";
+import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
+import type { Locale } from "../../i18n/types";
+import { bareSlug } from "../../lib/content";
 
-function Page({
-  slug,
-  title,
-  description,
-  imageData,
-}: {
-  slug: string;
-  title: string;
-  description: string;
-  imageData: string;
-}) {
-  return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center", // flex-end
-        justifyContent: "space-between", // space-between
-        backgroundColor: "#fafafa",
-        color: "#404040",
-      }}
-    >
-      <div
-        style={{
-          marginLeft: "4rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100%",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "IBM Plex Sans",
-            fontWeight: 700,
-            fontSize: "4rem",
-            marginBottom: 0,
-            paddingBottom: 0,
-            color: "#f54a00",
-          }}
-        >
-          {title}
-        </p>
-        <p
-          style={{
-            marginTop: "1.5rem",
-            maxWidth: "32rem",
-            fontSize: "18px",
-            lineHeight: "1.5556",
-            fontFamily: "Inter",
-          }}
-        >
-          {description}
-        </p>
-        <p style={{ fontSize: "2rem", fontWeight: 500, fontFamily: "Inter" }}>mares.cz/{slug}</p>
-      </div>
-      <img style={{ position: "absolute", bottom: 0, right: 60 }} alt="" height={600} src={imageData} />
-    </div>
-  );
-}
-
+// Async and `baseUrl` are part of the signature the card routes call; the card no longer fetches any image.
 export async function CreatePageImageComponent({
   slug,
   title,
   description,
-  baseUrl,
+  locale = "cs",
 }: {
   slug: string;
   title: string;
   description: string;
   baseUrl: string | URL;
+  locale?: Locale;
 }): Promise<ReactNode> {
-  const avatarSrc = await imageToDataUrl(avatarImage.src, baseUrl);
-
-  return <Page slug={slug} title={title} description={description} imageData={avatarSrc} />;
+  return <OgFrame url={displayUrl(`/${bareSlug(slug)}`, locale)} title={title} description={description} />;
 }

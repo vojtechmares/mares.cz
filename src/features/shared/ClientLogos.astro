@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+
+import logoCybroslabs from "../../images/logos/cybroslabs-black.jpeg";
+import logoFakturoid from "../../images/logos/fakturoid.svg";
+import logoGLAMI from "../../images/logos/glami.svg";
+import logoNOTINO from "../../images/logos/notino.svg";
+import logoNUMOTEQ from "../../images/logos/numoteq.png";
+import logoPartners from "../../images/logos/partners.png";
+import { t } from "../../i18n";
+
+interface Props {
+  /** Render without the top hairline (when the strip follows another rule). */
+  class?: string;
+}
+
+const locale = Astro.locals.locale;
+const { class: className } = Astro.props;
+
+// Logos are flattened to a single ink colour. `opaque` ones have a baked-in white
+// background and `inverse` ones are white on black: those are blended into the page instead.
+const clients = [
+  { name: "GLAMI", logo: logoGLAMI },
+  { name: "Fakturoid", logo: logoFakturoid },
+  { name: "Cybros Labs", logo: logoCybroslabs, opaque: true },
+  { name: "NUMOTEQ", logo: logoNUMOTEQ },
+  { name: "NOTINO", logo: logoNOTINO, inverse: true },
+  { name: "Partners", logo: logoPartners },
+];
+---
+
+<section class:list={["logos", className]} aria-label={t(locale, "clients.heading")}>
+  <div class="wrap logos__inner">
+    <p class="logos__label">{t(locale, "home.clients_label")}</p>
+    <ul class="logos__list">
+      {
+        clients.map((client) => (
+          <li>
+            {
+              // SVGs are served directly: the Cloudflare Images binding rejects vector input.
+              client.logo.format === "svg" ? (
+                <img
+                  class:list={["logo", client.inverse && "logo--inverse"]}
+                  alt={client.name}
+                  src={client.logo.src}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <Image
+                  class:list={["logo", client.opaque && "logo--opaque"]}
+                  alt={client.name}
+                  src={client.logo}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )
+            }
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

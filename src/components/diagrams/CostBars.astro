@@ -1,0 +1,31 @@
+---
+import Figure from "./Figure.astro";
+
+interface Props {
+  n: number | string;
+  caption: string;
+  before: string;
+  after: string;
+}
+
+const { n, caption, before, after } = Astro.props;
+---
+
+<Figure n={n} caption={caption}>
+  <div class="bars" role="img" aria-label={`${before} / ${after}`}>
+    <div class="bars__group">
+      <span class="bar" style="--h: 100%"></span>
+      <span class="bar" style="--h: 70%"></span>
+      <span class="bar" style="--h: 71%"></span>
+    </div>
+    <div class="bars__group">
+      <span class="bar bar--accent" style="--h: 48%; --i: 0"></span>
+      <span class="bar bar--accent" style="--h: 31%; --i: 1"></span>
+      <span class="bar bar--accent" style="--h: 33%; --i: 2"></span>
+    </div>
+  </div>
+  <div class="bars__labels">
+    <span>{before}</span>
+    <span>{after}</span>
+  </div>
+</Figure>

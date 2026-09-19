@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import PostRows from "../shared/PostRows.astro";
+import { t } from "../../i18n";
+import { localizeUrl } from "../../i18n/routes";
+import { toPostRow } from "../../lib/posts";
+
+interface Props {
+  title: string;
+  lead?: string;
+  /** Show a "← Blog" link instead of the section eyebrow (tag and archive pages). */
+  back?: boolean;
+  articles: CollectionEntry<"blog">[];
+  tags?: string[];
+  activeTag?: string;
+  /** Secondary navigation on the right of the filter bar (years or months). */
+  links?: { label: string; href: string }[];
+  linksLabel?: string;
+}
+
+const locale = Astro.locals.locale;
+const { title, lead, back = false, articles, tags = [], activeTag, links = [], linksLabel } = Astro.props;
+---
+
+<section class="section section--first">
+  <div class="wrap">
+    {
+      back ? (
+        <a href={localizeUrl("/blog", locale)} class="back-link">
+          ← {t(locale, "blog.back")}
+        </a>
+      ) : (
+        <p class="eyebrow">// {t(locale, "blog.eyebrow")}</p>
+      )
+    }
+    <h1 class="h-page">{title}</h1>
+    {lead && <p class="lead lead--wide">{lead}</p>}
+  </div>
+</section>
+
+<section class="section--last">
+  <div class="wrap">
+    {
+      (tags.length > 0 || links.length > 0) && (
+        <div class="filter-bar">
+          <div class="tags">
+            {tags.map((tag) => (
+              <a href={localizeUrl(`/blog/tag/${tag}`, locale)} aria-current={tag === activeTag ? "page" : undefined}>
+                #{tag}
+              </a>
+            ))}
+          </div>
+          {links.length > 0 && (
+            <div class="tags" style="color: var(--muted)">
+              {linksLabel && <span>{linksLabel}</span>}
+              {links.map((link) => (
+                <a href={link.href}>{link.label}</a>
+              ))}
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    <PostRows posts={articles.map((article) => toPostRow(article, locale))} size="lg" />
+
+    <p class="note" style="padding-top: 24px">
+      RSS ·
+      <a href={localizeUrl("/blog/rss.xml", locale)} class="link">
+        mares.cz{localizeUrl("/blog/rss.xml", locale)}
+      </a>
+      <span style="color: var(--faint)"> · </span>
+      <a href={localizeUrl("/prednasky", locale)} class="link">{t(locale, "blog.talks_link")} →</a>
+    </p>
+  </div>
+</section>

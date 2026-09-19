@@ -45,6 +45,7 @@ export async function GET({ params, url, locals }: APIContext) {
     title: page.data.title,
     description: page.data.description,
     baseUrl,
+    locale,
   });
 
   return OpenGraphImageResponse(component, baseUrl);

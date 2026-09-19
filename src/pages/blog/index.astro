@@ -1,11 +1,6 @@
 ---
-import { Container } from "../../components/ui/container";
-import { Heading } from "../../components/ui/heading";
-import { Link } from "../../components/ui/link";
-import { Section } from "../../components/ui/section";
-import { Text } from "../../components/ui/text";
+import BlogListing from "../../features/blog/BlogListing.astro";
 import Layout from "../../layouts/Layout.astro";
-import { ArticleGrid } from "../../features/blog/article-grid";
 import { t } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
 import { getLocalizedCollection } from "../../lib/content";
@@ -57,35 +52,12 @@ const jsonLd = {
 ---
 
 <Layout meta={meta} openGraph={openGraph} jsonLd={jsonLd}>
-  <Section variant="inverse">
-    <Container>
-      <Heading variant="inverse">Blog</Heading>
-      <Text variant="inverse" className="mt-4">
-        {
-          tags.map((tag) =>
-            // prettier-ignore
-            <><Link href={localizeUrl(`/blog/tag/${tag}`, locale)} className="text-neutral-100">#{tag}</Link>{" "}</>,
-          )
-        }
-      </Text>
-      <div class="mt-4 flex flex-row justify-between">
-        <Text variant="inverse" className="mt-2">
-          {t(locale, "blog.archive_label")}{" "}
-          {
-            years.map((year, i) =>
-              // prettier-ignore
-              <><Link href={localizeUrl(`/blog/archive/${year}`, locale)} className="text-neutral-100">{year}</Link>{i < years.length - 1 ? " · " : ""}</>,
-            )
-          }
-        </Text>
-        <Text variant="inverse" className="mt-2">
-          {t(locale, "blog.feed_label")}{" "}
-          <Link href={localizeUrl("/blog/rss.xml", locale)} className="text-neutral-100">RSS</Link>
-        </Text>
-      </div>
-    </Container>
-  </Section>
-  <Section>
-    <ArticleGrid articles={articles} locale={locale} />
-  </Section>
+  <BlogListing
+    title={t(locale, "blog.heading")}
+    lead={t(locale, "blog.meta_description")}
+    articles={articles}
+    tags={tags}
+    links={years.map((year) => ({ label: String(year), href: localizeUrl(`/blog/archive/${year}`, locale) }))}
+    linksLabel={t(locale, "blog.archive_label")}
+  />
 </Layout>

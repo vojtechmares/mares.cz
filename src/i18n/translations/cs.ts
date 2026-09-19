@@ -411,6 +411,163 @@ export const cs = {
   "newsletter.error_email": "Zadejte platný e-mail.",
   "newsletter.error_consent": "Bez souhlasu vás bohužel nemůžeme přihlásit.",
 
+  // ---------------------------------------------------------------------------
+  // v5 redesign
+  // ---------------------------------------------------------------------------
+
+  // Layout
+  "nav.label": "Hlavní navigace",
+  "nav.training": "Školení",
+  "nav.services": "Služby",
+  "nav.about": "O mně",
+  "nav.blog": "Blog",
+  "nav.talks": "Přednášky",
+  "nav.contact": "Kontakt",
+  "nav.cta": "Domluvme si schůzku",
+  "nav.catalog": "Celý katalog",
+  "nav.sessions": "Veřejné termíny",
+  "nav.theme_switch": "Přepnout světlý a tmavý režim",
+  "footer.contact": "Kontakt",
+  "footer.web": "Web",
+  "footer.elsewhere": "Jinde",
+  "footer.vat_payer_short": "plátce DPH",
+  "footer.location": "Praha, Česká republika",
+
+  // Homepage
+  "home.byline_role": "freelance DevOps architekt a lektor · Praha",
+  "home.hero_title": "Infrastruktura, na kterou se dá spolehnout.",
+  "home.hero_cta_secondary": "Katalog školení",
+  "home.fig_pipeline": "commit → build → GitOps sync → běžící cluster",
+  "home.clients_label": "Spolupracoval jsem s",
+  "home.services_eyebrow": "Služby",
+  "home.services_heading": "Tři způsoby, jak spolu můžeme pracovat.",
+  "home.services_note": "Úvodní schůzka · 30 minut zdarma",
+  "home.approach_eyebrow": "Přístup",
+  "home.approach_heading": "Systém, který se opraví sám, dřív než si toho někdo všimne.",
+  "home.approach_link": "Jak pracuji",
+  "home.training_eyebrow": "Školení",
+  "home.training_heading": "Katalog školení",
+  "home.training_link": "Všechna školení",
+  "home.references_eyebrow": "Reference",
+  "home.about_eyebrow": "O mně",
+  "home.about_heading": "Jsem Vojtěch, DevOps architekt, konzultant a lektor.",
+  "home.about_link": "Více o mně",
+  "home.portrait_label": "portrét · Vojtěch Mareš",
+  "home.posts_eyebrow": "Blog a přednášky",
+  "home.posts_heading": "Poslední texty a talky",
+  "home.posts_link": "Archiv",
+  "home.talk_tag": "přednáška",
+
+  // Short service descriptions for the table-like rows
+  "services.consultation_short": "Audit, výběr technologií, CI/CD a optimalizace nákladů.",
+  "services.training_short": "Hands-on workshopy. Veřejné termíny i firemní školení na míru.",
+  "services.cooperation_short": "Správa infrastruktury, Kubernetes, IaC a podpora se SLA.",
+
+  // Prices split into value + unit for the table-like rows
+  "price.consultation_value": "2 500 Kč",
+  "price.consultation_unit": "hod",
+  "price.training_value": "od 5 400 Kč",
+  "price.training_unit": "osoba",
+  "price.cooperation_value": "dle domluvy",
+  "price.per_person": "osoba",
+  "price.per_session": "firemní termín",
+
+  // Training catalog
+  "catalog.meta_title": "Vojtěch Mareš | Školení",
+  "catalog.eyebrow": "Školení",
+  "catalog.heading": "Praktická DevOps školení. Formou workshopu.",
+  "catalog.note": "Veřejný termín: cena za osobu bez DPH · firemní školení do 12 účastníků na míru.",
+  "catalog.sessions_heading": "Nejbližší veřejné termíny",
+  "catalog.sessions_link": "Všechny termíny",
+  "catalog.custom_heading": "Školení na míru vašemu týmu",
+  "catalog.fig_seats": "obsazenost veřejného termínu",
+
+  // Training detail
+  "course.back": "Školení",
+  "course.length": "délka",
+  "course.form": "forma",
+  "course.form_value": "prezenčně nebo online, max. 12 lidí",
+  "course.price_open": "veřejný termín",
+  "course.price_corporate": "firemní školení",
+  "course.cta": "Domluvit termín",
+  "course.cta_sessions": "Veřejné termíny",
+  "course.toc": "Obsah",
+  "course.fig_terminal": "co si na školení vyzkoušíte",
+  "course.sessions_eyebrow": "Termíny",
+  "course.price_eyebrow": "Cena",
+  "course.newsletter_eyebrow": "Newsletter",
+
+  // Services page
+  "services_page.eyebrow": "Služby",
+  "services_page.heading": "DevOps služby na míru.",
+  "services_page.fig_process": "průběh dlouhodobé spolupráce",
+  "services_page.fig_training": "školení je workshop, ne prezentace",
+  "services_page.fig_costs": "typický měsíční účet za cloud, relativně",
+  "services_page.costs_before": "před · compute / storage / egress",
+  "services_page.costs_after": "po · rightsizing, spot, autoscaling",
+  "services_page.process_heading": "Jak spolupráce probíhá",
+  "services_page.consultation_process_heading": "Jak konzultace probíhá",
+  "services_page.cooperation_cta": "Domluvit spolupráci",
+  "services_page.consultation_cta": "Domluvit konzultaci",
+  "services_page.node_analysis": "analýza",
+  "services_page.node_analysis_sub": "stav · rizika",
+  "services_page.node_design": "návrh",
+  "services_page.node_design_sub": "plán · priority",
+  "services_page.node_sprints": "sprinty",
+  "services_page.node_support": "podpora",
+  "services_page.node_support_sub": "SLA · po–pá 9–17",
+  "services_page.terminal_participant": "ucastnik",
+
+  // About page
+  "about.meta_title": "Vojtěch Mareš | O mně",
+  "about.meta_keywords": "devops, kubernetes, lektor, konzultant, freelancer",
+  "about.eyebrow": "O mně",
+  "about.facts_1": "Praha, CZ",
+  "about.facts_2": "DevOps · Kubernetes · lektor",
+  "about.talks_heading": "Přednášky",
+  "about.talks_link": "Všechny přednášky",
+  "about.clients_eyebrow": "Klienti",
+
+  // Contact page
+  "contact.meta_title": "Vojtěch Mareš | Kontakt",
+  "contact.meta_keywords": "kontakt, e-mail, telefon, schůzka",
+  "contact.eyebrow": "Kontakt",
+  "contact.heading": "Domluvme si půlhodinovou schůzku.",
+  "contact.cta": "Vybrat termín v kalendáři",
+  "contact.email": "e-mail",
+  "contact.phone": "telefon",
+  "contact.ids": "IČO / DIČ",
+  "contact.seat": "sídlo",
+  "contact.elsewhere": "jinde",
+
+  // Blog
+  "blog.eyebrow": "Blog a přednášky",
+  "blog.heading": "Texty a talky",
+  "blog.back": "Blog",
+  "blog.reading_minutes": "{count} min čtení",
+  "blog.minutes_short": "{count} min",
+  "blog.toc": "Obsah",
+  "blog.topics_label": "Témata:",
+  "blog.talks_link": "Přednášky na konferencích",
+  "blog.more_heading": "Další texty",
+  "blog.training_ad_eyebrow": "Školení",
+
+  // Talks
+  "talks.eyebrow": "Přednášky",
+
+  // Sessions page
+  "sessions_page.eyebrow": "Veřejné termíny",
+  "sessions_page.heading": "Veřejné termíny školení",
+  "sessions_page.fig_seats": "kapacita jednoho termínu",
+
+  // Diagrams
+  "diagram.seats_label": "Minimálně {min}, maximálně {max} účastníků na termín.",
+  "diagram.seats_status": "potvrzeno",
+  "diagram.self_healing_label": "Tři nody clusteru. Pod, který spadne, se sám nastartuje na jiném nodu.",
+
+  // Error pages
+  "error.fig": "požadavek, který nikam nevede",
+
   // Formatting
   "format.months.1": "Leden",
   "format.months.2": "Únor",

@@ -1,13 +1,6 @@
 import { actions } from "astro:actions";
 import { useId, useState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Heading } from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Body } from "@/components/ui/body";
 import { t, type Locale } from "@/i18n";
 import { EMAIL_REGEX, HONEYPOT_FIELD, type NewsletterFieldErrors } from "@/lib/newsletter";
 
@@ -88,23 +81,22 @@ export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
   const describe = (field: keyof NewsletterFieldErrors) => (errors[field] ? `${fieldId}-${field}-error` : undefined);
 
   return (
-    <Card variant="surface">
-      <Heading level="h3">{t(locale, "newsletter.heading")}</Heading>
-      <Body color="secondary" className="mt-3">
+    <div className="panel">
+      <h3 className="panel__heading">{t(locale, "newsletter.heading")}</h3>
+      <p className="lead-sm" style={{ marginTop: 12 }}>
         {t(locale, "newsletter.description")}
-      </Body>
-      <Body variant="small" color="secondary" className="mt-2">
+      </p>
+      <p className="note" style={{ marginTop: 8 }}>
         {t(locale, "newsletter.cadence")} {t(locale, "newsletter.czech_only_note")}
-      </Body>
+      </p>
 
       {succeeded ? (
-        <output aria-live="polite" className="mt-6 block">
-          <Body color="primary" className="font-medium">
-            {t(locale, status === "success_already" ? "newsletter.success_already" : "newsletter.success_confirm")}
-          </Body>
+        <output aria-live="polite" className="note note--status">
+          <span className="dot" aria-hidden="true" />
+          {t(locale, status === "success_already" ? "newsletter.success_already" : "newsletter.success_confirm")}
         </output>
       ) : (
-        <form onSubmit={handleSubmit} aria-busy={submitting} className="mt-6 flex flex-col gap-4" noValidate>
+        <form onSubmit={handleSubmit} aria-busy={submitting} className="form" noValidate>
           {/* Honeypot: hidden from users and assistive tech; bots tend to fill it. */}
           <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>
             <label htmlFor={`${fieldId}-${HONEYPOT_FIELD}`}>Company website</label>
@@ -119,9 +111,12 @@ export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
             />
           </div>
 
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor={`${fieldId}-name`}>{t(locale, "newsletter.name_label")}</Label>
-            <Input
+          <div className="field">
+            <label className="field__label" htmlFor={`${fieldId}-name`}>
+              {t(locale, "newsletter.name_label")}
+            </label>
+            <input
+              className="field__input"
               id={`${fieldId}-name`}
               name="name"
               value={name}
@@ -132,15 +127,18 @@ export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
               aria-describedby={describe("name")}
             />
             {fieldError("name") && (
-              <p id={`${fieldId}-name-error`} className="text-sm text-red-700">
+              <p id={`${fieldId}-name-error`} className="field__error">
                 {fieldError("name")}
               </p>
             )}
           </div>
 
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor={`${fieldId}-email`}>{t(locale, "newsletter.email_label")}</Label>
-            <Input
+          <div className="field">
+            <label className="field__label" htmlFor={`${fieldId}-email`}>
+              {t(locale, "newsletter.email_label")}
+            </label>
+            <input
+              className="field__input"
               id={`${fieldId}-email`}
               name="email"
               type="email"
@@ -152,45 +150,45 @@ export function TrainingNewsletterSignUp({ locale, trainingSlug }: Props) {
               aria-describedby={describe("email")}
             />
             {fieldError("email") && (
-              <p id={`${fieldId}-email-error`} className="text-sm text-red-700">
+              <p id={`${fieldId}-email-error`} className="field__error">
                 {fieldError("email")}
               </p>
             )}
           </div>
 
-          <div className="flex flex-col gap-1.5">
-            <div className="flex items-start gap-2">
-              <Checkbox
+          <div className="field">
+            <label className="check" htmlFor={`${fieldId}-consent`}>
+              <input
                 id={`${fieldId}-consent`}
+                type="checkbox"
                 checked={consent}
-                onCheckedChange={(checked) => setConsent(checked === true)}
+                onChange={(event) => setConsent(event.target.checked)}
                 required
                 aria-invalid={errors.consent ? true : undefined}
                 aria-describedby={describe("consent")}
-                className="mt-0.5"
               />
-              <Label htmlFor={`${fieldId}-consent`}>{t(locale, "newsletter.consent_label")}</Label>
-            </div>
+              <span>{t(locale, "newsletter.consent_label")}</span>
+            </label>
             {fieldError("consent") && (
-              <p id={`${fieldId}-consent-error`} className="text-sm text-red-700">
+              <p id={`${fieldId}-consent-error`} className="field__error">
                 {fieldError("consent")}
               </p>
             )}
           </div>
 
           {status === "error" && (
-            <p role="alert" className="text-sm text-red-700">
+            <p role="alert" className="field__error">
               {t(locale, "newsletter.error_message")}
             </p>
           )}
 
-          <div className="mt-2">
-            <Button variant="accent" size="large">
+          <div>
+            <button type="submit" className="btn btn--primary" disabled={submitting}>
               {submitting ? t(locale, "newsletter.submitting") : t(locale, "newsletter.submit")}
-            </Button>
+            </button>
           </div>
         </form>
       )}
-    </Card>
+    </div>
   );
 }
