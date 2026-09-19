@@ -29,6 +29,9 @@
   "env": {
     "staging": {
       "name": "mares-cz-staging",
+      // Pull request previews (.github/workflows/preview.yml) are served from
+      // versioned workers.dev preview URLs of this worker.
+      "preview_urls": true,
       "routes": [
         {
           "pattern": "beta.mares.cz",
