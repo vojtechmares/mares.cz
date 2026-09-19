@@ -1,11 +1,13 @@
 ---
 import Figure from "./Figure.astro";
+import { t } from "../../i18n";
 
 interface Props {
   n: number | string;
   caption?: string;
 }
 
+const locale = Astro.locals.locale;
 const { n, caption = "self-healing" } = Astro.props;
 const num = String(n).padStart(2, "0");
 
@@ -18,11 +20,7 @@ const cluster = [
 ---
 
 <Figure n={n} caption={caption} inlineCaption>
-  <div
-    class="heal__nodes"
-    role="img"
-    aria-label="Tři nody clusteru. Pod, který spadne, se sám nastartuje na jiném nodu."
-  >
+  <div class="heal__nodes" role="img" aria-label={t(locale, "diagram.self_healing_label")}>
     {
       cluster.map((node) => (
         <div class="heal__node">

@@ -1,5 +1,5 @@
 ---
-title: "Self-hosted vs managed řešení"
+title: "Self-hosted vs managed solutions"
 date: 2023-05-23
 event:
   name: "Cloud Computing Conference 2023"

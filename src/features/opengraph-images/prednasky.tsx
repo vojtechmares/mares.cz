@@ -1,5 +1,6 @@
 import { t, type Locale } from "../../i18n";
 import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
 
 export function CreatePrednaskyImageComponent({
   talkCount,
@@ -14,7 +15,7 @@ export function CreatePrednaskyImageComponent({
 }) {
   return (
     <OgFrame
-      url="mares.cz/prednasky"
+      url={displayUrl("/prednasky", locale)}
       eyebrow={t(locale, "talks.eyebrow")}
       title={`${t(locale, "talks.heading")} ${t(locale, "talks.heading_accent")}`}
       description={t(locale, "talks.description")}

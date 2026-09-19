@@ -1,6 +1,7 @@
 import { t, type Locale } from "../../i18n";
 import { formatDate, formatSessionCount } from "../../i18n/formatting";
 import { OgFrame, type OgStat } from "./frame";
+import { displayUrl } from "../../i18n/routes";
 
 export function CreateSessionsImageComponent({
   sessionCount,
@@ -34,7 +35,7 @@ export function CreateSessionsImageComponent({
 
   return (
     <OgFrame
-      url="mares.cz/skoleni/verejne-terminy"
+      url={displayUrl("/skoleni/verejne-terminy", locale)}
       eyebrow={t(locale, "og.services_bullet_training")}
       title={[
         t(locale, "sessions_hero.heading_public"),

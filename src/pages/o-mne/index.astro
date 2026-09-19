@@ -17,7 +17,7 @@ const talks = (await getLocalizedCollection("talk", locale, ({ data }) => !data.
 const meta = {
   title: t(locale, "about.meta_title"),
   description: t(locale, "jsonld.person_description"),
-  keywords: "devops, kubernetes, lektor, konzultant, freelancer",
+  keywords: t(locale, "about.meta_keywords"),
 };
 
 const openGraph = {

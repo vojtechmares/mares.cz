@@ -1,5 +1,5 @@
 ---
-title: "Bezpečnost kontejnerizovaných aplikací v Kubernetes"
+title: "Security of containerized applications in Kubernetes"
 date: 2026-02-12
 event:
   name: "Kontejnery v praxi 2026"

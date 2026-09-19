@@ -255,7 +255,7 @@ export const en: Partial<Record<TranslationKey, string>> = {
   "services_consultation.area3_description": "Design or optimization of build processes",
   "services_consultation.area4_name": "Cost optimization",
   "services_consultation.area4_description": "Quick cost analysis and savings proposals",
-  "services_consultation.price": "CZK 2,500 / hour",
+  "services_consultation.price": "€100 / hour",
   "services_consultation.scope": "Scope up to 2 person-days",
 
   // Services - Cooperation section
@@ -414,6 +414,164 @@ export const en: Partial<Record<TranslationKey, string>> = {
   "newsletter.error_required": "This field is required.",
   "newsletter.error_email": "Enter a valid email.",
   "newsletter.error_consent": "We can't subscribe you without your consent.",
+
+  // ---------------------------------------------------------------------------
+  // v5 redesign
+  // ---------------------------------------------------------------------------
+
+  // Layout
+  "nav.label": "Main navigation",
+  "nav.training": "Training",
+  "nav.services": "Services",
+  "nav.about": "About",
+  "nav.blog": "Blog",
+  "nav.talks": "Talks",
+  "nav.contact": "Contact",
+  "nav.cta": "Book a call",
+  "nav.catalog": "Full catalog",
+  "nav.sessions": "Public sessions",
+  "nav.theme_switch": "Switch between light and dark mode",
+  "footer.contact": "Contact",
+  "footer.web": "Site",
+  "footer.elsewhere": "Elsewhere",
+  "footer.vat_payer_short": "VAT registered",
+  "footer.location": "Prague, Czech Republic",
+
+  // Homepage
+  "home.byline_role": "freelance DevOps architect and trainer · Prague",
+  "home.hero_title": "Infrastructure you can rely on.",
+  "home.hero_cta_secondary": "Training catalog",
+  "home.fig_pipeline": "commit → build → GitOps sync → running cluster",
+  "home.clients_label": "I have worked with",
+  "home.services_eyebrow": "Services",
+  "home.services_heading": "Three ways we can work together.",
+  "home.services_note": "Intro meeting · 30 minutes free",
+  "home.approach_eyebrow": "Approach",
+  "home.approach_heading": "A system that heals itself before anyone notices.",
+  "home.approach_link": "How I work",
+  "home.training_eyebrow": "Training",
+  "home.training_heading": "Training catalog",
+  "home.training_link": "All training courses",
+  "home.references_eyebrow": "References",
+  "home.about_eyebrow": "About",
+  "home.about_heading": "I\u2019m Vojtěch, a DevOps architect, consultant and trainer.",
+  "home.about_link": "More about me",
+  "home.portrait_label": "portrait · Vojtěch Mareš",
+  "home.posts_eyebrow": "Blog and talks",
+  "home.posts_heading": "Latest posts and talks",
+  "home.posts_link": "Archive",
+  "home.talk_tag": "talk",
+
+  // Short service descriptions for the table-like rows
+  "services.consultation_short": "Audits, technology selection, CI/CD and cost optimization.",
+  "services.training_short": "Hands-on workshops. Public sessions and custom corporate training.",
+  "services.cooperation_short": "Infrastructure management, Kubernetes, IaC and support with an SLA.",
+
+  // Prices split into value + unit for the table-like rows
+  "price.consultation_value": "€100",
+  "price.consultation_unit": "hour",
+  "price.training_value": "from €220",
+  "price.training_unit": "person",
+  "price.cooperation_value": "custom pricing",
+  "price.per_person": "person",
+  "price.per_session": "corporate session",
+
+  // Training catalog
+  "catalog.meta_title": "Vojtěch Mareš | Training",
+  "catalog.eyebrow": "Training",
+  "catalog.heading": "Practical DevOps training. Delivered as workshops.",
+  "catalog.note":
+    "Public session: price per person excl. VAT · corporate training for up to 12 participants, tailored to your team.",
+  "catalog.sessions_heading": "Upcoming public sessions",
+  "catalog.sessions_link": "All sessions",
+  "catalog.custom_heading": "Training tailored to your team",
+  "catalog.fig_seats": "seats taken on a public session",
+
+  // Training detail
+  "course.back": "Training",
+  "course.length": "length",
+  "course.form": "format",
+  "course.form_value": "on-site or online, up to 12 people",
+  "course.price_open": "public session",
+  "course.price_corporate": "corporate training",
+  "course.cta": "Arrange a date",
+  "course.cta_sessions": "Public sessions",
+  "course.toc": "Contents",
+  "course.fig_terminal": "what you will try at the training",
+  "course.sessions_eyebrow": "Sessions",
+  "course.price_eyebrow": "Price",
+  "course.newsletter_eyebrow": "Newsletter",
+
+  // Services page
+  "services_page.eyebrow": "Services",
+  "services_page.heading": "Tailored DevOps services.",
+  "services_page.fig_process": "how a long-term partnership runs",
+  "services_page.fig_training": "training is a workshop, not a presentation",
+  "services_page.fig_costs": "a typical monthly cloud bill, relative",
+  "services_page.costs_before": "before · compute / storage / egress",
+  "services_page.costs_after": "after · rightsizing, spot, autoscaling",
+  "services_page.process_heading": "How the partnership works",
+  "services_page.consultation_process_heading": "How consulting works",
+  "services_page.cooperation_cta": "Arrange a partnership",
+  "services_page.consultation_cta": "Arrange a consultation",
+  "services_page.node_analysis": "analysis",
+  "services_page.node_analysis_sub": "state · risks",
+  "services_page.node_design": "design",
+  "services_page.node_design_sub": "plan · priorities",
+  "services_page.node_sprints": "sprints",
+  "services_page.node_support": "support",
+  "services_page.node_support_sub": "SLA · Mon–Fri 9–17",
+  "services_page.terminal_participant": "attendee",
+
+  // About page
+  "about.meta_title": "Vojtěch Mareš | About",
+  "about.meta_keywords": "devops, kubernetes, trainer, consultant, freelancer",
+  "about.eyebrow": "About",
+  "about.facts_1": "Prague, CZ",
+  "about.facts_2": "DevOps · Kubernetes · trainer",
+  "about.talks_heading": "Talks",
+  "about.talks_link": "All talks",
+  "about.clients_eyebrow": "Clients",
+
+  // Contact page
+  "contact.meta_title": "Vojtěch Mareš | Contact",
+  "contact.meta_keywords": "contact, email, phone, meeting",
+  "contact.eyebrow": "Contact",
+  "contact.heading": "Let\u2019s book a half-hour call.",
+  "contact.cta": "Pick a time in the calendar",
+  "contact.email": "email",
+  "contact.phone": "phone",
+  "contact.ids": "company / VAT ID",
+  "contact.seat": "based in",
+  "contact.elsewhere": "elsewhere",
+
+  // Blog
+  "blog.eyebrow": "Blog and talks",
+  "blog.heading": "Posts and talks",
+  "blog.back": "Blog",
+  "blog.reading_minutes": "{count} min read",
+  "blog.minutes_short": "{count} min",
+  "blog.toc": "Contents",
+  "blog.topics_label": "Topics:",
+  "blog.talks_link": "Conference talks",
+  "blog.more_heading": "More posts",
+  "blog.training_ad_eyebrow": "Training",
+
+  // Talks
+  "talks.eyebrow": "Talks",
+
+  // Sessions page
+  "sessions_page.eyebrow": "Public sessions",
+  "sessions_page.heading": "Public training sessions",
+  "sessions_page.fig_seats": "capacity of one session",
+
+  // Diagrams
+  "diagram.seats_label": "Minimum {min}, maximum {max} participants per session.",
+  "diagram.seats_status": "confirmed",
+  "diagram.self_healing_label": "Three cluster nodes. A pod that crashes restarts by itself on another node.",
+
+  // Error pages
+  "error.fig": "a request that leads nowhere",
 
   // Formatting
   "format.months.1": "January",

@@ -11,7 +11,7 @@ const locale = Astro.locals.locale;
 const meta = {
   title: t(locale, "contact.meta_title"),
   description: t(locale, "footer.interested_text"),
-  keywords: "kontakt, e-mail, telefon, schůzka",
+  keywords: t(locale, "contact.meta_keywords"),
 };
 
 const openGraph = {

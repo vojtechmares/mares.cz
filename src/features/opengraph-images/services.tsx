@@ -1,5 +1,6 @@
 import { t, type Locale } from "../../i18n";
 import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
 
 export function CreateServicesImageComponent({
   trainingCount,
@@ -17,7 +18,7 @@ export function CreateServicesImageComponent({
 
   return (
     <OgFrame
-      url="mares.cz/sluzby"
+      url={displayUrl("/sluzby", locale)}
       eyebrow={t(locale, "services.heading")}
       title={`${t(locale, "services_hero.heading")} ${t(locale, "services_hero.heading_accent")}`}
       description={t(locale, "og.services_description")}

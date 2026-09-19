@@ -13,9 +13,9 @@ const locale = Astro.locals.locale;
 const { variant = "default", linked = true } = Astro.props;
 
 const services: { id: string; anchor: string; unit?: TranslationKey }[] = [
-  { id: "consultation", anchor: "konzultace", unit: "price.consultation_unit" },
-  { id: "training", anchor: "skoleni", unit: "price.training_unit" },
-  { id: "cooperation", anchor: "spoluprace" },
+  { id: "consultation", anchor: locale === "en" ? "consulting" : "konzultace", unit: "price.consultation_unit" },
+  { id: "training", anchor: locale === "en" ? "training" : "skoleni", unit: "price.training_unit" },
+  { id: "cooperation", anchor: locale === "en" ? "partnership" : "spoluprace" },
 ];
 
 const rowClass = ["row", variant === "wide" ? "row--service-wide" : "row--service"];

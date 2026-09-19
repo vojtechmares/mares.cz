@@ -160,7 +160,8 @@ const reasons = ["workshop", "real_projects", "small_groups", "materials", "open
           conditions.map(([before, strong, after]) => (
             <li class="row">
               <span class="row__desc">
-                {before} {strong && <strong style="color: var(--ink); font-weight: 500">{strong}</strong>} {after}
+                {before} {strong && <strong style="color: var(--ink); font-weight: 500">{strong}</strong>}
+                {after && (/^[.,]/.test(after) ? after : ` ${after}`)}
               </span>
             </li>
           ))

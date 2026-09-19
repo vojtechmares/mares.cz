@@ -1,5 +1,6 @@
 ---
 import Figure from "./Figure.astro";
+import { t } from "../../i18n";
 
 interface Props {
   n: number | string;
@@ -8,6 +9,7 @@ interface Props {
   max?: number;
 }
 
+const locale = Astro.locals.locale;
 const { n, caption, min = 5, max = 12 } = Astro.props;
 
 /** Seats up to `min` are always taken, the next few fill in a loop, the rest stay free. */
@@ -20,7 +22,7 @@ const seats = Array.from({ length: max }, (_, index) => {
 ---
 
 <Figure n={n} caption={caption}>
-  <div class="seats" role="img" aria-label={`Minimálně ${min}, maximálně ${max} účastníků na termín.`}>
+  <div class="seats" role="img" aria-label={t(locale, "diagram.seats_label", { min, max })}>
     {
       seats.map((seat, index) => (
         <span class:list={["seat", `seat--${seat.kind}`]} style={`--i: ${seat.i}`}>
@@ -32,6 +34,6 @@ const seats = Array.from({ length: max }, (_, index) => {
   <div class="dg__legend">
     <span>min: <b>{min}</b></span>
     <span>max: <b>{max}</b></span>
-    <span>status: <span class="hl">potvrzeno</span></span>
+    <span>status: <span class="hl">{t(locale, "diagram.seats_status")}</span></span>
   </div>
 </Figure>

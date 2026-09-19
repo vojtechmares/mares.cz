@@ -708,6 +708,10 @@ main > .section:last-child {
     content: "zavřít";
   }
 
+  :root[lang="en"] .menu[open] > summary::after {
+    content: "close";
+  }
+
   .menu__panel {
     position: fixed;
     top: var(--header-height);

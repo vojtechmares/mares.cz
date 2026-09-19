@@ -1,5 +1,6 @@
 import { t, type Locale } from "../../i18n";
 import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
 
 export function CreateBlogListingImageComponent({
   articleCount,
@@ -12,7 +13,7 @@ export function CreateBlogListingImageComponent({
 }) {
   return (
     <OgFrame
-      url="mares.cz/blog"
+      url={displayUrl("/blog", locale)}
       eyebrow={t(locale, "blog.og_heading")}
       title={`${t(locale, "blog.og_heading")} ${t(locale, "blog.og_heading_accent")}`}
       description={t(locale, "blog.meta_description")}

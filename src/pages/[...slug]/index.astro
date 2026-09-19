@@ -4,6 +4,7 @@ import { render } from "astro:content";
 import Toc from "../../features/shared/Toc.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getLocalizedEntry, getLocalizedCollection, bareSlug } from "../../lib/content";
+import { t } from "../../i18n";
 import { localizeUrl } from "../../i18n/routes";
 
 const locale = Astro.locals.locale;
@@ -82,7 +83,7 @@ const { Content, headings } = await render(page);
 
   <section class="section--last">
     <div class="wrap article-grid">
-      <Toc headings={headings} title="Obsah" />
+      <Toc headings={headings} title={t(locale, "blog.toc")} />
       <article class="prose">
         <Content />
       </article>

@@ -10,6 +10,8 @@ const PATH_SEGMENT_MAP: Record<string, string> = {
   skoleni: "training",
   "verejne-terminy": "public-sessions",
   sluzby: "services",
+  "o-mne": "about",
+  kontakt: "contact",
 };
 
 const REVERSE_PATH_SEGMENT_MAP: Record<string, string> = Object.fromEntries(
@@ -58,6 +60,14 @@ export function localizeUrl(path: string, locale: Locale): string {
   // Add /en prefix
   if (englishPath === "/") return "/en";
   return "/en" + englishPath;
+}
+
+/**
+ * Human-readable page address without protocol, as printed on OG cards.
+ * e.g. displayUrl("/skoleni/kubernetes", "en") -> "mares.cz/en/training/kubernetes"
+ */
+export function displayUrl(path: string, locale: Locale): string {
+  return "mares.cz" + localizeUrl(path, locale).replace(/\/$/, "");
 }
 
 /**

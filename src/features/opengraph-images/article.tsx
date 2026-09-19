@@ -1,6 +1,8 @@
 import { t, type Locale } from "../../i18n";
 import { formatDate } from "../../i18n/formatting";
 import { OgFrame } from "./frame";
+import { displayUrl } from "../../i18n/routes";
+import { bareSlug } from "../../lib/content";
 
 export function CreateArticleImageComponent({
   slug,
@@ -21,7 +23,7 @@ export function CreateArticleImageComponent({
 }) {
   return (
     <OgFrame
-      url={`mares.cz/blog/${slug}`}
+      url={displayUrl(`/blog/${bareSlug(slug)}`, locale)}
       eyebrow={t(locale, "blog.og_heading")}
       title={title}
       description={description}

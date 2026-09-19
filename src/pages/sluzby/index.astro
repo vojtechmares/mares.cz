@@ -47,6 +47,9 @@ const consultationAreas = Array.from({ length: 4 }, (_, index) => ({
 
 const trainingBenefits = [1, 2, 3].map((index) => t(locale, key(`services_training.benefit${index}`)));
 
+// Pod names in the workshop terminal ("ucastnik" and "attendee" are the same length, the columns stay aligned).
+const participant = t(locale, "services_page.terminal_participant");
+
 const yearsOfPractice = new Date().getFullYear() - 2020;
 const stats = [
   `${yearsOfPractice}+ ${t(locale, "services_hero.years_suffix")} ${t(locale, "services_hero.years_label")}`,
@@ -83,7 +86,7 @@ const stats = [
   </section>
 
   {/* ------------------------------------------------------------ cooperation */}
-  <section class="section" id="spoluprace">
+  <section class="section" id={locale === "en" ? "partnership" : "spoluprace"}>
     <div class="wrap split">
       <div>
         <p class="eyebrow">{t(locale, "services_cooperation.badge")}</p>
@@ -96,10 +99,10 @@ const stats = [
           n={1}
           caption={t(locale, "services_page.fig_process")}
           nodes={[
-            { label: "analýza", sub: "stav · rizika" },
-            { label: "návrh", sub: "plán · priority" },
-            { label: "sprinty", sub: "IaC · K8s · CI/CD" },
-            { label: "podpora", sub: "SLA · po–pá 9–17" },
+            { label: t(locale, "services_page.node_analysis"), sub: t(locale, "services_page.node_analysis_sub") },
+            { label: t(locale, "services_page.node_design"), sub: t(locale, "services_page.node_design_sub") },
+            { label: t(locale, "services_page.node_sprints"), sub: "IaC · K8s · CI/CD" },
+            { label: t(locale, "services_page.node_support"), sub: t(locale, "services_page.node_support_sub") },
           ]}
         />
       </div>
@@ -157,7 +160,7 @@ const stats = [
   </section>
 
   {/* --------------------------------------------------------------- training */}
-  <section class="section" id="skoleni">
+  <section class="section" id={locale === "en" ? "training" : "skoleni"}>
     <div class="wrap split split--flip">
       <div class="split__media">
         <Terminal
@@ -168,10 +171,10 @@ const stats = [
           lines={[
             { cmd: "kubectl get pods -n workshop" },
             { out: "NAME         READY   STATUS" },
-            { out: "ucastnik-01  1/1     Running", hl: "Running" },
-            { out: "ucastnik-02  1/1     Running", hl: "Running" },
-            { out: "ucastnik-03  0/1     CrashLoopBackOff" },
-            { cmd: "kubectl logs ucastnik-03 --previous" },
+            { out: `${participant}-01  1/1     Running`, hl: "Running" },
+            { out: `${participant}-02  1/1     Running`, hl: "Running" },
+            { out: `${participant}-03  0/1     CrashLoopBackOff` },
+            { cmd: `kubectl logs ${participant}-03 --previous` },
             { out: "error: DATABASE_URL is not set", hl: "DATABASE_URL" },
           ]}
         />
@@ -206,7 +209,7 @@ const stats = [
   </section>
 
   {/* ----------------------------------------------------------- consultation */}
-  <section class="section" id="konzultace">
+  <section class="section" id={locale === "en" ? "consulting" : "konzultace"}>
     <div class="wrap split">
       <div>
         <p class="eyebrow">{t(locale, "services_consultation.badge")}</p>

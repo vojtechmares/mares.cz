@@ -85,6 +85,8 @@ const jsonLd = {
 
 const { Content, headings } = await render(training);
 
+const sessionsAnchor = locale === "en" ? "sessions" : "terminy";
+
 const icon = training.data.icon ?? training.data.logo;
 ---
 
@@ -116,7 +118,7 @@ const icon = training.data.icon ?? training.data.logo;
 
         <div class="actions">
           <a href={MeetingUrl} class="btn btn--primary">{t(locale, "course.cta")}</a>
-          <a href="#terminy" class="link-arrow link-arrow--ink">{t(locale, "course.cta_sessions")} →</a>
+          <a href={`#${sessionsAnchor}`} class="link-arrow link-arrow--ink">{t(locale, "course.cta_sessions")} →</a>
         </div>
       </div>
       <div class="split__media">
@@ -140,7 +142,7 @@ const icon = training.data.icon ?? training.data.logo;
     </div>
   </section>
 
-  <section class="section" id="terminy">
+  <section class="section" id={sessionsAnchor}>
     <div class="wrap aside-split">
       <div>
         <p class="eyebrow">{t(locale, "course.sessions_eyebrow")}</p>

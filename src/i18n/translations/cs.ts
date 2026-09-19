@@ -509,9 +509,18 @@ export const cs = {
   "services_page.consultation_process_heading": "Jak konzultace probíhá",
   "services_page.cooperation_cta": "Domluvit spolupráci",
   "services_page.consultation_cta": "Domluvit konzultaci",
+  "services_page.node_analysis": "analýza",
+  "services_page.node_analysis_sub": "stav · rizika",
+  "services_page.node_design": "návrh",
+  "services_page.node_design_sub": "plán · priority",
+  "services_page.node_sprints": "sprinty",
+  "services_page.node_support": "podpora",
+  "services_page.node_support_sub": "SLA · po–pá 9–17",
+  "services_page.terminal_participant": "ucastnik",
 
   // About page
   "about.meta_title": "Vojtěch Mareš | O mně",
+  "about.meta_keywords": "devops, kubernetes, lektor, konzultant, freelancer",
   "about.eyebrow": "O mně",
   "about.facts_1": "Praha, CZ",
   "about.facts_2": "DevOps · Kubernetes · lektor",
@@ -521,6 +530,7 @@ export const cs = {
 
   // Contact page
   "contact.meta_title": "Vojtěch Mareš | Kontakt",
+  "contact.meta_keywords": "kontakt, e-mail, telefon, schůzka",
   "contact.eyebrow": "Kontakt",
   "contact.heading": "Domluvme si půlhodinový hovor.",
   "contact.cta": "Vybrat termín v kalendáři",
@@ -549,6 +559,11 @@ export const cs = {
   "sessions_page.eyebrow": "Veřejné termíny",
   "sessions_page.heading": "Veřejné termíny školení",
   "sessions_page.fig_seats": "kapacita jednoho termínu",
+
+  // Diagrams
+  "diagram.seats_label": "Minimálně {min}, maximálně {max} účastníků na termín.",
+  "diagram.seats_status": "potvrzeno",
+  "diagram.self_healing_label": "Tři nody clusteru. Pod, který spadne, se sám nastartuje na jiném nodu.",
 
   // Error pages
   "error.fig": "požadavek, který nikam nevede",
