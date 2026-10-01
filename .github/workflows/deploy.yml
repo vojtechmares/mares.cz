@@ -32,7 +32,7 @@ jobs:
       CF_ENV: ${{ github.ref_name == 'production' && 'production' || 'staging' }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
