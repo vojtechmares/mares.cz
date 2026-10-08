@@ -288,7 +288,7 @@ export const en: Record<TranslationKey, string> = {
     "I work with companies from startups to enterprise — size doesn\u2019t matter. I bring technical know-how that the company lacks, whether it\u2019s infrastructure, automation, or DevOps culture. I\u2019ll adjust the scope to your needs — from a few hours per week up to roughly half a working week.",
   "services_cooperation.support_heading": "Long-term support and SLA",
   "services_cooperation.support_text1":
-    "I offer long-term support with guaranteed response times. I don\u2019t provide L1 support — I solve technical problems at an expert level. Support is provided with my team during business hours, Mon\u2013Fri 9\u201317.",
+    "I offer long-term support with guaranteed response times. I don\u2019t provide L1 support — I solve technical problems at an expert level. Support is provided during business hours, Mon\u2013Fri 9\u201317.",
   "services_cooperation.support_text2":
     "Support includes regular infrastructure reviews, proactive updates, and tracking new technologies. Thanks to ongoing collaboration, I know your environment in detail and can respond quickly and effectively.",
   "services_cooperation.projects_heading": "Typical projects",

@@ -286,7 +286,7 @@ export const cs = {
     "Spolupracuji s firmami od startupů po enterprise — na velikosti nezáleží. Přináším technické know-how, které firmě chybí, ať už jde o infrastrukturu, automatizaci, nebo DevOps kulturu. Rozsah přizpůsobím vašim potřebám — od několika hodin týdně až po zhruba polovinu pracovního týdne.",
   "services_cooperation.support_heading": "Dlouhodobá podpora a SLA",
   "services_cooperation.support_text1":
-    "Nabízím dlouhodobou podporu s garantovanými reakčními časy. Nenabízím L1 podporu — řeším technické problémy na expertní úrovni. Podporu zajišťuji se svým týmem v pracovních hodinách, tj.\u00A0Po–Pá 9–17.",
+    "Nabízím dlouhodobou podporu s garantovanými reakčními časy. Nenabízím L1 podporu — řeším technické problémy na expertní úrovni. Podporu zajišťuji v pracovních hodinách, tj.\u00A0Po–Pá 9–17.",
   "services_cooperation.support_text2":
     "Součástí podpory jsou pravidelné revize infrastruktury, proaktivní aktualizace a sledování nových technologií. Díky průběžné spolupráci znám vaše prostředí do detailu a dokážu reagovat rychle a efektivně.",
   "services_cooperation.projects_heading": "Typické projekty",
