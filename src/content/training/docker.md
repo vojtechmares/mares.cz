@@ -12,7 +12,7 @@ price:
   open:
     - amount: 11400
       currency: CZK
-    - amount: 220
+    - amount: 440
       currency: EUR
   corporate:
     - amount: 44000
